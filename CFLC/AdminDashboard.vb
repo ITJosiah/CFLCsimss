@@ -141,7 +141,7 @@
 
     Private Sub btnManageTeachers_Click(sender As Object, e As EventArgs) Handles btnManageTeachers.Click
         ' TODO: Open Manage Teachers form
-        MessageBox.Show("Manage Teachers - Coming Soon")
+        MessageBox.Show("Manage Teachers - NEO")
     End Sub
 
     Private Sub btnManageSections_Click(sender As Object, e As EventArgs) Handles btnManageSections.Click
