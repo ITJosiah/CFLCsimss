@@ -207,7 +207,7 @@ Partial Class AdminManageStudents
         Me.pnlContent.Dock = System.Windows.Forms.DockStyle.Fill
         Me.pnlContent.Location = New System.Drawing.Point(300, 0)
         Me.pnlContent.Name = "pnlContent"
-        Me.pnlContent.Padding = New System.Windows.Forms.Padding(30, 30, 30, 30)
+        Me.pnlContent.Padding = New System.Windows.Forms.Padding(30)
         Me.pnlContent.Size = New System.Drawing.Size(1000, 633)
         Me.pnlContent.TabIndex = 1
         '
@@ -421,9 +421,9 @@ Partial Class AdminManageStudents
         Me.grpStudentInfo.Controls.Add(Me.lblStudentFirstName)
         Me.grpStudentInfo.Controls.Add(Me.txtStudentId)
         Me.grpStudentInfo.Controls.Add(Me.lblStudentID)
-        Me.grpStudentInfo.Location = New System.Drawing.Point(33, 80)
+        Me.grpStudentInfo.Location = New System.Drawing.Point(33, 79)
         Me.grpStudentInfo.Name = "grpStudentInfo"
-        Me.grpStudentInfo.Size = New System.Drawing.Size(934, 175)
+        Me.grpStudentInfo.Size = New System.Drawing.Size(934, 167)
         Me.grpStudentInfo.TabIndex = 3
         Me.grpStudentInfo.TabStop = False
         Me.grpStudentInfo.Text = "Student List"
