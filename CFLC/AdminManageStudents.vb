@@ -1,10 +1,21 @@
 ﻿Public Class AdminManageStudents
 
+    Public Property IsEmbedded As Boolean = False
+
+
+
     Private Sub AdminManageStudents_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Me.WindowState = FormWindowState.Maximized
-        Me.BackColor = Color.FromArgb(15, 56, 32)
-        StyleSidebarButtons()
-        PositionSidebarButtons()
+        If Not IsEmbedded Then
+            Me.WindowState = FormWindowState.Maximized
+            Me.BackColor = Color.FromArgb(15, 56, 32)
+            StyleSidebarButtons()
+            PositionSidebarButtons()
+            ' Replace the designer-generated AutoScaleMode line with:
+            Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Else
+            pnlSidebar.Visible = False
+            pnlContent.Dock = DockStyle.Fill
+        End If
     End Sub
 
     Private Sub PositionSidebarButtons()

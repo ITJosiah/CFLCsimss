@@ -1,29 +1,28 @@
 ﻿Public Class AdminDashboard
+    Private currentContent As Form
     Private Sub AdminDashboard_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ' Set form properties
         Me.WindowState = FormWindowState.Maximized
         Me.BackColor = Color.FromArgb(7, 77, 39) ' Dark green background
         Me.Text = "Dashboard-Admin"
 
-        ' Position sidebar buttons first
         PositionSidebarButtons()
 
-        ' Center the logo
-        CenterLogo()
+        ShowHomeContent()
 
-        ' Style the sidebar buttons
         StyleSidebarButtons()
     End Sub
 
     Private Sub CenterLogo()
-        ' Center the logo in the main content area
-        ' Adjust the left position to account for sidebar (sidebar is typically 200-250px wide)
-        Dim sidebarWidth As Integer = 250
-        Dim mainAreaLeft As Integer = sidebarWidth
-        Dim mainAreaWidth As Integer = Me.ClientSize.Width - sidebarWidth
+        If Not pnlMainContent.Controls.Contains(PictureBox1) Then
+            Return
+        End If
 
-        PictureBox1.Left = mainAreaLeft + (mainAreaWidth - PictureBox1.Width) \ 2
-        PictureBox1.Top = (Me.ClientSize.Height - PictureBox1.Height) \ 2 - 50
+        Dim areaWidth As Integer = pnlMainContent.ClientSize.Width
+        Dim areaHeight As Integer = pnlMainContent.ClientSize.Height
+
+        PictureBox1.Left = (areaWidth - PictureBox1.Width) \ 2
+        PictureBox1.Top = (areaHeight - PictureBox1.Height) \ 2
     End Sub
 
     Private Sub StyleSidebarButtons()
@@ -104,21 +103,40 @@
         btnLogout.Height = buttonHeight
     End Sub
 
-    ' Utility to open another form and hide dashboard until it closes
-    Private Sub ShowChildForm(child As Form)
-        AddHandler child.FormClosed, Sub(senderObj, args)
-                                         Me.Show()
-                                         Me.WindowState = FormWindowState.Maximized
-                                     End Sub
+    Private Sub LoadContentForm(child As Form)
+        If currentContent IsNot Nothing Then
+            currentContent.Close()
+            currentContent.Dispose()
+            currentContent = Nothing
+        End If
+
+        pnlMainContent.Controls.Clear()
+        currentContent = child
+        child.TopLevel = False
+        child.FormBorderStyle = FormBorderStyle.None
+        child.Dock = DockStyle.Fill
+        pnlMainContent.Controls.Add(child)
         child.Show()
-        child.WindowState = FormWindowState.Maximized
-        Me.Hide()
+    End Sub
+
+    Private Sub ShowHomeContent()
+        If currentContent IsNot Nothing Then
+            currentContent.Close()
+            currentContent.Dispose()
+            currentContent = Nothing
+        End If
+
+        pnlMainContent.Controls.Clear()
+        pnlMainContent.Controls.Add(PictureBox1)
+        CenterLogo()
     End Sub
 
     ' Button click handlers
     Private Sub btnManageStudents_Click(sender As Object, e As EventArgs) Handles btnManageStudents.Click
-        Dim manageStudentsForm As New AdminManageStudents()
-        ShowChildForm(manageStudentsForm)
+        Dim manageStudentsForm As New AdminManageStudents() With {
+            .IsEmbedded = True
+        }
+        LoadContentForm(manageStudentsForm)
     End Sub
 
     Private Sub btnManageTeachers_Click(sender As Object, e As EventArgs) Handles btnManageTeachers.Click

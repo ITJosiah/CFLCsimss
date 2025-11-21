@@ -32,6 +32,7 @@ Partial Class AdminDashboard
         Me.btnManageSubjects = New System.Windows.Forms.Button()
         Me.btnGenerateReports = New System.Windows.Forms.Button()
         Me.btnLogout = New System.Windows.Forms.Button()
+        Me.pnlMainContent = New System.Windows.Forms.Panel()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlSidebar.SuspendLayout()
         Me.flowButtons.SuspendLayout()
@@ -151,14 +152,24 @@ Partial Class AdminDashboard
         Me.btnLogout.Text = "Logout"
         Me.btnLogout.UseVisualStyleBackColor = False
         '
+        'pnlMainContent
+        '
+        Me.pnlMainContent.BackColor = System.Drawing.Color.FromArgb(CType(CType(7, Byte), Integer), CType(CType(77, Byte), Integer), CType(CType(39, Byte), Integer))
+        Me.pnlMainContent.Controls.Add(Me.PictureBox1)
+        Me.pnlMainContent.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.pnlMainContent.Location = New System.Drawing.Point(300, 0)
+        Me.pnlMainContent.Name = "pnlMainContent"
+        Me.pnlMainContent.Size = New System.Drawing.Size(1000, 633)
+        Me.pnlMainContent.TabIndex = 12
+        '
         'AdminDashboard
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(15, Byte), Integer), CType(CType(56, Byte), Integer), CType(CType(32, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(1300, 633)
+        Me.Controls.Add(Me.pnlMainContent)
         Me.Controls.Add(Me.pnlSidebar)
-        Me.Controls.Add(Me.PictureBox1)
         Me.Name = "AdminDashboard"
         Me.Text = "AdminDashboard"
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
@@ -178,4 +189,5 @@ Partial Class AdminDashboard
     Friend WithEvents btnManageStudents As Button
     Friend WithEvents pnlSidebar As Panel
     Friend WithEvents flowButtons As FlowLayoutPanel
+    Friend WithEvents pnlMainContent As Panel
 End Class
