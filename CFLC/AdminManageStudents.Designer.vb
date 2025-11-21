@@ -628,7 +628,7 @@ Partial Class AdminManageStudents
         '
         Me.picWatermark.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.picWatermark.Image = Global.CFLC.My.Resources.Resources.logo
-        Me.picWatermark.Location = New System.Drawing.Point(205, 79)
+        Me.picWatermark.Location = New System.Drawing.Point(238, 79)
         Me.picWatermark.Name = "picWatermark"
         Me.picWatermark.Size = New System.Drawing.Size(520, 466)
         Me.picWatermark.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
