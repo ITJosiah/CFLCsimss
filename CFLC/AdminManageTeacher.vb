@@ -1,12 +1,11 @@
-﻿Public Class AdminManageStudents
+﻿Public Class AdminManageTeacher
 
-    Private Sub AdminManageStudents_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Sub AdminManageTeacher_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.WindowState = FormWindowState.Maximized
         Me.BackColor = Color.FromArgb(15, 56, 32)
         StyleSidebarButtons()
         PositionSidebarButtons()
     End Sub
-
     Private Sub PositionSidebarButtons()
         ' Position sidebar buttons vertically with better spacing
         Dim sidebarWidth As Integer = 250
@@ -84,39 +83,25 @@
         btnLogout.TextAlign = ContentAlignment.MiddleCenter
     End Sub
 
-    Private Sub txtStudentId_TextChanged(sender As Object, e As EventArgs) Handles txtStudentId.TextChanged
+
+
+    Private Sub Teacher_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
     End Sub
 
-    Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
+    Private Sub grpStudentInfo_Enter(sender As Object, e As EventArgs) Handles grpTeacherInfo.Enter
 
     End Sub
 
-    Private Sub pnlContent_Paint(sender As Object, e As PaintEventArgs) Handles pnlContent.Paint
+    Private Sub Label4_Click(sender As Object, e As EventArgs) Handles Label4.Click
 
     End Sub
 
-    Private Sub Label1_Click(sender As Object, e As EventArgs) Handles Label1.Click
+    Private Sub Label11_Click(sender As Object, e As EventArgs) Handles Label11.Click
 
     End Sub
 
-    Private Sub txtAge_TextChanged(sender As Object, e As EventArgs) Handles txtAge.TextChanged
-
-    End Sub
-
-    Private Sub Label9_Click(sender As Object, e As EventArgs) Handles Label9.Click
-
-    End Sub
-
-    Private Sub Label10_Click(sender As Object, e As EventArgs) Handles Label10.Click
-
-    End Sub
-
-    Private Sub picWatermark_Click(sender As Object, e As EventArgs) Handles picWatermark.Click
-
-    End Sub
-
-    Private Sub grpStudentInfo_Enter(sender As Object, e As EventArgs) Handles grpStudentInfo.Enter
+    Private Sub dgvStudents_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvTeacher.CellContentClick
 
     End Sub
 End Class

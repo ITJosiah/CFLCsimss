@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class AdminManageStudents
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
+Partial Class AdminManageTeacher
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class AdminManageStudents
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.pnlSidebar = New System.Windows.Forms.Panel()
         Me.flowButtons = New System.Windows.Forms.FlowLayoutPanel()
@@ -31,11 +31,6 @@ Partial Class AdminManageStudents
         Me.btnManageSubjects = New System.Windows.Forms.Button()
         Me.btnGenerateReports = New System.Windows.Forms.Button()
         Me.btnLogout = New System.Windows.Forms.Button()
-        Me.pnlContent = New System.Windows.Forms.Panel()
-        Me.btnDelete = New System.Windows.Forms.Button()
-        Me.btnUpdate = New System.Windows.Forms.Button()
-        Me.btnAdd = New System.Windows.Forms.Button()
-        Me.dgvStudents = New System.Windows.Forms.DataGridView()
         Me.grpAddress = New System.Windows.Forms.GroupBox()
         Me.txtZipCode = New System.Windows.Forms.TextBox()
         Me.Label18 = New System.Windows.Forms.Label()
@@ -51,22 +46,22 @@ Partial Class AdminManageStudents
         Me.Label13 = New System.Windows.Forms.Label()
         Me.txtHouseNo = New System.Windows.Forms.TextBox()
         Me.Label12 = New System.Windows.Forms.Label()
-        Me.grpStudentInfo = New System.Windows.Forms.GroupBox()
-        Me.dtpBirthdate = New System.Windows.Forms.DateTimePicker()
+        Me.grpTeacherInfo = New System.Windows.Forms.GroupBox()
+        Me.ComboBoxGender = New System.Windows.Forms.ComboBox()
         Me.Label11 = New System.Windows.Forms.Label()
-        Me.txtGender = New System.Windows.Forms.TextBox()
+        Me.txtAssignedSection = New System.Windows.Forms.TextBox()
         Me.Label10 = New System.Windows.Forms.Label()
-        Me.txtAge = New System.Windows.Forms.TextBox()
+        Me.txtStatus = New System.Windows.Forms.TextBox()
         Me.Label9 = New System.Windows.Forms.Label()
-        Me.txtParentName = New System.Windows.Forms.TextBox()
+        Me.txtHireDate = New System.Windows.Forms.TextBox()
         Me.Label8 = New System.Windows.Forms.Label()
-        Me.txtReligion = New System.Windows.Forms.TextBox()
+        Me.txtSpecialization = New System.Windows.Forms.TextBox()
         Me.Label7 = New System.Windows.Forms.Label()
-        Me.txtSectionId = New System.Windows.Forms.TextBox()
+        Me.txtEducationalAttainment = New System.Windows.Forms.TextBox()
         Me.Label6 = New System.Windows.Forms.Label()
-        Me.txtGradeLevel = New System.Windows.Forms.TextBox()
+        Me.txtEmail = New System.Windows.Forms.TextBox()
         Me.Label5 = New System.Windows.Forms.Label()
-        Me.txtStudentNo = New System.Windows.Forms.TextBox()
+        Me.txtEmployeeNo = New System.Windows.Forms.TextBox()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.txtSurname = New System.Windows.Forms.TextBox()
         Me.Label3 = New System.Windows.Forms.Label()
@@ -74,18 +69,21 @@ Partial Class AdminManageStudents
         Me.Label2 = New System.Windows.Forms.Label()
         Me.txtFirstName = New System.Windows.Forms.TextBox()
         Me.lblFirstName = New System.Windows.Forms.Label()
-        Me.txtStudentId = New System.Windows.Forms.TextBox()
+        Me.txtTeacherId = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.lblStudentList = New System.Windows.Forms.Label()
+        Me.lblTeacherList = New System.Windows.Forms.Label()
         Me.btnSearch = New System.Windows.Forms.Button()
         Me.txtSearch = New System.Windows.Forms.TextBox()
+        Me.dgvTeacher = New System.Windows.Forms.DataGridView()
+        Me.btnDelete = New System.Windows.Forms.Button()
+        Me.btnUpdate = New System.Windows.Forms.Button()
+        Me.btnAdd = New System.Windows.Forms.Button()
         Me.picWatermark = New System.Windows.Forms.PictureBox()
         Me.pnlSidebar.SuspendLayout()
         Me.flowButtons.SuspendLayout()
-        Me.pnlContent.SuspendLayout()
-        CType(Me.dgvStudents, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpAddress.SuspendLayout()
-        Me.grpStudentInfo.SuspendLayout()
+        Me.grpTeacherInfo.SuspendLayout()
+        CType(Me.dgvTeacher, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.picWatermark, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -96,11 +94,11 @@ Partial Class AdminManageStudents
         Me.pnlSidebar.Controls.Add(Me.btnLogout)
         Me.pnlSidebar.Dock = System.Windows.Forms.DockStyle.Left
         Me.pnlSidebar.Location = New System.Drawing.Point(0, 0)
-        Me.pnlSidebar.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.pnlSidebar.Margin = New System.Windows.Forms.Padding(4)
         Me.pnlSidebar.Name = "pnlSidebar"
         Me.pnlSidebar.Padding = New System.Windows.Forms.Padding(40, 49, 40, 49)
         Me.pnlSidebar.Size = New System.Drawing.Size(400, 779)
-        Me.pnlSidebar.TabIndex = 11
+        Me.pnlSidebar.TabIndex = 12
         '
         'flowButtons
         '
@@ -186,79 +184,12 @@ Partial Class AdminManageStudents
         Me.btnLogout.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.btnLogout.ForeColor = System.Drawing.Color.White
         Me.btnLogout.Location = New System.Drawing.Point(40, 668)
-        Me.btnLogout.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnLogout.Margin = New System.Windows.Forms.Padding(0)
         Me.btnLogout.Name = "btnLogout"
         Me.btnLogout.Size = New System.Drawing.Size(320, 62)
         Me.btnLogout.TabIndex = 10
         Me.btnLogout.Text = "Logout"
         Me.btnLogout.UseVisualStyleBackColor = False
-        '
-        'pnlContent
-        '
-        Me.pnlContent.BackColor = System.Drawing.Color.FromArgb(CType(CType(7, Byte), Integer), CType(CType(77, Byte), Integer), CType(CType(39, Byte), Integer))
-        Me.pnlContent.Controls.Add(Me.btnDelete)
-        Me.pnlContent.Controls.Add(Me.btnUpdate)
-        Me.pnlContent.Controls.Add(Me.btnAdd)
-        Me.pnlContent.Controls.Add(Me.dgvStudents)
-        Me.pnlContent.Controls.Add(Me.grpAddress)
-        Me.pnlContent.Controls.Add(Me.grpStudentInfo)
-        Me.pnlContent.Controls.Add(Me.lblStudentList)
-        Me.pnlContent.Controls.Add(Me.btnSearch)
-        Me.pnlContent.Controls.Add(Me.txtSearch)
-        Me.pnlContent.Controls.Add(Me.picWatermark)
-        Me.pnlContent.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.pnlContent.Location = New System.Drawing.Point(400, 0)
-        Me.pnlContent.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
-        Me.pnlContent.Name = "pnlContent"
-        Me.pnlContent.Padding = New System.Windows.Forms.Padding(40, 37, 40, 37)
-        Me.pnlContent.Size = New System.Drawing.Size(1333, 779)
-        Me.pnlContent.TabIndex = 1
-        '
-        'btnDelete
-        '
-        Me.btnDelete.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnDelete.Location = New System.Drawing.Point(1211, 720)
-        Me.btnDelete.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
-        Me.btnDelete.Name = "btnDelete"
-        Me.btnDelete.Size = New System.Drawing.Size(115, 43)
-        Me.btnDelete.TabIndex = 9
-        Me.btnDelete.Text = "Delete"
-        Me.btnDelete.UseVisualStyleBackColor = True
-        '
-        'btnUpdate
-        '
-        Me.btnUpdate.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnUpdate.Location = New System.Drawing.Point(1061, 720)
-        Me.btnUpdate.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
-        Me.btnUpdate.Name = "btnUpdate"
-        Me.btnUpdate.Size = New System.Drawing.Size(115, 43)
-        Me.btnUpdate.TabIndex = 8
-        Me.btnUpdate.Text = "Update"
-        Me.btnUpdate.UseVisualStyleBackColor = True
-        '
-        'btnAdd
-        '
-        Me.btnAdd.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnAdd.Location = New System.Drawing.Point(912, 720)
-        Me.btnAdd.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
-        Me.btnAdd.Name = "btnAdd"
-        Me.btnAdd.Size = New System.Drawing.Size(115, 43)
-        Me.btnAdd.TabIndex = 7
-        Me.btnAdd.Text = "Add"
-        Me.btnAdd.UseVisualStyleBackColor = True
-        '
-        'dgvStudents
-        '
-        Me.dgvStudents.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.dgvStudents.BackgroundColor = System.Drawing.Color.WhiteSmoke
-        Me.dgvStudents.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvStudents.Location = New System.Drawing.Point(44, 514)
-        Me.dgvStudents.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
-        Me.dgvStudents.Name = "dgvStudents"
-        Me.dgvStudents.RowHeadersWidth = 51
-        Me.dgvStudents.Size = New System.Drawing.Size(1245, 185)
-        Me.dgvStudents.TabIndex = 6
         '
         'grpAddress
         '
@@ -280,10 +211,10 @@ Partial Class AdminManageStudents
         Me.grpAddress.Controls.Add(Me.txtHouseNo)
         Me.grpAddress.Controls.Add(Me.Label12)
         Me.grpAddress.ForeColor = System.Drawing.Color.Black
-        Me.grpAddress.Location = New System.Drawing.Point(44, 283)
-        Me.grpAddress.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.grpAddress.Location = New System.Drawing.Point(443, 288)
+        Me.grpAddress.Margin = New System.Windows.Forms.Padding(4)
         Me.grpAddress.Name = "grpAddress"
-        Me.grpAddress.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.grpAddress.Padding = New System.Windows.Forms.Padding(4)
         Me.grpAddress.Size = New System.Drawing.Size(1245, 215)
         Me.grpAddress.TabIndex = 4
         Me.grpAddress.TabStop = False
@@ -292,7 +223,7 @@ Partial Class AdminManageStudents
         'txtZipCode
         '
         Me.txtZipCode.Location = New System.Drawing.Point(867, 54)
-        Me.txtZipCode.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtZipCode.Margin = New System.Windows.Forms.Padding(4)
         Me.txtZipCode.Name = "txtZipCode"
         Me.txtZipCode.Size = New System.Drawing.Size(239, 22)
         Me.txtZipCode.TabIndex = 13
@@ -310,7 +241,7 @@ Partial Class AdminManageStudents
         'txtCity
         '
         Me.txtCity.Location = New System.Drawing.Point(480, 112)
-        Me.txtCity.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtCity.Margin = New System.Windows.Forms.Padding(4)
         Me.txtCity.Name = "txtCity"
         Me.txtCity.Size = New System.Drawing.Size(305, 22)
         Me.txtCity.TabIndex = 11
@@ -328,7 +259,7 @@ Partial Class AdminManageStudents
         'txtStreet
         '
         Me.txtStreet.Location = New System.Drawing.Point(53, 162)
-        Me.txtStreet.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtStreet.Margin = New System.Windows.Forms.Padding(4)
         Me.txtStreet.Name = "txtStreet"
         Me.txtStreet.Size = New System.Drawing.Size(305, 22)
         Me.txtStreet.TabIndex = 9
@@ -346,7 +277,7 @@ Partial Class AdminManageStudents
         'txtCountry
         '
         Me.txtCountry.Location = New System.Drawing.Point(480, 162)
-        Me.txtCountry.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtCountry.Margin = New System.Windows.Forms.Padding(4)
         Me.txtCountry.Name = "txtCountry"
         Me.txtCountry.Size = New System.Drawing.Size(305, 22)
         Me.txtCountry.TabIndex = 7
@@ -364,7 +295,7 @@ Partial Class AdminManageStudents
         'txtProvince
         '
         Me.txtProvince.Location = New System.Drawing.Point(480, 54)
-        Me.txtProvince.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtProvince.Margin = New System.Windows.Forms.Padding(4)
         Me.txtProvince.Name = "txtProvince"
         Me.txtProvince.Size = New System.Drawing.Size(305, 22)
         Me.txtProvince.TabIndex = 5
@@ -382,7 +313,7 @@ Partial Class AdminManageStudents
         'txtSubdivision
         '
         Me.txtSubdivision.Location = New System.Drawing.Point(53, 112)
-        Me.txtSubdivision.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtSubdivision.Margin = New System.Windows.Forms.Padding(4)
         Me.txtSubdivision.Name = "txtSubdivision"
         Me.txtSubdivision.Size = New System.Drawing.Size(305, 22)
         Me.txtSubdivision.TabIndex = 3
@@ -400,7 +331,7 @@ Partial Class AdminManageStudents
         'txtHouseNo
         '
         Me.txtHouseNo.Location = New System.Drawing.Point(53, 54)
-        Me.txtHouseNo.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtHouseNo.Margin = New System.Windows.Forms.Padding(4)
         Me.txtHouseNo.Name = "txtHouseNo"
         Me.txtHouseNo.Size = New System.Drawing.Size(305, 22)
         Me.txtHouseNo.TabIndex = 1
@@ -415,51 +346,52 @@ Partial Class AdminManageStudents
         Me.Label12.TabIndex = 0
         Me.Label12.Text = "House No. / Lot No. / Block"
         '
-        'grpStudentInfo
+        'grpTeacherInfo
         '
-        Me.grpStudentInfo.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+        Me.grpTeacherInfo.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.grpStudentInfo.BackColor = System.Drawing.Color.Gainsboro
-        Me.grpStudentInfo.Controls.Add(Me.dtpBirthdate)
-        Me.grpStudentInfo.Controls.Add(Me.Label11)
-        Me.grpStudentInfo.Controls.Add(Me.txtGender)
-        Me.grpStudentInfo.Controls.Add(Me.Label10)
-        Me.grpStudentInfo.Controls.Add(Me.txtAge)
-        Me.grpStudentInfo.Controls.Add(Me.Label9)
-        Me.grpStudentInfo.Controls.Add(Me.txtParentName)
-        Me.grpStudentInfo.Controls.Add(Me.Label8)
-        Me.grpStudentInfo.Controls.Add(Me.txtReligion)
-        Me.grpStudentInfo.Controls.Add(Me.Label7)
-        Me.grpStudentInfo.Controls.Add(Me.txtSectionId)
-        Me.grpStudentInfo.Controls.Add(Me.Label6)
-        Me.grpStudentInfo.Controls.Add(Me.txtGradeLevel)
-        Me.grpStudentInfo.Controls.Add(Me.Label5)
-        Me.grpStudentInfo.Controls.Add(Me.txtStudentNo)
-        Me.grpStudentInfo.Controls.Add(Me.Label4)
-        Me.grpStudentInfo.Controls.Add(Me.txtSurname)
-        Me.grpStudentInfo.Controls.Add(Me.Label3)
-        Me.grpStudentInfo.Controls.Add(Me.txtMiddleName)
-        Me.grpStudentInfo.Controls.Add(Me.Label2)
-        Me.grpStudentInfo.Controls.Add(Me.txtFirstName)
-        Me.grpStudentInfo.Controls.Add(Me.lblFirstName)
-        Me.grpStudentInfo.Controls.Add(Me.txtStudentId)
-        Me.grpStudentInfo.Controls.Add(Me.Label1)
-        Me.grpStudentInfo.Location = New System.Drawing.Point(44, 98)
-        Me.grpStudentInfo.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
-        Me.grpStudentInfo.Name = "grpStudentInfo"
-        Me.grpStudentInfo.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
-        Me.grpStudentInfo.Size = New System.Drawing.Size(1245, 215)
-        Me.grpStudentInfo.TabIndex = 3
-        Me.grpStudentInfo.TabStop = False
-        Me.grpStudentInfo.Text = "Student List"
+        Me.grpTeacherInfo.BackColor = System.Drawing.Color.Gainsboro
+        Me.grpTeacherInfo.Controls.Add(Me.ComboBoxGender)
+        Me.grpTeacherInfo.Controls.Add(Me.Label11)
+        Me.grpTeacherInfo.Controls.Add(Me.txtAssignedSection)
+        Me.grpTeacherInfo.Controls.Add(Me.Label10)
+        Me.grpTeacherInfo.Controls.Add(Me.txtStatus)
+        Me.grpTeacherInfo.Controls.Add(Me.Label9)
+        Me.grpTeacherInfo.Controls.Add(Me.txtHireDate)
+        Me.grpTeacherInfo.Controls.Add(Me.Label8)
+        Me.grpTeacherInfo.Controls.Add(Me.txtSpecialization)
+        Me.grpTeacherInfo.Controls.Add(Me.Label7)
+        Me.grpTeacherInfo.Controls.Add(Me.txtEducationalAttainment)
+        Me.grpTeacherInfo.Controls.Add(Me.Label6)
+        Me.grpTeacherInfo.Controls.Add(Me.txtEmail)
+        Me.grpTeacherInfo.Controls.Add(Me.Label5)
+        Me.grpTeacherInfo.Controls.Add(Me.txtEmployeeNo)
+        Me.grpTeacherInfo.Controls.Add(Me.Label4)
+        Me.grpTeacherInfo.Controls.Add(Me.txtSurname)
+        Me.grpTeacherInfo.Controls.Add(Me.Label3)
+        Me.grpTeacherInfo.Controls.Add(Me.txtMiddleName)
+        Me.grpTeacherInfo.Controls.Add(Me.Label2)
+        Me.grpTeacherInfo.Controls.Add(Me.txtFirstName)
+        Me.grpTeacherInfo.Controls.Add(Me.lblFirstName)
+        Me.grpTeacherInfo.Controls.Add(Me.txtTeacherId)
+        Me.grpTeacherInfo.Controls.Add(Me.Label1)
+        Me.grpTeacherInfo.Location = New System.Drawing.Point(443, 103)
+        Me.grpTeacherInfo.Margin = New System.Windows.Forms.Padding(4)
+        Me.grpTeacherInfo.Name = "grpTeacherInfo"
+        Me.grpTeacherInfo.Padding = New System.Windows.Forms.Padding(4)
+        Me.grpTeacherInfo.Size = New System.Drawing.Size(1245, 215)
+        Me.grpTeacherInfo.TabIndex = 3
+        Me.grpTeacherInfo.TabStop = False
+        Me.grpTeacherInfo.Text = "Teacher List"
         '
-        'dtpBirthdate
+        'ComboBoxGender
         '
-        Me.dtpBirthdate.Location = New System.Drawing.Point(933, 158)
-        Me.dtpBirthdate.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
-        Me.dtpBirthdate.Name = "dtpBirthdate"
-        Me.dtpBirthdate.Size = New System.Drawing.Size(265, 22)
-        Me.dtpBirthdate.TabIndex = 22
+        Me.ComboBoxGender.FormattingEnabled = True
+        Me.ComboBoxGender.Items.AddRange(New Object() {"Male", "Female"})
+        Me.ComboBoxGender.Location = New System.Drawing.Point(933, 155)
+        Me.ComboBoxGender.Name = "ComboBoxGender"
+        Me.ComboBoxGender.Size = New System.Drawing.Size(71, 24)
+        Me.ComboBoxGender.TabIndex = 24
         '
         'Label11
         '
@@ -467,17 +399,17 @@ Partial Class AdminManageStudents
         Me.Label11.Location = New System.Drawing.Point(929, 135)
         Me.Label11.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(60, 16)
+        Me.Label11.Size = New System.Drawing.Size(52, 16)
         Me.Label11.TabIndex = 21
-        Me.Label11.Text = "Birthdate"
+        Me.Label11.Text = "Gender"
         '
-        'txtGender
+        'txtAssignedSection
         '
-        Me.txtGender.Location = New System.Drawing.Point(933, 103)
-        Me.txtGender.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
-        Me.txtGender.Name = "txtGender"
-        Me.txtGender.Size = New System.Drawing.Size(159, 22)
-        Me.txtGender.TabIndex = 20
+        Me.txtAssignedSection.Location = New System.Drawing.Point(933, 103)
+        Me.txtAssignedSection.Margin = New System.Windows.Forms.Padding(4)
+        Me.txtAssignedSection.Name = "txtAssignedSection"
+        Me.txtAssignedSection.Size = New System.Drawing.Size(159, 22)
+        Me.txtAssignedSection.TabIndex = 20
         '
         'Label10
         '
@@ -485,17 +417,17 @@ Partial Class AdminManageStudents
         Me.Label10.Location = New System.Drawing.Point(929, 84)
         Me.Label10.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(52, 16)
+        Me.Label10.Size = New System.Drawing.Size(112, 16)
         Me.Label10.TabIndex = 19
-        Me.Label10.Text = "Gender"
+        Me.Label10.Text = "Assigned Section"
         '
-        'txtAge
+        'txtStatus
         '
-        Me.txtAge.Location = New System.Drawing.Point(933, 47)
-        Me.txtAge.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
-        Me.txtAge.Name = "txtAge"
-        Me.txtAge.Size = New System.Drawing.Size(159, 22)
-        Me.txtAge.TabIndex = 18
+        Me.txtStatus.Location = New System.Drawing.Point(933, 47)
+        Me.txtStatus.Margin = New System.Windows.Forms.Padding(4)
+        Me.txtStatus.Name = "txtStatus"
+        Me.txtStatus.Size = New System.Drawing.Size(159, 22)
+        Me.txtStatus.TabIndex = 18
         '
         'Label9
         '
@@ -503,17 +435,17 @@ Partial Class AdminManageStudents
         Me.Label9.Location = New System.Drawing.Point(929, 27)
         Me.Label9.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(32, 16)
+        Me.Label9.Size = New System.Drawing.Size(44, 16)
         Me.Label9.TabIndex = 17
-        Me.Label9.Text = "Age"
+        Me.Label9.Text = "Status"
         '
-        'txtParentName
+        'txtHireDate
         '
-        Me.txtParentName.Location = New System.Drawing.Point(640, 158)
-        Me.txtParentName.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
-        Me.txtParentName.Name = "txtParentName"
-        Me.txtParentName.Size = New System.Drawing.Size(252, 22)
-        Me.txtParentName.TabIndex = 16
+        Me.txtHireDate.Location = New System.Drawing.Point(640, 158)
+        Me.txtHireDate.Margin = New System.Windows.Forms.Padding(4)
+        Me.txtHireDate.Name = "txtHireDate"
+        Me.txtHireDate.Size = New System.Drawing.Size(252, 22)
+        Me.txtHireDate.TabIndex = 16
         '
         'Label8
         '
@@ -521,17 +453,17 @@ Partial Class AdminManageStudents
         Me.Label8.Location = New System.Drawing.Point(636, 135)
         Me.Label8.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(86, 16)
+        Me.Label8.Size = New System.Drawing.Size(64, 16)
         Me.Label8.TabIndex = 15
-        Me.Label8.Text = "Parent Name"
+        Me.Label8.Text = "Hire Date"
         '
-        'txtReligion
+        'txtSpecialization
         '
-        Me.txtReligion.Location = New System.Drawing.Point(640, 103)
-        Me.txtReligion.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
-        Me.txtReligion.Name = "txtReligion"
-        Me.txtReligion.Size = New System.Drawing.Size(252, 22)
-        Me.txtReligion.TabIndex = 14
+        Me.txtSpecialization.Location = New System.Drawing.Point(640, 103)
+        Me.txtSpecialization.Margin = New System.Windows.Forms.Padding(4)
+        Me.txtSpecialization.Name = "txtSpecialization"
+        Me.txtSpecialization.Size = New System.Drawing.Size(252, 22)
+        Me.txtSpecialization.TabIndex = 14
         '
         'Label7
         '
@@ -539,17 +471,17 @@ Partial Class AdminManageStudents
         Me.Label7.Location = New System.Drawing.Point(636, 84)
         Me.Label7.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(57, 16)
+        Me.Label7.Size = New System.Drawing.Size(91, 16)
         Me.Label7.TabIndex = 13
-        Me.Label7.Text = "Religion"
+        Me.Label7.Text = "Specialization"
         '
-        'txtSectionId
+        'txtEducationalAttainment
         '
-        Me.txtSectionId.Location = New System.Drawing.Point(640, 47)
-        Me.txtSectionId.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
-        Me.txtSectionId.Name = "txtSectionId"
-        Me.txtSectionId.Size = New System.Drawing.Size(252, 22)
-        Me.txtSectionId.TabIndex = 12
+        Me.txtEducationalAttainment.Location = New System.Drawing.Point(640, 47)
+        Me.txtEducationalAttainment.Margin = New System.Windows.Forms.Padding(4)
+        Me.txtEducationalAttainment.Name = "txtEducationalAttainment"
+        Me.txtEducationalAttainment.Size = New System.Drawing.Size(252, 22)
+        Me.txtEducationalAttainment.TabIndex = 12
         '
         'Label6
         '
@@ -557,17 +489,17 @@ Partial Class AdminManageStudents
         Me.Label6.Location = New System.Drawing.Point(636, 27)
         Me.Label6.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(68, 16)
+        Me.Label6.Size = New System.Drawing.Size(143, 16)
         Me.Label6.TabIndex = 11
-        Me.Label6.Text = "Section ID"
+        Me.Label6.Text = "Educational Attainment"
         '
-        'txtGradeLevel
+        'txtEmail
         '
-        Me.txtGradeLevel.Location = New System.Drawing.Point(347, 158)
-        Me.txtGradeLevel.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
-        Me.txtGradeLevel.Name = "txtGradeLevel"
-        Me.txtGradeLevel.Size = New System.Drawing.Size(252, 22)
-        Me.txtGradeLevel.TabIndex = 10
+        Me.txtEmail.Location = New System.Drawing.Point(347, 158)
+        Me.txtEmail.Margin = New System.Windows.Forms.Padding(4)
+        Me.txtEmail.Name = "txtEmail"
+        Me.txtEmail.Size = New System.Drawing.Size(252, 22)
+        Me.txtEmail.TabIndex = 10
         '
         'Label5
         '
@@ -575,17 +507,17 @@ Partial Class AdminManageStudents
         Me.Label5.Location = New System.Drawing.Point(343, 135)
         Me.Label5.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(81, 16)
+        Me.Label5.Size = New System.Drawing.Size(41, 16)
         Me.Label5.TabIndex = 9
-        Me.Label5.Text = "Grade Level"
+        Me.Label5.Text = "Email"
         '
-        'txtStudentNo
+        'txtEmployeeNo
         '
-        Me.txtStudentNo.Location = New System.Drawing.Point(347, 103)
-        Me.txtStudentNo.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
-        Me.txtStudentNo.Name = "txtStudentNo"
-        Me.txtStudentNo.Size = New System.Drawing.Size(252, 22)
-        Me.txtStudentNo.TabIndex = 8
+        Me.txtEmployeeNo.Location = New System.Drawing.Point(347, 103)
+        Me.txtEmployeeNo.Margin = New System.Windows.Forms.Padding(4)
+        Me.txtEmployeeNo.Name = "txtEmployeeNo"
+        Me.txtEmployeeNo.Size = New System.Drawing.Size(252, 22)
+        Me.txtEmployeeNo.TabIndex = 8
         '
         'Label4
         '
@@ -593,14 +525,14 @@ Partial Class AdminManageStudents
         Me.Label4.Location = New System.Drawing.Point(343, 84)
         Me.Label4.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(76, 16)
+        Me.Label4.Size = New System.Drawing.Size(93, 16)
         Me.Label4.TabIndex = 7
-        Me.Label4.Text = "Student No."
+        Me.Label4.Text = "Employee No."
         '
         'txtSurname
         '
         Me.txtSurname.Location = New System.Drawing.Point(53, 158)
-        Me.txtSurname.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtSurname.Margin = New System.Windows.Forms.Padding(4)
         Me.txtSurname.Name = "txtSurname"
         Me.txtSurname.Size = New System.Drawing.Size(252, 22)
         Me.txtSurname.TabIndex = 6
@@ -618,7 +550,7 @@ Partial Class AdminManageStudents
         'txtMiddleName
         '
         Me.txtMiddleName.Location = New System.Drawing.Point(347, 47)
-        Me.txtMiddleName.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtMiddleName.Margin = New System.Windows.Forms.Padding(4)
         Me.txtMiddleName.Name = "txtMiddleName"
         Me.txtMiddleName.Size = New System.Drawing.Size(252, 22)
         Me.txtMiddleName.TabIndex = 4
@@ -636,7 +568,7 @@ Partial Class AdminManageStudents
         'txtFirstName
         '
         Me.txtFirstName.Location = New System.Drawing.Point(53, 103)
-        Me.txtFirstName.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtFirstName.Margin = New System.Windows.Forms.Padding(4)
         Me.txtFirstName.Name = "txtFirstName"
         Me.txtFirstName.Size = New System.Drawing.Size(252, 22)
         Me.txtFirstName.TabIndex = 2
@@ -651,13 +583,13 @@ Partial Class AdminManageStudents
         Me.lblFirstName.TabIndex = 1
         Me.lblFirstName.Text = "First Name"
         '
-        'txtStudentId
+        'txtTeacherId
         '
-        Me.txtStudentId.Location = New System.Drawing.Point(53, 47)
-        Me.txtStudentId.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
-        Me.txtStudentId.Name = "txtStudentId"
-        Me.txtStudentId.Size = New System.Drawing.Size(252, 22)
-        Me.txtStudentId.TabIndex = 0
+        Me.txtTeacherId.Location = New System.Drawing.Point(53, 47)
+        Me.txtTeacherId.Margin = New System.Windows.Forms.Padding(4)
+        Me.txtTeacherId.Name = "txtTeacherId"
+        Me.txtTeacherId.Size = New System.Drawing.Size(252, 22)
+        Me.txtTeacherId.TabIndex = 0
         '
         'Label1
         '
@@ -665,78 +597,130 @@ Partial Class AdminManageStudents
         Me.Label1.Location = New System.Drawing.Point(49, 27)
         Me.Label1.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(68, 16)
+        Me.Label1.Size = New System.Drawing.Size(74, 16)
         Me.Label1.TabIndex = 23
-        Me.Label1.Text = "Student ID"
+        Me.Label1.Text = "Teacher ID"
         '
-        'lblStudentList
+        'lblTeacherList
         '
-        Me.lblStudentList.AutoSize = True
-        Me.lblStudentList.Font = New System.Drawing.Font("Segoe UI Semibold", 14.0!, System.Drawing.FontStyle.Bold)
-        Me.lblStudentList.ForeColor = System.Drawing.Color.White
-        Me.lblStudentList.Location = New System.Drawing.Point(37, 36)
-        Me.lblStudentList.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.lblStudentList.Name = "lblStudentList"
-        Me.lblStudentList.Size = New System.Drawing.Size(143, 32)
-        Me.lblStudentList.TabIndex = 2
-        Me.lblStudentList.Text = "Student List"
+        Me.lblTeacherList.AutoSize = True
+        Me.lblTeacherList.Font = New System.Drawing.Font("Segoe UI Semibold", 14.0!, System.Drawing.FontStyle.Bold)
+        Me.lblTeacherList.ForeColor = System.Drawing.Color.White
+        Me.lblTeacherList.Location = New System.Drawing.Point(434, 23)
+        Me.lblTeacherList.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblTeacherList.Name = "lblTeacherList"
+        Me.lblTeacherList.Size = New System.Drawing.Size(142, 32)
+        Me.lblTeacherList.TabIndex = 17
+        Me.lblTeacherList.Text = "Teacher List"
         '
         'btnSearch
         '
         Me.btnSearch.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnSearch.Location = New System.Drawing.Point(1200, 34)
-        Me.btnSearch.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnSearch.Location = New System.Drawing.Point(1597, 21)
+        Me.btnSearch.Margin = New System.Windows.Forms.Padding(4)
         Me.btnSearch.Name = "btnSearch"
         Me.btnSearch.Size = New System.Drawing.Size(89, 32)
-        Me.btnSearch.TabIndex = 1
+        Me.btnSearch.TabIndex = 16
         Me.btnSearch.Text = "Search"
         Me.btnSearch.UseVisualStyleBackColor = True
         '
         'txtSearch
         '
         Me.txtSearch.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtSearch.Location = New System.Drawing.Point(839, 39)
-        Me.txtSearch.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtSearch.Location = New System.Drawing.Point(1236, 26)
+        Me.txtSearch.Margin = New System.Windows.Forms.Padding(4)
         Me.txtSearch.Name = "txtSearch"
         Me.txtSearch.Size = New System.Drawing.Size(264, 22)
-        Me.txtSearch.TabIndex = 0
+        Me.txtSearch.TabIndex = 15
+        '
+        'dgvTeacher
+        '
+        Me.dgvTeacher.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.dgvTeacher.BackgroundColor = System.Drawing.Color.WhiteSmoke
+        Me.dgvTeacher.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dgvTeacher.Location = New System.Drawing.Point(443, 522)
+        Me.dgvTeacher.Margin = New System.Windows.Forms.Padding(4)
+        Me.dgvTeacher.Name = "dgvTeacher"
+        Me.dgvTeacher.RowHeadersWidth = 51
+        Me.dgvTeacher.Size = New System.Drawing.Size(1245, 185)
+        Me.dgvTeacher.TabIndex = 18
+        '
+        'btnDelete
+        '
+        Me.btnDelete.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnDelete.Location = New System.Drawing.Point(1571, 723)
+        Me.btnDelete.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnDelete.Name = "btnDelete"
+        Me.btnDelete.Size = New System.Drawing.Size(115, 43)
+        Me.btnDelete.TabIndex = 21
+        Me.btnDelete.Text = "Delete"
+        Me.btnDelete.UseVisualStyleBackColor = True
+        '
+        'btnUpdate
+        '
+        Me.btnUpdate.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnUpdate.Location = New System.Drawing.Point(1421, 723)
+        Me.btnUpdate.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnUpdate.Name = "btnUpdate"
+        Me.btnUpdate.Size = New System.Drawing.Size(115, 43)
+        Me.btnUpdate.TabIndex = 20
+        Me.btnUpdate.Text = "Update"
+        Me.btnUpdate.UseVisualStyleBackColor = True
+        '
+        'btnAdd
+        '
+        Me.btnAdd.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnAdd.Location = New System.Drawing.Point(1272, 723)
+        Me.btnAdd.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnAdd.Name = "btnAdd"
+        Me.btnAdd.Size = New System.Drawing.Size(115, 43)
+        Me.btnAdd.TabIndex = 19
+        Me.btnAdd.Text = "Add"
+        Me.btnAdd.UseVisualStyleBackColor = True
         '
         'picWatermark
         '
         Me.picWatermark.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.picWatermark.Image = Global.CFLC.My.Resources.Resources.logo
-        Me.picWatermark.Location = New System.Drawing.Point(273, 97)
-        Me.picWatermark.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.picWatermark.Location = New System.Drawing.Point(720, 109)
+        Me.picWatermark.Margin = New System.Windows.Forms.Padding(4)
         Me.picWatermark.Name = "picWatermark"
         Me.picWatermark.Size = New System.Drawing.Size(693, 574)
         Me.picWatermark.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
-        Me.picWatermark.TabIndex = 5
+        Me.picWatermark.TabIndex = 22
         Me.picWatermark.TabStop = False
         '
-        'AdminManageStudents
+        'AdminManageTeacher
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(15, Byte), Integer), CType(CType(56, Byte), Integer), CType(CType(32, Byte), Integer))
+        Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(7, Byte), Integer), CType(CType(77, Byte), Integer), CType(CType(39, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(1733, 779)
-        Me.Controls.Add(Me.pnlContent)
+        Me.Controls.Add(Me.btnDelete)
+        Me.Controls.Add(Me.btnUpdate)
+        Me.Controls.Add(Me.btnAdd)
+        Me.Controls.Add(Me.dgvTeacher)
+        Me.Controls.Add(Me.lblTeacherList)
+        Me.Controls.Add(Me.btnSearch)
+        Me.Controls.Add(Me.txtSearch)
+        Me.Controls.Add(Me.grpAddress)
+        Me.Controls.Add(Me.grpTeacherInfo)
         Me.Controls.Add(Me.pnlSidebar)
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
-        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
-        Me.Name = "AdminManageStudents"
+        Me.Controls.Add(Me.picWatermark)
+        Me.Name = "AdminManageTeacher"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Admin - Manage Students"
+        Me.Text = "Teacher"
         Me.pnlSidebar.ResumeLayout(False)
         Me.flowButtons.ResumeLayout(False)
-        Me.pnlContent.ResumeLayout(False)
-        Me.pnlContent.PerformLayout()
-        CType(Me.dgvStudents, System.ComponentModel.ISupportInitialize).EndInit()
         Me.grpAddress.ResumeLayout(False)
         Me.grpAddress.PerformLayout()
-        Me.grpStudentInfo.ResumeLayout(False)
-        Me.grpStudentInfo.PerformLayout()
+        Me.grpTeacherInfo.ResumeLayout(False)
+        Me.grpTeacherInfo.PerformLayout()
+        CType(Me.dgvTeacher, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.picWatermark, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 
@@ -749,40 +733,6 @@ Partial Class AdminManageStudents
     Friend WithEvents btnManageSubjects As Button
     Friend WithEvents btnGenerateReports As Button
     Friend WithEvents btnLogout As Button
-    Friend WithEvents pnlContent As Panel
-    Friend WithEvents btnDelete As Button
-    Friend WithEvents btnUpdate As Button
-    Friend WithEvents btnAdd As Button
-    Friend WithEvents dgvStudents As DataGridView
-    Friend WithEvents picWatermark As PictureBox
-    Friend WithEvents grpStudentInfo As GroupBox
-    Friend WithEvents dtpBirthdate As DateTimePicker
-    Friend WithEvents Label11 As Label
-    Friend WithEvents txtGender As TextBox
-    Friend WithEvents Label10 As Label
-    Friend WithEvents txtAge As TextBox
-    Friend WithEvents Label9 As Label
-    Friend WithEvents txtParentName As TextBox
-    Friend WithEvents Label8 As Label
-    Friend WithEvents txtReligion As TextBox
-    Friend WithEvents Label7 As Label
-    Friend WithEvents txtSectionId As TextBox
-    Friend WithEvents Label6 As Label
-    Friend WithEvents txtGradeLevel As TextBox
-    Friend WithEvents Label5 As Label
-    Friend WithEvents txtStudentNo As TextBox
-    Friend WithEvents Label4 As Label
-    Friend WithEvents txtSurname As TextBox
-    Friend WithEvents Label3 As Label
-    Friend WithEvents txtMiddleName As TextBox
-    Friend WithEvents Label2 As Label
-    Friend WithEvents txtFirstName As TextBox
-    Friend WithEvents lblFirstName As Label
-    Friend WithEvents txtStudentId As TextBox
-    Friend WithEvents Label1 As Label
-    Friend WithEvents lblStudentList As Label
-    Friend WithEvents btnSearch As Button
-    Friend WithEvents txtSearch As TextBox
     Friend WithEvents grpAddress As GroupBox
     Friend WithEvents txtZipCode As TextBox
     Friend WithEvents Label18 As Label
@@ -798,4 +748,37 @@ Partial Class AdminManageStudents
     Friend WithEvents Label13 As Label
     Friend WithEvents txtHouseNo As TextBox
     Friend WithEvents Label12 As Label
+    Friend WithEvents grpTeacherInfo As GroupBox
+    Friend WithEvents Label11 As Label
+    Friend WithEvents txtAssignedSection As TextBox
+    Friend WithEvents Label10 As Label
+    Friend WithEvents txtStatus As TextBox
+    Friend WithEvents Label9 As Label
+    Friend WithEvents txtHireDate As TextBox
+    Friend WithEvents Label8 As Label
+    Friend WithEvents txtSpecialization As TextBox
+    Friend WithEvents Label7 As Label
+    Friend WithEvents txtEducationalAttainment As TextBox
+    Friend WithEvents Label6 As Label
+    Friend WithEvents txtEmail As TextBox
+    Friend WithEvents Label5 As Label
+    Friend WithEvents txtEmployeeNo As TextBox
+    Friend WithEvents Label4 As Label
+    Friend WithEvents txtSurname As TextBox
+    Friend WithEvents Label3 As Label
+    Friend WithEvents txtMiddleName As TextBox
+    Friend WithEvents Label2 As Label
+    Friend WithEvents txtFirstName As TextBox
+    Friend WithEvents lblFirstName As Label
+    Friend WithEvents txtTeacherId As TextBox
+    Friend WithEvents Label1 As Label
+    Friend WithEvents ComboBoxGender As ComboBox
+    Friend WithEvents lblTeacherList As Label
+    Friend WithEvents btnSearch As Button
+    Friend WithEvents txtSearch As TextBox
+    Friend WithEvents dgvTeacher As DataGridView
+    Friend WithEvents btnDelete As Button
+    Friend WithEvents btnUpdate As Button
+    Friend WithEvents btnAdd As Button
+    Friend WithEvents picWatermark As PictureBox
 End Class
