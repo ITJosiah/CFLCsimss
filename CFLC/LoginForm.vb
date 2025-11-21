@@ -1,6 +1,6 @@
 ﻿Public Class LoginForm
     Private Sub LoginForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        ' Set form properties
+        ' Set form properties sadasdada
         Me.WindowState = FormWindowState.Maximized
         Me.BackColor = Color.FromArgb(7, 77, 39)
 
