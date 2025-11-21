@@ -395,6 +395,7 @@ Partial Class AdminManageStudents
         '
         Me.grpStudentInfo.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.grpStudentInfo.AutoSize = True
         Me.grpStudentInfo.BackColor = System.Drawing.Color.Gainsboro
         Me.grpStudentInfo.Controls.Add(Me.dtpBirthdate)
         Me.grpStudentInfo.Controls.Add(Me.Label11)
@@ -422,7 +423,7 @@ Partial Class AdminManageStudents
         Me.grpStudentInfo.Controls.Add(Me.Label1)
         Me.grpStudentInfo.Location = New System.Drawing.Point(33, 80)
         Me.grpStudentInfo.Name = "grpStudentInfo"
-        Me.grpStudentInfo.Size = New System.Drawing.Size(969, 210)
+        Me.grpStudentInfo.Size = New System.Drawing.Size(969, 219)
         Me.grpStudentInfo.TabIndex = 3
         Me.grpStudentInfo.TabStop = False
         Me.grpStudentInfo.Text = "Student List"
