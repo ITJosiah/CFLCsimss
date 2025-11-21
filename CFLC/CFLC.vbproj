@@ -79,6 +79,12 @@
     <Compile Include="AdminDashboard.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="AdminManageStudents.Designer.vb">
+      <DependentUpon>AdminManageStudents.vb</DependentUpon>
+    </Compile>
+    <Compile Include="AdminManageStudents.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Form1.vb">
       <SubType>Form</SubType>
     </Compile>
@@ -108,16 +114,19 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="Teacher.Designer.vb">
-      <DependentUpon>Teacher.vb</DependentUpon>
+    <Compile Include="AdminManageTeacher.Designer.vb">
+      <DependentUpon>AdminManageTeacher.vb</DependentUpon>
     </Compile>
-    <Compile Include="Teacher.vb">
+    <Compile Include="AdminManageTeacher.vb">
       <SubType>Form</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="AdminDashboard.resx">
       <DependentUpon>AdminDashboard.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AdminManageStudents.resx">
+      <DependentUpon>AdminManageStudents.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.vb</DependentUpon>
@@ -130,6 +139,9 @@
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AdminManageTeacher.resx">
+      <DependentUpon>AdminManageTeacher.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
