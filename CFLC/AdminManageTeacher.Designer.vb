@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
-Partial Class AdminManageTeachers
+Partial Class AdminManageTeacher
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -61,7 +61,7 @@ Partial Class AdminManageTeachers
         Me.txtFirstName = New System.Windows.Forms.TextBox()
         Me.lblFirstName = New System.Windows.Forms.Label()
         Me.txtTeacherId = New System.Windows.Forms.TextBox()
-        Me.Label1 = New System.Windows.Forms.Label()
+        Me.TeacherID = New System.Windows.Forms.Label()
         Me.lblTeacherList = New System.Windows.Forms.Label()
         Me.btnSearch = New System.Windows.Forms.Button()
         Me.txtSearch = New System.Windows.Forms.TextBox()
@@ -72,12 +72,12 @@ Partial Class AdminManageTeachers
         Me.picWatermark = New System.Windows.Forms.PictureBox()
         Me.btnLogout = New System.Windows.Forms.Button()
         Me.flowButtons = New System.Windows.Forms.FlowLayoutPanel()
-        Me.btnGenerateReports = New System.Windows.Forms.Button()
-        Me.btnManageSubjects = New System.Windows.Forms.Button()
-        Me.btnManageEnrollments = New System.Windows.Forms.Button()
-        Me.btnManageSections = New System.Windows.Forms.Button()
-        Me.btnManageTeachers = New System.Windows.Forms.Button()
         Me.btnManageStudents = New System.Windows.Forms.Button()
+        Me.btnManageTeachers = New System.Windows.Forms.Button()
+        Me.btnManageSections = New System.Windows.Forms.Button()
+        Me.btnManageEnrollments = New System.Windows.Forms.Button()
+        Me.btnManageSubjects = New System.Windows.Forms.Button()
+        Me.btnGenerateReports = New System.Windows.Forms.Button()
         Me.pnlSidebar = New System.Windows.Forms.Panel()
         Me.grpAddress.SuspendLayout()
         Me.grpTeacherInfo.SuspendLayout()
@@ -270,7 +270,7 @@ Partial Class AdminManageTeachers
         Me.grpTeacherInfo.Controls.Add(Me.txtFirstName)
         Me.grpTeacherInfo.Controls.Add(Me.lblFirstName)
         Me.grpTeacherInfo.Controls.Add(Me.txtTeacherId)
-        Me.grpTeacherInfo.Controls.Add(Me.Label1)
+        Me.grpTeacherInfo.Controls.Add(Me.TeacherID)
         Me.grpTeacherInfo.Location = New System.Drawing.Point(443, 103)
         Me.grpTeacherInfo.Margin = New System.Windows.Forms.Padding(4)
         Me.grpTeacherInfo.Name = "grpTeacherInfo"
@@ -487,15 +487,15 @@ Partial Class AdminManageTeachers
         Me.txtTeacherId.Size = New System.Drawing.Size(252, 22)
         Me.txtTeacherId.TabIndex = 0
         '
-        'Label1
+        'TeacherID
         '
-        Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(49, 27)
-        Me.Label1.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(74, 16)
-        Me.Label1.TabIndex = 23
-        Me.Label1.Text = "Teacher ID"
+        Me.TeacherID.AutoSize = True
+        Me.TeacherID.Location = New System.Drawing.Point(49, 27)
+        Me.TeacherID.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.TeacherID.Name = "TeacherID"
+        Me.TeacherID.Size = New System.Drawing.Size(74, 16)
+        Me.TeacherID.TabIndex = 23
+        Me.TeacherID.Text = "Teacher ID"
         '
         'lblTeacherList
         '
@@ -618,45 +618,15 @@ Partial Class AdminManageTeachers
         Me.flowButtons.TabIndex = 0
         Me.flowButtons.WrapContents = False
         '
-        'btnGenerateReports
+        'btnManageStudents
         '
-        Me.btnGenerateReports.Location = New System.Drawing.Point(0, 385)
-        Me.btnGenerateReports.Margin = New System.Windows.Forms.Padding(0, 0, 0, 22)
-        Me.btnGenerateReports.Name = "btnGenerateReports"
-        Me.btnGenerateReports.Size = New System.Drawing.Size(320, 55)
-        Me.btnGenerateReports.TabIndex = 9
-        Me.btnGenerateReports.Text = "Generate Reports"
-        Me.btnGenerateReports.UseVisualStyleBackColor = True
-        '
-        'btnManageSubjects
-        '
-        Me.btnManageSubjects.Location = New System.Drawing.Point(0, 308)
-        Me.btnManageSubjects.Margin = New System.Windows.Forms.Padding(0, 0, 0, 22)
-        Me.btnManageSubjects.Name = "btnManageSubjects"
-        Me.btnManageSubjects.Size = New System.Drawing.Size(320, 55)
-        Me.btnManageSubjects.TabIndex = 8
-        Me.btnManageSubjects.Text = "Manage Subjects"
-        Me.btnManageSubjects.UseVisualStyleBackColor = True
-        '
-        'btnManageEnrollments
-        '
-        Me.btnManageEnrollments.Location = New System.Drawing.Point(0, 231)
-        Me.btnManageEnrollments.Margin = New System.Windows.Forms.Padding(0, 0, 0, 22)
-        Me.btnManageEnrollments.Name = "btnManageEnrollments"
-        Me.btnManageEnrollments.Size = New System.Drawing.Size(320, 55)
-        Me.btnManageEnrollments.TabIndex = 7
-        Me.btnManageEnrollments.Text = "Manage Enrollments"
-        Me.btnManageEnrollments.UseVisualStyleBackColor = True
-        '
-        'btnManageSections
-        '
-        Me.btnManageSections.Location = New System.Drawing.Point(0, 154)
-        Me.btnManageSections.Margin = New System.Windows.Forms.Padding(0, 0, 0, 22)
-        Me.btnManageSections.Name = "btnManageSections"
-        Me.btnManageSections.Size = New System.Drawing.Size(320, 55)
-        Me.btnManageSections.TabIndex = 6
-        Me.btnManageSections.Text = "Manage Sections"
-        Me.btnManageSections.UseVisualStyleBackColor = True
+        Me.btnManageStudents.Location = New System.Drawing.Point(0, 0)
+        Me.btnManageStudents.Margin = New System.Windows.Forms.Padding(0, 0, 0, 22)
+        Me.btnManageStudents.Name = "btnManageStudents"
+        Me.btnManageStudents.Size = New System.Drawing.Size(320, 55)
+        Me.btnManageStudents.TabIndex = 4
+        Me.btnManageStudents.Text = "Manage Students"
+        Me.btnManageStudents.UseVisualStyleBackColor = True
         '
         'btnManageTeachers
         '
@@ -668,15 +638,45 @@ Partial Class AdminManageTeachers
         Me.btnManageTeachers.Text = "Manage Teachers"
         Me.btnManageTeachers.UseVisualStyleBackColor = True
         '
-        'btnManageStudents
+        'btnManageSections
         '
-        Me.btnManageStudents.Location = New System.Drawing.Point(0, 0)
-        Me.btnManageStudents.Margin = New System.Windows.Forms.Padding(0, 0, 0, 22)
-        Me.btnManageStudents.Name = "btnManageStudents"
-        Me.btnManageStudents.Size = New System.Drawing.Size(320, 55)
-        Me.btnManageStudents.TabIndex = 4
-        Me.btnManageStudents.Text = "Manage Students"
-        Me.btnManageStudents.UseVisualStyleBackColor = True
+        Me.btnManageSections.Location = New System.Drawing.Point(0, 154)
+        Me.btnManageSections.Margin = New System.Windows.Forms.Padding(0, 0, 0, 22)
+        Me.btnManageSections.Name = "btnManageSections"
+        Me.btnManageSections.Size = New System.Drawing.Size(320, 55)
+        Me.btnManageSections.TabIndex = 6
+        Me.btnManageSections.Text = "Manage Sections"
+        Me.btnManageSections.UseVisualStyleBackColor = True
+        '
+        'btnManageEnrollments
+        '
+        Me.btnManageEnrollments.Location = New System.Drawing.Point(0, 231)
+        Me.btnManageEnrollments.Margin = New System.Windows.Forms.Padding(0, 0, 0, 22)
+        Me.btnManageEnrollments.Name = "btnManageEnrollments"
+        Me.btnManageEnrollments.Size = New System.Drawing.Size(320, 55)
+        Me.btnManageEnrollments.TabIndex = 7
+        Me.btnManageEnrollments.Text = "Manage Enrollments"
+        Me.btnManageEnrollments.UseVisualStyleBackColor = True
+        '
+        'btnManageSubjects
+        '
+        Me.btnManageSubjects.Location = New System.Drawing.Point(0, 308)
+        Me.btnManageSubjects.Margin = New System.Windows.Forms.Padding(0, 0, 0, 22)
+        Me.btnManageSubjects.Name = "btnManageSubjects"
+        Me.btnManageSubjects.Size = New System.Drawing.Size(320, 55)
+        Me.btnManageSubjects.TabIndex = 8
+        Me.btnManageSubjects.Text = "Manage Subjects"
+        Me.btnManageSubjects.UseVisualStyleBackColor = True
+        '
+        'btnGenerateReports
+        '
+        Me.btnGenerateReports.Location = New System.Drawing.Point(0, 385)
+        Me.btnGenerateReports.Margin = New System.Windows.Forms.Padding(0, 0, 0, 22)
+        Me.btnGenerateReports.Name = "btnGenerateReports"
+        Me.btnGenerateReports.Size = New System.Drawing.Size(320, 55)
+        Me.btnGenerateReports.TabIndex = 9
+        Me.btnGenerateReports.Text = "Generate Reports"
+        Me.btnGenerateReports.UseVisualStyleBackColor = True
         '
         'pnlSidebar
         '
@@ -691,7 +691,7 @@ Partial Class AdminManageTeachers
         Me.pnlSidebar.Size = New System.Drawing.Size(400, 779)
         Me.pnlSidebar.TabIndex = 12
         '
-        'AdminManageTeachers
+        'AdminManageTeacher
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -708,7 +708,7 @@ Partial Class AdminManageTeachers
         Me.Controls.Add(Me.grpTeacherInfo)
         Me.Controls.Add(Me.pnlSidebar)
         Me.Controls.Add(Me.picWatermark)
-        Me.Name = "AdminManageTeachers"
+        Me.Name = "AdminManageTeacher"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Teacher"
         Me.grpAddress.ResumeLayout(False)
@@ -761,7 +761,7 @@ Partial Class AdminManageTeachers
     Friend WithEvents txtFirstName As TextBox
     Friend WithEvents lblFirstName As Label
     Friend WithEvents txtTeacherId As TextBox
-    Friend WithEvents Label1 As Label
+    Friend WithEvents TeacherID As Label
     Friend WithEvents ComboBoxGender As ComboBox
     Friend WithEvents lblTeacherList As Label
     Friend WithEvents btnSearch As Button
