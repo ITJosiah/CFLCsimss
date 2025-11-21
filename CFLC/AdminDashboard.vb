@@ -140,8 +140,11 @@
     End Sub
 
     Private Sub btnManageTeachers_Click(sender As Object, e As EventArgs) Handles btnManageTeachers.Click
-        ' TODO: Open Manage Teachers form
-        MessageBox.Show("Manage Teachers - NEO")
+        Dim manageTeachersForm As New AdminManageTeacher() With {
+            .IsEmbedded = True
+        }
+        LoadContentForm(manageTeachersForm)
+
     End Sub
 
     Private Sub btnManageSections_Click(sender As Object, e As EventArgs) Handles btnManageSections.Click

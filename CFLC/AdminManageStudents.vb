@@ -130,4 +130,8 @@
     Private Sub grpStudentInfo_Enter(sender As Object, e As EventArgs) Handles grpStudentInfo.Enter
 
     End Sub
+
+    Private Sub pnlSidebar_Paint(sender As Object, e As PaintEventArgs) Handles pnlSidebar.Paint
+
+    End Sub
 End Class
