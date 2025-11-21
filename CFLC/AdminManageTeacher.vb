@@ -11,7 +11,6 @@
             Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Else
             pnlSidebar.Visible = False
-            pnlContent.Dock = DockStyle.Fill
         End If
     End Sub
     Private Sub PositionSidebarButtons()
