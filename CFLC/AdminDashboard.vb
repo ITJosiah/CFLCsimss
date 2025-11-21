@@ -107,7 +107,7 @@
     ' Button click handlers
     Private Sub btnManageStudents_Click(sender As Object, e As EventArgs) Handles btnManageStudents.Click
         ' TODO: Open Manage Students form
-        MessageBox.Show("Manage Students - Coming Soon")
+        MessageBox.Show("Manage Students - Hello Po!!!")
     End Sub
 
     Private Sub btnManageTeachers_Click(sender As Object, e As EventArgs) Handles btnManageTeachers.Click
