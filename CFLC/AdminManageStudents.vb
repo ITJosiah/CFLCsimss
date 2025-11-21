@@ -12,6 +12,7 @@
             PositionSidebarButtons()
             ' Replace the designer-generated AutoScaleMode line with:
             Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+
         Else
             pnlSidebar.Visible = False
             pnlContent.Dock = DockStyle.Fill
@@ -95,7 +96,7 @@
         btnLogout.TextAlign = ContentAlignment.MiddleCenter
     End Sub
 
-    Private Sub txtStudentId_TextChanged(sender As Object, e As EventArgs) Handles txtStudentId.TextChanged
+    Private Sub txtStudentId_TextChanged(sender As Object, e As EventArgs)
 
     End Sub
 
@@ -107,15 +108,15 @@
 
     End Sub
 
-    Private Sub txtAge_TextChanged(sender As Object, e As EventArgs) Handles txtAge.TextChanged
+    Private Sub txtAge_TextChanged(sender As Object, e As EventArgs)
 
     End Sub
 
-    Private Sub Label9_Click(sender As Object, e As EventArgs) Handles Label9.Click
+    Private Sub Label9_Click(sender As Object, e As EventArgs) Handles Label9.Click, lblStudentAge.Click
 
     End Sub
 
-    Private Sub Label10_Click(sender As Object, e As EventArgs) Handles Label10.Click
+    Private Sub Label10_Click(sender As Object, e As EventArgs) Handles Label10.Click, lblStudentGender.Click
 
     End Sub
 
@@ -135,11 +136,31 @@
 
     End Sub
 
-    Private Sub Label16_Click(sender As Object, e As EventArgs) Handles Label16.Click
+    Private Sub Label16_Click(sender As Object, e As EventArgs) Handles Label16.Click, lblStudentBarangay.Click
 
     End Sub
 
-    Private Sub Label17_Click(sender As Object, e As EventArgs) Handles Label17.Click
+    Private Sub Label17_Click(sender As Object, e As EventArgs) Handles Label17.Click, lblStudentProvince.Click
+
+    End Sub
+
+    Private Sub lblStudentMiddleName_Click(sender As Object, e As EventArgs) Handles lblStudentMiddleName.Click
+
+    End Sub
+
+    Private Sub cmbGender_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbGender.SelectedIndexChanged, cmbStudenttGender.SelectedIndexChanged
+
+    End Sub
+
+    Private Sub NumericUpDown1_ValueChanged(sender As Object, e As EventArgs) Handles NumericUpDown1.ValueChanged, nudStudentAge.ValueChanged
+
+    End Sub
+
+    Private Sub txtSurname_TextChanged(sender As Object, e As EventArgs) Handles txtSurname.TextChanged, txtbxStudentSurname.TextChanged
+
+    End Sub
+
+    Private Sub Label18_Click(sender As Object, e As EventArgs)
 
     End Sub
 End Class
