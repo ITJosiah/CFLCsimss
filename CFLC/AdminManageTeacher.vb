@@ -1,5 +1,4 @@
 ﻿Public Class AdminManageTeacher
-
     Public Property IsEmbedded As Boolean = False
     Private Sub AdminManageTeacher_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If Not IsEmbedded Then
@@ -115,4 +114,10 @@
     Private Sub pnlSidebar_Paint(sender As Object, e As PaintEventArgs) Handles pnlSidebar.Paint
 
     End Sub
+
+    Private Sub btnManageTeachers_Click(sender As Object, e As EventArgs) Handles btnManageTeachers.Click
+
+    End Sub
 End Class
+
+
