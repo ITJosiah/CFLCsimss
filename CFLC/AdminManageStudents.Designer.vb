@@ -36,7 +36,21 @@ Partial Class AdminManageStudents
         Me.btnUpdate = New System.Windows.Forms.Button()
         Me.btnAdd = New System.Windows.Forms.Button()
         Me.dgvStudents = New System.Windows.Forms.DataGridView()
-        Me.picWatermark = New System.Windows.Forms.PictureBox()
+        Me.grpAddress = New System.Windows.Forms.GroupBox()
+        Me.txtZipCode = New System.Windows.Forms.TextBox()
+        Me.Label18 = New System.Windows.Forms.Label()
+        Me.txtCity = New System.Windows.Forms.TextBox()
+        Me.Label17 = New System.Windows.Forms.Label()
+        Me.txtStreet = New System.Windows.Forms.TextBox()
+        Me.Label16 = New System.Windows.Forms.Label()
+        Me.txtCountry = New System.Windows.Forms.TextBox()
+        Me.Label15 = New System.Windows.Forms.Label()
+        Me.txtProvince = New System.Windows.Forms.TextBox()
+        Me.Label14 = New System.Windows.Forms.Label()
+        Me.txtSubdivision = New System.Windows.Forms.TextBox()
+        Me.Label13 = New System.Windows.Forms.Label()
+        Me.txtHouseNo = New System.Windows.Forms.TextBox()
+        Me.Label12 = New System.Windows.Forms.Label()
         Me.grpStudentInfo = New System.Windows.Forms.GroupBox()
         Me.dtpBirthdate = New System.Windows.Forms.DateTimePicker()
         Me.Label11 = New System.Windows.Forms.Label()
@@ -65,28 +79,14 @@ Partial Class AdminManageStudents
         Me.lblStudentList = New System.Windows.Forms.Label()
         Me.btnSearch = New System.Windows.Forms.Button()
         Me.txtSearch = New System.Windows.Forms.TextBox()
-        Me.Label12 = New System.Windows.Forms.Label()
-        Me.txtHouseNo = New System.Windows.Forms.TextBox()
-        Me.Label13 = New System.Windows.Forms.Label()
-        Me.txtSubdivision = New System.Windows.Forms.TextBox()
-        Me.Label14 = New System.Windows.Forms.Label()
-        Me.txtProvince = New System.Windows.Forms.TextBox()
-        Me.Label15 = New System.Windows.Forms.Label()
-        Me.txtCountry = New System.Windows.Forms.TextBox()
-        Me.Label16 = New System.Windows.Forms.Label()
-        Me.txtStreet = New System.Windows.Forms.TextBox()
-        Me.Label17 = New System.Windows.Forms.Label()
-        Me.txtCity = New System.Windows.Forms.TextBox()
-        Me.Label18 = New System.Windows.Forms.Label()
-        Me.txtZipCode = New System.Windows.Forms.TextBox()
-        Me.grpAddress = New System.Windows.Forms.GroupBox()
+        Me.picWatermark = New System.Windows.Forms.PictureBox()
         Me.pnlSidebar.SuspendLayout()
         Me.flowButtons.SuspendLayout()
         Me.pnlContent.SuspendLayout()
         CType(Me.dgvStudents, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.picWatermark, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.grpStudentInfo.SuspendLayout()
         Me.grpAddress.SuspendLayout()
+        Me.grpStudentInfo.SuspendLayout()
+        CType(Me.picWatermark, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'pnlSidebar
@@ -252,16 +252,144 @@ Partial Class AdminManageStudents
         Me.dgvStudents.Size = New System.Drawing.Size(872, 139)
         Me.dgvStudents.TabIndex = 6
         '
-        'picWatermark
+        'grpAddress
         '
-        Me.picWatermark.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.picWatermark.Image = Global.CFLC.My.Resources.Resources.logo
-        Me.picWatermark.Location = New System.Drawing.Point(205, 79)
-        Me.picWatermark.Name = "picWatermark"
-        Me.picWatermark.Size = New System.Drawing.Size(520, 466)
-        Me.picWatermark.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
-        Me.picWatermark.TabIndex = 5
-        Me.picWatermark.TabStop = False
+        Me.grpAddress.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.grpAddress.BackColor = System.Drawing.Color.FromArgb(CType(CType(211, Byte), Integer), CType(CType(211, Byte), Integer), CType(CType(211, Byte), Integer))
+        Me.grpAddress.Controls.Add(Me.txtZipCode)
+        Me.grpAddress.Controls.Add(Me.Label18)
+        Me.grpAddress.Controls.Add(Me.txtCity)
+        Me.grpAddress.Controls.Add(Me.Label17)
+        Me.grpAddress.Controls.Add(Me.txtStreet)
+        Me.grpAddress.Controls.Add(Me.Label16)
+        Me.grpAddress.Controls.Add(Me.txtCountry)
+        Me.grpAddress.Controls.Add(Me.Label15)
+        Me.grpAddress.Controls.Add(Me.txtProvince)
+        Me.grpAddress.Controls.Add(Me.Label14)
+        Me.grpAddress.Controls.Add(Me.txtSubdivision)
+        Me.grpAddress.Controls.Add(Me.Label13)
+        Me.grpAddress.Controls.Add(Me.txtHouseNo)
+        Me.grpAddress.Controls.Add(Me.Label12)
+        Me.grpAddress.ForeColor = System.Drawing.Color.Black
+        Me.grpAddress.Location = New System.Drawing.Point(28, 235)
+        Me.grpAddress.Name = "grpAddress"
+        Me.grpAddress.Size = New System.Drawing.Size(939, 147)
+        Me.grpAddress.TabIndex = 4
+        Me.grpAddress.TabStop = False
+        Me.grpAddress.Text = "Address"
+        '
+        'txtZipCode
+        '
+        Me.txtZipCode.Location = New System.Drawing.Point(611, 102)
+        Me.txtZipCode.Name = "txtZipCode"
+        Me.txtZipCode.Size = New System.Drawing.Size(215, 20)
+        Me.txtZipCode.TabIndex = 13
+        '
+        'Label18
+        '
+        Me.Label18.AutoSize = True
+        Me.Label18.Location = New System.Drawing.Point(609, 87)
+        Me.Label18.Name = "Label18"
+        Me.Label18.Size = New System.Drawing.Size(50, 13)
+        Me.Label18.TabIndex = 12
+        Me.Label18.Text = "Zip Code"
+        '
+        'txtCity
+        '
+        Me.txtCity.Location = New System.Drawing.Point(317, 102)
+        Me.txtCity.Name = "txtCity"
+        Me.txtCity.Size = New System.Drawing.Size(215, 20)
+        Me.txtCity.TabIndex = 11
+        '
+        'Label17
+        '
+        Me.Label17.AutoSize = True
+        Me.Label17.Location = New System.Drawing.Point(315, 87)
+        Me.Label17.Name = "Label17"
+        Me.Label17.Size = New System.Drawing.Size(90, 13)
+        Me.Label17.TabIndex = 10
+        Me.Label17.Text = "City / Municipality"
+        '
+        'txtStreet
+        '
+        Me.txtStreet.Location = New System.Drawing.Point(17, 102)
+        Me.txtStreet.Name = "txtStreet"
+        Me.txtStreet.Size = New System.Drawing.Size(215, 20)
+        Me.txtStreet.TabIndex = 9
+        '
+        'Label16
+        '
+        Me.Label16.AutoSize = True
+        Me.Label16.Location = New System.Drawing.Point(15, 87)
+        Me.Label16.Name = "Label16"
+        Me.Label16.Size = New System.Drawing.Size(105, 13)
+        Me.Label16.TabIndex = 8
+        Me.Label16.Text = "Street / Purok / Sitio"
+        '
+        'txtCountry
+        '
+        Me.txtCountry.Location = New System.Drawing.Point(611, 50)
+        Me.txtCountry.Name = "txtCountry"
+        Me.txtCountry.Size = New System.Drawing.Size(215, 20)
+        Me.txtCountry.TabIndex = 7
+        '
+        'Label15
+        '
+        Me.Label15.AutoSize = True
+        Me.Label15.Location = New System.Drawing.Point(609, 35)
+        Me.Label15.Name = "Label15"
+        Me.Label15.Size = New System.Drawing.Size(43, 13)
+        Me.Label15.TabIndex = 6
+        Me.Label15.Text = "Country"
+        '
+        'txtProvince
+        '
+        Me.txtProvince.Location = New System.Drawing.Point(317, 50)
+        Me.txtProvince.Name = "txtProvince"
+        Me.txtProvince.Size = New System.Drawing.Size(215, 20)
+        Me.txtProvince.TabIndex = 5
+        '
+        'Label14
+        '
+        Me.Label14.AutoSize = True
+        Me.Label14.Location = New System.Drawing.Point(315, 35)
+        Me.Label14.Name = "Label14"
+        Me.Label14.Size = New System.Drawing.Size(49, 13)
+        Me.Label14.TabIndex = 4
+        Me.Label14.Text = "Province"
+        '
+        'txtSubdivision
+        '
+        Me.txtSubdivision.Location = New System.Drawing.Point(17, 50)
+        Me.txtSubdivision.Name = "txtSubdivision"
+        Me.txtSubdivision.Size = New System.Drawing.Size(215, 20)
+        Me.txtSubdivision.TabIndex = 3
+        '
+        'Label13
+        '
+        Me.Label13.AutoSize = True
+        Me.Label13.Location = New System.Drawing.Point(15, 35)
+        Me.Label13.Name = "Label13"
+        Me.Label13.Size = New System.Drawing.Size(159, 13)
+        Me.Label13.TabIndex = 2
+        Me.Label13.Text = "Subdivision / Village / Barangay"
+        '
+        'txtHouseNo
+        '
+        Me.txtHouseNo.Location = New System.Drawing.Point(17, 24)
+        Me.txtHouseNo.Name = "txtHouseNo"
+        Me.txtHouseNo.Size = New System.Drawing.Size(215, 20)
+        Me.txtHouseNo.TabIndex = 1
+        '
+        'Label12
+        '
+        Me.Label12.AutoSize = True
+        Me.Label12.Location = New System.Drawing.Point(15, 9)
+        Me.Label12.Name = "Label12"
+        Me.Label12.Size = New System.Drawing.Size(142, 13)
+        Me.Label12.TabIndex = 0
+        Me.Label12.Text = "House No. / Lot No. / Block"
         '
         'grpStudentInfo
         '
@@ -292,7 +420,7 @@ Partial Class AdminManageStudents
         Me.grpStudentInfo.Controls.Add(Me.lblFirstName)
         Me.grpStudentInfo.Controls.Add(Me.txtStudentId)
         Me.grpStudentInfo.Controls.Add(Me.Label1)
-        Me.grpStudentInfo.Location = New System.Drawing.Point(28, 82)
+        Me.grpStudentInfo.Location = New System.Drawing.Point(28, 80)
         Me.grpStudentInfo.Name = "grpStudentInfo"
         Me.grpStudentInfo.Size = New System.Drawing.Size(939, 147)
         Me.grpStudentInfo.TabIndex = 3
@@ -301,7 +429,7 @@ Partial Class AdminManageStudents
         '
         'dtpBirthdate
         '
-        Me.dtpBirthdate.Location = New System.Drawing.Point(611, 111)
+        Me.dtpBirthdate.Location = New System.Drawing.Point(560, 116)
         Me.dtpBirthdate.Name = "dtpBirthdate"
         Me.dtpBirthdate.Size = New System.Drawing.Size(215, 20)
         Me.dtpBirthdate.TabIndex = 22
@@ -309,7 +437,7 @@ Partial Class AdminManageStudents
         'Label11
         '
         Me.Label11.AutoSize = True
-        Me.Label11.Location = New System.Drawing.Point(609, 95)
+        Me.Label11.Location = New System.Drawing.Point(558, 100)
         Me.Label11.Name = "Label11"
         Me.Label11.Size = New System.Drawing.Size(49, 13)
         Me.Label11.TabIndex = 21
@@ -317,15 +445,15 @@ Partial Class AdminManageStudents
         '
         'txtGender
         '
-        Me.txtGender.Location = New System.Drawing.Point(611, 68)
+        Me.txtGender.Location = New System.Drawing.Point(560, 73)
         Me.txtGender.Name = "txtGender"
-        Me.txtGender.Size = New System.Drawing.Size(215, 20)
+        Me.txtGender.Size = New System.Drawing.Size(48, 20)
         Me.txtGender.TabIndex = 20
         '
         'Label10
         '
         Me.Label10.AutoSize = True
-        Me.Label10.Location = New System.Drawing.Point(609, 52)
+        Me.Label10.Location = New System.Drawing.Point(558, 57)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(42, 13)
         Me.Label10.TabIndex = 19
@@ -333,15 +461,15 @@ Partial Class AdminManageStudents
         '
         'txtAge
         '
-        Me.txtAge.Location = New System.Drawing.Point(611, 33)
+        Me.txtAge.Location = New System.Drawing.Point(560, 38)
         Me.txtAge.Name = "txtAge"
-        Me.txtAge.Size = New System.Drawing.Size(103, 20)
+        Me.txtAge.Size = New System.Drawing.Size(48, 20)
         Me.txtAge.TabIndex = 18
         '
         'Label9
         '
         Me.Label9.AutoSize = True
-        Me.Label9.Location = New System.Drawing.Point(609, 17)
+        Me.Label9.Location = New System.Drawing.Point(558, 22)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(26, 13)
         Me.Label9.TabIndex = 17
@@ -349,7 +477,7 @@ Partial Class AdminManageStudents
         '
         'txtParentName
         '
-        Me.txtParentName.Location = New System.Drawing.Point(453, 111)
+        Me.txtParentName.Location = New System.Drawing.Point(370, 114)
         Me.txtParentName.Name = "txtParentName"
         Me.txtParentName.Size = New System.Drawing.Size(129, 20)
         Me.txtParentName.TabIndex = 16
@@ -357,7 +485,7 @@ Partial Class AdminManageStudents
         'Label8
         '
         Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(450, 95)
+        Me.Label8.Location = New System.Drawing.Point(367, 98)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(69, 13)
         Me.Label8.TabIndex = 15
@@ -365,7 +493,7 @@ Partial Class AdminManageStudents
         '
         'txtReligion
         '
-        Me.txtReligion.Location = New System.Drawing.Point(453, 68)
+        Me.txtReligion.Location = New System.Drawing.Point(370, 71)
         Me.txtReligion.Name = "txtReligion"
         Me.txtReligion.Size = New System.Drawing.Size(129, 20)
         Me.txtReligion.TabIndex = 14
@@ -373,7 +501,7 @@ Partial Class AdminManageStudents
         'Label7
         '
         Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(450, 52)
+        Me.Label7.Location = New System.Drawing.Point(367, 55)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(45, 13)
         Me.Label7.TabIndex = 13
@@ -381,7 +509,7 @@ Partial Class AdminManageStudents
         '
         'txtSectionId
         '
-        Me.txtSectionId.Location = New System.Drawing.Point(453, 33)
+        Me.txtSectionId.Location = New System.Drawing.Point(370, 36)
         Me.txtSectionId.Name = "txtSectionId"
         Me.txtSectionId.Size = New System.Drawing.Size(129, 20)
         Me.txtSectionId.TabIndex = 12
@@ -389,7 +517,7 @@ Partial Class AdminManageStudents
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(450, 17)
+        Me.Label6.Location = New System.Drawing.Point(367, 20)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(57, 13)
         Me.Label6.TabIndex = 11
@@ -397,7 +525,7 @@ Partial Class AdminManageStudents
         '
         'txtGradeLevel
         '
-        Me.txtGradeLevel.Location = New System.Drawing.Point(317, 111)
+        Me.txtGradeLevel.Location = New System.Drawing.Point(208, 112)
         Me.txtGradeLevel.Name = "txtGradeLevel"
         Me.txtGradeLevel.Size = New System.Drawing.Size(112, 20)
         Me.txtGradeLevel.TabIndex = 10
@@ -405,7 +533,7 @@ Partial Class AdminManageStudents
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(315, 95)
+        Me.Label5.Location = New System.Drawing.Point(205, 96)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(65, 13)
         Me.Label5.TabIndex = 9
@@ -413,7 +541,7 @@ Partial Class AdminManageStudents
         '
         'txtStudentNo
         '
-        Me.txtStudentNo.Location = New System.Drawing.Point(317, 68)
+        Me.txtStudentNo.Location = New System.Drawing.Point(208, 73)
         Me.txtStudentNo.Name = "txtStudentNo"
         Me.txtStudentNo.Size = New System.Drawing.Size(112, 20)
         Me.txtStudentNo.TabIndex = 8
@@ -421,7 +549,7 @@ Partial Class AdminManageStudents
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(315, 52)
+        Me.Label4.Location = New System.Drawing.Point(205, 57)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(64, 13)
         Me.Label4.TabIndex = 7
@@ -445,7 +573,7 @@ Partial Class AdminManageStudents
         '
         'txtMiddleName
         '
-        Me.txtMiddleName.Location = New System.Drawing.Point(180, 34)
+        Me.txtMiddleName.Location = New System.Drawing.Point(208, 34)
         Me.txtMiddleName.Name = "txtMiddleName"
         Me.txtMiddleName.Size = New System.Drawing.Size(115, 20)
         Me.txtMiddleName.TabIndex = 4
@@ -485,7 +613,7 @@ Partial Class AdminManageStudents
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(177, 18)
+        Me.Label1.Location = New System.Drawing.Point(205, 18)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(58, 13)
         Me.Label1.TabIndex = 23
@@ -520,144 +648,16 @@ Partial Class AdminManageStudents
         Me.txtSearch.Size = New System.Drawing.Size(199, 20)
         Me.txtSearch.TabIndex = 0
         '
-        'Label12
+        'picWatermark
         '
-        Me.Label12.AutoSize = True
-        Me.Label12.Location = New System.Drawing.Point(15, 9)
-        Me.Label12.Name = "Label12"
-        Me.Label12.Size = New System.Drawing.Size(142, 13)
-        Me.Label12.TabIndex = 0
-        Me.Label12.Text = "House No. / Lot No. / Block"
-        '
-        'txtHouseNo
-        '
-        Me.txtHouseNo.Location = New System.Drawing.Point(17, 24)
-        Me.txtHouseNo.Name = "txtHouseNo"
-        Me.txtHouseNo.Size = New System.Drawing.Size(215, 20)
-        Me.txtHouseNo.TabIndex = 1
-        '
-        'Label13
-        '
-        Me.Label13.AutoSize = True
-        Me.Label13.Location = New System.Drawing.Point(15, 35)
-        Me.Label13.Name = "Label13"
-        Me.Label13.Size = New System.Drawing.Size(159, 13)
-        Me.Label13.TabIndex = 2
-        Me.Label13.Text = "Subdivision / Village / Barangay"
-        '
-        'txtSubdivision
-        '
-        Me.txtSubdivision.Location = New System.Drawing.Point(17, 50)
-        Me.txtSubdivision.Name = "txtSubdivision"
-        Me.txtSubdivision.Size = New System.Drawing.Size(215, 20)
-        Me.txtSubdivision.TabIndex = 3
-        '
-        'Label14
-        '
-        Me.Label14.AutoSize = True
-        Me.Label14.Location = New System.Drawing.Point(315, 35)
-        Me.Label14.Name = "Label14"
-        Me.Label14.Size = New System.Drawing.Size(49, 13)
-        Me.Label14.TabIndex = 4
-        Me.Label14.Text = "Province"
-        '
-        'txtProvince
-        '
-        Me.txtProvince.Location = New System.Drawing.Point(317, 50)
-        Me.txtProvince.Name = "txtProvince"
-        Me.txtProvince.Size = New System.Drawing.Size(215, 20)
-        Me.txtProvince.TabIndex = 5
-        '
-        'Label15
-        '
-        Me.Label15.AutoSize = True
-        Me.Label15.Location = New System.Drawing.Point(609, 35)
-        Me.Label15.Name = "Label15"
-        Me.Label15.Size = New System.Drawing.Size(43, 13)
-        Me.Label15.TabIndex = 6
-        Me.Label15.Text = "Country"
-        '
-        'txtCountry
-        '
-        Me.txtCountry.Location = New System.Drawing.Point(611, 50)
-        Me.txtCountry.Name = "txtCountry"
-        Me.txtCountry.Size = New System.Drawing.Size(215, 20)
-        Me.txtCountry.TabIndex = 7
-        '
-        'Label16
-        '
-        Me.Label16.AutoSize = True
-        Me.Label16.Location = New System.Drawing.Point(15, 87)
-        Me.Label16.Name = "Label16"
-        Me.Label16.Size = New System.Drawing.Size(105, 13)
-        Me.Label16.TabIndex = 8
-        Me.Label16.Text = "Street / Purok / Sitio"
-        '
-        'txtStreet
-        '
-        Me.txtStreet.Location = New System.Drawing.Point(17, 102)
-        Me.txtStreet.Name = "txtStreet"
-        Me.txtStreet.Size = New System.Drawing.Size(215, 20)
-        Me.txtStreet.TabIndex = 9
-        '
-        'Label17
-        '
-        Me.Label17.AutoSize = True
-        Me.Label17.Location = New System.Drawing.Point(315, 87)
-        Me.Label17.Name = "Label17"
-        Me.Label17.Size = New System.Drawing.Size(90, 13)
-        Me.Label17.TabIndex = 10
-        Me.Label17.Text = "City / Municipality"
-        '
-        'txtCity
-        '
-        Me.txtCity.Location = New System.Drawing.Point(317, 102)
-        Me.txtCity.Name = "txtCity"
-        Me.txtCity.Size = New System.Drawing.Size(215, 20)
-        Me.txtCity.TabIndex = 11
-        '
-        'Label18
-        '
-        Me.Label18.AutoSize = True
-        Me.Label18.Location = New System.Drawing.Point(609, 87)
-        Me.Label18.Name = "Label18"
-        Me.Label18.Size = New System.Drawing.Size(50, 13)
-        Me.Label18.TabIndex = 12
-        Me.Label18.Text = "Zip Code"
-        '
-        'txtZipCode
-        '
-        Me.txtZipCode.Location = New System.Drawing.Point(611, 102)
-        Me.txtZipCode.Name = "txtZipCode"
-        Me.txtZipCode.Size = New System.Drawing.Size(215, 20)
-        Me.txtZipCode.TabIndex = 13
-        '
-        'grpAddress
-        '
-        Me.grpAddress.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.grpAddress.BackColor = System.Drawing.Color.FromArgb(CType(CType(211, Byte), Integer), CType(CType(211, Byte), Integer), CType(CType(211, Byte), Integer))
-        Me.grpAddress.Controls.Add(Me.txtZipCode)
-        Me.grpAddress.Controls.Add(Me.Label18)
-        Me.grpAddress.Controls.Add(Me.txtCity)
-        Me.grpAddress.Controls.Add(Me.Label17)
-        Me.grpAddress.Controls.Add(Me.txtStreet)
-        Me.grpAddress.Controls.Add(Me.Label16)
-        Me.grpAddress.Controls.Add(Me.txtCountry)
-        Me.grpAddress.Controls.Add(Me.Label15)
-        Me.grpAddress.Controls.Add(Me.txtProvince)
-        Me.grpAddress.Controls.Add(Me.Label14)
-        Me.grpAddress.Controls.Add(Me.txtSubdivision)
-        Me.grpAddress.Controls.Add(Me.Label13)
-        Me.grpAddress.Controls.Add(Me.txtHouseNo)
-        Me.grpAddress.Controls.Add(Me.Label12)
-        Me.grpAddress.ForeColor = System.Drawing.Color.Black
-        Me.grpAddress.Location = New System.Drawing.Point(28, 235)
-        Me.grpAddress.Name = "grpAddress"
-        Me.grpAddress.Size = New System.Drawing.Size(939, 147)
-        Me.grpAddress.TabIndex = 4
-        Me.grpAddress.TabStop = False
-        Me.grpAddress.Text = "Address"
+        Me.picWatermark.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.picWatermark.Image = Global.CFLC.My.Resources.Resources.logo
+        Me.picWatermark.Location = New System.Drawing.Point(205, 79)
+        Me.picWatermark.Name = "picWatermark"
+        Me.picWatermark.Size = New System.Drawing.Size(520, 466)
+        Me.picWatermark.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.picWatermark.TabIndex = 5
+        Me.picWatermark.TabStop = False
         '
         'AdminManageStudents
         '
@@ -676,11 +676,11 @@ Partial Class AdminManageStudents
         Me.pnlContent.ResumeLayout(False)
         Me.pnlContent.PerformLayout()
         CType(Me.dgvStudents, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.picWatermark, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.grpStudentInfo.ResumeLayout(False)
-        Me.grpStudentInfo.PerformLayout()
         Me.grpAddress.ResumeLayout(False)
         Me.grpAddress.PerformLayout()
+        Me.grpStudentInfo.ResumeLayout(False)
+        Me.grpStudentInfo.PerformLayout()
+        CType(Me.picWatermark, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
