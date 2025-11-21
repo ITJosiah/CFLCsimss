@@ -14,6 +14,7 @@
             Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Else
             pnlSidebar.Visible = False
+            pnlContent.Dock = DockStyle.Fill
         End If
     End Sub
 
@@ -94,35 +95,35 @@
         btnLogout.TextAlign = ContentAlignment.MiddleCenter
     End Sub
 
-    Private Sub txtStudentId_TextChanged(sender As Object, e As EventArgs)
+    Private Sub txtStudentId_TextChanged(sender As Object, e As EventArgs) Handles txtStudentId.TextChanged
 
     End Sub
 
-    Private Sub btnAdd_Click(sender As Object, e As EventArgs)
+    Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
 
     End Sub
 
-    Private Sub pnlContent_Paint(sender As Object, e As PaintEventArgs)
+    Private Sub pnlContent_Paint(sender As Object, e As PaintEventArgs) Handles pnlContent.Paint
 
     End Sub
 
-    Private Sub txtStudentAge_TextChanged(sender As Object, e As EventArgs) Handles txtStudentAge.TextChanged
+    Private Sub txtAge_TextChanged(sender As Object, e As EventArgs) Handles txtAge.TextChanged
 
     End Sub
 
-    Private Sub Label9_Click(sender As Object, e As EventArgs)
+    Private Sub Label9_Click(sender As Object, e As EventArgs) Handles Label9.Click
 
     End Sub
 
-    Private Sub Label10_Click(sender As Object, e As EventArgs)
+    Private Sub Label10_Click(sender As Object, e As EventArgs) Handles Label10.Click
 
     End Sub
 
-    Private Sub picWatermark_Click(sender As Object, e As EventArgs)
+    Private Sub picWatermark_Click(sender As Object, e As EventArgs) Handles picWatermark.Click
 
     End Sub
 
-    Private Sub grpStudentInfo_Enter(sender As Object, e As EventArgs)
+    Private Sub grpStudentInfo_Enter(sender As Object, e As EventArgs) Handles grpStudentInfo.Enter
 
     End Sub
 
@@ -130,11 +131,15 @@
 
     End Sub
 
-    Private Sub lblStudentProvince_Click(sender As Object, e As EventArgs) Handles lblStudentProvince.Click
+    Private Sub grpAddress_Enter(sender As Object, e As EventArgs) Handles grpAddress.Enter
 
     End Sub
 
-    Private Sub txtbxStudentGradeLevel_TextChanged(sender As Object, e As EventArgs) Handles txtbxStudentGradeLevel.TextChanged
+    Private Sub Label16_Click(sender As Object, e As EventArgs) Handles Label16.Click
+
+    End Sub
+
+    Private Sub Label17_Click(sender As Object, e As EventArgs) Handles Label17.Click
 
     End Sub
 End Class
