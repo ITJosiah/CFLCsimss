@@ -94,39 +94,47 @@
         btnLogout.TextAlign = ContentAlignment.MiddleCenter
     End Sub
 
-    Private Sub txtStudentId_TextChanged(sender As Object, e As EventArgs) Handles txtStudentId.TextChanged
+    Private Sub txtStudentId_TextChanged(sender As Object, e As EventArgs)
 
     End Sub
 
-    Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
+    Private Sub btnAdd_Click(sender As Object, e As EventArgs)
 
     End Sub
 
-    Private Sub pnlContent_Paint(sender As Object, e As PaintEventArgs) Handles pnlContent.Paint
+    Private Sub pnlContent_Paint(sender As Object, e As PaintEventArgs)
 
     End Sub
 
-    Private Sub txtAge_TextChanged(sender As Object, e As EventArgs) Handles txtAge.TextChanged
+    Private Sub txtStudentAge_TextChanged(sender As Object, e As EventArgs) Handles txtStudentAge.TextChanged
 
     End Sub
 
-    Private Sub Label9_Click(sender As Object, e As EventArgs) Handles Label9.Click
+    Private Sub Label9_Click(sender As Object, e As EventArgs)
 
     End Sub
 
-    Private Sub Label10_Click(sender As Object, e As EventArgs) Handles Label10.Click
+    Private Sub Label10_Click(sender As Object, e As EventArgs)
 
     End Sub
 
-    Private Sub picWatermark_Click(sender As Object, e As EventArgs) Handles picWatermark.Click
+    Private Sub picWatermark_Click(sender As Object, e As EventArgs)
 
     End Sub
 
-    Private Sub grpStudentInfo_Enter(sender As Object, e As EventArgs) Handles grpStudentInfo.Enter
+    Private Sub grpStudentInfo_Enter(sender As Object, e As EventArgs)
 
     End Sub
 
     Private Sub pnlSidebar_Paint(sender As Object, e As PaintEventArgs) Handles pnlSidebar.Paint
+
+    End Sub
+
+    Private Sub lblStudentProvince_Click(sender As Object, e As EventArgs) Handles lblStudentProvince.Click
+
+    End Sub
+
+    Private Sub txtbxStudentGradeLevel_TextChanged(sender As Object, e As EventArgs) Handles txtbxStudentGradeLevel.TextChanged
 
     End Sub
 End Class
