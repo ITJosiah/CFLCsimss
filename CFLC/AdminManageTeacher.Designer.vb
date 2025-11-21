@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
-Partial Class AdminManageTeacher
+Partial Class AdminManageTeachers
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -691,7 +691,7 @@ Partial Class AdminManageTeacher
         Me.pnlSidebar.Size = New System.Drawing.Size(400, 779)
         Me.pnlSidebar.TabIndex = 12
         '
-        'AdminManageTeacher
+        'AdminManageTeachers
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -708,7 +708,7 @@ Partial Class AdminManageTeacher
         Me.Controls.Add(Me.grpTeacherInfo)
         Me.Controls.Add(Me.pnlSidebar)
         Me.Controls.Add(Me.picWatermark)
-        Me.Name = "AdminManageTeacher"
+        Me.Name = "AdminManageTeachers"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Teacher"
         Me.grpAddress.ResumeLayout(False)
