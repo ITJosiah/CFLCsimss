@@ -39,6 +39,8 @@ Partial Class AdminManageStudents
         Me.grpAddress = New System.Windows.Forms.GroupBox()
         Me.txtbxZipCode = New System.Windows.Forms.TextBox()
         Me.lblStudentZIP = New System.Windows.Forms.Label()
+        Me.txtbxStudentProvince = New System.Windows.Forms.TextBox()
+        Me.lblStudentProvince = New System.Windows.Forms.Label()
         Me.txtbxStudentBarangay = New System.Windows.Forms.TextBox()
         Me.lblStudentBarangay = New System.Windows.Forms.Label()
         Me.txtbxCountry = New System.Windows.Forms.TextBox()
@@ -50,6 +52,10 @@ Partial Class AdminManageStudents
         Me.txtbxStudentHouseNo = New System.Windows.Forms.TextBox()
         Me.lblStudentHouseNumber = New System.Windows.Forms.Label()
         Me.grpStudentInfo = New System.Windows.Forms.GroupBox()
+        Me.nudStudentGradeLevel = New System.Windows.Forms.NumericUpDown()
+        Me.lblStudentEnrollmentID = New System.Windows.Forms.Label()
+        Me.nudStudentAge = New System.Windows.Forms.NumericUpDown()
+        Me.cmbStudenttGender = New System.Windows.Forms.ComboBox()
         Me.dtpStudentBirthdate = New System.Windows.Forms.DateTimePicker()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.lblStudentGender = New System.Windows.Forms.Label()
@@ -71,22 +77,15 @@ Partial Class AdminManageStudents
         Me.lblStudentList = New System.Windows.Forms.Label()
         Me.btnSearch = New System.Windows.Forms.Button()
         Me.picWatermark = New System.Windows.Forms.PictureBox()
-        Me.cmbStudenttGender = New System.Windows.Forms.ComboBox()
-        Me.nudStudentAge = New System.Windows.Forms.NumericUpDown()
-        Me.lblStudentEnrollmentID = New System.Windows.Forms.Label()
-        Me.nudStudentGradeLevel = New System.Windows.Forms.NumericUpDown()
-        Me.DateTimePicker1 = New System.Windows.Forms.DateTimePicker()
-        Me.lblStudentProvince = New System.Windows.Forms.Label()
-        Me.txtbxStudentProvince = New System.Windows.Forms.TextBox()
         Me.pnlSidebar.SuspendLayout()
         Me.flowButtons.SuspendLayout()
         Me.pnlContent.SuspendLayout()
         CType(Me.dgvStudents, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpAddress.SuspendLayout()
         Me.grpStudentInfo.SuspendLayout()
-        CType(Me.picWatermark, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.nudStudentAge, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudStudentGradeLevel, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.nudStudentAge, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.picWatermark, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'pnlSidebar
@@ -98,7 +97,7 @@ Partial Class AdminManageStudents
         Me.pnlSidebar.Location = New System.Drawing.Point(0, 0)
         Me.pnlSidebar.Name = "pnlSidebar"
         Me.pnlSidebar.Padding = New System.Windows.Forms.Padding(30, 40, 30, 40)
-        Me.pnlSidebar.Size = New System.Drawing.Size(300, 633)
+        Me.pnlSidebar.Size = New System.Drawing.Size(300, 630)
         Me.pnlSidebar.TabIndex = 11
         '
         'flowButtons
@@ -115,7 +114,7 @@ Partial Class AdminManageStudents
         Me.flowButtons.Location = New System.Drawing.Point(30, 40)
         Me.flowButtons.Margin = New System.Windows.Forms.Padding(0)
         Me.flowButtons.Name = "flowButtons"
-        Me.flowButtons.Size = New System.Drawing.Size(240, 503)
+        Me.flowButtons.Size = New System.Drawing.Size(240, 500)
         Me.flowButtons.TabIndex = 0
         Me.flowButtons.WrapContents = False
         '
@@ -184,7 +183,7 @@ Partial Class AdminManageStudents
         Me.btnLogout.BackColor = System.Drawing.Color.Red
         Me.btnLogout.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.btnLogout.ForeColor = System.Drawing.Color.White
-        Me.btnLogout.Location = New System.Drawing.Point(30, 543)
+        Me.btnLogout.Location = New System.Drawing.Point(30, 540)
         Me.btnLogout.Name = "btnLogout"
         Me.btnLogout.Size = New System.Drawing.Size(240, 50)
         Me.btnLogout.TabIndex = 10
@@ -296,6 +295,22 @@ Partial Class AdminManageStudents
         Me.lblStudentZIP.TabIndex = 12
         Me.lblStudentZIP.Text = "Zip Code"
         '
+        'txtbxStudentProvince
+        '
+        Me.txtbxStudentProvince.Location = New System.Drawing.Point(359, 94)
+        Me.txtbxStudentProvince.Name = "txtbxStudentProvince"
+        Me.txtbxStudentProvince.Size = New System.Drawing.Size(230, 23)
+        Me.txtbxStudentProvince.TabIndex = 11
+        '
+        'lblStudentProvince
+        '
+        Me.lblStudentProvince.AutoSize = True
+        Me.lblStudentProvince.Location = New System.Drawing.Point(356, 74)
+        Me.lblStudentProvince.Name = "lblStudentProvince"
+        Me.lblStudentProvince.Size = New System.Drawing.Size(63, 17)
+        Me.lblStudentProvince.TabIndex = 10
+        Me.lblStudentProvince.Text = "Province"
+        '
         'txtbxStudentBarangay
         '
         Me.txtbxStudentBarangay.Location = New System.Drawing.Point(55, 136)
@@ -381,7 +396,6 @@ Partial Class AdminManageStudents
         Me.grpStudentInfo.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.grpStudentInfo.BackColor = System.Drawing.Color.Gainsboro
-        Me.grpStudentInfo.Controls.Add(Me.DateTimePicker1)
         Me.grpStudentInfo.Controls.Add(Me.nudStudentGradeLevel)
         Me.grpStudentInfo.Controls.Add(Me.lblStudentEnrollmentID)
         Me.grpStudentInfo.Controls.Add(Me.nudStudentAge)
@@ -412,11 +426,42 @@ Partial Class AdminManageStudents
         Me.grpStudentInfo.TabStop = False
         Me.grpStudentInfo.Text = "Student List"
         '
+        'nudStudentGradeLevel
+        '
+        Me.nudStudentGradeLevel.Location = New System.Drawing.Point(591, 130)
+        Me.nudStudentGradeLevel.Name = "nudStudentGradeLevel"
+        Me.nudStudentGradeLevel.Size = New System.Drawing.Size(35, 23)
+        Me.nudStudentGradeLevel.TabIndex = 27
+        '
+        'lblStudentEnrollmentID
+        '
+        Me.lblStudentEnrollmentID.AutoSize = True
+        Me.lblStudentEnrollmentID.Location = New System.Drawing.Point(698, 68)
+        Me.lblStudentEnrollmentID.Name = "lblStudentEnrollmentID"
+        Me.lblStudentEnrollmentID.Size = New System.Drawing.Size(92, 17)
+        Me.lblStudentEnrollmentID.TabIndex = 26
+        Me.lblStudentEnrollmentID.Text = "Enrollment ID"
+        '
+        'nudStudentAge
+        '
+        Me.nudStudentAge.Location = New System.Drawing.Point(292, 84)
+        Me.nudStudentAge.Name = "nudStudentAge"
+        Me.nudStudentAge.Size = New System.Drawing.Size(35, 23)
+        Me.nudStudentAge.TabIndex = 24
+        '
+        'cmbStudenttGender
+        '
+        Me.cmbStudenttGender.FormattingEnabled = True
+        Me.cmbStudenttGender.Location = New System.Drawing.Point(292, 37)
+        Me.cmbStudenttGender.Name = "cmbStudenttGender"
+        Me.cmbStudenttGender.Size = New System.Drawing.Size(103, 24)
+        Me.cmbStudenttGender.TabIndex = 23
+        '
         'dtpStudentBirthdate
         '
-        Me.dtpStudentBirthdate.Location = New System.Drawing.Point(274, 129)
+        Me.dtpStudentBirthdate.Location = New System.Drawing.Point(274, 130)
         Me.dtpStudentBirthdate.Name = "dtpStudentBirthdate"
-        Me.dtpStudentBirthdate.Size = New System.Drawing.Size(218, 23)
+        Me.dtpStudentBirthdate.Size = New System.Drawing.Size(232, 23)
         Me.dtpStudentBirthdate.TabIndex = 22
         '
         'Label11
@@ -456,7 +501,7 @@ Partial Class AdminManageStudents
         'lblStudentParentName
         '
         Me.lblStudentParentName.AutoSize = True
-        Me.lblStudentParentName.Location = New System.Drawing.Point(477, 24)
+        Me.lblStudentParentName.Location = New System.Drawing.Point(477, 19)
         Me.lblStudentParentName.Name = "lblStudentParentName"
         Me.lblStudentParentName.Size = New System.Drawing.Size(91, 17)
         Me.lblStudentParentName.TabIndex = 15
@@ -472,7 +517,7 @@ Partial Class AdminManageStudents
         'lblStudentReligion
         '
         Me.lblStudentReligion.AutoSize = True
-        Me.lblStudentReligion.Location = New System.Drawing.Point(477, 68)
+        Me.lblStudentReligion.Location = New System.Drawing.Point(477, 64)
         Me.lblStudentReligion.Name = "lblStudentReligion"
         Me.lblStudentReligion.Size = New System.Drawing.Size(59, 17)
         Me.lblStudentReligion.TabIndex = 13
@@ -504,7 +549,7 @@ Partial Class AdminManageStudents
         'lblStudentGradeLevel
         '
         Me.lblStudentGradeLevel.AutoSize = True
-        Me.lblStudentGradeLevel.Location = New System.Drawing.Point(509, 109)
+        Me.lblStudentGradeLevel.Location = New System.Drawing.Point(559, 110)
         Me.lblStudentGradeLevel.Name = "lblStudentGradeLevel"
         Me.lblStudentGradeLevel.Size = New System.Drawing.Size(86, 17)
         Me.lblStudentGradeLevel.TabIndex = 9
@@ -590,66 +635,13 @@ Partial Class AdminManageStudents
         Me.picWatermark.TabIndex = 5
         Me.picWatermark.TabStop = False
         '
-        'cmbStudenttGender
-        '
-        Me.cmbStudenttGender.FormattingEnabled = True
-        Me.cmbStudenttGender.Location = New System.Drawing.Point(292, 37)
-        Me.cmbStudenttGender.Name = "cmbStudenttGender"
-        Me.cmbStudenttGender.Size = New System.Drawing.Size(103, 24)
-        Me.cmbStudenttGender.TabIndex = 23
-        '
-        'nudStudentAge
-        '
-        Me.nudStudentAge.Location = New System.Drawing.Point(292, 84)
-        Me.nudStudentAge.Name = "nudStudentAge"
-        Me.nudStudentAge.Size = New System.Drawing.Size(35, 23)
-        Me.nudStudentAge.TabIndex = 24
-        '
-        'lblStudentEnrollmentID
-        '
-        Me.lblStudentEnrollmentID.AutoSize = True
-        Me.lblStudentEnrollmentID.Location = New System.Drawing.Point(698, 68)
-        Me.lblStudentEnrollmentID.Name = "lblStudentEnrollmentID"
-        Me.lblStudentEnrollmentID.Size = New System.Drawing.Size(92, 17)
-        Me.lblStudentEnrollmentID.TabIndex = 26
-        Me.lblStudentEnrollmentID.Text = "Enrollment ID"
-        '
-        'nudStudentGradeLevel
-        '
-        Me.nudStudentGradeLevel.Location = New System.Drawing.Point(512, 129)
-        Me.nudStudentGradeLevel.Name = "nudStudentGradeLevel"
-        Me.nudStudentGradeLevel.Size = New System.Drawing.Size(35, 23)
-        Me.nudStudentGradeLevel.TabIndex = 27
-        '
-        'DateTimePicker1
-        '
-        Me.DateTimePicker1.Location = New System.Drawing.Point(394, 131)
-        Me.DateTimePicker1.Name = "DateTimePicker1"
-        Me.DateTimePicker1.Size = New System.Drawing.Size(8, 23)
-        Me.DateTimePicker1.TabIndex = 28
-        '
-        'lblStudentProvince
-        '
-        Me.lblStudentProvince.AutoSize = True
-        Me.lblStudentProvince.Location = New System.Drawing.Point(356, 74)
-        Me.lblStudentProvince.Name = "lblStudentProvince"
-        Me.lblStudentProvince.Size = New System.Drawing.Size(63, 17)
-        Me.lblStudentProvince.TabIndex = 10
-        Me.lblStudentProvince.Text = "Province"
-        '
-        'txtbxStudentProvince
-        '
-        Me.txtbxStudentProvince.Location = New System.Drawing.Point(359, 94)
-        Me.txtbxStudentProvince.Name = "txtbxStudentProvince"
-        Me.txtbxStudentProvince.Size = New System.Drawing.Size(230, 23)
-        Me.txtbxStudentProvince.TabIndex = 11
-        '
         'AdminManageStudents
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoSize = True
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(15, Byte), Integer), CType(CType(56, Byte), Integer), CType(CType(32, Byte), Integer))
-        Me.ClientSize = New System.Drawing.Size(1300, 633)
+        Me.ClientSize = New System.Drawing.Size(1299, 630)
         Me.Controls.Add(Me.pnlContent)
         Me.Controls.Add(Me.pnlSidebar)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
@@ -665,9 +657,9 @@ Partial Class AdminManageStudents
         Me.grpAddress.PerformLayout()
         Me.grpStudentInfo.ResumeLayout(False)
         Me.grpStudentInfo.PerformLayout()
-        CType(Me.picWatermark, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.nudStudentAge, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.nudStudentGradeLevel, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.nudStudentAge, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.picWatermark, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -725,7 +717,6 @@ Partial Class AdminManageStudents
     Friend WithEvents lblStudentEnrollmentID As Label
     Friend WithEvents nudStudentAge As NumericUpDown
     Friend WithEvents nudStudentGradeLevel As NumericUpDown
-    Friend WithEvents DateTimePicker1 As DateTimePicker
     Friend WithEvents txtbxStudentProvince As TextBox
     Friend WithEvents lblStudentProvince As Label
 End Class
