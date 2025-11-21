@@ -122,4 +122,12 @@
     Private Sub Label10_Click(sender As Object, e As EventArgs) Handles Label10.Click
 
     End Sub
+
+    Private Sub picWatermark_Click(sender As Object, e As EventArgs) Handles picWatermark.Click
+
+    End Sub
+
+    Private Sub grpStudentInfo_Enter(sender As Object, e As EventArgs) Handles grpStudentInfo.Enter
+
+    End Sub
 End Class
