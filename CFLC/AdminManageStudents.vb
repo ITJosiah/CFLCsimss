@@ -130,4 +130,16 @@
     Private Sub pnlSidebar_Paint(sender As Object, e As PaintEventArgs) Handles pnlSidebar.Paint
 
     End Sub
+
+    Private Sub grpAddress_Enter(sender As Object, e As EventArgs) Handles grpAddress.Enter
+
+    End Sub
+
+    Private Sub Label16_Click(sender As Object, e As EventArgs) Handles Label16.Click
+
+    End Sub
+
+    Private Sub Label17_Click(sender As Object, e As EventArgs) Handles Label17.Click
+
+    End Sub
 End Class
