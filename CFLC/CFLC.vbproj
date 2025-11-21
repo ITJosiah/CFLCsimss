@@ -128,6 +128,12 @@
     <Compile Include="AdminDashboard.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="AdminManageSections.Designer.vb">
+      <DependentUpon>AdminManageSections.vb</DependentUpon>
+    </Compile>
+    <Compile Include="AdminManageSections.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="AdminManageStudents.Designer.vb">
       <DependentUpon>AdminManageStudents.vb</DependentUpon>
     </Compile>
@@ -150,6 +156,12 @@
       <DependentUpon>LoginForm.vb</DependentUpon>
     </Compile>
     <Compile Include="LoginForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ManageEnrollmentForms.Designer.vb">
+      <DependentUpon>ManageEnrollmentForms.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ManageEnrollmentForms.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
@@ -179,6 +191,9 @@
     <EmbeddedResource Include="AdminDashboard.resx">
       <DependentUpon>AdminDashboard.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="AdminManageSections.resx">
+      <DependentUpon>AdminManageSections.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="AdminManageStudents.resx">
       <DependentUpon>AdminManageStudents.vb</DependentUpon>
     </EmbeddedResource>
@@ -190,6 +205,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="LoginForm.resx">
       <DependentUpon>LoginForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ManageEnrollmentForms.resx">
+      <DependentUpon>ManageEnrollmentForms.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>

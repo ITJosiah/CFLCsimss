@@ -1,10 +1,7 @@
-﻿Public Class AdminManageStudents
+﻿Public Class AdminManageSections
 
     Public Property IsEmbedded As Boolean = False
-
-
-
-    Private Sub AdminManageStudents_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Sub AdminManageSections_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If Not IsEmbedded Then
             Me.WindowState = FormWindowState.Maximized
             Me.BackColor = Color.FromArgb(15, 56, 32)
@@ -15,7 +12,7 @@
 
         Else
             pnlSidebar.Visible = False
-            pnlContent.Dock = DockStyle.Fill
+            pnlManSecContent.Dock = DockStyle.Fill
         End If
     End Sub
 
@@ -96,71 +93,7 @@
         btnLogout.TextAlign = ContentAlignment.MiddleCenter
     End Sub
 
-    Private Sub txtStudentId_TextChanged(sender As Object, e As EventArgs)
-
-    End Sub
-
-    Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
-
-    End Sub
-
-    Private Sub pnlContent_Paint(sender As Object, e As PaintEventArgs) Handles pnlContent.Paint
-
-    End Sub
-
-    Private Sub txtAge_TextChanged(sender As Object, e As EventArgs)
-
-    End Sub
-
-    Private Sub lblStudentAge_Click(sender As Object, e As EventArgs) Handles lblStudentAge.Click
-
-    End Sub
-
-    Private Sub lblStudentGender_Click(sender As Object, e As EventArgs) Handles lblStudentGender.Click
-
-    End Sub
-
-    Private Sub picWatermark_Click(sender As Object, e As EventArgs) Handles picWatermark.Click
-
-    End Sub
-
-    Private Sub grpStudentInfo_Enter(sender As Object, e As EventArgs) Handles grpStudentInfo.Enter
-
-    End Sub
-
-    Private Sub pnlSidebar_Paint(sender As Object, e As PaintEventArgs) Handles pnlSidebar.Paint
-
-    End Sub
-
-    Private Sub grpAddress_Enter(sender As Object, e As EventArgs) Handles grpAddress.Enter
-
-    End Sub
-
-    Private Sub lblStudentBarangay_Click(sender As Object, e As EventArgs) Handles lblStudentBarangay.Click
-
-    End Sub
-
-    Private Sub lblStudentProvince_Click(sender As Object, e As EventArgs) Handles lblStudentProvince.Click
-
-    End Sub
-
-    Private Sub lblStudentMiddleName_Click(sender As Object, e As EventArgs) Handles lblStudentMiddleName.Click
-
-    End Sub
-
-    Private Sub cmbStudenttGenderSelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbStudenttGender.SelectedIndexChanged
-
-    End Sub
-
-    Private Sub nudStudentAgeValueChanged(sender As Object, e As EventArgs) Handles nudStudentAge.ValueChanged
-
-    End Sub
-
-    Private Sub txtbxStudentSurnameTextChanged(sender As Object, e As EventArgs) Handles txtbxStudentSurname.TextChanged
-
-    End Sub
-
-    Private Sub Label18_Click(sender As Object, e As EventArgs)
+    Private Sub txtbxManSecRoomNo_TextChanged(sender As Object, e As EventArgs) Handles txtbxManSecRoomNo.TextChanged
 
     End Sub
 End Class

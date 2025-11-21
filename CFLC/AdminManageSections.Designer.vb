@@ -1,0 +1,641 @@
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+Partial Class AdminManageSections
+    Inherits System.Windows.Forms.Form
+
+    'Form overrides dispose to clean up the component list.
+    <System.Diagnostics.DebuggerNonUserCode()> _
+    Protected Overrides Sub Dispose(ByVal disposing As Boolean)
+        Try
+            If disposing AndAlso components IsNot Nothing Then
+                components.Dispose()
+            End If
+        Finally
+            MyBase.Dispose(disposing)
+        End Try
+    End Sub
+
+    'Required by the Windows Form Designer
+    Private components As System.ComponentModel.IContainer
+
+    'NOTE: The following procedure is required by the Windows Form Designer
+    'It can be modified using the Windows Form Designer.  
+    'Do not modify it using the code editor.
+    <System.Diagnostics.DebuggerStepThrough()> _
+    Private Sub InitializeComponent()
+        Me.pnlSidebar = New System.Windows.Forms.Panel()
+        Me.flowButtons = New System.Windows.Forms.FlowLayoutPanel()
+        Me.btnManageStudents = New System.Windows.Forms.Button()
+        Me.btnManageTeachers = New System.Windows.Forms.Button()
+        Me.btnManageSections = New System.Windows.Forms.Button()
+        Me.btnManageEnrollments = New System.Windows.Forms.Button()
+        Me.btnManageSubjects = New System.Windows.Forms.Button()
+        Me.btnGenerateReports = New System.Windows.Forms.Button()
+        Me.btnLogout = New System.Windows.Forms.Button()
+        Me.pnlManSecContent = New System.Windows.Forms.Panel()
+        Me.btnDelete = New System.Windows.Forms.Button()
+        Me.btnUpdate = New System.Windows.Forms.Button()
+        Me.btnAdd = New System.Windows.Forms.Button()
+        Me.dgvSections = New System.Windows.Forms.DataGridView()
+        Me.grpRemarks = New System.Windows.Forms.GroupBox()
+        Me.txtbxManSecRoomNo = New System.Windows.Forms.TextBox()
+        Me.lblManSecRoomNo = New System.Windows.Forms.Label()
+        Me.txtbxManSecDateCreated = New System.Windows.Forms.TextBox()
+        Me.lblManSecDateCreated = New System.Windows.Forms.Label()
+        Me.txtbxManSecCreatedBy = New System.Windows.Forms.TextBox()
+        Me.lblManSecCreatedBy = New System.Windows.Forms.Label()
+        Me.grpSectionInfo = New System.Windows.Forms.GroupBox()
+        Me.nudManSecGradeLevel = New System.Windows.Forms.NumericUpDown()
+        Me.lblManSecStatus = New System.Windows.Forms.Label()
+        Me.nudManSecNoOfStudents = New System.Windows.Forms.NumericUpDown()
+        Me.cmbStudenttGender = New System.Windows.Forms.ComboBox()
+        Me.dtpManSecSchoolYear = New System.Windows.Forms.DateTimePicker()
+        Me.lblManSecSchoolYear = New System.Windows.Forms.Label()
+        Me.lblManSecCapacity = New System.Windows.Forms.Label()
+        Me.lblManSecNoOfStudents = New System.Windows.Forms.Label()
+        Me.lblManSecStartDate = New System.Windows.Forms.Label()
+        Me.lblManSecEndDate = New System.Windows.Forms.Label()
+        Me.txtbxStudentEnrollmentID = New System.Windows.Forms.TextBox()
+        Me.lblManSecSchedule = New System.Windows.Forms.Label()
+        Me.txtbxSchedule = New System.Windows.Forms.TextBox()
+        Me.lblManSecGradeLevel = New System.Windows.Forms.Label()
+        Me.txtbxManSecTeacherID = New System.Windows.Forms.TextBox()
+        Me.lblManSecTeacherID = New System.Windows.Forms.Label()
+        Me.txtbxManSecSectionName = New System.Windows.Forms.TextBox()
+        Me.lblManSecSectionName = New System.Windows.Forms.Label()
+        Me.txtbxManSecSectionID = New System.Windows.Forms.TextBox()
+        Me.lblManSecSectionID = New System.Windows.Forms.Label()
+        Me.lblSectionsList = New System.Windows.Forms.Label()
+        Me.btnSearch = New System.Windows.Forms.Button()
+        Me.picWatermark = New System.Windows.Forms.PictureBox()
+        Me.dtpManSecStartDate = New System.Windows.Forms.DateTimePicker()
+        Me.dtpManSecEndDate = New System.Windows.Forms.DateTimePicker()
+        Me.txtbxManSecRemarks = New System.Windows.Forms.TextBox()
+        Me.pnlSidebar.SuspendLayout()
+        Me.flowButtons.SuspendLayout()
+        Me.pnlManSecContent.SuspendLayout()
+        CType(Me.dgvSections, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.grpRemarks.SuspendLayout()
+        Me.grpSectionInfo.SuspendLayout()
+        CType(Me.nudManSecGradeLevel, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.nudManSecNoOfStudents, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.picWatermark, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.SuspendLayout()
+        '
+        'pnlSidebar
+        '
+        Me.pnlSidebar.BackColor = System.Drawing.Color.FromArgb(CType(CType(40, Byte), Integer), CType(CType(130, Byte), Integer), CType(CType(61, Byte), Integer))
+        Me.pnlSidebar.Controls.Add(Me.flowButtons)
+        Me.pnlSidebar.Controls.Add(Me.btnLogout)
+        Me.pnlSidebar.Dock = System.Windows.Forms.DockStyle.Left
+        Me.pnlSidebar.Location = New System.Drawing.Point(0, 0)
+        Me.pnlSidebar.Name = "pnlSidebar"
+        Me.pnlSidebar.Padding = New System.Windows.Forms.Padding(30, 40, 30, 40)
+        Me.pnlSidebar.Size = New System.Drawing.Size(300, 630)
+        Me.pnlSidebar.TabIndex = 12
+        '
+        'flowButtons
+        '
+        Me.flowButtons.BackColor = System.Drawing.Color.Transparent
+        Me.flowButtons.Controls.Add(Me.btnManageStudents)
+        Me.flowButtons.Controls.Add(Me.btnManageTeachers)
+        Me.flowButtons.Controls.Add(Me.btnManageSections)
+        Me.flowButtons.Controls.Add(Me.btnManageEnrollments)
+        Me.flowButtons.Controls.Add(Me.btnManageSubjects)
+        Me.flowButtons.Controls.Add(Me.btnGenerateReports)
+        Me.flowButtons.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.flowButtons.FlowDirection = System.Windows.Forms.FlowDirection.TopDown
+        Me.flowButtons.Location = New System.Drawing.Point(30, 40)
+        Me.flowButtons.Margin = New System.Windows.Forms.Padding(0)
+        Me.flowButtons.Name = "flowButtons"
+        Me.flowButtons.Size = New System.Drawing.Size(240, 500)
+        Me.flowButtons.TabIndex = 0
+        Me.flowButtons.WrapContents = False
+        '
+        'btnManageStudents
+        '
+        Me.btnManageStudents.Location = New System.Drawing.Point(0, 0)
+        Me.btnManageStudents.Margin = New System.Windows.Forms.Padding(0, 0, 0, 18)
+        Me.btnManageStudents.Name = "btnManageStudents"
+        Me.btnManageStudents.Size = New System.Drawing.Size(240, 45)
+        Me.btnManageStudents.TabIndex = 4
+        Me.btnManageStudents.Text = "Manage Students"
+        Me.btnManageStudents.UseVisualStyleBackColor = True
+        '
+        'btnManageTeachers
+        '
+        Me.btnManageTeachers.Location = New System.Drawing.Point(0, 63)
+        Me.btnManageTeachers.Margin = New System.Windows.Forms.Padding(0, 0, 0, 18)
+        Me.btnManageTeachers.Name = "btnManageTeachers"
+        Me.btnManageTeachers.Size = New System.Drawing.Size(240, 45)
+        Me.btnManageTeachers.TabIndex = 5
+        Me.btnManageTeachers.Text = "Manage Teachers"
+        Me.btnManageTeachers.UseVisualStyleBackColor = True
+        '
+        'btnManageSections
+        '
+        Me.btnManageSections.Location = New System.Drawing.Point(0, 126)
+        Me.btnManageSections.Margin = New System.Windows.Forms.Padding(0, 0, 0, 18)
+        Me.btnManageSections.Name = "btnManageSections"
+        Me.btnManageSections.Size = New System.Drawing.Size(240, 45)
+        Me.btnManageSections.TabIndex = 6
+        Me.btnManageSections.Text = "Manage Sections"
+        Me.btnManageSections.UseVisualStyleBackColor = True
+        '
+        'btnManageEnrollments
+        '
+        Me.btnManageEnrollments.Location = New System.Drawing.Point(0, 189)
+        Me.btnManageEnrollments.Margin = New System.Windows.Forms.Padding(0, 0, 0, 18)
+        Me.btnManageEnrollments.Name = "btnManageEnrollments"
+        Me.btnManageEnrollments.Size = New System.Drawing.Size(240, 45)
+        Me.btnManageEnrollments.TabIndex = 7
+        Me.btnManageEnrollments.Text = "Manage Enrollments"
+        Me.btnManageEnrollments.UseVisualStyleBackColor = True
+        '
+        'btnManageSubjects
+        '
+        Me.btnManageSubjects.Location = New System.Drawing.Point(0, 252)
+        Me.btnManageSubjects.Margin = New System.Windows.Forms.Padding(0, 0, 0, 18)
+        Me.btnManageSubjects.Name = "btnManageSubjects"
+        Me.btnManageSubjects.Size = New System.Drawing.Size(240, 45)
+        Me.btnManageSubjects.TabIndex = 8
+        Me.btnManageSubjects.Text = "Manage Subjects"
+        Me.btnManageSubjects.UseVisualStyleBackColor = True
+        '
+        'btnGenerateReports
+        '
+        Me.btnGenerateReports.Location = New System.Drawing.Point(0, 315)
+        Me.btnGenerateReports.Margin = New System.Windows.Forms.Padding(0, 0, 0, 18)
+        Me.btnGenerateReports.Name = "btnGenerateReports"
+        Me.btnGenerateReports.Size = New System.Drawing.Size(240, 45)
+        Me.btnGenerateReports.TabIndex = 9
+        Me.btnGenerateReports.Text = "Generate Reports"
+        Me.btnGenerateReports.UseVisualStyleBackColor = True
+        '
+        'btnLogout
+        '
+        Me.btnLogout.BackColor = System.Drawing.Color.Red
+        Me.btnLogout.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.btnLogout.ForeColor = System.Drawing.Color.White
+        Me.btnLogout.Location = New System.Drawing.Point(30, 540)
+        Me.btnLogout.Name = "btnLogout"
+        Me.btnLogout.Size = New System.Drawing.Size(240, 50)
+        Me.btnLogout.TabIndex = 10
+        Me.btnLogout.Text = "Logout"
+        Me.btnLogout.UseVisualStyleBackColor = False
+        '
+        'pnlManSecContent
+        '
+        Me.pnlManSecContent.BackColor = System.Drawing.Color.FromArgb(CType(CType(7, Byte), Integer), CType(CType(77, Byte), Integer), CType(CType(39, Byte), Integer))
+        Me.pnlManSecContent.Controls.Add(Me.btnDelete)
+        Me.pnlManSecContent.Controls.Add(Me.btnUpdate)
+        Me.pnlManSecContent.Controls.Add(Me.btnAdd)
+        Me.pnlManSecContent.Controls.Add(Me.dgvSections)
+        Me.pnlManSecContent.Controls.Add(Me.grpRemarks)
+        Me.pnlManSecContent.Controls.Add(Me.grpSectionInfo)
+        Me.pnlManSecContent.Controls.Add(Me.lblSectionsList)
+        Me.pnlManSecContent.Controls.Add(Me.btnSearch)
+        Me.pnlManSecContent.Controls.Add(Me.picWatermark)
+        Me.pnlManSecContent.Location = New System.Drawing.Point(300, 1)
+        Me.pnlManSecContent.Name = "pnlManSecContent"
+        Me.pnlManSecContent.Padding = New System.Windows.Forms.Padding(30)
+        Me.pnlManSecContent.Size = New System.Drawing.Size(1000, 633)
+        Me.pnlManSecContent.TabIndex = 13
+        '
+        'btnDelete
+        '
+        Me.btnDelete.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnDelete.Location = New System.Drawing.Point(908, 585)
+        Me.btnDelete.Name = "btnDelete"
+        Me.btnDelete.Size = New System.Drawing.Size(86, 35)
+        Me.btnDelete.TabIndex = 9
+        Me.btnDelete.Text = "Delete"
+        Me.btnDelete.UseVisualStyleBackColor = True
+        '
+        'btnUpdate
+        '
+        Me.btnUpdate.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnUpdate.Location = New System.Drawing.Point(796, 585)
+        Me.btnUpdate.Name = "btnUpdate"
+        Me.btnUpdate.Size = New System.Drawing.Size(86, 35)
+        Me.btnUpdate.TabIndex = 8
+        Me.btnUpdate.Text = "Update"
+        Me.btnUpdate.UseVisualStyleBackColor = True
+        '
+        'btnAdd
+        '
+        Me.btnAdd.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnAdd.Location = New System.Drawing.Point(684, 585)
+        Me.btnAdd.Name = "btnAdd"
+        Me.btnAdd.Size = New System.Drawing.Size(86, 35)
+        Me.btnAdd.TabIndex = 7
+        Me.btnAdd.Text = "Add"
+        Me.btnAdd.UseVisualStyleBackColor = True
+        '
+        'dgvSections
+        '
+        Me.dgvSections.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.dgvSections.BackgroundColor = System.Drawing.Color.WhiteSmoke
+        Me.dgvSections.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dgvSections.Location = New System.Drawing.Point(33, 418)
+        Me.dgvSections.Name = "dgvSections"
+        Me.dgvSections.RowHeadersWidth = 51
+        Me.dgvSections.Size = New System.Drawing.Size(934, 150)
+        Me.dgvSections.TabIndex = 6
+        '
+        'grpRemarks
+        '
+        Me.grpRemarks.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.grpRemarks.BackColor = System.Drawing.Color.Gainsboro
+        Me.grpRemarks.Controls.Add(Me.txtbxManSecRemarks)
+        Me.grpRemarks.Controls.Add(Me.txtbxManSecDateCreated)
+        Me.grpRemarks.Controls.Add(Me.lblManSecDateCreated)
+        Me.grpRemarks.Controls.Add(Me.txtbxManSecCreatedBy)
+        Me.grpRemarks.Controls.Add(Me.lblManSecCreatedBy)
+        Me.grpRemarks.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.grpRemarks.ForeColor = System.Drawing.Color.Black
+        Me.grpRemarks.Location = New System.Drawing.Point(33, 269)
+        Me.grpRemarks.Name = "grpRemarks"
+        Me.grpRemarks.Size = New System.Drawing.Size(934, 143)
+        Me.grpRemarks.TabIndex = 4
+        Me.grpRemarks.TabStop = False
+        Me.grpRemarks.Text = "Remarks"
+        '
+        'txtbxManSecRoomNo
+        '
+        Me.txtbxManSecRoomNo.Location = New System.Drawing.Point(474, 133)
+        Me.txtbxManSecRoomNo.Name = "txtbxManSecRoomNo"
+        Me.txtbxManSecRoomNo.Size = New System.Drawing.Size(133, 23)
+        Me.txtbxManSecRoomNo.TabIndex = 13
+        '
+        'lblManSecRoomNo
+        '
+        Me.lblManSecRoomNo.AutoSize = True
+        Me.lblManSecRoomNo.Location = New System.Drawing.Point(471, 114)
+        Me.lblManSecRoomNo.Name = "lblManSecRoomNo"
+        Me.lblManSecRoomNo.Size = New System.Drawing.Size(71, 17)
+        Me.lblManSecRoomNo.TabIndex = 12
+        Me.lblManSecRoomNo.Text = "Room No."
+        '
+        'txtbxManSecDateCreated
+        '
+        Me.txtbxManSecDateCreated.Location = New System.Drawing.Point(684, 107)
+        Me.txtbxManSecDateCreated.Name = "txtbxManSecDateCreated"
+        Me.txtbxManSecDateCreated.Size = New System.Drawing.Size(188, 23)
+        Me.txtbxManSecDateCreated.TabIndex = 5
+        '
+        'lblManSecDateCreated
+        '
+        Me.lblManSecDateCreated.AutoSize = True
+        Me.lblManSecDateCreated.Location = New System.Drawing.Point(681, 85)
+        Me.lblManSecDateCreated.Name = "lblManSecDateCreated"
+        Me.lblManSecDateCreated.Size = New System.Drawing.Size(92, 17)
+        Me.lblManSecDateCreated.TabIndex = 4
+        Me.lblManSecDateCreated.Text = "Date Created"
+        '
+        'txtbxManSecCreatedBy
+        '
+        Me.txtbxManSecCreatedBy.Location = New System.Drawing.Point(474, 107)
+        Me.txtbxManSecCreatedBy.Name = "txtbxManSecCreatedBy"
+        Me.txtbxManSecCreatedBy.Size = New System.Drawing.Size(180, 23)
+        Me.txtbxManSecCreatedBy.TabIndex = 1
+        '
+        'lblManSecCreatedBy
+        '
+        Me.lblManSecCreatedBy.AutoSize = True
+        Me.lblManSecCreatedBy.Location = New System.Drawing.Point(471, 85)
+        Me.lblManSecCreatedBy.Name = "lblManSecCreatedBy"
+        Me.lblManSecCreatedBy.Size = New System.Drawing.Size(78, 17)
+        Me.lblManSecCreatedBy.TabIndex = 0
+        Me.lblManSecCreatedBy.Text = "Created By"
+        '
+        'grpSectionInfo
+        '
+        Me.grpSectionInfo.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.grpSectionInfo.BackColor = System.Drawing.Color.Gainsboro
+        Me.grpSectionInfo.Controls.Add(Me.txtbxManSecRoomNo)
+        Me.grpSectionInfo.Controls.Add(Me.dtpManSecEndDate)
+        Me.grpSectionInfo.Controls.Add(Me.lblManSecRoomNo)
+        Me.grpSectionInfo.Controls.Add(Me.dtpManSecStartDate)
+        Me.grpSectionInfo.Controls.Add(Me.nudManSecGradeLevel)
+        Me.grpSectionInfo.Controls.Add(Me.lblManSecStatus)
+        Me.grpSectionInfo.Controls.Add(Me.nudManSecNoOfStudents)
+        Me.grpSectionInfo.Controls.Add(Me.cmbStudenttGender)
+        Me.grpSectionInfo.Controls.Add(Me.txtbxStudentEnrollmentID)
+        Me.grpSectionInfo.Controls.Add(Me.dtpManSecSchoolYear)
+        Me.grpSectionInfo.Controls.Add(Me.lblManSecSchoolYear)
+        Me.grpSectionInfo.Controls.Add(Me.txtbxSchedule)
+        Me.grpSectionInfo.Controls.Add(Me.lblManSecSchedule)
+        Me.grpSectionInfo.Controls.Add(Me.lblManSecCapacity)
+        Me.grpSectionInfo.Controls.Add(Me.lblManSecNoOfStudents)
+        Me.grpSectionInfo.Controls.Add(Me.lblManSecStartDate)
+        Me.grpSectionInfo.Controls.Add(Me.lblManSecEndDate)
+        Me.grpSectionInfo.Controls.Add(Me.lblManSecGradeLevel)
+        Me.grpSectionInfo.Controls.Add(Me.txtbxManSecTeacherID)
+        Me.grpSectionInfo.Controls.Add(Me.lblManSecTeacherID)
+        Me.grpSectionInfo.Controls.Add(Me.txtbxManSecSectionName)
+        Me.grpSectionInfo.Controls.Add(Me.lblManSecSectionName)
+        Me.grpSectionInfo.Controls.Add(Me.txtbxManSecSectionID)
+        Me.grpSectionInfo.Controls.Add(Me.lblManSecSectionID)
+        Me.grpSectionInfo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.grpSectionInfo.Location = New System.Drawing.Point(33, 79)
+        Me.grpSectionInfo.Name = "grpSectionInfo"
+        Me.grpSectionInfo.Size = New System.Drawing.Size(934, 194)
+        Me.grpSectionInfo.TabIndex = 3
+        Me.grpSectionInfo.TabStop = False
+        Me.grpSectionInfo.Text = "Section Information"
+        '
+        'nudManSecGradeLevel
+        '
+        Me.nudManSecGradeLevel.Location = New System.Drawing.Point(84, 134)
+        Me.nudManSecGradeLevel.Name = "nudManSecGradeLevel"
+        Me.nudManSecGradeLevel.Size = New System.Drawing.Size(35, 23)
+        Me.nudManSecGradeLevel.TabIndex = 27
+        '
+        'lblManSecStatus
+        '
+        Me.lblManSecStatus.AutoSize = True
+        Me.lblManSecStatus.Location = New System.Drawing.Point(471, 68)
+        Me.lblManSecStatus.Name = "lblManSecStatus"
+        Me.lblManSecStatus.Size = New System.Drawing.Size(48, 17)
+        Me.lblManSecStatus.TabIndex = 26
+        Me.lblManSecStatus.Text = "Status"
+        '
+        'nudManSecNoOfStudents
+        '
+        Me.nudManSecNoOfStudents.Location = New System.Drawing.Point(292, 84)
+        Me.nudManSecNoOfStudents.Name = "nudManSecNoOfStudents"
+        Me.nudManSecNoOfStudents.Size = New System.Drawing.Size(35, 23)
+        Me.nudManSecNoOfStudents.TabIndex = 24
+        '
+        'cmbStudenttGender
+        '
+        Me.cmbStudenttGender.FormattingEnabled = True
+        Me.cmbStudenttGender.Location = New System.Drawing.Point(292, 37)
+        Me.cmbStudenttGender.Name = "cmbStudenttGender"
+        Me.cmbStudenttGender.Size = New System.Drawing.Size(103, 24)
+        Me.cmbStudenttGender.TabIndex = 23
+        '
+        'dtpManSecSchoolYear
+        '
+        Me.dtpManSecSchoolYear.Location = New System.Drawing.Point(654, 134)
+        Me.dtpManSecSchoolYear.Name = "dtpManSecSchoolYear"
+        Me.dtpManSecSchoolYear.Size = New System.Drawing.Size(232, 23)
+        Me.dtpManSecSchoolYear.TabIndex = 22
+        '
+        'lblManSecSchoolYear
+        '
+        Me.lblManSecSchoolYear.AutoSize = True
+        Me.lblManSecSchoolYear.Location = New System.Drawing.Point(671, 114)
+        Me.lblManSecSchoolYear.Name = "lblManSecSchoolYear"
+        Me.lblManSecSchoolYear.Size = New System.Drawing.Size(85, 17)
+        Me.lblManSecSchoolYear.TabIndex = 21
+        Me.lblManSecSchoolYear.Text = "School Year"
+        '
+        'lblManSecCapacity
+        '
+        Me.lblManSecCapacity.AutoSize = True
+        Me.lblManSecCapacity.Location = New System.Drawing.Point(289, 19)
+        Me.lblManSecCapacity.Name = "lblManSecCapacity"
+        Me.lblManSecCapacity.Size = New System.Drawing.Size(62, 17)
+        Me.lblManSecCapacity.TabIndex = 19
+        Me.lblManSecCapacity.Text = "Capacity"
+        '
+        'lblManSecNoOfStudents
+        '
+        Me.lblManSecNoOfStudents.AutoSize = True
+        Me.lblManSecNoOfStudents.Location = New System.Drawing.Point(289, 68)
+        Me.lblManSecNoOfStudents.Name = "lblManSecNoOfStudents"
+        Me.lblManSecNoOfStudents.Size = New System.Drawing.Size(106, 17)
+        Me.lblManSecNoOfStudents.TabIndex = 17
+        Me.lblManSecNoOfStudents.Text = "No. of Students"
+        '
+        'lblManSecStartDate
+        '
+        Me.lblManSecStartDate.AutoSize = True
+        Me.lblManSecStartDate.Location = New System.Drawing.Point(671, 19)
+        Me.lblManSecStartDate.Name = "lblManSecStartDate"
+        Me.lblManSecStartDate.Size = New System.Drawing.Size(72, 17)
+        Me.lblManSecStartDate.TabIndex = 15
+        Me.lblManSecStartDate.Text = "Start Date"
+        '
+        'lblManSecEndDate
+        '
+        Me.lblManSecEndDate.AutoSize = True
+        Me.lblManSecEndDate.Location = New System.Drawing.Point(671, 65)
+        Me.lblManSecEndDate.Name = "lblManSecEndDate"
+        Me.lblManSecEndDate.Size = New System.Drawing.Size(67, 17)
+        Me.lblManSecEndDate.TabIndex = 13
+        Me.lblManSecEndDate.Text = "End Date"
+        '
+        'txtbxStudentEnrollmentID
+        '
+        Me.txtbxStudentEnrollmentID.Location = New System.Drawing.Point(474, 88)
+        Me.txtbxStudentEnrollmentID.Name = "txtbxStudentEnrollmentID"
+        Me.txtbxStudentEnrollmentID.Size = New System.Drawing.Size(133, 23)
+        Me.txtbxStudentEnrollmentID.TabIndex = 12
+        '
+        'lblManSecSchedule
+        '
+        Me.lblManSecSchedule.AutoSize = True
+        Me.lblManSecSchedule.Location = New System.Drawing.Point(471, 23)
+        Me.lblManSecSchedule.Name = "lblManSecSchedule"
+        Me.lblManSecSchedule.Size = New System.Drawing.Size(67, 17)
+        Me.lblManSecSchedule.TabIndex = 11
+        Me.lblManSecSchedule.Text = "Schedule"
+        '
+        'txtbxSchedule
+        '
+        Me.txtbxSchedule.Location = New System.Drawing.Point(474, 39)
+        Me.txtbxSchedule.Name = "txtbxSchedule"
+        Me.txtbxSchedule.Size = New System.Drawing.Size(133, 23)
+        Me.txtbxSchedule.TabIndex = 10
+        '
+        'lblManSecGradeLevel
+        '
+        Me.lblManSecGradeLevel.AutoSize = True
+        Me.lblManSecGradeLevel.Location = New System.Drawing.Point(52, 114)
+        Me.lblManSecGradeLevel.Name = "lblManSecGradeLevel"
+        Me.lblManSecGradeLevel.Size = New System.Drawing.Size(86, 17)
+        Me.lblManSecGradeLevel.TabIndex = 9
+        Me.lblManSecGradeLevel.Text = "Grade Level"
+        '
+        'txtbxManSecTeacherID
+        '
+        Me.txtbxManSecTeacherID.Location = New System.Drawing.Point(292, 134)
+        Me.txtbxManSecTeacherID.Name = "txtbxManSecTeacherID"
+        Me.txtbxManSecTeacherID.Size = New System.Drawing.Size(116, 23)
+        Me.txtbxManSecTeacherID.TabIndex = 6
+        '
+        'lblManSecTeacherID
+        '
+        Me.lblManSecTeacherID.AutoSize = True
+        Me.lblManSecTeacherID.Location = New System.Drawing.Point(289, 114)
+        Me.lblManSecTeacherID.Name = "lblManSecTeacherID"
+        Me.lblManSecTeacherID.Size = New System.Drawing.Size(78, 17)
+        Me.lblManSecTeacherID.TabIndex = 5
+        Me.lblManSecTeacherID.Text = "Teacher ID"
+        '
+        'txtbxManSecSectionName
+        '
+        Me.txtbxManSecSectionName.Location = New System.Drawing.Point(55, 84)
+        Me.txtbxManSecSectionName.Name = "txtbxManSecSectionName"
+        Me.txtbxManSecSectionName.Size = New System.Drawing.Size(190, 23)
+        Me.txtbxManSecSectionName.TabIndex = 4
+        '
+        'lblManSecSectionName
+        '
+        Me.lblManSecSectionName.AutoSize = True
+        Me.lblManSecSectionName.Location = New System.Drawing.Point(52, 64)
+        Me.lblManSecSectionName.Name = "lblManSecSectionName"
+        Me.lblManSecSectionName.Size = New System.Drawing.Size(96, 17)
+        Me.lblManSecSectionName.TabIndex = 3
+        Me.lblManSecSectionName.Text = "Section Name"
+        '
+        'txtbxManSecSectionID
+        '
+        Me.txtbxManSecSectionID.Location = New System.Drawing.Point(55, 37)
+        Me.txtbxManSecSectionID.Name = "txtbxManSecSectionID"
+        Me.txtbxManSecSectionID.Size = New System.Drawing.Size(190, 23)
+        Me.txtbxManSecSectionID.TabIndex = 2
+        '
+        'lblManSecSectionID
+        '
+        Me.lblManSecSectionID.AutoSize = True
+        Me.lblManSecSectionID.Location = New System.Drawing.Point(52, 19)
+        Me.lblManSecSectionID.Name = "lblManSecSectionID"
+        Me.lblManSecSectionID.Size = New System.Drawing.Size(72, 17)
+        Me.lblManSecSectionID.TabIndex = 1
+        Me.lblManSecSectionID.Text = "Section ID"
+        '
+        'lblSectionsList
+        '
+        Me.lblSectionsList.AutoSize = True
+        Me.lblSectionsList.Font = New System.Drawing.Font("Segoe UI Semibold", 14.0!, System.Drawing.FontStyle.Bold)
+        Me.lblSectionsList.ForeColor = System.Drawing.Color.White
+        Me.lblSectionsList.Location = New System.Drawing.Point(28, 29)
+        Me.lblSectionsList.Name = "lblSectionsList"
+        Me.lblSectionsList.Size = New System.Drawing.Size(117, 25)
+        Me.lblSectionsList.TabIndex = 2
+        Me.lblSectionsList.Text = "Sections List"
+        '
+        'btnSearch
+        '
+        Me.btnSearch.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnSearch.Location = New System.Drawing.Point(569, 585)
+        Me.btnSearch.Name = "btnSearch"
+        Me.btnSearch.Size = New System.Drawing.Size(90, 35)
+        Me.btnSearch.TabIndex = 1
+        Me.btnSearch.Text = "Search"
+        Me.btnSearch.UseVisualStyleBackColor = True
+        '
+        'picWatermark
+        '
+        Me.picWatermark.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.picWatermark.Image = Global.CFLC.My.Resources.Resources.logo
+        Me.picWatermark.Location = New System.Drawing.Point(238, 79)
+        Me.picWatermark.Name = "picWatermark"
+        Me.picWatermark.Size = New System.Drawing.Size(520, 466)
+        Me.picWatermark.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.picWatermark.TabIndex = 5
+        Me.picWatermark.TabStop = False
+        '
+        'dtpManSecStartDate
+        '
+        Me.dtpManSecStartDate.Location = New System.Drawing.Point(654, 39)
+        Me.dtpManSecStartDate.Name = "dtpManSecStartDate"
+        Me.dtpManSecStartDate.Size = New System.Drawing.Size(232, 23)
+        Me.dtpManSecStartDate.TabIndex = 28
+        '
+        'dtpManSecEndDate
+        '
+        Me.dtpManSecEndDate.Location = New System.Drawing.Point(654, 86)
+        Me.dtpManSecEndDate.Name = "dtpManSecEndDate"
+        Me.dtpManSecEndDate.Size = New System.Drawing.Size(232, 23)
+        Me.dtpManSecEndDate.TabIndex = 29
+        '
+        'txtbxManSecRemarks
+        '
+        Me.txtbxManSecRemarks.Location = New System.Drawing.Point(55, 22)
+        Me.txtbxManSecRemarks.Multiline = True
+        Me.txtbxManSecRemarks.Name = "txtbxManSecRemarks"
+        Me.txtbxManSecRemarks.Size = New System.Drawing.Size(397, 90)
+        Me.txtbxManSecRemarks.TabIndex = 6
+        '
+        'AdminManageSections
+        '
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.ClientSize = New System.Drawing.Size(1299, 630)
+        Me.Controls.Add(Me.pnlManSecContent)
+        Me.Controls.Add(Me.pnlSidebar)
+        Me.Name = "AdminManageSections"
+        Me.Text = "AdminManageSections"
+        Me.pnlSidebar.ResumeLayout(False)
+        Me.flowButtons.ResumeLayout(False)
+        Me.pnlManSecContent.ResumeLayout(False)
+        Me.pnlManSecContent.PerformLayout()
+        CType(Me.dgvSections, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.grpRemarks.ResumeLayout(False)
+        Me.grpRemarks.PerformLayout()
+        Me.grpSectionInfo.ResumeLayout(False)
+        Me.grpSectionInfo.PerformLayout()
+        CType(Me.nudManSecGradeLevel, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.nudManSecNoOfStudents, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.picWatermark, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.ResumeLayout(False)
+
+    End Sub
+
+    Friend WithEvents pnlSidebar As Panel
+    Friend WithEvents flowButtons As FlowLayoutPanel
+    Friend WithEvents btnManageStudents As Button
+    Friend WithEvents btnManageTeachers As Button
+    Friend WithEvents btnManageSections As Button
+    Friend WithEvents btnManageEnrollments As Button
+    Friend WithEvents btnManageSubjects As Button
+    Friend WithEvents btnGenerateReports As Button
+    Friend WithEvents btnLogout As Button
+    Friend WithEvents pnlManSecContent As Panel
+    Friend WithEvents btnDelete As Button
+    Friend WithEvents btnUpdate As Button
+    Friend WithEvents btnAdd As Button
+    Friend WithEvents dgvSections As DataGridView
+    Friend WithEvents grpRemarks As GroupBox
+    Friend WithEvents txtbxManSecRoomNo As TextBox
+    Friend WithEvents lblManSecRoomNo As Label
+    Friend WithEvents txtbxManSecDateCreated As TextBox
+    Friend WithEvents lblManSecDateCreated As Label
+    Friend WithEvents txtbxManSecCreatedBy As TextBox
+    Friend WithEvents lblManSecCreatedBy As Label
+    Friend WithEvents grpSectionInfo As GroupBox
+    Friend WithEvents nudManSecGradeLevel As NumericUpDown
+    Friend WithEvents lblManSecStatus As Label
+    Friend WithEvents nudManSecNoOfStudents As NumericUpDown
+    Friend WithEvents cmbStudenttGender As ComboBox
+    Friend WithEvents dtpManSecSchoolYear As DateTimePicker
+    Friend WithEvents lblManSecSchoolYear As Label
+    Friend WithEvents lblManSecCapacity As Label
+    Friend WithEvents lblManSecNoOfStudents As Label
+    Friend WithEvents lblManSecStartDate As Label
+    Friend WithEvents lblManSecEndDate As Label
+    Friend WithEvents txtbxStudentEnrollmentID As TextBox
+    Friend WithEvents lblManSecSchedule As Label
+    Friend WithEvents txtbxSchedule As TextBox
+    Friend WithEvents lblManSecGradeLevel As Label
+    Friend WithEvents txtbxManSecTeacherID As TextBox
+    Friend WithEvents lblManSecTeacherID As Label
+    Friend WithEvents txtbxManSecSectionName As TextBox
+    Friend WithEvents lblManSecSectionName As Label
+    Friend WithEvents txtbxManSecSectionID As TextBox
+    Friend WithEvents lblManSecSectionID As Label
+    Friend WithEvents lblSectionsList As Label
+    Friend WithEvents btnSearch As Button
+    Friend WithEvents picWatermark As PictureBox
+    Friend WithEvents dtpManSecEndDate As DateTimePicker
+    Friend WithEvents dtpManSecStartDate As DateTimePicker
+    Friend WithEvents txtbxManSecRemarks As TextBox
+End Class

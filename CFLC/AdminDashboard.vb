@@ -148,8 +148,10 @@
     End Sub
 
     Private Sub btnManageSections_Click(sender As Object, e As EventArgs) Handles btnManageSections.Click
-        ' TODO: Open Manage Sections form
-        MessageBox.Show("Manage Sections - Coming Soon")
+        Dim manageSectionsForm As New AdminManageSections() With {
+            .IsEmbedded = True
+        }
+        LoadContentForm(manageSectionsForm)
     End Sub
 
     Private Sub btnManageEnrollments_Click(sender As Object, e As EventArgs) Handles btnManageEnrollments.Click
