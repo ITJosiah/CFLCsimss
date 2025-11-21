@@ -104,10 +104,21 @@
         btnLogout.Height = buttonHeight
     End Sub
 
+    ' Utility to open another form and hide dashboard until it closes
+    Private Sub ShowChildForm(child As Form)
+        AddHandler child.FormClosed, Sub(senderObj, args)
+                                         Me.Show()
+                                         Me.WindowState = FormWindowState.Maximized
+                                     End Sub
+        child.Show()
+        child.WindowState = FormWindowState.Maximized
+        Me.Hide()
+    End Sub
+
     ' Button click handlers
     Private Sub btnManageStudents_Click(sender As Object, e As EventArgs) Handles btnManageStudents.Click
-        ' TODO: Open Manage Students form
-        MessageBox.Show("Manage Students - Hello Po!!!")
+        Dim manageStudentsForm As New AdminManageStudents()
+        ShowChildForm(manageStudentsForm)
     End Sub
 
     Private Sub btnManageTeachers_Click(sender As Object, e As EventArgs) Handles btnManageTeachers.Click
