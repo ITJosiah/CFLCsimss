@@ -160,8 +160,10 @@
     End Sub
 
     Private Sub btnManageSubjects_Click(sender As Object, e As EventArgs) Handles btnManageSubjects.Click
-        ' TODO: Open Manage Subjects form
-        MessageBox.Show("Manage Subjects - Coming Soon")
+        Dim manageSubjectsForm As New AdminManageSubjects() With {
+            .IsEmbedded = True
+        }
+        LoadContentForm(manageSubjectsForm)
     End Sub
 
     Private Sub btnGenerateReports_Click(sender As Object, e As EventArgs) Handles btnGenerateReports.Click

@@ -91,6 +91,12 @@
     <Compile Include="AdminManageStudents.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="AdminManageSubjects.Designer.vb">
+      <DependentUpon>AdminManageSubjects.vb</DependentUpon>
+    </Compile>
+    <Compile Include="AdminManageSubjects.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Form1.vb">
       <SubType>Form</SubType>
     </Compile>
@@ -142,6 +148,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AdminManageStudents.resx">
       <DependentUpon>AdminManageStudents.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AdminManageSubjects.resx">
+      <DependentUpon>AdminManageSubjects.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.vb</DependentUpon>
