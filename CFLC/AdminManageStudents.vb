@@ -107,10 +107,6 @@
 
     End Sub
 
-    Private Sub Label1_Click(sender As Object, e As EventArgs) Handles Label1.Click, lblStudentID.Click
-
-    End Sub
-
     Private Sub txtAge_TextChanged(sender As Object, e As EventArgs) Handles txtAge.TextChanged
 
     End Sub
