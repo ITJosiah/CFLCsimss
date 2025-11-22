@@ -97,7 +97,7 @@
 
     End Sub
 
-    Private Sub lblManSubUnits_Click(sender As Object, e As EventArgs) Handles lblManSubUnits.Click, lblManSubCategory.Click
+    Private Sub lblManSubCategory_Click(sender As Object, e As EventArgs) Handles lblManSubCategory.Click, lblManSubCategory.Click
 
     End Sub
 End Class

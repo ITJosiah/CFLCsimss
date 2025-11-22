@@ -100,7 +100,7 @@
 
     End Sub
 
-    Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click, btnStudentAdd.Click
+    Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnStudentAdd.Click, btnStudentAdd.Click
 
     End Sub
 
