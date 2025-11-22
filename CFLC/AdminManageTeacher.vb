@@ -12,7 +12,9 @@
         End If
     End Sub
 
+    Private Sub dgvTeacher_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvTeacher.CellContentClick
 
+    End Sub
 End Class
 
 
