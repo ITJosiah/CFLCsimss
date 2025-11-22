@@ -651,7 +651,7 @@ Partial Class AdminManageStudents
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.Name = "AdminManageStudents"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Admin - Manage Students"
+        Me.Text = "AdminManageStudents"
         Me.pnlSidebar.ResumeLayout(False)
         Me.flowButtons.ResumeLayout(False)
         Me.pnlContent.ResumeLayout(False)

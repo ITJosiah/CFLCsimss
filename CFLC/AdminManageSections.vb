@@ -100,4 +100,16 @@
     Private Sub lblSectionsList_Click(sender As Object, e As EventArgs) Handles lblSectionsList.Click
 
     End Sub
+
+    Private Sub txtbxManSecSectionID_TextChanged(sender As Object, e As EventArgs) Handles txtbxManSecSectionID.TextChanged
+
+    End Sub
+
+    Private Sub txtbxManSecSectionID_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtbxManSecSectionID.KeyPress
+        ' Allow only digits and control characters (like backspace)
+        If Not Char.IsControl(e.KeyChar) AndAlso Not Char.IsDigit(e.KeyChar) Then
+            e.Handled = True
+        End If
+
+    End Sub
 End Class
