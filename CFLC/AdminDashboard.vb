@@ -155,13 +155,17 @@
     End Sub
 
     Private Sub btnManageEnrollments_Click(sender As Object, e As EventArgs) Handles btnManageEnrollments.Click
-        ' TODO: Open Manage Enrollments form
-        MessageBox.Show("Manage Enrollments - Coming Soon")
+        Dim manageEnrollmentForms As New ManageEnrollmentForms() With {
+            .IsEmbedded = True
+        }
+        LoadContentForm(manageEnrollmentForms)
     End Sub
 
     Private Sub btnManageSubjects_Click(sender As Object, e As EventArgs) Handles btnManageSubjects.Click
-        ' TODO: Open Manage Subjects form
-        MessageBox.Show("Manage Subjects - Coming Soon")
+        Dim manageSubjectsForm As New AdminManageSubjects() With {
+            .IsEmbedded = True
+        }
+        LoadContentForm(manageSubjectsForm)
     End Sub
 
     Private Sub btnGenerateReports_Click(sender As Object, e As EventArgs) Handles btnGenerateReports.Click

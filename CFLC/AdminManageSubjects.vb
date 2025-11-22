@@ -1,7 +1,7 @@
-﻿Public Class AdminManageSections
+﻿Public Class AdminManageSubjects
 
     Public Property IsEmbedded As Boolean = False
-    Private Sub AdminManageSections_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Sub AdminManageSubjects_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If Not IsEmbedded Then
             Me.WindowState = FormWindowState.Maximized
             Me.BackColor = Color.FromArgb(15, 56, 32)
@@ -12,7 +12,7 @@
 
         Else
             pnlSidebar.Visible = False
-            pnlManSecContent.Dock = DockStyle.Fill
+            pnlManSubContent.Dock = DockStyle.Fill
         End If
     End Sub
 
@@ -93,23 +93,7 @@
         btnLogout.TextAlign = ContentAlignment.MiddleCenter
     End Sub
 
-    Private Sub txtbxManSecRoomNo_TextChanged(sender As Object, e As EventArgs) Handles txtbxManSecRoomNo.TextChanged
-
-    End Sub
-
-    Private Sub lblSectionsList_Click(sender As Object, e As EventArgs) Handles lblSectionsList.Click
-
-    End Sub
-
-    Private Sub txtbxManSecSectionID_TextChanged(sender As Object, e As EventArgs) Handles txtbxManSecSectionID.TextChanged
-
-    End Sub
-
-    Private Sub txtbxManSecSectionID_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtbxManSecSectionID.KeyPress
-        ' Allow only digits and control characters (like backspace)
-        If Not Char.IsControl(e.KeyChar) AndAlso Not Char.IsDigit(e.KeyChar) Then
-            e.Handled = True
-        End If
+    Private Sub pnlManSubContent_Paint(sender As Object, e As PaintEventArgs) Handles pnlManSubContent.Paint
 
     End Sub
 End Class
