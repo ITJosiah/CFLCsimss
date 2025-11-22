@@ -96,4 +96,8 @@
     Private Sub pnlManSubContent_Paint(sender As Object, e As PaintEventArgs) Handles pnlManSubContent.Paint
 
     End Sub
+
+    Private Sub lblManSubCategory_Click(sender As Object, e As EventArgs) Handles lblManSubCategory.Click, lblManSubCategory.Click
+
+    End Sub
 End Class
