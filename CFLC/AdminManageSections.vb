@@ -112,4 +112,8 @@
         End If
 
     End Sub
+
+    Private Sub lblManSecRemarks(sender As Object, e As EventArgs) Handles lblManSecRemarks.Click
+
+    End Sub
 End Class
