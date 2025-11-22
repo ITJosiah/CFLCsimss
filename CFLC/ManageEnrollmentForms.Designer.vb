@@ -25,6 +25,10 @@ Partial Class ManageEnrollmentForms
         Me.pnlContent = New System.Windows.Forms.Panel()
         Me.dgvEnrollment = New System.Windows.Forms.DataGridView()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.DateTimePickerEnrollmentDate = New System.Windows.Forms.DateTimePicker()
+        Me.TextBoxEnrollmentContactNo = New System.Windows.Forms.TextBox()
+        Me.LabelEnrollmentContactNo = New System.Windows.Forms.Label()
+        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
         Me.LabelEnrollmentMode = New System.Windows.Forms.Label()
         Me.TextBoxEnrollmentModeOfPayment = New System.Windows.Forms.TextBox()
         Me.TextEnrollmentModeOfPayment = New System.Windows.Forms.Label()
@@ -47,15 +51,11 @@ Partial Class ManageEnrollmentForms
         Me.TextBoxEnrollmentGradeLvl = New System.Windows.Forms.TextBox()
         Me.TextEnrollmentGradeLvl = New System.Windows.Forms.Label()
         Me.lblTeacherList = New System.Windows.Forms.Label()
-        Me.btnDelete = New System.Windows.Forms.Button()
-        Me.btnUpdate = New System.Windows.Forms.Button()
-        Me.btnAdd = New System.Windows.Forms.Button()
-        Me.btnSearch = New System.Windows.Forms.Button()
+        Me.btnEnrollDelete = New System.Windows.Forms.Button()
+        Me.btnEnrollUpdate = New System.Windows.Forms.Button()
+        Me.btnEnrollAdd = New System.Windows.Forms.Button()
+        Me.btnEnrollSearch = New System.Windows.Forms.Button()
         Me.picWatermark = New System.Windows.Forms.PictureBox()
-        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
-        Me.LabelEnrollmentContactNo = New System.Windows.Forms.Label()
-        Me.TextBoxEnrollmentContactNo = New System.Windows.Forms.TextBox()
-        Me.DateTimePickerEnrollmentDate = New System.Windows.Forms.DateTimePicker()
         Me.pnlContent.SuspendLayout()
         CType(Me.dgvEnrollment, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
@@ -68,10 +68,10 @@ Partial Class ManageEnrollmentForms
         Me.pnlContent.Controls.Add(Me.dgvEnrollment)
         Me.pnlContent.Controls.Add(Me.Panel1)
         Me.pnlContent.Controls.Add(Me.lblTeacherList)
-        Me.pnlContent.Controls.Add(Me.btnDelete)
-        Me.pnlContent.Controls.Add(Me.btnUpdate)
-        Me.pnlContent.Controls.Add(Me.btnAdd)
-        Me.pnlContent.Controls.Add(Me.btnSearch)
+        Me.pnlContent.Controls.Add(Me.btnEnrollDelete)
+        Me.pnlContent.Controls.Add(Me.btnEnrollUpdate)
+        Me.pnlContent.Controls.Add(Me.btnEnrollAdd)
+        Me.pnlContent.Controls.Add(Me.btnEnrollSearch)
         Me.pnlContent.Controls.Add(Me.picWatermark)
         Me.pnlContent.Dock = System.Windows.Forms.DockStyle.Fill
         Me.pnlContent.Location = New System.Drawing.Point(0, 0)
@@ -128,6 +128,41 @@ Partial Class ManageEnrollmentForms
         Me.Panel1.Padding = New System.Windows.Forms.Padding(3)
         Me.Panel1.Size = New System.Drawing.Size(1627, 355)
         Me.Panel1.TabIndex = 28
+        '
+        'DateTimePickerEnrollmentDate
+        '
+        Me.DateTimePickerEnrollmentDate.Location = New System.Drawing.Point(90, 177)
+        Me.DateTimePickerEnrollmentDate.Name = "DateTimePickerEnrollmentDate"
+        Me.DateTimePickerEnrollmentDate.Size = New System.Drawing.Size(233, 22)
+        Me.DateTimePickerEnrollmentDate.TabIndex = 53
+        '
+        'TextBoxEnrollmentContactNo
+        '
+        Me.TextBoxEnrollmentContactNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBoxEnrollmentContactNo.Location = New System.Drawing.Point(746, 123)
+        Me.TextBoxEnrollmentContactNo.Name = "TextBoxEnrollmentContactNo"
+        Me.TextBoxEnrollmentContactNo.Size = New System.Drawing.Size(251, 26)
+        Me.TextBoxEnrollmentContactNo.TabIndex = 52
+        '
+        'LabelEnrollmentContactNo
+        '
+        Me.LabelEnrollmentContactNo.AutoSize = True
+        Me.LabelEnrollmentContactNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelEnrollmentContactNo.Location = New System.Drawing.Point(693, 98)
+        Me.LabelEnrollmentContactNo.Name = "LabelEnrollmentContactNo"
+        Me.LabelEnrollmentContactNo.Size = New System.Drawing.Size(97, 20)
+        Me.LabelEnrollmentContactNo.TabIndex = 51
+        Me.LabelEnrollmentContactNo.Text = "Contact No."
+        '
+        'ComboBox1
+        '
+        Me.ComboBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ComboBox1.FormattingEnabled = True
+        Me.ComboBox1.Items.AddRange(New Object() {"Walk-in", "Online", "Scheduled Appointment"})
+        Me.ComboBox1.Location = New System.Drawing.Point(407, 188)
+        Me.ComboBox1.Name = "ComboBox1"
+        Me.ComboBox1.Size = New System.Drawing.Size(110, 28)
+        Me.ComboBox1.TabIndex = 50
         '
         'LabelEnrollmentMode
         '
@@ -326,9 +361,9 @@ Partial Class ManageEnrollmentForms
         Me.TextEnrollmentGradeLvl.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextEnrollmentGradeLvl.Location = New System.Drawing.Point(55, 97)
         Me.TextEnrollmentGradeLvl.Name = "TextEnrollmentGradeLvl"
-        Me.TextEnrollmentGradeLvl.Size = New System.Drawing.Size(77, 20)
+        Me.TextEnrollmentGradeLvl.Size = New System.Drawing.Size(100, 20)
         Me.TextEnrollmentGradeLvl.TabIndex = 4
-        Me.TextEnrollmentGradeLvl.Text = "GradeLvl"
+        Me.TextEnrollmentGradeLvl.Text = "Grade Level"
         '
         'lblTeacherList
         '
@@ -342,49 +377,49 @@ Partial Class ManageEnrollmentForms
         Me.lblTeacherList.TabIndex = 24
         Me.lblTeacherList.Text = "Enrollment List"
         '
-        'btnDelete
+        'btnEnrollDelete
         '
-        Me.btnDelete.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnDelete.Location = New System.Drawing.Point(1558, 676)
-        Me.btnDelete.Margin = New System.Windows.Forms.Padding(4)
-        Me.btnDelete.Name = "btnDelete"
-        Me.btnDelete.Size = New System.Drawing.Size(115, 43)
-        Me.btnDelete.TabIndex = 27
-        Me.btnDelete.Text = "Delete"
-        Me.btnDelete.UseVisualStyleBackColor = True
+        Me.btnEnrollDelete.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnEnrollDelete.Location = New System.Drawing.Point(1558, 676)
+        Me.btnEnrollDelete.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnEnrollDelete.Name = "btnEnrollDelete"
+        Me.btnEnrollDelete.Size = New System.Drawing.Size(115, 43)
+        Me.btnEnrollDelete.TabIndex = 27
+        Me.btnEnrollDelete.Text = "Delete"
+        Me.btnEnrollDelete.UseVisualStyleBackColor = True
         '
-        'btnUpdate
+        'btnEnrollUpdate
         '
-        Me.btnUpdate.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnUpdate.Location = New System.Drawing.Point(1408, 676)
-        Me.btnUpdate.Margin = New System.Windows.Forms.Padding(4)
-        Me.btnUpdate.Name = "btnUpdate"
-        Me.btnUpdate.Size = New System.Drawing.Size(115, 43)
-        Me.btnUpdate.TabIndex = 26
-        Me.btnUpdate.Text = "Update"
-        Me.btnUpdate.UseVisualStyleBackColor = True
+        Me.btnEnrollUpdate.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnEnrollUpdate.Location = New System.Drawing.Point(1408, 676)
+        Me.btnEnrollUpdate.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnEnrollUpdate.Name = "btnEnrollUpdate"
+        Me.btnEnrollUpdate.Size = New System.Drawing.Size(115, 43)
+        Me.btnEnrollUpdate.TabIndex = 26
+        Me.btnEnrollUpdate.Text = "Update"
+        Me.btnEnrollUpdate.UseVisualStyleBackColor = True
         '
-        'btnAdd
+        'btnEnrollAdd
         '
-        Me.btnAdd.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnAdd.Location = New System.Drawing.Point(1259, 676)
-        Me.btnAdd.Margin = New System.Windows.Forms.Padding(4)
-        Me.btnAdd.Name = "btnAdd"
-        Me.btnAdd.Size = New System.Drawing.Size(115, 43)
-        Me.btnAdd.TabIndex = 25
-        Me.btnAdd.Text = "Add"
-        Me.btnAdd.UseVisualStyleBackColor = True
+        Me.btnEnrollAdd.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnEnrollAdd.Location = New System.Drawing.Point(1259, 676)
+        Me.btnEnrollAdd.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnEnrollAdd.Name = "btnEnrollAdd"
+        Me.btnEnrollAdd.Size = New System.Drawing.Size(115, 43)
+        Me.btnEnrollAdd.TabIndex = 25
+        Me.btnEnrollAdd.Text = "Add"
+        Me.btnEnrollAdd.UseVisualStyleBackColor = True
         '
-        'btnSearch
+        'btnEnrollSearch
         '
-        Me.btnSearch.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnSearch.Location = New System.Drawing.Point(1108, 676)
-        Me.btnSearch.Margin = New System.Windows.Forms.Padding(4)
-        Me.btnSearch.Name = "btnSearch"
-        Me.btnSearch.Size = New System.Drawing.Size(117, 43)
-        Me.btnSearch.TabIndex = 24
-        Me.btnSearch.Text = "Search"
-        Me.btnSearch.UseVisualStyleBackColor = True
+        Me.btnEnrollSearch.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnEnrollSearch.Location = New System.Drawing.Point(1108, 676)
+        Me.btnEnrollSearch.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnEnrollSearch.Name = "btnEnrollSearch"
+        Me.btnEnrollSearch.Size = New System.Drawing.Size(117, 43)
+        Me.btnEnrollSearch.TabIndex = 24
+        Me.btnEnrollSearch.Text = "Search"
+        Me.btnEnrollSearch.UseVisualStyleBackColor = True
         '
         'picWatermark
         '
@@ -396,41 +431,6 @@ Partial Class ManageEnrollmentForms
         Me.picWatermark.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
         Me.picWatermark.TabIndex = 22
         Me.picWatermark.TabStop = False
-        '
-        'ComboBox1
-        '
-        Me.ComboBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ComboBox1.FormattingEnabled = True
-        Me.ComboBox1.Items.AddRange(New Object() {"Walk-in", "Online", "Scheduled Appointment"})
-        Me.ComboBox1.Location = New System.Drawing.Point(407, 188)
-        Me.ComboBox1.Name = "ComboBox1"
-        Me.ComboBox1.Size = New System.Drawing.Size(110, 28)
-        Me.ComboBox1.TabIndex = 50
-        '
-        'LabelEnrollmentContactNo
-        '
-        Me.LabelEnrollmentContactNo.AutoSize = True
-        Me.LabelEnrollmentContactNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelEnrollmentContactNo.Location = New System.Drawing.Point(693, 98)
-        Me.LabelEnrollmentContactNo.Name = "LabelEnrollmentContactNo"
-        Me.LabelEnrollmentContactNo.Size = New System.Drawing.Size(97, 20)
-        Me.LabelEnrollmentContactNo.TabIndex = 51
-        Me.LabelEnrollmentContactNo.Text = "Contact No."
-        '
-        'TextBoxEnrollmentContactNo
-        '
-        Me.TextBoxEnrollmentContactNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBoxEnrollmentContactNo.Location = New System.Drawing.Point(746, 123)
-        Me.TextBoxEnrollmentContactNo.Name = "TextBoxEnrollmentContactNo"
-        Me.TextBoxEnrollmentContactNo.Size = New System.Drawing.Size(251, 26)
-        Me.TextBoxEnrollmentContactNo.TabIndex = 52
-        '
-        'DateTimePickerEnrollmentDate
-        '
-        Me.DateTimePickerEnrollmentDate.Location = New System.Drawing.Point(90, 177)
-        Me.DateTimePickerEnrollmentDate.Name = "DateTimePickerEnrollmentDate"
-        Me.DateTimePickerEnrollmentDate.Size = New System.Drawing.Size(233, 22)
-        Me.DateTimePickerEnrollmentDate.TabIndex = 53
         '
         'ManageEnrollmentForms
         '
@@ -452,10 +452,10 @@ Partial Class ManageEnrollmentForms
 
     Friend WithEvents pnlContent As Panel
     Friend WithEvents lblTeacherList As Label
-    Friend WithEvents btnDelete As Button
-    Friend WithEvents btnUpdate As Button
-    Friend WithEvents btnAdd As Button
-    Friend WithEvents btnSearch As Button
+    Friend WithEvents btnEnrollDelete As Button
+    Friend WithEvents btnEnrollUpdate As Button
+    Friend WithEvents btnEnrollAdd As Button
+    Friend WithEvents btnEnrollSearch As Button
     Friend WithEvents picWatermark As PictureBox
     Friend WithEvents Panel1 As Panel
     Friend WithEvents ComboBoxEnrollmentStatus As ComboBox
