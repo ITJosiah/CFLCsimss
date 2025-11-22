@@ -141,10 +141,6 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ApplicationEvents.vb" />
-    <Compile Include="DataConnection.Designer.vb">
-      <DependentUpon>DataConnection.vb</DependentUpon>
-    </Compile>
-    <Compile Include="DataConnection.vb" />
     <Compile Include="Form1.vb">
       <SubType>Form</SubType>
     </Compile>
@@ -164,6 +160,10 @@
     <Compile Include="ManageEnrollmentForms.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="modDB.Designer.vb">
+      <DependentUpon>modDB.vb</DependentUpon>
+    </Compile>
+    <Compile Include="modDB.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -197,9 +197,6 @@
     <EmbeddedResource Include="AdminManageStudents.resx">
       <DependentUpon>AdminManageStudents.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="DataConnection.resx">
-      <DependentUpon>DataConnection.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.vb</DependentUpon>
     </EmbeddedResource>
@@ -208,6 +205,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ManageEnrollmentForms.resx">
       <DependentUpon>ManageEnrollmentForms.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="modDB.resx">
+      <DependentUpon>modDB.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
