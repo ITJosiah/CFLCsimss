@@ -36,18 +36,12 @@ Partial Class AdminManageSubjects
         Me.btnSubjectUpdate = New System.Windows.Forms.Button()
         Me.btnSubjectAdd = New System.Windows.Forms.Button()
         Me.dgvSections = New System.Windows.Forms.DataGridView()
-        Me.grpRemarks = New System.Windows.Forms.GroupBox()
-        Me.txtbxManSecRemarks = New System.Windows.Forms.TextBox()
-        Me.txtbxManSecDateCreated = New System.Windows.Forms.TextBox()
-        Me.lblManSecDateCreated = New System.Windows.Forms.Label()
-        Me.txtbxManSubCreatedBy = New System.Windows.Forms.TextBox()
-        Me.lblManSubCreatedBy = New System.Windows.Forms.Label()
         Me.grpSubjectInformation = New System.Windows.Forms.GroupBox()
         Me.txtbxManSubSubjectName = New System.Windows.Forms.TextBox()
         Me.txtbxManSubType = New System.Windows.Forms.TextBox()
-        Me.txtbxManSubRoomNo = New System.Windows.Forms.TextBox()
-        Me.lblManSubRoomNo = New System.Windows.Forms.Label()
-        Me.dtpManSecStartDate = New System.Windows.Forms.DateTimePicker()
+        Me.txtbxManSubSkillFocus = New System.Windows.Forms.TextBox()
+        Me.lblManSubSkillFocus = New System.Windows.Forms.Label()
+        Me.dtpManSubCurriculumYear = New System.Windows.Forms.DateTimePicker()
         Me.nudManSubGradeLevel = New System.Windows.Forms.NumericUpDown()
         Me.lblManSubStatus = New System.Windows.Forms.Label()
         Me.nudManSubQuarters = New System.Windows.Forms.NumericUpDown()
@@ -56,7 +50,7 @@ Partial Class AdminManageSubjects
         Me.lblManSubSubjectName = New System.Windows.Forms.Label()
         Me.txtbxManSubSchedule = New System.Windows.Forms.TextBox()
         Me.lblManSubSchedule = New System.Windows.Forms.Label()
-        Me.lblManSubUnits = New System.Windows.Forms.Label()
+        Me.lblManSubCategory = New System.Windows.Forms.Label()
         Me.lblManSubQuarter = New System.Windows.Forms.Label()
         Me.lblManSubCurriculumYear = New System.Windows.Forms.Label()
         Me.lblManSubRoomType = New System.Windows.Forms.Label()
@@ -66,15 +60,22 @@ Partial Class AdminManageSubjects
         Me.txtbxManSubSubjectCode = New System.Windows.Forms.TextBox()
         Me.lblManSubSubjectCode = New System.Windows.Forms.Label()
         Me.txtbxManSubSubjectID = New System.Windows.Forms.TextBox()
-        Me.lblManSubSectionID = New System.Windows.Forms.Label()
+        Me.lblManSubSubjectD = New System.Windows.Forms.Label()
         Me.lblSubjectList = New System.Windows.Forms.Label()
         Me.btnSubjectSearch = New System.Windows.Forms.Button()
         Me.picWatermark = New System.Windows.Forms.PictureBox()
+        Me.lblManSubCreatedBy = New System.Windows.Forms.Label()
+        Me.txtbxManSubCreatedBy = New System.Windows.Forms.TextBox()
+        Me.lblManSecDateCreated = New System.Windows.Forms.Label()
+        Me.dtpManSubDateCreated = New System.Windows.Forms.DateTimePicker()
+        Me.txtbxManSubLearningMaterials = New System.Windows.Forms.TextBox()
+        Me.lblManSubLearningMaterials = New System.Windows.Forms.Label()
+        Me.txtbxManSubDescription = New System.Windows.Forms.TextBox()
+        Me.lblManSubDescription = New System.Windows.Forms.Label()
         Me.pnlSidebar.SuspendLayout()
         Me.flowButtons.SuspendLayout()
         Me.pnlManSubContent.SuspendLayout()
         CType(Me.dgvSections, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.grpRemarks.SuspendLayout()
         Me.grpSubjectInformation.SuspendLayout()
         CType(Me.nudManSubGradeLevel, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudManSubQuarters, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -190,7 +191,6 @@ Partial Class AdminManageSubjects
         Me.pnlManSubContent.Controls.Add(Me.btnSubjectUpdate)
         Me.pnlManSubContent.Controls.Add(Me.btnSubjectAdd)
         Me.pnlManSubContent.Controls.Add(Me.dgvSections)
-        Me.pnlManSubContent.Controls.Add(Me.grpRemarks)
         Me.pnlManSubContent.Controls.Add(Me.grpSubjectInformation)
         Me.pnlManSubContent.Controls.Add(Me.lblSubjectList)
         Me.pnlManSubContent.Controls.Add(Me.btnSubjectSearch)
@@ -244,75 +244,24 @@ Partial Class AdminManageSubjects
         Me.dgvSections.Size = New System.Drawing.Size(934, 150)
         Me.dgvSections.TabIndex = 6
         '
-        'grpRemarks
-        '
-        Me.grpRemarks.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.grpRemarks.BackColor = System.Drawing.Color.Gainsboro
-        Me.grpRemarks.Controls.Add(Me.txtbxManSecRemarks)
-        Me.grpRemarks.Controls.Add(Me.txtbxManSecDateCreated)
-        Me.grpRemarks.Controls.Add(Me.lblManSecDateCreated)
-        Me.grpRemarks.Controls.Add(Me.txtbxManSubCreatedBy)
-        Me.grpRemarks.Controls.Add(Me.lblManSubCreatedBy)
-        Me.grpRemarks.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.grpRemarks.ForeColor = System.Drawing.Color.Black
-        Me.grpRemarks.Location = New System.Drawing.Point(33, 269)
-        Me.grpRemarks.Name = "grpRemarks"
-        Me.grpRemarks.Size = New System.Drawing.Size(934, 143)
-        Me.grpRemarks.TabIndex = 4
-        Me.grpRemarks.TabStop = False
-        Me.grpRemarks.Text = "Remarks"
-        '
-        'txtbxManSecRemarks
-        '
-        Me.txtbxManSecRemarks.Location = New System.Drawing.Point(55, 22)
-        Me.txtbxManSecRemarks.Multiline = True
-        Me.txtbxManSecRemarks.Name = "txtbxManSecRemarks"
-        Me.txtbxManSecRemarks.Size = New System.Drawing.Size(397, 90)
-        Me.txtbxManSecRemarks.TabIndex = 6
-        '
-        'txtbxManSecDateCreated
-        '
-        Me.txtbxManSecDateCreated.Location = New System.Drawing.Point(684, 107)
-        Me.txtbxManSecDateCreated.Name = "txtbxManSecDateCreated"
-        Me.txtbxManSecDateCreated.Size = New System.Drawing.Size(188, 23)
-        Me.txtbxManSecDateCreated.TabIndex = 5
-        '
-        'lblManSecDateCreated
-        '
-        Me.lblManSecDateCreated.AutoSize = True
-        Me.lblManSecDateCreated.Location = New System.Drawing.Point(681, 85)
-        Me.lblManSecDateCreated.Name = "lblManSecDateCreated"
-        Me.lblManSecDateCreated.Size = New System.Drawing.Size(92, 17)
-        Me.lblManSecDateCreated.TabIndex = 4
-        Me.lblManSecDateCreated.Text = "Date Created"
-        '
-        'txtbxManSubCreatedBy
-        '
-        Me.txtbxManSubCreatedBy.Location = New System.Drawing.Point(474, 107)
-        Me.txtbxManSubCreatedBy.Name = "txtbxManSubCreatedBy"
-        Me.txtbxManSubCreatedBy.Size = New System.Drawing.Size(180, 23)
-        Me.txtbxManSubCreatedBy.TabIndex = 1
-        '
-        'lblManSubCreatedBy
-        '
-        Me.lblManSubCreatedBy.AutoSize = True
-        Me.lblManSubCreatedBy.Location = New System.Drawing.Point(471, 85)
-        Me.lblManSubCreatedBy.Name = "lblManSubCreatedBy"
-        Me.lblManSubCreatedBy.Size = New System.Drawing.Size(78, 17)
-        Me.lblManSubCreatedBy.TabIndex = 0
-        Me.lblManSubCreatedBy.Text = "Created By"
-        '
         'grpSubjectInformation
         '
         Me.grpSubjectInformation.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.grpSubjectInformation.BackColor = System.Drawing.Color.Gainsboro
+        Me.grpSubjectInformation.Controls.Add(Me.txtbxManSubDescription)
+        Me.grpSubjectInformation.Controls.Add(Me.lblManSubDescription)
+        Me.grpSubjectInformation.Controls.Add(Me.txtbxManSubLearningMaterials)
+        Me.grpSubjectInformation.Controls.Add(Me.lblManSubLearningMaterials)
+        Me.grpSubjectInformation.Controls.Add(Me.dtpManSubDateCreated)
         Me.grpSubjectInformation.Controls.Add(Me.txtbxManSubSubjectName)
         Me.grpSubjectInformation.Controls.Add(Me.txtbxManSubType)
-        Me.grpSubjectInformation.Controls.Add(Me.txtbxManSubRoomNo)
-        Me.grpSubjectInformation.Controls.Add(Me.lblManSubRoomNo)
-        Me.grpSubjectInformation.Controls.Add(Me.dtpManSecStartDate)
+        Me.grpSubjectInformation.Controls.Add(Me.lblManSecDateCreated)
+        Me.grpSubjectInformation.Controls.Add(Me.txtbxManSubSkillFocus)
+        Me.grpSubjectInformation.Controls.Add(Me.txtbxManSubCreatedBy)
+        Me.grpSubjectInformation.Controls.Add(Me.lblManSubSkillFocus)
+        Me.grpSubjectInformation.Controls.Add(Me.lblManSubCreatedBy)
+        Me.grpSubjectInformation.Controls.Add(Me.dtpManSubCurriculumYear)
         Me.grpSubjectInformation.Controls.Add(Me.nudManSubGradeLevel)
         Me.grpSubjectInformation.Controls.Add(Me.lblManSubStatus)
         Me.grpSubjectInformation.Controls.Add(Me.nudManSubQuarters)
@@ -321,7 +270,7 @@ Partial Class AdminManageSubjects
         Me.grpSubjectInformation.Controls.Add(Me.lblManSubSubjectName)
         Me.grpSubjectInformation.Controls.Add(Me.txtbxManSubSchedule)
         Me.grpSubjectInformation.Controls.Add(Me.lblManSubSchedule)
-        Me.grpSubjectInformation.Controls.Add(Me.lblManSubUnits)
+        Me.grpSubjectInformation.Controls.Add(Me.lblManSubCategory)
         Me.grpSubjectInformation.Controls.Add(Me.lblManSubQuarter)
         Me.grpSubjectInformation.Controls.Add(Me.lblManSubCurriculumYear)
         Me.grpSubjectInformation.Controls.Add(Me.lblManSubRoomType)
@@ -331,11 +280,11 @@ Partial Class AdminManageSubjects
         Me.grpSubjectInformation.Controls.Add(Me.txtbxManSubSubjectCode)
         Me.grpSubjectInformation.Controls.Add(Me.lblManSubSubjectCode)
         Me.grpSubjectInformation.Controls.Add(Me.txtbxManSubSubjectID)
-        Me.grpSubjectInformation.Controls.Add(Me.lblManSubSectionID)
+        Me.grpSubjectInformation.Controls.Add(Me.lblManSubSubjectD)
         Me.grpSubjectInformation.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.grpSubjectInformation.Location = New System.Drawing.Point(33, 79)
         Me.grpSubjectInformation.Name = "grpSubjectInformation"
-        Me.grpSubjectInformation.Size = New System.Drawing.Size(934, 194)
+        Me.grpSubjectInformation.Size = New System.Drawing.Size(934, 312)
         Me.grpSubjectInformation.TabIndex = 3
         Me.grpSubjectInformation.TabStop = False
         Me.grpSubjectInformation.Text = "Subject Information"
@@ -354,28 +303,28 @@ Partial Class AdminManageSubjects
         Me.txtbxManSubType.Size = New System.Drawing.Size(133, 23)
         Me.txtbxManSubType.TabIndex = 29
         '
-        'txtbxManSubRoomNo
+        'txtbxManSubSkillFocus
         '
-        Me.txtbxManSubRoomNo.Location = New System.Drawing.Point(474, 133)
-        Me.txtbxManSubRoomNo.Name = "txtbxManSubRoomNo"
-        Me.txtbxManSubRoomNo.Size = New System.Drawing.Size(133, 23)
-        Me.txtbxManSubRoomNo.TabIndex = 13
+        Me.txtbxManSubSkillFocus.Location = New System.Drawing.Point(474, 133)
+        Me.txtbxManSubSkillFocus.Name = "txtbxManSubSkillFocus"
+        Me.txtbxManSubSkillFocus.Size = New System.Drawing.Size(133, 23)
+        Me.txtbxManSubSkillFocus.TabIndex = 13
         '
-        'lblManSubRoomNo
+        'lblManSubSkillFocus
         '
-        Me.lblManSubRoomNo.AutoSize = True
-        Me.lblManSubRoomNo.Location = New System.Drawing.Point(471, 114)
-        Me.lblManSubRoomNo.Name = "lblManSubRoomNo"
-        Me.lblManSubRoomNo.Size = New System.Drawing.Size(71, 17)
-        Me.lblManSubRoomNo.TabIndex = 12
-        Me.lblManSubRoomNo.Text = "Room No."
+        Me.lblManSubSkillFocus.AutoSize = True
+        Me.lblManSubSkillFocus.Location = New System.Drawing.Point(471, 114)
+        Me.lblManSubSkillFocus.Name = "lblManSubSkillFocus"
+        Me.lblManSubSkillFocus.Size = New System.Drawing.Size(75, 17)
+        Me.lblManSubSkillFocus.TabIndex = 12
+        Me.lblManSubSkillFocus.Text = "Skill Focus"
         '
-        'dtpManSecStartDate
+        'dtpManSubCurriculumYear
         '
-        Me.dtpManSecStartDate.Location = New System.Drawing.Point(654, 39)
-        Me.dtpManSecStartDate.Name = "dtpManSecStartDate"
-        Me.dtpManSecStartDate.Size = New System.Drawing.Size(232, 23)
-        Me.dtpManSecStartDate.TabIndex = 28
+        Me.dtpManSubCurriculumYear.Location = New System.Drawing.Point(654, 39)
+        Me.dtpManSubCurriculumYear.Name = "dtpManSubCurriculumYear"
+        Me.dtpManSubCurriculumYear.Size = New System.Drawing.Size(232, 23)
+        Me.dtpManSubCurriculumYear.TabIndex = 28
         '
         'nudManSubGradeLevel
         '
@@ -440,14 +389,14 @@ Partial Class AdminManageSubjects
         Me.lblManSubSchedule.TabIndex = 11
         Me.lblManSubSchedule.Text = "Schedule"
         '
-        'lblManSubUnits
+        'lblManSubCategory
         '
-        Me.lblManSubUnits.AutoSize = True
-        Me.lblManSubUnits.Location = New System.Drawing.Point(289, 19)
-        Me.lblManSubUnits.Name = "lblManSubUnits"
-        Me.lblManSubUnits.Size = New System.Drawing.Size(40, 17)
-        Me.lblManSubUnits.TabIndex = 19
-        Me.lblManSubUnits.Text = "Units"
+        Me.lblManSubCategory.AutoSize = True
+        Me.lblManSubCategory.Location = New System.Drawing.Point(289, 19)
+        Me.lblManSubCategory.Name = "lblManSubCategory"
+        Me.lblManSubCategory.Size = New System.Drawing.Size(65, 17)
+        Me.lblManSubCategory.TabIndex = 19
+        Me.lblManSubCategory.Text = "Category"
         '
         'lblManSubQuarter
         '
@@ -524,14 +473,14 @@ Partial Class AdminManageSubjects
         Me.txtbxManSubSubjectID.Size = New System.Drawing.Size(190, 23)
         Me.txtbxManSubSubjectID.TabIndex = 2
         '
-        'lblManSubSectionID
+        'lblManSubSubjectD
         '
-        Me.lblManSubSectionID.AutoSize = True
-        Me.lblManSubSectionID.Location = New System.Drawing.Point(52, 19)
-        Me.lblManSubSectionID.Name = "lblManSubSectionID"
-        Me.lblManSubSectionID.Size = New System.Drawing.Size(72, 17)
-        Me.lblManSubSectionID.TabIndex = 1
-        Me.lblManSubSectionID.Text = "Subject ID"
+        Me.lblManSubSubjectD.AutoSize = True
+        Me.lblManSubSubjectD.Location = New System.Drawing.Point(52, 19)
+        Me.lblManSubSubjectD.Name = "lblManSubSubjectD"
+        Me.lblManSubSubjectD.Size = New System.Drawing.Size(72, 17)
+        Me.lblManSubSubjectD.TabIndex = 1
+        Me.lblManSubSubjectD.Text = "Subject ID"
         '
         'lblSubjectList
         '
@@ -565,6 +514,71 @@ Partial Class AdminManageSubjects
         Me.picWatermark.TabIndex = 5
         Me.picWatermark.TabStop = False
         '
+        'lblManSubCreatedBy
+        '
+        Me.lblManSubCreatedBy.AutoSize = True
+        Me.lblManSubCreatedBy.Location = New System.Drawing.Point(533, 256)
+        Me.lblManSubCreatedBy.Name = "lblManSubCreatedBy"
+        Me.lblManSubCreatedBy.Size = New System.Drawing.Size(78, 17)
+        Me.lblManSubCreatedBy.TabIndex = 0
+        Me.lblManSubCreatedBy.Text = "Created By"
+        '
+        'txtbxManSubCreatedBy
+        '
+        Me.txtbxManSubCreatedBy.Location = New System.Drawing.Point(536, 278)
+        Me.txtbxManSubCreatedBy.Name = "txtbxManSubCreatedBy"
+        Me.txtbxManSubCreatedBy.Size = New System.Drawing.Size(180, 23)
+        Me.txtbxManSubCreatedBy.TabIndex = 1
+        '
+        'lblManSecDateCreated
+        '
+        Me.lblManSecDateCreated.AutoSize = True
+        Me.lblManSecDateCreated.Location = New System.Drawing.Point(743, 256)
+        Me.lblManSecDateCreated.Name = "lblManSecDateCreated"
+        Me.lblManSecDateCreated.Size = New System.Drawing.Size(92, 17)
+        Me.lblManSecDateCreated.TabIndex = 4
+        Me.lblManSecDateCreated.Text = "Date Created"
+        '
+        'dtpManSubDateCreated
+        '
+        Me.dtpManSubDateCreated.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
+        Me.dtpManSubDateCreated.Location = New System.Drawing.Point(746, 276)
+        Me.dtpManSubDateCreated.Name = "dtpManSubDateCreated"
+        Me.dtpManSubDateCreated.Size = New System.Drawing.Size(103, 23)
+        Me.dtpManSubDateCreated.TabIndex = 7
+        '
+        'txtbxManSubLearningMaterials
+        '
+        Me.txtbxManSubLearningMaterials.Location = New System.Drawing.Point(55, 200)
+        Me.txtbxManSubLearningMaterials.Name = "txtbxManSubLearningMaterials"
+        Me.txtbxManSubLearningMaterials.Size = New System.Drawing.Size(180, 23)
+        Me.txtbxManSubLearningMaterials.TabIndex = 32
+        '
+        'lblManSubLearningMaterials
+        '
+        Me.lblManSubLearningMaterials.AutoSize = True
+        Me.lblManSubLearningMaterials.Location = New System.Drawing.Point(52, 178)
+        Me.lblManSubLearningMaterials.Name = "lblManSubLearningMaterials"
+        Me.lblManSubLearningMaterials.Size = New System.Drawing.Size(125, 17)
+        Me.lblManSubLearningMaterials.TabIndex = 31
+        Me.lblManSubLearningMaterials.Text = "Learning Materials"
+        '
+        'txtbxManSubDescription
+        '
+        Me.txtbxManSubDescription.Location = New System.Drawing.Point(292, 200)
+        Me.txtbxManSubDescription.Name = "txtbxManSubDescription"
+        Me.txtbxManSubDescription.Size = New System.Drawing.Size(180, 23)
+        Me.txtbxManSubDescription.TabIndex = 34
+        '
+        'lblManSubDescription
+        '
+        Me.lblManSubDescription.AutoSize = True
+        Me.lblManSubDescription.Location = New System.Drawing.Point(289, 178)
+        Me.lblManSubDescription.Name = "lblManSubDescription"
+        Me.lblManSubDescription.Size = New System.Drawing.Size(79, 17)
+        Me.lblManSubDescription.TabIndex = 33
+        Me.lblManSubDescription.Text = "Description"
+        '
         'AdminManageSubjects
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -579,8 +593,6 @@ Partial Class AdminManageSubjects
         Me.pnlManSubContent.ResumeLayout(False)
         Me.pnlManSubContent.PerformLayout()
         CType(Me.dgvSections, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.grpRemarks.ResumeLayout(False)
-        Me.grpRemarks.PerformLayout()
         Me.grpSubjectInformation.ResumeLayout(False)
         Me.grpSubjectInformation.PerformLayout()
         CType(Me.nudManSubGradeLevel, System.ComponentModel.ISupportInitialize).EndInit()
@@ -604,16 +616,10 @@ Partial Class AdminManageSubjects
     Friend WithEvents btnSubjectUpdate As Button
     Friend WithEvents btnSubjectAdd As Button
     Friend WithEvents dgvSections As DataGridView
-    Friend WithEvents grpRemarks As GroupBox
-    Friend WithEvents txtbxManSecRemarks As TextBox
-    Friend WithEvents txtbxManSecDateCreated As TextBox
-    Friend WithEvents lblManSecDateCreated As Label
-    Friend WithEvents txtbxManSubCreatedBy As TextBox
-    Friend WithEvents lblManSubCreatedBy As Label
     Friend WithEvents grpSubjectInformation As GroupBox
-    Friend WithEvents txtbxManSubRoomNo As TextBox
-    Friend WithEvents lblManSubRoomNo As Label
-    Friend WithEvents dtpManSecStartDate As DateTimePicker
+    Friend WithEvents txtbxManSubSkillFocus As TextBox
+    Friend WithEvents lblManSubSkillFocus As Label
+    Friend WithEvents dtpManSubCurriculumYear As DateTimePicker
     Friend WithEvents nudManSubGradeLevel As NumericUpDown
     Friend WithEvents lblManSubStatus As Label
     Friend WithEvents nudManSubQuarters As NumericUpDown
@@ -622,7 +628,7 @@ Partial Class AdminManageSubjects
     Friend WithEvents lblManSubSubjectName As Label
     Friend WithEvents txtbxManSubSchedule As TextBox
     Friend WithEvents lblManSubSchedule As Label
-    Friend WithEvents lblManSubUnits As Label
+    Friend WithEvents lblManSubCategory As Label
     Friend WithEvents lblManSubQuarter As Label
     Friend WithEvents lblManSubCurriculumYear As Label
     Friend WithEvents lblManSubRoomType As Label
@@ -632,10 +638,18 @@ Partial Class AdminManageSubjects
     Friend WithEvents txtbxManSubSubjectCode As TextBox
     Friend WithEvents lblManSubSubjectCode As Label
     Friend WithEvents txtbxManSubSubjectID As TextBox
-    Friend WithEvents lblManSubSectionID As Label
+    Friend WithEvents lblManSubSubjectD As Label
     Friend WithEvents lblSubjectList As Label
     Friend WithEvents btnSubjectSearch As Button
     Friend WithEvents picWatermark As PictureBox
     Friend WithEvents txtbxManSubSubjectName As TextBox
     Friend WithEvents txtbxManSubType As TextBox
+    Friend WithEvents txtbxManSubDescription As TextBox
+    Friend WithEvents lblManSubDescription As Label
+    Friend WithEvents txtbxManSubLearningMaterials As TextBox
+    Friend WithEvents lblManSubLearningMaterials As Label
+    Friend WithEvents dtpManSubDateCreated As DateTimePicker
+    Friend WithEvents lblManSecDateCreated As Label
+    Friend WithEvents txtbxManSubCreatedBy As TextBox
+    Friend WithEvents lblManSubCreatedBy As Label
 End Class
