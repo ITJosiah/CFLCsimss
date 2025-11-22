@@ -5,10 +5,7 @@ Public Class AdminManageStudents
     Public Property IsEmbedded As Boolean = False
 
     Private Sub AdminManageStudents_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        ' Update connection string using config.txt - NO changes to modDB.vb needed
-        modDBx.UpdateConnectionString() ' This will read from config.txt
 
-        ' Rest of your existing code remains the same...
         If Not IsEmbedded Then
             Me.WindowState = FormWindowState.Maximized
             Me.BackColor = Color.FromArgb(15, 56, 32)
@@ -25,13 +22,6 @@ Public Class AdminManageStudents
 
         ' Initialize numeric controls with safe default values
         InitializeNumericControls()
-
-        modDBx.UpdateConnectionString()
-
-        ' Temporary: Show what connection string is being used
-        MessageBox.Show("Using connection: " & modDBx.strConnection, "Debug Info")
-
-
     End Sub
 
     Private Sub InitializeNumericControls()

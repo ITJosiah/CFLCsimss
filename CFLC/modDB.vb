@@ -8,11 +8,12 @@ Module modDBx
     Public myadocon, conn As New MySqlConnection
     Public cmd As New MySqlCommand
     Public cmdRead As MySqlDataReader
-    Public db_server As String = "'localhost'"
-    Public db_uid As String = "'root'"
-    Public db_pwd As String = "''"
-    Public db_name As String = "'company'"
-    Public strConnection As String = "server=" & db_server & ";uid=" & db_uid & ";password=" & db_pwd & ";database=" & db_name & ";" & "allowuservariables='True';"
+
+    Public db_server As String = "localhost"
+    Public db_uid As String = "root"
+    Public db_pwd As String = ""
+    Public db_name As String = "cflc_db"
+    Public strConnection As String = "server=" & db_server & ";port=3306;uid=" & db_uid & ";password=" & db_pwd & ";database=" & db_name & ";allowuservariables=True;"
 
     Public Structure LoggedUser
         Dim id As Integer
