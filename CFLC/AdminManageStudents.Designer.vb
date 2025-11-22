@@ -428,7 +428,7 @@ Partial Class AdminManageStudents
         '
         'nudStudentGradeLevel
         '
-        Me.nudStudentGradeLevel.Location = New System.Drawing.Point(591, 130)
+        Me.nudStudentGradeLevel.Location = New System.Drawing.Point(544, 125)
         Me.nudStudentGradeLevel.Name = "nudStudentGradeLevel"
         Me.nudStudentGradeLevel.Size = New System.Drawing.Size(35, 23)
         Me.nudStudentGradeLevel.TabIndex = 27
@@ -444,7 +444,7 @@ Partial Class AdminManageStudents
         '
         'nudStudentAge
         '
-        Me.nudStudentAge.Location = New System.Drawing.Point(292, 84)
+        Me.nudStudentAge.Location = New System.Drawing.Point(544, 80)
         Me.nudStudentAge.Name = "nudStudentAge"
         Me.nudStudentAge.Size = New System.Drawing.Size(35, 23)
         Me.nudStudentAge.TabIndex = 24
@@ -459,7 +459,8 @@ Partial Class AdminManageStudents
         '
         'dtpStudentBirthdate
         '
-        Me.dtpStudentBirthdate.Location = New System.Drawing.Point(274, 130)
+        Me.dtpStudentBirthdate.Checked = False
+        Me.dtpStudentBirthdate.Location = New System.Drawing.Point(274, 84)
         Me.dtpStudentBirthdate.Name = "dtpStudentBirthdate"
         Me.dtpStudentBirthdate.Size = New System.Drawing.Size(232, 23)
         Me.dtpStudentBirthdate.TabIndex = 22
@@ -467,7 +468,7 @@ Partial Class AdminManageStudents
         'Label11
         '
         Me.Label11.AutoSize = True
-        Me.Label11.Location = New System.Drawing.Point(289, 110)
+        Me.Label11.Location = New System.Drawing.Point(289, 64)
         Me.Label11.Name = "Label11"
         Me.Label11.Size = New System.Drawing.Size(65, 17)
         Me.Label11.TabIndex = 21
@@ -485,7 +486,7 @@ Partial Class AdminManageStudents
         'lblStudentAge
         '
         Me.lblStudentAge.AutoSize = True
-        Me.lblStudentAge.Location = New System.Drawing.Point(289, 68)
+        Me.lblStudentAge.Location = New System.Drawing.Point(541, 64)
         Me.lblStudentAge.Name = "lblStudentAge"
         Me.lblStudentAge.Size = New System.Drawing.Size(33, 17)
         Me.lblStudentAge.TabIndex = 17
@@ -509,7 +510,7 @@ Partial Class AdminManageStudents
         '
         'txtbxStudentReligion
         '
-        Me.txtbxStudentReligion.Location = New System.Drawing.Point(480, 84)
+        Me.txtbxStudentReligion.Location = New System.Drawing.Point(292, 129)
         Me.txtbxStudentReligion.Name = "txtbxStudentReligion"
         Me.txtbxStudentReligion.Size = New System.Drawing.Size(190, 23)
         Me.txtbxStudentReligion.TabIndex = 14
@@ -517,7 +518,7 @@ Partial Class AdminManageStudents
         'lblStudentReligion
         '
         Me.lblStudentReligion.AutoSize = True
-        Me.lblStudentReligion.Location = New System.Drawing.Point(477, 64)
+        Me.lblStudentReligion.Location = New System.Drawing.Point(289, 110)
         Me.lblStudentReligion.Name = "lblStudentReligion"
         Me.lblStudentReligion.Size = New System.Drawing.Size(59, 17)
         Me.lblStudentReligion.TabIndex = 13
@@ -549,7 +550,7 @@ Partial Class AdminManageStudents
         'lblStudentGradeLevel
         '
         Me.lblStudentGradeLevel.AutoSize = True
-        Me.lblStudentGradeLevel.Location = New System.Drawing.Point(559, 110)
+        Me.lblStudentGradeLevel.Location = New System.Drawing.Point(512, 106)
         Me.lblStudentGradeLevel.Name = "lblStudentGradeLevel"
         Me.lblStudentGradeLevel.Size = New System.Drawing.Size(86, 17)
         Me.lblStudentGradeLevel.TabIndex = 9
@@ -558,6 +559,7 @@ Partial Class AdminManageStudents
         'txtbxStudentSurname
         '
         Me.txtbxStudentSurname.Location = New System.Drawing.Point(55, 130)
+        Me.txtbxStudentSurname.MaxLength = 50
         Me.txtbxStudentSurname.Name = "txtbxStudentSurname"
         Me.txtbxStudentSurname.Size = New System.Drawing.Size(190, 23)
         Me.txtbxStudentSurname.TabIndex = 6
@@ -574,6 +576,7 @@ Partial Class AdminManageStudents
         'txtStudentMiddleName
         '
         Me.txtStudentMiddleName.Location = New System.Drawing.Point(55, 84)
+        Me.txtStudentMiddleName.MaxLength = 50
         Me.txtStudentMiddleName.Name = "txtStudentMiddleName"
         Me.txtStudentMiddleName.Size = New System.Drawing.Size(190, 23)
         Me.txtStudentMiddleName.TabIndex = 4
@@ -590,6 +593,7 @@ Partial Class AdminManageStudents
         'txtbxStudentFirstName
         '
         Me.txtbxStudentFirstName.Location = New System.Drawing.Point(55, 37)
+        Me.txtbxStudentFirstName.MaxLength = 50
         Me.txtbxStudentFirstName.Name = "txtbxStudentFirstName"
         Me.txtbxStudentFirstName.Size = New System.Drawing.Size(190, 23)
         Me.txtbxStudentFirstName.TabIndex = 2

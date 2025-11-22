@@ -163,4 +163,31 @@
     Private Sub Label18_Click(sender As Object, e As EventArgs)
 
     End Sub
+
+    Private Sub txtbxZipCode_TextChanged(sender As Object, e As EventArgs) Handles txtbxZipCode.TextChanged
+
+    End Sub
+
+    Private Sub txtbxZipCode_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtbxZipCode.KeyPress
+        If Not Char.IsDigit(e.KeyChar) AndAlso e.KeyChar <> ControlChars.Back Then
+            e.Handled = True
+        End If
+    End Sub
+
+    Private Sub dtpStudentBirthdate_ValueChanged(sender As Object, e As EventArgs) Handles dtpStudentBirthdate.ValueChanged
+        Dim birthDate As Date = dtpStudentBirthdate.Value
+        nudStudentAge.Value = CalculateAge(birthDate)
+    End Sub
+
+    Private Function CalculateAge(birthDate As Date) As Integer
+        Dim today As Date = Date.Today
+        Dim age As Integer = today.Year - birthDate.Year
+
+        If birthDate > today.AddYears(-age) Then
+            age -= 1
+        End If
+
+        Return age
+    End Function
+
 End Class
