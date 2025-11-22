@@ -37,10 +37,18 @@ Partial Class AdminManageSubjects
         Me.btnSubjectAdd = New System.Windows.Forms.Button()
         Me.dgvSections = New System.Windows.Forms.DataGridView()
         Me.grpSubjectInformation = New System.Windows.Forms.GroupBox()
+        Me.txtbxManSubDescription = New System.Windows.Forms.TextBox()
+        Me.lblManSubDescription = New System.Windows.Forms.Label()
+        Me.txtbxManSubLearningMaterials = New System.Windows.Forms.TextBox()
+        Me.lblManSubLearningMaterials = New System.Windows.Forms.Label()
+        Me.dtpManSubDateCreated = New System.Windows.Forms.DateTimePicker()
         Me.txtbxManSubSubjectName = New System.Windows.Forms.TextBox()
         Me.txtbxManSubType = New System.Windows.Forms.TextBox()
+        Me.lblManSecDateCreated = New System.Windows.Forms.Label()
         Me.txtbxManSubSkillFocus = New System.Windows.Forms.TextBox()
+        Me.txtbxManSubCreatedBy = New System.Windows.Forms.TextBox()
         Me.lblManSubSkillFocus = New System.Windows.Forms.Label()
+        Me.lblManSubCreatedBy = New System.Windows.Forms.Label()
         Me.dtpManSubCurriculumYear = New System.Windows.Forms.DateTimePicker()
         Me.nudManSubGradeLevel = New System.Windows.Forms.NumericUpDown()
         Me.lblManSubStatus = New System.Windows.Forms.Label()
@@ -64,14 +72,6 @@ Partial Class AdminManageSubjects
         Me.lblSubjectList = New System.Windows.Forms.Label()
         Me.btnSubjectSearch = New System.Windows.Forms.Button()
         Me.picWatermark = New System.Windows.Forms.PictureBox()
-        Me.lblManSubCreatedBy = New System.Windows.Forms.Label()
-        Me.txtbxManSubCreatedBy = New System.Windows.Forms.TextBox()
-        Me.lblManSecDateCreated = New System.Windows.Forms.Label()
-        Me.dtpManSubDateCreated = New System.Windows.Forms.DateTimePicker()
-        Me.txtbxManSubLearningMaterials = New System.Windows.Forms.TextBox()
-        Me.lblManSubLearningMaterials = New System.Windows.Forms.Label()
-        Me.txtbxManSubDescription = New System.Windows.Forms.TextBox()
-        Me.lblManSubDescription = New System.Windows.Forms.Label()
         Me.pnlSidebar.SuspendLayout()
         Me.flowButtons.SuspendLayout()
         Me.pnlManSubContent.SuspendLayout()
@@ -87,11 +87,11 @@ Partial Class AdminManageSubjects
         Me.pnlSidebar.BackColor = System.Drawing.Color.FromArgb(CType(CType(40, Byte), Integer), CType(CType(130, Byte), Integer), CType(CType(61, Byte), Integer))
         Me.pnlSidebar.Controls.Add(Me.flowButtons)
         Me.pnlSidebar.Controls.Add(Me.btnLogout)
-        Me.pnlSidebar.Dock = System.Windows.Forms.DockStyle.Left
+        Me.pnlSidebar.Dock = System.Windows.Forms.DockStyle.Fill
         Me.pnlSidebar.Location = New System.Drawing.Point(0, 0)
         Me.pnlSidebar.Name = "pnlSidebar"
         Me.pnlSidebar.Padding = New System.Windows.Forms.Padding(30, 40, 30, 40)
-        Me.pnlSidebar.Size = New System.Drawing.Size(300, 633)
+        Me.pnlSidebar.Size = New System.Drawing.Size(1300, 633)
         Me.pnlSidebar.TabIndex = 13
         '
         'flowButtons
@@ -108,7 +108,7 @@ Partial Class AdminManageSubjects
         Me.flowButtons.Location = New System.Drawing.Point(30, 40)
         Me.flowButtons.Margin = New System.Windows.Forms.Padding(0)
         Me.flowButtons.Name = "flowButtons"
-        Me.flowButtons.Size = New System.Drawing.Size(240, 503)
+        Me.flowButtons.Size = New System.Drawing.Size(1240, 503)
         Me.flowButtons.TabIndex = 0
         Me.flowButtons.WrapContents = False
         '
@@ -179,7 +179,7 @@ Partial Class AdminManageSubjects
         Me.btnLogout.ForeColor = System.Drawing.Color.White
         Me.btnLogout.Location = New System.Drawing.Point(30, 543)
         Me.btnLogout.Name = "btnLogout"
-        Me.btnLogout.Size = New System.Drawing.Size(240, 50)
+        Me.btnLogout.Size = New System.Drawing.Size(1240, 50)
         Me.btnLogout.TabIndex = 10
         Me.btnLogout.Text = "Logout"
         Me.btnLogout.UseVisualStyleBackColor = False
@@ -193,8 +193,8 @@ Partial Class AdminManageSubjects
         Me.pnlManSubContent.Controls.Add(Me.dgvSections)
         Me.pnlManSubContent.Controls.Add(Me.grpSubjectInformation)
         Me.pnlManSubContent.Controls.Add(Me.lblSubjectList)
-        Me.pnlManSubContent.Controls.Add(Me.btnSubjectSearch)
         Me.pnlManSubContent.Controls.Add(Me.picWatermark)
+        Me.pnlManSubContent.Controls.Add(Me.btnSubjectSearch)
         Me.pnlManSubContent.Location = New System.Drawing.Point(300, 0)
         Me.pnlManSubContent.Name = "pnlManSubContent"
         Me.pnlManSubContent.Padding = New System.Windows.Forms.Padding(30)
@@ -289,6 +289,46 @@ Partial Class AdminManageSubjects
         Me.grpSubjectInformation.TabStop = False
         Me.grpSubjectInformation.Text = "Subject Information"
         '
+        'txtbxManSubDescription
+        '
+        Me.txtbxManSubDescription.Location = New System.Drawing.Point(292, 200)
+        Me.txtbxManSubDescription.Name = "txtbxManSubDescription"
+        Me.txtbxManSubDescription.Size = New System.Drawing.Size(180, 23)
+        Me.txtbxManSubDescription.TabIndex = 34
+        '
+        'lblManSubDescription
+        '
+        Me.lblManSubDescription.AutoSize = True
+        Me.lblManSubDescription.Location = New System.Drawing.Point(289, 178)
+        Me.lblManSubDescription.Name = "lblManSubDescription"
+        Me.lblManSubDescription.Size = New System.Drawing.Size(79, 17)
+        Me.lblManSubDescription.TabIndex = 33
+        Me.lblManSubDescription.Text = "Description"
+        '
+        'txtbxManSubLearningMaterials
+        '
+        Me.txtbxManSubLearningMaterials.Location = New System.Drawing.Point(55, 200)
+        Me.txtbxManSubLearningMaterials.Name = "txtbxManSubLearningMaterials"
+        Me.txtbxManSubLearningMaterials.Size = New System.Drawing.Size(180, 23)
+        Me.txtbxManSubLearningMaterials.TabIndex = 32
+        '
+        'lblManSubLearningMaterials
+        '
+        Me.lblManSubLearningMaterials.AutoSize = True
+        Me.lblManSubLearningMaterials.Location = New System.Drawing.Point(52, 178)
+        Me.lblManSubLearningMaterials.Name = "lblManSubLearningMaterials"
+        Me.lblManSubLearningMaterials.Size = New System.Drawing.Size(125, 17)
+        Me.lblManSubLearningMaterials.TabIndex = 31
+        Me.lblManSubLearningMaterials.Text = "Learning Materials"
+        '
+        'dtpManSubDateCreated
+        '
+        Me.dtpManSubDateCreated.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
+        Me.dtpManSubDateCreated.Location = New System.Drawing.Point(746, 276)
+        Me.dtpManSubDateCreated.Name = "dtpManSubDateCreated"
+        Me.dtpManSubDateCreated.Size = New System.Drawing.Size(103, 23)
+        Me.dtpManSubDateCreated.TabIndex = 7
+        '
         'txtbxManSubSubjectName
         '
         Me.txtbxManSubSubjectName.Location = New System.Drawing.Point(654, 134)
@@ -303,12 +343,28 @@ Partial Class AdminManageSubjects
         Me.txtbxManSubType.Size = New System.Drawing.Size(133, 23)
         Me.txtbxManSubType.TabIndex = 29
         '
+        'lblManSecDateCreated
+        '
+        Me.lblManSecDateCreated.AutoSize = True
+        Me.lblManSecDateCreated.Location = New System.Drawing.Point(743, 256)
+        Me.lblManSecDateCreated.Name = "lblManSecDateCreated"
+        Me.lblManSecDateCreated.Size = New System.Drawing.Size(92, 17)
+        Me.lblManSecDateCreated.TabIndex = 4
+        Me.lblManSecDateCreated.Text = "Date Created"
+        '
         'txtbxManSubSkillFocus
         '
         Me.txtbxManSubSkillFocus.Location = New System.Drawing.Point(474, 133)
         Me.txtbxManSubSkillFocus.Name = "txtbxManSubSkillFocus"
         Me.txtbxManSubSkillFocus.Size = New System.Drawing.Size(133, 23)
         Me.txtbxManSubSkillFocus.TabIndex = 13
+        '
+        'txtbxManSubCreatedBy
+        '
+        Me.txtbxManSubCreatedBy.Location = New System.Drawing.Point(536, 278)
+        Me.txtbxManSubCreatedBy.Name = "txtbxManSubCreatedBy"
+        Me.txtbxManSubCreatedBy.Size = New System.Drawing.Size(180, 23)
+        Me.txtbxManSubCreatedBy.TabIndex = 1
         '
         'lblManSubSkillFocus
         '
@@ -318,6 +374,15 @@ Partial Class AdminManageSubjects
         Me.lblManSubSkillFocus.Size = New System.Drawing.Size(75, 17)
         Me.lblManSubSkillFocus.TabIndex = 12
         Me.lblManSubSkillFocus.Text = "Skill Focus"
+        '
+        'lblManSubCreatedBy
+        '
+        Me.lblManSubCreatedBy.AutoSize = True
+        Me.lblManSubCreatedBy.Location = New System.Drawing.Point(533, 256)
+        Me.lblManSubCreatedBy.Name = "lblManSubCreatedBy"
+        Me.lblManSubCreatedBy.Size = New System.Drawing.Size(78, 17)
+        Me.lblManSubCreatedBy.TabIndex = 0
+        Me.lblManSubCreatedBy.Text = "Created By"
         '
         'dtpManSubCurriculumYear
         '
@@ -507,77 +572,12 @@ Partial Class AdminManageSubjects
         '
         Me.picWatermark.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.picWatermark.Image = Global.CFLC.My.Resources.Resources.logo
-        Me.picWatermark.Location = New System.Drawing.Point(238, 79)
+        Me.picWatermark.Location = New System.Drawing.Point(284, 171)
         Me.picWatermark.Name = "picWatermark"
-        Me.picWatermark.Size = New System.Drawing.Size(520, 466)
+        Me.picWatermark.Size = New System.Drawing.Size(418, 372)
         Me.picWatermark.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
         Me.picWatermark.TabIndex = 5
         Me.picWatermark.TabStop = False
-        '
-        'lblManSubCreatedBy
-        '
-        Me.lblManSubCreatedBy.AutoSize = True
-        Me.lblManSubCreatedBy.Location = New System.Drawing.Point(533, 256)
-        Me.lblManSubCreatedBy.Name = "lblManSubCreatedBy"
-        Me.lblManSubCreatedBy.Size = New System.Drawing.Size(78, 17)
-        Me.lblManSubCreatedBy.TabIndex = 0
-        Me.lblManSubCreatedBy.Text = "Created By"
-        '
-        'txtbxManSubCreatedBy
-        '
-        Me.txtbxManSubCreatedBy.Location = New System.Drawing.Point(536, 278)
-        Me.txtbxManSubCreatedBy.Name = "txtbxManSubCreatedBy"
-        Me.txtbxManSubCreatedBy.Size = New System.Drawing.Size(180, 23)
-        Me.txtbxManSubCreatedBy.TabIndex = 1
-        '
-        'lblManSecDateCreated
-        '
-        Me.lblManSecDateCreated.AutoSize = True
-        Me.lblManSecDateCreated.Location = New System.Drawing.Point(743, 256)
-        Me.lblManSecDateCreated.Name = "lblManSecDateCreated"
-        Me.lblManSecDateCreated.Size = New System.Drawing.Size(92, 17)
-        Me.lblManSecDateCreated.TabIndex = 4
-        Me.lblManSecDateCreated.Text = "Date Created"
-        '
-        'dtpManSubDateCreated
-        '
-        Me.dtpManSubDateCreated.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.dtpManSubDateCreated.Location = New System.Drawing.Point(746, 276)
-        Me.dtpManSubDateCreated.Name = "dtpManSubDateCreated"
-        Me.dtpManSubDateCreated.Size = New System.Drawing.Size(103, 23)
-        Me.dtpManSubDateCreated.TabIndex = 7
-        '
-        'txtbxManSubLearningMaterials
-        '
-        Me.txtbxManSubLearningMaterials.Location = New System.Drawing.Point(55, 200)
-        Me.txtbxManSubLearningMaterials.Name = "txtbxManSubLearningMaterials"
-        Me.txtbxManSubLearningMaterials.Size = New System.Drawing.Size(180, 23)
-        Me.txtbxManSubLearningMaterials.TabIndex = 32
-        '
-        'lblManSubLearningMaterials
-        '
-        Me.lblManSubLearningMaterials.AutoSize = True
-        Me.lblManSubLearningMaterials.Location = New System.Drawing.Point(52, 178)
-        Me.lblManSubLearningMaterials.Name = "lblManSubLearningMaterials"
-        Me.lblManSubLearningMaterials.Size = New System.Drawing.Size(125, 17)
-        Me.lblManSubLearningMaterials.TabIndex = 31
-        Me.lblManSubLearningMaterials.Text = "Learning Materials"
-        '
-        'txtbxManSubDescription
-        '
-        Me.txtbxManSubDescription.Location = New System.Drawing.Point(292, 200)
-        Me.txtbxManSubDescription.Name = "txtbxManSubDescription"
-        Me.txtbxManSubDescription.Size = New System.Drawing.Size(180, 23)
-        Me.txtbxManSubDescription.TabIndex = 34
-        '
-        'lblManSubDescription
-        '
-        Me.lblManSubDescription.AutoSize = True
-        Me.lblManSubDescription.Location = New System.Drawing.Point(289, 178)
-        Me.lblManSubDescription.Name = "lblManSubDescription"
-        Me.lblManSubDescription.Size = New System.Drawing.Size(79, 17)
-        Me.lblManSubDescription.TabIndex = 33
-        Me.lblManSubDescription.Text = "Description"
         '
         'AdminManageSubjects
         '
