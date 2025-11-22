@@ -121,12 +121,13 @@ Partial Class AdminManageTeacher
         Me.dgvTeacher.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.dgvTeacher.BackgroundColor = System.Drawing.Color.WhiteSmoke
         Me.dgvTeacher.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvTeacher.Location = New System.Drawing.Point(64, 648)
+        Me.dgvTeacher.Location = New System.Drawing.Point(64, 496)
         Me.dgvTeacher.Name = "dgvTeacher"
         Me.dgvTeacher.RowHeadersWidth = 51
         Me.dgvTeacher.RowTemplate.Height = 24
-        Me.dgvTeacher.Size = New System.Drawing.Size(1627, 40)
+        Me.dgvTeacher.Size = New System.Drawing.Size(1627, 192)
         Me.dgvTeacher.TabIndex = 24
         '
         'btnUpdate
