@@ -25,6 +25,24 @@ Public Class AdminManageStudents
 
         ' Initialize Gender ComboBox
         InitializeGenderComboBox()
+
+        ' Initialize numeric controls with safe default values
+        InitializeNumericControls()
+    End Sub
+
+    Private Sub InitializeNumericControls()
+        ' Set safe default values for numeric up/down controls
+        If nudStudentAge.Minimum <= 0 AndAlso nudStudentAge.Maximum >= 0 Then
+            nudStudentAge.Value = 0
+        Else
+            nudStudentAge.Value = nudStudentAge.Minimum
+        End If
+
+        If nudStudentGradeLevel.Minimum <= 0 AndAlso nudStudentGradeLevel.Maximum >= 0 Then
+            nudStudentGradeLevel.Value = 0
+        Else
+            nudStudentGradeLevel.Value = nudStudentGradeLevel.Minimum
+        End If
     End Sub
 
     Private Sub InitializeGenderComboBox()
@@ -122,8 +140,8 @@ Public Class AdminManageStudents
             Dim sectionIDValue As String = If(String.IsNullOrWhiteSpace(txtbxStudentSectionID.Text), "NULL", "'" & txtbxStudentSectionID.Text.Trim().Replace("'", "''") & "'")
             Dim enrollmentIDValue As String = If(String.IsNullOrWhiteSpace(txtbxStudentEnrollmentID.Text), "NULL", "'" & txtbxStudentEnrollmentID.Text.Trim().Replace("'", "''") & "'")
 
-            Dim query As String = "INSERT INTO student (MiddleName, FirstName, LastName, Gender, BirthDate, Age, GuardianName, Religion, GradeLevel, SectionID, EnrollmentID, HouseNumber, Street, Barangay, Municipality, Province, ZipCode) " &
-                                "VALUES ('{0}', '{1}', '{2}', '{3}', '{4}', {5}, '{6}', '{7}', {8}, {9}, {10}, '{11}', '{12}', '{13}', '{14}', '{15}', '{16}')"
+            Dim query As String = "INSERT INTO student (MiddleName, FirstName, LastName, Gender, BirthDate, Age, GuardianName, Religion, GradeLevel, SectionID, EnrollmentID, HouseNumber, Street, Barangay, Municipality, Province, Country, ZipCode) " &
+                                "VALUES ('{0}', '{1}', '{2}', '{3}', '{4}', {5}, '{6}', '{7}', {8}, {9}, {10}, '{11}', '{12}', '{13}', '{14}', '{15}', '{16}', '{17}')"
 
             ' Format the query with values
             query = String.Format(query,
@@ -133,16 +151,17 @@ Public Class AdminManageStudents
                 cmbStudenttGender.SelectedItem.ToString(),
                 dtpStudentBirthdate.Value.ToString("yyyy-MM-dd"),
                 nudStudentAge.Value,
-                txtbxStudentParentName.Text.Trim().Replace("'", "''"),
+                txtbxGuardianName.Text.Trim().Replace("'", "''"),
                 txtbxStudentReligion.Text.Trim().Replace("'", "''"),
                 nudStudentGradeLevel.Value,
                 sectionIDValue,
                 enrollmentIDValue,
                 txtbxStudentHouseNo.Text.Trim().Replace("'", "''"),
-                txtbxStudentStreet.Text.Trim().Replace("'", "''"),
+                txtbcStudentStreet.Text.Trim().Replace("'", "''"),
                 txtbxStudentBarangay.Text.Trim().Replace("'", "''"),
                 txtbxStudentCity.Text.Trim().Replace("'", "''"),
                 txtbxStudentProvince.Text.Trim().Replace("'", "''"),
+                txtbxCountry.Text.Trim().Replace("'", "''"),
                 txtbxZipCode.Text.Trim().Replace("'", "''")
             )
 
@@ -231,9 +250,9 @@ Public Class AdminManageStudents
             Return False
         End If
 
-        If String.IsNullOrWhiteSpace(txtbxStudentStreet.Text) Then
+        If String.IsNullOrWhiteSpace(txtbcStudentStreet.Text) Then
             MessageBox.Show("Please enter Street.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            txtbxStudentStreet.Focus()
+            txtbcStudentStreet.Focus()
             Return False
         End If
 
@@ -252,6 +271,12 @@ Public Class AdminManageStudents
         If String.IsNullOrWhiteSpace(txtbxStudentProvince.Text) Then
             MessageBox.Show("Please enter Province.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             txtbxStudentProvince.Focus()
+            Return False
+        End If
+
+        If String.IsNullOrWhiteSpace(txtbxCountry.Text) Then
+            MessageBox.Show("Please enter Country.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            txtbxCountry.Focus()
             Return False
         End If
 
@@ -344,23 +369,38 @@ Public Class AdminManageStudents
         txtbxStudentSurname.Clear()
         cmbStudenttGender.SelectedIndex = -1
         dtpStudentBirthdate.Value = DateTime.Now
-        nudStudentAge.Value = 0
-        txtbxStudentParentName.Clear()
+
+        ' Reset numeric controls safely
+        ResetNumericControl(nudStudentAge)
+        ResetNumericControl(nudStudentGradeLevel)
+
+        txtbxGuardianName.Clear()
         txtbxStudentReligion.Clear()
-        nudStudentGradeLevel.Value = 0
         txtbxStudentSectionID.Clear()
         txtbxStudentEnrollmentID.Clear()
 
         ' Clear address fields
         txtbxStudentHouseNo.Clear()
-        txtbxStudentStreet.Clear()
+        txtbcStudentStreet.Clear()
         txtbxStudentBarangay.Clear()
         txtbxStudentCity.Clear()
         txtbxStudentProvince.Clear()
+        txtbxCountry.Clear()
         txtbxZipCode.Clear()
 
         ' Set focus back to first field
         txtbxStudentFirstName.Focus()
+    End Sub
+
+    ' Helper method to safely reset numeric up/down controls
+    Private Sub ResetNumericControl(nudControl As NumericUpDown)
+        ' Set to minimum value, but ensure it's within valid range
+        If nudControl.Minimum <= 0 AndAlso nudControl.Maximum >= 0 Then
+            nudControl.Value = 0
+        Else
+            ' If 0 is not valid, set to the minimum value
+            nudControl.Value = nudControl.Minimum
+        End If
     End Sub
 
     ' Auto-calculate age when birthdate changes
@@ -374,86 +414,14 @@ Public Class AdminManageStudents
             age -= 1
         End If
 
-        nudStudentAge.Value = age
-    End Sub
-
-    Private Sub txtStudentId_TextChanged(sender As Object, e As EventArgs)
-
-    End Sub
-
-    Private Sub pnlContent_Paint(sender As Object, e As PaintEventArgs) Handles pnlContent.Paint
-
-    End Sub
-
-    Private Sub txtAge_TextChanged(sender As Object, e As EventArgs)
-
-    End Sub
-
-    Private Sub lblStudentAge_Click(sender As Object, e As EventArgs) Handles lblStudentAge.Click
-
-    End Sub
-
-    Private Sub lblStudentGender_Click(sender As Object, e As EventArgs) Handles lblStudentGender.Click
-
-    End Sub
-
-    Private Sub picWatermark_Click(sender As Object, e As EventArgs) Handles picWatermark.Click
-
-    End Sub
-
-    Private Sub grpStudentInfo_Enter(sender As Object, e As EventArgs) Handles grpStudentInfo.Enter
-
-    End Sub
-
-    Private Sub pnlSidebar_Paint(sender As Object, e As PaintEventArgs) Handles pnlSidebar.Paint
-
-    End Sub
-
-    Private Sub grpAddress_Enter(sender As Object, e As EventArgs) Handles grpAddress.Enter
-
-    End Sub
-
-    Private Sub lblStudentBarangay_Click(sender As Object, e As EventArgs) Handles lblStudentBarangay.Click
-
-    End Sub
-
-    Private Sub lblStudentProvince_Click(sender As Object, e As EventArgs) Handles lblStudentProvince.Click
-
-    End Sub
-
-    Private Sub lblStudentMiddleName_Click(sender As Object, e As EventArgs) Handles lblStudentMiddleName.Click
-
-    End Sub
-
-    Private Sub cmbStudenttGenderSelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbStudenttGender.SelectedIndexChanged
-
-    End Sub
-
-    Private Sub nudStudentAgeValueChanged(sender As Object, e As EventArgs) Handles nudStudentAge.ValueChanged
-
-    End Sub
-
-    Private Sub txtbxStudentSurnameTextChanged(sender As Object, e As EventArgs) Handles txtbxStudentSurname.TextChanged
-
-    End Sub
-
-    Private Sub Label18_Click(sender As Object, e As EventArgs)
-
-    End Sub
-
-    Private Sub txtbxZipCode_TextChanged(sender As Object, e As EventArgs) Handles txtbxZipCode.TextChanged
-
-    End Sub
-
-    Private Sub txtbxZipCode_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtbxZipCode.KeyPress
-        If Not Char.IsDigit(e.KeyChar) AndAlso e.KeyChar <> ControlChars.Back Then
-            e.Handled = True
+        ' Ensure age is within valid range for the control
+        If age < nudStudentAge.Minimum Then
+            nudStudentAge.Value = nudStudentAge.Minimum
+        ElseIf age > nudStudentAge.Maximum Then
+            nudStudentAge.Value = nudStudentAge.Maximum
+        Else
+            nudStudentAge.Value = age
         End If
-    End Sub
-
-    Private Sub dtpStudentBirthdate_ValueChanged(sender As Object, e As EventArgs) Handles dtpStudentBirthdate.ValueChanged
-        Dim birthDate As Date = dtpStudentBirthdate.Value
-        nudStudentAge.Value = CalculateAge(birthDate)
     End Sub
 
     Private Function CalculateAge(birthDate As Date) As Integer
@@ -466,5 +434,85 @@ Public Class AdminManageStudents
 
         Return age
     End Function
+
+    ' Event handlers for various controls
+    Private Sub txtStudentId_TextChanged(sender As Object, e As EventArgs)
+        ' Handle text change if needed
+    End Sub
+
+    Private Sub pnlContent_Paint(sender As Object, e As PaintEventArgs) Handles pnlContent.Paint
+        ' Handle paint event if needed
+    End Sub
+
+    Private Sub txtAge_TextChanged(sender As Object, e As EventArgs)
+        ' Handle text change if needed
+    End Sub
+
+    Private Sub lblStudentAge_Click(sender As Object, e As EventArgs) Handles lblStudentAge.Click
+        ' Handle label click if needed
+    End Sub
+
+    Private Sub lblStudentGender_Click(sender As Object, e As EventArgs) Handles lblStudentGender.Click
+        ' Handle label click if needed
+    End Sub
+
+    Private Sub picWatermark_Click(sender As Object, e As EventArgs) Handles picWatermark.Click
+        ' Handle picture click if needed
+    End Sub
+
+    Private Sub grpStudentInfo_Enter(sender As Object, e As EventArgs) Handles grpStudentInfo.Enter
+        ' Handle group box enter if needed
+    End Sub
+
+    Private Sub pnlSidebar_Paint(sender As Object, e As PaintEventArgs) Handles pnlSidebar.Paint
+        ' Handle paint event if needed
+    End Sub
+
+    Private Sub grpAddress_Enter(sender As Object, e As EventArgs) Handles grpAddress.Enter
+        ' Handle group box enter if needed
+    End Sub
+
+    Private Sub lblStudentBarangay_Click(sender As Object, e As EventArgs) Handles lblStudentBarangay.Click
+        ' Handle label click if needed
+    End Sub
+
+    Private Sub lblStudentProvince_Click(sender As Object, e As EventArgs) Handles lblStudentProvince.Click
+        ' Handle label click if needed
+    End Sub
+
+    Private Sub lblStudentMiddleName_Click(sender As Object, e As EventArgs) Handles lblStudentMiddleName.Click
+        ' Handle label click if needed
+    End Sub
+
+    Private Sub cmbStudenttGenderSelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbStudenttGender.SelectedIndexChanged
+        ' Handle combo box selection change if needed
+    End Sub
+
+    Private Sub nudStudentAgeValueChanged(sender As Object, e As EventArgs) Handles nudStudentAge.ValueChanged
+        ' Handle numeric up/down value change if needed
+    End Sub
+
+    Private Sub txtbxStudentSurnameTextChanged(sender As Object, e As EventArgs) Handles txtbxStudentSurname.TextChanged
+        ' Handle text change if needed
+    End Sub
+
+    Private Sub Label18_Click(sender As Object, e As EventArgs)
+        ' Handle label click if needed
+    End Sub
+
+    Private Sub txtbxZipCode_TextChanged(sender As Object, e As EventArgs) Handles txtbxZipCode.TextChanged
+        ' Handle text change if needed
+    End Sub
+
+    Private Sub txtbxZipCode_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtbxZipCode.KeyPress
+        ' Only allow digits and backspace
+        If Not Char.IsDigit(e.KeyChar) AndAlso e.KeyChar <> ControlChars.Back Then
+            e.Handled = True
+        End If
+    End Sub
+
+    Private Sub dtpStudentBirthdate_ValuesChanged(sender As Object, e As EventArgs) Handles dtpStudentBirthdate.ValueChanged
+        ' This is already handled by dtpStudentBirthdate_ValueChanged
+    End Sub
 
 End Class
