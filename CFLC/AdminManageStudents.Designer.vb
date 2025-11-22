@@ -60,8 +60,8 @@ Partial Class AdminManageStudents
         Me.Label11 = New System.Windows.Forms.Label()
         Me.lblStudentGender = New System.Windows.Forms.Label()
         Me.lblStudentAge = New System.Windows.Forms.Label()
-        Me.txtbxStudentParentName = New System.Windows.Forms.TextBox()
-        Me.lblStudentParentName = New System.Windows.Forms.Label()
+        Me.txtbxGuardianName = New System.Windows.Forms.TextBox()
+        Me.lblStudentGuardianName = New System.Windows.Forms.Label()
         Me.txtbxStudentReligion = New System.Windows.Forms.TextBox()
         Me.lblStudentReligion = New System.Windows.Forms.Label()
         Me.txtbxStudentEnrollmentID = New System.Windows.Forms.TextBox()
@@ -298,6 +298,7 @@ Partial Class AdminManageStudents
         'txtbxStudentProvince
         '
         Me.txtbxStudentProvince.Location = New System.Drawing.Point(359, 94)
+        Me.txtbxStudentProvince.MaxLength = 50
         Me.txtbxStudentProvince.Name = "txtbxStudentProvince"
         Me.txtbxStudentProvince.Size = New System.Drawing.Size(230, 23)
         Me.txtbxStudentProvince.TabIndex = 11
@@ -314,6 +315,7 @@ Partial Class AdminManageStudents
         'txtbxStudentBarangay
         '
         Me.txtbxStudentBarangay.Location = New System.Drawing.Point(55, 136)
+        Me.txtbxStudentBarangay.MaxLength = 50
         Me.txtbxStudentBarangay.Name = "txtbxStudentBarangay"
         Me.txtbxStudentBarangay.Size = New System.Drawing.Size(230, 23)
         Me.txtbxStudentBarangay.TabIndex = 9
@@ -330,6 +332,7 @@ Partial Class AdminManageStudents
         'txtbxCountry
         '
         Me.txtbxCountry.Location = New System.Drawing.Point(359, 136)
+        Me.txtbxCountry.MaxLength = 50
         Me.txtbxCountry.Name = "txtbxCountry"
         Me.txtbxCountry.Size = New System.Drawing.Size(230, 23)
         Me.txtbxCountry.TabIndex = 7
@@ -346,6 +349,7 @@ Partial Class AdminManageStudents
         'txtbxStudentCity
         '
         Me.txtbxStudentCity.Location = New System.Drawing.Point(360, 47)
+        Me.txtbxStudentCity.MaxLength = 50
         Me.txtbxStudentCity.Name = "txtbxStudentCity"
         Me.txtbxStudentCity.Size = New System.Drawing.Size(230, 23)
         Me.txtbxStudentCity.TabIndex = 5
@@ -362,6 +366,7 @@ Partial Class AdminManageStudents
         'txtbcStudentStreet
         '
         Me.txtbcStudentStreet.Location = New System.Drawing.Point(55, 91)
+        Me.txtbcStudentStreet.MaxLength = 20
         Me.txtbcStudentStreet.Name = "txtbcStudentStreet"
         Me.txtbcStudentStreet.Size = New System.Drawing.Size(230, 23)
         Me.txtbcStudentStreet.TabIndex = 3
@@ -378,6 +383,7 @@ Partial Class AdminManageStudents
         'txtbxStudentHouseNo
         '
         Me.txtbxStudentHouseNo.Location = New System.Drawing.Point(55, 48)
+        Me.txtbxStudentHouseNo.MaxLength = 20
         Me.txtbxStudentHouseNo.Name = "txtbxStudentHouseNo"
         Me.txtbxStudentHouseNo.Size = New System.Drawing.Size(230, 23)
         Me.txtbxStudentHouseNo.TabIndex = 1
@@ -404,8 +410,8 @@ Partial Class AdminManageStudents
         Me.grpStudentInfo.Controls.Add(Me.Label11)
         Me.grpStudentInfo.Controls.Add(Me.lblStudentGender)
         Me.grpStudentInfo.Controls.Add(Me.lblStudentAge)
-        Me.grpStudentInfo.Controls.Add(Me.txtbxStudentParentName)
-        Me.grpStudentInfo.Controls.Add(Me.lblStudentParentName)
+        Me.grpStudentInfo.Controls.Add(Me.txtbxGuardianName)
+        Me.grpStudentInfo.Controls.Add(Me.lblStudentGuardianName)
         Me.grpStudentInfo.Controls.Add(Me.txtbxStudentReligion)
         Me.grpStudentInfo.Controls.Add(Me.lblStudentReligion)
         Me.grpStudentInfo.Controls.Add(Me.txtbxStudentEnrollmentID)
@@ -492,25 +498,28 @@ Partial Class AdminManageStudents
         Me.lblStudentAge.TabIndex = 17
         Me.lblStudentAge.Text = "Age"
         '
-        'txtbxStudentParentName
+        'txtbxGuardianName
         '
-        Me.txtbxStudentParentName.Location = New System.Drawing.Point(480, 37)
-        Me.txtbxStudentParentName.Name = "txtbxStudentParentName"
-        Me.txtbxStudentParentName.Size = New System.Drawing.Size(190, 23)
-        Me.txtbxStudentParentName.TabIndex = 16
+        Me.txtbxGuardianName.Location = New System.Drawing.Point(480, 37)
+        Me.txtbxGuardianName.MaxLength = 50
+        Me.txtbxGuardianName.Name = "txtbxGuardianName"
+        Me.txtbxGuardianName.Size = New System.Drawing.Size(190, 23)
+        Me.txtbxGuardianName.TabIndex = 16
         '
-        'lblStudentParentName
+        'lblStudentGuardianName
         '
-        Me.lblStudentParentName.AutoSize = True
-        Me.lblStudentParentName.Location = New System.Drawing.Point(477, 19)
-        Me.lblStudentParentName.Name = "lblStudentParentName"
-        Me.lblStudentParentName.Size = New System.Drawing.Size(91, 17)
-        Me.lblStudentParentName.TabIndex = 15
-        Me.lblStudentParentName.Text = "Parent Name"
+        Me.lblStudentGuardianName.AutoEllipsis = True
+        Me.lblStudentGuardianName.AutoSize = True
+        Me.lblStudentGuardianName.Location = New System.Drawing.Point(477, 19)
+        Me.lblStudentGuardianName.Name = "lblStudentGuardianName"
+        Me.lblStudentGuardianName.Size = New System.Drawing.Size(108, 17)
+        Me.lblStudentGuardianName.TabIndex = 15
+        Me.lblStudentGuardianName.Text = "Guardian Name"
         '
         'txtbxStudentReligion
         '
         Me.txtbxStudentReligion.Location = New System.Drawing.Point(292, 129)
+        Me.txtbxStudentReligion.MaxLength = 20
         Me.txtbxStudentReligion.Name = "txtbxStudentReligion"
         Me.txtbxStudentReligion.Size = New System.Drawing.Size(190, 23)
         Me.txtbxStudentReligion.TabIndex = 14
@@ -688,8 +697,8 @@ Partial Class AdminManageStudents
     Friend WithEvents Label11 As Label
     Friend WithEvents lblStudentGender As Label
     Friend WithEvents lblStudentAge As Label
-    Friend WithEvents txtbxStudentParentName As TextBox
-    Friend WithEvents lblStudentParentName As Label
+    Friend WithEvents txtbxGuardianName As TextBox
+    Friend WithEvents lblStudentGuardianName As Label
     Friend WithEvents txtbxStudentReligion As TextBox
     Friend WithEvents lblStudentReligion As Label
     Friend WithEvents txtbxStudentEnrollmentID As TextBox

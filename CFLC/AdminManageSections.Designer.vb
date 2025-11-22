@@ -37,6 +37,8 @@ Partial Class AdminManageSections
         Me.btnAdd = New System.Windows.Forms.Button()
         Me.dgvSections = New System.Windows.Forms.DataGridView()
         Me.grpSectionInfo = New System.Windows.Forms.GroupBox()
+        Me.cmbManSecLearningMode = New System.Windows.Forms.ComboBox()
+        Me.cmbManSecClassType = New System.Windows.Forms.ComboBox()
         Me.lblManSecLearningMode = New System.Windows.Forms.Label()
         Me.lblManSecClassType = New System.Windows.Forms.Label()
         Me.dtpManSecDateCreated = New System.Windows.Forms.DateTimePicker()
@@ -70,8 +72,6 @@ Partial Class AdminManageSections
         Me.lblSectionsList = New System.Windows.Forms.Label()
         Me.btnSearch = New System.Windows.Forms.Button()
         Me.picWatermark = New System.Windows.Forms.PictureBox()
-        Me.cmbManSecClassType = New System.Windows.Forms.ComboBox()
-        Me.cmbManSecLearningMode = New System.Windows.Forms.ComboBox()
         Me.pnlSidebar.SuspendLayout()
         Me.flowButtons.SuspendLayout()
         Me.pnlManSecContent.SuspendLayout()
@@ -289,6 +289,22 @@ Partial Class AdminManageSections
         Me.grpSectionInfo.TabStop = False
         Me.grpSectionInfo.Text = "Section Information"
         '
+        'cmbManSecLearningMode
+        '
+        Me.cmbManSecLearningMode.FormattingEnabled = True
+        Me.cmbManSecLearningMode.Location = New System.Drawing.Point(55, 260)
+        Me.cmbManSecLearningMode.Name = "cmbManSecLearningMode"
+        Me.cmbManSecLearningMode.Size = New System.Drawing.Size(154, 24)
+        Me.cmbManSecLearningMode.TabIndex = 34
+        '
+        'cmbManSecClassType
+        '
+        Me.cmbManSecClassType.FormattingEnabled = True
+        Me.cmbManSecClassType.Location = New System.Drawing.Point(55, 197)
+        Me.cmbManSecClassType.Name = "cmbManSecClassType"
+        Me.cmbManSecClassType.Size = New System.Drawing.Size(154, 24)
+        Me.cmbManSecClassType.TabIndex = 33
+        '
         'lblManSecLearningMode
         '
         Me.lblManSecLearningMode.AutoSize = True
@@ -323,9 +339,10 @@ Partial Class AdminManageSections
         '
         'dtpManSecEndDate
         '
-        Me.dtpManSecEndDate.Location = New System.Drawing.Point(654, 86)
+        Me.dtpManSecEndDate.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
+        Me.dtpManSecEndDate.Location = New System.Drawing.Point(674, 86)
         Me.dtpManSecEndDate.Name = "dtpManSecEndDate"
-        Me.dtpManSecEndDate.Size = New System.Drawing.Size(232, 23)
+        Me.dtpManSecEndDate.Size = New System.Drawing.Size(102, 23)
         Me.dtpManSecEndDate.TabIndex = 29
         '
         'lblManSecDateCreated
@@ -349,6 +366,7 @@ Partial Class AdminManageSections
         'txtbxManSecCreatedBy
         '
         Me.txtbxManSecCreatedBy.Location = New System.Drawing.Point(394, 277)
+        Me.txtbxManSecCreatedBy.MaxLength = 50
         Me.txtbxManSecCreatedBy.Name = "txtbxManSecCreatedBy"
         Me.txtbxManSecCreatedBy.Size = New System.Drawing.Size(180, 23)
         Me.txtbxManSecCreatedBy.TabIndex = 1
@@ -364,9 +382,10 @@ Partial Class AdminManageSections
         '
         'dtpManSecStartDate
         '
-        Me.dtpManSecStartDate.Location = New System.Drawing.Point(654, 39)
+        Me.dtpManSecStartDate.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
+        Me.dtpManSecStartDate.Location = New System.Drawing.Point(674, 39)
         Me.dtpManSecStartDate.Name = "dtpManSecStartDate"
-        Me.dtpManSecStartDate.Size = New System.Drawing.Size(232, 23)
+        Me.dtpManSecStartDate.Size = New System.Drawing.Size(102, 23)
         Me.dtpManSecStartDate.TabIndex = 28
         '
         'nudManSecGradeLevel
@@ -567,22 +586,6 @@ Partial Class AdminManageSections
         Me.picWatermark.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
         Me.picWatermark.TabIndex = 5
         Me.picWatermark.TabStop = False
-        '
-        'cmbManSecClassType
-        '
-        Me.cmbManSecClassType.FormattingEnabled = True
-        Me.cmbManSecClassType.Location = New System.Drawing.Point(55, 197)
-        Me.cmbManSecClassType.Name = "cmbManSecClassType"
-        Me.cmbManSecClassType.Size = New System.Drawing.Size(154, 24)
-        Me.cmbManSecClassType.TabIndex = 33
-        '
-        'cmbManSecLearningMode
-        '
-        Me.cmbManSecLearningMode.FormattingEnabled = True
-        Me.cmbManSecLearningMode.Location = New System.Drawing.Point(55, 260)
-        Me.cmbManSecLearningMode.Name = "cmbManSecLearningMode"
-        Me.cmbManSecLearningMode.Size = New System.Drawing.Size(154, 24)
-        Me.cmbManSecLearningMode.TabIndex = 34
         '
         'AdminManageSections
         '
