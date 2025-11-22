@@ -51,7 +51,7 @@ Partial Class ManageEnrollmentForms
         Me.TextBoxEnrollmentGradeLvl = New System.Windows.Forms.TextBox()
         Me.TextEnrollmentGradeLvl = New System.Windows.Forms.Label()
         Me.lblTeacherList = New System.Windows.Forms.Label()
-        Me.btnEnrollDeletee = New System.Windows.Forms.Button()
+        Me.btnEnrollDelete = New System.Windows.Forms.Button()
         Me.btnEnrollUpdate = New System.Windows.Forms.Button()
         Me.btnEnrollAdd = New System.Windows.Forms.Button()
         Me.btnEnrollSearch = New System.Windows.Forms.Button()
@@ -68,7 +68,7 @@ Partial Class ManageEnrollmentForms
         Me.pnlContent.Controls.Add(Me.dgvEnrollment)
         Me.pnlContent.Controls.Add(Me.Panel1)
         Me.pnlContent.Controls.Add(Me.lblTeacherList)
-        Me.pnlContent.Controls.Add(Me.btnEnrollDeletee)
+        Me.pnlContent.Controls.Add(Me.btnEnrollDelete)
         Me.pnlContent.Controls.Add(Me.btnEnrollUpdate)
         Me.pnlContent.Controls.Add(Me.btnEnrollAdd)
         Me.pnlContent.Controls.Add(Me.btnEnrollSearch)
@@ -377,16 +377,16 @@ Partial Class ManageEnrollmentForms
         Me.lblTeacherList.TabIndex = 24
         Me.lblTeacherList.Text = "Enrollment List"
         '
-        'btnEnrollDeletee
+        'btnEnrollDelete
         '
-        Me.btnEnrollDeletee.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnEnrollDeletee.Location = New System.Drawing.Point(1558, 676)
-        Me.btnEnrollDeletee.Margin = New System.Windows.Forms.Padding(4)
-        Me.btnEnrollDeletee.Name = "btnEnrollDeletee"
-        Me.btnEnrollDeletee.Size = New System.Drawing.Size(115, 43)
-        Me.btnEnrollDeletee.TabIndex = 27
-        Me.btnEnrollDeletee.Text = "Delete"
-        Me.btnEnrollDeletee.UseVisualStyleBackColor = True
+        Me.btnEnrollDelete.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnEnrollDelete.Location = New System.Drawing.Point(1558, 676)
+        Me.btnEnrollDelete.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnEnrollDelete.Name = "btnEnrollDelete"
+        Me.btnEnrollDelete.Size = New System.Drawing.Size(115, 43)
+        Me.btnEnrollDelete.TabIndex = 27
+        Me.btnEnrollDelete.Text = "Delete"
+        Me.btnEnrollDelete.UseVisualStyleBackColor = True
         '
         'btnEnrollUpdate
         '
@@ -452,7 +452,7 @@ Partial Class ManageEnrollmentForms
 
     Friend WithEvents pnlContent As Panel
     Friend WithEvents lblTeacherList As Label
-    Friend WithEvents btnEnrollDeletee As Button
+    Friend WithEvents btnEnrollDelete As Button
     Friend WithEvents btnEnrollUpdate As Button
     Friend WithEvents btnEnrollAdd As Button
     Friend WithEvents btnEnrollSearch As Button
