@@ -68,6 +68,25 @@ Partial Class AdminManageTeacher
         Me.TeacherFirstName = New System.Windows.Forms.Label()
         Me.btnTeaSearch = New System.Windows.Forms.Button()
         Me.picWatermark = New System.Windows.Forms.PictureBox()
+        Me.TeacherID = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.TFirstName = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.TMiddleName = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.TLastName = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.TGender = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.TBirthDate = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.TContactNumber = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.TEmail = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.THouseNumber = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.TBarangay = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.TMunicipality = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.TProvince = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.TCountry = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.TZipcode = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.TEducationalAttainment = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.TSpecialization = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.THireDate = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.TStatus = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.TSectionID = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.pnlContent.SuspendLayout()
         CType(Me.dgvTeacher, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TextBoxProvince.SuspendLayout()
@@ -116,15 +135,21 @@ Partial Class AdminManageTeacher
         '
         'dgvTeacher
         '
+        Me.dgvTeacher.AllowUserToAddRows = False
+        Me.dgvTeacher.AllowUserToDeleteRows = False
         Me.dgvTeacher.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.dgvTeacher.BackgroundColor = System.Drawing.Color.WhiteSmoke
+        Me.dgvTeacher.BackgroundColor = System.Drawing.Color.White
         Me.dgvTeacher.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dgvTeacher.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.TeacherID, Me.TFirstName, Me.TMiddleName, Me.TLastName, Me.TGender, Me.TBirthDate, Me.TContactNumber, Me.TEmail, Me.THouseNumber, Me.TBarangay, Me.TMunicipality, Me.TProvince, Me.TCountry, Me.TZipcode, Me.TEducationalAttainment, Me.TSpecialization, Me.THireDate, Me.TStatus, Me.TSectionID})
         Me.dgvTeacher.Location = New System.Drawing.Point(64, 488)
         Me.dgvTeacher.Name = "dgvTeacher"
+        Me.dgvTeacher.ReadOnly = True
+        Me.dgvTeacher.RowHeadersVisible = False
         Me.dgvTeacher.RowHeadersWidth = 51
         Me.dgvTeacher.RowTemplate.Height = 24
+        Me.dgvTeacher.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.dgvTeacher.Size = New System.Drawing.Size(1627, 183)
         Me.dgvTeacher.TabIndex = 24
         '
@@ -585,6 +610,176 @@ Partial Class AdminManageTeacher
         Me.picWatermark.TabIndex = 22
         Me.picWatermark.TabStop = False
         '
+        'TeacherID
+        '
+        Me.TeacherID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.TeacherID.HeaderText = "Teacher ID"
+        Me.TeacherID.MinimumWidth = 6
+        Me.TeacherID.Name = "TeacherID"
+        Me.TeacherID.ReadOnly = True
+        Me.TeacherID.Width = 103
+        '
+        'TFirstName
+        '
+        Me.TFirstName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.TFirstName.HeaderText = "First Name"
+        Me.TFirstName.MinimumWidth = 6
+        Me.TFirstName.Name = "TFirstName"
+        Me.TFirstName.ReadOnly = True
+        Me.TFirstName.Width = 101
+        '
+        'TMiddleName
+        '
+        Me.TMiddleName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.TMiddleName.HeaderText = "Middle Name"
+        Me.TMiddleName.MinimumWidth = 6
+        Me.TMiddleName.Name = "TMiddleName"
+        Me.TMiddleName.ReadOnly = True
+        Me.TMiddleName.Width = 117
+        '
+        'TLastName
+        '
+        Me.TLastName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.TLastName.HeaderText = "Last Name"
+        Me.TLastName.MinimumWidth = 6
+        Me.TLastName.Name = "TLastName"
+        Me.TLastName.ReadOnly = True
+        Me.TLastName.Width = 101
+        '
+        'TGender
+        '
+        Me.TGender.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.TGender.HeaderText = "Gender"
+        Me.TGender.MinimumWidth = 6
+        Me.TGender.Name = "TGender"
+        Me.TGender.ReadOnly = True
+        Me.TGender.Width = 81
+        '
+        'TBirthDate
+        '
+        Me.TBirthDate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.TBirthDate.HeaderText = "Birth Date"
+        Me.TBirthDate.MinimumWidth = 6
+        Me.TBirthDate.Name = "TBirthDate"
+        Me.TBirthDate.ReadOnly = True
+        Me.TBirthDate.Width = 94
+        '
+        'TContactNumber
+        '
+        Me.TContactNumber.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.TContactNumber.HeaderText = "Contact No"
+        Me.TContactNumber.MinimumWidth = 6
+        Me.TContactNumber.Name = "TContactNumber"
+        Me.TContactNumber.ReadOnly = True
+        Me.TContactNumber.Width = 102
+        '
+        'TEmail
+        '
+        Me.TEmail.HeaderText = "Email"
+        Me.TEmail.MinimumWidth = 6
+        Me.TEmail.Name = "TEmail"
+        Me.TEmail.ReadOnly = True
+        Me.TEmail.Width = 125
+        '
+        'THouseNumber
+        '
+        Me.THouseNumber.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.THouseNumber.HeaderText = "House Number"
+        Me.THouseNumber.MinimumWidth = 6
+        Me.THouseNumber.Name = "THouseNumber"
+        Me.THouseNumber.ReadOnly = True
+        Me.THouseNumber.Width = 117
+        '
+        'TBarangay
+        '
+        Me.TBarangay.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.TBarangay.HeaderText = "Barangay"
+        Me.TBarangay.MinimumWidth = 6
+        Me.TBarangay.Name = "TBarangay"
+        Me.TBarangay.ReadOnly = True
+        Me.TBarangay.Width = 95
+        '
+        'TMunicipality
+        '
+        Me.TMunicipality.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.TMunicipality.HeaderText = "Municipality"
+        Me.TMunicipality.MinimumWidth = 6
+        Me.TMunicipality.Name = "TMunicipality"
+        Me.TMunicipality.ReadOnly = True
+        Me.TMunicipality.Width = 106
+        '
+        'TProvince
+        '
+        Me.TProvince.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.TProvince.HeaderText = "Province"
+        Me.TProvince.MinimumWidth = 6
+        Me.TProvince.Name = "TProvince"
+        Me.TProvince.ReadOnly = True
+        Me.TProvince.Width = 89
+        '
+        'TCountry
+        '
+        Me.TCountry.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.TCountry.HeaderText = "Country"
+        Me.TCountry.MinimumWidth = 6
+        Me.TCountry.Name = "TCountry"
+        Me.TCountry.ReadOnly = True
+        Me.TCountry.Width = 81
+        '
+        'TZipcode
+        '
+        Me.TZipcode.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.TZipcode.HeaderText = "Zipcode"
+        Me.TZipcode.MinimumWidth = 6
+        Me.TZipcode.Name = "TZipcode"
+        Me.TZipcode.ReadOnly = True
+        Me.TZipcode.Width = 86
+        '
+        'TEducationalAttainment
+        '
+        Me.TEducationalAttainment.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.TEducationalAttainment.HeaderText = "Educational Attainment"
+        Me.TEducationalAttainment.MinimumWidth = 6
+        Me.TEducationalAttainment.Name = "TEducationalAttainment"
+        Me.TEducationalAttainment.ReadOnly = True
+        Me.TEducationalAttainment.Width = 157
+        '
+        'TSpecialization
+        '
+        Me.TSpecialization.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.TSpecialization.HeaderText = "Specialization"
+        Me.TSpecialization.MinimumWidth = 6
+        Me.TSpecialization.Name = "TSpecialization"
+        Me.TSpecialization.ReadOnly = True
+        Me.TSpecialization.Width = 120
+        '
+        'THireDate
+        '
+        Me.THireDate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.THireDate.HeaderText = "Hire Date"
+        Me.THireDate.MinimumWidth = 6
+        Me.THireDate.Name = "THireDate"
+        Me.THireDate.ReadOnly = True
+        Me.THireDate.Width = 86
+        '
+        'TStatus
+        '
+        Me.TStatus.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.TStatus.HeaderText = "Status"
+        Me.TStatus.MinimumWidth = 6
+        Me.TStatus.Name = "TStatus"
+        Me.TStatus.ReadOnly = True
+        Me.TStatus.Width = 73
+        '
+        'TSectionID
+        '
+        Me.TSectionID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.TSectionID.HeaderText = "Section ID"
+        Me.TSectionID.MinimumWidth = 6
+        Me.TSectionID.Name = "TSectionID"
+        Me.TSectionID.ReadOnly = True
+        Me.TSectionID.Width = 90
+        '
         'AdminManageTeacher
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
@@ -650,4 +845,23 @@ Partial Class AdminManageTeacher
     Friend WithEvents ManageTeacherHireDate As DateTimePicker
     Friend WithEvents DateTimePicker1 As DateTimePicker
     Friend WithEvents Label1 As Label
+    Friend WithEvents TeacherID As DataGridViewTextBoxColumn
+    Friend WithEvents TFirstName As DataGridViewTextBoxColumn
+    Friend WithEvents TMiddleName As DataGridViewTextBoxColumn
+    Friend WithEvents TLastName As DataGridViewTextBoxColumn
+    Friend WithEvents TGender As DataGridViewTextBoxColumn
+    Friend WithEvents TBirthDate As DataGridViewTextBoxColumn
+    Friend WithEvents TContactNumber As DataGridViewTextBoxColumn
+    Friend WithEvents TEmail As DataGridViewTextBoxColumn
+    Friend WithEvents THouseNumber As DataGridViewTextBoxColumn
+    Friend WithEvents TBarangay As DataGridViewTextBoxColumn
+    Friend WithEvents TMunicipality As DataGridViewTextBoxColumn
+    Friend WithEvents TProvince As DataGridViewTextBoxColumn
+    Friend WithEvents TCountry As DataGridViewTextBoxColumn
+    Friend WithEvents TZipcode As DataGridViewTextBoxColumn
+    Friend WithEvents TEducationalAttainment As DataGridViewTextBoxColumn
+    Friend WithEvents TSpecialization As DataGridViewTextBoxColumn
+    Friend WithEvents THireDate As DataGridViewTextBoxColumn
+    Friend WithEvents TStatus As DataGridViewTextBoxColumn
+    Friend WithEvents TSectionID As DataGridViewTextBoxColumn
 End Class
