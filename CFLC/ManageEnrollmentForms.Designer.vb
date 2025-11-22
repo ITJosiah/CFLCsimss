@@ -25,6 +25,9 @@ Partial Class ManageEnrollmentForms
         Me.pnlContent = New System.Windows.Forms.Panel()
         Me.dgvEnrollment = New System.Windows.Forms.DataGridView()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
+        Me.TextBoxEnrollmentTotalFees = New System.Windows.Forms.TextBox()
+        Me.TextBoxEnrollmentRelationship = New System.Windows.Forms.TextBox()
         Me.ComboBoxEnrollmentStatus = New System.Windows.Forms.ComboBox()
         Me.TextBoxStatus = New System.Windows.Forms.TextBox()
         Me.TextEnrollmentStatus = New System.Windows.Forms.Label()
@@ -61,9 +64,6 @@ Partial Class ManageEnrollmentForms
         Me.btnAdd = New System.Windows.Forms.Button()
         Me.btnSearch = New System.Windows.Forms.Button()
         Me.picWatermark = New System.Windows.Forms.PictureBox()
-        Me.TextBoxEnrollmentRelationship = New System.Windows.Forms.TextBox()
-        Me.TextBoxEnrollmentTotalFees = New System.Windows.Forms.TextBox()
-        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
         Me.pnlContent.SuspendLayout()
         CType(Me.dgvEnrollment, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
@@ -144,6 +144,32 @@ Partial Class ManageEnrollmentForms
         Me.Panel1.Padding = New System.Windows.Forms.Padding(3)
         Me.Panel1.Size = New System.Drawing.Size(1627, 355)
         Me.Panel1.TabIndex = 28
+        '
+        'ComboBox1
+        '
+        Me.ComboBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ComboBox1.FormattingEnabled = True
+        Me.ComboBox1.Items.AddRange(New Object() {"Paid", "Unpaid"})
+        Me.ComboBox1.Location = New System.Drawing.Point(972, 43)
+        Me.ComboBox1.Name = "ComboBox1"
+        Me.ComboBox1.Size = New System.Drawing.Size(118, 28)
+        Me.ComboBox1.TabIndex = 46
+        '
+        'TextBoxEnrollmentTotalFees
+        '
+        Me.TextBoxEnrollmentTotalFees.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBoxEnrollmentTotalFees.Location = New System.Drawing.Point(1362, 45)
+        Me.TextBoxEnrollmentTotalFees.Name = "TextBoxEnrollmentTotalFees"
+        Me.TextBoxEnrollmentTotalFees.Size = New System.Drawing.Size(207, 26)
+        Me.TextBoxEnrollmentTotalFees.TabIndex = 45
+        '
+        'TextBoxEnrollmentRelationship
+        '
+        Me.TextBoxEnrollmentRelationship.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBoxEnrollmentRelationship.Location = New System.Drawing.Point(972, 136)
+        Me.TextBoxEnrollmentRelationship.Name = "TextBoxEnrollmentRelationship"
+        Me.TextBoxEnrollmentRelationship.Size = New System.Drawing.Size(207, 26)
+        Me.TextBoxEnrollmentRelationship.TabIndex = 44
         '
         'ComboBoxEnrollmentStatus
         '
@@ -495,32 +521,6 @@ Partial Class ManageEnrollmentForms
         Me.picWatermark.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
         Me.picWatermark.TabIndex = 22
         Me.picWatermark.TabStop = False
-        '
-        'TextBoxEnrollmentRelationship
-        '
-        Me.TextBoxEnrollmentRelationship.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBoxEnrollmentRelationship.Location = New System.Drawing.Point(972, 136)
-        Me.TextBoxEnrollmentRelationship.Name = "TextBoxEnrollmentRelationship"
-        Me.TextBoxEnrollmentRelationship.Size = New System.Drawing.Size(207, 26)
-        Me.TextBoxEnrollmentRelationship.TabIndex = 44
-        '
-        'TextBoxEnrollmentTotalFees
-        '
-        Me.TextBoxEnrollmentTotalFees.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBoxEnrollmentTotalFees.Location = New System.Drawing.Point(1362, 45)
-        Me.TextBoxEnrollmentTotalFees.Name = "TextBoxEnrollmentTotalFees"
-        Me.TextBoxEnrollmentTotalFees.Size = New System.Drawing.Size(207, 26)
-        Me.TextBoxEnrollmentTotalFees.TabIndex = 45
-        '
-        'ComboBox1
-        '
-        Me.ComboBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ComboBox1.FormattingEnabled = True
-        Me.ComboBox1.Items.AddRange(New Object() {"Paid", "Unpaid"})
-        Me.ComboBox1.Location = New System.Drawing.Point(972, 43)
-        Me.ComboBox1.Name = "ComboBox1"
-        Me.ComboBox1.Size = New System.Drawing.Size(118, 28)
-        Me.ComboBox1.TabIndex = 46
         '
         'ManageEnrollmentForms
         '

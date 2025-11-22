@@ -49,8 +49,7 @@ Partial Class AdminManageTeacher
         Me.Label14 = New System.Windows.Forms.Label()
         Me.ComboBoxTeacherGender = New System.Windows.Forms.ComboBox()
         Me.TeacherGender = New System.Windows.Forms.Label()
-        Me.TextBoxTeacherassignedSection = New System.Windows.Forms.TextBox()
-        Me.TeacherAssignedSection = New System.Windows.Forms.Label()
+        Me.TeacherBirthDate = New System.Windows.Forms.Label()
         Me.TeacherStatus = New System.Windows.Forms.Label()
         Me.TeacherHireDate = New System.Windows.Forms.Label()
         Me.TextBoxTeacherSpecialization = New System.Windows.Forms.TextBox()
@@ -61,8 +60,6 @@ Partial Class AdminManageTeacher
         Me.TeacherContactNo = New System.Windows.Forms.Label()
         Me.TextBoxTeacherEmail = New System.Windows.Forms.TextBox()
         Me.TeacherEmail = New System.Windows.Forms.Label()
-        Me.TextBoxTeacherEmployeeNo = New System.Windows.Forms.TextBox()
-        Me.TeacherEmployeeNo = New System.Windows.Forms.Label()
         Me.TextBoxTeacherSurname = New System.Windows.Forms.TextBox()
         Me.TeacherSurname = New System.Windows.Forms.Label()
         Me.TextBoxTeacherMiddleName = New System.Windows.Forms.TextBox()
@@ -71,6 +68,8 @@ Partial Class AdminManageTeacher
         Me.TeacherFirstName = New System.Windows.Forms.Label()
         Me.btnSearch = New System.Windows.Forms.Button()
         Me.picWatermark = New System.Windows.Forms.PictureBox()
+        Me.DateTimePicker1 = New System.Windows.Forms.DateTimePicker()
+        Me.Label1 = New System.Windows.Forms.Label()
         Me.pnlContent.SuspendLayout()
         CType(Me.dgvTeacher, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TextBoxProvince.SuspendLayout()
@@ -123,11 +122,11 @@ Partial Class AdminManageTeacher
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.dgvTeacher.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvTeacher.Location = New System.Drawing.Point(64, 492)
+        Me.dgvTeacher.Location = New System.Drawing.Point(64, 648)
         Me.dgvTeacher.Name = "dgvTeacher"
         Me.dgvTeacher.RowHeadersWidth = 51
         Me.dgvTeacher.RowTemplate.Height = 24
-        Me.dgvTeacher.Size = New System.Drawing.Size(1627, 196)
+        Me.dgvTeacher.Size = New System.Drawing.Size(1627, 40)
         Me.dgvTeacher.TabIndex = 24
         '
         'btnUpdate
@@ -157,15 +156,21 @@ Partial Class AdminManageTeacher
         Me.TextBoxProvince.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.TextBoxProvince.BackColor = System.Drawing.Color.Gainsboro
+        Me.TextBoxProvince.Controls.Add(Me.Label1)
+        Me.TextBoxProvince.Controls.Add(Me.DateTimePicker1)
         Me.TextBoxProvince.Controls.Add(Me.ComboBoxTeacherStatus)
         Me.TextBoxProvince.Controls.Add(Me.ManageTeacherHireDate)
         Me.TextBoxProvince.Controls.Add(Me.txtbxTeacherZipCode)
         Me.TextBoxProvince.Controls.Add(Me.lblTeacherZIP)
         Me.TextBoxProvince.Controls.Add(Me.txtbxTeacherProvince)
         Me.TextBoxProvince.Controls.Add(Me.lblTeacherProvince)
+        Me.TextBoxProvince.Controls.Add(Me.TeacherEmail)
         Me.TextBoxProvince.Controls.Add(Me.txtbxTeacherBarangay)
+        Me.TextBoxProvince.Controls.Add(Me.TextBoxTeacherEmail)
         Me.TextBoxProvince.Controls.Add(Me.lblTeacherBarangay)
+        Me.TextBoxProvince.Controls.Add(Me.TeacherContactNo)
         Me.TextBoxProvince.Controls.Add(Me.txtbxTeacherCountry)
+        Me.TextBoxProvince.Controls.Add(Me.TextBoxTeacherContactNo)
         Me.TextBoxProvince.Controls.Add(Me.lblTeacherCountry)
         Me.TextBoxProvince.Controls.Add(Me.txtbxTeacherCity)
         Me.TextBoxProvince.Controls.Add(Me.lblTeacherCity)
@@ -177,20 +182,13 @@ Partial Class AdminManageTeacher
         Me.TextBoxProvince.Controls.Add(Me.Label14)
         Me.TextBoxProvince.Controls.Add(Me.ComboBoxTeacherGender)
         Me.TextBoxProvince.Controls.Add(Me.TeacherGender)
-        Me.TextBoxProvince.Controls.Add(Me.TextBoxTeacherassignedSection)
-        Me.TextBoxProvince.Controls.Add(Me.TeacherAssignedSection)
+        Me.TextBoxProvince.Controls.Add(Me.TeacherBirthDate)
         Me.TextBoxProvince.Controls.Add(Me.TeacherStatus)
         Me.TextBoxProvince.Controls.Add(Me.TeacherHireDate)
         Me.TextBoxProvince.Controls.Add(Me.TextBoxTeacherSpecialization)
         Me.TextBoxProvince.Controls.Add(Me.TeacherSpecialization)
         Me.TextBoxProvince.Controls.Add(Me.TextBoxTeacherEducationalAttainment)
         Me.TextBoxProvince.Controls.Add(Me.TeacherEducationalAttainment)
-        Me.TextBoxProvince.Controls.Add(Me.TextBoxTeacherContactNo)
-        Me.TextBoxProvince.Controls.Add(Me.TeacherContactNo)
-        Me.TextBoxProvince.Controls.Add(Me.TextBoxTeacherEmail)
-        Me.TextBoxProvince.Controls.Add(Me.TeacherEmail)
-        Me.TextBoxProvince.Controls.Add(Me.TextBoxTeacherEmployeeNo)
-        Me.TextBoxProvince.Controls.Add(Me.TeacherEmployeeNo)
         Me.TextBoxProvince.Controls.Add(Me.TextBoxTeacherSurname)
         Me.TextBoxProvince.Controls.Add(Me.TeacherSurname)
         Me.TextBoxProvince.Controls.Add(Me.TextBoxTeacherMiddleName)
@@ -200,7 +198,7 @@ Partial Class AdminManageTeacher
         Me.TextBoxProvince.Location = New System.Drawing.Point(64, 89)
         Me.TextBoxProvince.Name = "TextBoxProvince"
         Me.TextBoxProvince.Padding = New System.Windows.Forms.Padding(3)
-        Me.TextBoxProvince.Size = New System.Drawing.Size(1627, 355)
+        Me.TextBoxProvince.Size = New System.Drawing.Size(1627, 384)
         Me.TextBoxProvince.TabIndex = 23
         '
         'ComboBoxTeacherStatus
@@ -208,22 +206,23 @@ Partial Class AdminManageTeacher
         Me.ComboBoxTeacherStatus.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ComboBoxTeacherStatus.FormattingEnabled = True
         Me.ComboBoxTeacherStatus.Items.AddRange(New Object() {"Male", "Female"})
-        Me.ComboBoxTeacherStatus.Location = New System.Drawing.Point(1362, 84)
+        Me.ComboBoxTeacherStatus.Location = New System.Drawing.Point(1013, 94)
         Me.ComboBoxTeacherStatus.Name = "ComboBoxTeacherStatus"
         Me.ComboBoxTeacherStatus.Size = New System.Drawing.Size(110, 28)
         Me.ComboBoxTeacherStatus.TabIndex = 43
         '
         'ManageTeacherHireDate
         '
-        Me.ManageTeacherHireDate.Location = New System.Drawing.Point(972, 136)
+        Me.ManageTeacherHireDate.CalendarFont = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ManageTeacherHireDate.Location = New System.Drawing.Point(713, 160)
         Me.ManageTeacherHireDate.Name = "ManageTeacherHireDate"
-        Me.ManageTeacherHireDate.Size = New System.Drawing.Size(200, 22)
+        Me.ManageTeacherHireDate.Size = New System.Drawing.Size(242, 22)
         Me.ManageTeacherHireDate.TabIndex = 42
         '
         'txtbxTeacherZipCode
         '
         Me.txtbxTeacherZipCode.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtbxTeacherZipCode.Location = New System.Drawing.Point(878, 207)
+        Me.txtbxTeacherZipCode.Location = New System.Drawing.Point(716, 247)
         Me.txtbxTeacherZipCode.Margin = New System.Windows.Forms.Padding(4)
         Me.txtbxTeacherZipCode.Name = "txtbxTeacherZipCode"
         Me.txtbxTeacherZipCode.Size = New System.Drawing.Size(239, 26)
@@ -233,7 +232,7 @@ Partial Class AdminManageTeacher
         '
         Me.lblTeacherZIP.AutoSize = True
         Me.lblTeacherZIP.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblTeacherZIP.Location = New System.Drawing.Point(874, 182)
+        Me.lblTeacherZIP.Location = New System.Drawing.Point(712, 220)
         Me.lblTeacherZIP.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblTeacherZIP.Name = "lblTeacherZIP"
         Me.lblTeacherZIP.Size = New System.Drawing.Size(75, 20)
@@ -243,17 +242,17 @@ Partial Class AdminManageTeacher
         'txtbxTeacherProvince
         '
         Me.txtbxTeacherProvince.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtbxTeacherProvince.Location = New System.Drawing.Point(490, 265)
+        Me.txtbxTeacherProvince.Location = New System.Drawing.Point(410, 305)
         Me.txtbxTeacherProvince.Margin = New System.Windows.Forms.Padding(4)
         Me.txtbxTeacherProvince.Name = "txtbxTeacherProvince"
-        Me.txtbxTeacherProvince.Size = New System.Drawing.Size(305, 26)
+        Me.txtbxTeacherProvince.Size = New System.Drawing.Size(231, 26)
         Me.txtbxTeacherProvince.TabIndex = 39
         '
         'lblTeacherProvince
         '
         Me.lblTeacherProvince.AutoSize = True
         Me.lblTeacherProvince.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblTeacherProvince.Location = New System.Drawing.Point(486, 240)
+        Me.lblTeacherProvince.Location = New System.Drawing.Point(406, 278)
         Me.lblTeacherProvince.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblTeacherProvince.Name = "lblTeacherProvince"
         Me.lblTeacherProvince.Size = New System.Drawing.Size(74, 20)
@@ -263,17 +262,17 @@ Partial Class AdminManageTeacher
         'txtbxTeacherBarangay
         '
         Me.txtbxTeacherBarangay.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtbxTeacherBarangay.Location = New System.Drawing.Point(1203, 208)
+        Me.txtbxTeacherBarangay.Location = New System.Drawing.Point(1015, 247)
         Me.txtbxTeacherBarangay.Margin = New System.Windows.Forms.Padding(4)
         Me.txtbxTeacherBarangay.Name = "txtbxTeacherBarangay"
-        Me.txtbxTeacherBarangay.Size = New System.Drawing.Size(305, 26)
+        Me.txtbxTeacherBarangay.Size = New System.Drawing.Size(255, 26)
         Me.txtbxTeacherBarangay.TabIndex = 37
         '
         'lblTeacherBarangay
         '
         Me.lblTeacherBarangay.AutoSize = True
         Me.lblTeacherBarangay.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblTeacherBarangay.Location = New System.Drawing.Point(1199, 184)
+        Me.lblTeacherBarangay.Location = New System.Drawing.Point(1011, 221)
         Me.lblTeacherBarangay.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblTeacherBarangay.Name = "lblTeacherBarangay"
         Me.lblTeacherBarangay.Size = New System.Drawing.Size(80, 20)
@@ -283,17 +282,17 @@ Partial Class AdminManageTeacher
         'txtbxTeacherCountry
         '
         Me.txtbxTeacherCountry.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtbxTeacherCountry.Location = New System.Drawing.Point(872, 265)
+        Me.txtbxTeacherCountry.Location = New System.Drawing.Point(718, 305)
         Me.txtbxTeacherCountry.Margin = New System.Windows.Forms.Padding(4)
         Me.txtbxTeacherCountry.Name = "txtbxTeacherCountry"
-        Me.txtbxTeacherCountry.Size = New System.Drawing.Size(305, 26)
+        Me.txtbxTeacherCountry.Size = New System.Drawing.Size(237, 26)
         Me.txtbxTeacherCountry.TabIndex = 35
         '
         'lblTeacherCountry
         '
         Me.lblTeacherCountry.AutoSize = True
         Me.lblTeacherCountry.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblTeacherCountry.Location = New System.Drawing.Point(869, 241)
+        Me.lblTeacherCountry.Location = New System.Drawing.Point(707, 279)
         Me.lblTeacherCountry.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblTeacherCountry.Name = "lblTeacherCountry"
         Me.lblTeacherCountry.Size = New System.Drawing.Size(67, 20)
@@ -303,17 +302,17 @@ Partial Class AdminManageTeacher
         'txtbxTeacherCity
         '
         Me.txtbxTeacherCity.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtbxTeacherCity.Location = New System.Drawing.Point(491, 207)
+        Me.txtbxTeacherCity.Location = New System.Drawing.Point(411, 247)
         Me.txtbxTeacherCity.Margin = New System.Windows.Forms.Padding(4)
         Me.txtbxTeacherCity.Name = "txtbxTeacherCity"
-        Me.txtbxTeacherCity.Size = New System.Drawing.Size(305, 26)
+        Me.txtbxTeacherCity.Size = New System.Drawing.Size(230, 26)
         Me.txtbxTeacherCity.TabIndex = 33
         '
         'lblTeacherCity
         '
         Me.lblTeacherCity.AutoSize = True
         Me.lblTeacherCity.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblTeacherCity.Location = New System.Drawing.Point(487, 183)
+        Me.lblTeacherCity.Location = New System.Drawing.Point(407, 221)
         Me.lblTeacherCity.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblTeacherCity.Name = "lblTeacherCity"
         Me.lblTeacherCity.Size = New System.Drawing.Size(141, 20)
@@ -323,17 +322,17 @@ Partial Class AdminManageTeacher
         'txtbcTeacherStreet
         '
         Me.txtbcTeacherStreet.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtbcTeacherStreet.Location = New System.Drawing.Point(84, 261)
+        Me.txtbcTeacherStreet.Location = New System.Drawing.Point(84, 300)
         Me.txtbcTeacherStreet.Margin = New System.Windows.Forms.Padding(4)
         Me.txtbcTeacherStreet.Name = "txtbcTeacherStreet"
-        Me.txtbcTeacherStreet.Size = New System.Drawing.Size(305, 26)
+        Me.txtbcTeacherStreet.Size = New System.Drawing.Size(249, 26)
         Me.txtbcTeacherStreet.TabIndex = 31
         '
         'lblTeacherStreet
         '
         Me.lblTeacherStreet.AutoSize = True
         Me.lblTeacherStreet.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblTeacherStreet.Location = New System.Drawing.Point(80, 240)
+        Me.lblTeacherStreet.Location = New System.Drawing.Point(80, 279)
         Me.lblTeacherStreet.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblTeacherStreet.Name = "lblTeacherStreet"
         Me.lblTeacherStreet.Size = New System.Drawing.Size(54, 20)
@@ -343,17 +342,17 @@ Partial Class AdminManageTeacher
         'txtbxTeacherHouseNo
         '
         Me.txtbxTeacherHouseNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtbxTeacherHouseNo.Location = New System.Drawing.Point(84, 208)
+        Me.txtbxTeacherHouseNo.Location = New System.Drawing.Point(84, 247)
         Me.txtbxTeacherHouseNo.Margin = New System.Windows.Forms.Padding(4)
         Me.txtbxTeacherHouseNo.Name = "txtbxTeacherHouseNo"
-        Me.txtbxTeacherHouseNo.Size = New System.Drawing.Size(305, 26)
+        Me.txtbxTeacherHouseNo.Size = New System.Drawing.Size(249, 26)
         Me.txtbxTeacherHouseNo.TabIndex = 29
         '
         'lbTeacherHouseNumber
         '
         Me.lbTeacherHouseNumber.AutoSize = True
         Me.lbTeacherHouseNumber.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbTeacherHouseNumber.Location = New System.Drawing.Point(80, 183)
+        Me.lbTeacherHouseNumber.Location = New System.Drawing.Point(80, 222)
         Me.lbTeacherHouseNumber.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lbTeacherHouseNumber.Name = "lbTeacherHouseNumber"
         Me.lbTeacherHouseNumber.Size = New System.Drawing.Size(122, 20)
@@ -364,7 +363,7 @@ Partial Class AdminManageTeacher
         '
         Me.Label15.AutoSize = True
         Me.Label15.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label15.Location = New System.Drawing.Point(5, 164)
+        Me.Label15.Location = New System.Drawing.Point(5, 203)
         Me.Label15.Name = "Label15"
         Me.Label15.Size = New System.Drawing.Size(71, 20)
         Me.Label15.TabIndex = 27
@@ -385,7 +384,7 @@ Partial Class AdminManageTeacher
         Me.ComboBoxTeacherGender.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ComboBoxTeacherGender.FormattingEnabled = True
         Me.ComboBoxTeacherGender.Items.AddRange(New Object() {"Male", "Female"})
-        Me.ComboBoxTeacherGender.Location = New System.Drawing.Point(1362, 44)
+        Me.ComboBoxTeacherGender.Location = New System.Drawing.Point(410, 47)
         Me.ComboBoxTeacherGender.Name = "ComboBoxTeacherGender"
         Me.ComboBoxTeacherGender.Size = New System.Drawing.Size(110, 28)
         Me.ComboBoxTeacherGender.TabIndex = 25
@@ -394,35 +393,27 @@ Partial Class AdminManageTeacher
         '
         Me.TeacherGender.AutoSize = True
         Me.TeacherGender.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TeacherGender.Location = New System.Drawing.Point(1311, 24)
+        Me.TeacherGender.Location = New System.Drawing.Point(393, 25)
         Me.TeacherGender.Name = "TeacherGender"
         Me.TeacherGender.Size = New System.Drawing.Size(64, 20)
         Me.TeacherGender.TabIndex = 24
         Me.TeacherGender.Text = "Gender"
         '
-        'TextBoxTeacherassignedSection
+        'TeacherBirthDate
         '
-        Me.TextBoxTeacherassignedSection.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBoxTeacherassignedSection.Location = New System.Drawing.Point(1362, 137)
-        Me.TextBoxTeacherassignedSection.Name = "TextBoxTeacherassignedSection"
-        Me.TextBoxTeacherassignedSection.Size = New System.Drawing.Size(213, 26)
-        Me.TextBoxTeacherassignedSection.TabIndex = 23
-        '
-        'TeacherAssignedSection
-        '
-        Me.TeacherAssignedSection.AutoSize = True
-        Me.TeacherAssignedSection.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TeacherAssignedSection.Location = New System.Drawing.Point(1247, 115)
-        Me.TeacherAssignedSection.Name = "TeacherAssignedSection"
-        Me.TeacherAssignedSection.Size = New System.Drawing.Size(139, 20)
-        Me.TeacherAssignedSection.TabIndex = 22
-        Me.TeacherAssignedSection.Text = "Assigned Section"
+        Me.TeacherBirthDate.AutoSize = True
+        Me.TeacherBirthDate.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TeacherBirthDate.Location = New System.Drawing.Point(368, 80)
+        Me.TeacherBirthDate.Name = "TeacherBirthDate"
+        Me.TeacherBirthDate.Size = New System.Drawing.Size(86, 20)
+        Me.TeacherBirthDate.TabIndex = 22
+        Me.TeacherBirthDate.Text = "Birth Date"
         '
         'TeacherStatus
         '
         Me.TeacherStatus.AutoSize = True
         Me.TeacherStatus.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TeacherStatus.Location = New System.Drawing.Point(1311, 67)
+        Me.TeacherStatus.Location = New System.Drawing.Point(990, 74)
         Me.TeacherStatus.Name = "TeacherStatus"
         Me.TeacherStatus.Size = New System.Drawing.Size(57, 20)
         Me.TeacherStatus.TabIndex = 20
@@ -432,7 +423,7 @@ Partial Class AdminManageTeacher
         '
         Me.TeacherHireDate.AutoSize = True
         Me.TeacherHireDate.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TeacherHireDate.Location = New System.Drawing.Point(899, 111)
+        Me.TeacherHireDate.Location = New System.Drawing.Point(676, 134)
         Me.TeacherHireDate.Name = "TeacherHireDate"
         Me.TeacherHireDate.Size = New System.Drawing.Size(82, 20)
         Me.TeacherHireDate.TabIndex = 16
@@ -441,7 +432,7 @@ Partial Class AdminManageTeacher
         'TextBoxTeacherSpecialization
         '
         Me.TextBoxTeacherSpecialization.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBoxTeacherSpecialization.Location = New System.Drawing.Point(972, 86)
+        Me.TextBoxTeacherSpecialization.Location = New System.Drawing.Point(1013, 44)
         Me.TextBoxTeacherSpecialization.Name = "TextBoxTeacherSpecialization"
         Me.TextBoxTeacherSpecialization.Size = New System.Drawing.Size(207, 26)
         Me.TextBoxTeacherSpecialization.TabIndex = 15
@@ -450,7 +441,7 @@ Partial Class AdminManageTeacher
         '
         Me.TeacherSpecialization.AutoSize = True
         Me.TeacherSpecialization.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TeacherSpecialization.Location = New System.Drawing.Point(868, 63)
+        Me.TeacherSpecialization.Location = New System.Drawing.Point(962, 19)
         Me.TeacherSpecialization.Name = "TeacherSpecialization"
         Me.TeacherSpecialization.Size = New System.Drawing.Size(113, 20)
         Me.TeacherSpecialization.TabIndex = 14
@@ -459,16 +450,16 @@ Partial Class AdminManageTeacher
         'TextBoxTeacherEducationalAttainment
         '
         Me.TextBoxTeacherEducationalAttainment.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBoxTeacherEducationalAttainment.Location = New System.Drawing.Point(972, 40)
+        Me.TextBoxTeacherEducationalAttainment.Location = New System.Drawing.Point(713, 98)
         Me.TextBoxTeacherEducationalAttainment.Name = "TextBoxTeacherEducationalAttainment"
-        Me.TextBoxTeacherEducationalAttainment.Size = New System.Drawing.Size(207, 26)
+        Me.TextBoxTeacherEducationalAttainment.Size = New System.Drawing.Size(229, 26)
         Me.TextBoxTeacherEducationalAttainment.TabIndex = 13
         '
         'TeacherEducationalAttainment
         '
         Me.TeacherEducationalAttainment.AutoSize = True
         Me.TeacherEducationalAttainment.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TeacherEducationalAttainment.Location = New System.Drawing.Point(800, 17)
+        Me.TeacherEducationalAttainment.Location = New System.Drawing.Point(655, 75)
         Me.TeacherEducationalAttainment.Name = "TeacherEducationalAttainment"
         Me.TeacherEducationalAttainment.Size = New System.Drawing.Size(181, 20)
         Me.TeacherEducationalAttainment.TabIndex = 12
@@ -477,7 +468,7 @@ Partial Class AdminManageTeacher
         'TextBoxTeacherContactNo
         '
         Me.TextBoxTeacherContactNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBoxTeacherContactNo.Location = New System.Drawing.Point(491, 138)
+        Me.TextBoxTeacherContactNo.Location = New System.Drawing.Point(410, 156)
         Me.TextBoxTeacherContactNo.Name = "TextBoxTeacherContactNo"
         Me.TextBoxTeacherContactNo.Size = New System.Drawing.Size(233, 26)
         Me.TextBoxTeacherContactNo.TabIndex = 11
@@ -486,7 +477,7 @@ Partial Class AdminManageTeacher
         '
         Me.TeacherContactNo.AutoSize = True
         Me.TeacherContactNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TeacherContactNo.Location = New System.Drawing.Point(411, 116)
+        Me.TeacherContactNo.Location = New System.Drawing.Point(355, 132)
         Me.TeacherContactNo.Name = "TeacherContactNo"
         Me.TeacherContactNo.Size = New System.Drawing.Size(97, 20)
         Me.TeacherContactNo.TabIndex = 10
@@ -495,7 +486,7 @@ Partial Class AdminManageTeacher
         'TextBoxTeacherEmail
         '
         Me.TextBoxTeacherEmail.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBoxTeacherEmail.Location = New System.Drawing.Point(491, 91)
+        Me.TextBoxTeacherEmail.Location = New System.Drawing.Point(709, 44)
         Me.TextBoxTeacherEmail.Name = "TextBoxTeacherEmail"
         Me.TextBoxTeacherEmail.Size = New System.Drawing.Size(233, 26)
         Me.TextBoxTeacherEmail.TabIndex = 9
@@ -504,34 +495,16 @@ Partial Class AdminManageTeacher
         '
         Me.TeacherEmail.AutoSize = True
         Me.TeacherEmail.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TeacherEmail.Location = New System.Drawing.Point(457, 68)
+        Me.TeacherEmail.Location = New System.Drawing.Point(696, 19)
         Me.TeacherEmail.Name = "TeacherEmail"
         Me.TeacherEmail.Size = New System.Drawing.Size(51, 20)
         Me.TeacherEmail.TabIndex = 8
         Me.TeacherEmail.Text = "Email"
         '
-        'TextBoxTeacherEmployeeNo
-        '
-        Me.TextBoxTeacherEmployeeNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBoxTeacherEmployeeNo.Location = New System.Drawing.Point(491, 45)
-        Me.TextBoxTeacherEmployeeNo.Name = "TextBoxTeacherEmployeeNo"
-        Me.TextBoxTeacherEmployeeNo.Size = New System.Drawing.Size(233, 26)
-        Me.TextBoxTeacherEmployeeNo.TabIndex = 7
-        '
-        'TeacherEmployeeNo
-        '
-        Me.TeacherEmployeeNo.AutoSize = True
-        Me.TeacherEmployeeNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TeacherEmployeeNo.Location = New System.Drawing.Point(396, 25)
-        Me.TeacherEmployeeNo.Name = "TeacherEmployeeNo"
-        Me.TeacherEmployeeNo.Size = New System.Drawing.Size(112, 20)
-        Me.TeacherEmployeeNo.TabIndex = 6
-        Me.TeacherEmployeeNo.Text = "Employee No."
-        '
         'TextBoxTeacherSurname
         '
         Me.TextBoxTeacherSurname.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBoxTeacherSurname.Location = New System.Drawing.Point(82, 139)
+        Me.TextBoxTeacherSurname.Location = New System.Drawing.Point(92, 156)
         Me.TextBoxTeacherSurname.Name = "TextBoxTeacherSurname"
         Me.TextBoxTeacherSurname.Size = New System.Drawing.Size(241, 26)
         Me.TextBoxTeacherSurname.TabIndex = 5
@@ -540,7 +513,7 @@ Partial Class AdminManageTeacher
         '
         Me.TeacherSurname.AutoSize = True
         Me.TeacherSurname.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TeacherSurname.Location = New System.Drawing.Point(55, 117)
+        Me.TeacherSurname.Location = New System.Drawing.Point(65, 132)
         Me.TeacherSurname.Name = "TeacherSurname"
         Me.TeacherSurname.Size = New System.Drawing.Size(76, 20)
         Me.TeacherSurname.TabIndex = 4
@@ -549,7 +522,7 @@ Partial Class AdminManageTeacher
         'TextBoxTeacherMiddleName
         '
         Me.TextBoxTeacherMiddleName.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBoxTeacherMiddleName.Location = New System.Drawing.Point(84, 91)
+        Me.TextBoxTeacherMiddleName.Location = New System.Drawing.Point(94, 103)
         Me.TextBoxTeacherMiddleName.Name = "TextBoxTeacherMiddleName"
         Me.TextBoxTeacherMiddleName.Size = New System.Drawing.Size(239, 26)
         Me.TextBoxTeacherMiddleName.TabIndex = 3
@@ -558,7 +531,7 @@ Partial Class AdminManageTeacher
         '
         Me.TeacherMiddleName.AutoSize = True
         Me.TeacherMiddleName.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TeacherMiddleName.Location = New System.Drawing.Point(24, 69)
+        Me.TeacherMiddleName.Location = New System.Drawing.Point(34, 77)
         Me.TeacherMiddleName.Name = "TeacherMiddleName"
         Me.TeacherMiddleName.Size = New System.Drawing.Size(107, 20)
         Me.TeacherMiddleName.TabIndex = 2
@@ -567,7 +540,7 @@ Partial Class AdminManageTeacher
         'TextBoxTeacherFirstName
         '
         Me.TextBoxTeacherFirstName.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBoxTeacherFirstName.Location = New System.Drawing.Point(84, 46)
+        Me.TextBoxTeacherFirstName.Location = New System.Drawing.Point(94, 47)
         Me.TextBoxTeacherFirstName.Name = "TextBoxTeacherFirstName"
         Me.TextBoxTeacherFirstName.Size = New System.Drawing.Size(239, 26)
         Me.TextBoxTeacherFirstName.TabIndex = 1
@@ -576,7 +549,7 @@ Partial Class AdminManageTeacher
         '
         Me.TeacherFirstName.AutoSize = True
         Me.TeacherFirstName.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TeacherFirstName.Location = New System.Drawing.Point(38, 26)
+        Me.TeacherFirstName.Location = New System.Drawing.Point(48, 27)
         Me.TeacherFirstName.Name = "TeacherFirstName"
         Me.TeacherFirstName.Size = New System.Drawing.Size(92, 20)
         Me.TeacherFirstName.TabIndex = 0
@@ -603,6 +576,23 @@ Partial Class AdminManageTeacher
         Me.picWatermark.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
         Me.picWatermark.TabIndex = 22
         Me.picWatermark.TabStop = False
+        '
+        'DateTimePicker1
+        '
+        Me.DateTimePicker1.CalendarFont = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.DateTimePicker1.Location = New System.Drawing.Point(410, 107)
+        Me.DateTimePicker1.Name = "DateTimePicker1"
+        Me.DateTimePicker1.Size = New System.Drawing.Size(241, 22)
+        Me.DateTimePicker1.TabIndex = 46
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.Location = New System.Drawing.Point(1001, 145)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(0, 20)
+        Me.Label1.TabIndex = 47
         '
         'AdminManageTeacher
         '
@@ -642,16 +632,13 @@ Partial Class AdminManageTeacher
     Friend WithEvents TeacherContactNo As Label
     Friend WithEvents TextBoxTeacherEmail As TextBox
     Friend WithEvents TeacherEmail As Label
-    Friend WithEvents TextBoxTeacherEmployeeNo As TextBox
-    Friend WithEvents TeacherEmployeeNo As Label
     Friend WithEvents TextBoxTeacherSurname As TextBox
     Friend WithEvents TeacherSurname As Label
     Friend WithEvents TextBoxTeacherMiddleName As TextBox
     Friend WithEvents TeacherMiddleName As Label
     Friend WithEvents TextBoxTeacherFirstName As TextBox
     Friend WithEvents TeacherGender As Label
-    Friend WithEvents TextBoxTeacherassignedSection As TextBox
-    Friend WithEvents TeacherAssignedSection As Label
+    Friend WithEvents TeacherBirthDate As Label
     Friend WithEvents TeacherStatus As Label
     Friend WithEvents ComboBoxTeacherGender As ComboBox
     Friend WithEvents Label15 As Label
@@ -672,4 +659,6 @@ Partial Class AdminManageTeacher
     Friend WithEvents lbTeacherHouseNumber As Label
     Friend WithEvents ComboBoxTeacherStatus As ComboBox
     Friend WithEvents ManageTeacherHireDate As DateTimePicker
+    Friend WithEvents DateTimePicker1 As DateTimePicker
+    Friend WithEvents Label1 As Label
 End Class
