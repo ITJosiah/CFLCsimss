@@ -108,7 +108,9 @@ Partial Class ManageEnrollmentForms
         Me.dgvEnrollment.Margin = New System.Windows.Forms.Padding(4)
         Me.dgvEnrollment.Name = "dgvEnrollment"
         Me.dgvEnrollment.ReadOnly = True
+        Me.dgvEnrollment.RowHeadersVisible = False
         Me.dgvEnrollment.RowHeadersWidth = 51
+        Me.dgvEnrollment.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.dgvEnrollment.Size = New System.Drawing.Size(1624, 193)
         Me.dgvEnrollment.TabIndex = 29
         '
