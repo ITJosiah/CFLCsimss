@@ -32,9 +32,9 @@ Partial Class AdminManageSections
         Me.btnGenerateReports = New System.Windows.Forms.Button()
         Me.btnLogout = New System.Windows.Forms.Button()
         Me.pnlManSecContent = New System.Windows.Forms.Panel()
-        Me.btnDelete = New System.Windows.Forms.Button()
-        Me.btnUpdate = New System.Windows.Forms.Button()
-        Me.btnAdd = New System.Windows.Forms.Button()
+        Me.btnSectionDelete = New System.Windows.Forms.Button()
+        Me.btnSectionUpdate = New System.Windows.Forms.Button()
+        Me.btnSectionAdd = New System.Windows.Forms.Button()
         Me.dgvSections = New System.Windows.Forms.DataGridView()
         Me.grpSectionInfo = New System.Windows.Forms.GroupBox()
         Me.cmbManSecLearningMode = New System.Windows.Forms.ComboBox()
@@ -70,7 +70,7 @@ Partial Class AdminManageSections
         Me.txtbxManSecSectionID = New System.Windows.Forms.TextBox()
         Me.lblManSecSectionID = New System.Windows.Forms.Label()
         Me.lblSectionsList = New System.Windows.Forms.Label()
-        Me.btnSearch = New System.Windows.Forms.Button()
+        Me.btnSectionSearch = New System.Windows.Forms.Button()
         Me.picWatermark = New System.Windows.Forms.PictureBox()
         Me.pnlSidebar.SuspendLayout()
         Me.flowButtons.SuspendLayout()
@@ -187,13 +187,13 @@ Partial Class AdminManageSections
         'pnlManSecContent
         '
         Me.pnlManSecContent.BackColor = System.Drawing.Color.FromArgb(CType(CType(7, Byte), Integer), CType(CType(77, Byte), Integer), CType(CType(39, Byte), Integer))
-        Me.pnlManSecContent.Controls.Add(Me.btnDelete)
-        Me.pnlManSecContent.Controls.Add(Me.btnUpdate)
-        Me.pnlManSecContent.Controls.Add(Me.btnAdd)
+        Me.pnlManSecContent.Controls.Add(Me.btnSectionDelete)
+        Me.pnlManSecContent.Controls.Add(Me.btnSectionUpdate)
+        Me.pnlManSecContent.Controls.Add(Me.btnSectionAdd)
         Me.pnlManSecContent.Controls.Add(Me.dgvSections)
         Me.pnlManSecContent.Controls.Add(Me.grpSectionInfo)
         Me.pnlManSecContent.Controls.Add(Me.lblSectionsList)
-        Me.pnlManSecContent.Controls.Add(Me.btnSearch)
+        Me.pnlManSecContent.Controls.Add(Me.btnSectionSearch)
         Me.pnlManSecContent.Controls.Add(Me.picWatermark)
         Me.pnlManSecContent.Location = New System.Drawing.Point(300, 1)
         Me.pnlManSecContent.Name = "pnlManSecContent"
@@ -201,35 +201,35 @@ Partial Class AdminManageSections
         Me.pnlManSecContent.Size = New System.Drawing.Size(1000, 633)
         Me.pnlManSecContent.TabIndex = 13
         '
-        'btnDelete
+        'btnSectionDelete
         '
-        Me.btnDelete.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnDelete.Location = New System.Drawing.Point(908, 585)
-        Me.btnDelete.Name = "btnDelete"
-        Me.btnDelete.Size = New System.Drawing.Size(86, 35)
-        Me.btnDelete.TabIndex = 9
-        Me.btnDelete.Text = "Delete"
-        Me.btnDelete.UseVisualStyleBackColor = True
+        Me.btnSectionDelete.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnSectionDelete.Location = New System.Drawing.Point(908, 585)
+        Me.btnSectionDelete.Name = "btnSectionDelete"
+        Me.btnSectionDelete.Size = New System.Drawing.Size(86, 35)
+        Me.btnSectionDelete.TabIndex = 9
+        Me.btnSectionDelete.Text = "Delete"
+        Me.btnSectionDelete.UseVisualStyleBackColor = True
         '
-        'btnUpdate
+        'btnSectionUpdate
         '
-        Me.btnUpdate.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnUpdate.Location = New System.Drawing.Point(796, 585)
-        Me.btnUpdate.Name = "btnUpdate"
-        Me.btnUpdate.Size = New System.Drawing.Size(86, 35)
-        Me.btnUpdate.TabIndex = 8
-        Me.btnUpdate.Text = "Update"
-        Me.btnUpdate.UseVisualStyleBackColor = True
+        Me.btnSectionUpdate.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnSectionUpdate.Location = New System.Drawing.Point(796, 585)
+        Me.btnSectionUpdate.Name = "btnSectionUpdate"
+        Me.btnSectionUpdate.Size = New System.Drawing.Size(86, 35)
+        Me.btnSectionUpdate.TabIndex = 8
+        Me.btnSectionUpdate.Text = "Update"
+        Me.btnSectionUpdate.UseVisualStyleBackColor = True
         '
-        'btnAdd
+        'btnSectionAdd
         '
-        Me.btnAdd.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnAdd.Location = New System.Drawing.Point(684, 585)
-        Me.btnAdd.Name = "btnAdd"
-        Me.btnAdd.Size = New System.Drawing.Size(86, 35)
-        Me.btnAdd.TabIndex = 7
-        Me.btnAdd.Text = "Add"
-        Me.btnAdd.UseVisualStyleBackColor = True
+        Me.btnSectionAdd.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnSectionAdd.Location = New System.Drawing.Point(684, 585)
+        Me.btnSectionAdd.Name = "btnSectionAdd"
+        Me.btnSectionAdd.Size = New System.Drawing.Size(86, 35)
+        Me.btnSectionAdd.TabIndex = 7
+        Me.btnSectionAdd.Text = "Add"
+        Me.btnSectionAdd.UseVisualStyleBackColor = True
         '
         'dgvSections
         '
@@ -566,15 +566,15 @@ Partial Class AdminManageSections
         Me.lblSectionsList.TabIndex = 2
         Me.lblSectionsList.Text = "Sections List"
         '
-        'btnSearch
+        'btnSectionSearch
         '
-        Me.btnSearch.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnSearch.Location = New System.Drawing.Point(569, 585)
-        Me.btnSearch.Name = "btnSearch"
-        Me.btnSearch.Size = New System.Drawing.Size(90, 35)
-        Me.btnSearch.TabIndex = 1
-        Me.btnSearch.Text = "Search"
-        Me.btnSearch.UseVisualStyleBackColor = True
+        Me.btnSectionSearch.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnSectionSearch.Location = New System.Drawing.Point(569, 585)
+        Me.btnSectionSearch.Name = "btnSectionSearch"
+        Me.btnSectionSearch.Size = New System.Drawing.Size(90, 35)
+        Me.btnSectionSearch.TabIndex = 1
+        Me.btnSectionSearch.Text = "Search"
+        Me.btnSectionSearch.UseVisualStyleBackColor = True
         '
         'picWatermark
         '
@@ -620,9 +620,9 @@ Partial Class AdminManageSections
     Friend WithEvents btnGenerateReports As Button
     Friend WithEvents btnLogout As Button
     Friend WithEvents pnlManSecContent As Panel
-    Friend WithEvents btnDelete As Button
-    Friend WithEvents btnUpdate As Button
-    Friend WithEvents btnAdd As Button
+    Friend WithEvents btnSectionDelete As Button
+    Friend WithEvents btnSectionUpdate As Button
+    Friend WithEvents btnSectionAdd As Button
     Friend WithEvents dgvSections As DataGridView
     Friend WithEvents txtbxManSecRoomNo As TextBox
     Friend WithEvents lblManSecRoomNo As Label
@@ -651,7 +651,7 @@ Partial Class AdminManageSections
     Friend WithEvents txtbxManSecSectionID As TextBox
     Friend WithEvents lblManSecSectionID As Label
     Friend WithEvents lblSectionsList As Label
-    Friend WithEvents btnSearch As Button
+    Friend WithEvents btnSectionSearch As Button
     Friend WithEvents picWatermark As PictureBox
     Friend WithEvents dtpManSecEndDate As DateTimePicker
     Friend WithEvents dtpManSecStartDate As DateTimePicker

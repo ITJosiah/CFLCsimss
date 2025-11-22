@@ -32,9 +32,9 @@ Partial Class AdminManageStudents
         Me.btnGenerateReports = New System.Windows.Forms.Button()
         Me.btnLogout = New System.Windows.Forms.Button()
         Me.pnlContent = New System.Windows.Forms.Panel()
-        Me.btnDelete = New System.Windows.Forms.Button()
-        Me.btnUpdate = New System.Windows.Forms.Button()
-        Me.btnAdd = New System.Windows.Forms.Button()
+        Me.btnStudentDelete = New System.Windows.Forms.Button()
+        Me.btnStudentUpdate = New System.Windows.Forms.Button()
+        Me.btnStudentAdd = New System.Windows.Forms.Button()
         Me.dgvStudents = New System.Windows.Forms.DataGridView()
         Me.grpAddress = New System.Windows.Forms.GroupBox()
         Me.txtbxZipCode = New System.Windows.Forms.TextBox()
@@ -75,7 +75,7 @@ Partial Class AdminManageStudents
         Me.txtbxStudentFirstName = New System.Windows.Forms.TextBox()
         Me.lblStudentFirstName = New System.Windows.Forms.Label()
         Me.lblStudentList = New System.Windows.Forms.Label()
-        Me.btnSearch = New System.Windows.Forms.Button()
+        Me.btnStudentSearch = New System.Windows.Forms.Button()
         Me.picWatermark = New System.Windows.Forms.PictureBox()
         Me.pnlSidebar.SuspendLayout()
         Me.flowButtons.SuspendLayout()
@@ -193,14 +193,14 @@ Partial Class AdminManageStudents
         'pnlContent
         '
         Me.pnlContent.BackColor = System.Drawing.Color.FromArgb(CType(CType(7, Byte), Integer), CType(CType(77, Byte), Integer), CType(CType(39, Byte), Integer))
-        Me.pnlContent.Controls.Add(Me.btnDelete)
-        Me.pnlContent.Controls.Add(Me.btnUpdate)
-        Me.pnlContent.Controls.Add(Me.btnAdd)
+        Me.pnlContent.Controls.Add(Me.btnStudentDelete)
+        Me.pnlContent.Controls.Add(Me.btnStudentUpdate)
+        Me.pnlContent.Controls.Add(Me.btnStudentAdd)
         Me.pnlContent.Controls.Add(Me.dgvStudents)
         Me.pnlContent.Controls.Add(Me.grpAddress)
         Me.pnlContent.Controls.Add(Me.grpStudentInfo)
         Me.pnlContent.Controls.Add(Me.lblStudentList)
-        Me.pnlContent.Controls.Add(Me.btnSearch)
+        Me.pnlContent.Controls.Add(Me.btnStudentSearch)
         Me.pnlContent.Controls.Add(Me.picWatermark)
         Me.pnlContent.Location = New System.Drawing.Point(300, 0)
         Me.pnlContent.Name = "pnlContent"
@@ -208,35 +208,35 @@ Partial Class AdminManageStudents
         Me.pnlContent.Size = New System.Drawing.Size(1000, 633)
         Me.pnlContent.TabIndex = 1
         '
-        'btnDelete
+        'btnStudentDelete
         '
-        Me.btnDelete.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnDelete.Location = New System.Drawing.Point(908, 585)
-        Me.btnDelete.Name = "btnDelete"
-        Me.btnDelete.Size = New System.Drawing.Size(86, 35)
-        Me.btnDelete.TabIndex = 9
-        Me.btnDelete.Text = "Delete"
-        Me.btnDelete.UseVisualStyleBackColor = True
+        Me.btnStudentDelete.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnStudentDelete.Location = New System.Drawing.Point(908, 585)
+        Me.btnStudentDelete.Name = "btnStudentDelete"
+        Me.btnStudentDelete.Size = New System.Drawing.Size(86, 35)
+        Me.btnStudentDelete.TabIndex = 9
+        Me.btnStudentDelete.Text = "Delete"
+        Me.btnStudentDelete.UseVisualStyleBackColor = True
         '
-        'btnUpdate
+        'btnStudentUpdate
         '
-        Me.btnUpdate.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnUpdate.Location = New System.Drawing.Point(796, 585)
-        Me.btnUpdate.Name = "btnUpdate"
-        Me.btnUpdate.Size = New System.Drawing.Size(86, 35)
-        Me.btnUpdate.TabIndex = 8
-        Me.btnUpdate.Text = "Update"
-        Me.btnUpdate.UseVisualStyleBackColor = True
+        Me.btnStudentUpdate.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnStudentUpdate.Location = New System.Drawing.Point(796, 585)
+        Me.btnStudentUpdate.Name = "btnStudentUpdate"
+        Me.btnStudentUpdate.Size = New System.Drawing.Size(86, 35)
+        Me.btnStudentUpdate.TabIndex = 8
+        Me.btnStudentUpdate.Text = "Update"
+        Me.btnStudentUpdate.UseVisualStyleBackColor = True
         '
-        'btnAdd
+        'btnStudentAdd
         '
-        Me.btnAdd.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnAdd.Location = New System.Drawing.Point(684, 585)
-        Me.btnAdd.Name = "btnAdd"
-        Me.btnAdd.Size = New System.Drawing.Size(86, 35)
-        Me.btnAdd.TabIndex = 7
-        Me.btnAdd.Text = "Add"
-        Me.btnAdd.UseVisualStyleBackColor = True
+        Me.btnStudentAdd.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnStudentAdd.Location = New System.Drawing.Point(684, 585)
+        Me.btnStudentAdd.Name = "btnStudentAdd"
+        Me.btnStudentAdd.Size = New System.Drawing.Size(86, 35)
+        Me.btnStudentAdd.TabIndex = 7
+        Me.btnStudentAdd.Text = "Add"
+        Me.btnStudentAdd.UseVisualStyleBackColor = True
         '
         'dgvStudents
         '
@@ -627,15 +627,15 @@ Partial Class AdminManageStudents
         Me.lblStudentList.TabIndex = 2
         Me.lblStudentList.Text = "Student List"
         '
-        'btnSearch
+        'btnStudentSearch
         '
-        Me.btnSearch.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnSearch.Location = New System.Drawing.Point(569, 585)
-        Me.btnSearch.Name = "btnSearch"
-        Me.btnSearch.Size = New System.Drawing.Size(90, 35)
-        Me.btnSearch.TabIndex = 1
-        Me.btnSearch.Text = "Search"
-        Me.btnSearch.UseVisualStyleBackColor = True
+        Me.btnStudentSearch.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnStudentSearch.Location = New System.Drawing.Point(569, 585)
+        Me.btnStudentSearch.Name = "btnStudentSearch"
+        Me.btnStudentSearch.Size = New System.Drawing.Size(90, 35)
+        Me.btnStudentSearch.TabIndex = 1
+        Me.btnStudentSearch.Text = "Search"
+        Me.btnStudentSearch.UseVisualStyleBackColor = True
         '
         'picWatermark
         '
@@ -687,9 +687,9 @@ Partial Class AdminManageStudents
     Friend WithEvents btnGenerateReports As Button
     Friend WithEvents btnLogout As Button
     Friend WithEvents pnlContent As Panel
-    Friend WithEvents btnDelete As Button
-    Friend WithEvents btnUpdate As Button
-    Friend WithEvents btnAdd As Button
+    Friend WithEvents btnStudentDelete As Button
+    Friend WithEvents btnStudentUpdate As Button
+    Friend WithEvents btnStudentAdd As Button
     Friend WithEvents dgvStudents As DataGridView
     Friend WithEvents picWatermark As PictureBox
     Friend WithEvents grpStudentInfo As GroupBox
@@ -712,7 +712,7 @@ Partial Class AdminManageStudents
     Friend WithEvents txtbxStudentFirstName As TextBox
     Friend WithEvents lblStudentFirstName As Label
     Friend WithEvents lblStudentList As Label
-    Friend WithEvents btnSearch As Button
+    Friend WithEvents btnStudentSearch As Button
     Friend WithEvents grpAddress As GroupBox
     Friend WithEvents txtbxZipCode As TextBox
     Friend WithEvents lblStudentZIP As Label
