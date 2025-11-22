@@ -5,13 +5,10 @@ Public Class AdminManageStudents
     Public Property IsEmbedded As Boolean = False
 
     Private Sub AdminManageStudents_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        ' Update connection string in modDB
-        modDBx.db_server = "127.0.0.1"
-        modDBx.db_uid = "root"
-        modDBx.db_pwd = ""
-        modDBx.db_name = "cflc_db"
-        modDBx.strConnection = "server=" & modDBx.db_server & ";port=3306;uid=" & modDBx.db_uid & ";password=" & modDBx.db_pwd & ";database=" & modDBx.db_name & ";allowuservariables=True;"
+        ' Update connection string using config.txt - NO changes to modDB.vb needed
+        modDBx.UpdateConnectionString() ' This will read from config.txt
 
+        ' Rest of your existing code remains the same...
         If Not IsEmbedded Then
             Me.WindowState = FormWindowState.Maximized
             Me.BackColor = Color.FromArgb(15, 56, 32)
@@ -28,6 +25,13 @@ Public Class AdminManageStudents
 
         ' Initialize numeric controls with safe default values
         InitializeNumericControls()
+
+        modDBx.UpdateConnectionString()
+
+        ' Temporary: Show what connection string is being used
+        MessageBox.Show("Using connection: " & modDBx.strConnection, "Debug Info")
+
+
     End Sub
 
     Private Sub InitializeNumericControls()
@@ -127,7 +131,7 @@ Public Class AdminManageStudents
         btnLogout.TextAlign = ContentAlignment.MiddleCenter
     End Sub
 
-    Private Sub BtnStudentAdd_Click(sender As Object, e As EventArgs) Handles btnStudentAdd.Click
+    Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnStudentAdd.Click
         ' Validate required fields FIRST
         If Not ValidateInputs() Then
             Return ' Stop execution if validation fails
@@ -514,5 +518,6 @@ Public Class AdminManageStudents
     Private Sub dtpStudentBirthdate_ValuesChanged(sender As Object, e As EventArgs) Handles dtpStudentBirthdate.ValueChanged
         ' This is already handled by dtpStudentBirthdate_ValueChanged
     End Sub
+
 
 End Class
