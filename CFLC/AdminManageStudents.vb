@@ -127,7 +127,7 @@ Public Class AdminManageStudents
         btnLogout.TextAlign = ContentAlignment.MiddleCenter
     End Sub
 
-    Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
+    Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnStudentAdd.Click
         ' Validate required fields FIRST
         If Not ValidateInputs() Then
             Return ' Stop execution if validation fails
