@@ -46,7 +46,7 @@ Public Class AdminManageStudents
     End Sub
 
     Private Sub InitializeGenderComboBox()
-        ' Populate Gender dropdown
+        ' Populate Gender dropdownS
         cmbStudenttGender.Items.Clear()
         cmbStudenttGender.Items.Add("Male")
         cmbStudenttGender.Items.Add("Female")
