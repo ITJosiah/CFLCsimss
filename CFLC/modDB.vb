@@ -4,6 +4,7 @@ Imports System.Security
 Imports System.Security.Cryptography
 Imports ST = System.Runtime.InteropServices
 Imports MySql.Data.MySqlClient
+
 Module modDBx
     Public myadocon, conn As New MySqlConnection
     Public cmd As New MySqlCommand
