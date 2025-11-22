@@ -80,6 +80,22 @@ Partial Class AdminManageStudents
         Me.SStudentID = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.SFirstName = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.SMiddleName = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.SLastName = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.SGender = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.SBirthDate = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.SAge = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.SHouseNumber = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.SStreet = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.SBarangay = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.SMunicipality = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.SProvince = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.SCountry = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.SZipCode = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.SReligion = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.SGuardianName = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.SGradeLevel = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.SSectionID = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.SEnrllmentID = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.pnlSidebar.SuspendLayout()
         Me.flowButtons.SuspendLayout()
         Me.pnlContent.SuspendLayout()
@@ -256,7 +272,7 @@ Partial Class AdminManageStudents
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.dgvStudents.BackgroundColor = System.Drawing.Color.WhiteSmoke
         Me.dgvStudents.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvStudents.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.SStudentID, Me.SFirstName, Me.SMiddleName})
+        Me.dgvStudents.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.SStudentID, Me.SFirstName, Me.SMiddleName, Me.SLastName, Me.SGender, Me.SBirthDate, Me.SAge, Me.SHouseNumber, Me.SStreet, Me.SBarangay, Me.SMunicipality, Me.SProvince, Me.SCountry, Me.SZipCode, Me.SReligion, Me.SGuardianName, Me.SGradeLevel, Me.SSectionID, Me.SEnrllmentID})
         Me.dgvStudents.Location = New System.Drawing.Point(44, 514)
         Me.dgvStudents.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.dgvStudents.Name = "dgvStudents"
@@ -709,27 +725,174 @@ Partial Class AdminManageStudents
         '
         'SStudentID
         '
+        Me.SStudentID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
         Me.SStudentID.HeaderText = "Student ID"
         Me.SStudentID.MinimumWidth = 6
         Me.SStudentID.Name = "SStudentID"
         Me.SStudentID.ReadOnly = True
-        Me.SStudentID.Width = 125
+        Me.SStudentID.Width = 97
         '
         'SFirstName
         '
+        Me.SFirstName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
         Me.SFirstName.HeaderText = "First Name"
         Me.SFirstName.MinimumWidth = 6
         Me.SFirstName.Name = "SFirstName"
         Me.SFirstName.ReadOnly = True
-        Me.SFirstName.Width = 125
+        Me.SFirstName.Width = 101
         '
         'SMiddleName
         '
+        Me.SMiddleName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
         Me.SMiddleName.HeaderText = "Middle Name"
         Me.SMiddleName.MinimumWidth = 6
         Me.SMiddleName.Name = "SMiddleName"
         Me.SMiddleName.ReadOnly = True
-        Me.SMiddleName.Width = 125
+        Me.SMiddleName.Width = 117
+        '
+        'SLastName
+        '
+        Me.SLastName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.SLastName.HeaderText = "Last Name"
+        Me.SLastName.MinimumWidth = 6
+        Me.SLastName.Name = "SLastName"
+        Me.SLastName.ReadOnly = True
+        Me.SLastName.Width = 101
+        '
+        'SGender
+        '
+        Me.SGender.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.SGender.HeaderText = "Gender"
+        Me.SGender.MinimumWidth = 6
+        Me.SGender.Name = "SGender"
+        Me.SGender.ReadOnly = True
+        Me.SGender.Width = 81
+        '
+        'SBirthDate
+        '
+        Me.SBirthDate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.SBirthDate.HeaderText = "Birth Date"
+        Me.SBirthDate.MinimumWidth = 6
+        Me.SBirthDate.Name = "SBirthDate"
+        Me.SBirthDate.ReadOnly = True
+        Me.SBirthDate.Width = 94
+        '
+        'SAge
+        '
+        Me.SAge.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.SAge.HeaderText = "Age"
+        Me.SAge.MinimumWidth = 6
+        Me.SAge.Name = "SAge"
+        Me.SAge.ReadOnly = True
+        Me.SAge.Width = 61
+        '
+        'SHouseNumber
+        '
+        Me.SHouseNumber.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.SHouseNumber.HeaderText = "House Number"
+        Me.SHouseNumber.MinimumWidth = 6
+        Me.SHouseNumber.Name = "SHouseNumber"
+        Me.SHouseNumber.ReadOnly = True
+        Me.SHouseNumber.Width = 117
+        '
+        'SStreet
+        '
+        Me.SStreet.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.SStreet.HeaderText = "Street"
+        Me.SStreet.MinimumWidth = 6
+        Me.SStreet.Name = "SStreet"
+        Me.SStreet.ReadOnly = True
+        Me.SStreet.Width = 71
+        '
+        'SBarangay
+        '
+        Me.SBarangay.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.SBarangay.HeaderText = "Barangay"
+        Me.SBarangay.MinimumWidth = 6
+        Me.SBarangay.Name = "SBarangay"
+        Me.SBarangay.ReadOnly = True
+        Me.SBarangay.Width = 95
+        '
+        'SMunicipality
+        '
+        Me.SMunicipality.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.SMunicipality.HeaderText = "Municipality"
+        Me.SMunicipality.MinimumWidth = 6
+        Me.SMunicipality.Name = "SMunicipality"
+        Me.SMunicipality.ReadOnly = True
+        Me.SMunicipality.Width = 106
+        '
+        'SProvince
+        '
+        Me.SProvince.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.SProvince.HeaderText = "Province"
+        Me.SProvince.MinimumWidth = 6
+        Me.SProvince.Name = "SProvince"
+        Me.SProvince.ReadOnly = True
+        Me.SProvince.Width = 89
+        '
+        'SCountry
+        '
+        Me.SCountry.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.SCountry.HeaderText = "Country"
+        Me.SCountry.MinimumWidth = 6
+        Me.SCountry.Name = "SCountry"
+        Me.SCountry.ReadOnly = True
+        Me.SCountry.Width = 81
+        '
+        'SZipCode
+        '
+        Me.SZipCode.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.SZipCode.HeaderText = "ZipCode"
+        Me.SZipCode.MinimumWidth = 6
+        Me.SZipCode.Name = "SZipCode"
+        Me.SZipCode.ReadOnly = True
+        Me.SZipCode.Width = 88
+        '
+        'SReligion
+        '
+        Me.SReligion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.SReligion.HeaderText = "Religion"
+        Me.SReligion.MinimumWidth = 6
+        Me.SReligion.Name = "SReligion"
+        Me.SReligion.ReadOnly = True
+        Me.SReligion.Width = 86
+        '
+        'SGuardianName
+        '
+        Me.SGuardianName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.SGuardianName.HeaderText = "Guardian Name"
+        Me.SGuardianName.MinimumWidth = 6
+        Me.SGuardianName.Name = "SGuardianName"
+        Me.SGuardianName.ReadOnly = True
+        Me.SGuardianName.Width = 120
+        '
+        'SGradeLevel
+        '
+        Me.SGradeLevel.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.SGradeLevel.HeaderText = "Grade Level"
+        Me.SGradeLevel.MinimumWidth = 6
+        Me.SGradeLevel.Name = "SGradeLevel"
+        Me.SGradeLevel.ReadOnly = True
+        Me.SGradeLevel.Width = 101
+        '
+        'SSectionID
+        '
+        Me.SSectionID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.SSectionID.HeaderText = "Section ID"
+        Me.SSectionID.MinimumWidth = 6
+        Me.SSectionID.Name = "SSectionID"
+        Me.SSectionID.ReadOnly = True
+        Me.SSectionID.Width = 90
+        '
+        'SEnrllmentID
+        '
+        Me.SEnrllmentID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.SEnrllmentID.HeaderText = "Enrollment ID"
+        Me.SEnrllmentID.MinimumWidth = 6
+        Me.SEnrllmentID.Name = "SEnrllmentID"
+        Me.SEnrllmentID.ReadOnly = True
+        Me.SEnrllmentID.Width = 106
         '
         'AdminManageStudents
         '
@@ -819,4 +982,20 @@ Partial Class AdminManageStudents
     Friend WithEvents SStudentID As DataGridViewTextBoxColumn
     Friend WithEvents SFirstName As DataGridViewTextBoxColumn
     Friend WithEvents SMiddleName As DataGridViewTextBoxColumn
+    Friend WithEvents SLastName As DataGridViewTextBoxColumn
+    Friend WithEvents SGender As DataGridViewTextBoxColumn
+    Friend WithEvents SBirthDate As DataGridViewTextBoxColumn
+    Friend WithEvents SAge As DataGridViewTextBoxColumn
+    Friend WithEvents SHouseNumber As DataGridViewTextBoxColumn
+    Friend WithEvents SStreet As DataGridViewTextBoxColumn
+    Friend WithEvents SBarangay As DataGridViewTextBoxColumn
+    Friend WithEvents SMunicipality As DataGridViewTextBoxColumn
+    Friend WithEvents SProvince As DataGridViewTextBoxColumn
+    Friend WithEvents SCountry As DataGridViewTextBoxColumn
+    Friend WithEvents SZipCode As DataGridViewTextBoxColumn
+    Friend WithEvents SReligion As DataGridViewTextBoxColumn
+    Friend WithEvents SGuardianName As DataGridViewTextBoxColumn
+    Friend WithEvents SGradeLevel As DataGridViewTextBoxColumn
+    Friend WithEvents SSectionID As DataGridViewTextBoxColumn
+    Friend WithEvents SEnrllmentID As DataGridViewTextBoxColumn
 End Class
