@@ -3,6 +3,8 @@ Imports MySql.Data.MySqlClient
 
 Public Class AdminManageStudents
 
+    Private currentStudentID As Integer = 0
+
     Public Property IsEmbedded As Boolean = False
 
     Protected Overrides Function ProcessCmdKey(ByRef msg As Message, keyData As Keys) As Boolean
@@ -323,6 +325,9 @@ Public Class AdminManageStudents
         If e.RowIndex >= 0 Then
             Dim row As DataGridViewRow = dgvStudents.Rows(e.RowIndex)
 
+            ' Store the StudentID (assuming it's the first column, index 0)
+            currentStudentID = CInt(row.Cells(0).Value)
+
             txtbxStudentFirstName.Text = row.Cells("FirstName").Value.ToString()
             txtStudentMiddleName.Text = row.Cells("MiddleName").Value.ToString()
             txtbxStudentSurname.Text = row.Cells("LastName").Value.ToString()
@@ -362,6 +367,92 @@ Public Class AdminManageStudents
             txtbxZipCode.Text = row.Cells("ZIPCode").Value.ToString()
         End If
     End Sub
+
+    Private Sub UpdateStudent()
+        If currentStudentID = 0 Then
+            MsgBox("No student selected for update.", MsgBoxStyle.Exclamation, "Update Error")
+            Return
+        End If
+
+        Try
+            ' Open Connection
+            modDBx.openConn(modDBx.db_name)
+
+            ' Define the SQL Update Statement using parameters
+            Dim sql As String = "UPDATE student SET " &
+                            "FirstName = @FirstName, " &
+                            "MiddleName = @MiddleName, " &
+                            "LastName = @LastName, " &
+                            "Gender = @Gender, " &
+                            "Birthdate = @Birthdate, " &
+                            "Religion = @Religion, " &
+                            "GuardianName = @GuardianName, " &
+                            "Age = @Age, " &
+                            "GradeLevel = @GradeLevel, " &
+                            "SectionID = @SectionID, " &
+                            "EnrollmentID = @EnrollmentID, " &
+                            "HouseNumber = @HouseNumber, " &
+                            "Street = @Street, " &
+                            "Barangay = @Barangay, " &
+                            "Municipality = @Municipality, " &
+                            "Province = @Province, " &
+                            "Country = @Country, " &
+                            "ZIPCode = @ZIPCode " &
+                            "WHERE StudentID = @StudentID"
+
+            ' Create and Configure Command
+            Using cmd As New MySqlCommand(sql, modDBx.conn)
+                ' Add Parameters
+                cmd.Parameters.AddWithValue("@FirstName", txtbxStudentFirstName.Text.Trim())
+                cmd.Parameters.AddWithValue("@MiddleName", txtStudentMiddleName.Text.Trim())
+                cmd.Parameters.AddWithValue("@LastName", txtbxStudentSurname.Text.Trim())
+                cmd.Parameters.AddWithValue("@Gender", cmbStudenttGender.Text.Trim())
+                cmd.Parameters.AddWithValue("@Birthdate", dtpStudentBirthdate.Value)
+                cmd.Parameters.AddWithValue("@Religion", txtbxStudentReligion.Text.Trim())
+                cmd.Parameters.AddWithValue("@GuardianName", txtbxGuardianName.Text.Trim())
+                cmd.Parameters.AddWithValue("@Age", nudStudentAge.Value)
+                cmd.Parameters.AddWithValue("@GradeLevel", nudStudentGradeLevel.Value)
+                ' Handle SectionID as nullable
+                If String.IsNullOrWhiteSpace(txtbxStudentSectionID.Text) Then
+                    cmd.Parameters.AddWithValue("@SectionID", DBNull.Value)
+                Else
+                    cmd.Parameters.AddWithValue("@SectionID", txtbxStudentSectionID.Text.Trim())
+                End If
+                cmd.Parameters.AddWithValue("@EnrollmentID", txtbxStudentEnrollmentID.Text.Trim())
+                cmd.Parameters.AddWithValue("@HouseNumber", txtbxStudentHouseNo.Text.Trim())
+                cmd.Parameters.AddWithValue("@Street", txtbcStudentStreet.Text.Trim())
+                cmd.Parameters.AddWithValue("@Barangay", txtbxStudentBarangay.Text.Trim())
+                cmd.Parameters.AddWithValue("@Municipality", txtbxStudentCity.Text.Trim())
+                cmd.Parameters.AddWithValue("@Province", txtbxStudentProvince.Text.Trim())
+                cmd.Parameters.AddWithValue("@Country", txtbxCountry.Text.Trim())
+                cmd.Parameters.AddWithValue("@ZIPCode", txtbxZipCode.Text.Trim())
+                cmd.Parameters.AddWithValue("@StudentID", currentStudentID)
+
+                ' Execute the Update
+                Dim rowsAffected As Integer = cmd.ExecuteNonQuery()
+
+                If rowsAffected > 0 Then
+                    MsgBox("Student updated successfully.", MsgBoxStyle.Information, "Update Success")
+                    ' Reload the DataGridView to reflect changes
+                    LoadToDGV("SELECT * FROM student", dgvStudents)
+                    ' Clear the current selection or reset fields if needed
+                    currentStudentID = 0
+                Else
+                    MsgBox("No student was updated. Please check the data.", MsgBoxStyle.Exclamation, "Update Failed")
+                End If
+            End Using
+
+        Catch ex As Exception
+            MsgBox("Error updating student: " & ex.Message, MsgBoxStyle.Critical, "Update Error")
+        Finally
+            ' Close Connection safely
+            If modDBx.conn IsNot Nothing AndAlso modDBx.conn.State = ConnectionState.Open Then
+                modDBx.conn.Close()
+            End If
+        End Try
+    End Sub
+
+    ' Example: Call UpdateStudent from a button click (add a button named btnUpdateStudent)
     Private Sub SearchStudentsBySurname(ByVal surname As String)
         ' 1. If the search box is empty, load all students (default view)
         If String.IsNullOrWhiteSpace(surname) Then
@@ -420,5 +511,9 @@ Public Class AdminManageStudents
 
     Private Sub btnStudentSearch_Click(sender As Object, e As EventArgs) Handles btnStudentSearch.Click
         SearchStudentsBySurname(TextBoxStudentSearch.Text)
+    End Sub
+
+    Private Sub btnStudentUpdate_Click(sender As Object, e As EventArgs) Handles btnStudentUpdate.Click
+        UpdateStudent()
     End Sub
 End Class
