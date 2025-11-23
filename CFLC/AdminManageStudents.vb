@@ -287,4 +287,42 @@ Public Class AdminManageStudents
     Private Sub FormStudents_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         LoadToDGV("SELECT * FROM student", dgvStudents)
     End Sub
+
+    Private Sub dgvStudents_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvStudents.CellClick
+        If e.RowIndex >= 0 Then
+            Dim row As DataGridViewRow = dgvStudents.Rows(e.RowIndex)
+
+            txtbxStudentFirstName.Text = row.Cells("FirstName").Value.ToString()
+            txtStudentMiddleName.Text = row.Cells("MiddleName").Value.ToString()
+            txtbxStudentSurname.Text = row.Cells("LastName").Value.ToString()
+            cmbStudenttGender.Text = row.Cells("Gender").Value.ToString()
+
+            ' Birthdate (DateTimePicker)
+            If Not IsDBNull(row.Cells("Birthdate").Value) Then
+                dtpStudentBirthdate.Value = CDate(row.Cells("Birthdate").Value)
+            End If
+
+            txtbxStudentReligion.Text = row.Cells("Religion").Value.ToString()
+            txtbxGuardianName.Text = row.Cells("GuardianName").Value.ToString()
+
+            ' Numeric Up Downs
+            If Not IsDBNull(row.Cells("Age").Value) Then
+                nudStudentAge.Value = CInt(row.Cells("Age").Value)
+            End If
+
+            If Not IsDBNull(row.Cells("GradeLevel").Value) Then
+                nudStudentGradeLevel.Value = CInt(row.Cells("GradeLevel").Value)
+            End If
+
+            txtbxStudentSectionID.Text = row.Cells("SectionID").Value.ToString()
+            txtbxStudentEnrollmentID.Text = row.Cells("EnrollmentID").Value.ToString()
+            txtbxStudentHouseNo.Text = row.Cells("HouseNumber").Value.ToString()
+            txtbcStudentStreet.Text = row.Cells("Street").Value.ToString()
+            txtbxStudentBarangay.Text = row.Cells("Barangay").Value.ToString()
+            txtbxStudentCity.Text = row.Cells("Municipality").Value.ToString()
+            txtbxStudentProvince.Text = row.Cells("Province").Value.ToString()
+            txtbxCountry.Text = row.Cells("Country").Value.ToString()
+            txtbxZipCode.Text = row.Cells("ZIPCode").Value.ToString()
+        End If
+    End Sub
 End Class
