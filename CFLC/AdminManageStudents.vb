@@ -323,11 +323,6 @@ Public Class AdminManageStudents
         If e.RowIndex >= 0 Then
             Dim row As DataGridViewRow = dgvStudents.Rows(e.RowIndex)
 
-            ' ------------------------------------------------------------------
-            ' WARNING: The StudentIDToUpdate assignment is intentionally left out here.
-            ' Your StudentIDToUpdate variable will remain 0, breaking the update function.
-            ' ------------------------------------------------------------------
-
             txtbxStudentFirstName.Text = row.Cells("FirstName").Value.ToString()
             txtStudentMiddleName.Text = row.Cells("MiddleName").Value.ToString()
             txtbxStudentSurname.Text = row.Cells("LastName").Value.ToString()
