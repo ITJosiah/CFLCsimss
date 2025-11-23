@@ -609,7 +609,7 @@ Partial Class AdminManageTeacher
         '
         Me.PBoxTeacher.Location = New System.Drawing.Point(37, 34)
         Me.PBoxTeacher.Name = "PBoxTeacher"
-        Me.PBoxTeacher.Size = New System.Drawing.Size(191, 161)
+        Me.PBoxTeacher.Size = New System.Drawing.Size(208, 161)
         Me.PBoxTeacher.TabIndex = 48
         Me.PBoxTeacher.TabStop = False
         '
