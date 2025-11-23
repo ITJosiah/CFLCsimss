@@ -282,4 +282,8 @@ Public Class AdminManageStudents
     Private Sub dgvStudents_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvStudents.CellContentClick
 
     End Sub
+
+    Private Sub FormStudents_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        LoadToDGV("SELECT * FROM student", dgvStudents)
+    End Sub
 End Class
