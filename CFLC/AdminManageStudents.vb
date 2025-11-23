@@ -279,5 +279,7 @@ Public Class AdminManageStudents
         ' This is already handled by dtpStudentBirthdate_ValueChanged
     End Sub
 
+    Private Sub dgvStudents_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvStudents.CellContentClick
 
+    End Sub
 End Class
