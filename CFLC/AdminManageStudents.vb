@@ -367,4 +367,63 @@ Public Class AdminManageStudents
             txtbxZipCode.Text = row.Cells("ZIPCode").Value.ToString()
         End If
     End Sub
+    Private Sub SearchStudentsBySurname(ByVal surname As String)
+        ' 1. If the search box is empty, load all students (default view)
+        If String.IsNullOrWhiteSpace(surname) Then
+            LoadToDGV("SELECT * FROM student", dgvStudents)
+            Return
+        End If
+
+        Try
+            ' 2. Open Connection
+            modDBx.openConn(modDBx.db_name)
+
+            ' 3. Define the SQL Search Statement using parameters
+            ' We use LIKE and wildcards (%) for partial and case-insensitive matching.
+            Dim sql As String = "SELECT * FROM student WHERE LastName LIKE @searchSurname ORDER BY LastName"
+
+            ' 4. Create and Configure Command
+            Using cmd As New MySqlCommand(sql, modDBx.conn)
+                ' 5. Add Parameter with Wildcards
+                ' The database column is 'LastName', which the user enters in the search box (Surname).
+                cmd.Parameters.AddWithValue("@searchSurname", "%" & surname.Trim() & "%")
+
+                ' 6. Execute and Load Data into a DataTable
+                Dim dt As New System.Data.DataTable
+                Using adapter As New MySql.Data.MySqlClient.MySqlDataAdapter(cmd)
+                    adapter.Fill(dt)
+                End Using
+
+                ' 7. Update the DataGridView
+                dgvStudents.DataSource = dt
+                dgvStudents.Refresh()
+
+                ' Hide the primary key column (StudentID is usually the first column)
+                If dgvStudents.ColumnCount > 0 Then
+                    dgvStudents.Columns(0).Visible = False
+                End If
+
+                ' Notification
+                If dt.Rows.Count = 0 Then
+                    MsgBox("No student found matching the surname '" & surname & "'.", MsgBoxStyle.Information, "Search Result")
+                End If
+
+            End Using
+
+        Catch ex As Exception
+            MsgBox("Error searching students: " & ex.Message, MsgBoxStyle.Critical)
+        Finally
+            ' 8. Close Connection safely
+            If modDBx.conn IsNot Nothing AndAlso modDBx.conn.State = System.Data.ConnectionState.Open Then
+                modDBx.conn.Close()
+            End If
+        End Try
+    End Sub
+    Private Sub TextBoxStudentSearch_TextChanged(sender As Object, e As EventArgs) Handles TextBoxStudentSearch.TextChanged
+        SearchStudentsBySurname(TextBoxStudentSearch.Text)
+    End Sub
+
+    Private Sub btnStudentSearch_Click(sender As Object, e As EventArgs) Handles btnStudentSearch.Click
+        SearchStudentsBySurname(TextBoxStudentSearch.Text)
+    End Sub
 End Class

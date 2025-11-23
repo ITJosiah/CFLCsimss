@@ -71,6 +71,7 @@ Partial Class ManageEnrollmentForms
         Me.btnEnrollAdd = New System.Windows.Forms.Button()
         Me.btnEnrollSearch = New System.Windows.Forms.Button()
         Me.picWatermark = New System.Windows.Forms.PictureBox()
+        Me.TextBoxStudentSearch = New System.Windows.Forms.TextBox()
         Me.pnlContent.SuspendLayout()
         CType(Me.dgvEnrollment, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
@@ -80,6 +81,7 @@ Partial Class ManageEnrollmentForms
         'pnlContent
         '
         Me.pnlContent.BackColor = System.Drawing.Color.FromArgb(CType(CType(7, Byte), Integer), CType(CType(77, Byte), Integer), CType(CType(39, Byte), Integer))
+        Me.pnlContent.Controls.Add(Me.TextBoxStudentSearch)
         Me.pnlContent.Controls.Add(Me.dgvEnrollment)
         Me.pnlContent.Controls.Add(Me.Panel1)
         Me.pnlContent.Controls.Add(Me.lblTeacherList)
@@ -595,6 +597,16 @@ Partial Class ManageEnrollmentForms
         Me.picWatermark.TabIndex = 22
         Me.picWatermark.TabStop = False
         '
+        'TextBoxStudentSearch
+        '
+        Me.TextBoxStudentSearch.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.TextBoxStudentSearch.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBoxStudentSearch.Location = New System.Drawing.Point(827, 683)
+        Me.TextBoxStudentSearch.MaxLength = 50
+        Me.TextBoxStudentSearch.Name = "TextBoxStudentSearch"
+        Me.TextBoxStudentSearch.Size = New System.Drawing.Size(246, 36)
+        Me.TextBoxStudentSearch.TabIndex = 30
+        '
         'ManageEnrollmentForms
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
@@ -662,4 +674,5 @@ Partial Class ManageEnrollmentForms
     Friend WithEvents EContactNumber As DataGridViewTextBoxColumn
     Friend WithEvents ERequirementStatus As DataGridViewTextBoxColumn
     Friend WithEvents EReferenceNumber As DataGridViewTextBoxColumn
+    Friend WithEvents TextBoxStudentSearch As TextBox
 End Class

@@ -24,6 +24,7 @@
         ' Optional: Me.TopMost = True  ' Uncomment if you want it on top of other windows
 
     End Sub
+
     Protected Overrides Function ProcessCmdKey(ByRef msg As Message, keyData As Keys) As Boolean
         If keyData = Keys.Escape Then
             ExitFullScreen()
