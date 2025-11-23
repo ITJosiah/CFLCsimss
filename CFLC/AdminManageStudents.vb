@@ -154,10 +154,6 @@ Public Class AdminManageStudents
         btnLogout.TextAlign = ContentAlignment.MiddleCenter
     End Sub
 
-    Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnStudentAdd.Click
-
-    End Sub
-
 
     Private Sub ClearInputFields()
         ' Clear all input fields after successful add
@@ -310,10 +306,6 @@ Public Class AdminManageStudents
 
     Private Sub dtpStudentBirthdate_ValuesChanged(sender As Object, e As EventArgs) Handles dtpStudentBirthdate.ValueChanged
         ' This is already handled by dtpStudentBirthdate_ValueChanged
-    End Sub
-
-    Private Sub dgvStudents_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvStudents.CellContentClick
-
     End Sub
 
     Private Sub FormStudents_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -560,7 +552,6 @@ Public Class AdminManageStudents
             End If
         End Try
     End Sub
-
 
 
 End Class
