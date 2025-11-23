@@ -772,7 +772,7 @@ Partial Class AdminManageTeacher
         'picWatermark
         '
         Me.picWatermark.Image = Global.CFLC.My.Resources.Resources.logo
-        Me.picWatermark.Location = New System.Drawing.Point(649, 133)
+        Me.picWatermark.Location = New System.Drawing.Point(487, 139)
         Me.picWatermark.Margin = New System.Windows.Forms.Padding(4)
         Me.picWatermark.Name = "picWatermark"
         Me.picWatermark.Size = New System.Drawing.Size(648, 596)
