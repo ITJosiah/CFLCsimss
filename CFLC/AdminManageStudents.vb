@@ -1,10 +1,44 @@
-﻿Imports MySql.Data.MySqlClient
+﻿Imports System.Data.SqlClient
+Imports MySql.Data.MySqlClient
 
 Public Class AdminManageStudents
 
+    Private currentStudentID As Integer = 0
+
     Public Property IsEmbedded As Boolean = False
 
+    Protected Overrides Function ProcessCmdKey(ByRef msg As Message, keyData As Keys) As Boolean
+        If keyData = Keys.Escape Then
+            ExitFullScreen()
+            Return True
+        End If
+
+        If keyData = Keys.F Then
+            MakeItFullScreen()
+            Return True
+        End If
+
+        Return MyBase.ProcessCmdKey(msg, keyData)
+
+
+    End Function
+
+    Private Sub ExitFullScreen()
+        Me.FormBorderStyle = FormBorderStyle.Sizable
+        Me.WindowState = FormWindowState.Maximized
+        Me.TopMost = False
+    End Sub
+
+    Private Sub MakeItFullScreen()
+        Me.FormBorderStyle = FormBorderStyle.None
+        Me.WindowState = FormWindowState.Maximized
+        Me.Bounds = Screen.PrimaryScreen.Bounds
+        Me.TopMost = True
+        Me.BringToFront()
+    End Sub
+
     Private Sub AdminManageStudents_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
         If Not IsEmbedded Then
             Me.WindowState = FormWindowState.Maximized
             Me.BackColor = Color.FromArgb(15, 56, 32)
@@ -520,6 +554,9 @@ Public Class AdminManageStudents
         If e.RowIndex >= 0 Then
             Dim row As DataGridViewRow = dgvStudents.Rows(e.RowIndex)
 
+            ' Store the StudentID (assuming it's the first column, index 0)
+            currentStudentID = CInt(row.Cells(0).Value)
+
             txtbxStudentFirstName.Text = row.Cells("FirstName").Value.ToString()
             txtStudentMiddleName.Text = row.Cells("MiddleName").Value.ToString()
             txtbxStudentSurname.Text = row.Cells("LastName").Value.ToString()
@@ -542,7 +579,13 @@ Public Class AdminManageStudents
                 nudStudentGradeLevel.Value = CInt(row.Cells("GradeLevel").Value)
             End If
 
-            txtbxStudentSectionID.Text = row.Cells("SectionID").Value.ToString()
+            ' SectionID retrieval (still needed for the textbox)
+            If Not IsDBNull(row.Cells("SectionID").Value) Then
+                txtbxStudentSectionID.Text = row.Cells("SectionID").Value.ToString()
+            Else
+                txtbxStudentSectionID.Text = String.Empty
+            End If
+
             txtbxStudentEnrollmentID.Text = row.Cells("EnrollmentID").Value.ToString()
             txtbxStudentHouseNo.Text = row.Cells("HouseNumber").Value.ToString()
             txtbcStudentStreet.Text = row.Cells("Street").Value.ToString()
@@ -554,23 +597,200 @@ Public Class AdminManageStudents
         End If
     End Sub
 
-    ' Method to load data to DataGridView
-    Private Sub LoadToDGV(query As String, dgv As DataGridView)
+    Private Sub UpdateStudent()
+        If currentStudentID = 0 Then
+            MsgBox("No student selected for update.", MsgBoxStyle.Exclamation, "Update Error")
+            Return
+        End If
+
         Try
+            ' Open Connection
             modDBx.openConn(modDBx.db_name)
-            Using cmd As New MySqlCommand(query, modDBx.conn)
-                Using adapter As New MySqlDataAdapter(cmd)
-                    Dim dt As New DataTable()
-                    adapter.Fill(dt)
-                    dgv.DataSource = dt
-                End Using
+
+            ' Define the SQL Update Statement using parameters
+            Dim sql As String = "UPDATE student SET " &
+                            "FirstName = @FirstName, " &
+                            "MiddleName = @MiddleName, " &
+                            "LastName = @LastName, " &
+                            "Gender = @Gender, " &
+                            "Birthdate = @Birthdate, " &
+                            "Religion = @Religion, " &
+                            "GuardianName = @GuardianName, " &
+                            "Age = @Age, " &
+                            "GradeLevel = @GradeLevel, " &
+                            "SectionID = @SectionID, " &
+                            "EnrollmentID = @EnrollmentID, " &
+                            "HouseNumber = @HouseNumber, " &
+                            "Street = @Street, " &
+                            "Barangay = @Barangay, " &
+                            "Municipality = @Municipality, " &
+                            "Province = @Province, " &
+                            "Country = @Country, " &
+                            "ZIPCode = @ZIPCode " &
+                            "WHERE StudentID = @StudentID"
+
+            ' Create and Configure Command
+            Using cmd As New MySqlCommand(sql, modDBx.conn)
+                ' Add Parameters
+                cmd.Parameters.AddWithValue("@FirstName", txtbxStudentFirstName.Text.Trim())
+                cmd.Parameters.AddWithValue("@MiddleName", txtStudentMiddleName.Text.Trim())
+                cmd.Parameters.AddWithValue("@LastName", txtbxStudentSurname.Text.Trim())
+                cmd.Parameters.AddWithValue("@Gender", cmbStudenttGender.Text.Trim())
+                cmd.Parameters.AddWithValue("@Birthdate", dtpStudentBirthdate.Value)
+                cmd.Parameters.AddWithValue("@Religion", txtbxStudentReligion.Text.Trim())
+                cmd.Parameters.AddWithValue("@GuardianName", txtbxGuardianName.Text.Trim())
+                cmd.Parameters.AddWithValue("@Age", nudStudentAge.Value)
+                cmd.Parameters.AddWithValue("@GradeLevel", nudStudentGradeLevel.Value)
+                ' Handle SectionID as nullable
+                If String.IsNullOrWhiteSpace(txtbxStudentSectionID.Text) Then
+                    cmd.Parameters.AddWithValue("@SectionID", DBNull.Value)
+                Else
+                    cmd.Parameters.AddWithValue("@SectionID", txtbxStudentSectionID.Text.Trim())
+                End If
+                cmd.Parameters.AddWithValue("@EnrollmentID", txtbxStudentEnrollmentID.Text.Trim())
+                cmd.Parameters.AddWithValue("@HouseNumber", txtbxStudentHouseNo.Text.Trim())
+                cmd.Parameters.AddWithValue("@Street", txtbcStudentStreet.Text.Trim())
+                cmd.Parameters.AddWithValue("@Barangay", txtbxStudentBarangay.Text.Trim())
+                cmd.Parameters.AddWithValue("@Municipality", txtbxStudentCity.Text.Trim())
+                cmd.Parameters.AddWithValue("@Province", txtbxStudentProvince.Text.Trim())
+                cmd.Parameters.AddWithValue("@Country", txtbxCountry.Text.Trim())
+                cmd.Parameters.AddWithValue("@ZIPCode", txtbxZipCode.Text.Trim())
+                cmd.Parameters.AddWithValue("@StudentID", currentStudentID)
+
+                ' Execute the Update
+                Dim rowsAffected As Integer = cmd.ExecuteNonQuery()
+
+                If rowsAffected > 0 Then
+                    MsgBox("Student updated successfully.", MsgBoxStyle.Information, "Update Success")
+                    ' Reload the DataGridView to reflect changes
+                    LoadToDGV("SELECT * FROM student", dgvStudents)
+                    ' Clear the current selection or reset fields if needed
+                    currentStudentID = 0
+                Else
+                    MsgBox("No student was updated. Please check the data.", MsgBoxStyle.Exclamation, "Update Failed")
+                End If
             End Using
+
         Catch ex As Exception
-            MessageBox.Show("Error loading data: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            MsgBox("Error updating student: " & ex.Message, MsgBoxStyle.Critical, "Update Error")
         Finally
-            If modDBx.conn.State = ConnectionState.Open Then
+            ' Close Connection safely
+            If modDBx.conn IsNot Nothing AndAlso modDBx.conn.State = ConnectionState.Open Then
                 modDBx.conn.Close()
             End If
         End Try
     End Sub
+
+    ' Example: Call UpdateStudent from a button click (add a button named btnUpdateStudent)
+    Private Sub SearchStudentsBySurname(ByVal surname As String)
+        ' 1. If the search box is empty, load all students (default view)
+        If String.IsNullOrWhiteSpace(surname) Then
+            LoadToDGV("SELECT * FROM student", dgvStudents)
+            Return
+        End If
+
+        Try
+            ' 2. Open Connection
+            modDBx.openConn(modDBx.db_name)
+
+            ' 3. Define the SQL Search Statement using parameters
+            ' We use LIKE and wildcards (%) for partial and case-insensitive matching.
+            Dim sql As String = "SELECT * FROM student WHERE LastName LIKE @searchSurname ORDER BY LastName"
+
+            ' 4. Create and Configure Command
+            Using cmd As New MySqlCommand(sql, modDBx.conn)
+                ' 5. Add Parameter with Wildcards
+                ' The database column is 'LastName', which the user enters in the search box (Surname).
+                cmd.Parameters.AddWithValue("@searchSurname", "%" & surname.Trim() & "%")
+
+                ' 6. Execute and Load Data into a DataTable
+                Dim dt As New System.Data.DataTable
+                Using adapter As New MySql.Data.MySqlClient.MySqlDataAdapter(cmd)
+                    adapter.Fill(dt)
+                End Using
+
+                ' 7. Update the DataGridView
+                dgvStudents.DataSource = dt
+                dgvStudents.Refresh()
+
+                ' Hide the primary key column (StudentID is usually the first column)
+                If dgvStudents.ColumnCount > 0 Then
+                    dgvStudents.Columns(0).Visible = False
+                End If
+
+                ' Notification
+                If dt.Rows.Count = 0 Then
+                    MsgBox("No student found matching the surname '" & surname & "'.", MsgBoxStyle.Information, "Search Result")
+                End If
+
+            End Using
+
+        Catch ex As Exception
+            MsgBox("Error searching students: " & ex.Message, MsgBoxStyle.Critical)
+        Finally
+            ' 8. Close Connection safely
+            If modDBx.conn IsNot Nothing AndAlso modDBx.conn.State = System.Data.ConnectionState.Open Then
+                modDBx.conn.Close()
+            End If
+        End Try
+    End Sub
+    Private Sub TextBoxStudentSearch_TextChanged(sender As Object, e As EventArgs) Handles TextBoxStudentSearch.TextChanged
+        SearchStudentsBySurname(TextBoxStudentSearch.Text)
+    End Sub
+
+    Private Sub btnStudentSearch_Click(sender As Object, e As EventArgs)
+        SearchStudentsBySurname(TextBoxStudentSearch.Text)
+    End Sub
+
+    Private Sub btnStudentUpdate_Click(sender As Object, e As EventArgs) Handles btnStudentUpdate.Click
+        UpdateStudent()
+    End Sub
+
+    Private Sub btnStudentDelete_Click(sender As Object, e As EventArgs) Handles btnStudentDelete.Click
+        ' Check if a student is selected
+        If currentStudentID = 0 Then
+            MsgBox("Please select a student to delete.", MsgBoxStyle.Exclamation, "Delete Student")
+            Return
+        End If
+
+        ' Confirm deletion
+        If MessageBox.Show("Are you sure you want to delete this student?", "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) = DialogResult.No Then
+            Return
+        End If
+
+        Try
+            ' Open database connection
+            modDBx.openConn(modDBx.db_name)
+
+            ' Prepare the DELETE SQL statement
+            Dim sql As String = "DELETE FROM student WHERE StudentID = @StudentID"
+
+            Using cmd As New MySqlCommand(sql, modDBx.conn)
+                cmd.Parameters.AddWithValue("@StudentID", currentStudentID)
+                Dim rowsAffected As Integer = cmd.ExecuteNonQuery()
+
+                If rowsAffected > 0 Then
+                    MsgBox("Student deleted successfully.", MsgBoxStyle.Information, "Delete Success")
+                    ' Refresh the DataGridView
+                    LoadToDGV("SELECT * FROM student", dgvStudents)
+                    ' Reset current selection and clear input fields
+                    currentStudentID = 0
+                    ClearInputFields()
+                Else
+                    MsgBox("No student was deleted. Please check your selection.", MsgBoxStyle.Exclamation, "Delete Failed")
+                End If
+            End Using
+
+        Catch ex As Exception
+            MsgBox("Error deleting student: " & ex.Message, MsgBoxStyle.Critical, "Delete Error")
+        Finally
+            ' Close connection safely
+            If modDBx.conn IsNot Nothing AndAlso modDBx.conn.State = ConnectionState.Open Then
+                modDBx.conn.Close()
+            End If
+        End Try
+    End Sub
+
+
+
 End Class
