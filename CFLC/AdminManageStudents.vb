@@ -1,4 +1,5 @@
-﻿Imports MySql.Data.MySqlClient
+﻿Imports System.Data.SqlClient
+Imports MySql.Data.MySqlClient
 
 Public Class AdminManageStudents
 
@@ -321,6 +322,11 @@ Public Class AdminManageStudents
     Private Sub dgvStudents_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvStudents.CellClick
         If e.RowIndex >= 0 Then
             Dim row As DataGridViewRow = dgvStudents.Rows(e.RowIndex)
+            If Not IsDBNull(row.Cells("StudentID").Value) Then
+
+            Else
+
+            End If
 
             txtbxStudentFirstName.Text = row.Cells("FirstName").Value.ToString()
             txtStudentMiddleName.Text = row.Cells("MiddleName").Value.ToString()
