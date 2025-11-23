@@ -225,6 +225,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AdminManageTeacher.resx">
       <DependentUpon>AdminManageTeacher.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
