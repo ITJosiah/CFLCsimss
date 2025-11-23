@@ -15,6 +15,10 @@
     Private Sub dgvTeacher_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvTeacher.CellContentClick
 
     End Sub
+
+    Private Sub AdminManageTeacher_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+    End Sub
 End Class
 
 
