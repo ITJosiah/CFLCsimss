@@ -77,6 +77,7 @@ Partial Class AdminManageStudents
         Me.lblStudentList = New System.Windows.Forms.Label()
         Me.btnStudentSearch = New System.Windows.Forms.Button()
         Me.picWatermark = New System.Windows.Forms.PictureBox()
+        Me.TextBoxStudentSearch = New System.Windows.Forms.TextBox()
         Me.pnlSidebar.SuspendLayout()
         Me.flowButtons.SuspendLayout()
         Me.pnlContent.SuspendLayout()
@@ -195,6 +196,7 @@ Partial Class AdminManageStudents
         'pnlContent
         '
         Me.pnlContent.BackColor = System.Drawing.Color.FromArgb(CType(CType(7, Byte), Integer), CType(CType(77, Byte), Integer), CType(CType(39, Byte), Integer))
+        Me.pnlContent.Controls.Add(Me.TextBoxStudentSearch)
         Me.pnlContent.Controls.Add(Me.btnStudentDelete)
         Me.pnlContent.Controls.Add(Me.btnStudentUpdate)
         Me.pnlContent.Controls.Add(Me.btnStudentAdd)
@@ -703,6 +705,15 @@ Partial Class AdminManageStudents
         Me.picWatermark.TabIndex = 5
         Me.picWatermark.TabStop = False
         '
+        'TextBoxStudentSearch
+        '
+        Me.TextBoxStudentSearch.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBoxStudentSearch.Location = New System.Drawing.Point(478, 727)
+        Me.TextBoxStudentSearch.MaxLength = 50
+        Me.TextBoxStudentSearch.Name = "TextBoxStudentSearch"
+        Me.TextBoxStudentSearch.Size = New System.Drawing.Size(246, 36)
+        Me.TextBoxStudentSearch.TabIndex = 10
+        '
         'AdminManageStudents
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
@@ -788,4 +799,5 @@ Partial Class AdminManageStudents
     Friend WithEvents nudStudentGradeLevel As NumericUpDown
     Friend WithEvents txtbxStudentProvince As TextBox
     Friend WithEvents lblStudentProvince As Label
+    Friend WithEvents TextBoxStudentSearch As TextBox
 End Class
