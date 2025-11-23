@@ -1,5 +1,16 @@
 ﻿Public Class Form1
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+
+        UpdateConnectionString()
+
+        If isConnectedToLocalServer() Then
+            MsgBox("Connected!")
+        Else
+            MsgBox("Failed to connect!")
+        End If
+
+
         Me.WindowState = FormWindowState.Maximized
         CenterUI()
         ' Do not set FormBorderStyle = None to keep buttons visible
@@ -38,5 +49,9 @@
         Dim loginForm As New LoginForm()
         loginForm.Show()
         Me.Hide() ' Hide Form1, or use Me.Close() if you want to close it
+    End Sub
+
+    Private Sub DataGridView1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellContentClick
+
     End Sub
 End Class
