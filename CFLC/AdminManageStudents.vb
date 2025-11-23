@@ -5,8 +5,6 @@ Public Class AdminManageStudents
     Public Property IsEmbedded As Boolean = False
 
     Private Sub AdminManageStudents_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
-
         If Not IsEmbedded Then
             Me.WindowState = FormWindowState.Maximized
             Me.BackColor = Color.FromArgb(15, 56, 32)
@@ -23,6 +21,9 @@ Public Class AdminManageStudents
 
         ' Initialize numeric controls with safe default values
         InitializeNumericControls()
+
+        ' Load students data
+        LoadToDGV("SELECT * FROM student", dgvStudents)
     End Sub
 
     Private Sub InitializeNumericControls()
@@ -41,7 +42,7 @@ Public Class AdminManageStudents
     End Sub
 
     Private Sub InitializeGenderComboBox()
-        ' Populate Gender dropdownS
+        ' Populate Gender dropdown
         cmbStudenttGender.Items.Clear()
         cmbStudenttGender.Items.Add("Male")
         cmbStudenttGender.Items.Add("Female")
@@ -123,9 +124,240 @@ Public Class AdminManageStudents
     End Sub
 
     Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnStudentAdd.Click
+        ' Validate required fields FIRST
+        If Not ValidateInputs() Then
+            Return ' Stop execution if validation fails
+        End If
 
+        ' Add student to database using modDB
+        Try
+            ' Build the INSERT query (StudentID auto-increments, StudentNo left blank for now)
+            ' Use NULL for empty SectionID and EnrollmentID to avoid foreign key constraints
+            Dim sectionIDValue As String = If(String.IsNullOrWhiteSpace(txtbxStudentSectionID.Text), "NULL", "'" & txtbxStudentSectionID.Text.Trim().Replace("'", "''") & "'")
+            Dim enrollmentIDValue As String = If(String.IsNullOrWhiteSpace(txtbxStudentEnrollmentID.Text), "NULL", "'" & txtbxStudentEnrollmentID.Text.Trim().Replace("'", "''") & "'")
+
+            Dim query As String = "INSERT INTO student (MiddleName, FirstName, LastName, Gender, BirthDate, Age, GuardianName, Religion, GradeLevel, SectionID, EnrollmentID, HouseNumber, Street, Barangay, Municipality, Province, Country, ZipCode) " &
+                                "VALUES ('{0}', '{1}', '{2}', '{3}', '{4}', {5}, '{6}', '{7}', {8}, {9}, {10}, '{11}', '{12}', '{13}', '{14}', '{15}', '{16}', '{17}')"
+
+            ' Format the query with values
+            query = String.Format(query,
+                txtStudentMiddleName.Text.Trim().Replace("'", "''"),
+                txtbxStudentFirstName.Text.Trim().Replace("'", "''"),
+                txtbxStudentSurname.Text.Trim().Replace("'", "''"),
+                cmbStudenttGender.SelectedItem.ToString(),
+                dtpStudentBirthdate.Value.ToString("yyyy-MM-dd"),
+                nudStudentAge.Value,
+                txtbxGuardianName.Text.Trim().Replace("'", "''"),
+                txtbxStudentReligion.Text.Trim().Replace("'", "''"),
+                nudStudentGradeLevel.Value,
+                sectionIDValue,
+                enrollmentIDValue,
+                txtbxStudentHouseNo.Text.Trim().Replace("'", "''"),
+                txtbcStudentStreet.Text.Trim().Replace("'", "''"),
+                txtbxStudentBarangay.Text.Trim().Replace("'", "''"),
+                txtbxStudentCity.Text.Trim().Replace("'", "''"),
+                txtbxStudentProvince.Text.Trim().Replace("'", "''"),
+                txtbxCountry.Text.Trim().Replace("'", "''"),
+                txtbxZipCode.Text.Trim().Replace("'", "''")
+            )
+
+            ' Open connection and execute query
+            modDBx.openConn(modDBx.db_name)
+
+            Using cmd As New MySqlCommand(query, modDBx.conn)
+                Dim rowsAffected As Integer = cmd.ExecuteNonQuery()
+
+                If rowsAffected > 0 Then
+                    MessageBox.Show("Student added successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
+
+                    ' Note: Logging functionality removed due to missing method
+                    ' You can add your own logging implementation here if needed
+
+                    ' Clear all fields after successful insert
+                    ClearInputFields()
+
+                    ' Refresh the DataGridView
+                    LoadToDGV("SELECT * FROM student", dgvStudents)
+                Else
+                    MessageBox.Show("Failed to add student. Please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                End If
+            End Using
+
+            ' Close connection
+            If modDBx.conn.State = ConnectionState.Open Then
+                modDBx.conn.Close()
+            End If
+
+        Catch ex As MySqlException
+            MessageBox.Show("Database Error: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        Catch ex As Exception
+            MessageBox.Show("Error: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        Finally
+            ' Ensure connection is closed
+            If modDBx.conn.State = ConnectionState.Open Then
+                modDBx.conn.Close()
+            End If
+        End Try
     End Sub
 
+    Private Function ValidateInputs() As Boolean
+        ' Check if required fields are filled
+        If String.IsNullOrWhiteSpace(txtbxStudentFirstName.Text) Then
+            MessageBox.Show("Please enter First Name.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            txtbxStudentFirstName.Focus()
+            Return False
+        End If
+
+        If String.IsNullOrWhiteSpace(txtbxStudentSurname.Text) Then
+            MessageBox.Show("Please enter Last Name.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            txtbxStudentSurname.Focus()
+            Return False
+        End If
+
+        If cmbStudenttGender.SelectedIndex = -1 Then
+            MessageBox.Show("Please select Gender.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            cmbStudenttGender.Focus()
+            Return False
+        End If
+
+        If nudStudentAge.Value <= 0 Then
+            MessageBox.Show("Please enter a valid Age.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            nudStudentAge.Focus()
+            Return False
+        End If
+
+        If nudStudentGradeLevel.Value <= 0 Then
+            MessageBox.Show("Please enter a valid Grade Level.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            nudStudentGradeLevel.Focus()
+            Return False
+        End If
+
+        ' Validate address fields
+        If String.IsNullOrWhiteSpace(txtbxStudentHouseNo.Text) Then
+            MessageBox.Show("Please enter House Number.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            txtbxStudentHouseNo.Focus()
+            Return False
+        End If
+
+        ' Validate House Number is numeric
+        Dim houseNum As Integer
+        If Not Integer.TryParse(txtbxStudentHouseNo.Text.Trim(), houseNum) Then
+            MessageBox.Show("House Number must contain only numbers.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            txtbxStudentHouseNo.Focus()
+            Return False
+        End If
+
+        If String.IsNullOrWhiteSpace(txtbcStudentStreet.Text) Then
+            MessageBox.Show("Please enter Street.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            txtbcStudentStreet.Focus()
+            Return False
+        End If
+
+        If String.IsNullOrWhiteSpace(txtbxStudentBarangay.Text) Then
+            MessageBox.Show("Please enter Barangay.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            txtbxStudentBarangay.Focus()
+            Return False
+        End If
+
+        If String.IsNullOrWhiteSpace(txtbxStudentCity.Text) Then
+            MessageBox.Show("Please enter Municipality/City.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            txtbxStudentCity.Focus()
+            Return False
+        End If
+
+        If String.IsNullOrWhiteSpace(txtbxStudentProvince.Text) Then
+            MessageBox.Show("Please enter Province.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            txtbxStudentProvince.Focus()
+            Return False
+        End If
+
+        If String.IsNullOrWhiteSpace(txtbxCountry.Text) Then
+            MessageBox.Show("Please enter Country.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            txtbxCountry.Focus()
+            Return False
+        End If
+
+        If String.IsNullOrWhiteSpace(txtbxZipCode.Text) Then
+            MessageBox.Show("Please enter Zip Code.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            txtbxZipCode.Focus()
+            Return False
+        End If
+
+        ' Validate Zip Code is numeric and has appropriate length
+        Dim zipCode As String = txtbxZipCode.Text.Trim()
+        If zipCode.Length <> 4 Then
+            MessageBox.Show("Zip Code must be exactly 4 digits.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            txtbxZipCode.Focus()
+            Return False
+        End If
+
+        Dim zipCodeNum As Integer
+        If Not Integer.TryParse(zipCode, zipCodeNum) Then
+            MessageBox.Show("Zip Code must contain only numbers.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            txtbxZipCode.Focus()
+            Return False
+        End If
+
+        ' Validate SectionID exists in section table (if not empty)
+        If Not String.IsNullOrWhiteSpace(txtbxStudentSectionID.Text) Then
+            If Not ValidateSectionID(txtbxStudentSectionID.Text.Trim()) Then
+                MessageBox.Show("The Section ID does not exist. Please enter a valid Section ID or leave it blank.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                txtbxStudentSectionID.Focus()
+                Return False
+            End If
+        End If
+
+        ' Validate EnrollmentID exists in enrollment table (if not empty)
+        If Not String.IsNullOrWhiteSpace(txtbxStudentEnrollmentID.Text) Then
+            If Not ValidateEnrollmentID(txtbxStudentEnrollmentID.Text.Trim()) Then
+                MessageBox.Show("The Enrollment ID does not exist. Please enter a valid Enrollment ID or leave it blank.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                txtbxStudentEnrollmentID.Focus()
+                Return False
+            End If
+        End If
+
+        Return True
+    End Function
+
+    Private Function ValidateSectionID(sectionID As String) As Boolean
+        Try
+            Dim query As String = String.Format("SELECT COUNT(*) FROM section WHERE SectionID = '{0}'", sectionID.Replace("'", "''"))
+            modDBx.openConn(modDBx.db_name)
+
+            Using cmd As New MySqlCommand(query, modDBx.conn)
+                Dim count As Integer = Convert.ToInt32(cmd.ExecuteScalar())
+                If modDBx.conn.State = ConnectionState.Open Then
+                    modDBx.conn.Close()
+                End If
+                Return count > 0
+            End Using
+        Catch ex As Exception
+            If modDBx.conn.State = ConnectionState.Open Then
+                modDBx.conn.Close()
+            End If
+            Return False
+        End Try
+    End Function
+
+    Private Function ValidateEnrollmentID(enrollmentID As String) As Boolean
+        Try
+            Dim query As String = String.Format("SELECT COUNT(*) FROM enrollment WHERE EnrollmentID = '{0}'", enrollmentID.Replace("'", "''"))
+            modDBx.openConn(modDBx.db_name)
+
+            Using cmd As New MySqlCommand(query, modDBx.conn)
+                Dim count As Integer = Convert.ToInt32(cmd.ExecuteScalar())
+                If modDBx.conn.State = ConnectionState.Open Then
+                    modDBx.conn.Close()
+                End If
+                Return count > 0
+            End Using
+        Catch ex As Exception
+            If modDBx.conn.State = ConnectionState.Open Then
+                modDBx.conn.Close()
+            End If
+            Return False
+        End Try
+    End Function
 
     Private Sub ClearInputFields()
         ' Clear all input fields after successful add
@@ -281,11 +513,7 @@ Public Class AdminManageStudents
     End Sub
 
     Private Sub dgvStudents_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvStudents.CellContentClick
-
-    End Sub
-
-    Private Sub FormStudents_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        LoadToDGV("SELECT * FROM student", dgvStudents)
+        ' Handle cell content click if needed
     End Sub
 
     Private Sub dgvStudents_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvStudents.CellClick
@@ -324,5 +552,25 @@ Public Class AdminManageStudents
             txtbxCountry.Text = row.Cells("Country").Value.ToString()
             txtbxZipCode.Text = row.Cells("ZIPCode").Value.ToString()
         End If
+    End Sub
+
+    ' Method to load data to DataGridView
+    Private Sub LoadToDGV(query As String, dgv As DataGridView)
+        Try
+            modDBx.openConn(modDBx.db_name)
+            Using cmd As New MySqlCommand(query, modDBx.conn)
+                Using adapter As New MySqlDataAdapter(cmd)
+                    Dim dt As New DataTable()
+                    adapter.Fill(dt)
+                    dgv.DataSource = dt
+                End Using
+            End Using
+        Catch ex As Exception
+            MessageBox.Show("Error loading data: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        Finally
+            If modDBx.conn.State = ConnectionState.Open Then
+                modDBx.conn.Close()
+            End If
+        End Try
     End Sub
 End Class
