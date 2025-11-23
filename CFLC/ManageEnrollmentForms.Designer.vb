@@ -24,6 +24,21 @@ Partial Class ManageEnrollmentForms
     Private Sub InitializeComponent()
         Me.pnlContent = New System.Windows.Forms.Panel()
         Me.dgvEnrollment = New System.Windows.Forms.DataGridView()
+        Me.EnrollmentID = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.EStudentID = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ESchoolYear = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.EGradeLevel = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ESectionID = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.EnrollmentDate = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.EPaymentStatus = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.EModeOfPayment = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.EnrollmentStatus = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.EnrollmentMode = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.EProcessedBy = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.EGuardianName = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.EContactNumber = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ERequirementStatus = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.EReferenceNumber = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.DateTimePickerEnrollmentDate = New System.Windows.Forms.DateTimePicker()
         Me.TextBoxEnrollmentContactNo = New System.Windows.Forms.TextBox()
@@ -56,21 +71,6 @@ Partial Class ManageEnrollmentForms
         Me.btnEnrollAdd = New System.Windows.Forms.Button()
         Me.btnEnrollSearch = New System.Windows.Forms.Button()
         Me.picWatermark = New System.Windows.Forms.PictureBox()
-        Me.EnrollmentID = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.EStudentID = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ESchoolYear = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.EGradeLevel = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ESectionID = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.EnrollmentDate = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.EPaymentStatus = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.EModeOfPayment = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.EnrollmentStatus = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.EnrollmentMode = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.EProcessedBy = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.EGuardianName = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.EContactNumber = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ERequirementStatus = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.EReferenceNumber = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.pnlContent.SuspendLayout()
         CType(Me.dgvEnrollment, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
@@ -113,6 +113,141 @@ Partial Class ManageEnrollmentForms
         Me.dgvEnrollment.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.dgvEnrollment.Size = New System.Drawing.Size(1624, 193)
         Me.dgvEnrollment.TabIndex = 29
+        '
+        'EnrollmentID
+        '
+        Me.EnrollmentID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.EnrollmentID.HeaderText = "Enrollment ID"
+        Me.EnrollmentID.MinimumWidth = 6
+        Me.EnrollmentID.Name = "EnrollmentID"
+        Me.EnrollmentID.ReadOnly = True
+        Me.EnrollmentID.Width = 106
+        '
+        'EStudentID
+        '
+        Me.EStudentID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.EStudentID.HeaderText = "Student ID"
+        Me.EStudentID.MinimumWidth = 6
+        Me.EStudentID.Name = "EStudentID"
+        Me.EStudentID.ReadOnly = True
+        Me.EStudentID.Width = 90
+        '
+        'ESchoolYear
+        '
+        Me.ESchoolYear.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.ESchoolYear.HeaderText = "School Year"
+        Me.ESchoolYear.MinimumWidth = 6
+        Me.ESchoolYear.Name = "ESchoolYear"
+        Me.ESchoolYear.ReadOnly = True
+        Me.ESchoolYear.Width = 101
+        '
+        'EGradeLevel
+        '
+        Me.EGradeLevel.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.EGradeLevel.HeaderText = "Grade Level"
+        Me.EGradeLevel.MinimumWidth = 6
+        Me.EGradeLevel.Name = "EGradeLevel"
+        Me.EGradeLevel.ReadOnly = True
+        Me.EGradeLevel.Width = 101
+        '
+        'ESectionID
+        '
+        Me.ESectionID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.ESectionID.HeaderText = "SectionID"
+        Me.ESectionID.MinimumWidth = 6
+        Me.ESectionID.Name = "ESectionID"
+        Me.ESectionID.ReadOnly = True
+        Me.ESectionID.Width = 94
+        '
+        'EnrollmentDate
+        '
+        Me.EnrollmentDate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.EnrollmentDate.HeaderText = "Enrollment Date"
+        Me.EnrollmentDate.MinimumWidth = 6
+        Me.EnrollmentDate.Name = "EnrollmentDate"
+        Me.EnrollmentDate.ReadOnly = True
+        Me.EnrollmentDate.Width = 120
+        '
+        'EPaymentStatus
+        '
+        Me.EPaymentStatus.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.EPaymentStatus.HeaderText = "Payment Status"
+        Me.EPaymentStatus.MinimumWidth = 6
+        Me.EPaymentStatus.Name = "EPaymentStatus"
+        Me.EPaymentStatus.ReadOnly = True
+        Me.EPaymentStatus.Width = 119
+        '
+        'EModeOfPayment
+        '
+        Me.EModeOfPayment.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.EModeOfPayment.HeaderText = "Mode Of Payment"
+        Me.EModeOfPayment.MinimumWidth = 6
+        Me.EModeOfPayment.Name = "EModeOfPayment"
+        Me.EModeOfPayment.ReadOnly = True
+        Me.EModeOfPayment.Width = 131
+        '
+        'EnrollmentStatus
+        '
+        Me.EnrollmentStatus.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.EnrollmentStatus.HeaderText = "Enrollment Status"
+        Me.EnrollmentStatus.MinimumWidth = 6
+        Me.EnrollmentStatus.Name = "EnrollmentStatus"
+        Me.EnrollmentStatus.ReadOnly = True
+        Me.EnrollmentStatus.Width = 128
+        '
+        'EnrollmentMode
+        '
+        Me.EnrollmentMode.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.EnrollmentMode.HeaderText = "Enrollment Mode"
+        Me.EnrollmentMode.MinimumWidth = 6
+        Me.EnrollmentMode.Name = "EnrollmentMode"
+        Me.EnrollmentMode.ReadOnly = True
+        Me.EnrollmentMode.Width = 126
+        '
+        'EProcessedBy
+        '
+        Me.EProcessedBy.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.EProcessedBy.HeaderText = "Processed By"
+        Me.EProcessedBy.MinimumWidth = 6
+        Me.EProcessedBy.Name = "EProcessedBy"
+        Me.EProcessedBy.ReadOnly = True
+        Me.EProcessedBy.Width = 111
+        '
+        'EGuardianName
+        '
+        Me.EGuardianName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.EGuardianName.HeaderText = "Guardian Name"
+        Me.EGuardianName.MinimumWidth = 6
+        Me.EGuardianName.Name = "EGuardianName"
+        Me.EGuardianName.ReadOnly = True
+        Me.EGuardianName.Width = 120
+        '
+        'EContactNumber
+        '
+        Me.EContactNumber.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.EContactNumber.HeaderText = "Contact No"
+        Me.EContactNumber.MinimumWidth = 6
+        Me.EContactNumber.Name = "EContactNumber"
+        Me.EContactNumber.ReadOnly = True
+        Me.EContactNumber.Width = 94
+        '
+        'ERequirementStatus
+        '
+        Me.ERequirementStatus.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.ERequirementStatus.HeaderText = "Requirement Status"
+        Me.ERequirementStatus.MinimumWidth = 6
+        Me.ERequirementStatus.Name = "ERequirementStatus"
+        Me.ERequirementStatus.ReadOnly = True
+        Me.ERequirementStatus.Width = 140
+        '
+        'EReferenceNumber
+        '
+        Me.EReferenceNumber.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.EReferenceNumber.HeaderText = "Reference Number"
+        Me.EReferenceNumber.MinimumWidth = 6
+        Me.EReferenceNumber.Name = "EReferenceNumber"
+        Me.EReferenceNumber.ReadOnly = True
+        Me.EReferenceNumber.Width = 137
         '
         'Panel1
         '
@@ -452,148 +587,13 @@ Partial Class ManageEnrollmentForms
         'picWatermark
         '
         Me.picWatermark.Image = Global.CFLC.My.Resources.Resources.logo
-        Me.picWatermark.Location = New System.Drawing.Point(640, 100)
+        Me.picWatermark.Location = New System.Drawing.Point(487, 139)
         Me.picWatermark.Margin = New System.Windows.Forms.Padding(4)
         Me.picWatermark.Name = "picWatermark"
         Me.picWatermark.Size = New System.Drawing.Size(648, 596)
         Me.picWatermark.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
         Me.picWatermark.TabIndex = 22
         Me.picWatermark.TabStop = False
-        '
-        'EnrollmentID
-        '
-        Me.EnrollmentID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        Me.EnrollmentID.HeaderText = "Enrollment ID"
-        Me.EnrollmentID.MinimumWidth = 6
-        Me.EnrollmentID.Name = "EnrollmentID"
-        Me.EnrollmentID.ReadOnly = True
-        Me.EnrollmentID.Width = 115
-        '
-        'EStudentID
-        '
-        Me.EStudentID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        Me.EStudentID.HeaderText = "Student ID"
-        Me.EStudentID.MinimumWidth = 6
-        Me.EStudentID.Name = "EStudentID"
-        Me.EStudentID.ReadOnly = True
-        Me.EStudentID.Width = 97
-        '
-        'ESchoolYear
-        '
-        Me.ESchoolYear.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        Me.ESchoolYear.HeaderText = "School Year"
-        Me.ESchoolYear.MinimumWidth = 6
-        Me.ESchoolYear.Name = "ESchoolYear"
-        Me.ESchoolYear.ReadOnly = True
-        Me.ESchoolYear.Width = 110
-        '
-        'EGradeLevel
-        '
-        Me.EGradeLevel.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        Me.EGradeLevel.HeaderText = "Grade Level"
-        Me.EGradeLevel.MinimumWidth = 6
-        Me.EGradeLevel.Name = "EGradeLevel"
-        Me.EGradeLevel.ReadOnly = True
-        Me.EGradeLevel.Width = 110
-        '
-        'ESectionID
-        '
-        Me.ESectionID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        Me.ESectionID.HeaderText = "SectionID"
-        Me.ESectionID.MinimumWidth = 6
-        Me.ESectionID.Name = "ESectionID"
-        Me.ESectionID.ReadOnly = True
-        Me.ESectionID.Width = 94
-        '
-        'EnrollmentDate
-        '
-        Me.EnrollmentDate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        Me.EnrollmentDate.HeaderText = "Enrollment Date"
-        Me.EnrollmentDate.MinimumWidth = 6
-        Me.EnrollmentDate.Name = "EnrollmentDate"
-        Me.EnrollmentDate.ReadOnly = True
-        Me.EnrollmentDate.Width = 120
-        '
-        'EPaymentStatus
-        '
-        Me.EPaymentStatus.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        Me.EPaymentStatus.HeaderText = "Payment Status"
-        Me.EPaymentStatus.MinimumWidth = 6
-        Me.EPaymentStatus.Name = "EPaymentStatus"
-        Me.EPaymentStatus.ReadOnly = True
-        Me.EPaymentStatus.Width = 119
-        '
-        'EModeOfPayment
-        '
-        Me.EModeOfPayment.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        Me.EModeOfPayment.HeaderText = "Mode Of Payment"
-        Me.EModeOfPayment.MinimumWidth = 6
-        Me.EModeOfPayment.Name = "EModeOfPayment"
-        Me.EModeOfPayment.ReadOnly = True
-        Me.EModeOfPayment.Width = 131
-        '
-        'EnrollmentStatus
-        '
-        Me.EnrollmentStatus.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        Me.EnrollmentStatus.HeaderText = "Enrollment Status"
-        Me.EnrollmentStatus.MinimumWidth = 6
-        Me.EnrollmentStatus.Name = "EnrollmentStatus"
-        Me.EnrollmentStatus.ReadOnly = True
-        Me.EnrollmentStatus.Width = 128
-        '
-        'EnrollmentMode
-        '
-        Me.EnrollmentMode.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        Me.EnrollmentMode.HeaderText = "Enrollment Mode"
-        Me.EnrollmentMode.MinimumWidth = 6
-        Me.EnrollmentMode.Name = "EnrollmentMode"
-        Me.EnrollmentMode.ReadOnly = True
-        Me.EnrollmentMode.Width = 126
-        '
-        'EProcessedBy
-        '
-        Me.EProcessedBy.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        Me.EProcessedBy.HeaderText = "Processed By"
-        Me.EProcessedBy.MinimumWidth = 6
-        Me.EProcessedBy.Name = "EProcessedBy"
-        Me.EProcessedBy.ReadOnly = True
-        Me.EProcessedBy.Width = 111
-        '
-        'EGuardianName
-        '
-        Me.EGuardianName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        Me.EGuardianName.HeaderText = "Guardian Name"
-        Me.EGuardianName.MinimumWidth = 6
-        Me.EGuardianName.Name = "EGuardianName"
-        Me.EGuardianName.ReadOnly = True
-        Me.EGuardianName.Width = 120
-        '
-        'EContactNumber
-        '
-        Me.EContactNumber.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        Me.EContactNumber.HeaderText = "Contact No"
-        Me.EContactNumber.MinimumWidth = 6
-        Me.EContactNumber.Name = "EContactNumber"
-        Me.EContactNumber.ReadOnly = True
-        Me.EContactNumber.Width = 94
-        '
-        'ERequirementStatus
-        '
-        Me.ERequirementStatus.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        Me.ERequirementStatus.HeaderText = "Requirement Status"
-        Me.ERequirementStatus.MinimumWidth = 6
-        Me.ERequirementStatus.Name = "ERequirementStatus"
-        Me.ERequirementStatus.ReadOnly = True
-        Me.ERequirementStatus.Width = 140
-        '
-        'EReferenceNumber
-        '
-        Me.EReferenceNumber.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        Me.EReferenceNumber.HeaderText = "Reference Number"
-        Me.EReferenceNumber.MinimumWidth = 6
-        Me.EReferenceNumber.Name = "EReferenceNumber"
-        Me.EReferenceNumber.ReadOnly = True
-        Me.EReferenceNumber.Width = 137
         '
         'ManageEnrollmentForms
         '

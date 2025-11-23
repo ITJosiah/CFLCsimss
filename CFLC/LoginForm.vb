@@ -1,7 +1,12 @@
 ﻿Public Class LoginForm
     Private Sub LoginForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ' Set form properties sadasdada
+
+        Me.FormBorderStyle = FormBorderStyle.None
         Me.WindowState = FormWindowState.Maximized
+        Me.Bounds = Screen.PrimaryScreen.Bounds
+        Me.TopMost = True
+        Me.BringToFront()
         Me.BackColor = Color.FromArgb(7, 77, 39)
 
         txtUserID.Size = New Size(200, 35)
@@ -24,6 +29,35 @@
         ' btnBack.FlatAppearance.BorderSize = 0
     End Sub
 
+    Protected Overrides Function ProcessCmdKey(ByRef msg As Message, keyData As Keys) As Boolean
+        If keyData = Keys.Escape Then
+            ExitFullScreen()
+            Return True
+        End If
+
+        If keyData = Keys.F Then
+            MakeItFullScreen()
+            Return True
+        End If
+
+        Return MyBase.ProcessCmdKey(msg, keyData)
+
+
+    End Function
+
+    Private Sub ExitFullScreen()
+        Me.FormBorderStyle = FormBorderStyle.Sizable
+        Me.WindowState = FormWindowState.Maximized
+        Me.TopMost = False
+    End Sub
+
+    Private Sub MakeItFullScreen()
+        Me.FormBorderStyle = FormBorderStyle.None
+        Me.WindowState = FormWindowState.Maximized
+        Me.Bounds = Screen.PrimaryScreen.Bounds
+        Me.TopMost = True
+        Me.BringToFront()
+    End Sub
     Private Sub CenterControls()
 
         txtUserID.Size = New Size(200, 35)
