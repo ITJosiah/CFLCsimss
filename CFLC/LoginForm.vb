@@ -71,7 +71,7 @@
         Dim password As String = txtPassword.Text
 
         ' Example validation (replace with your actual validation)
-        If userID = "admin" AndAlso password = "password" Then
+        If userID = "" AndAlso password = "" Then
             ' Navigate to Admin Dashboard
             Dim adminDashboard As New AdminDashboard()
             adminDashboard.Show()
@@ -95,6 +95,10 @@
     End Sub
 
     Private Sub PictureBox1_Click(sender As Object, e As EventArgs) Handles PictureBox1.Click
+
+    End Sub
+
+    Private Sub txtUserID_TextChanged(sender As Object, e As EventArgs) Handles txtUserID.TextChanged
 
     End Sub
 End Class
