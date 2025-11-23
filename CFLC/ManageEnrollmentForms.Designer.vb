@@ -599,6 +599,7 @@ Partial Class ManageEnrollmentForms
         '
         'TextBoxStudentSearch
         '
+        Me.TextBoxStudentSearch.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.TextBoxStudentSearch.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBoxStudentSearch.Location = New System.Drawing.Point(827, 683)
         Me.TextBoxStudentSearch.MaxLength = 50
