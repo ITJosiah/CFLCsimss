@@ -112,8 +112,4 @@
         End If
 
     End Sub
-
-    Private Sub dgvSections_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvSections.CellContentClick
-
-    End Sub
 End Class
