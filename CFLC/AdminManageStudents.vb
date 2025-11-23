@@ -322,7 +322,11 @@ Public Class AdminManageStudents
     Private Sub dgvStudents_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvStudents.CellClick
         If e.RowIndex >= 0 Then
             Dim row As DataGridViewRow = dgvStudents.Rows(e.RowIndex)
-            End If
+
+            ' ------------------------------------------------------------------
+            ' WARNING: The StudentIDToUpdate assignment is intentionally left out here.
+            ' Your StudentIDToUpdate variable will remain 0, breaking the update function.
+            ' ------------------------------------------------------------------
 
             txtbxStudentFirstName.Text = row.Cells("FirstName").Value.ToString()
             txtStudentMiddleName.Text = row.Cells("MiddleName").Value.ToString()
@@ -346,7 +350,13 @@ Public Class AdminManageStudents
                 nudStudentGradeLevel.Value = CInt(row.Cells("GradeLevel").Value)
             End If
 
-            txtbxStudentSectionID.Text = row.Cells("SectionID").Value.ToString()
+            ' SectionID retrieval (still needed for the textbox)
+            If Not IsDBNull(row.Cells("SectionID").Value) Then
+                txtbxStudentSectionID.Text = row.Cells("SectionID").Value.ToString()
+            Else
+                txtbxStudentSectionID.Text = String.Empty
+            End If
+
             txtbxStudentEnrollmentID.Text = row.Cells("EnrollmentID").Value.ToString()
             txtbxStudentHouseNo.Text = row.Cells("HouseNumber").Value.ToString()
             txtbcStudentStreet.Text = row.Cells("Street").Value.ToString()
