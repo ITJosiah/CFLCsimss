@@ -39,7 +39,6 @@ Public Class AdminManageStudents
 
     Private Sub AdminManageStudents_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-
         If Not IsEmbedded Then
             Me.WindowState = FormWindowState.Maximized
             Me.BackColor = Color.FromArgb(15, 56, 32)
@@ -516,4 +515,52 @@ Public Class AdminManageStudents
     Private Sub btnStudentUpdate_Click(sender As Object, e As EventArgs) Handles btnStudentUpdate.Click
         UpdateStudent()
     End Sub
+
+    Private Sub btnStudentDelete_Click(sender As Object, e As EventArgs) Handles btnStudentDelete.Click
+        ' Check if a student is selected
+        If currentStudentID = 0 Then
+            MsgBox("Please select a student to delete.", MsgBoxStyle.Exclamation, "Delete Student")
+            Return
+        End If
+
+        ' Confirm deletion
+        If MessageBox.Show("Are you sure you want to delete this student?", "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) = DialogResult.No Then
+            Return
+        End If
+
+        Try
+            ' Open database connection
+            modDBx.openConn(modDBx.db_name)
+
+            ' Prepare the DELETE SQL statement
+            Dim sql As String = "DELETE FROM student WHERE StudentID = @StudentID"
+
+            Using cmd As New MySqlCommand(sql, modDBx.conn)
+                cmd.Parameters.AddWithValue("@StudentID", currentStudentID)
+                Dim rowsAffected As Integer = cmd.ExecuteNonQuery()
+
+                If rowsAffected > 0 Then
+                    MsgBox("Student deleted successfully.", MsgBoxStyle.Information, "Delete Success")
+                    ' Refresh the DataGridView
+                    LoadToDGV("SELECT * FROM student", dgvStudents)
+                    ' Reset current selection and clear input fields
+                    currentStudentID = 0
+                    ClearInputFields()
+                Else
+                    MsgBox("No student was deleted. Please check your selection.", MsgBoxStyle.Exclamation, "Delete Failed")
+                End If
+            End Using
+
+        Catch ex As Exception
+            MsgBox("Error deleting student: " & ex.Message, MsgBoxStyle.Critical, "Delete Error")
+        Finally
+            ' Close connection safely
+            If modDBx.conn IsNot Nothing AndAlso modDBx.conn.State = ConnectionState.Open Then
+                modDBx.conn.Close()
+            End If
+        End Try
+    End Sub
+
+
+
 End Class
