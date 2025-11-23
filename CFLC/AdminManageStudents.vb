@@ -509,7 +509,7 @@ Public Class AdminManageStudents
         SearchStudentsBySurname(TextBoxStudentSearch.Text)
     End Sub
 
-    Private Sub btnStudentSearch_Click(sender As Object, e As EventArgs) Handles btnStudentSearch.Click
+    Private Sub btnStudentSearch_Click(sender As Object, e As EventArgs)
         SearchStudentsBySurname(TextBoxStudentSearch.Text)
     End Sub
 

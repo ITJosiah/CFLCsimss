@@ -76,7 +76,6 @@ Partial Class AdminManageStudents
         Me.txtbxStudentFirstName = New System.Windows.Forms.TextBox()
         Me.lblStudentFirstName = New System.Windows.Forms.Label()
         Me.lblStudentList = New System.Windows.Forms.Label()
-        Me.btnStudentSearch = New System.Windows.Forms.Button()
         Me.picWatermark = New System.Windows.Forms.PictureBox()
         Me.pnlSidebar.SuspendLayout()
         Me.flowButtons.SuspendLayout()
@@ -202,7 +201,6 @@ Partial Class AdminManageStudents
         Me.pnlContent.Controls.Add(Me.grpAddress)
         Me.pnlContent.Controls.Add(Me.grpStudentInfo)
         Me.pnlContent.Controls.Add(Me.lblStudentList)
-        Me.pnlContent.Controls.Add(Me.btnStudentSearch)
         Me.pnlContent.Controls.Add(Me.picWatermark)
         Me.pnlContent.Location = New System.Drawing.Point(300, 0)
         Me.pnlContent.Name = "pnlContent"
@@ -214,7 +212,7 @@ Partial Class AdminManageStudents
         '
         Me.TextBoxStudentSearch.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.TextBoxStudentSearch.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBoxStudentSearch.Location = New System.Drawing.Point(359, 590)
+        Me.TextBoxStudentSearch.Location = New System.Drawing.Point(481, 587)
         Me.TextBoxStudentSearch.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.TextBoxStudentSearch.MaxLength = 50
         Me.TextBoxStudentSearch.Name = "TextBoxStudentSearch"
@@ -645,16 +643,6 @@ Partial Class AdminManageStudents
         Me.lblStudentList.TabIndex = 2
         Me.lblStudentList.Text = "Student List"
         '
-        'btnStudentSearch
-        '
-        Me.btnStudentSearch.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnStudentSearch.Location = New System.Drawing.Point(569, 585)
-        Me.btnStudentSearch.Name = "btnStudentSearch"
-        Me.btnStudentSearch.Size = New System.Drawing.Size(90, 35)
-        Me.btnStudentSearch.TabIndex = 1
-        Me.btnStudentSearch.Text = "Search"
-        Me.btnStudentSearch.UseVisualStyleBackColor = True
-        '
         'picWatermark
         '
         Me.picWatermark.Anchor = System.Windows.Forms.AnchorStyles.None
@@ -730,7 +718,6 @@ Partial Class AdminManageStudents
     Friend WithEvents txtbxStudentFirstName As TextBox
     Friend WithEvents lblStudentFirstName As Label
     Friend WithEvents lblStudentList As Label
-    Friend WithEvents btnStudentSearch As Button
     Friend WithEvents grpAddress As GroupBox
     Friend WithEvents txtbxZipCode As TextBox
     Friend WithEvents lblStudentZIP As Label
