@@ -1,4 +1,5 @@
-﻿Imports MySql.Data.MySqlClient
+﻿Imports System.Data.SqlClient
+Imports MySql.Data.MySqlClient
 
 Public Class AdminManageStudents
 
