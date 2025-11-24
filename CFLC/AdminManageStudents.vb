@@ -167,7 +167,6 @@ Public Class AdminManageStudents
         Try
             ' Build the INSERT query (StudentID auto-increments, StudentNo left blank for now)
             ' Use NULL for empty SectionID and EnrollmentID to avoid foreign key constraints
-            Dim sectionIDValue As String = If(String.IsNullOrWhiteSpace(txtbxStudentSectionID.Text), "NULL", "'" & txtbxStudentSectionID.Text.Trim().Replace("'", "''") & "'")
             Dim enrollmentIDValue As String = If(String.IsNullOrWhiteSpace(txtbxStudentEnrollmentID.Text), "NULL", "'" & txtbxStudentEnrollmentID.Text.Trim().Replace("'", "''") & "'")
 
             Dim query As String = "INSERT INTO student (MiddleName, FirstName, LastName, Gender, BirthDate, Age, GuardianName, Religion, GradeLevel, SectionID, EnrollmentID, HouseNumber, Street, Barangay, Municipality, Province, Country, ZipCode) " &
@@ -570,11 +569,7 @@ Public Class AdminManageStudents
             End If
 
             ' SectionID retrieval (still needed for the textbox)
-            If Not IsDBNull(row.Cells("SectionID").Value) Then
-                txtbxStudentSectionID.Text = row.Cells("SectionID").Value.ToString()
-            Else
-                txtbxStudentSectionID.Text = String.Empty
-            End If
+           
 
             txtbxStudentEnrollmentID.Text = row.Cells("EnrollmentID").Value.ToString()
             txtbxStudentHouseNo.Text = row.Cells("HouseNumber").Value.ToString()
