@@ -332,12 +332,17 @@ Public Class AdminManageStudents
 
         ' Validate SectionID exists in section table (if not empty)
 
+        Return False
+ 
+
         ' Validate EnrollmentID exists in enrollment table (if not empty)
-        If Not String.IsNullOrWhiteSpace(txtbxStudentEnrollmentID.Text) AndAlso Not ValidateEnrollmentID(txtbxStudentEnrollmentID.Text.Trim()) Then
+        If Not String.IsNullOrWhiteSpace(txtbxStudentEnrollmentID.Text) Then
+            If Not ValidateEnrollmentID(txtbxStudentEnrollmentID.Text.Trim()) Then
                 MessageBox.Show("The Enrollment ID does not exist. Please enter a valid Enrollment ID or leave it blank.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
                 txtbxStudentEnrollmentID.Focus()
                 Return False
             End If
+        End If
 
         Return True
     End Function
@@ -396,7 +401,7 @@ Public Class AdminManageStudents
 
         txtbxGuardianName.Clear()
         txtbxStudentReligion.Clear()
-        txtbxStudentSectionID.Clear()
+
         txtbxStudentEnrollmentID.Clear()
 
         ' Clear address fields
@@ -569,7 +574,7 @@ Public Class AdminManageStudents
             End If
 
             ' SectionID retrieval (still needed for the textbox)
-           
+
 
             txtbxStudentEnrollmentID.Text = row.Cells("EnrollmentID").Value.ToString()
             txtbxStudentHouseNo.Text = row.Cells("HouseNumber").Value.ToString()
@@ -626,12 +631,7 @@ Public Class AdminManageStudents
                 cmd.Parameters.AddWithValue("@GuardianName", txtbxGuardianName.Text.Trim())
                 cmd.Parameters.AddWithValue("@Age", nudStudentAge.Value)
                 cmd.Parameters.AddWithValue("@GradeLevel", nudStudentGradeLevel.Value)
-                ' Handle SectionID as nullable
-                If String.IsNullOrWhiteSpace(txtbxStudentSectionID.Text) Then
-                    cmd.Parameters.AddWithValue("@SectionID", DBNull.Value)
-                Else
-                    cmd.Parameters.AddWithValue("@SectionID", txtbxStudentSectionID.Text.Trim())
-                End If
+
                 cmd.Parameters.AddWithValue("@EnrollmentID", txtbxStudentEnrollmentID.Text.Trim())
                 cmd.Parameters.AddWithValue("@HouseNumber", txtbxStudentHouseNo.Text.Trim())
                 cmd.Parameters.AddWithValue("@Street", txtbcStudentStreet.Text.Trim())
