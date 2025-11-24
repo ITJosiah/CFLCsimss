@@ -184,7 +184,6 @@ Public Class AdminManageStudents
                 txtbxGuardianName.Text.Trim().Replace("'", "''"),
                 txtbxStudentReligion.Text.Trim().Replace("'", "''"),
                 nudStudentGradeLevel.Value,
-                sectionIDValue,
                 enrollmentIDValue,
                 txtbxStudentHouseNo.Text.Trim().Replace("'", "''"),
                 txtbcStudentStreet.Text.Trim().Replace("'", "''"),
@@ -333,22 +332,13 @@ Public Class AdminManageStudents
         End If
 
         ' Validate SectionID exists in section table (if not empty)
-        If Not String.IsNullOrWhiteSpace(txtbxStudentSectionID.Text) Then
-            If Not ValidateSectionID(txtbxStudentSectionID.Text.Trim()) Then
-                MessageBox.Show("The Section ID does not exist. Please enter a valid Section ID or leave it blank.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-                txtbxStudentSectionID.Focus()
-                Return False
-            End If
-        End If
 
         ' Validate EnrollmentID exists in enrollment table (if not empty)
-        If Not String.IsNullOrWhiteSpace(txtbxStudentEnrollmentID.Text) Then
-            If Not ValidateEnrollmentID(txtbxStudentEnrollmentID.Text.Trim()) Then
+        If Not String.IsNullOrWhiteSpace(txtbxStudentEnrollmentID.Text) AndAlso Not ValidateEnrollmentID(txtbxStudentEnrollmentID.Text.Trim()) Then
                 MessageBox.Show("The Enrollment ID does not exist. Please enter a valid Enrollment ID or leave it blank.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
                 txtbxStudentEnrollmentID.Focus()
                 Return False
             End If
-        End If
 
         Return True
     End Function
