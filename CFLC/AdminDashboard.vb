@@ -6,7 +6,6 @@
         Me.WindowState = FormWindowState.Maximized
         Me.Bounds = Screen.PrimaryScreen.Bounds
         Me.TopMost = True
-        Me.BringToFront()
         Me.BackColor = Color.FromArgb(7, 77, 39) ' Dark green background
         Me.Text = "Dashboard-Admin"
 

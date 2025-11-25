@@ -24,74 +24,19 @@ Public Class AdminManageStudents
         InitializeGenderComboBox()
 
         ' Initialize numeric controls with safe default values
-        InitializeNumericControls()
-
-        ' Initialize radio buttons
-        InitializeRadioButtons()
 
         ' Load students data
         LoadToDGV("SELECT * FROM student", dgvStudents)
+
+        txtbxStudentAge.ReadOnly = True
     End Sub
 
-    Private Sub InitializeRadioButtons()
-        ' Set default values for radio buttons
-        RadioButtonStudentIPNO.Checked = True
-        RadioButtonStudent4PNO.Checked = True
-
-        ' Disable Indigineous group textbox by default
-        txtbbxStudentIPGroup.Enabled = False
-    End Sub
-
-    Private Sub InitializeNumericControls()
-        ' Set safe default values for numeric up/down controls
-        If nudStudentAge.Minimum <= 0 AndAlso nudStudentAge.Maximum >= 0 Then
-            nudStudentAge.Value = 0
-        Else
-            nudStudentAge.Value = nudStudentAge.Minimum
-        End If
-
-        If nudStudentGradeLevel.Minimum <= 0 AndAlso nudStudentGradeLevel.Maximum >= 0 Then
-            nudStudentGradeLevel.Value = 0
-        Else
-            nudStudentGradeLevel.Value = nudStudentGradeLevel.Minimum
-        End If
-    End Sub
 
     Private Sub InitializeGenderComboBox()
         ' Populate Gender dropdown
         cmbStudenttGender.Items.Clear()
         cmbStudenttGender.Items.Add("Male")
         cmbStudenttGender.Items.Add("Female")
-    End Sub
-
-    ' Handle Indigineous radio button changes
-    Private Sub RadioButtonStudentIPYES_CheckedChanged(sender As Object, e As EventArgs) Handles RadioButtonStudentIPYES.CheckedChanged
-        txtbbxStudentIPGroup.Enabled = RadioButtonStudentIPYES.Checked
-        If Not RadioButtonStudentIPYES.Checked Then
-            txtbbxStudentIPGroup.Clear()
-        End If
-    End Sub
-
-    Private Sub RadioButtonStudentIPNO_CheckedChanged(sender As Object, e As EventArgs) Handles RadioButtonStudentIPNO.CheckedChanged
-        txtbbxStudentIPGroup.Enabled = Not RadioButtonStudentIPNO.Checked
-        If RadioButtonStudentIPNO.Checked Then
-            txtbbxStudentIPGroup.Clear()
-        End If
-    End Sub
-
-    ' Handle 4Ps radio button changes
-    Private Sub RadioButtonStudent4PYES_CheckedChanged(sender As Object, e As EventArgs) Handles RadioButtonStudent4PYES.CheckedChanged
-        txtbx4ps.Enabled = RadioButtonStudent4PYES.Checked
-        If Not RadioButtonStudent4PYES.Checked Then
-            txtbx4ps.Clear()
-        End If
-    End Sub
-
-    Private Sub RadioButtonStudent4PNO_CheckedChanged(sender As Object, e As EventArgs) Handles RadioButtonStudent4PNO.CheckedChanged
-        txtbx4ps.Enabled = Not RadioButtonStudent4PNO.Checked
-        If RadioButtonStudent4PNO.Checked Then
-            txtbx4ps.Clear()
-        End If
     End Sub
 
     Private Sub PositionSidebarButtons()
@@ -177,79 +122,54 @@ Public Class AdminManageStudents
 
         ' Add student to database using modDB
         Try
-            Dim query As String = "INSERT INTO student (" &
-                                "LRN, MiddleName, FirstName, LastName, ExtensionName, " &
-                                "Gender, BirthDate, Age, BirthPlace, MotherTongue, " &
-                                "Indigineous, IndigineousSpecific, 4Ps, 4PsID, " &
-                                "Religion, GuardianName, GuardianContact, " &
-                                "GradeLevel, SectionID, EnrollmentID, " &
-                                "HouseNumber, Street, Barangay, Municipality, Province, Country, ZipCode" &
-                                ") VALUES (" &
-                                "@LRN, @MiddleName, @FirstName, @LastName, @ExtensionName, " &
-                                "@Gender, @BirthDate, @Age, @BirthPlace, @MotherTongue, " &
-                                "@Indigineous, @IndigineousSpecific, @4Ps, @4PsID, " &
-                                "@Religion, @GuardianName, @GuardianContact, " &
-                                "@GradeLevel, @SectionID, @EnrollmentID, " &
-                                "@HouseNumber, @Street, @Barangay, @Municipality, @Province, @Country, @ZipCode)"
 
+
+            Dim query As String = "INSERT INTO student (MiddleName, FirstName, LastName, Gender, BirthDate, Age, GuardianName, Religion, GradeLevel, SectionID, HouseNumber, Street, Barangay, Municipality, Province, Country, ZipCode) " &
+                                "VALUES ('{0}', '{1}', '{2}', '{3}', '{4}', {5}, '{6}', '{7}', {8}, {9}, {10}, '{11}', '{12}', '{13}', '{14}', '{15}', '{16}', '{17}')"
+
+            ' Format the query with values
+            query = String.Format(query,
+                txtStudentMiddleName.Text.Trim().Replace("'", "''"),
+                txtbxStudentFirstName.Text.Trim().Replace("'", "''"),
+                txtbxStudentSurname.Text.Trim().Replace("'", "''"),
+                cmbStudenttGender.SelectedItem.ToString(),
+                dtpStudentBirthdate.Value.ToString("yyyy-MM-dd"),
+                txtbxStudentAge.Text.Trim().Replace("'", "''"),
+                txtbxGuardianName.Text.Trim().Replace("'", "''"),
+                txtbxStudentReligion.Text.Trim().Replace("'", "''"),
+                nudStudentGradeLevel.Value,
+                 txtbxStudentHouseNo.Text.Trim().Replace("'", "''"),
+                txtbxstudentStreet.Text.Trim().Replace("'", "''"),
+                txtbxStudentBarangay.Text.Trim().Replace("'", "''"),
+                txtbxStudentCity.Text.Trim().Replace("'", "''"),
+                txtbxStudentProvince.Text.Trim().Replace("'", "''"),
+                txtbxCountry.Text.Trim().Replace("'", "''"),
+                txtbxZipCode.Text.Trim().Replace("'", "''")
+            )
+
+            ' Open connection and execute query
             modDBx.openConn(modDBx.db_name)
 
             Using cmd As New MySqlCommand(query, modDBx.conn)
-                ' LRN (optional)
-                cmd.Parameters.AddWithValue("@LRN", SafeString(txtbxStudentLRN.Text))
-
-                ' Personal Information
-                cmd.Parameters.AddWithValue("@MiddleName", SafeString(txtStudentMiddleName.Text))
-                cmd.Parameters.AddWithValue("@FirstName", SafeString(txtbxStudentFirstName.Text))
-                cmd.Parameters.AddWithValue("@LastName", SafeString(txtbxStudentSurname.Text))
-                cmd.Parameters.AddWithValue("@ExtensionName", SafeString(txtbxStudentExtension.Text))
-
-                Dim gender As String = ""
-                If cmbStudenttGender.SelectedItem IsNot Nothing Then
-                    gender = cmbStudenttGender.SelectedItem.ToString()
-                End If
-                cmd.Parameters.AddWithValue("@Gender", gender)
-                cmd.Parameters.AddWithValue("@BirthDate", dtpStudentBirthdate.Value.ToString("yyyy-MM-dd"))
-                cmd.Parameters.AddWithValue("@Age", nudStudentAge.Value)
-                cmd.Parameters.AddWithValue("@BirthPlace", SafeString(txtbxStudentPOB.Text))
-                cmd.Parameters.AddWithValue("@MotherTongue", SafeString(txtbxStudentMotherTongue.Text))
-
-                ' Indigineous Information
-                cmd.Parameters.AddWithValue("@Indigineous", If(RadioButtonStudentIPYES.Checked, "Yes", "No"))
-                cmd.Parameters.AddWithValue("@IndigineousSpecific", SafeString(txtbbxStudentIPGroup.Text))
-
-                ' 4Ps Information
-                cmd.Parameters.AddWithValue("@4Ps", If(RadioButtonStudent4PYES.Checked, "Yes", "No"))
-                cmd.Parameters.AddWithValue("@4PsID", SafeString(txtbx4ps.Text))
-
-                ' Guardian and Religion
-                cmd.Parameters.AddWithValue("@Religion", SafeString(txtbxStudentReligion.Text))
-                cmd.Parameters.AddWithValue("@GuardianName", SafeString(txtbxGuardianName.Text))
-                cmd.Parameters.AddWithValue("@GuardianContact", SafeString(txtbxGuardianContactNo.Text))
-
-                ' Academic Information
-                cmd.Parameters.AddWithValue("@GradeLevel", nudStudentGradeLevel.Value)
-
-                ' Address Information
-                cmd.Parameters.AddWithValue("@HouseNumber", SafeString(txtbxStudentHouseNo.Text))
-                cmd.Parameters.AddWithValue("@Street", SafeString(txtbxstudentStreet.Text))
-                cmd.Parameters.AddWithValue("@Barangay", SafeString(txtbxStudentBarangay.Text))
-                cmd.Parameters.AddWithValue("@Municipality", SafeString(txtbxStudentCity.Text))
-                cmd.Parameters.AddWithValue("@Province", SafeString(txtbxStudentProvince.Text))
-                cmd.Parameters.AddWithValue("@Country", SafeString(txtbxCountry.Text))
-                cmd.Parameters.AddWithValue("@ZipCode", SafeString(txtbxZipCode.Text))
-
                 Dim rowsAffected As Integer = cmd.ExecuteNonQuery()
 
                 If rowsAffected > 0 Then
                     MessageBox.Show("Student added successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
+
+                    ' Note: Logging functionality removed due to missing method
+                    ' You can add your own logging implementation here if needed
+
+                    ' Clear all fields after successful insert
                     ClearInputFields()
+
+                    ' Refresh the DataGridView
                     LoadToDGV("SELECT * FROM student", dgvStudents)
                 Else
                     MessageBox.Show("Failed to add student. Please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 End If
             End Using
 
+            ' Close connection
             If modDBx.conn.State = ConnectionState.Open Then
                 modDBx.conn.Close()
             End If
@@ -259,135 +179,53 @@ Public Class AdminManageStudents
         Catch ex As Exception
             MessageBox.Show("Error: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         Finally
+            ' Ensure connection is closed
             If modDBx.conn.State = ConnectionState.Open Then
                 modDBx.conn.Close()
             End If
         End Try
     End Sub
 
-    ' Helper function to safely handle string values
-    Private Function SafeString(value As String) As String
-        Return If(String.IsNullOrWhiteSpace(value), "", value.Trim().Replace("'", "''"))
-    End Function
-
     Private Function ValidateInputs() As Boolean
-        ' Check if required fields are filled in sequence
-
-        ' 1. First Name (Required)
+        ' Check if required fields are filled
         If String.IsNullOrWhiteSpace(txtbxStudentFirstName.Text) Then
             MessageBox.Show("Please enter First Name.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             txtbxStudentFirstName.Focus()
             Return False
         End If
 
-        ' 2. Last Name (Required)
         If String.IsNullOrWhiteSpace(txtbxStudentSurname.Text) Then
             MessageBox.Show("Please enter Last Name.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             txtbxStudentSurname.Focus()
             Return False
         End If
 
-        ' 3. Birth Date (Required - validated by control)
-        ' 4. Age (Required)
-        If nudStudentAge.Value <= 0 Then
-            MessageBox.Show("Please enter a valid Age.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            nudStudentAge.Focus()
-            Return False
-        End If
-
-        ' 5. Gender (Required)
         If cmbStudenttGender.SelectedIndex = -1 Then
-            MessageBox.Show("Please select Sex.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            MessageBox.Show("Please select Gender.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             cmbStudenttGender.Focus()
             Return False
         End If
 
-        ' 6. Grade Level (Required)
+        If String.IsNullOrWhiteSpace(txtbxStudentAge.Text) Then
+            MessageBox.Show("Please enter a valid Age.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            txtbxStudentAge.Focus()
+            Return False
+        End If
+
         If nudStudentGradeLevel.Value <= 0 Then
             MessageBox.Show("Please enter a valid Grade Level.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             nudStudentGradeLevel.Focus()
             Return False
         End If
 
-        ' 7. Birth Place (Required)
-        If String.IsNullOrWhiteSpace(txtbxStudentPOB.Text) Then
-            MessageBox.Show("Please enter Birth Place.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            txtbxStudentPOB.Focus()
-            Return False
-        End If
-
-        ' 8. Religion (Required)
-        If String.IsNullOrWhiteSpace(txtbxStudentReligion.Text) Then
-            MessageBox.Show("Please enter Religion.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            txtbxStudentReligion.Focus()
-            Return False
-        End If
-
-        ' 9. Mother Tongue (Required)
-        If String.IsNullOrWhiteSpace(txtbxStudentMotherTongue.Text) Then
-            MessageBox.Show("Please enter Mother Tongue.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            txtbxStudentMotherTongue.Focus()
-            Return False
-        End If
-
-        ' 10. Guardian Name (Required)
-        If String.IsNullOrWhiteSpace(txtbxGuardianName.Text) Then
-            MessageBox.Show("Please enter Guardian Name.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            txtbxGuardianName.Focus()
-            Return False
-        End If
-
-        ' 11. Guardian Contact (Required with specific format)
-        If String.IsNullOrWhiteSpace(txtbxGuardianContactNo.Text) Then
-            MessageBox.Show("Please enter Guardian Contact Number.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            txtbxGuardianContactNo.Focus()
-            Return False
-        End If
-
-        ' Validate Guardian Contact format (09XXXXXXXXX - 11 digits)
-        Dim guardianContact As String = txtbxGuardianContactNo.Text.Trim()
-        If guardianContact.Length <> 11 Then
-            MessageBox.Show("Guardian Contact must be exactly 11 digits (09XXXXXXXXX).", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            txtbxGuardianContactNo.Focus()
-            Return False
-        End If
-
-        If Not guardianContact.StartsWith("09") Then
-            MessageBox.Show("Guardian Contact must start with '09'.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            txtbxGuardianContactNo.Focus()
-            Return False
-        End If
-
-        Dim contactNum As Long
-        If Not Long.TryParse(guardianContact, contactNum) Then
-            MessageBox.Show("Guardian Contact must contain only numbers.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            txtbxGuardianContactNo.Focus()
-            Return False
-        End If
-
-        ' 12. Validate Indigineous group if Indigineous is YES
-        If RadioButtonStudentIPYES.Checked AndAlso String.IsNullOrWhiteSpace(txtbbxStudentIPGroup.Text) Then
-            MessageBox.Show("Please specify Indigineous Group.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            txtbbxStudentIPGroup.Focus()
-            Return False
-        End If
-
-        ' 13. Validate 4Ps ID if 4Ps is YES
-        If RadioButtonStudent4PYES.Checked AndAlso String.IsNullOrWhiteSpace(txtbx4ps.Text) Then
-            MessageBox.Show("Please enter 4Ps ID.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            txtbx4ps.Focus()
-            Return False
-        End If
-
-        ' 14. Address validation
-
-        ' House Number (Required and numeric)
+        ' Validate address fields
         If String.IsNullOrWhiteSpace(txtbxStudentHouseNo.Text) Then
             MessageBox.Show("Please enter House Number.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             txtbxStudentHouseNo.Focus()
             Return False
         End If
 
+        ' Validate House Number is numeric
         Dim houseNum As Integer
         If Not Integer.TryParse(txtbxStudentHouseNo.Text.Trim(), houseNum) Then
             MessageBox.Show("House Number must contain only numbers.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
@@ -395,42 +233,36 @@ Public Class AdminManageStudents
             Return False
         End If
 
-        ' Street (Required)
         If String.IsNullOrWhiteSpace(txtbxstudentStreet.Text) Then
             MessageBox.Show("Please enter Street.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             txtbxstudentStreet.Focus()
             Return False
         End If
 
-        ' Barangay (Required)
         If String.IsNullOrWhiteSpace(txtbxStudentBarangay.Text) Then
             MessageBox.Show("Please enter Barangay.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             txtbxStudentBarangay.Focus()
             Return False
         End If
 
-        ' Municipality/City (Required)
         If String.IsNullOrWhiteSpace(txtbxStudentCity.Text) Then
             MessageBox.Show("Please enter Municipality/City.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             txtbxStudentCity.Focus()
             Return False
         End If
 
-        ' Province (Required)
         If String.IsNullOrWhiteSpace(txtbxStudentProvince.Text) Then
             MessageBox.Show("Please enter Province.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             txtbxStudentProvince.Focus()
             Return False
         End If
 
-        ' Country (Required)
         If String.IsNullOrWhiteSpace(txtbxCountry.Text) Then
             MessageBox.Show("Please enter Country.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             txtbxCountry.Focus()
             Return False
         End If
 
-        ' Zip Code (Required)
         If String.IsNullOrWhiteSpace(txtbxZipCode.Text) Then
             MessageBox.Show("Please enter Zip Code.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             txtbxZipCode.Focus()
@@ -452,43 +284,52 @@ Public Class AdminManageStudents
             Return False
         End If
 
+        ' Validate SectionID exists in section table (if not empty)
+
+        Return False
+
+
+
         Return True
     End Function
 
+    Private Function ValidateSectionID(sectionID As String) As Boolean
+        Try
+            Dim query As String = String.Format("SELECT COUNT(*) FROM section WHERE SectionID = '{0}'", sectionID.Replace("'", "''"))
+            modDBx.openConn(modDBx.db_name)
+
+            Using cmd As New MySqlCommand(query, modDBx.conn)
+                Dim count As Integer = Convert.ToInt32(cmd.ExecuteScalar())
+                If modDBx.conn.State = ConnectionState.Open Then
+                    modDBx.conn.Close()
+                End If
+                Return count > 0
+            End Using
+        Catch ex As Exception
+            If modDBx.conn.State = ConnectionState.Open Then
+                modDBx.conn.Close()
+            End If
+            Return False
+        End Try
+    End Function
+
+
+
     Private Sub ClearInputFields()
         ' Clear all input fields after successful add
-
-        ' LRN (optional)
-        txtbxStudentLRN.Clear()
-
-        ' Personal Information
         txtStudentMiddleName.Clear()
         txtbxStudentFirstName.Clear()
         txtbxStudentSurname.Clear()
-        txtbxStudentExtension.Clear()
         cmbStudenttGender.SelectedIndex = -1
         dtpStudentBirthdate.Value = DateTime.Now
+        txtbxStudentAge.Clear()
 
         ' Reset numeric controls safely
-        ResetNumericControl(nudStudentAge)
         ResetNumericControl(nudStudentGradeLevel)
 
-        ' Clear additional personal info
-        txtbxStudentPOB.Clear()
-        txtbxStudentMotherTongue.Clear()
+        txtbxGuardianName.Clear()
         txtbxStudentReligion.Clear()
 
-        ' Guardian Information
-        txtbxGuardianName.Clear()
-        txtbxGuardianContactNo.Clear()
-
-        ' Reset Indigineous radio buttons
-        RadioButtonStudentIPNO.Checked = True
-        txtbbxStudentIPGroup.Clear()
-
-        ' Reset 4Ps radio buttons
-        RadioButtonStudent4PNO.Checked = True
-        txtbx4ps.Clear()
 
         ' Clear address fields
         txtbxStudentHouseNo.Clear()
@@ -505,9 +346,11 @@ Public Class AdminManageStudents
 
     ' Helper method to safely reset numeric up/down controls
     Private Sub ResetNumericControl(nudControl As NumericUpDown)
+        ' Set to minimum value, but ensure it's within valid range
         If nudControl.Minimum <= 0 AndAlso nudControl.Maximum >= 0 Then
             nudControl.Value = 0
         Else
+            ' If 0 is not valid, set to the minimum value
             nudControl.Value = nudControl.Minimum
         End If
     End Sub
@@ -516,20 +359,145 @@ Public Class AdminManageStudents
     Private Sub dtpStudentBirthdate_ValueChanged(sender As Object, e As EventArgs) Handles dtpStudentBirthdate.ValueChanged
         Dim birthDate As Date = dtpStudentBirthdate.Value
         Dim today As Date = Date.Today
+
         Dim age As Integer = today.Year - birthDate.Year
 
-        ' Adjust if birthday hasn't occurred this year
-        If birthDate.Date > today.AddYears(-age) Then
+        ' Adjust if birthday hasn't happened yet this year
+        If birthDate > today.AddYears(-age) Then
             age -= 1
         End If
 
-        ' Ensure age is within valid range for the control
-        If age < nudStudentAge.Minimum Then
-            nudStudentAge.Value = nudStudentAge.Minimum
-        ElseIf age > nudStudentAge.Maximum Then
-            nudStudentAge.Value = nudStudentAge.Maximum
-        Else
-            nudStudentAge.Value = age
+        txtbxStudentAge.Text = age.ToString()
+    End Sub
+
+    Private Function CalculateAge(birthDate As Date) As Integer
+        Dim today As Date = Date.Today
+        Dim age As Integer = today.Year - birthDate.Year
+
+        If birthDate > today.AddYears(-age) Then
+            age -= 1
+        End If
+
+        Return age
+    End Function
+
+    ' Event handlers for various controls
+    Private Sub txtStudentId_TextChanged(sender As Object, e As EventArgs)
+        ' Handle text change if needed
+    End Sub
+
+    Private Sub pnlContent_Paint(sender As Object, e As PaintEventArgs) Handles pnlContent.Paint
+
+    End Sub
+
+    Private Sub txtAge_TextChanged(sender As Object, e As EventArgs)
+        ' Handle text change if needed
+    End Sub
+
+    Private Sub lblStudentAge_Click(sender As Object, e As EventArgs) Handles lblStudentAge.Click
+        ' Handle label click if needed
+    End Sub
+
+    Private Sub lblStudentGender_Click(sender As Object, e As EventArgs) Handles lblStudentGender.Click
+        ' Handle label click if needed
+    End Sub
+
+    Private Sub picWatermark_Click(sender As Object, e As EventArgs) Handles picWatermark.Click
+        ' Handle picture click if needed
+    End Sub
+
+    Private Sub grpStudentInfo_Enter(sender As Object, e As EventArgs) Handles grpStudentInfo.Enter
+        ' Handle group box enter if needed
+    End Sub
+
+    Private Sub pnlSidebar_Paint(sender As Object, e As PaintEventArgs) Handles pnlSidebar.Paint
+        ' Handle paint event if needed
+    End Sub
+
+    Private Sub grpAddress_Enter(sender As Object, e As EventArgs)
+        ' Handle group box enter if needed
+    End Sub
+
+    Private Sub lblStudentBarangay_Click(sender As Object, e As EventArgs)
+        ' Handle label click if needed
+    End Sub
+
+    Private Sub lblStudentProvince_Click(sender As Object, e As EventArgs)
+        ' Handle label click if needed
+    End Sub
+
+    Private Sub lblStudentMiddleName_Click(sender As Object, e As EventArgs) Handles lblStudentMiddleName.Click
+        ' Handle label click if needed
+    End Sub
+
+    Private Sub cmbStudenttGenderSelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbStudenttGender.SelectedIndexChanged
+        ' Handle combo box selection change if needed
+    End Sub
+
+    Private Sub txtbxStudentAgeValueChanged(sender As Object, e As EventArgs)
+        ' Handle numeric up/down value change if needed
+    End Sub
+
+    Private Sub txtbxStudentSurnameTextChanged(sender As Object, e As EventArgs) Handles txtbxStudentSurname.TextChanged
+        ' Handle text change if needed
+    End Sub
+
+    Private Sub Label18_Click(sender As Object, e As EventArgs)
+        ' Handle label click if needed
+    End Sub
+
+    Private Sub txtbxZipCode_TextChanged(sender As Object, e As EventArgs)
+        ' Handle text change if needed
+    End Sub
+
+    Private Sub txtbxZipCode_KeyPress(sender As Object, e As KeyPressEventArgs)
+        ' Only allow digits and backspace
+        If Not Char.IsDigit(e.KeyChar) AndAlso e.KeyChar <> ControlChars.Back Then
+            e.Handled = True
+        End If
+    End Sub
+
+    Private Sub dtpStudentBirthdate_ValuesChanged(sender As Object, e As EventArgs) Handles dtpStudentBirthdate.ValueChanged
+        ' This is already handled by dtpStudentBirthdate_ValueChanged
+    End Sub
+
+    Private Sub dgvStudents_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvStudents.CellContentClick
+        ' Handle cell content click if needed
+    End Sub
+
+    Private Sub dgvStudents_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvStudents.CellClick
+        If e.RowIndex >= 0 Then
+            Dim row As DataGridViewRow = dgvStudents.Rows(e.RowIndex)
+
+            ' Store the StudentID (assuming it's the first column, index 0)
+            currentStudentID = CInt(row.Cells(0).Value)
+
+            txtbxStudentFirstName.Text = row.Cells("FirstName").Value.ToString()
+            txtStudentMiddleName.Text = row.Cells("MiddleName").Value.ToString()
+            txtbxStudentSurname.Text = row.Cells("LastName").Value.ToString()
+            cmbStudenttGender.Text = row.Cells("Gender").Value.ToString()
+
+            ' Birthdate (DateTimePicker)
+            If Not IsDBNull(row.Cells("Birthdate").Value) Then
+                dtpStudentBirthdate.Value = CDate(row.Cells("Birthdate").Value)
+            End If
+
+            txtbxStudentReligion.Text = row.Cells("Religion").Value.ToString()
+            txtbxGuardianName.Text = row.Cells("GuardianName").Value.ToString()
+
+            ' Numeric Up Downs
+            If Not IsDBNull(row.Cells("GradeLevel").Value) Then
+                nudStudentGradeLevel.Value = CInt(row.Cells("GradeLevel").Value)
+            End If
+
+            ' SectionID retrieval (still needed for the textbox)
+            txtbxStudentHouseNo.Text = row.Cells("HouseNumber").Value.ToString()
+            txtbxstudentStreet.Text = row.Cells("Street").Value.ToString()
+            txtbxStudentBarangay.Text = row.Cells("Barangay").Value.ToString()
+            txtbxStudentCity.Text = row.Cells("Municipality").Value.ToString()
+            txtbxStudentProvince.Text = row.Cells("Province").Value.ToString()
+            txtbxCountry.Text = row.Cells("Country").Value.ToString()
+            txtbxZipCode.Text = row.Cells("ZIPCode").Value.ToString()
         End If
     End Sub
 
@@ -540,29 +508,21 @@ Public Class AdminManageStudents
         End If
 
         Try
+            ' Open Connection
             modDBx.openConn(modDBx.db_name)
 
+            ' Define the SQL Update Statement using parameters
             Dim sql As String = "UPDATE student SET " &
-                            "LRN = @LRN, " &
                             "FirstName = @FirstName, " &
                             "MiddleName = @MiddleName, " &
                             "LastName = @LastName, " &
-                            "ExtensionName = @ExtensionName, " &
                             "Gender = @Gender, " &
                             "Birthdate = @Birthdate, " &
-                            "Age = @Age, " &
-                            "BirthPlace = @BirthPlace, " &
-                            "MotherTongue = @MotherTongue, " &
-                            "Indigineous = @Indigineous, " &
-                            "IndigineousSpecific = @IndigineousSpecific, " &
-                            "4Ps = @4Ps, " &
-                            "4PsID = @4PsID, " &
                             "Religion = @Religion, " &
                             "GuardianName = @GuardianName, " &
-                            "GuardianContact = @GuardianContact, " &
+                            "Age = @Age, " &
                             "GradeLevel = @GradeLevel, " &
                             "SectionID = @SectionID, " &
-                            "EnrollmentID = @EnrollmentID, " &
                             "HouseNumber = @HouseNumber, " &
                             "Street = @Street, " &
                             "Barangay = @Barangay, " &
@@ -572,26 +532,19 @@ Public Class AdminManageStudents
                             "ZIPCode = @ZIPCode " &
                             "WHERE StudentID = @StudentID"
 
+            ' Create and Configure Command
             Using cmd As New MySqlCommand(sql, modDBx.conn)
-                ' Add all parameters including LRN
-                cmd.Parameters.AddWithValue("@LRN", txtbxStudentLRN.Text.Trim())
+                ' Add Parameters
                 cmd.Parameters.AddWithValue("@FirstName", txtbxStudentFirstName.Text.Trim())
                 cmd.Parameters.AddWithValue("@MiddleName", txtStudentMiddleName.Text.Trim())
                 cmd.Parameters.AddWithValue("@LastName", txtbxStudentSurname.Text.Trim())
-                cmd.Parameters.AddWithValue("@ExtensionName", txtbxStudentExtension.Text.Trim())
                 cmd.Parameters.AddWithValue("@Gender", cmbStudenttGender.Text.Trim())
                 cmd.Parameters.AddWithValue("@Birthdate", dtpStudentBirthdate.Value)
-                cmd.Parameters.AddWithValue("@Age", nudStudentAge.Value)
-                cmd.Parameters.AddWithValue("@BirthPlace", txtbxStudentPOB.Text.Trim())
-                cmd.Parameters.AddWithValue("@MotherTongue", txtbxStudentMotherTongue.Text.Trim())
-                cmd.Parameters.AddWithValue("@Indigineous", If(RadioButtonStudentIPYES.Checked, "Yes", "No"))
-                cmd.Parameters.AddWithValue("@IndigineousSpecific", txtbbxStudentIPGroup.Text.Trim())
-                cmd.Parameters.AddWithValue("@4Ps", If(RadioButtonStudent4PYES.Checked, "Yes", "No"))
-                cmd.Parameters.AddWithValue("@4PsID", txtbx4ps.Text.Trim())
                 cmd.Parameters.AddWithValue("@Religion", txtbxStudentReligion.Text.Trim())
                 cmd.Parameters.AddWithValue("@GuardianName", txtbxGuardianName.Text.Trim())
-                cmd.Parameters.AddWithValue("@GuardianContact", txtbxGuardianContactNo.Text.Trim())
+                cmd.Parameters.AddWithValue("@Age", txtbxStudentAge.Text.Trim())
                 cmd.Parameters.AddWithValue("@GradeLevel", nudStudentGradeLevel.Value)
+
                 cmd.Parameters.AddWithValue("@HouseNumber", txtbxStudentHouseNo.Text.Trim())
                 cmd.Parameters.AddWithValue("@Street", txtbxstudentStreet.Text.Trim())
                 cmd.Parameters.AddWithValue("@Barangay", txtbxStudentBarangay.Text.Trim())
@@ -601,11 +554,14 @@ Public Class AdminManageStudents
                 cmd.Parameters.AddWithValue("@ZIPCode", txtbxZipCode.Text.Trim())
                 cmd.Parameters.AddWithValue("@StudentID", currentStudentID)
 
+                ' Execute the Update
                 Dim rowsAffected As Integer = cmd.ExecuteNonQuery()
 
                 If rowsAffected > 0 Then
                     MsgBox("Student updated successfully.", MsgBoxStyle.Information, "Update Success")
+                    ' Reload the DataGridView to reflect changes
                     LoadToDGV("SELECT * FROM student", dgvStudents)
+                    ' Clear the current selection or reset fields if needed
                     currentStudentID = 0
                 Else
                     MsgBox("No student was updated. Please check the data.", MsgBoxStyle.Exclamation, "Update Failed")
@@ -615,141 +571,61 @@ Public Class AdminManageStudents
         Catch ex As Exception
             MsgBox("Error updating student: " & ex.Message, MsgBoxStyle.Critical, "Update Error")
         Finally
+            ' Close Connection safely
             If modDBx.conn IsNot Nothing AndAlso modDBx.conn.State = ConnectionState.Open Then
                 modDBx.conn.Close()
             End If
         End Try
     End Sub
 
-    ' Update the dgvStudents_CellClick method to populate all fields including LRN
-    Private Sub dgvStudents_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvStudents.CellClick
-        If e.RowIndex >= 0 Then
-            Dim row As DataGridViewRow = dgvStudents.Rows(e.RowIndex)
-
-            currentStudentID = CInt(row.Cells(0).Value)
-
-            ' Populate all fields including LRN
-            txtbxStudentLRN.Text = GetSafeString(row.Cells("LRN"))
-            txtbxStudentFirstName.Text = GetSafeString(row.Cells("FirstName"))
-            txtStudentMiddleName.Text = GetSafeString(row.Cells("MiddleName"))
-            txtbxStudentSurname.Text = GetSafeString(row.Cells("LastName"))
-            txtbxStudentExtension.Text = GetSafeString(row.Cells("ExtensionName"))
-            cmbStudenttGender.Text = GetSafeString(row.Cells("Gender"))
-
-            If Not IsDBNull(row.Cells("Birthdate").Value) Then
-                dtpStudentBirthdate.Value = CDate(row.Cells("Birthdate").Value)
-            End If
-
-            txtbxStudentPOB.Text = GetSafeString(row.Cells("BirthPlace"))
-            txtbxStudentMotherTongue.Text = GetSafeString(row.Cells("MotherTongue"))
-            txtbxStudentReligion.Text = GetSafeString(row.Cells("Religion"))
-
-            ' Indigineous fields
-            Dim indigineous As String = GetSafeString(row.Cells("Indigineous"))
-            If indigineous = "Yes" Then
-                RadioButtonStudentIPYES.Checked = True
-            Else
-                RadioButtonStudentIPNO.Checked = True
-            End If
-            txtbbxStudentIPGroup.Text = GetSafeString(row.Cells("IndigineousSpecific"))
-
-            ' 4Ps fields
-            Dim is4Ps As String = GetSafeString(row.Cells("4Ps"))
-            If is4Ps = "Yes" Then
-                RadioButtonStudent4PYES.Checked = True
-            Else
-                RadioButtonStudent4PNO.Checked = True
-            End If
-            txtbx4ps.Text = GetSafeString(row.Cells("4PsID"))
-
-            txtbxGuardianName.Text = GetSafeString(row.Cells("GuardianName"))
-            txtbxGuardianContactNo.Text = GetSafeString(row.Cells("GuardianContact"))
-
-            ' Numeric fields
-            If Not IsDBNull(row.Cells("Age").Value) Then
-                nudStudentAge.Value = CInt(row.Cells("Age").Value)
-            End If
-
-            If Not IsDBNull(row.Cells("GradeLevel").Value) Then
-                nudStudentGradeLevel.Value = CInt(row.Cells("GradeLevel").Value)
-            End If
-
-            ' Address fields
-            txtbxStudentHouseNo.Text = GetSafeString(row.Cells("HouseNumber"))
-            txtbxstudentStreet.Text = GetSafeString(row.Cells("Street"))
-            txtbxStudentBarangay.Text = GetSafeString(row.Cells("Barangay"))
-            txtbxStudentCity.Text = GetSafeString(row.Cells("Municipality"))
-            txtbxStudentProvince.Text = GetSafeString(row.Cells("Province"))
-            txtbxCountry.Text = GetSafeString(row.Cells("Country"))
-            txtbxZipCode.Text = GetSafeString(row.Cells("ZIPCode"))
-        End If
-    End Sub
-
-    ' Helper function for safe string retrieval from DataGridView
-    Private Function GetSafeString(cell As DataGridViewCell) As String
-        Return If(cell.Value Is Nothing OrElse IsDBNull(cell.Value), "", cell.Value.ToString())
-    End Function
-
+    ' Example: Call UpdateStudent from a button click (add a button named btnUpdateStudent)
     Private Sub SearchStudentsBySurname(ByVal surname As String)
-        ' 1. If the search box is empty, load all students (default view)
+        ' If the search box is empty, load all students (default view)
         If String.IsNullOrWhiteSpace(surname) Then
             LoadToDGV("SELECT * FROM student", dgvStudents)
             Return
         End If
 
         Try
-            ' 2. Open Connection
+            ' Open Connection
             modDBx.openConn(modDBx.db_name)
 
-            ' 3. Define the SQL Search Statement using parameters
-            ' We use LIKE and wildcards (%) for partial and case-insensitive matching.
+            ' Use prefix match so search is from the first letter to the last (incremental per-letter filter)
             Dim sql As String = "SELECT * FROM student WHERE LastName LIKE @searchSurname ORDER BY LastName"
 
-            ' 4. Create and Configure Command
             Using cmd As New MySqlCommand(sql, modDBx.conn)
-                ' 5. Add Parameter with Wildcards
-                ' The database column is 'LastName', which the user enters in the search box (Surname).
-                cmd.Parameters.AddWithValue("@searchSurname", "%" & surname.Trim() & "%")
+                ' Use surname + '%' to match only names that start with the typed letters
+                cmd.Parameters.AddWithValue("@searchSurname", surname.Trim() & "%")
 
-                ' 6. Execute and Load Data into a DataTable
                 Dim dt As New System.Data.DataTable
                 Using adapter As New MySql.Data.MySqlClient.MySqlDataAdapter(cmd)
                     adapter.Fill(dt)
                 End Using
 
-                ' 7. Update the DataGridView
                 dgvStudents.DataSource = dt
                 dgvStudents.Refresh()
 
-                ' Hide the primary key column (StudentID is usually the first column)
                 If dgvStudents.ColumnCount > 0 Then
                     dgvStudents.Columns(0).Visible = False
                 End If
 
-                ' Notification
                 If dt.Rows.Count = 0 Then
                     MsgBox("No student found matching the surname '" & surname & "'.", MsgBoxStyle.Information, "Search Result")
                 End If
-
             End Using
 
         Catch ex As Exception
             MsgBox("Error searching students: " & ex.Message, MsgBoxStyle.Critical)
         Finally
-            ' 8. Close Connection safely
             If modDBx.conn IsNot Nothing AndAlso modDBx.conn.State = System.Data.ConnectionState.Open Then
                 modDBx.conn.Close()
             End If
         End Try
     End Sub
-
     Private Sub TextBoxStudentSearch_TextChanged(sender As Object, e As EventArgs) Handles TextBoxStudentSearch.TextChanged
         SearchStudentsBySurname(TextBoxStudentSearch.Text)
     End Sub
 
-    Private Sub btnStudentSearch_Click(sender As Object, e As EventArgs)
-        SearchStudentsBySurname(TextBoxStudentSearch.Text)
-    End Sub
 
     Private Sub btnStudentUpdate_Click(sender As Object, e As EventArgs) Handles btnStudentUpdate.Click
         UpdateStudent()
@@ -811,5 +687,21 @@ Public Class AdminManageStudents
     Private Sub TextBox5_TextChanged(sender As Object, e As EventArgs) Handles txtbxStudentProvince.TextChanged
 
     End Sub
+
+    Private Sub txtbxStudentAge_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtbxStudentAge.KeyPress
+        e.Handled = True ' Block typing
+    End Sub
+
+    Private Sub txtbxStudentAge_TextChanged(sender As Object, e As EventArgs) Handles txtbxStudentAge.TextChanged
+        ' Prevent manual edits from breaking the value
+        If Not txtbxStudentAge.ReadOnly Then
+            txtbxStudentAge.ReadOnly = True
+        End If
+    End Sub
+
+
+
+
+    ' test123
 
 End Class
