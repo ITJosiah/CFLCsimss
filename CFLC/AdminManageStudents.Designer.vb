@@ -682,14 +682,14 @@ Partial Class AdminManageStudents
         '
         'nudStudentGradeLevel
         '
-        Me.nudStudentGradeLevel.Location = New System.Drawing.Point(438, 33)
+        Me.nudStudentGradeLevel.Location = New System.Drawing.Point(442, 82)
         Me.nudStudentGradeLevel.Name = "nudStudentGradeLevel"
         Me.nudStudentGradeLevel.Size = New System.Drawing.Size(35, 23)
         Me.nudStudentGradeLevel.TabIndex = 27
         '
         'nudStudentAge
         '
-        Me.nudStudentAge.Location = New System.Drawing.Point(308, 84)
+        Me.nudStudentAge.Location = New System.Drawing.Point(442, 33)
         Me.nudStudentAge.Name = "nudStudentAge"
         Me.nudStudentAge.Size = New System.Drawing.Size(35, 23)
         Me.nudStudentAge.TabIndex = 24
@@ -697,7 +697,7 @@ Partial Class AdminManageStudents
         'cmbStudenttGender
         '
         Me.cmbStudenttGender.FormattingEnabled = True
-        Me.cmbStudenttGender.Location = New System.Drawing.Point(386, 82)
+        Me.cmbStudenttGender.Location = New System.Drawing.Point(309, 82)
         Me.cmbStudenttGender.Name = "cmbStudenttGender"
         Me.cmbStudenttGender.Size = New System.Drawing.Size(91, 24)
         Me.cmbStudenttGender.TabIndex = 23
@@ -723,7 +723,7 @@ Partial Class AdminManageStudents
         'lblStudentGender
         '
         Me.lblStudentGender.AutoSize = True
-        Me.lblStudentGender.Location = New System.Drawing.Point(383, 64)
+        Me.lblStudentGender.Location = New System.Drawing.Point(306, 64)
         Me.lblStudentGender.Name = "lblStudentGender"
         Me.lblStudentGender.Size = New System.Drawing.Size(31, 17)
         Me.lblStudentGender.TabIndex = 19
@@ -732,7 +732,7 @@ Partial Class AdminManageStudents
         'lblStudentAge
         '
         Me.lblStudentAge.AutoSize = True
-        Me.lblStudentAge.Location = New System.Drawing.Point(305, 64)
+        Me.lblStudentAge.Location = New System.Drawing.Point(439, 13)
         Me.lblStudentAge.Name = "lblStudentAge"
         Me.lblStudentAge.Size = New System.Drawing.Size(33, 17)
         Me.lblStudentAge.TabIndex = 17
@@ -776,7 +776,7 @@ Partial Class AdminManageStudents
         'lblStudentGradeLevel
         '
         Me.lblStudentGradeLevel.AutoSize = True
-        Me.lblStudentGradeLevel.Location = New System.Drawing.Point(417, 13)
+        Me.lblStudentGradeLevel.Location = New System.Drawing.Point(421, 62)
         Me.lblStudentGradeLevel.Name = "lblStudentGradeLevel"
         Me.lblStudentGradeLevel.Size = New System.Drawing.Size(86, 17)
         Me.lblStudentGradeLevel.TabIndex = 9
