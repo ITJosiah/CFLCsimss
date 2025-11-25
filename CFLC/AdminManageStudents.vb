@@ -28,11 +28,17 @@ Public Class AdminManageStudents
 
         ' Load students data
         LoadToDGV("SELECT * FROM student", dgvStudents)
+        ' Ensure the grid doesn't auto-select the first row on load
+        dgvStudents.ClearSelection()
+        dgvStudents.CurrentCell = Nothing
+        currentStudentID = 0
 
         txtbxStudentAge.ReadOnly = True
 
         ' Ensure Add button is enabled by default
         btnStudentAdd.Enabled = True
+
+        AddHandler dgvStudents.DataBindingComplete, AddressOf dgvStudents_DataBindingComplete
 
     End Sub
 
@@ -1107,53 +1113,32 @@ Public Class AdminManageStudents
         End If
     End Sub
 
-    ' Keep all your existing event handlers that weren't modified
-    Private Sub pnlContent_Paint(sender As Object, e As PaintEventArgs) Handles pnlContent.Paint
-        ' Handle paint event if needed
+    Private Sub dgvStudents_DataBindingComplete(sender As Object, e As DataGridViewBindingCompleteEventArgs) Handles dgvStudents.DataBindingComplete
+        ' Clear any automatic selection made during binding
+        dgvStudents.ClearSelection()
+
+        ' Try to remove the current cell focus safely
+        Try
+            If dgvStudents.Rows.Count > 0 AndAlso dgvStudents.Columns.Count > 0 Then
+                dgvStudents.CurrentCell = Nothing
+            End If
+        Catch
+            ' ignore - some layout states prevent setting CurrentCell to Nothing
+        End Try
     End Sub
 
-    Private Sub lblStudentAge_Click(sender As Object, e As EventArgs) Handles lblStudentAge.Click
-        ' Handle label click if needed
-    End Sub
+    Private Sub AdminManageStudents_Shown(sender As Object, e As EventArgs) Handles Me.Shown
+        ' Final fallback after the form is displayed
+        dgvStudents.ClearSelection()
+        Try
+            If dgvStudents.Rows.Count > 0 AndAlso dgvStudents.Columns.Count > 0 Then
+                dgvStudents.CurrentCell = Nothing
+            End If
+        Catch
+        End Try
 
-    Private Sub lblStudentGender_Click(sender As Object, e As EventArgs) Handles lblStudentGender.Click
-        ' Handle label click if needed
-    End Sub
-
-    Private Sub picWatermark_Click(sender As Object, e As EventArgs) Handles picWatermark.Click
-        ' Handle picture click if needed
-    End Sub
-
-    Private Sub grpStudentInfo_Enter(sender As Object, e As EventArgs) Handles grpStudentInfo.Enter
-        ' Handle group box enter if needed
-    End Sub
-
-    Private Sub pnlSidebar_Paint(sender As Object, e As PaintEventArgs) Handles pnlSidebar.Paint
-        ' Handle paint event if needed
-    End Sub
-
-    Private Sub lblStudentMiddleName_Click(sender As Object, e As EventArgs) Handles lblStudentMiddleName.Click
-        ' Handle label click if needed
-    End Sub
-
-    Private Sub cmbStudenttGenderSelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbStudenttGender.SelectedIndexChanged
-        ' Handle combo box selection change if needed
-    End Sub
-
-    Private Sub txtbxStudentSurnameTextChanged(sender As Object, e As EventArgs) Handles txtbxStudentSurname.TextChanged
-        ' Handle text change if needed
-    End Sub
-
-    Private Sub Label11_Click(sender As Object, e As EventArgs) Handles Label11.Click
-        ' Handle label click if needed
-    End Sub
-
-    Private Sub Label8_Click(sender As Object, e As EventArgs) Handles Label8.Click
-        ' Handle label click if needed
-    End Sub
-
-    Private Sub TextBox5_TextChanged(sender As Object, e As EventArgs) Handles txtbxStudentProvince.TextChanged
-        ' Handle text change if needed
+        ' Move focus to the first input so the grid doesn't look focused
+        txtbxStudentFirstName.Focus()
     End Sub
 
 End Class

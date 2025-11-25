@@ -23,6 +23,7 @@ Partial Class ManageEnrollmentForms
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.pnlContent = New System.Windows.Forms.Panel()
+        Me.TextBoxStudentSearch = New System.Windows.Forms.TextBox()
         Me.dgvEnrollment = New System.Windows.Forms.DataGridView()
         Me.EnrollmentID = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.EStudentID = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -71,7 +72,6 @@ Partial Class ManageEnrollmentForms
         Me.btnEnrollAdd = New System.Windows.Forms.Button()
         Me.btnEnrollSearch = New System.Windows.Forms.Button()
         Me.picWatermark = New System.Windows.Forms.PictureBox()
-        Me.TextBoxStudentSearch = New System.Windows.Forms.TextBox()
         Me.pnlContent.SuspendLayout()
         CType(Me.dgvEnrollment, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
@@ -95,6 +95,16 @@ Partial Class ManageEnrollmentForms
         Me.pnlContent.Name = "pnlContent"
         Me.pnlContent.Size = New System.Drawing.Size(1715, 732)
         Me.pnlContent.TabIndex = 24
+        '
+        'TextBoxStudentSearch
+        '
+        Me.TextBoxStudentSearch.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.TextBoxStudentSearch.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBoxStudentSearch.Location = New System.Drawing.Point(827, 683)
+        Me.TextBoxStudentSearch.MaxLength = 50
+        Me.TextBoxStudentSearch.Name = "TextBoxStudentSearch"
+        Me.TextBoxStudentSearch.Size = New System.Drawing.Size(246, 36)
+        Me.TextBoxStudentSearch.TabIndex = 30
         '
         'dgvEnrollment
         '
@@ -429,9 +439,9 @@ Partial Class ManageEnrollmentForms
         Me.Label14.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label14.Location = New System.Drawing.Point(-1, 3)
         Me.Label14.Name = "Label14"
-        Me.Label14.Size = New System.Drawing.Size(103, 20)
+        Me.Label14.Size = New System.Drawing.Size(122, 20)
         Me.Label14.TabIndex = 26
-        Me.Label14.Text = "Teacher List"
+        Me.Label14.Text = "Enrollment List"
         '
         'EnrollmentRequirementStatus
         '
@@ -596,16 +606,6 @@ Partial Class ManageEnrollmentForms
         Me.picWatermark.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
         Me.picWatermark.TabIndex = 22
         Me.picWatermark.TabStop = False
-        '
-        'TextBoxStudentSearch
-        '
-        Me.TextBoxStudentSearch.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TextBoxStudentSearch.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBoxStudentSearch.Location = New System.Drawing.Point(827, 683)
-        Me.TextBoxStudentSearch.MaxLength = 50
-        Me.TextBoxStudentSearch.Name = "TextBoxStudentSearch"
-        Me.TextBoxStudentSearch.Size = New System.Drawing.Size(246, 36)
-        Me.TextBoxStudentSearch.TabIndex = 30
         '
         'ManageEnrollmentForms
         '

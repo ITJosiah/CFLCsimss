@@ -14,6 +14,9 @@
             pnlSidebar.Visible = False
             pnlManSubContent.Dock = DockStyle.Fill
         End If
+
+
+
     End Sub
 
     Private Sub PositionSidebarButtons()
@@ -100,4 +103,5 @@
     Private Sub lblManSubCategory_Click(sender As Object, e As EventArgs) Handles lblManSubCategory.Click, lblManSubCategory.Click
 
     End Sub
+
 End Class
