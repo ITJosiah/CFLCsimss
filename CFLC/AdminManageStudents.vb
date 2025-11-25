@@ -185,7 +185,7 @@ Public Class AdminManageStudents
                 nudStudentGradeLevel.Value,
                 enrollmentIDValue,
                 txtbxStudentHouseNo.Text.Trim().Replace("'", "''"),
-                txtbcStudentStreet.Text.Trim().Replace("'", "''"),
+                txtbxstudentStreet.Text.Trim().Replace("'", "''"),
                 txtbxStudentBarangay.Text.Trim().Replace("'", "''"),
                 txtbxStudentCity.Text.Trim().Replace("'", "''"),
                 txtbxStudentProvince.Text.Trim().Replace("'", "''"),
@@ -279,9 +279,9 @@ Public Class AdminManageStudents
             Return False
         End If
 
-        If String.IsNullOrWhiteSpace(txtbcStudentStreet.Text) Then
+        If String.IsNullOrWhiteSpace(txtbxstudentStreet.Text) Then
             MessageBox.Show("Please enter Street.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            txtbcStudentStreet.Focus()
+            txtbxstudentStreet.Focus()
             Return False
         End If
 
@@ -406,7 +406,7 @@ Public Class AdminManageStudents
 
         ' Clear address fields
         txtbxStudentHouseNo.Clear()
-        txtbcStudentStreet.Clear()
+        txtbxstudentStreet.Clear()
         txtbxStudentBarangay.Clear()
         txtbxStudentCity.Clear()
         txtbxStudentProvince.Clear()
@@ -466,7 +466,7 @@ Public Class AdminManageStudents
     End Sub
 
     Private Sub pnlContent_Paint(sender As Object, e As PaintEventArgs) Handles pnlContent.Paint
-        ' Handle paint event if needed
+
     End Sub
 
     Private Sub txtAge_TextChanged(sender As Object, e As EventArgs)
@@ -493,15 +493,15 @@ Public Class AdminManageStudents
         ' Handle paint event if needed
     End Sub
 
-    Private Sub grpAddress_Enter(sender As Object, e As EventArgs) Handles grpAddress.Enter
+    Private Sub grpAddress_Enter(sender As Object, e As EventArgs)
         ' Handle group box enter if needed
     End Sub
 
-    Private Sub lblStudentBarangay_Click(sender As Object, e As EventArgs) Handles lblStudentBarangay.Click
+    Private Sub lblStudentBarangay_Click(sender As Object, e As EventArgs)
         ' Handle label click if needed
     End Sub
 
-    Private Sub lblStudentProvince_Click(sender As Object, e As EventArgs) Handles lblStudentProvince.Click
+    Private Sub lblStudentProvince_Click(sender As Object, e As EventArgs)
         ' Handle label click if needed
     End Sub
 
@@ -525,11 +525,11 @@ Public Class AdminManageStudents
         ' Handle label click if needed
     End Sub
 
-    Private Sub txtbxZipCode_TextChanged(sender As Object, e As EventArgs) Handles txtbxZipCode.TextChanged
+    Private Sub txtbxZipCode_TextChanged(sender As Object, e As EventArgs)
         ' Handle text change if needed
     End Sub
 
-    Private Sub txtbxZipCode_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtbxZipCode.KeyPress
+    Private Sub txtbxZipCode_KeyPress(sender As Object, e As KeyPressEventArgs)
         ' Only allow digits and backspace
         If Not Char.IsDigit(e.KeyChar) AndAlso e.KeyChar <> ControlChars.Back Then
             e.Handled = True
@@ -578,7 +578,7 @@ Public Class AdminManageStudents
 
             txtbxStudentEnrollmentID.Text = row.Cells("EnrollmentID").Value.ToString()
             txtbxStudentHouseNo.Text = row.Cells("HouseNumber").Value.ToString()
-            txtbcStudentStreet.Text = row.Cells("Street").Value.ToString()
+            txtbxstudentStreet.Text = row.Cells("Street").Value.ToString()
             txtbxStudentBarangay.Text = row.Cells("Barangay").Value.ToString()
             txtbxStudentCity.Text = row.Cells("Municipality").Value.ToString()
             txtbxStudentProvince.Text = row.Cells("Province").Value.ToString()
@@ -634,7 +634,7 @@ Public Class AdminManageStudents
 
                 cmd.Parameters.AddWithValue("@EnrollmentID", txtbxStudentEnrollmentID.Text.Trim())
                 cmd.Parameters.AddWithValue("@HouseNumber", txtbxStudentHouseNo.Text.Trim())
-                cmd.Parameters.AddWithValue("@Street", txtbcStudentStreet.Text.Trim())
+                cmd.Parameters.AddWithValue("@Street", txtbxstudentStreet.Text.Trim())
                 cmd.Parameters.AddWithValue("@Barangay", txtbxStudentBarangay.Text.Trim())
                 cmd.Parameters.AddWithValue("@Municipality", txtbxStudentCity.Text.Trim())
                 cmd.Parameters.AddWithValue("@Province", txtbxStudentProvince.Text.Trim())
@@ -777,6 +777,14 @@ Public Class AdminManageStudents
     End Sub
 
     Private Sub Label11_Click(sender As Object, e As EventArgs) Handles Label11.Click
+
+    End Sub
+
+    Private Sub Label8_Click(sender As Object, e As EventArgs) Handles Label8.Click
+
+    End Sub
+
+    Private Sub TextBox5_TextChanged(sender As Object, e As EventArgs) Handles txtbxStudentProvince.TextChanged
 
     End Sub
 
