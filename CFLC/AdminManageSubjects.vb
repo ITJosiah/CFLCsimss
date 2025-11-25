@@ -4,6 +4,7 @@ Imports MySql.Data.MySqlClient
 Public Class AdminManageSubjects
 
     Public Property IsEmbedded As Boolean = False
+
     Private Sub AdminManageSubjects_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         cmbSubjectCategory.Items.Clear()
@@ -23,6 +24,7 @@ Public Class AdminManageSubjects
         Catch
             ' ignore potential layout timing exceptions
         End Try
+
         currentSubjectID = 0
 
         If Not IsEmbedded Then
@@ -227,6 +229,105 @@ Public Class AdminManageSubjects
 
         End If
 
+    End Sub
+
+    Private Sub btnSubjectDelete_Click(sender As Object, e As EventArgs) Handles btnSubjectDelete.Click
+        ' Check if a subject is selected
+        If currentSubjectID = 0 Then
+            MessageBox.Show("Please select a subject to delete.", "Delete Subject", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+            Return
+        End If
+
+        ' Confirm deletion
+        If MessageBox.Show("Are you sure you want to delete this subject?", "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) = DialogResult.No Then
+            Return
+        End If
+
+        Try
+            ' Open database connection
+            modDBx.openConn(modDBx.db_name)
+
+            ' Prepare the DELETE SQL statement
+            Dim sql As String = "DELETE FROM subject WHERE SubjectID = @SubjectID"
+
+            Using cmd As New MySqlCommand(sql, modDBx.conn)
+                cmd.Parameters.AddWithValue("@SubjectID", currentSubjectID)
+                Dim rowsAffected As Integer = cmd.ExecuteNonQuery()
+
+                If rowsAffected > 0 Then
+                    MessageBox.Show("Subject deleted successfully.", "Delete Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                    ' Refresh the DataGridView
+                    LoadToDGV("SELECT * FROM subject", dgvSubjectList)
+                    ' Reset current selection and clear input fields
+                    currentSubjectID = 0
+                    ClearInputFields()
+                Else
+                    MessageBox.Show("No subject was deleted. Please check your selection.", "Delete Failed", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+                End If
+            End Using
+
+        Catch ex As MySqlException
+            MessageBox.Show("Database Error: " & ex.Message, "Delete Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        Catch ex As Exception
+            MessageBox.Show("Error deleting subject: " & ex.Message, "Delete Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        Finally
+            ' Close connection safely
+            If modDBx.conn IsNot Nothing AndAlso modDBx.conn.State = ConnectionState.Open Then
+                modDBx.conn.Close()
+            End If
+        End Try
+    End Sub
+
+    Private Sub ClearInputFields()
+        ' Clear all input fields after successful add or when un-selecting a row
+
+        ' Subject Information
+        txtbxManSubSubjectName.Clear()
+        txtbxManSubSubjectCode.Clear()
+        txtbxManSubDescription.Clear()
+        txtbxManSubSkillFocus.Clear()
+        cbxManSubRoomType.SelectedIndex = -1
+        nudManSubGradeLevel.Value = 1
+        nudManSubQuarter.Value = 1
+        txtbxManSubLearningMaterials.Clear()
+        txtbxManSubSchedule.Clear()
+        txtbxManSubStatus.Clear()
+        txtbxManSubCurriculumYear.Clear()
+        dtpManSubDateCreated.Value = DateTime.Now
+        txtbxManSubCreatedBy.Clear()
+
+        ' Reset current teacher selection
+        currentSubjectID = 0
+
+        ' Set focus back to first field
+        txtbxManSubSubjectName.Focus()
+    End Sub
+
+    ' Ensure selection is cleared after any data binding operation
+    Private Sub dgvSubjectList_DataBindingComplete(sender As Object, e As DataGridViewBindingCompleteEventArgs) Handles dgvSubjectList.DataBindingComplete
+        dgvSubjectList.ClearSelection()
+        Try
+            If dgvSubjectList.Rows.Count > 0 AndAlso dgvSubjectList.Columns.Count > 0 Then
+                dgvSubjectList.CurrentCell = Nothing
+            End If
+        Catch
+            ' ignore - layout timing may prevent clearing CurrentCell
+        End Try
+    End Sub
+
+    ' Final fallback after form is shown
+    Private Sub AdminManageSubjects_Shown(sender As Object, e As EventArgs) Handles Me.Shown
+        dgvSubjectList.ClearSelection()
+        Try
+            If dgvSubjectList.Rows.Count > 0 AndAlso dgvSubjectList.Columns.Count > 0 Then
+                dgvSubjectList.CurrentCell = Nothing
+            End If
+        Catch
+            ' ignore
+        End Try
+
+        ' Move focus to first input so the grid doesn't look focused
+        txtbxManSubSubjectName.Focus()
     End Sub
 
 End Class
