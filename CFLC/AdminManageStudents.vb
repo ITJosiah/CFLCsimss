@@ -696,6 +696,12 @@ Public Class AdminManageStudents
             Return ' Stop execution if validation fails
         End If
 
+        ' Check if any data has actually changed
+        If Not HasDataChanged() Then
+            MsgBox("No changes were made to the student data.", MsgBoxStyle.Information, "No Changes")
+            Return
+        End If
+
         Try
             modDBx.openConn(modDBx.db_name)
 
@@ -777,6 +783,65 @@ Public Class AdminManageStudents
             End If
         End Try
     End Sub
+
+    ' Add this function to check if any data has changed
+    Private Function HasDataChanged() As Boolean
+        ' Get the current student data from database to compare
+        Try
+            modDBx.openConn(modDBx.db_name)
+            Dim sql As String = "SELECT * FROM student WHERE StudentID = @StudentID"
+
+            Using cmd As New MySqlCommand(sql, modDBx.conn)
+                cmd.Parameters.AddWithValue("@StudentID", currentStudentID)
+
+                Using reader As MySqlDataReader = cmd.ExecuteReader()
+                    If reader.Read() Then
+                        ' Compare each field with current form values
+                        If GetSafeString(reader("LRN")) <> If(String.IsNullOrWhiteSpace(txtbxStudentLRN.Text), "", txtbxStudentLRN.Text.Trim()) Then Return True
+                        If GetSafeString(reader("FirstName")) <> txtbxStudentFirstName.Text.Trim() Then Return True
+                        If GetSafeString(reader("MiddleName")) <> If(String.IsNullOrWhiteSpace(txtStudentMiddleName.Text), "", txtStudentMiddleName.Text.Trim()) Then Return True
+                        If GetSafeString(reader("LastName")) <> txtbxStudentSurname.Text.Trim() Then Return True
+                        If GetSafeString(reader("ExtensionName")) <> If(String.IsNullOrWhiteSpace(txtbxStudentExtension.Text), "", txtbxStudentExtension.Text.Trim()) Then Return True
+                        If GetSafeString(reader("Gender")) <> cmbStudenttGender.Text.Trim() Then Return True
+                        If CDate(reader("Birthdate")) <> dtpStudentBirthdate.Value Then Return True
+                        If GetSafeString(reader("Age")) <> txtbxStudentAge.Text.Trim() Then Return True
+                        If GetSafeString(reader("BirthPlace")) <> txtbxStudentPOB.Text.Trim() Then Return True
+                        If GetSafeString(reader("MotherTongue")) <> txtbxStudentMotherTongue.Text.Trim() Then Return True
+                        If GetSafeString(reader("Indigineous")) <> If(RadioButtonStudentIPYES.Checked, "Yes", "No") Then Return True
+                        If GetSafeString(reader("IndigineousSpecific")) <> If(String.IsNullOrWhiteSpace(txtbbxStudentIPGroup.Text), "", txtbbxStudentIPGroup.Text.Trim()) Then Return True
+                        If GetSafeString(reader("4Ps")) <> If(RadioButtonStudent4PYES.Checked, "Yes", "No") Then Return True
+                        If GetSafeString(reader("4PsID")) <> If(String.IsNullOrWhiteSpace(txtbx4ps.Text), "", txtbx4ps.Text.Trim()) Then Return True
+                        If GetSafeString(reader("Religion")) <> txtbxStudentReligion.Text.Trim() Then Return True
+                        If GetSafeString(reader("GuardianName")) <> txtbxGuardianName.Text.Trim() Then Return True
+                        If GetSafeString(reader("GuardianContact")) <> txtbxGuardianContactNo.Text.Trim() Then Return True
+                        If CInt(reader("GradeLevel")) <> nudStudentGradeLevel.Value Then Return True
+                        If GetSafeString(reader("HouseNumber")) <> txtbxStudentHouseNo.Text.Trim() Then Return True
+                        If GetSafeString(reader("Street")) <> txtbxstudentStreet.Text.Trim() Then Return True
+                        If GetSafeString(reader("Barangay")) <> txtbxStudentBarangay.Text.Trim() Then Return True
+                        If GetSafeString(reader("Municipality")) <> txtbxStudentCity.Text.Trim() Then Return True
+                        If GetSafeString(reader("Province")) <> txtbxStudentProvince.Text.Trim() Then Return True
+                        If GetSafeString(reader("Country")) <> txtbxCountry.Text.Trim() Then Return True
+                        If GetSafeString(reader("ZIPCode")) <> txtbxZipCode.Text.Trim() Then Return True
+                    End If
+                End Using
+            End Using
+
+            Return False ' No changes detected
+
+        Catch ex As Exception
+            ' If we can't check for changes, assume there are changes to be safe
+            Return True
+        Finally
+            If modDBx.conn IsNot Nothing AndAlso modDBx.conn.State = ConnectionState.Open Then
+                modDBx.conn.Close()
+            End If
+        End Try
+    End Function
+
+    ' Helper function for safe string retrieval from database
+    Private Function GetSafeString(dbValue As Object) As String
+        Return If(dbValue Is Nothing OrElse IsDBNull(dbValue), "", dbValue.ToString())
+    End Function
 
     Private Sub SearchStudentsBySurname(ByVal surname As String)
         ' If the search box is empty, load all students (default view)
