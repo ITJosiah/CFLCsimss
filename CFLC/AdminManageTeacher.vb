@@ -2,10 +2,10 @@
 Imports MySql.Data.MySqlClient
 Public Class AdminManageTeacher
 
-
     Public Property IsEmbedded As Boolean = False
 
     Private currentTeacherID As Integer = 0
+
     Private Sub dgvTeacher_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvTeacher.CellClick
         If e.RowIndex >= 0 Then
             Dim row As DataGridViewRow = dgvTeacher.Rows(e.RowIndex)
@@ -49,6 +49,7 @@ Public Class AdminManageTeacher
 
         End If
     End Sub
+
     Private Sub txtbxTeacherZipCode_TextChanged(sender As Object, e As EventArgs) Handles txtbxTeacherZipCode.TextChanged
 
     End Sub
@@ -61,12 +62,22 @@ Public Class AdminManageTeacher
 
     Private Sub AdminManageTeacher_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-
         ' Initialize Gender ComboBox
         InitializeGenderComboBox()
 
         ' Load students data
         LoadToDGV("SELECT * FROM teacher", dgvTeacher)
+
+        ' Ensure the grid doesn't auto-select the first row on load
+        dgvTeacher.ClearSelection()
+        Try
+            If dgvTeacher.Rows.Count > 0 AndAlso dgvTeacher.Columns.Count > 0 Then
+                dgvTeacher.CurrentCell = Nothing
+            End If
+        Catch
+            ' ignore potential layout timing exceptions
+        End Try
+        currentTeacherID = 0
 
     End Sub
 
@@ -156,6 +167,33 @@ Public Class AdminManageTeacher
     Private Sub pnlContent_Paint(sender As Object, e As PaintEventArgs) Handles pnlContent.Paint
 
     End Sub
+
+    ' Ensure selection is cleared after any data binding operation
+    Private Sub dgvTeacher_DataBindingComplete(sender As Object, e As DataGridViewBindingCompleteEventArgs) Handles dgvTeacher.DataBindingComplete
+        dgvTeacher.ClearSelection()
+        Try
+            If dgvTeacher.Rows.Count > 0 AndAlso dgvTeacher.Columns.Count > 0 Then
+                dgvTeacher.CurrentCell = Nothing
+            End If
+        Catch
+            ' ignore - layout timing may prevent clearing CurrentCell
+        End Try
+    End Sub
+
+    ' Final fallback after form is shown
+    Private Sub AdminManageTeacher_Shown(sender As Object, e As EventArgs) Handles Me.Shown
+        dgvTeacher.ClearSelection()
+        Try
+            If dgvTeacher.Rows.Count > 0 AndAlso dgvTeacher.Columns.Count > 0 Then
+                dgvTeacher.CurrentCell = Nothing
+            End If
+        Catch
+        End Try
+
+        ' Move focus to first input so the grid doesn't appear focused
+        TextBoxTeacherFirstName.Focus()
+    End Sub
+
 End Class
 
 
