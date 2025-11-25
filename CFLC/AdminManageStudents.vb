@@ -514,8 +514,6 @@ Public Class AdminManageStudents
             End If
 
             ' SectionID retrieval (still needed for the textbox)
-
-
             txtbxStudentHouseNo.Text = row.Cells("HouseNumber").Value.ToString()
             txtbxstudentStreet.Text = row.Cells("Street").Value.ToString()
             txtbxStudentBarangay.Text = row.Cells("Barangay").Value.ToString()
