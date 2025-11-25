@@ -24,11 +24,9 @@ Public Class AdminManageStudents
         InitializeGenderComboBox()
 
         ' Initialize numeric controls with safe default values
-        InitializeNumericControls()
 
         ' Load students data
         LoadToDGV("SELECT * FROM student", dgvStudents)
-    End Sub
 
     Private Sub InitializeNumericControls()
         ' Set safe default values for numeric up/down controls
@@ -337,7 +335,6 @@ Public Class AdminManageStudents
         dtpStudentBirthdate.Value = DateTime.Now
 
         ' Reset numeric controls safely
-        ResetNumericControl(nudStudentAge)
         ResetNumericControl(nudStudentGradeLevel)
 
         txtbxGuardianName.Clear()
@@ -505,10 +502,6 @@ Public Class AdminManageStudents
             txtbxGuardianName.Text = row.Cells("GuardianName").Value.ToString()
 
             ' Numeric Up Downs
-            If Not IsDBNull(row.Cells("Age").Value) Then
-                nudStudentAge.Value = CInt(row.Cells("Age").Value)
-            End If
-
             If Not IsDBNull(row.Cells("GradeLevel").Value) Then
                 nudStudentGradeLevel.Value = CInt(row.Cells("GradeLevel").Value)
             End If
