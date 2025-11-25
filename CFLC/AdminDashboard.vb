@@ -10,6 +10,7 @@
         Me.BackColor = Color.FromArgb(7, 77, 39) ' Dark green background
         Me.Text = "Dashboard-Admin"
 
+
         PositionSidebarButtons()
 
         ShowHomeContent()
