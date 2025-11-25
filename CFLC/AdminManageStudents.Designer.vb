@@ -38,8 +38,13 @@ Partial Class AdminManageStudents
         Me.btnStudentAdd = New System.Windows.Forms.Button()
         Me.dgvStudents = New System.Windows.Forms.DataGridView()
         Me.grpStudentInfo = New System.Windows.Forms.GroupBox()
+        Me.RadioButtonStudentIPNO = New System.Windows.Forms.RadioButton()
+        Me.RadioButtonStudentIPYES = New System.Windows.Forms.RadioButton()
         Me.txtbxZipCode = New System.Windows.Forms.TextBox()
         Me.Label18 = New System.Windows.Forms.Label()
+        Me.GroupBox4P = New System.Windows.Forms.GroupBox()
+        Me.RadioButtonStudent4PYES = New System.Windows.Forms.RadioButton()
+        Me.RadioButtonStudent4PNO = New System.Windows.Forms.RadioButton()
         Me.txtbxCountry = New System.Windows.Forms.TextBox()
         Me.Label15 = New System.Windows.Forms.Label()
         Me.txtbxStudentProvince = New System.Windows.Forms.TextBox()
@@ -89,20 +94,15 @@ Partial Class AdminManageStudents
         Me.lblStudentFirstName = New System.Windows.Forms.Label()
         Me.lblStudentList = New System.Windows.Forms.Label()
         Me.picWatermark = New System.Windows.Forms.PictureBox()
-        Me.RadioButtonStudentIPYES = New System.Windows.Forms.RadioButton()
-        Me.RadioButtonStudentIPNO = New System.Windows.Forms.RadioButton()
-        Me.RadioButtonStudent4PNO = New System.Windows.Forms.RadioButton()
-        Me.RadioButtonStudent4PYES = New System.Windows.Forms.RadioButton()
-        Me.GroupBox4P = New System.Windows.Forms.GroupBox()
         Me.pnlSidebar.SuspendLayout()
         Me.flowButtons.SuspendLayout()
         Me.pnlContent.SuspendLayout()
         CType(Me.dgvStudents, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpStudentInfo.SuspendLayout()
+        Me.GroupBox4P.SuspendLayout()
         CType(Me.nudStudentGradeLevel, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudStudentAge, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.picWatermark, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.GroupBox4P.SuspendLayout()
         Me.SuspendLayout()
         '
         'pnlSidebar
@@ -361,6 +361,28 @@ Partial Class AdminManageStudents
         Me.grpStudentInfo.TabStop = False
         Me.grpStudentInfo.Text = "Student List"
         '
+        'RadioButtonStudentIPNO
+        '
+        Me.RadioButtonStudentIPNO.AutoSize = True
+        Me.RadioButtonStudentIPNO.Location = New System.Drawing.Point(154, 293)
+        Me.RadioButtonStudentIPNO.Name = "RadioButtonStudentIPNO"
+        Me.RadioButtonStudentIPNO.Size = New System.Drawing.Size(51, 24)
+        Me.RadioButtonStudentIPNO.TabIndex = 64
+        Me.RadioButtonStudentIPNO.TabStop = True
+        Me.RadioButtonStudentIPNO.Text = "No"
+        Me.RadioButtonStudentIPNO.UseVisualStyleBackColor = True
+        '
+        'RadioButtonStudentIPYES
+        '
+        Me.RadioButtonStudentIPYES.AutoSize = True
+        Me.RadioButtonStudentIPYES.Location = New System.Drawing.Point(84, 294)
+        Me.RadioButtonStudentIPYES.Name = "RadioButtonStudentIPYES"
+        Me.RadioButtonStudentIPYES.Size = New System.Drawing.Size(58, 24)
+        Me.RadioButtonStudentIPYES.TabIndex = 63
+        Me.RadioButtonStudentIPYES.TabStop = True
+        Me.RadioButtonStudentIPYES.Text = "Yes"
+        Me.RadioButtonStudentIPYES.UseVisualStyleBackColor = True
+        '
         'txtbxZipCode
         '
         Me.txtbxZipCode.Location = New System.Drawing.Point(740, 447)
@@ -379,6 +401,39 @@ Partial Class AdminManageStudents
         Me.Label18.Size = New System.Drawing.Size(77, 20)
         Me.Label18.TabIndex = 61
         Me.Label18.Text = "ZIP Code"
+        '
+        'GroupBox4P
+        '
+        Me.GroupBox4P.BackColor = System.Drawing.Color.Gainsboro
+        Me.GroupBox4P.Controls.Add(Me.RadioButtonStudent4PYES)
+        Me.GroupBox4P.Controls.Add(Me.RadioButtonStudent4PNO)
+        Me.GroupBox4P.Location = New System.Drawing.Point(78, 350)
+        Me.GroupBox4P.Name = "GroupBox4P"
+        Me.GroupBox4P.Size = New System.Drawing.Size(134, 44)
+        Me.GroupBox4P.TabIndex = 11
+        Me.GroupBox4P.TabStop = False
+        '
+        'RadioButtonStudent4PYES
+        '
+        Me.RadioButtonStudent4PYES.AutoSize = True
+        Me.RadioButtonStudent4PYES.Location = New System.Drawing.Point(7, 9)
+        Me.RadioButtonStudent4PYES.Name = "RadioButtonStudent4PYES"
+        Me.RadioButtonStudent4PYES.Size = New System.Drawing.Size(58, 24)
+        Me.RadioButtonStudent4PYES.TabIndex = 65
+        Me.RadioButtonStudent4PYES.TabStop = True
+        Me.RadioButtonStudent4PYES.Text = "Yes"
+        Me.RadioButtonStudent4PYES.UseVisualStyleBackColor = True
+        '
+        'RadioButtonStudent4PNO
+        '
+        Me.RadioButtonStudent4PNO.AutoSize = True
+        Me.RadioButtonStudent4PNO.Location = New System.Drawing.Point(77, 9)
+        Me.RadioButtonStudent4PNO.Name = "RadioButtonStudent4PNO"
+        Me.RadioButtonStudent4PNO.Size = New System.Drawing.Size(51, 24)
+        Me.RadioButtonStudent4PNO.TabIndex = 66
+        Me.RadioButtonStudent4PNO.TabStop = True
+        Me.RadioButtonStudent4PNO.Text = "No"
+        Me.RadioButtonStudent4PNO.UseVisualStyleBackColor = True
         '
         'txtbxCountry
         '
@@ -565,7 +620,7 @@ Partial Class AdminManageStudents
         '
         'txtbbxStudentIPGroup
         '
-        Me.txtbbxStudentIPGroup.Location = New System.Drawing.Point(411, 289)
+        Me.txtbbxStudentIPGroup.Location = New System.Drawing.Point(416, 290)
         Me.txtbbxStudentIPGroup.Margin = New System.Windows.Forms.Padding(4)
         Me.txtbbxStudentIPGroup.MaxLength = 50
         Me.txtbbxStudentIPGroup.Name = "txtbbxStudentIPGroup"
@@ -584,7 +639,7 @@ Partial Class AdminManageStudents
         '
         'txtbxStudentMotherTongue
         '
-        Me.txtbxStudentMotherTongue.Location = New System.Drawing.Point(740, 111)
+        Me.txtbxStudentMotherTongue.Location = New System.Drawing.Point(740, 159)
         Me.txtbxStudentMotherTongue.Margin = New System.Windows.Forms.Padding(4)
         Me.txtbxStudentMotherTongue.MaxLength = 50
         Me.txtbxStudentMotherTongue.Name = "txtbxStudentMotherTongue"
@@ -595,7 +650,7 @@ Partial Class AdminManageStudents
         '
         Me.Label4.AutoEllipsis = True
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(736, 87)
+        Me.Label4.Location = New System.Drawing.Point(736, 135)
         Me.Label4.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(121, 20)
@@ -854,61 +909,6 @@ Partial Class AdminManageStudents
         Me.picWatermark.TabIndex = 5
         Me.picWatermark.TabStop = False
         '
-        'RadioButtonStudentIPYES
-        '
-        Me.RadioButtonStudentIPYES.AutoSize = True
-        Me.RadioButtonStudentIPYES.Location = New System.Drawing.Point(84, 294)
-        Me.RadioButtonStudentIPYES.Name = "RadioButtonStudentIPYES"
-        Me.RadioButtonStudentIPYES.Size = New System.Drawing.Size(58, 24)
-        Me.RadioButtonStudentIPYES.TabIndex = 63
-        Me.RadioButtonStudentIPYES.TabStop = True
-        Me.RadioButtonStudentIPYES.Text = "Yes"
-        Me.RadioButtonStudentIPYES.UseVisualStyleBackColor = True
-        '
-        'RadioButtonStudentIPNO
-        '
-        Me.RadioButtonStudentIPNO.AutoSize = True
-        Me.RadioButtonStudentIPNO.Location = New System.Drawing.Point(154, 293)
-        Me.RadioButtonStudentIPNO.Name = "RadioButtonStudentIPNO"
-        Me.RadioButtonStudentIPNO.Size = New System.Drawing.Size(51, 24)
-        Me.RadioButtonStudentIPNO.TabIndex = 64
-        Me.RadioButtonStudentIPNO.TabStop = True
-        Me.RadioButtonStudentIPNO.Text = "No"
-        Me.RadioButtonStudentIPNO.UseVisualStyleBackColor = True
-        '
-        'RadioButtonStudent4PNO
-        '
-        Me.RadioButtonStudent4PNO.AutoSize = True
-        Me.RadioButtonStudent4PNO.Location = New System.Drawing.Point(77, 9)
-        Me.RadioButtonStudent4PNO.Name = "RadioButtonStudent4PNO"
-        Me.RadioButtonStudent4PNO.Size = New System.Drawing.Size(51, 24)
-        Me.RadioButtonStudent4PNO.TabIndex = 66
-        Me.RadioButtonStudent4PNO.TabStop = True
-        Me.RadioButtonStudent4PNO.Text = "No"
-        Me.RadioButtonStudent4PNO.UseVisualStyleBackColor = True
-        '
-        'RadioButtonStudent4PYES
-        '
-        Me.RadioButtonStudent4PYES.AutoSize = True
-        Me.RadioButtonStudent4PYES.Location = New System.Drawing.Point(7, 9)
-        Me.RadioButtonStudent4PYES.Name = "RadioButtonStudent4PYES"
-        Me.RadioButtonStudent4PYES.Size = New System.Drawing.Size(58, 24)
-        Me.RadioButtonStudent4PYES.TabIndex = 65
-        Me.RadioButtonStudent4PYES.TabStop = True
-        Me.RadioButtonStudent4PYES.Text = "Yes"
-        Me.RadioButtonStudent4PYES.UseVisualStyleBackColor = True
-        '
-        'GroupBox4P
-        '
-        Me.GroupBox4P.BackColor = System.Drawing.Color.Gainsboro
-        Me.GroupBox4P.Controls.Add(Me.RadioButtonStudent4PYES)
-        Me.GroupBox4P.Controls.Add(Me.RadioButtonStudent4PNO)
-        Me.GroupBox4P.Location = New System.Drawing.Point(78, 350)
-        Me.GroupBox4P.Name = "GroupBox4P"
-        Me.GroupBox4P.Size = New System.Drawing.Size(134, 44)
-        Me.GroupBox4P.TabIndex = 11
-        Me.GroupBox4P.TabStop = False
-        '
         'AdminManageStudents
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
@@ -930,11 +930,11 @@ Partial Class AdminManageStudents
         CType(Me.dgvStudents, System.ComponentModel.ISupportInitialize).EndInit()
         Me.grpStudentInfo.ResumeLayout(False)
         Me.grpStudentInfo.PerformLayout()
+        Me.GroupBox4P.ResumeLayout(False)
+        Me.GroupBox4P.PerformLayout()
         CType(Me.nudStudentGradeLevel, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.nudStudentAge, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.picWatermark, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.GroupBox4P.ResumeLayout(False)
-        Me.GroupBox4P.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
