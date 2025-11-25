@@ -1,10 +1,12 @@
-﻿Public Class AdminManageTeacher
+﻿Imports System.Data.SqlClient
+Imports MySql.Data.MySqlClient
+Public Class AdminManageTeacher
 
 
     Public Property IsEmbedded As Boolean = False
 
     Private currentTeacherID As Integer = 0
-    Private Sub dgvStudents_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvTeacher.CellClick
+    Private Sub dgvTeacher_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvTeacher.CellClick
         If e.RowIndex >= 0 Then
             Dim row As DataGridViewRow = dgvTeacher.Rows(e.RowIndex)
 
@@ -14,14 +16,16 @@
             TextBoxTeacherFirstName.Text = row.Cells("FirstName").Value.ToString()
             TextBoxTeacherMiddleName.Text = row.Cells("MiddleName").Value.ToString()
             TextBoxTeacherSurname.Text = row.Cells("LastName").Value.ToString()
+            TextBoxTeacherExtension.Text = row.Cells("ExtensionName").Value.ToString()
+            txtbxTeacherAge.Text = row.Cells("Age").Value.ToString()
 
             'TextBpxTeacherExtensionName.Text = row.Cells("ExtensionName").Value.ToString()
 
-            ComboBoxTeacherGender.Text = row.Cells("Gender").Value.ToString()
+            ComboBoxTeacherGender.Text = row.Cells("Sex").Value.ToString()
 
             ' Birthdate (DateTimePicker)
             If Not IsDBNull(row.Cells("Birthdate").Value) Then
-                DateTImePickerTeacherBirthdate.Value = CDate(row.Cells("Birth Date").Value)
+                DateTImePickerTeacherBirthdate.Value = CDate(row.Cells("BirthDate").Value)
             End If
 
             If Not IsDBNull(row.Cells("HireDate").Value) Then
@@ -72,6 +76,79 @@
         ComboBoxTeacherGender.Items.Add("Female")
     End Sub
 
+    Private Sub btnTeaUpdate_Click(sender As Object, e As EventArgs) Handles btnTeaUpdate.Click
+        UpdateTeacher()
+    End Sub
+
+    Private Sub UpdateTeacher()
+        If currentTeacherID = 0 Then
+            MessageBox.Show("Please select a teacher to update.", "No Teacher Selected", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Return
+        End If
+
+        Try
+            Dim query As String = "
+            UPDATE teacher SET
+                FirstName = @FirstName,
+                MiddleName = @MiddleName,
+                LastName = @LastName,
+                ExtensionName = @ExtensionName,
+                Age = @Age,
+                Sex = @Sex,
+                BirthDate = @BirthDate,
+                HireDate = @HireDate,
+                ContactNumber = @ContactNumber,
+                Email = @Email,
+                HouseNumber = @HouseNumber,
+                Barangay = @Barangay,
+                Municipality = @Municipality,
+                Province = @Province,
+                Country = @Country,
+                ZipCode = @ZipCode,
+                EducationalAttainment = @EducationalAttainment,
+                Specialization = @Specialization,
+                Status = @Status
+            WHERE TeacherID = @TeacherID
+        "
+
+            Dim con As New MySqlConnection("server=192.168.1.30;user=jeje;password=password;database=cflc_db;")
+            Using cmd As New MySqlCommand(query, con)
+                ' Add parameters
+                cmd.Parameters.AddWithValue("@TeacherID", currentTeacherID)
+                cmd.Parameters.AddWithValue("@FirstName", TextBoxTeacherFirstName.Text)
+                cmd.Parameters.AddWithValue("@MiddleName", TextBoxTeacherMiddleName.Text)
+                cmd.Parameters.AddWithValue("@LastName", TextBoxTeacherSurname.Text)
+                cmd.Parameters.AddWithValue("@ExtensionName", TextBoxTeacherExtension.Text)
+                cmd.Parameters.AddWithValue("@Sex", ComboBoxTeacherGender.Text)
+                cmd.Parameters.AddWithValue("@BirthDate", DateTImePickerTeacherBirthdate.Value)
+                cmd.Parameters.AddWithValue("@Age", txtbxTeacherAge.Text)
+                cmd.Parameters.AddWithValue("@HireDate", ManageTeacherHireDate.Value)
+                cmd.Parameters.AddWithValue("@ContactNumber", TextBoxTeacherContactNo.Text)
+                cmd.Parameters.AddWithValue("@Email", TextBoxTeacherEmail.Text)
+                cmd.Parameters.AddWithValue("@HouseNumber", txtbxTeacherHouseNo.Text)
+                cmd.Parameters.AddWithValue("@Barangay", txtbxTeacherBarangay.Text)
+                cmd.Parameters.AddWithValue("@Municipality", txtbxTeacherCity.Text)
+                cmd.Parameters.AddWithValue("@Province", txtbxTeacherProvince.Text)
+                cmd.Parameters.AddWithValue("@Country", txtbxTeacherCountry.Text)
+                cmd.Parameters.AddWithValue("@ZipCode", txtbxTeacherZipCode.Text)
+                cmd.Parameters.AddWithValue("@EducationalAttainment", TextBoxTeacherEducationalAttainment.Text)
+                cmd.Parameters.AddWithValue("@Specialization", TextBoxTeacherSpecialization.Text)
+                cmd.Parameters.AddWithValue("@Status", ComboBoxTeacherStatus.Text)
+
+                con.Open()
+                cmd.ExecuteNonQuery()
+
+            End Using
+
+            MessageBox.Show("Teacher information updated successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
+
+            ' Refresh DataGridView
+            LoadToDGV("SELECT * FROM teacher", dgvTeacher)
+
+        Catch ex As Exception
+            MessageBox.Show("Update failed: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+    End Sub
 
 End Class
 
