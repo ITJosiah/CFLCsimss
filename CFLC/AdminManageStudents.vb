@@ -691,53 +691,58 @@ Public Class AdminManageStudents
             Return
         End If
 
+        ' Validate required fields FIRST using the same validation as Add
+        If Not ValidateInputs() Then
+            Return ' Stop execution if validation fails
+        End If
+
         Try
             modDBx.openConn(modDBx.db_name)
 
             Dim sql As String = "UPDATE student SET " &
-                        "LRN = @LRN, " &
-                        "FirstName = @FirstName, " &
-                        "MiddleName = @MiddleName, " &
-                        "LastName = @LastName, " &
-                        "ExtensionName = @ExtensionName, " &
-                        "Gender = @Gender, " &
-                        "Birthdate = @Birthdate, " &
-                        "Age = @Age, " &
-                        "BirthPlace = @BirthPlace, " &
-                        "MotherTongue = @MotherTongue, " &
-                        "Indigineous = @Indigineous, " &
-                        "IndigineousSpecific = @IndigineousSpecific, " &
-                        "4Ps = @4Ps, " &
-                        "4PsID = @4PsID, " &
-                        "Religion = @Religion, " &
-                        "GuardianName = @GuardianName, " &
-                        "GuardianContact = @GuardianContact, " &
-                        "GradeLevel = @GradeLevel, " &
-                        "HouseNumber = @HouseNumber, " &
-                        "Street = @Street, " &
-                        "Barangay = @Barangay, " &
-                        "Municipality = @Municipality, " &
-                        "Province = @Province, " &
-                        "Country = @Country, " &
-                        "ZIPCode = @ZIPCode " &
-                        "WHERE StudentID = @StudentID"
+                    "LRN = @LRN, " &
+                    "FirstName = @FirstName, " &
+                    "MiddleName = @MiddleName, " &
+                    "LastName = @LastName, " &
+                    "ExtensionName = @ExtensionName, " &
+                    "Gender = @Gender, " &
+                    "Birthdate = @Birthdate, " &
+                    "Age = @Age, " &
+                    "BirthPlace = @BirthPlace, " &
+                    "MotherTongue = @MotherTongue, " &
+                    "Indigineous = @Indigineous, " &
+                    "IndigineousSpecific = @IndigineousSpecific, " &
+                    "4Ps = @4Ps, " &
+                    "4PsID = @4PsID, " &
+                    "Religion = @Religion, " &
+                    "GuardianName = @GuardianName, " &
+                    "GuardianContact = @GuardianContact, " &
+                    "GradeLevel = @GradeLevel, " &
+                    "HouseNumber = @HouseNumber, " &
+                    "Street = @Street, " &
+                    "Barangay = @Barangay, " &
+                    "Municipality = @Municipality, " &
+                    "Province = @Province, " &
+                    "Country = @Country, " &
+                    "ZIPCode = @ZIPCode " &
+                    "WHERE StudentID = @StudentID"
 
             Using cmd As New MySqlCommand(sql, modDBx.conn)
                 ' Add all parameters - Convert appropriate fields to Proper Case
-                cmd.Parameters.AddWithValue("@LRN", txtbxStudentLRN.Text.Trim())
+                cmd.Parameters.AddWithValue("@LRN", If(String.IsNullOrWhiteSpace(txtbxStudentLRN.Text), DBNull.Value, txtbxStudentLRN.Text.Trim()))
                 cmd.Parameters.AddWithValue("@FirstName", ConvertToProperCase(txtbxStudentFirstName.Text.Trim()))
-                cmd.Parameters.AddWithValue("@MiddleName", ConvertToProperCase(txtStudentMiddleName.Text.Trim()))
+                cmd.Parameters.AddWithValue("@MiddleName", If(String.IsNullOrWhiteSpace(txtStudentMiddleName.Text), DBNull.Value, ConvertToProperCase(txtStudentMiddleName.Text.Trim())))
                 cmd.Parameters.AddWithValue("@LastName", ConvertToProperCase(txtbxStudentSurname.Text.Trim()))
-                cmd.Parameters.AddWithValue("@ExtensionName", ConvertToProperCase(txtbxStudentExtension.Text.Trim()))
+                cmd.Parameters.AddWithValue("@ExtensionName", If(String.IsNullOrWhiteSpace(txtbxStudentExtension.Text), DBNull.Value, ConvertToProperCase(txtbxStudentExtension.Text.Trim())))
                 cmd.Parameters.AddWithValue("@Gender", cmbStudenttGender.Text.Trim())
                 cmd.Parameters.AddWithValue("@Birthdate", dtpStudentBirthdate.Value)
                 cmd.Parameters.AddWithValue("@Age", txtbxStudentAge.Text.Trim())
                 cmd.Parameters.AddWithValue("@BirthPlace", ConvertToProperCase(txtbxStudentPOB.Text.Trim()))
                 cmd.Parameters.AddWithValue("@MotherTongue", ConvertToProperCase(txtbxStudentMotherTongue.Text.Trim()))
                 cmd.Parameters.AddWithValue("@Indigineous", If(RadioButtonStudentIPYES.Checked, "Yes", "No"))
-                cmd.Parameters.AddWithValue("@IndigineousSpecific", ConvertToProperCase(txtbbxStudentIPGroup.Text.Trim()))
+                cmd.Parameters.AddWithValue("@IndigineousSpecific", If(String.IsNullOrWhiteSpace(txtbbxStudentIPGroup.Text), DBNull.Value, ConvertToProperCase(txtbbxStudentIPGroup.Text.Trim())))
                 cmd.Parameters.AddWithValue("@4Ps", If(RadioButtonStudent4PYES.Checked, "Yes", "No"))
-                cmd.Parameters.AddWithValue("@4PsID", txtbx4ps.Text.Trim())
+                cmd.Parameters.AddWithValue("@4PsID", If(String.IsNullOrWhiteSpace(txtbx4ps.Text), DBNull.Value, txtbx4ps.Text.Trim()))
                 cmd.Parameters.AddWithValue("@Religion", ConvertToProperCase(txtbxStudentReligion.Text.Trim()))
                 cmd.Parameters.AddWithValue("@GuardianName", ConvertToProperCase(txtbxGuardianName.Text.Trim()))
                 cmd.Parameters.AddWithValue("@GuardianContact", txtbxGuardianContactNo.Text.Trim())
