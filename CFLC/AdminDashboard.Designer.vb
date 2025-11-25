@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class AdminDashboard
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class AdminDashboard
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.pnlSidebar = New System.Windows.Forms.Panel()
@@ -36,13 +36,14 @@ Partial Class AdminDashboard
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlSidebar.SuspendLayout()
         Me.flowButtons.SuspendLayout()
+        Me.pnlMainContent.SuspendLayout()
         Me.SuspendLayout()
         '
         'PictureBox1
         '
         Me.PictureBox1.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.PictureBox1.Image = Global.CFLC.My.Resources.Resources.logo
-        Me.PictureBox1.Location = New System.Drawing.Point(360, 90)
+        Me.PictureBox1.Location = New System.Drawing.Point(760, 356)
         Me.PictureBox1.Name = "PictureBox1"
         Me.PictureBox1.Size = New System.Drawing.Size(375, 330)
         Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
@@ -91,7 +92,7 @@ Partial Class AdminDashboard
         '
         'btnManageTeachers
         '
-        Me.btnManageTeachers.Location = New System.Drawing.Point(0, 57)
+        Me.btnManageTeachers.Location = New System.Drawing.Point(0, 63)
         Me.btnManageTeachers.Margin = New System.Windows.Forms.Padding(0, 0, 0, 18)
         Me.btnManageTeachers.Name = "btnManageTeachers"
         Me.btnManageTeachers.Size = New System.Drawing.Size(240, 45)
@@ -101,7 +102,7 @@ Partial Class AdminDashboard
         '
         'btnManageSections
         '
-        Me.btnManageSections.Location = New System.Drawing.Point(0, 114)
+        Me.btnManageSections.Location = New System.Drawing.Point(0, 126)
         Me.btnManageSections.Margin = New System.Windows.Forms.Padding(0, 0, 0, 18)
         Me.btnManageSections.Name = "btnManageSections"
         Me.btnManageSections.Size = New System.Drawing.Size(240, 45)
@@ -111,7 +112,7 @@ Partial Class AdminDashboard
         '
         'btnManageEnrollments
         '
-        Me.btnManageEnrollments.Location = New System.Drawing.Point(0, 171)
+        Me.btnManageEnrollments.Location = New System.Drawing.Point(0, 189)
         Me.btnManageEnrollments.Margin = New System.Windows.Forms.Padding(0, 0, 0, 18)
         Me.btnManageEnrollments.Name = "btnManageEnrollments"
         Me.btnManageEnrollments.Size = New System.Drawing.Size(240, 45)
@@ -121,7 +122,7 @@ Partial Class AdminDashboard
         '
         'btnManageSubjects
         '
-        Me.btnManageSubjects.Location = New System.Drawing.Point(0, 228)
+        Me.btnManageSubjects.Location = New System.Drawing.Point(0, 252)
         Me.btnManageSubjects.Margin = New System.Windows.Forms.Padding(0, 0, 0, 18)
         Me.btnManageSubjects.Name = "btnManageSubjects"
         Me.btnManageSubjects.Size = New System.Drawing.Size(240, 45)
@@ -131,7 +132,7 @@ Partial Class AdminDashboard
         '
         'btnGenerateReports
         '
-        Me.btnGenerateReports.Location = New System.Drawing.Point(0, 285)
+        Me.btnGenerateReports.Location = New System.Drawing.Point(0, 315)
         Me.btnGenerateReports.Margin = New System.Windows.Forms.Padding(0, 0, 0, 18)
         Me.btnGenerateReports.Name = "btnGenerateReports"
         Me.btnGenerateReports.Size = New System.Drawing.Size(240, 45)
@@ -159,7 +160,7 @@ Partial Class AdminDashboard
         Me.pnlMainContent.Dock = System.Windows.Forms.DockStyle.Fill
         Me.pnlMainContent.Location = New System.Drawing.Point(300, 0)
         Me.pnlMainContent.Name = "pnlMainContent"
-        Me.pnlMainContent.Size = New System.Drawing.Size(1000, 633)
+        Me.pnlMainContent.Size = New System.Drawing.Size(1115, 633)
         Me.pnlMainContent.TabIndex = 12
         '
         'AdminDashboard
@@ -175,6 +176,7 @@ Partial Class AdminDashboard
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.pnlSidebar.ResumeLayout(False)
         Me.flowButtons.ResumeLayout(False)
+        Me.pnlMainContent.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub

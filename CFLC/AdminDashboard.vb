@@ -10,6 +10,8 @@
         Me.BackColor = Color.FromArgb(7, 77, 39) ' Dark green background
         Me.Text = "Dashboard-Admin"
 
+        LoadChartData()
+
         PositionSidebarButtons()
 
         ShowHomeContent()
@@ -223,5 +225,10 @@
     Private Sub PictureBox1_Click(sender As Object, e As EventArgs) Handles PictureBox1.Click
 
     End Sub
+
+    Private Sub pnlMainContent_Paint(sender As Object, e As PaintEventArgs) Handles pnlMainContent.Paint
+
+    End Sub
+
 End Class
 
