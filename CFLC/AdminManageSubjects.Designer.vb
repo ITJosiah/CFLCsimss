@@ -32,11 +32,11 @@ Partial Class AdminManageSubjects
         Me.btnGenerateReports = New System.Windows.Forms.Button()
         Me.btnLogout = New System.Windows.Forms.Button()
         Me.pnlManSubContent = New System.Windows.Forms.Panel()
-        Me.TextBoxStudentSearch = New System.Windows.Forms.TextBox()
+        Me.TextBoxSubjectSearch = New System.Windows.Forms.TextBox()
         Me.btnSubjectDelete = New System.Windows.Forms.Button()
         Me.btnSubjectUpdate = New System.Windows.Forms.Button()
         Me.btnSubjectAdd = New System.Windows.Forms.Button()
-        Me.dgvSections = New System.Windows.Forms.DataGridView()
+        Me.dgvSubjectList = New System.Windows.Forms.DataGridView()
         Me.grpSubjectInformation = New System.Windows.Forms.GroupBox()
         Me.cbxManSubRoomType = New System.Windows.Forms.ComboBox()
         Me.txtbxManSubSubjectName = New System.Windows.Forms.TextBox()
@@ -71,7 +71,7 @@ Partial Class AdminManageSubjects
         Me.pnlSidebar.SuspendLayout()
         Me.flowButtons.SuspendLayout()
         Me.pnlManSubContent.SuspendLayout()
-        CType(Me.dgvSections, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.dgvSubjectList, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpSubjectInformation.SuspendLayout()
         CType(Me.nudManSubGradeLevel, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudManSubQuarter, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -185,11 +185,11 @@ Partial Class AdminManageSubjects
         'pnlManSubContent
         '
         Me.pnlManSubContent.BackColor = System.Drawing.Color.FromArgb(CType(CType(7, Byte), Integer), CType(CType(77, Byte), Integer), CType(CType(39, Byte), Integer))
-        Me.pnlManSubContent.Controls.Add(Me.TextBoxStudentSearch)
+        Me.pnlManSubContent.Controls.Add(Me.TextBoxSubjectSearch)
         Me.pnlManSubContent.Controls.Add(Me.btnSubjectDelete)
         Me.pnlManSubContent.Controls.Add(Me.btnSubjectUpdate)
         Me.pnlManSubContent.Controls.Add(Me.btnSubjectAdd)
-        Me.pnlManSubContent.Controls.Add(Me.dgvSections)
+        Me.pnlManSubContent.Controls.Add(Me.dgvSubjectList)
         Me.pnlManSubContent.Controls.Add(Me.grpSubjectInformation)
         Me.pnlManSubContent.Controls.Add(Me.lblSubjectList)
         Me.pnlManSubContent.Controls.Add(Me.picWatermark)
@@ -200,15 +200,15 @@ Partial Class AdminManageSubjects
         Me.pnlManSubContent.Size = New System.Drawing.Size(1333, 779)
         Me.pnlManSubContent.TabIndex = 14
         '
-        'TextBoxStudentSearch
+        'TextBoxSubjectSearch
         '
-        Me.TextBoxStudentSearch.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TextBoxStudentSearch.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBoxStudentSearch.Location = New System.Drawing.Point(629, 728)
-        Me.TextBoxStudentSearch.MaxLength = 50
-        Me.TextBoxStudentSearch.Name = "TextBoxStudentSearch"
-        Me.TextBoxStudentSearch.Size = New System.Drawing.Size(246, 36)
-        Me.TextBoxStudentSearch.TabIndex = 11
+        Me.TextBoxSubjectSearch.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.TextBoxSubjectSearch.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBoxSubjectSearch.Location = New System.Drawing.Point(629, 728)
+        Me.TextBoxSubjectSearch.MaxLength = 50
+        Me.TextBoxSubjectSearch.Name = "TextBoxSubjectSearch"
+        Me.TextBoxSubjectSearch.Size = New System.Drawing.Size(246, 36)
+        Me.TextBoxSubjectSearch.TabIndex = 11
         '
         'btnSubjectDelete
         '
@@ -243,24 +243,24 @@ Partial Class AdminManageSubjects
         Me.btnSubjectAdd.Text = "Add"
         Me.btnSubjectAdd.UseVisualStyleBackColor = True
         '
-        'dgvSections
+        'dgvSubjectList
         '
-        Me.dgvSections.AllowUserToAddRows = False
-        Me.dgvSections.AllowUserToDeleteRows = False
-        Me.dgvSections.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+        Me.dgvSubjectList.AllowUserToAddRows = False
+        Me.dgvSubjectList.AllowUserToDeleteRows = False
+        Me.dgvSubjectList.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.dgvSections.BackgroundColor = System.Drawing.Color.WhiteSmoke
-        Me.dgvSections.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvSections.Location = New System.Drawing.Point(44, 477)
-        Me.dgvSections.Margin = New System.Windows.Forms.Padding(4)
-        Me.dgvSections.Name = "dgvSections"
-        Me.dgvSections.ReadOnly = True
-        Me.dgvSections.RowHeadersVisible = False
-        Me.dgvSections.RowHeadersWidth = 51
-        Me.dgvSections.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.dgvSections.Size = New System.Drawing.Size(1245, 222)
-        Me.dgvSections.TabIndex = 6
+        Me.dgvSubjectList.BackgroundColor = System.Drawing.Color.WhiteSmoke
+        Me.dgvSubjectList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dgvSubjectList.Location = New System.Drawing.Point(44, 477)
+        Me.dgvSubjectList.Margin = New System.Windows.Forms.Padding(4)
+        Me.dgvSubjectList.Name = "dgvSubjectList"
+        Me.dgvSubjectList.ReadOnly = True
+        Me.dgvSubjectList.RowHeadersVisible = False
+        Me.dgvSubjectList.RowHeadersWidth = 51
+        Me.dgvSubjectList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.dgvSubjectList.Size = New System.Drawing.Size(1245, 222)
+        Me.dgvSubjectList.TabIndex = 6
         '
         'grpSubjectInformation
         '
@@ -599,7 +599,7 @@ Partial Class AdminManageSubjects
         Me.flowButtons.ResumeLayout(False)
         Me.pnlManSubContent.ResumeLayout(False)
         Me.pnlManSubContent.PerformLayout()
-        CType(Me.dgvSections, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.dgvSubjectList, System.ComponentModel.ISupportInitialize).EndInit()
         Me.grpSubjectInformation.ResumeLayout(False)
         Me.grpSubjectInformation.PerformLayout()
         CType(Me.nudManSubGradeLevel, System.ComponentModel.ISupportInitialize).EndInit()
@@ -622,7 +622,7 @@ Partial Class AdminManageSubjects
     Friend WithEvents btnSubjectDelete As Button
     Friend WithEvents btnSubjectUpdate As Button
     Friend WithEvents btnSubjectAdd As Button
-    Friend WithEvents dgvSections As DataGridView
+    Friend WithEvents dgvSubjectList As DataGridView
     Friend WithEvents grpSubjectInformation As GroupBox
     Friend WithEvents txtbxManSubSkillFocus As TextBox
     Friend WithEvents lblManSubSkillFocus As Label
@@ -650,7 +650,7 @@ Partial Class AdminManageSubjects
     Friend WithEvents lblManSecDateCreated As Label
     Friend WithEvents txtbxManSubCreatedBy As TextBox
     Friend WithEvents lblManSubCreatedBy As Label
-    Friend WithEvents TextBoxStudentSearch As TextBox
+    Friend WithEvents TextBoxSubjectSearch As TextBox
     Friend WithEvents txtbxManSubSubjectName As TextBox
     Friend WithEvents Label1 As Label
     Friend WithEvents cbxManSubRoomType As ComboBox
