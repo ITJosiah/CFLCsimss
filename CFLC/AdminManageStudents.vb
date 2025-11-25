@@ -333,7 +333,7 @@ Public Class AdminManageStudents
         ' Validate SectionID exists in section table (if not empty)
 
         Return False
- 
+
 
         ' Validate EnrollmentID exists in enrollment table (if not empty)
         If Not String.IsNullOrWhiteSpace(txtbxStudentEnrollmentID.Text) Then
