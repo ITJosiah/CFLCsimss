@@ -913,6 +913,160 @@ Public Class AdminManageStudents
     End Sub
 
     ' Rest of your existing event handlers...
+    ' LRN Validation - Numbers only, 12 digits
+    Private Sub txtbxStudentLRN_Validating(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles txtbxStudentLRN.Validating
+        If String.IsNullOrWhiteSpace(txtbxStudentLRN.Text) Then
+            Return ' Allow empty field if it's optional
+        End If
+
+        Dim lrnText As String = txtbxStudentLRN.Text.Trim()
+
+        ' Check if contains only numbers
+        If Not System.Text.RegularExpressions.Regex.IsMatch(lrnText, "^\d+$") Then
+            MessageBox.Show("LRN must contain numbers only.", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            txtbxStudentLRN.Focus()
+            Return
+        End If
+
+        ' Check if exactly 12 digits
+        If lrnText.Length <> 12 Then
+            MessageBox.Show("LRN must be exactly 12 digits.", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            txtbxStudentLRN.Focus()
+            Return
+        End If
+    End Sub
+
+    ' Guardian Contact Number Validation - Numbers only, 11 digits
+    Private Sub txtbxGuardianContactNo_Validating(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles txtbxGuardianContactNo.Validating
+        If String.IsNullOrWhiteSpace(txtbxGuardianContactNo.Text) Then
+            Return ' Will be caught by required field validation
+        End If
+
+        Dim contactText As String = txtbxGuardianContactNo.Text.Trim()
+
+        ' Check if contains only numbers
+        If Not System.Text.RegularExpressions.Regex.IsMatch(contactText, "^\d+$") Then
+            MessageBox.Show("Guardian Contact Number must contain numbers only.", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            txtbxGuardianContactNo.Focus()
+            Return
+        End If
+
+        ' Check if exactly 11 digits
+        If contactText.Length <> 11 Then
+            MessageBox.Show("Guardian Contact Number must be exactly 11 digits.", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            txtbxGuardianContactNo.Focus()
+            Return
+        End If
+
+        ' Additional check for Philippine mobile numbers (starts with 09)
+        If Not contactText.StartsWith("09") Then
+            MessageBox.Show("Guardian Contact Number must start with '09'.", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            txtbxGuardianContactNo.Focus()
+            Return
+        End If
+    End Sub
+
+    ' 4Ps Household ID Validation - Numbers only, 17 to 21 digits
+    Private Sub txtbx4ps_Validating(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles txtbx4ps.Validating
+        ' Only validate if 4Ps is enabled and has text
+        If Not RadioButtonStudent4PYES.Checked OrElse String.IsNullOrWhiteSpace(txtbx4ps.Text) Then
+            Return
+        End If
+
+        Dim fourPsText As String = txtbx4ps.Text.Trim()
+
+        ' Check if contains only numbers
+        If Not System.Text.RegularExpressions.Regex.IsMatch(fourPsText, "^\d+$") Then
+            MessageBox.Show("4Ps Household ID must contain numbers only.", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            txtbx4ps.Focus()
+            Return
+        End If
+
+        ' Check if between 17 and 21 digits
+        If fourPsText.Length < 17 OrElse fourPsText.Length > 21 Then
+            MessageBox.Show("4Ps Household ID must be between 17 and 21 digits.", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            txtbx4ps.Focus()
+            Return
+        End If
+    End Sub
+
+    ' Household Number Validation - Numbers only
+    Private Sub txtbxStudentHouseNo_Validating(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles txtbxStudentHouseNo.Validating
+        If String.IsNullOrWhiteSpace(txtbxStudentHouseNo.Text) Then
+            Return ' Will be caught by required field validation
+        End If
+
+        Dim houseNoText As String = txtbxStudentHouseNo.Text.Trim()
+
+        ' Check if contains only numbers
+        If Not System.Text.RegularExpressions.Regex.IsMatch(houseNoText, "^\d+$") Then
+            MessageBox.Show("Household Number must contain numbers only.", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            txtbxStudentHouseNo.Focus()
+            Return
+        End If
+    End Sub
+
+    ' Zip Code Validation - Numbers only, 4 digits
+    Private Sub txtbxZipCode_Validating(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles txtbxZipCode.Validating
+        If String.IsNullOrWhiteSpace(txtbxZipCode.Text) Then
+            Return ' Will be caught by required field validation
+        End If
+
+        Dim zipCodeText As String = txtbxZipCode.Text.Trim()
+
+        ' Check if contains only numbers
+        If Not System.Text.RegularExpressions.Regex.IsMatch(zipCodeText, "^\d+$") Then
+            MessageBox.Show("Zip Code must contain numbers only.", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            txtbxZipCode.Focus()
+            Return
+        End If
+
+        ' Check if exactly 4 digits
+        If zipCodeText.Length <> 4 Then
+            MessageBox.Show("Zip Code must be exactly 4 digits.", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            txtbxZipCode.Focus()
+            Return
+        End If
+    End Sub
+
+    ' Optional: Add KeyPress events to provide real-time feedback without blocking input
+    Private Sub txtbxStudentLRN_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtbxStudentLRN.KeyPress
+        ' Allow backspace, delete, and numbers
+        If Not Char.IsControl(e.KeyChar) AndAlso Not Char.IsDigit(e.KeyChar) Then
+            ' Show tooltip or status message instead of blocking
+            If Not String.IsNullOrEmpty(txtbxStudentLRN.Text) Then
+                ' You could add a status label here to show "Numbers only" message
+            End If
+        End If
+    End Sub
+
+    Private Sub txtbxGuardianContactNo_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtbxGuardianContactNo.KeyPress
+        ' Allow backspace, delete, and numbers
+        If Not Char.IsControl(e.KeyChar) AndAlso Not Char.IsDigit(e.KeyChar) Then
+            ' You could add a status label here to show "Numbers only" message
+        End If
+    End Sub
+
+    Private Sub txtbx4ps_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtbx4ps.KeyPress
+        ' Allow backspace, delete, and numbers
+        If Not Char.IsControl(e.KeyChar) AndAlso Not Char.IsDigit(e.KeyChar) Then
+            ' You could add a status label here to show "Numbers only" message
+        End If
+    End Sub
+
+    Private Sub txtbxStudentHouseNo_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtbxStudentHouseNo.KeyPress
+        ' Allow backspace, delete, and numbers
+        If Not Char.IsControl(e.KeyChar) AndAlso Not Char.IsDigit(e.KeyChar) Then
+            ' You could add a status label here to show "Numbers only" message
+        End If
+    End Sub
+
+    Private Sub txtbxZipCode_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtbxZipCode.KeyPress
+        ' Allow backspace, delete, and numbers
+        If Not Char.IsControl(e.KeyChar) AndAlso Not Char.IsDigit(e.KeyChar) Then
+            ' You could add a status label here to show "Numbers only" message
+        End If
+    End Sub
 
     Private Sub txtbxStudentAge_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtbxStudentAge.KeyPress
         e.Handled = True ' Block typing
