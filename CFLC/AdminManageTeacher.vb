@@ -272,7 +272,53 @@ Public Class AdminManageTeacher
         txtbxTeacherZipCode.Clear()
     End Sub
 
+    Private Sub SearchTeachersBySurname(ByVal surname As String)
+        ' If the search box is empty, load all teachers (default view)
+        If String.IsNullOrWhiteSpace(surname) Then
+            LoadToDGV("SELECT * FROM teacher", dgvTeacher)
+            Return
+        End If
 
+        Try
+            ' Open Connection
+            modDBx.openConn(modDBx.db_name)
+
+            ' Use prefix match so search is from the first letter to the last (incremental per-letter filter)
+            Dim sql As String = "SELECT * FROM teacher WHERE LastName LIKE @searchSurname ORDER BY LastName"
+
+            Using cmd As New MySqlCommand(sql, modDBx.conn)
+                ' Use surname + '%' to match only names that start with the typed letters
+                cmd.Parameters.AddWithValue("@searchSurname", surname.Trim() & "%")
+
+                Dim dt As New System.Data.DataTable
+                Using adapter As New MySql.Data.MySqlClient.MySqlDataAdapter(cmd)
+                    adapter.Fill(dt)
+                End Using
+
+                dgvTeacher.DataSource = dt
+                dgvTeacher.Refresh()
+
+                If dgvTeacher.ColumnCount > 0 Then
+                    dgvTeacher.Columns(0).Visible = False ' Hide TeacherID column
+                End If
+
+                If dt.Rows.Count = 0 Then
+                    MsgBox("No teacher found matching the surname '" & surname & "'.", MsgBoxStyle.Information, "Search Result")
+                End If
+            End Using
+
+        Catch ex As Exception
+            MsgBox("Error searching teachers: " & ex.Message, MsgBoxStyle.Critical)
+        Finally
+            If modDBx.conn IsNot Nothing AndAlso modDBx.conn.State = System.Data.ConnectionState.Open Then
+                modDBx.conn.Close()
+            End If
+        End Try
+    End Sub
+
+    Private Sub TextBoxTeacherSearch_TextChanged(sender As Object, e As EventArgs) Handles TextBoxTeacherSearch.TextChanged
+        SearchTeachersBySurname(TextBoxTeacherSearch.Text)
+    End Sub
 End Class
 
 
