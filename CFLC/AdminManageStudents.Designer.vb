@@ -70,7 +70,6 @@ Partial Class AdminManageStudents
         Me.txtbxStudentExtension = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.nudStudentGradeLevel = New System.Windows.Forms.NumericUpDown()
-        Me.lblStudentEnrollmentID = New System.Windows.Forms.Label()
         Me.nudStudentAge = New System.Windows.Forms.NumericUpDown()
         Me.cmbStudenttGender = New System.Windows.Forms.ComboBox()
         Me.dtpStudentBirthdate = New System.Windows.Forms.DateTimePicker()
@@ -81,7 +80,6 @@ Partial Class AdminManageStudents
         Me.lblStudentGuardianName = New System.Windows.Forms.Label()
         Me.txtbxStudentReligion = New System.Windows.Forms.TextBox()
         Me.lblStudentReligion = New System.Windows.Forms.Label()
-        Me.txtbxStudentEnrollmentID = New System.Windows.Forms.TextBox()
         Me.lblStudentGradeLevel = New System.Windows.Forms.Label()
         Me.txtbxStudentSurname = New System.Windows.Forms.TextBox()
         Me.lblStudentSurname = New System.Windows.Forms.Label()
@@ -336,7 +334,6 @@ Partial Class AdminManageStudents
         Me.grpStudentInfo.Controls.Add(Me.txtbxStudentExtension)
         Me.grpStudentInfo.Controls.Add(Me.Label1)
         Me.grpStudentInfo.Controls.Add(Me.nudStudentGradeLevel)
-        Me.grpStudentInfo.Controls.Add(Me.lblStudentEnrollmentID)
         Me.grpStudentInfo.Controls.Add(Me.nudStudentAge)
         Me.grpStudentInfo.Controls.Add(Me.cmbStudenttGender)
         Me.grpStudentInfo.Controls.Add(Me.dtpStudentBirthdate)
@@ -347,7 +344,6 @@ Partial Class AdminManageStudents
         Me.grpStudentInfo.Controls.Add(Me.lblStudentGuardianName)
         Me.grpStudentInfo.Controls.Add(Me.txtbxStudentReligion)
         Me.grpStudentInfo.Controls.Add(Me.lblStudentReligion)
-        Me.grpStudentInfo.Controls.Add(Me.txtbxStudentEnrollmentID)
         Me.grpStudentInfo.Controls.Add(Me.lblStudentGradeLevel)
         Me.grpStudentInfo.Controls.Add(Me.txtbxStudentSurname)
         Me.grpStudentInfo.Controls.Add(Me.lblStudentSurname)
@@ -510,7 +506,7 @@ Partial Class AdminManageStudents
         '
         'txtbx4ps
         '
-        Me.txtbx4ps.Location = New System.Drawing.Point(663, 354)
+        Me.txtbx4ps.Location = New System.Drawing.Point(626, 356)
         Me.txtbx4ps.Margin = New System.Windows.Forms.Padding(4)
         Me.txtbx4ps.MaxLength = 50
         Me.txtbx4ps.Name = "txtbx4ps"
@@ -520,7 +516,7 @@ Partial Class AdminManageStudents
         'Label8
         '
         Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(217, 358)
+        Me.Label8.Location = New System.Drawing.Point(217, 360)
         Me.Label8.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(392, 20)
@@ -569,7 +565,7 @@ Partial Class AdminManageStudents
         '
         'txtbbxStudentIPGroup
         '
-        Me.txtbbxStudentIPGroup.Location = New System.Drawing.Point(419, 289)
+        Me.txtbbxStudentIPGroup.Location = New System.Drawing.Point(411, 289)
         Me.txtbbxStudentIPGroup.Margin = New System.Windows.Forms.Padding(4)
         Me.txtbbxStudentIPGroup.MaxLength = 50
         Me.txtbbxStudentIPGroup.Name = "txtbbxStudentIPGroup"
@@ -588,7 +584,7 @@ Partial Class AdminManageStudents
         '
         'txtbxStudentMotherTongue
         '
-        Me.txtbxStudentMotherTongue.Location = New System.Drawing.Point(740, 159)
+        Me.txtbxStudentMotherTongue.Location = New System.Drawing.Point(740, 111)
         Me.txtbxStudentMotherTongue.Margin = New System.Windows.Forms.Padding(4)
         Me.txtbxStudentMotherTongue.MaxLength = 50
         Me.txtbxStudentMotherTongue.Name = "txtbxStudentMotherTongue"
@@ -599,7 +595,7 @@ Partial Class AdminManageStudents
         '
         Me.Label4.AutoEllipsis = True
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(736, 135)
+        Me.Label4.Location = New System.Drawing.Point(736, 87)
         Me.Label4.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(121, 20)
@@ -670,16 +666,6 @@ Partial Class AdminManageStudents
         Me.nudStudentGradeLevel.Name = "nudStudentGradeLevel"
         Me.nudStudentGradeLevel.Size = New System.Drawing.Size(47, 26)
         Me.nudStudentGradeLevel.TabIndex = 27
-        '
-        'lblStudentEnrollmentID
-        '
-        Me.lblStudentEnrollmentID.AutoSize = True
-        Me.lblStudentEnrollmentID.Location = New System.Drawing.Point(736, 79)
-        Me.lblStudentEnrollmentID.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.lblStudentEnrollmentID.Name = "lblStudentEnrollmentID"
-        Me.lblStudentEnrollmentID.Size = New System.Drawing.Size(111, 20)
-        Me.lblStudentEnrollmentID.TabIndex = 26
-        Me.lblStudentEnrollmentID.Text = "Enrollment ID"
         '
         'nudStudentAge
         '
@@ -776,14 +762,6 @@ Partial Class AdminManageStudents
         Me.lblStudentReligion.Size = New System.Drawing.Size(69, 20)
         Me.lblStudentReligion.TabIndex = 13
         Me.lblStudentReligion.Text = "Religion"
-        '
-        'txtbxStudentEnrollmentID
-        '
-        Me.txtbxStudentEnrollmentID.Location = New System.Drawing.Point(740, 102)
-        Me.txtbxStudentEnrollmentID.Margin = New System.Windows.Forms.Padding(4)
-        Me.txtbxStudentEnrollmentID.Name = "txtbxStudentEnrollmentID"
-        Me.txtbxStudentEnrollmentID.Size = New System.Drawing.Size(252, 26)
-        Me.txtbxStudentEnrollmentID.TabIndex = 12
         '
         'lblStudentGradeLevel
         '
@@ -985,7 +963,6 @@ Partial Class AdminManageStudents
     Friend WithEvents lblStudentGuardianName As Label
     Friend WithEvents txtbxStudentReligion As TextBox
     Friend WithEvents lblStudentReligion As Label
-    Friend WithEvents txtbxStudentEnrollmentID As TextBox
     Friend WithEvents lblStudentGradeLevel As Label
     Friend WithEvents txtbxStudentSurname As TextBox
     Friend WithEvents lblStudentSurname As Label
@@ -995,7 +972,6 @@ Partial Class AdminManageStudents
     Friend WithEvents lblStudentFirstName As Label
     Friend WithEvents lblStudentList As Label
     Friend WithEvents cmbStudenttGender As ComboBox
-    Friend WithEvents lblStudentEnrollmentID As Label
     Friend WithEvents nudStudentAge As NumericUpDown
     Friend WithEvents nudStudentGradeLevel As NumericUpDown
     Friend WithEvents TextBoxStudentSearch As TextBox
