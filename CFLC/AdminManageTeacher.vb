@@ -45,6 +45,7 @@ Public Class AdminManageTeacher
             TextBoxTeacherEducationalAttainment.Text = row.Cells("EducationalAttainment").Value.ToString()
             TextBoxTeacherSpecialization.Text = row.Cells("Specialization").Value.ToString()
             ComboBoxTeacherStatus.Text = row.Cells("Status").Value.ToString()
+            TextBoxTeacherStreet.Text = row.Cells("Street").Value.ToString()
 
         End If
     End Sub
@@ -100,6 +101,7 @@ Public Class AdminManageTeacher
                 ContactNumber = @ContactNumber,
                 Email = @Email,
                 HouseNumber = @HouseNumber,
+                Street = @Street,
                 Barangay = @Barangay,
                 Municipality = @Municipality,
                 Province = @Province,
@@ -126,6 +128,7 @@ Public Class AdminManageTeacher
                 cmd.Parameters.AddWithValue("@ContactNumber", TextBoxTeacherContactNo.Text)
                 cmd.Parameters.AddWithValue("@Email", TextBoxTeacherEmail.Text)
                 cmd.Parameters.AddWithValue("@HouseNumber", txtbxTeacherHouseNo.Text)
+                cmd.Parameters.AddWithValue("@Street", TextBoxTeacherStreet.Text)
                 cmd.Parameters.AddWithValue("@Barangay", txtbxTeacherBarangay.Text)
                 cmd.Parameters.AddWithValue("@Municipality", txtbxTeacherCity.Text)
                 cmd.Parameters.AddWithValue("@Province", txtbxTeacherProvince.Text)
