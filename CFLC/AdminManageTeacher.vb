@@ -61,15 +61,15 @@ Public Class AdminManageTeacher
             ' Note: TeacherID should be auto-increment, so we don't include it in the INSERT
             ' SectionID is set to 0 initially (teacher not assigned to section yet)
             Dim query As String = "INSERT INTO teacher (" &
-                                "SectionID, FirstName, MiddleName, LastName, ExtensionName, " &
-                                "Sex, BirthDate, Age, ContactNumber, Email, " &
-                                "EducationalAttainment, HireDate, Specialization, Status, " &
-                                "HouseNumber, Barangay, Municipality, Province, Country, ZipCode" &
-                                ") VALUES (" &
-                                "@SectionID, @FirstName, @MiddleName, @LastName, @ExtensionName, " &
-                                "@Sex, @BirthDate, @Age, @ContactNumber, @Email, " &
-                                "@EducationalAttainment, @HireDate, @Specialization, @Status, " &
-                                "@HouseNumber, @Barangay, @Municipality, @Province, @Country, @ZipCode)"
+                            "SectionID, FirstName, MiddleName, LastName, ExtensionName, " &
+                            "Sex, BirthDate, Age, ContactNumber, Email, " &
+                            "EducationalAttainment, HireDate, Specialization, Status, " &
+                            "HouseNumber, Barangay, Municipality, Province, Country, ZipCode" &
+                            ") VALUES (" &
+                            "@SectionID, @FirstName, @MiddleName, @LastName, @ExtensionName, " &
+                            "@Sex, @BirthDate, @Age, @ContactNumber, @Email, " &
+                            "@EducationalAttainment, @HireDate, @Specialization, @Status, " &
+                            "@HouseNumber, @Barangay, @Municipality, @Province, @Country, @ZipCode)"
 
             modDBx.openConn(modDBx.db_name)
 
@@ -140,6 +140,220 @@ Public Class AdminManageTeacher
             End If
         End Try
     End Sub
+
+    Private Sub btnTeaDelete_Click(sender As Object, e As EventArgs) Handles btnTeaDelete.Click
+        ' Check if a teacher is selected
+        If currentTeacherID = 0 Then
+            MessageBox.Show("Please select a teacher to delete.", "Delete Teacher", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+            Return
+        End If
+
+        ' Confirm deletion
+        If MessageBox.Show("Are you sure you want to delete this teacher?", "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) = DialogResult.No Then
+            Return
+        End If
+
+        Try
+            ' Open database connection
+            modDBx.openConn(modDBx.db_name)
+
+            ' Prepare the DELETE SQL statement
+            Dim sql As String = "DELETE FROM teacher WHERE TeacherID = @TeacherID"
+
+            Using cmd As New MySqlCommand(sql, modDBx.conn)
+                cmd.Parameters.AddWithValue("@TeacherID", currentTeacherID)
+                Dim rowsAffected As Integer = cmd.ExecuteNonQuery()
+
+                If rowsAffected > 0 Then
+                    MessageBox.Show("Teacher deleted successfully.", "Delete Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                    ' Refresh the DataGridView
+                    LoadToDGV("SELECT * FROM teacher", dgvTeacher)
+                    ' Reset current selection and clear input fields
+                    currentTeacherID = 0
+                    ClearInputFields()
+                Else
+                    MessageBox.Show("No teacher was deleted. Please check your selection.", "Delete Failed", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+                End If
+            End Using
+
+        Catch ex As MySqlException
+            MessageBox.Show("Database Error: " & ex.Message, "Delete Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        Catch ex As Exception
+            MessageBox.Show("Error deleting teacher: " & ex.Message, "Delete Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        Finally
+            ' Close connection safely
+            If modDBx.conn IsNot Nothing AndAlso modDBx.conn.State = ConnectionState.Open Then
+                modDBx.conn.Close()
+            End If
+        End Try
+    End Sub
+
+    Private Sub btnTeaUpdate_Click(sender As Object, e As EventArgs) Handles btnTeaUpdate.Click
+        UpdateTeacher()
+    End Sub
+
+    Private Sub UpdateTeacher()
+        ' Check if a teacher is selected
+        If currentTeacherID = 0 Then
+            MessageBox.Show("No teacher selected for update.", "Update Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+            Return
+        End If
+
+        ' Validate required fields FIRST using the same validation as Add
+        If Not ValidateInputs() Then
+            Return ' Stop execution if validation fails
+        End If
+
+        ' Check if any data has actually changed
+        If Not HasTeacherDataChanged() Then
+            MessageBox.Show("No changes were made to the teacher data.", "No Changes", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Return
+        End If
+
+        Try
+            modDBx.openConn(modDBx.db_name)
+
+            Dim sql As String = "UPDATE teacher SET " &
+                "FirstName = @FirstName, " &
+                "MiddleName = @MiddleName, " &
+                "LastName = @LastName, " &
+                "ExtensionName = @ExtensionName, " &
+                "Sex = @Sex, " &
+                "BirthDate = @BirthDate, " &
+                "Age = @Age, " &
+                "ContactNumber = @ContactNumber, " &
+                "Email = @Email, " &
+                "EducationalAttainment = @EducationalAttainment, " &
+                "HireDate = @HireDate, " &
+                "Specialization = @Specialization, " &
+                "Status = @Status, " &
+                "HouseNumber = @HouseNumber, " &
+                "Barangay = @Barangay, " &
+                "Municipality = @Municipality, " &
+                "Province = @Province, " &
+                "Country = @Country, " &
+                "ZipCode = @ZipCode " &
+                "WHERE TeacherID = @TeacherID"
+
+            Using cmd As New MySqlCommand(sql, modDBx.conn)
+                ' Personal Information - Convert to Proper Case
+                cmd.Parameters.AddWithValue("@FirstName", ConvertToProperCase(SafeString(TextBoxTeacherFirstName.Text)))
+                cmd.Parameters.AddWithValue("@MiddleName", If(String.IsNullOrWhiteSpace(TextBoxTeacherMiddleName.Text), DBNull.Value, ConvertToProperCase(TextBoxTeacherMiddleName.Text.Trim())))
+                cmd.Parameters.AddWithValue("@LastName", ConvertToProperCase(SafeString(TextBoxTeacherSurname.Text)))
+                cmd.Parameters.AddWithValue("@ExtensionName", If(String.IsNullOrWhiteSpace(TextBoxTeacherExtension.Text), DBNull.Value, ConvertToProperCase(TextBoxTeacherExtension.Text.Trim())))
+
+                Dim gender As String = ""
+                If ComboBoxTeacherGender.SelectedItem IsNot Nothing Then
+                    gender = ComboBoxTeacherGender.SelectedItem.ToString()
+                End If
+                cmd.Parameters.AddWithValue("@Sex", gender)
+
+                cmd.Parameters.AddWithValue("@BirthDate", DateTImePickerTeacherBirthdate.Value.ToString("yyyy-MM-dd"))
+                cmd.Parameters.AddWithValue("@Age", txtbxTeacherAge.Text)
+
+                ' Contact Information
+                cmd.Parameters.AddWithValue("@ContactNumber", SafeString(TextBoxTeacherContactNo.Text))
+                cmd.Parameters.AddWithValue("@Email", SafeString(TextBoxTeacherEmail.Text))
+
+                ' Professional Information - Convert to Proper Case
+                cmd.Parameters.AddWithValue("@EducationalAttainment", ConvertToProperCase(SafeString(TextBoxTeacherEducationalAttainment.Text)))
+                cmd.Parameters.AddWithValue("@HireDate", ManageTeacherHireDate.Value.ToString("yyyy-MM-dd"))
+                cmd.Parameters.AddWithValue("@Specialization", ConvertToProperCase(SafeString(TextBoxTeacherSpecialization.Text)))
+
+                Dim status As String = ""
+                If ComboBoxTeacherStatus.SelectedItem IsNot Nothing Then
+                    status = ComboBoxTeacherStatus.SelectedItem.ToString()
+                End If
+                cmd.Parameters.AddWithValue("@Status", status)
+
+                ' Address Information - Convert to Proper Case
+                cmd.Parameters.AddWithValue("@HouseNumber", SafeString(txtbxTeacherHouseNo.Text))
+                cmd.Parameters.AddWithValue("@Barangay", ConvertToProperCase(SafeString(txtbxTeacherBarangay.Text)))
+                cmd.Parameters.AddWithValue("@Municipality", ConvertToProperCase(SafeString(txtbxTeacherCity.Text)))
+                cmd.Parameters.AddWithValue("@Province", ConvertToProperCase(SafeString(txtbxTeacherProvince.Text)))
+                cmd.Parameters.AddWithValue("@Country", ConvertToProperCase(SafeString(txtbxTeacherCountry.Text)))
+                cmd.Parameters.AddWithValue("@ZipCode", SafeString(txtbxTeacherZipCode.Text))
+
+                cmd.Parameters.AddWithValue("@TeacherID", currentTeacherID)
+
+                Dim rowsAffected As Integer = cmd.ExecuteNonQuery()
+
+                If rowsAffected > 0 Then
+                    MessageBox.Show("Teacher updated successfully.", "Update Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                    ' Clear inputs and re-enable Add after successful update
+                    ClearInputFields()
+                    LoadToDGV("SELECT * FROM teacher", dgvTeacher)
+                    currentTeacherID = 0
+                Else
+                    MessageBox.Show("No teacher was updated. Please check the data.", "Update Failed", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+                End If
+            End Using
+
+        Catch ex As MySqlException
+            MessageBox.Show("Database Error: " & ex.Message, "Update Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        Catch ex As Exception
+            MessageBox.Show("Error updating teacher: " & ex.Message, "Update Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        Finally
+            If modDBx.conn IsNot Nothing AndAlso modDBx.conn.State = ConnectionState.Open Then
+                modDBx.conn.Close()
+            End If
+        End Try
+    End Sub
+
+    ' Add this function to check if any data has changed
+    Private Function HasTeacherDataChanged() As Boolean
+        ' Get the current teacher data from database to compare
+        Try
+            modDBx.openConn(modDBx.db_name)
+            Dim sql As String = "SELECT * FROM teacher WHERE TeacherID = @TeacherID"
+
+            Using cmd As New MySqlCommand(sql, modDBx.conn)
+                cmd.Parameters.AddWithValue("@TeacherID", currentTeacherID)
+
+                Using reader As MySqlDataReader = cmd.ExecuteReader()
+                    If reader.Read() Then
+                        ' Compare each field with current form values
+                        If GetSafeStringFromDB(reader("FirstName")) <> TextBoxTeacherFirstName.Text.Trim() Then Return True
+                        If GetSafeStringFromDB(reader("MiddleName")) <> If(String.IsNullOrWhiteSpace(TextBoxTeacherMiddleName.Text), "", TextBoxTeacherMiddleName.Text.Trim()) Then Return True
+                        If GetSafeStringFromDB(reader("LastName")) <> TextBoxTeacherSurname.Text.Trim() Then Return True
+                        If GetSafeStringFromDB(reader("ExtensionName")) <> If(String.IsNullOrWhiteSpace(TextBoxTeacherExtension.Text), "", TextBoxTeacherExtension.Text.Trim()) Then Return True
+                        If GetSafeStringFromDB(reader("Sex")) <> ComboBoxTeacherGender.Text.Trim() Then Return True
+                        If CDate(reader("BirthDate")).Date <> DateTImePickerTeacherBirthdate.Value.Date Then Return True
+                        If GetSafeStringFromDB(reader("Age")) <> txtbxTeacherAge.Text.Trim() Then Return True
+                        If GetSafeStringFromDB(reader("ContactNumber")) <> TextBoxTeacherContactNo.Text.Trim() Then Return True
+                        If GetSafeStringFromDB(reader("Email")) <> TextBoxTeacherEmail.Text.Trim() Then Return True
+                        If GetSafeStringFromDB(reader("EducationalAttainment")) <> TextBoxTeacherEducationalAttainment.Text.Trim() Then Return True
+                        If CDate(reader("HireDate")).Date <> ManageTeacherHireDate.Value.Date Then Return True
+                        If GetSafeStringFromDB(reader("Specialization")) <> TextBoxTeacherSpecialization.Text.Trim() Then Return True
+                        If GetSafeStringFromDB(reader("Status")) <> ComboBoxTeacherStatus.Text.Trim() Then Return True
+                        If GetSafeStringFromDB(reader("HouseNumber")) <> txtbxTeacherHouseNo.Text.Trim() Then Return True
+                        If GetSafeStringFromDB(reader("Barangay")) <> txtbxTeacherBarangay.Text.Trim() Then Return True
+                        If GetSafeStringFromDB(reader("Municipality")) <> txtbxTeacherCity.Text.Trim() Then Return True
+                        If GetSafeStringFromDB(reader("Province")) <> txtbxTeacherProvince.Text.Trim() Then Return True
+                        If GetSafeStringFromDB(reader("Country")) <> txtbxTeacherCountry.Text.Trim() Then Return True
+                        If GetSafeStringFromDB(reader("ZipCode")) <> txtbxTeacherZipCode.Text.Trim() Then Return True
+                    End If
+                End Using
+            End Using
+
+            Return False ' No changes detected
+
+        Catch ex As Exception
+            ' If we can't check for changes, assume there are changes to be safe
+            Return True
+        Finally
+            If modDBx.conn IsNot Nothing AndAlso modDBx.conn.State = ConnectionState.Open Then
+                modDBx.conn.Close()
+            End If
+        End Try
+    End Function
+
+    ' Helper function for safe string retrieval from database
+    Private Function GetSafeStringFromDB(dbValue As Object) As String
+        Return If(dbValue Is Nothing OrElse IsDBNull(dbValue), "", dbValue.ToString())
+    End Function
+
+
 
     Private Function ValidateInputs() As Boolean
         ' 1. First Name (Required)
@@ -514,12 +728,18 @@ Public Class AdminManageTeacher
         End If
     End Sub
 
-End Class
+    ' Helper function for safe string retrieval from DataGridView
+    Private Function GetSafeString(cell As DataGridViewCell) As String
+        Return If(cell.Value Is Nothing OrElse IsDBNull(cell.Value), "", cell.Value.ToString())
+    End Function
 
-Private Sub txtbxTeacherZipCode_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtbxTeacherZipCode.KeyPress
-    If Not Char.IsDigit(e.KeyChar) AndAlso e.KeyChar <> ControlChars.Back Then
-        e.Handled = True
-    End If
-End Sub
+    Private Sub txtbxTeacherZipCode_TextChanged(sender As Object, e As EventArgs) Handles txtbxTeacherZipCode.TextChanged
+    End Sub
+
+    Private Sub txtbxTeacherZipCode_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtbxTeacherZipCode.KeyPress
+        If Not Char.IsDigit(e.KeyChar) AndAlso e.KeyChar <> ControlChars.Back Then
+            e.Handled = True
+        End If
+    End Sub
 
 End Class
