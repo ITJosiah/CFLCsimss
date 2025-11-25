@@ -7,36 +7,6 @@ Public Class AdminManageStudents
 
     Public Property IsEmbedded As Boolean = False
 
-    Protected Overrides Function ProcessCmdKey(ByRef msg As Message, keyData As Keys) As Boolean
-        If keyData = Keys.Escape Then
-            ExitFullScreen()
-            Return True
-        End If
-
-        If keyData = Keys.F Then
-            MakeItFullScreen()
-            Return True
-        End If
-
-        Return MyBase.ProcessCmdKey(msg, keyData)
-
-
-    End Function
-
-    Private Sub ExitFullScreen()
-        Me.FormBorderStyle = FormBorderStyle.Sizable
-        Me.WindowState = FormWindowState.Maximized
-        Me.TopMost = False
-    End Sub
-
-    Private Sub MakeItFullScreen()
-        Me.FormBorderStyle = FormBorderStyle.None
-        Me.WindowState = FormWindowState.Maximized
-        Me.Bounds = Screen.PrimaryScreen.Bounds
-        Me.TopMost = True
-        Me.BringToFront()
-    End Sub
-
     Private Sub AdminManageStudents_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         If Not IsEmbedded Then
@@ -165,11 +135,9 @@ Public Class AdminManageStudents
 
         ' Add student to database using modDB
         Try
-            ' Build the INSERT query (StudentID auto-increments, StudentNo left blank for now)
-            ' Use NULL for empty SectionID and EnrollmentID to avoid foreign key constraints
-            Dim enrollmentIDValue As String = If(String.IsNullOrWhiteSpace(txtbxStudentEnrollmentID.Text), "NULL", "'" & txtbxStudentEnrollmentID.Text.Trim().Replace("'", "''") & "'")
 
-            Dim query As String = "INSERT INTO student (MiddleName, FirstName, LastName, Gender, BirthDate, Age, GuardianName, Religion, GradeLevel, SectionID, EnrollmentID, HouseNumber, Street, Barangay, Municipality, Province, Country, ZipCode) " &
+
+            Dim query As String = "INSERT INTO student (MiddleName, FirstName, LastName, Gender, BirthDate, Age, GuardianName, Religion, GradeLevel, SectionID, HouseNumber, Street, Barangay, Municipality, Province, Country, ZipCode) " &
                                 "VALUES ('{0}', '{1}', '{2}', '{3}', '{4}', {5}, '{6}', '{7}', {8}, {9}, {10}, '{11}', '{12}', '{13}', '{14}', '{15}', '{16}', '{17}')"
 
             ' Format the query with values
@@ -183,8 +151,7 @@ Public Class AdminManageStudents
                 txtbxGuardianName.Text.Trim().Replace("'", "''"),
                 txtbxStudentReligion.Text.Trim().Replace("'", "''"),
                 nudStudentGradeLevel.Value,
-                enrollmentIDValue,
-                txtbxStudentHouseNo.Text.Trim().Replace("'", "''"),
+                 txtbxStudentHouseNo.Text.Trim().Replace("'", "''"),
                 txtbxstudentStreet.Text.Trim().Replace("'", "''"),
                 txtbxStudentBarangay.Text.Trim().Replace("'", "''"),
                 txtbxStudentCity.Text.Trim().Replace("'", "''"),
@@ -335,14 +302,6 @@ Public Class AdminManageStudents
         Return False
 
 
-        ' Validate EnrollmentID exists in enrollment table (if not empty)
-        If Not String.IsNullOrWhiteSpace(txtbxStudentEnrollmentID.Text) Then
-            If Not ValidateEnrollmentID(txtbxStudentEnrollmentID.Text.Trim()) Then
-                MessageBox.Show("The Enrollment ID does not exist. Please enter a valid Enrollment ID or leave it blank.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-                txtbxStudentEnrollmentID.Focus()
-                Return False
-            End If
-        End If
 
         Return True
     End Function
@@ -367,25 +326,7 @@ Public Class AdminManageStudents
         End Try
     End Function
 
-    Private Function ValidateEnrollmentID(enrollmentID As String) As Boolean
-        Try
-            Dim query As String = String.Format("SELECT COUNT(*) FROM enrollment WHERE EnrollmentID = '{0}'", enrollmentID.Replace("'", "''"))
-            modDBx.openConn(modDBx.db_name)
 
-            Using cmd As New MySqlCommand(query, modDBx.conn)
-                Dim count As Integer = Convert.ToInt32(cmd.ExecuteScalar())
-                If modDBx.conn.State = ConnectionState.Open Then
-                    modDBx.conn.Close()
-                End If
-                Return count > 0
-            End Using
-        Catch ex As Exception
-            If modDBx.conn.State = ConnectionState.Open Then
-                modDBx.conn.Close()
-            End If
-            Return False
-        End Try
-    End Function
 
     Private Sub ClearInputFields()
         ' Clear all input fields after successful add
@@ -402,7 +343,6 @@ Public Class AdminManageStudents
         txtbxGuardianName.Clear()
         txtbxStudentReligion.Clear()
 
-        txtbxStudentEnrollmentID.Clear()
 
         ' Clear address fields
         txtbxStudentHouseNo.Clear()
@@ -576,7 +516,6 @@ Public Class AdminManageStudents
             ' SectionID retrieval (still needed for the textbox)
 
 
-            txtbxStudentEnrollmentID.Text = row.Cells("EnrollmentID").Value.ToString()
             txtbxStudentHouseNo.Text = row.Cells("HouseNumber").Value.ToString()
             txtbxstudentStreet.Text = row.Cells("Street").Value.ToString()
             txtbxStudentBarangay.Text = row.Cells("Barangay").Value.ToString()
@@ -609,7 +548,6 @@ Public Class AdminManageStudents
                             "Age = @Age, " &
                             "GradeLevel = @GradeLevel, " &
                             "SectionID = @SectionID, " &
-                            "EnrollmentID = @EnrollmentID, " &
                             "HouseNumber = @HouseNumber, " &
                             "Street = @Street, " &
                             "Barangay = @Barangay, " &
@@ -632,7 +570,6 @@ Public Class AdminManageStudents
                 cmd.Parameters.AddWithValue("@Age", nudStudentAge.Value)
                 cmd.Parameters.AddWithValue("@GradeLevel", nudStudentGradeLevel.Value)
 
-                cmd.Parameters.AddWithValue("@EnrollmentID", txtbxStudentEnrollmentID.Text.Trim())
                 cmd.Parameters.AddWithValue("@HouseNumber", txtbxStudentHouseNo.Text.Trim())
                 cmd.Parameters.AddWithValue("@Street", txtbxstudentStreet.Text.Trim())
                 cmd.Parameters.AddWithValue("@Barangay", txtbxStudentBarangay.Text.Trim())
@@ -787,6 +724,9 @@ Public Class AdminManageStudents
     Private Sub TextBox5_TextChanged(sender As Object, e As EventArgs) Handles txtbxStudentProvince.TextChanged
 
     End Sub
+
+
+
 
     ' test123
 

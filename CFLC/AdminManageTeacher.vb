@@ -1,4 +1,6 @@
 ﻿Public Class AdminManageTeacher
+
+
     Public Property IsEmbedded As Boolean = False
 
     Private currentTeacherID As Integer = 0
@@ -47,6 +49,23 @@
         End If
     End Sub
 
+    Private Sub AdminManageTeacher_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+
+        ' Initialize Gender ComboBox
+        InitializeGenderComboBox()
+
+        ' Load students data
+        LoadToDGV("SELECT * FROM student", dgvTeacher)
+
+    End Sub
+
+    Private Sub InitializeGenderComboBox()
+        ' Populate Gender dropdown
+        ComboBoxTeacherGender.Items.Clear()
+        ComboBoxTeacherGender.Items.Add("Male")
+        ComboBoxTeacherGender.Items.Add("Female")
+    End Sub
 
 
 End Class

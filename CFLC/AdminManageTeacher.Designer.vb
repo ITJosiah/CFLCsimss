@@ -30,6 +30,7 @@ Partial Class AdminManageTeacher
         Me.btnTeaUpdate = New System.Windows.Forms.Button()
         Me.btnTeaAdd = New System.Windows.Forms.Button()
         Me.TextBoxProvince = New System.Windows.Forms.Panel()
+        Me.PBoxTeacher = New System.Windows.Forms.PictureBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.DateTImePickerTeacherBirthdate = New System.Windows.Forms.DateTimePicker()
         Me.ComboBoxTeacherStatus = New System.Windows.Forms.ComboBox()
@@ -69,12 +70,11 @@ Partial Class AdminManageTeacher
         Me.TeacherFirstName = New System.Windows.Forms.Label()
         Me.btnTeaSearch = New System.Windows.Forms.Button()
         Me.picWatermark = New System.Windows.Forms.PictureBox()
-        Me.PBoxTeacher = New System.Windows.Forms.PictureBox()
         Me.pnlContent.SuspendLayout()
         CType(Me.dgvTeacher, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TextBoxProvince.SuspendLayout()
-        CType(Me.picWatermark, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PBoxTeacher, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.picWatermark, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'pnlContent
@@ -217,6 +217,14 @@ Partial Class AdminManageTeacher
         Me.TextBoxProvince.Padding = New System.Windows.Forms.Padding(3)
         Me.TextBoxProvince.Size = New System.Drawing.Size(1627, 384)
         Me.TextBoxProvince.TabIndex = 23
+        '
+        'PBoxTeacher
+        '
+        Me.PBoxTeacher.Location = New System.Drawing.Point(37, 34)
+        Me.PBoxTeacher.Name = "PBoxTeacher"
+        Me.PBoxTeacher.Size = New System.Drawing.Size(208, 161)
+        Me.PBoxTeacher.TabIndex = 48
+        Me.PBoxTeacher.TabStop = False
         '
         'Label1
         '
@@ -605,14 +613,6 @@ Partial Class AdminManageTeacher
         Me.picWatermark.TabIndex = 22
         Me.picWatermark.TabStop = False
         '
-        'PBoxTeacher
-        '
-        Me.PBoxTeacher.Location = New System.Drawing.Point(37, 34)
-        Me.PBoxTeacher.Name = "PBoxTeacher"
-        Me.PBoxTeacher.Size = New System.Drawing.Size(208, 161)
-        Me.PBoxTeacher.TabIndex = 48
-        Me.PBoxTeacher.TabStop = False
-        '
         'AdminManageTeacher
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
@@ -628,8 +628,8 @@ Partial Class AdminManageTeacher
         CType(Me.dgvTeacher, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TextBoxProvince.ResumeLayout(False)
         Me.TextBoxProvince.PerformLayout()
-        CType(Me.picWatermark, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PBoxTeacher, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.picWatermark, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
