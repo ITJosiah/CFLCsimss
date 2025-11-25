@@ -1,7 +1,30 @@
-﻿Public Class AdminManageSubjects
+﻿Imports System.Data.SqlClient
+Imports MySql.Data.MySqlClient
+
+Public Class AdminManageSubjects
 
     Public Property IsEmbedded As Boolean = False
     Private Sub AdminManageSubjects_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+        cmbSubjectCategory.Items.Clear()
+        cmbSubjectCategory.Items.Add("Core")
+        cmbSubjectCategory.Items.Add("Elective")
+        cmbSubjectCategory.Items.Add("Special")
+
+        ' Load subject data
+        LoadToDGV("SELECT * FROM subject", dgvSubjectList)
+
+        ' Ensure the grid doesn't auto-select the first row on load
+        dgvSubjectList.ClearSelection()
+        Try
+            If dgvSubjectList.Rows.Count > 0 AndAlso dgvSubjectList.Columns.Count > 0 Then
+                dgvSubjectList.CurrentCell = Nothing
+            End If
+        Catch
+            ' ignore potential layout timing exceptions
+        End Try
+        currentSubjectID = 0
+
         If Not IsEmbedded Then
             Me.WindowState = FormWindowState.Maximized
             Me.BackColor = Color.FromArgb(15, 56, 32)
@@ -101,6 +124,108 @@
     End Sub
 
     Private Sub lblManSubCategory_Click(sender As Object, e As EventArgs) Handles lblManSubCategory.Click, lblManSubCategory.Click
+
+    End Sub
+
+    Private Sub btnSubUpdate_Click(sender As Object, e As EventArgs) Handles btnSubjectUpdate.Click
+        UpdateSubject()
+    End Sub
+
+    Private currentSubjectID As Integer = 0 ' Make sure this is set when selecting a row
+
+    Private Sub UpdateSubject()
+        If currentSubjectID = 0 Then
+            MessageBox.Show("Please select a subject to update.", "No Subject Selected", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Return
+        End If
+
+        Try
+            Dim query As String = "
+        UPDATE subject SET
+            SubjectName = @SubjectName,
+            SubjectCode = @SubjectCode,
+            Description = @Description,
+            SkillFocus = @SkillFocus,
+            GradeLevel = @GradeLevel,
+            RoomType = @RoomType,
+            Quarter = @Quarter,
+            LearningMaterials = @LearningMaterials,
+            Category = @Category,
+            Schedule = @Schedule,
+            Status = @Status,
+            CurriculumYear = @CurriculumYear,
+            DateCreated = @DateCreated
+        WHERE SubjectID = @SubjectID
+    "
+
+            Using con As New MySqlConnection("server=192.168.1.30;user=jeje;password=password;database=cflc_db;")
+                Using cmd As New MySqlCommand(query, con)
+                    ' Add parameters
+                    cmd.Parameters.AddWithValue("@SubjectID", currentSubjectID)
+                    cmd.Parameters.AddWithValue("@SubjectName", txtbxManSubSubjectName.Text)
+                    cmd.Parameters.AddWithValue("@SubjectCode", txtbxManSubSubjectCode.Text)
+                    cmd.Parameters.AddWithValue("@Description", txtbxManSubDescription.Text)
+                    cmd.Parameters.AddWithValue("@SkillFocus", txtbxManSubSkillFocus.Text)
+                    cmd.Parameters.AddWithValue("@RoomType", cbxManSubRoomType.Text)
+                    cmd.Parameters.AddWithValue("@GradeLevel", nudManSubGradeLevel.Value)
+                    cmd.Parameters.AddWithValue("@Quarter", nudManSubQuarter.Value)
+                    cmd.Parameters.AddWithValue("@LearningMaterials", txtbxManSubLearningMaterials.Text)
+                    cmd.Parameters.AddWithValue("@Schedule", txtbxManSubSchedule.Text)
+                    cmd.Parameters.AddWithValue("@Status", txtbxManSubStatus.Text)
+                    cmd.Parameters.AddWithValue("@CurriculumYear", txtbxManSubCurriculumYear.Text)
+                    cmd.Parameters.AddWithValue("@DateCreated", dtpManSubDateCreated.Value)
+                    cmd.Parameters.AddWithValue("@Category", cmbSubjectCategory.Text)
+
+                    con.Open()
+                    cmd.ExecuteNonQuery()
+                End Using
+            End Using
+
+            MessageBox.Show("Subject updated successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
+
+            ' Refresh DataGridView (assuming you have a LoadToDGV function)
+            LoadToDGV("SELECT * FROM subject", dgvSubjectList)
+
+        Catch ex As Exception
+            MessageBox.Show("Update failed: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+
+    End Sub
+
+    Private Sub dgvSubjectList_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvSubjectList.CellClick
+        If e.RowIndex >= 0 Then
+            Dim row As DataGridViewRow = dgvSubjectList.Rows(e.RowIndex)
+
+            ' Store the SubjectID
+            currentSubjectID = If(row.Cells(0).Value IsNot Nothing, CInt(row.Cells(0).Value), 0)
+
+            ' Safely assign text values
+            txtbxManSubSubjectName.Text = If(row.Cells("SubjectName").Value IsNot DBNull.Value, row.Cells("SubjectName").Value.ToString(), "")
+            txtbxManSubSubjectCode.Text = If(row.Cells("SubjectCode").Value IsNot DBNull.Value, row.Cells("SubjectCode").Value.ToString(), "")
+            txtbxManSubDescription.Text = If(row.Cells("Description").Value IsNot DBNull.Value, row.Cells("Description").Value.ToString(), "")
+            txtbxManSubLearningMaterials.Text = If(row.Cells("LearningMaterials").Value IsNot DBNull.Value, row.Cells("LearningMaterials").Value.ToString(), "")
+            txtbxManSubSchedule.Text = If(row.Cells("Schedule").Value IsNot DBNull.Value, row.Cells("Schedule").Value.ToString(), "")
+            txtbxManSubStatus.Text = If(row.Cells("Status").Value IsNot DBNull.Value, row.Cells("Status").Value.ToString(), "")
+            txtbxManSubCurriculumYear.Text = If(row.Cells("CurriculumYear").Value IsNot DBNull.Value, row.Cells("CurriculumYear").Value.ToString(), "")
+            txtbxManSubSkillFocus.Text = If(row.Cells("SkillFocus").Value IsNot DBNull.Value, row.Cells("SkillFocus").Value.ToString(), "")
+            txtbxManSubCreatedBy.Text = If(row.Cells("CreatedBy").Value IsNot DBNull.Value, row.Cells("CreatedBy").Value.ToString(), "")
+
+            ' Safely assign numeric up-down values
+            nudManSubQuarter.Value = If(row.Cells("Quarter").Value IsNot DBNull.Value, Convert.ToDecimal(row.Cells("Quarter").Value), 1D)
+
+            ' Safely assign GradeLevel
+            nudManSubGradeLevel.Value = If(row.Cells("GradeLevel").Value IsNot DBNull.Value, Convert.ToDecimal(row.Cells("GradeLevel").Value), 1D)
+
+            ' Safely assign RoomType (ComboBox)
+            cbxManSubRoomType.Text = If(row.Cells("RoomType").Value IsNot DBNull.Value, row.Cells("RoomType").Value.ToString(), "")
+            cmbSubjectCategory.Text = If(row.Cells("Category").Value IsNot DBNull.Value, row.Cells("Category").Value.ToString(), "")
+
+            ' Safely assign DateCreated
+            If row.Cells("DateCreated").Value IsNot DBNull.Value Then
+                dtpManSubDateCreated.Value = CDate(row.Cells("DateCreated").Value)
+            End If
+
+        End If
 
     End Sub
 
