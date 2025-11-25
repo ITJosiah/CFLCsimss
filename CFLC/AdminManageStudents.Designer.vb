@@ -590,7 +590,7 @@ Partial Class AdminManageStudents
         '
         'txtbxGuardianContactNo
         '
-        Me.txtbxGuardianContactNo.Location = New System.Drawing.Point(975, 286)
+        Me.txtbxGuardianContactNo.Location = New System.Drawing.Point(740, 215)
         Me.txtbxGuardianContactNo.Margin = New System.Windows.Forms.Padding(4)
         Me.txtbxGuardianContactNo.MaxLength = 50
         Me.txtbxGuardianContactNo.Name = "txtbxGuardianContactNo"
@@ -601,7 +601,7 @@ Partial Class AdminManageStudents
         '
         Me.Label7.AutoEllipsis = True
         Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(971, 263)
+        Me.Label7.Location = New System.Drawing.Point(736, 192)
         Me.Label7.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(204, 20)
@@ -639,7 +639,7 @@ Partial Class AdminManageStudents
         '
         'txtbxStudentMotherTongue
         '
-        Me.txtbxStudentMotherTongue.Location = New System.Drawing.Point(740, 159)
+        Me.txtbxStudentMotherTongue.Location = New System.Drawing.Point(740, 101)
         Me.txtbxStudentMotherTongue.Margin = New System.Windows.Forms.Padding(4)
         Me.txtbxStudentMotherTongue.MaxLength = 50
         Me.txtbxStudentMotherTongue.Name = "txtbxStudentMotherTongue"
@@ -650,7 +650,7 @@ Partial Class AdminManageStudents
         '
         Me.Label4.AutoEllipsis = True
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(736, 135)
+        Me.Label4.Location = New System.Drawing.Point(736, 77)
         Me.Label4.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(121, 20)
@@ -781,7 +781,7 @@ Partial Class AdminManageStudents
         '
         'txtbxGuardianName
         '
-        Me.txtbxGuardianName.Location = New System.Drawing.Point(732, 286)
+        Me.txtbxGuardianName.Location = New System.Drawing.Point(740, 159)
         Me.txtbxGuardianName.Margin = New System.Windows.Forms.Padding(4)
         Me.txtbxGuardianName.MaxLength = 50
         Me.txtbxGuardianName.Name = "txtbxGuardianName"
@@ -792,7 +792,7 @@ Partial Class AdminManageStudents
         '
         Me.lblStudentGuardianName.AutoEllipsis = True
         Me.lblStudentGuardianName.AutoSize = True
-        Me.lblStudentGuardianName.Location = New System.Drawing.Point(728, 263)
+        Me.lblStudentGuardianName.Location = New System.Drawing.Point(736, 136)
         Me.lblStudentGuardianName.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblStudentGuardianName.Name = "lblStudentGuardianName"
         Me.lblStudentGuardianName.Size = New System.Drawing.Size(126, 20)
