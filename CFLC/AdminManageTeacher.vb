@@ -10,7 +10,7 @@ Public Class AdminManageTeacher
         If e.RowIndex >= 0 Then
             Dim row As DataGridViewRow = dgvTeacher.Rows(e.RowIndex)
 
-            ' Store the StudentID (assuming it's the first column, index 0)
+            ' Store the Teacher (assuming it's the first column, index 0)
             currentTeacherID = CInt(row.Cells(0).Value)
 
             TextBoxTeacherFirstName.Text = row.Cells("FirstName").Value.ToString()
@@ -65,7 +65,7 @@ Public Class AdminManageTeacher
         ' Initialize Gender ComboBox
         InitializeGenderComboBox()
 
-        ' Load students data
+        ' Load teacher data
         LoadToDGV("SELECT * FROM teacher", dgvTeacher)
 
         ' Ensure the grid doesn't auto-select the first row on load
@@ -193,6 +193,85 @@ Public Class AdminManageTeacher
         ' Move focus to first input so the grid doesn't appear focused
         TextBoxTeacherFirstName.Focus()
     End Sub
+
+
+    Private Sub btnTeacherDelete_Click(sender As Object, e As EventArgs) Handles btnTeaDelete.Click
+        ' Check if a teacher is selected
+        If currentTeacherID = 0 Then
+            MsgBox("Please select a teacher to delete.", MsgBoxStyle.Exclamation, "Delete Teacher")
+            Return
+        End If
+
+        ' Confirm deletion
+        If MessageBox.Show("Are you sure you want to delete this teacher?", "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) = DialogResult.No Then
+            Return
+        End If
+
+        Try
+            ' Open database connection
+            modDBx.openConn(modDBx.db_name)
+
+            ' Prepare the DELETE SQL statement
+            Dim sql As String = "DELETE FROM teacher WHERE TeacherID = @TeacherID"
+
+            Using cmd As New MySqlCommand(sql, modDBx.conn)
+                cmd.Parameters.AddWithValue("@TeacherID", currentTeacherID)
+                Dim rowsAffected As Integer = cmd.ExecuteNonQuery()
+
+                If rowsAffected > 0 Then
+                    MsgBox("Teacher deleted successfully.", MsgBoxStyle.Information, "Delete Success")
+                    ' Refresh the DataGridView
+                    LoadToDGV("SELECT * FROM teacher", dgvTeacher)
+                    ' Reset current selection and clear input fields
+                    currentTeacherID = 0
+                    ClearInputFIelds()
+
+                Else
+                    MsgBox("No teacher was deleted. Please check your selection.", MsgBoxStyle.Exclamation, "Delete Failed")
+                End If
+            End Using
+
+        Catch ex As Exception
+            MsgBox("Error deleting teacher: " & ex.Message, MsgBoxStyle.Critical, "Delete Error")
+        Finally
+            ' Close connection safely
+            If modDBx.conn IsNot Nothing AndAlso modDBx.conn.State = ConnectionState.Open Then
+                modDBx.conn.Close()
+            End If
+        End Try
+    End Sub
+
+    Private Sub ClearInputFIelds()
+        TextBoxTeacherFirstName.Clear()
+        TextBoxTeacherMiddleName.Clear()
+        TextBoxTeacherSurname.Clear()
+        TextBoxTeacherExtension.Clear()
+        txtbxTeacherAge.Clear()
+        ComboBoxTeacherGender.SelectedIndex = -1
+        DateTImePickerTeacherBirthdate.Value = DateTime.Now
+        ManageTeacherHireDate.Value = DateTime.Now
+        TextBoxTeacherContactNo.Clear()
+        TextBoxTeacherEmail.Clear()
+        txtbxTeacherHouseNo.Clear()
+        txtbxTeacherBarangay.Clear()
+        txtbxTeacherCity.Clear()
+        txtbxTeacherProvince.Clear()
+        txtbxTeacherCountry.Clear()
+        txtbxTeacherZipCode.Clear()
+        TextBoxTeacherEducationalAttainment.Clear()
+        TextBoxTeacherSpecialization.Clear()
+        ComboBoxTeacherStatus.SelectedIndex = -1
+
+        ' Clear address fields
+        txtbxTeacherHouseNo.Clear()
+        TextBoxTeacherStreet.Clear()
+        txtbxTeacherBarangay.Clear()
+        txtbxTeacherCity.Clear()
+        txtbxTeacherProvince.Clear()
+        txtbxTeacherCountry.Clear()
+        txtbxTeacherZipCode.Clear()
+    End Sub
+
 
 End Class
 
