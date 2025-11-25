@@ -1,4 +1,5 @@
 ﻿Imports System.Data.SqlClient
+Imports System.Text
 Imports MySql.Data.MySqlClient
 
 Public Class AdminManageTeacher
@@ -369,171 +370,109 @@ Public Class AdminManageTeacher
     End Function
 
     Private Function ValidateInputs() As Boolean
-        ' 1. First Name (Required)
+        Dim errors As New List(Of String)
+
+        ' 1. Personal Information Validation
         If String.IsNullOrWhiteSpace(TextBoxTeacherFirstName.Text) Then
-            MessageBox.Show("Please enter First Name.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            TextBoxTeacherFirstName.Focus()
-            Return False
+            errors.Add("• First Name is required")
         End If
 
-        ' 2. Last Name (Required)
         If String.IsNullOrWhiteSpace(TextBoxTeacherSurname.Text) Then
-            MessageBox.Show("Please enter Last Name.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            TextBoxTeacherSurname.Focus()
-            Return False
+            errors.Add("• Last Name is required")
         End If
 
-        ' 3. Gender (Required)
         If ComboBoxTeacherGender.SelectedIndex = -1 Then
-            MessageBox.Show("Please select Sex.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            ComboBoxTeacherGender.Focus()
-            Return False
+            errors.Add("• Sex is required")
         End If
 
-        ' 4. Birth Date (Required - validated by control)
-        ' 5. Age (Required)
         If String.IsNullOrWhiteSpace(txtbxTeacherAge.Text) Then
-            MessageBox.Show("Please enter a valid Age.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            txtbxTeacherAge.Focus()
-            Return False
+            errors.Add("• Age is required")
         End If
 
-        ' 6. Contact Number (Required with specific format)
-        If String.IsNullOrWhiteSpace(TextBoxTeacherContactNo.Text) Then
-            MessageBox.Show("Please enter Contact Number.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            TextBoxTeacherContactNo.Focus()
-            Return False
-        End If
-
-        ' Validate Contact Number format (09XXXXXXXXX - 11 digits)
+        ' 2. Contact Information Validation
         Dim contactNumber As String = TextBoxTeacherContactNo.Text.Trim()
-        If contactNumber.Length <> 11 Then
-            MessageBox.Show("Contact Number must be exactly 11 digits (09XXXXXXXXX).", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            TextBoxTeacherContactNo.Focus()
-            Return False
+        If String.IsNullOrWhiteSpace(contactNumber) Then
+            errors.Add("• Contact Number is required")
+        Else
+            If contactNumber.Length <> 11 Then
+                errors.Add("• Contact Number must be exactly 11 digits (09XXXXXXXXX)")
+            ElseIf Not contactNumber.StartsWith("09") Then
+                errors.Add("• Contact Number must start with '09'")
+            ElseIf Not Long.TryParse(contactNumber, Nothing) Then
+                errors.Add("• Contact Number must contain only numbers")
+            End If
         End If
 
-        If Not contactNumber.StartsWith("09") Then
-            MessageBox.Show("Contact Number must start with '09'.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            TextBoxTeacherContactNo.Focus()
-            Return False
-        End If
-
-        Dim contactNum As Long
-        If Not Long.TryParse(contactNumber, contactNum) Then
-            MessageBox.Show("Contact Number must contain only numbers.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            TextBoxTeacherContactNo.Focus()
-            Return False
-        End If
-
-        ' 7. Email (Required and valid format)
-        If String.IsNullOrWhiteSpace(TextBoxTeacherEmail.Text) Then
-            MessageBox.Show("Please enter Email Address.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            TextBoxTeacherEmail.Focus()
-            Return False
-        End If
-
-        ' Basic email validation
         Dim email As String = TextBoxTeacherEmail.Text.Trim()
-        If Not email.Contains("@") OrElse Not email.Contains(".") Then
-            MessageBox.Show("Please enter a valid Email Address.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            TextBoxTeacherEmail.Focus()
-            Return False
+        If String.IsNullOrWhiteSpace(email) Then
+            errors.Add("• Email Address is required")
+        ElseIf Not email.Contains("@") OrElse Not email.Contains(".") Then
+            errors.Add("• Please enter a valid Email Address")
         End If
 
-        ' 8. Educational Attainment (Required)
+        ' 3. Professional Information Validation
         If String.IsNullOrWhiteSpace(TextBoxTeacherEducationalAttainment.Text) Then
-            MessageBox.Show("Please enter Educational Attainment.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            TextBoxTeacherEducationalAttainment.Focus()
-            Return False
+            errors.Add("• Educational Attainment is required")
         End If
 
-        ' 9. Hire Date (Required - validated by control)
-
-        ' 10. Specialization (Required)
         If String.IsNullOrWhiteSpace(TextBoxTeacherSpecialization.Text) Then
-            MessageBox.Show("Please enter Specialization.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            TextBoxTeacherSpecialization.Focus()
-            Return False
+            errors.Add("• Specialization is required")
         End If
 
-        ' 11. Status (Required)
         If ComboBoxTeacherStatus.SelectedIndex = -1 Then
-            MessageBox.Show("Please select Status.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            ComboBoxTeacherStatus.Focus()
-            Return False
+            errors.Add("• Status is required")
         End If
 
-        ' 12. Address validation
-
-        ' House Number (Required and numeric)
-        If String.IsNullOrWhiteSpace(txtbxTeacherHouseNo.Text) Then
-            MessageBox.Show("Please enter House Number.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            txtbxTeacherHouseNo.Focus()
-            Return False
+        ' 4. Address Information Validation
+        Dim houseNumber As String = txtbxTeacherHouseNo.Text.Trim()
+        If String.IsNullOrWhiteSpace(houseNumber) Then
+            errors.Add("• House Number is required")
+        ElseIf Not Integer.TryParse(houseNumber, Nothing) Then
+            errors.Add("• House Number must contain only numbers")
         End If
 
-        Dim houseNum As Integer
-        If Not Integer.TryParse(txtbxTeacherHouseNo.Text.Trim(), houseNum) Then
-            MessageBox.Show("House Number must contain only numbers.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            txtbxTeacherHouseNo.Focus()
-            Return False
-        End If
-
-        ' Street (Required)
         If String.IsNullOrWhiteSpace(TextBoxTeacherStreet.Text) Then
-            MessageBox.Show("Please enter Street.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            TextBoxTeacherStreet.Focus()
-            Return False
+            errors.Add("• Street is required")
         End If
 
-        ' Barangay (Required)
         If String.IsNullOrWhiteSpace(txtbxTeacherBarangay.Text) Then
-            MessageBox.Show("Please enter Barangay.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            txtbxTeacherBarangay.Focus()
-            Return False
+            errors.Add("• Barangay is required")
         End If
 
-        ' Municipality/City (Required)
         If String.IsNullOrWhiteSpace(txtbxTeacherCity.Text) Then
-            MessageBox.Show("Please enter Municipality/City.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            txtbxTeacherCity.Focus()
-            Return False
+            errors.Add("• Municipality/City is required")
         End If
 
-        ' Province (Required)
         If String.IsNullOrWhiteSpace(txtbxTeacherProvince.Text) Then
-            MessageBox.Show("Please enter Province.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            txtbxTeacherProvince.Focus()
-            Return False
+            errors.Add("• Province is required")
         End If
 
-        ' Country (Required)
         If String.IsNullOrWhiteSpace(txtbxTeacherCountry.Text) Then
-            MessageBox.Show("Please enter Country.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            txtbxTeacherCountry.Focus()
-            Return False
+            errors.Add("• Country is required")
         End If
 
-        ' Zip Code (Required)
-        If String.IsNullOrWhiteSpace(txtbxTeacherZipCode.Text) Then
-            MessageBox.Show("Please enter Zip Code.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            txtbxTeacherZipCode.Focus()
-            Return False
-        End If
-
-        ' Validate Zip Code is numeric and has appropriate length
         Dim zipCode As String = txtbxTeacherZipCode.Text.Trim()
-        If zipCode.Length <> 4 Then
-            MessageBox.Show("Zip Code must be exactly 4 digits.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            txtbxTeacherZipCode.Focus()
-            Return False
+        If String.IsNullOrWhiteSpace(zipCode) Then
+            errors.Add("• Zip Code is required")
+        Else
+            If zipCode.Length <> 4 Then
+                errors.Add("• Zip Code must be exactly 4 digits")
+            ElseIf Not Integer.TryParse(zipCode, Nothing) Then
+                errors.Add("• Zip Code must contain only numbers")
+            End If
         End If
 
-        Dim zipCodeNum As Integer
-        If Not Integer.TryParse(zipCode, zipCodeNum) Then
-            MessageBox.Show("Zip Code must contain only numbers.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            txtbxTeacherZipCode.Focus()
+        ' 5. Check if there are any validation errors
+        If errors.Count > 0 Then
+            Dim errorMessage As New StringBuilder()
+            errorMessage.AppendLine("Please fix the following errors before proceeding:")
+            errorMessage.AppendLine()
+
+            For Each [error] As String In errors
+                errorMessage.AppendLine([error])
+            Next
+
+            MessageBox.Show(errorMessage.ToString(), "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             Return False
         End If
 
