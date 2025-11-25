@@ -33,6 +33,7 @@ Public Class AdminManageStudents
 
         ' Ensure Add button is enabled by default
         btnStudentAdd.Enabled = True
+
     End Sub
 
     Private Sub InitializeRadioButtons()
