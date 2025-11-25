@@ -32,25 +32,11 @@ Partial Class AdminManageSections
         Me.btnGenerateReports = New System.Windows.Forms.Button()
         Me.btnLogout = New System.Windows.Forms.Button()
         Me.pnlManSecContent = New System.Windows.Forms.Panel()
+        Me.TextBoxStudentSearch = New System.Windows.Forms.TextBox()
         Me.btnSectionDelete = New System.Windows.Forms.Button()
         Me.btnSectionUpdate = New System.Windows.Forms.Button()
         Me.btnSectionAdd = New System.Windows.Forms.Button()
         Me.dgvSections = New System.Windows.Forms.DataGridView()
-        Me.SecSectionID = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.SecSubjectCode = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.SecSubjectName = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.SecDescription = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.SecSkillFocus = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.SecGradeLevel = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.SecRoomType = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.SecCategory = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.SecLearningMaterials = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.SecTeacherID = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.SecSchedule = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.SecQuarter = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.SecStatus = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.SecCreatedBy = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.SecDateCreated = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.grpSectionInfo = New System.Windows.Forms.GroupBox()
         Me.txtbxManSecRemarks = New System.Windows.Forms.TextBox()
         Me.lblManSecRemarks = New System.Windows.Forms.Label()
@@ -89,7 +75,6 @@ Partial Class AdminManageSections
         Me.lblSectionsList = New System.Windows.Forms.Label()
         Me.btnSectionSearch = New System.Windows.Forms.Button()
         Me.picWatermark = New System.Windows.Forms.PictureBox()
-        Me.TextBoxStudentSearch = New System.Windows.Forms.TextBox()
         Me.pnlSidebar.SuspendLayout()
         Me.flowButtons.SuspendLayout()
         Me.pnlManSecContent.SuspendLayout()
@@ -223,6 +208,16 @@ Partial Class AdminManageSections
         Me.pnlManSecContent.Size = New System.Drawing.Size(1333, 779)
         Me.pnlManSecContent.TabIndex = 13
         '
+        'TextBoxStudentSearch
+        '
+        Me.TextBoxStudentSearch.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.TextBoxStudentSearch.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBoxStudentSearch.Location = New System.Drawing.Point(483, 726)
+        Me.TextBoxStudentSearch.MaxLength = 50
+        Me.TextBoxStudentSearch.Name = "TextBoxStudentSearch"
+        Me.TextBoxStudentSearch.Size = New System.Drawing.Size(246, 36)
+        Me.TextBoxStudentSearch.TabIndex = 11
+        '
         'btnSectionDelete
         '
         Me.btnSectionDelete.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
@@ -265,7 +260,6 @@ Partial Class AdminManageSections
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.dgvSections.BackgroundColor = System.Drawing.Color.WhiteSmoke
         Me.dgvSections.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvSections.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.SecSectionID, Me.SecSubjectCode, Me.SecSubjectName, Me.SecDescription, Me.SecSkillFocus, Me.SecGradeLevel, Me.SecRoomType, Me.SecCategory, Me.SecLearningMaterials, Me.SecTeacherID, Me.SecSchedule, Me.SecQuarter, Me.SecStatus, Me.SecCreatedBy, Me.SecDateCreated})
         Me.dgvSections.Location = New System.Drawing.Point(44, 554)
         Me.dgvSections.Margin = New System.Windows.Forms.Padding(4)
         Me.dgvSections.Name = "dgvSections"
@@ -275,140 +269,6 @@ Partial Class AdminManageSections
         Me.dgvSections.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.dgvSections.Size = New System.Drawing.Size(1245, 145)
         Me.dgvSections.TabIndex = 6
-        '
-        'SecSectionID
-        '
-        Me.SecSectionID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        Me.SecSectionID.HeaderText = "Section ID"
-        Me.SecSectionID.MinimumWidth = 6
-        Me.SecSectionID.Name = "SecSectionID"
-        Me.SecSectionID.ReadOnly = True
-        Me.SecSectionID.Width = 90
-        '
-        'SecSubjectCode
-        '
-        Me.SecSubjectCode.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        Me.SecSubjectCode.HeaderText = "Subject Code"
-        Me.SecSubjectCode.MinimumWidth = 6
-        Me.SecSubjectCode.Name = "SecSubjectCode"
-        Me.SecSubjectCode.ReadOnly = True
-        Me.SecSubjectCode.Width = 108
-        '
-        'SecSubjectName
-        '
-        Me.SecSubjectName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        Me.SecSubjectName.HeaderText = "Subject Name"
-        Me.SecSubjectName.MinimumWidth = 6
-        Me.SecSubjectName.Name = "SecSubjectName"
-        Me.SecSubjectName.ReadOnly = True
-        Me.SecSubjectName.Width = 111
-        '
-        'SecDescription
-        '
-        Me.SecDescription.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        Me.SecDescription.HeaderText = "Description"
-        Me.SecDescription.MinimumWidth = 6
-        Me.SecDescription.Name = "SecDescription"
-        Me.SecDescription.ReadOnly = True
-        Me.SecDescription.Width = 104
-        '
-        'SecSkillFocus
-        '
-        Me.SecSkillFocus.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        Me.SecSkillFocus.HeaderText = "Skill Focus"
-        Me.SecSkillFocus.MinimumWidth = 6
-        Me.SecSkillFocus.Name = "SecSkillFocus"
-        Me.SecSkillFocus.ReadOnly = True
-        Me.SecSkillFocus.Width = 93
-        '
-        'SecGradeLevel
-        '
-        Me.SecGradeLevel.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        Me.SecGradeLevel.HeaderText = "Grade Level"
-        Me.SecGradeLevel.MinimumWidth = 6
-        Me.SecGradeLevel.Name = "SecGradeLevel"
-        Me.SecGradeLevel.ReadOnly = True
-        Me.SecGradeLevel.Width = 101
-        '
-        'SecRoomType
-        '
-        Me.SecRoomType.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        Me.SecRoomType.HeaderText = "Room Type"
-        Me.SecRoomType.MinimumWidth = 6
-        Me.SecRoomType.Name = "SecRoomType"
-        Me.SecRoomType.ReadOnly = True
-        '
-        'SecCategory
-        '
-        Me.SecCategory.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        Me.SecCategory.HeaderText = "Category"
-        Me.SecCategory.MinimumWidth = 6
-        Me.SecCategory.Name = "SecCategory"
-        Me.SecCategory.ReadOnly = True
-        Me.SecCategory.Width = 91
-        '
-        'SecLearningMaterials
-        '
-        Me.SecLearningMaterials.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        Me.SecLearningMaterials.HeaderText = "Learning Materials"
-        Me.SecLearningMaterials.MinimumWidth = 6
-        Me.SecLearningMaterials.Name = "SecLearningMaterials"
-        Me.SecLearningMaterials.ReadOnly = True
-        Me.SecLearningMaterials.Width = 134
-        '
-        'SecTeacherID
-        '
-        Me.SecTeacherID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        Me.SecTeacherID.HeaderText = "Teacher ID"
-        Me.SecTeacherID.MinimumWidth = 6
-        Me.SecTeacherID.Name = "SecTeacherID"
-        Me.SecTeacherID.ReadOnly = True
-        Me.SecTeacherID.Width = 95
-        '
-        'SecSchedule
-        '
-        Me.SecSchedule.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        Me.SecSchedule.HeaderText = "Schedule"
-        Me.SecSchedule.MinimumWidth = 6
-        Me.SecSchedule.Name = "SecSchedule"
-        Me.SecSchedule.ReadOnly = True
-        Me.SecSchedule.Width = 93
-        '
-        'SecQuarter
-        '
-        Me.SecQuarter.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        Me.SecQuarter.HeaderText = "Quarter"
-        Me.SecQuarter.MinimumWidth = 6
-        Me.SecQuarter.Name = "SecQuarter"
-        Me.SecQuarter.ReadOnly = True
-        Me.SecQuarter.Width = 80
-        '
-        'SecStatus
-        '
-        Me.SecStatus.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        Me.SecStatus.HeaderText = "Status"
-        Me.SecStatus.MinimumWidth = 6
-        Me.SecStatus.Name = "SecStatus"
-        Me.SecStatus.ReadOnly = True
-        Me.SecStatus.Width = 73
-        '
-        'SecCreatedBy
-        '
-        Me.SecCreatedBy.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        Me.SecCreatedBy.HeaderText = "Created By"
-        Me.SecCreatedBy.MinimumWidth = 6
-        Me.SecCreatedBy.Name = "SecCreatedBy"
-        Me.SecCreatedBy.ReadOnly = True
-        Me.SecCreatedBy.Width = 95
-        '
-        'SecDateCreated
-        '
-        Me.SecDateCreated.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        Me.SecDateCreated.HeaderText = "Date Created"
-        Me.SecDateCreated.MinimumWidth = 6
-        Me.SecDateCreated.Name = "SecDateCreated"
-        Me.SecDateCreated.ReadOnly = True
-        Me.SecDateCreated.Width = 107
         '
         'grpSectionInfo
         '
@@ -813,16 +673,6 @@ Partial Class AdminManageSections
         Me.picWatermark.TabIndex = 5
         Me.picWatermark.TabStop = False
         '
-        'TextBoxStudentSearch
-        '
-        Me.TextBoxStudentSearch.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TextBoxStudentSearch.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBoxStudentSearch.Location = New System.Drawing.Point(483, 726)
-        Me.TextBoxStudentSearch.MaxLength = 50
-        Me.TextBoxStudentSearch.Name = "TextBoxStudentSearch"
-        Me.TextBoxStudentSearch.Size = New System.Drawing.Size(246, 36)
-        Me.TextBoxStudentSearch.TabIndex = 11
-        '
         'AdminManageSections
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
@@ -899,20 +749,5 @@ Partial Class AdminManageSections
     Friend WithEvents cmbManSecClassType As ComboBox
     Friend WithEvents lblManSecRemarks As Label
     Friend WithEvents txtbxManSecRemarks As TextBox
-    Friend WithEvents SecSectionID As DataGridViewTextBoxColumn
-    Friend WithEvents SecSubjectCode As DataGridViewTextBoxColumn
-    Friend WithEvents SecSubjectName As DataGridViewTextBoxColumn
-    Friend WithEvents SecDescription As DataGridViewTextBoxColumn
-    Friend WithEvents SecSkillFocus As DataGridViewTextBoxColumn
-    Friend WithEvents SecGradeLevel As DataGridViewTextBoxColumn
-    Friend WithEvents SecRoomType As DataGridViewTextBoxColumn
-    Friend WithEvents SecCategory As DataGridViewTextBoxColumn
-    Friend WithEvents SecLearningMaterials As DataGridViewTextBoxColumn
-    Friend WithEvents SecTeacherID As DataGridViewTextBoxColumn
-    Friend WithEvents SecSchedule As DataGridViewTextBoxColumn
-    Friend WithEvents SecQuarter As DataGridViewTextBoxColumn
-    Friend WithEvents SecStatus As DataGridViewTextBoxColumn
-    Friend WithEvents SecCreatedBy As DataGridViewTextBoxColumn
-    Friend WithEvents SecDateCreated As DataGridViewTextBoxColumn
     Friend WithEvents TextBoxStudentSearch As TextBox
 End Class
