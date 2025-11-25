@@ -75,7 +75,6 @@ Partial Class AdminManageStudents
         Me.txtbxStudentExtension = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.nudStudentGradeLevel = New System.Windows.Forms.NumericUpDown()
-        Me.nudStudentAge = New System.Windows.Forms.NumericUpDown()
         Me.cmbStudenttGender = New System.Windows.Forms.ComboBox()
         Me.dtpStudentBirthdate = New System.Windows.Forms.DateTimePicker()
         Me.Label11 = New System.Windows.Forms.Label()
@@ -94,6 +93,7 @@ Partial Class AdminManageStudents
         Me.lblStudentFirstName = New System.Windows.Forms.Label()
         Me.lblStudentList = New System.Windows.Forms.Label()
         Me.picWatermark = New System.Windows.Forms.PictureBox()
+        Me.txtbxStudentAge = New System.Windows.Forms.TextBox()
         Me.pnlSidebar.SuspendLayout()
         Me.flowButtons.SuspendLayout()
         Me.pnlContent.SuspendLayout()
@@ -101,7 +101,6 @@ Partial Class AdminManageStudents
         Me.grpStudentInfo.SuspendLayout()
         Me.GroupBox4P.SuspendLayout()
         CType(Me.nudStudentGradeLevel, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.nudStudentAge, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.picWatermark, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -292,6 +291,7 @@ Partial Class AdminManageStudents
         Me.grpStudentInfo.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.grpStudentInfo.BackColor = System.Drawing.Color.Gainsboro
+        Me.grpStudentInfo.Controls.Add(Me.txtbxStudentAge)
         Me.grpStudentInfo.Controls.Add(Me.RadioButtonStudentIPNO)
         Me.grpStudentInfo.Controls.Add(Me.RadioButtonStudentIPYES)
         Me.grpStudentInfo.Controls.Add(Me.txtbxZipCode)
@@ -327,7 +327,6 @@ Partial Class AdminManageStudents
         Me.grpStudentInfo.Controls.Add(Me.txtbxStudentExtension)
         Me.grpStudentInfo.Controls.Add(Me.Label1)
         Me.grpStudentInfo.Controls.Add(Me.nudStudentGradeLevel)
-        Me.grpStudentInfo.Controls.Add(Me.nudStudentAge)
         Me.grpStudentInfo.Controls.Add(Me.cmbStudenttGender)
         Me.grpStudentInfo.Controls.Add(Me.dtpStudentBirthdate)
         Me.grpStudentInfo.Controls.Add(Me.Label11)
@@ -687,13 +686,6 @@ Partial Class AdminManageStudents
         Me.nudStudentGradeLevel.Size = New System.Drawing.Size(35, 23)
         Me.nudStudentGradeLevel.TabIndex = 27
         '
-        'nudStudentAge
-        '
-        Me.nudStudentAge.Location = New System.Drawing.Point(442, 33)
-        Me.nudStudentAge.Name = "nudStudentAge"
-        Me.nudStudentAge.Size = New System.Drawing.Size(35, 23)
-        Me.nudStudentAge.TabIndex = 24
-        '
         'cmbStudenttGender
         '
         Me.cmbStudenttGender.FormattingEnabled = True
@@ -855,6 +847,14 @@ Partial Class AdminManageStudents
         Me.picWatermark.TabIndex = 5
         Me.picWatermark.TabStop = False
         '
+        'txtbxStudentAge
+        '
+        Me.txtbxStudentAge.Location = New System.Drawing.Point(442, 33)
+        Me.txtbxStudentAge.Name = "txtbxStudentAge"
+        Me.txtbxStudentAge.ReadOnly = True
+        Me.txtbxStudentAge.Size = New System.Drawing.Size(47, 23)
+        Me.txtbxStudentAge.TabIndex = 65
+        '
         'AdminManageStudents
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -878,7 +878,6 @@ Partial Class AdminManageStudents
         Me.GroupBox4P.ResumeLayout(False)
         Me.GroupBox4P.PerformLayout()
         CType(Me.nudStudentGradeLevel, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.nudStudentAge, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.picWatermark, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
@@ -917,7 +916,6 @@ Partial Class AdminManageStudents
     Friend WithEvents lblStudentFirstName As Label
     Friend WithEvents lblStudentList As Label
     Friend WithEvents cmbStudenttGender As ComboBox
-    Friend WithEvents nudStudentAge As NumericUpDown
     Friend WithEvents nudStudentGradeLevel As NumericUpDown
     Friend WithEvents TextBoxStudentSearch As TextBox
     Friend WithEvents txtbxStudentExtension As TextBox
@@ -956,4 +954,5 @@ Partial Class AdminManageStudents
     Friend WithEvents RadioButtonStudent4PYES As RadioButton
     Friend WithEvents RadioButtonStudentIPNO As RadioButton
     Friend WithEvents GroupBox4P As GroupBox
+    Friend WithEvents txtbxStudentAge As TextBox
 End Class

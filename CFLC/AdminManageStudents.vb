@@ -28,20 +28,9 @@ Public Class AdminManageStudents
         ' Load students data
         LoadToDGV("SELECT * FROM student", dgvStudents)
 
-    Private Sub InitializeNumericControls()
-        ' Set safe default values for numeric up/down controls
-        If nudStudentAge.Minimum <= 0 AndAlso nudStudentAge.Maximum >= 0 Then
-            nudStudentAge.Value = 0
-        Else
-            nudStudentAge.Value = nudStudentAge.Minimum
-        End If
-
-        If nudStudentGradeLevel.Minimum <= 0 AndAlso nudStudentGradeLevel.Maximum >= 0 Then
-            nudStudentGradeLevel.Value = 0
-        Else
-            nudStudentGradeLevel.Value = nudStudentGradeLevel.Minimum
-        End If
+        txtbxStudentAge.ReadOnly = True
     End Sub
+
 
     Private Sub InitializeGenderComboBox()
         ' Populate Gender dropdown
@@ -145,7 +134,7 @@ Public Class AdminManageStudents
                 txtbxStudentSurname.Text.Trim().Replace("'", "''"),
                 cmbStudenttGender.SelectedItem.ToString(),
                 dtpStudentBirthdate.Value.ToString("yyyy-MM-dd"),
-                nudStudentAge.Value,
+                txtbxStudentAge.Text.Trim().Replace("'", "''"),
                 txtbxGuardianName.Text.Trim().Replace("'", "''"),
                 txtbxStudentReligion.Text.Trim().Replace("'", "''"),
                 nudStudentGradeLevel.Value,
@@ -217,9 +206,9 @@ Public Class AdminManageStudents
             Return False
         End If
 
-        If nudStudentAge.Value <= 0 Then
+        If String.IsNullOrWhiteSpace(txtbxStudentAge.Text) Then
             MessageBox.Show("Please enter a valid Age.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            nudStudentAge.Focus()
+            txtbxStudentAge.Focus()
             Return False
         End If
 
@@ -333,6 +322,7 @@ Public Class AdminManageStudents
         txtbxStudentSurname.Clear()
         cmbStudenttGender.SelectedIndex = -1
         dtpStudentBirthdate.Value = DateTime.Now
+        txtbxStudentAge.Clear()
 
         ' Reset numeric controls safely
         ResetNumericControl(nudStudentGradeLevel)
@@ -369,21 +359,15 @@ Public Class AdminManageStudents
     Private Sub dtpStudentBirthdate_ValueChanged(sender As Object, e As EventArgs) Handles dtpStudentBirthdate.ValueChanged
         Dim birthDate As Date = dtpStudentBirthdate.Value
         Dim today As Date = Date.Today
+
         Dim age As Integer = today.Year - birthDate.Year
 
-        ' Adjust if birthday hasn't occurred this year
-        If birthDate.Date > today.AddYears(-age) Then
+        ' Adjust if birthday hasn't happened yet this year
+        If birthDate > today.AddYears(-age) Then
             age -= 1
         End If
 
-        ' Ensure age is within valid range for the control
-        If age < nudStudentAge.Minimum Then
-            nudStudentAge.Value = nudStudentAge.Minimum
-        ElseIf age > nudStudentAge.Maximum Then
-            nudStudentAge.Value = nudStudentAge.Maximum
-        Else
-            nudStudentAge.Value = age
-        End If
+        txtbxStudentAge.Text = age.ToString()
     End Sub
 
     Private Function CalculateAge(birthDate As Date) As Integer
@@ -450,7 +434,7 @@ Public Class AdminManageStudents
         ' Handle combo box selection change if needed
     End Sub
 
-    Private Sub nudStudentAgeValueChanged(sender As Object, e As EventArgs) Handles nudStudentAge.ValueChanged
+    Private Sub txtbxStudentAgeValueChanged(sender As Object, e As EventArgs)
         ' Handle numeric up/down value change if needed
     End Sub
 
@@ -558,7 +542,7 @@ Public Class AdminManageStudents
                 cmd.Parameters.AddWithValue("@Birthdate", dtpStudentBirthdate.Value)
                 cmd.Parameters.AddWithValue("@Religion", txtbxStudentReligion.Text.Trim())
                 cmd.Parameters.AddWithValue("@GuardianName", txtbxGuardianName.Text.Trim())
-                cmd.Parameters.AddWithValue("@Age", nudStudentAge.Value)
+                cmd.Parameters.AddWithValue("@Age", txtbxStudentAge.Text.Trim())
                 cmd.Parameters.AddWithValue("@GradeLevel", nudStudentGradeLevel.Value)
 
                 cmd.Parameters.AddWithValue("@HouseNumber", txtbxStudentHouseNo.Text.Trim())
@@ -714,6 +698,17 @@ Public Class AdminManageStudents
 
     Private Sub TextBox5_TextChanged(sender As Object, e As EventArgs) Handles txtbxStudentProvince.TextChanged
 
+    End Sub
+
+    Private Sub txtbxStudentAge_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtbxStudentAge.KeyPress
+        e.Handled = True ' Block typing
+    End Sub
+
+    Private Sub txtbxStudentAge_TextChanged(sender As Object, e As EventArgs) Handles txtbxStudentAge.TextChanged
+        ' Prevent manual edits from breaking the value
+        If Not txtbxStudentAge.ReadOnly Then
+            txtbxStudentAge.ReadOnly = True
+        End If
     End Sub
 
 
