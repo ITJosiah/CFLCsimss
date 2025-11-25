@@ -30,6 +30,9 @@ Public Class AdminManageStudents
         LoadToDGV("SELECT * FROM student", dgvStudents)
 
         txtbxStudentAge.ReadOnly = True
+
+        ' Ensure Add button is enabled by default
+        btnStudentAdd.Enabled = True
     End Sub
 
     Private Sub InitializeRadioButtons()
@@ -155,6 +158,12 @@ Public Class AdminManageStudents
     End Sub
 
     Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnStudentAdd.Click
+        ' If a row is currently selected, prevent adding and show error
+        If currentStudentID <> 0 Then
+            MessageBox.Show("no", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Return
+        End If
+
         ' Validate required fields FIRST
         If Not ValidateInputs() Then
             Return ' Stop execution if validation fails
@@ -163,31 +172,31 @@ Public Class AdminManageStudents
         ' Add student to database using modDB
         Try
             Dim query As String = "INSERT INTO student (" &
-                                "LRN, MiddleName, FirstName, LastName, ExtensionName, " &
-                                "Gender, BirthDate, Age, BirthPlace, MotherTongue, " &
-                                "Indigineous, IndigineousSpecific, 4Ps, 4PsID, " &
-                                "Religion, GuardianName, GuardianContact, " &
-                                "GradeLevel, SectionID, EnrollmentID, " &
-                                "HouseNumber, Street, Barangay, Municipality, Province, Country, ZipCode" &
-                                ") VALUES (" &
-                                "@LRN, @MiddleName, @FirstName, @LastName, @ExtensionName, " &
-                                "@Gender, @BirthDate, @Age, @BirthPlace, @MotherTongue, " &
-                                "@Indigineous, @IndigineousSpecific, @4Ps, @4PsID, " &
-                                "@Religion, @GuardianName, @GuardianContact, " &
-                                "@GradeLevel, @SectionID, @EnrollmentID, " &
-                                "@HouseNumber, @Street, @Barangay, @Municipality, @Province, @Country, @ZipCode)"
+                            "LRN, MiddleName, FirstName, LastName, ExtensionName, " &
+                            "Gender, BirthDate, Age, BirthPlace, MotherTongue, " &
+                            "Indigineous, IndigineousSpecific, 4Ps, 4PsID, " &
+                            "Religion, GuardianName, GuardianContact, " &
+                            "GradeLevel, SectionID, EnrollmentID, " &
+                            "HouseNumber, Street, Barangay, Municipality, Province, Country, ZipCode" &
+                            ") VALUES (" &
+                            "@LRN, @MiddleName, @FirstName, @LastName, @ExtensionName, " &
+                            "@Gender, @BirthDate, @Age, @BirthPlace, @MotherTongue, " &
+                            "@Indigineous, @IndigineousSpecific, @4Ps, @4PsID, " &
+                            "@Religion, @GuardianName, @GuardianContact, " &
+                            "@GradeLevel, @SectionID, @EnrollmentID, " &
+                            "@HouseNumber, @Street, @Barangay, @Municipality, @Province, @Country, @ZipCode)"
 
             modDBx.openConn(modDBx.db_name)
 
             Using cmd As New MySqlCommand(query, modDBx.conn)
-                ' LRN (optional)
+                ' LRN (optional) - No conversion needed (numeric)
                 cmd.Parameters.AddWithValue("@LRN", SafeString(txtbxStudentLRN.Text))
 
-                ' Personal Information
-                cmd.Parameters.AddWithValue("@MiddleName", SafeString(txtStudentMiddleName.Text))
-                cmd.Parameters.AddWithValue("@FirstName", SafeString(txtbxStudentFirstName.Text))
-                cmd.Parameters.AddWithValue("@LastName", SafeString(txtbxStudentSurname.Text))
-                cmd.Parameters.AddWithValue("@ExtensionName", SafeString(txtbxStudentExtension.Text))
+                ' Personal Information - Convert to Proper Case
+                cmd.Parameters.AddWithValue("@MiddleName", ConvertToProperCase(SafeString(txtStudentMiddleName.Text)))
+                cmd.Parameters.AddWithValue("@FirstName", ConvertToProperCase(SafeString(txtbxStudentFirstName.Text)))
+                cmd.Parameters.AddWithValue("@LastName", ConvertToProperCase(SafeString(txtbxStudentSurname.Text)))
+                cmd.Parameters.AddWithValue("@ExtensionName", ConvertToProperCase(SafeString(txtbxStudentExtension.Text)))
 
                 Dim gender As String = ""
                 If cmbStudenttGender.SelectedItem IsNot Nothing Then
@@ -196,33 +205,35 @@ Public Class AdminManageStudents
                 cmd.Parameters.AddWithValue("@Gender", gender)
                 cmd.Parameters.AddWithValue("@BirthDate", dtpStudentBirthdate.Value.ToString("yyyy-MM-dd"))
                 cmd.Parameters.AddWithValue("@Age", txtbxStudentAge.Text)
-                cmd.Parameters.AddWithValue("@BirthPlace", SafeString(txtbxStudentPOB.Text))
-                cmd.Parameters.AddWithValue("@MotherTongue", SafeString(txtbxStudentMotherTongue.Text))
+
+                ' Convert these fields to Proper Case
+                cmd.Parameters.AddWithValue("@BirthPlace", ConvertToProperCase(SafeString(txtbxStudentPOB.Text)))
+                cmd.Parameters.AddWithValue("@MotherTongue", ConvertToProperCase(SafeString(txtbxStudentMotherTongue.Text)))
 
                 ' Indigineous Information
                 cmd.Parameters.AddWithValue("@Indigineous", If(RadioButtonStudentIPYES.Checked, "Yes", "No"))
-                cmd.Parameters.AddWithValue("@IndigineousSpecific", SafeString(txtbbxStudentIPGroup.Text))
+                cmd.Parameters.AddWithValue("@IndigineousSpecific", ConvertToProperCase(SafeString(txtbbxStudentIPGroup.Text)))
 
                 ' 4Ps Information
                 cmd.Parameters.AddWithValue("@4Ps", If(RadioButtonStudent4PYES.Checked, "Yes", "No"))
-                cmd.Parameters.AddWithValue("@4PsID", SafeString(txtbx4ps.Text))
+                cmd.Parameters.AddWithValue("@4PsID", SafeString(txtbx4ps.Text)) ' No conversion (typically numeric)
 
-                ' Guardian and Religion
-                cmd.Parameters.AddWithValue("@Religion", SafeString(txtbxStudentReligion.Text))
-                cmd.Parameters.AddWithValue("@GuardianName", SafeString(txtbxGuardianName.Text))
-                cmd.Parameters.AddWithValue("@GuardianContact", SafeString(txtbxGuardianContactNo.Text))
+                ' Guardian and Religion - Convert to Proper Case
+                cmd.Parameters.AddWithValue("@Religion", ConvertToProperCase(SafeString(txtbxStudentReligion.Text)))
+                cmd.Parameters.AddWithValue("@GuardianName", ConvertToProperCase(SafeString(txtbxGuardianName.Text)))
+                cmd.Parameters.AddWithValue("@GuardianContact", SafeString(txtbxGuardianContactNo.Text)) ' No conversion (numeric)
 
                 ' Academic Information
                 cmd.Parameters.AddWithValue("@GradeLevel", nudStudentGradeLevel.Value)
 
-                ' Address Information
-                cmd.Parameters.AddWithValue("@HouseNumber", SafeString(txtbxStudentHouseNo.Text))
-                cmd.Parameters.AddWithValue("@Street", SafeString(txtbxstudentStreet.Text))
-                cmd.Parameters.AddWithValue("@Barangay", SafeString(txtbxStudentBarangay.Text))
-                cmd.Parameters.AddWithValue("@Municipality", SafeString(txtbxStudentCity.Text))
-                cmd.Parameters.AddWithValue("@Province", SafeString(txtbxStudentProvince.Text))
-                cmd.Parameters.AddWithValue("@Country", SafeString(txtbxCountry.Text))
-                cmd.Parameters.AddWithValue("@ZipCode", SafeString(txtbxZipCode.Text))
+                ' Address Information - Convert to Proper Case
+                cmd.Parameters.AddWithValue("@HouseNumber", SafeString(txtbxStudentHouseNo.Text)) ' No conversion (numeric)
+                cmd.Parameters.AddWithValue("@Street", ConvertToProperCase(SafeString(txtbxstudentStreet.Text)))
+                cmd.Parameters.AddWithValue("@Barangay", ConvertToProperCase(SafeString(txtbxStudentBarangay.Text)))
+                cmd.Parameters.AddWithValue("@Municipality", ConvertToProperCase(SafeString(txtbxStudentCity.Text)))
+                cmd.Parameters.AddWithValue("@Province", ConvertToProperCase(SafeString(txtbxStudentProvince.Text)))
+                cmd.Parameters.AddWithValue("@Country", ConvertToProperCase(SafeString(txtbxCountry.Text)))
+                cmd.Parameters.AddWithValue("@ZipCode", SafeString(txtbxZipCode.Text)) ' No conversion (numeric)
 
                 Dim rowsAffected As Integer = cmd.ExecuteNonQuery()
 
@@ -248,6 +259,102 @@ Public Class AdminManageStudents
                 modDBx.conn.Close()
             End If
         End Try
+    End Sub
+
+    Private Function ConvertToProperCase(text As String) As String
+        If String.IsNullOrWhiteSpace(text) Then
+            Return text
+        End If
+
+        ' Convert to proper case (first letter uppercase, rest lowercase)
+        Dim culture As New System.Globalization.CultureInfo("en-US")
+        Dim textInfo As System.Globalization.TextInfo = culture.TextInfo
+
+        Return textInfo.ToTitleCase(text.ToLower())
+    End Function
+
+    Private Sub txtbxStudentFirstName_Leave(sender As Object, e As EventArgs) Handles txtbxStudentFirstName.Leave
+        If Not String.IsNullOrWhiteSpace(txtbxStudentFirstName.Text) Then
+            txtbxStudentFirstName.Text = ConvertToProperCase(txtbxStudentFirstName.Text.Trim())
+        End If
+    End Sub
+
+    Private Sub txtStudentMiddleName_Leave(sender As Object, e As EventArgs) Handles txtStudentMiddleName.Leave
+        If Not String.IsNullOrWhiteSpace(txtStudentMiddleName.Text) Then
+            txtStudentMiddleName.Text = ConvertToProperCase(txtStudentMiddleName.Text.Trim())
+        End If
+    End Sub
+
+    Private Sub txtbxStudentSurname_Leave(sender As Object, e As EventArgs) Handles txtbxStudentSurname.Leave
+        If Not String.IsNullOrWhiteSpace(txtbxStudentSurname.Text) Then
+            txtbxStudentSurname.Text = ConvertToProperCase(txtbxStudentSurname.Text.Trim())
+        End If
+    End Sub
+
+    Private Sub txtbxStudentExtension_Leave(sender As Object, e As EventArgs) Handles txtbxStudentExtension.Leave
+        If Not String.IsNullOrWhiteSpace(txtbxStudentExtension.Text) Then
+            txtbxStudentExtension.Text = ConvertToProperCase(txtbxStudentExtension.Text.Trim())
+        End If
+    End Sub
+
+    Private Sub txtbxStudentPOB_Leave(sender As Object, e As EventArgs) Handles txtbxStudentPOB.Leave
+        If Not String.IsNullOrWhiteSpace(txtbxStudentPOB.Text) Then
+            txtbxStudentPOB.Text = ConvertToProperCase(txtbxStudentPOB.Text.Trim())
+        End If
+    End Sub
+
+    Private Sub txtbxStudentMotherTongue_Leave(sender As Object, e As EventArgs) Handles txtbxStudentMotherTongue.Leave
+        If Not String.IsNullOrWhiteSpace(txtbxStudentMotherTongue.Text) Then
+            txtbxStudentMotherTongue.Text = ConvertToProperCase(txtbxStudentMotherTongue.Text.Trim())
+        End If
+    End Sub
+
+    Private Sub txtbbxStudentIPGroup_Leave(sender As Object, e As EventArgs) Handles txtbbxStudentIPGroup.Leave
+        If Not String.IsNullOrWhiteSpace(txtbbxStudentIPGroup.Text) Then
+            txtbbxStudentIPGroup.Text = ConvertToProperCase(txtbbxStudentIPGroup.Text.Trim())
+        End If
+    End Sub
+
+    Private Sub txtbxStudentReligion_Leave(sender As Object, e As EventArgs) Handles txtbxStudentReligion.Leave
+        If Not String.IsNullOrWhiteSpace(txtbxStudentReligion.Text) Then
+            txtbxStudentReligion.Text = ConvertToProperCase(txtbxStudentReligion.Text.Trim())
+        End If
+    End Sub
+
+    Private Sub txtbxstudentStreet_Leave(sender As Object, e As EventArgs) Handles txtbxstudentStreet.Leave
+        If Not String.IsNullOrWhiteSpace(txtbxstudentStreet.Text) Then
+            txtbxstudentStreet.Text = ConvertToProperCase(txtbxstudentStreet.Text.Trim())
+        End If
+    End Sub
+
+    Private Sub txtbxStudentBarangay_Leave(sender As Object, e As EventArgs) Handles txtbxStudentBarangay.Leave
+        If Not String.IsNullOrWhiteSpace(txtbxStudentBarangay.Text) Then
+            txtbxStudentBarangay.Text = ConvertToProperCase(txtbxStudentBarangay.Text.Trim())
+        End If
+    End Sub
+
+    Private Sub txtbxStudentCity_Leave(sender As Object, e As EventArgs) Handles txtbxStudentCity.Leave
+        If Not String.IsNullOrWhiteSpace(txtbxStudentCity.Text) Then
+            txtbxStudentCity.Text = ConvertToProperCase(txtbxStudentCity.Text.Trim())
+        End If
+    End Sub
+
+    Private Sub txtbxStudentProvince_Leave(sender As Object, e As EventArgs) Handles txtbxStudentProvince.Leave
+        If Not String.IsNullOrWhiteSpace(txtbxStudentProvince.Text) Then
+            txtbxStudentProvince.Text = ConvertToProperCase(txtbxStudentProvince.Text.Trim())
+        End If
+    End Sub
+
+    Private Sub txtbxCountry_Leave(sender As Object, e As EventArgs) Handles txtbxCountry.Leave
+        If Not String.IsNullOrWhiteSpace(txtbxCountry.Text) Then
+            txtbxCountry.Text = ConvertToProperCase(txtbxCountry.Text.Trim())
+        End If
+    End Sub
+
+    Private Sub txtbxGuardianName_Leave(sender As Object, e As EventArgs) Handles txtbxGuardianName.Leave
+        If Not String.IsNullOrWhiteSpace(txtbxGuardianName.Text) Then
+            txtbxGuardianName.Text = ConvertToProperCase(txtbxGuardianName.Text.Trim())
+        End If
     End Sub
 
     ' Helper function to safely handle string values
@@ -441,7 +548,7 @@ Public Class AdminManageStudents
     End Function
 
     Private Sub ClearInputFields()
-        ' Clear all input fields after successful add
+        ' Clear all input fields after successful add or when un-selecting a row
 
         ' LRN (optional)
         txtbxStudentLRN.Clear()
@@ -480,6 +587,15 @@ Public Class AdminManageStudents
         txtbxStudentProvince.Clear()
         txtbxCountry.Clear()
         txtbxZipCode.Clear()
+
+        ' Reset current student selection
+        currentStudentID = 0
+
+        ' Reset grade level control to default (use helper)
+        ResetNumericControl(nudStudentGradeLevel)
+
+        ' Re-enable Add button so user can create a new record
+        btnStudentAdd.Enabled = True
 
         ' Set focus back to first field
         txtbxStudentFirstName.Focus()
@@ -522,12 +638,30 @@ Public Class AdminManageStudents
 
     ' Update the dgvStudents_CellClick method to populate all fields including new ones
     Private Sub dgvStudents_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvStudents.CellClick
-        If e.RowIndex >= 0 Then
-            Dim row As DataGridViewRow = dgvStudents.Rows(e.RowIndex)
+        If e.RowIndex < 0 Then
+            Return
+        End If
 
-            currentStudentID = CInt(row.Cells(0).Value)
+        Dim row As DataGridViewRow = dgvStudents.Rows(e.RowIndex)
 
-            ' Populate all fields including new ones
+        ' Safely read the StudentID in the clicked row
+        Dim clickedID As Integer = 0
+        If row.Cells.Count > 0 AndAlso row.Cells(0).Value IsNot Nothing AndAlso Not IsDBNull(row.Cells(0).Value) Then
+            Integer.TryParse(row.Cells(0).Value.ToString(), clickedID)
+        End If
+
+        ' If the user clicked the already-selected row, clear selection and inputs
+        If clickedID <> 0 AndAlso clickedID = currentStudentID Then
+            dgvStudents.ClearSelection()
+            currentStudentID = 0
+            ClearInputFields() ' clears age and grade level and re-enables Add
+            Return
+        End If
+
+        ' Otherwise populate fields for the newly selected row
+        If clickedID <> 0 Then
+            currentStudentID = clickedID
+
             txtbxStudentLRN.Text = GetSafeString(row.Cells("LRN"))
             txtbxStudentFirstName.Text = GetSafeString(row.Cells("FirstName"))
             txtStudentMiddleName.Text = GetSafeString(row.Cells("MiddleName"))
@@ -582,6 +716,9 @@ Public Class AdminManageStudents
             txtbxStudentProvince.Text = GetSafeString(row.Cells("Province"))
             txtbxCountry.Text = GetSafeString(row.Cells("Country"))
             txtbxZipCode.Text = GetSafeString(row.Cells("ZIPCode"))
+
+            ' Keep Add button enabled so it's clickable; btnAdd will block adding while updating via currentStudentID check
+            btnStudentAdd.Enabled = True
         End If
     End Sub
 
@@ -600,59 +737,59 @@ Public Class AdminManageStudents
             modDBx.openConn(modDBx.db_name)
 
             Dim sql As String = "UPDATE student SET " &
-                            "LRN = @LRN, " &
-                            "FirstName = @FirstName, " &
-                            "MiddleName = @MiddleName, " &
-                            "LastName = @LastName, " &
-                            "ExtensionName = @ExtensionName, " &
-                            "Gender = @Gender, " &
-                            "Birthdate = @Birthdate, " &
-                            "Age = @Age, " &
-                            "BirthPlace = @BirthPlace, " &
-                            "MotherTongue = @MotherTongue, " &
-                            "Indigineous = @Indigineous, " &
-                            "IndigineousSpecific = @IndigineousSpecific, " &
-                            "4Ps = @4Ps, " &
-                            "4PsID = @4PsID, " &
-                            "Religion = @Religion, " &
-                            "GuardianName = @GuardianName, " &
-                            "GuardianContact = @GuardianContact, " &
-                            "GradeLevel = @GradeLevel, " &
-                            "HouseNumber = @HouseNumber, " &
-                            "Street = @Street, " &
-                            "Barangay = @Barangay, " &
-                            "Municipality = @Municipality, " &
-                            "Province = @Province, " &
-                            "Country = @Country, " &
-                            "ZIPCode = @ZIPCode " &
-                            "WHERE StudentID = @StudentID"
+                        "LRN = @LRN, " &
+                        "FirstName = @FirstName, " &
+                        "MiddleName = @MiddleName, " &
+                        "LastName = @LastName, " &
+                        "ExtensionName = @ExtensionName, " &
+                        "Gender = @Gender, " &
+                        "Birthdate = @Birthdate, " &
+                        "Age = @Age, " &
+                        "BirthPlace = @BirthPlace, " &
+                        "MotherTongue = @MotherTongue, " &
+                        "Indigineous = @Indigineous, " &
+                        "IndigineousSpecific = @IndigineousSpecific, " &
+                        "4Ps = @4Ps, " &
+                        "4PsID = @4PsID, " &
+                        "Religion = @Religion, " &
+                        "GuardianName = @GuardianName, " &
+                        "GuardianContact = @GuardianContact, " &
+                        "GradeLevel = @GradeLevel, " &
+                        "HouseNumber = @HouseNumber, " &
+                        "Street = @Street, " &
+                        "Barangay = @Barangay, " &
+                        "Municipality = @Municipality, " &
+                        "Province = @Province, " &
+                        "Country = @Country, " &
+                        "ZIPCode = @ZIPCode " &
+                        "WHERE StudentID = @StudentID"
 
             Using cmd As New MySqlCommand(sql, modDBx.conn)
-                ' Add all parameters including new fields
+                ' Add all parameters - Convert appropriate fields to Proper Case
                 cmd.Parameters.AddWithValue("@LRN", txtbxStudentLRN.Text.Trim())
-                cmd.Parameters.AddWithValue("@FirstName", txtbxStudentFirstName.Text.Trim())
-                cmd.Parameters.AddWithValue("@MiddleName", txtStudentMiddleName.Text.Trim())
-                cmd.Parameters.AddWithValue("@LastName", txtbxStudentSurname.Text.Trim())
-                cmd.Parameters.AddWithValue("@ExtensionName", txtbxStudentExtension.Text.Trim())
+                cmd.Parameters.AddWithValue("@FirstName", ConvertToProperCase(txtbxStudentFirstName.Text.Trim()))
+                cmd.Parameters.AddWithValue("@MiddleName", ConvertToProperCase(txtStudentMiddleName.Text.Trim()))
+                cmd.Parameters.AddWithValue("@LastName", ConvertToProperCase(txtbxStudentSurname.Text.Trim()))
+                cmd.Parameters.AddWithValue("@ExtensionName", ConvertToProperCase(txtbxStudentExtension.Text.Trim()))
                 cmd.Parameters.AddWithValue("@Gender", cmbStudenttGender.Text.Trim())
                 cmd.Parameters.AddWithValue("@Birthdate", dtpStudentBirthdate.Value)
                 cmd.Parameters.AddWithValue("@Age", txtbxStudentAge.Text.Trim())
-                cmd.Parameters.AddWithValue("@BirthPlace", txtbxStudentPOB.Text.Trim())
-                cmd.Parameters.AddWithValue("@MotherTongue", txtbxStudentMotherTongue.Text.Trim())
+                cmd.Parameters.AddWithValue("@BirthPlace", ConvertToProperCase(txtbxStudentPOB.Text.Trim()))
+                cmd.Parameters.AddWithValue("@MotherTongue", ConvertToProperCase(txtbxStudentMotherTongue.Text.Trim()))
                 cmd.Parameters.AddWithValue("@Indigineous", If(RadioButtonStudentIPYES.Checked, "Yes", "No"))
-                cmd.Parameters.AddWithValue("@IndigineousSpecific", txtbbxStudentIPGroup.Text.Trim())
+                cmd.Parameters.AddWithValue("@IndigineousSpecific", ConvertToProperCase(txtbbxStudentIPGroup.Text.Trim()))
                 cmd.Parameters.AddWithValue("@4Ps", If(RadioButtonStudent4PYES.Checked, "Yes", "No"))
                 cmd.Parameters.AddWithValue("@4PsID", txtbx4ps.Text.Trim())
-                cmd.Parameters.AddWithValue("@Religion", txtbxStudentReligion.Text.Trim())
-                cmd.Parameters.AddWithValue("@GuardianName", txtbxGuardianName.Text.Trim())
+                cmd.Parameters.AddWithValue("@Religion", ConvertToProperCase(txtbxStudentReligion.Text.Trim()))
+                cmd.Parameters.AddWithValue("@GuardianName", ConvertToProperCase(txtbxGuardianName.Text.Trim()))
                 cmd.Parameters.AddWithValue("@GuardianContact", txtbxGuardianContactNo.Text.Trim())
                 cmd.Parameters.AddWithValue("@GradeLevel", nudStudentGradeLevel.Value)
                 cmd.Parameters.AddWithValue("@HouseNumber", txtbxStudentHouseNo.Text.Trim())
-                cmd.Parameters.AddWithValue("@Street", txtbxstudentStreet.Text.Trim())
-                cmd.Parameters.AddWithValue("@Barangay", txtbxStudentBarangay.Text.Trim())
-                cmd.Parameters.AddWithValue("@Municipality", txtbxStudentCity.Text.Trim())
-                cmd.Parameters.AddWithValue("@Province", txtbxStudentProvince.Text.Trim())
-                cmd.Parameters.AddWithValue("@Country", txtbxCountry.Text.Trim())
+                cmd.Parameters.AddWithValue("@Street", ConvertToProperCase(txtbxstudentStreet.Text.Trim()))
+                cmd.Parameters.AddWithValue("@Barangay", ConvertToProperCase(txtbxStudentBarangay.Text.Trim()))
+                cmd.Parameters.AddWithValue("@Municipality", ConvertToProperCase(txtbxStudentCity.Text.Trim()))
+                cmd.Parameters.AddWithValue("@Province", ConvertToProperCase(txtbxStudentProvince.Text.Trim()))
+                cmd.Parameters.AddWithValue("@Country", ConvertToProperCase(txtbxCountry.Text.Trim()))
                 cmd.Parameters.AddWithValue("@ZIPCode", txtbxZipCode.Text.Trim())
                 cmd.Parameters.AddWithValue("@StudentID", currentStudentID)
 
@@ -660,6 +797,8 @@ Public Class AdminManageStudents
 
                 If rowsAffected > 0 Then
                     MsgBox("Student updated successfully.", MsgBoxStyle.Information, "Update Success")
+                    ' Clear inputs and re-enable Add after successful update
+                    ClearInputFields()
                     LoadToDGV("SELECT * FROM student", dgvStudents)
                     currentStudentID = 0
                 Else
