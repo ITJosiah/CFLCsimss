@@ -364,80 +364,101 @@ Public Class AdminManageStudents
     End Function
 
     Private Function ValidateInputs() As Boolean
-        ' Check if required fields are filled in sequence
+        Dim emptyFields As New List(Of String)()
 
-        ' 1. First Name (Required)
+        ' Check required fields and collect empty ones
         If String.IsNullOrWhiteSpace(txtbxStudentFirstName.Text) Then
-            MessageBox.Show("Please enter First Name.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            txtbxStudentFirstName.Focus()
-            Return False
+            emptyFields.Add("First Name")
         End If
 
-        ' 2. Last Name (Required)
         If String.IsNullOrWhiteSpace(txtbxStudentSurname.Text) Then
-            MessageBox.Show("Please enter Last Name.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            txtbxStudentSurname.Focus()
-            Return False
+            emptyFields.Add("Last Name")
         End If
 
-        ' 3. Birth Date (Required - validated by control)
-        ' 4. Age (Required)
         If String.IsNullOrWhiteSpace(txtbxStudentAge.Text) Then
-            MessageBox.Show("Please enter a valid Age.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            txtbxStudentAge.Focus()
-            Return False
+            emptyFields.Add("Age")
         End If
 
-        ' 5. Gender (Required)
         If cmbStudenttGender.SelectedIndex = -1 Then
-            MessageBox.Show("Please select Gender.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            cmbStudenttGender.Focus()
-            Return False
+            emptyFields.Add("Sex")
         End If
 
-        ' 6. Grade Level (Required)
         If nudStudentGradeLevel.Value <= 0 Then
-            MessageBox.Show("Please enter a valid Grade Level.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            nudStudentGradeLevel.Focus()
-            Return False
+            emptyFields.Add("Grade Level")
         End If
 
-        ' 7. Birth Place (Required)
         If String.IsNullOrWhiteSpace(txtbxStudentPOB.Text) Then
-            MessageBox.Show("Please enter Birth Place.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            txtbxStudentPOB.Focus()
-            Return False
+            emptyFields.Add("Birth Place")
         End If
 
-        ' 8. Religion (Required)
         If String.IsNullOrWhiteSpace(txtbxStudentReligion.Text) Then
-            MessageBox.Show("Please enter Religion.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            txtbxStudentReligion.Focus()
-            Return False
+            emptyFields.Add("Religion")
         End If
 
-        ' 9. Mother Tongue (Required)
         If String.IsNullOrWhiteSpace(txtbxStudentMotherTongue.Text) Then
-            MessageBox.Show("Please enter Mother Tongue.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            txtbxStudentMotherTongue.Focus()
-            Return False
+            emptyFields.Add("Mother Tongue")
         End If
 
-        ' 10. Guardian Name (Required)
         If String.IsNullOrWhiteSpace(txtbxGuardianName.Text) Then
-            MessageBox.Show("Please enter Guardian Name.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            txtbxGuardianName.Focus()
-            Return False
+            emptyFields.Add("Guardian Name")
         End If
 
-        ' 11. Guardian Contact (Required with specific format)
         If String.IsNullOrWhiteSpace(txtbxGuardianContactNo.Text) Then
-            MessageBox.Show("Please enter Guardian Contact Number.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            txtbxGuardianContactNo.Focus()
+            emptyFields.Add("Guardian Contact Number")
+        End If
+
+        ' Validate Indigineous group if Indigineous is YES
+        If RadioButtonStudentIPYES.Checked AndAlso String.IsNullOrWhiteSpace(txtbbxStudentIPGroup.Text) Then
+            emptyFields.Add("Indigineous Group")
+        End If
+
+        ' Validate 4Ps ID if 4Ps is YES
+        If RadioButtonStudent4PYES.Checked AndAlso String.IsNullOrWhiteSpace(txtbx4ps.Text) Then
+            emptyFields.Add("4Ps ID")
+        End If
+
+        ' Address validation
+        If String.IsNullOrWhiteSpace(txtbxStudentHouseNo.Text) Then
+            emptyFields.Add("House Number")
+        End If
+
+        If String.IsNullOrWhiteSpace(txtbxstudentStreet.Text) Then
+            emptyFields.Add("Street")
+        End If
+
+        If String.IsNullOrWhiteSpace(txtbxStudentBarangay.Text) Then
+            emptyFields.Add("Barangay")
+        End If
+
+        If String.IsNullOrWhiteSpace(txtbxStudentCity.Text) Then
+            emptyFields.Add("Municipality/City")
+        End If
+
+        If String.IsNullOrWhiteSpace(txtbxStudentProvince.Text) Then
+            emptyFields.Add("Province")
+        End If
+
+        If String.IsNullOrWhiteSpace(txtbxCountry.Text) Then
+            emptyFields.Add("Country")
+        End If
+
+        If String.IsNullOrWhiteSpace(txtbxZipCode.Text) Then
+            emptyFields.Add("Zip Code")
+        End If
+
+        ' If there are empty fields, show them all in one message
+        If emptyFields.Count > 0 Then
+            Dim messageText As String = "Please fill in the following required fields:" & Environment.NewLine & Environment.NewLine
+            For Each field As String In emptyFields
+                messageText &= "• " & field & Environment.NewLine
+            Next
+            MessageBox.Show(messageText, "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             Return False
         End If
 
-        ' Validate Guardian Contact format (09XXXXXXXXX - 11 digits)
+        ' Now validate field formats (these will show individual messages as they're format-specific)
+
+        ' Validate Guardian Contact format
         Dim guardianContact As String = txtbxGuardianContactNo.Text.Trim()
         If guardianContact.Length <> 11 Then
             MessageBox.Show("Guardian Contact must be exactly 11 digits (09XXXXXXXXX).", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
@@ -458,29 +479,7 @@ Public Class AdminManageStudents
             Return False
         End If
 
-        ' 12. Validate Indigineous group if Indigineous is YES
-        If RadioButtonStudentIPYES.Checked AndAlso String.IsNullOrWhiteSpace(txtbbxStudentIPGroup.Text) Then
-            MessageBox.Show("Please specify Indigineous Group.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            txtbbxStudentIPGroup.Focus()
-            Return False
-        End If
-
-        ' 13. Validate 4Ps ID if 4Ps is YES
-        If RadioButtonStudent4PYES.Checked AndAlso String.IsNullOrWhiteSpace(txtbx4ps.Text) Then
-            MessageBox.Show("Please enter 4Ps ID.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            txtbx4ps.Focus()
-            Return False
-        End If
-
-        ' 14. Address validation
-
-        ' House Number (Required and numeric)
-        If String.IsNullOrWhiteSpace(txtbxStudentHouseNo.Text) Then
-            MessageBox.Show("Please enter House Number.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            txtbxStudentHouseNo.Focus()
-            Return False
-        End If
-
+        ' Validate House Number is numeric
         Dim houseNum As Integer
         If Not Integer.TryParse(txtbxStudentHouseNo.Text.Trim(), houseNum) Then
             MessageBox.Show("House Number must contain only numbers.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
@@ -488,49 +487,7 @@ Public Class AdminManageStudents
             Return False
         End If
 
-        ' Street (Required)
-        If String.IsNullOrWhiteSpace(txtbxstudentStreet.Text) Then
-            MessageBox.Show("Please enter Street.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            txtbxstudentStreet.Focus()
-            Return False
-        End If
-
-        ' Barangay (Required)
-        If String.IsNullOrWhiteSpace(txtbxStudentBarangay.Text) Then
-            MessageBox.Show("Please enter Barangay.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            txtbxStudentBarangay.Focus()
-            Return False
-        End If
-
-        ' Municipality/City (Required)
-        If String.IsNullOrWhiteSpace(txtbxStudentCity.Text) Then
-            MessageBox.Show("Please enter Municipality/City.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            txtbxStudentCity.Focus()
-            Return False
-        End If
-
-        ' Province (Required)
-        If String.IsNullOrWhiteSpace(txtbxStudentProvince.Text) Then
-            MessageBox.Show("Please enter Province.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            txtbxStudentProvince.Focus()
-            Return False
-        End If
-
-        ' Country (Required)
-        If String.IsNullOrWhiteSpace(txtbxCountry.Text) Then
-            MessageBox.Show("Please enter Country.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            txtbxCountry.Focus()
-            Return False
-        End If
-
-        ' Zip Code (Required)
-        If String.IsNullOrWhiteSpace(txtbxZipCode.Text) Then
-            MessageBox.Show("Please enter Zip Code.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            txtbxZipCode.Focus()
-            Return False
-        End If
-
-        ' Validate Zip Code is numeric and has appropriate length
+        ' Validate Zip Code format
         Dim zipCode As String = txtbxZipCode.Text.Trim()
         If zipCode.Length <> 4 Then
             MessageBox.Show("Zip Code must be exactly 4 digits.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
