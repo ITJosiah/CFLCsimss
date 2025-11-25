@@ -141,52 +141,7 @@ Public Class AdminManageTeacher
         End Try
     End Sub
 
-    Private Sub btnTeaDelete_Click(sender As Object, e As EventArgs) Handles btnTeaDelete.Click
-        ' Check if a teacher is selected
-        If currentTeacherID = 0 Then
-            MessageBox.Show("Please select a teacher to delete.", "Delete Teacher", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-            Return
-        End If
 
-        ' Confirm deletion
-        If MessageBox.Show("Are you sure you want to delete this teacher?", "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) = DialogResult.No Then
-            Return
-        End If
-
-        Try
-            ' Open database connection
-            modDBx.openConn(modDBx.db_name)
-
-            ' Prepare the DELETE SQL statement
-            Dim sql As String = "DELETE FROM teacher WHERE TeacherID = @TeacherID"
-
-            Using cmd As New MySqlCommand(sql, modDBx.conn)
-                cmd.Parameters.AddWithValue("@TeacherID", currentTeacherID)
-                Dim rowsAffected As Integer = cmd.ExecuteNonQuery()
-
-                If rowsAffected > 0 Then
-                    MessageBox.Show("Teacher deleted successfully.", "Delete Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
-                    ' Refresh the DataGridView
-                    LoadToDGV("SELECT * FROM teacher", dgvTeacher)
-                    ' Reset current selection and clear input fields
-                    currentTeacherID = 0
-                    ClearInputFields()
-                Else
-                    MessageBox.Show("No teacher was deleted. Please check your selection.", "Delete Failed", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-                End If
-            End Using
-
-        Catch ex As MySqlException
-            MessageBox.Show("Database Error: " & ex.Message, "Delete Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-        Catch ex As Exception
-            MessageBox.Show("Error deleting teacher: " & ex.Message, "Delete Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-        Finally
-            ' Close connection safely
-            If modDBx.conn IsNot Nothing AndAlso modDBx.conn.State = ConnectionState.Open Then
-                modDBx.conn.Close()
-            End If
-        End Try
-    End Sub
 
     Private Sub btnTeaUpdate_Click(sender As Object, e As EventArgs) Handles btnTeaUpdate.Click
         UpdateTeacher()
