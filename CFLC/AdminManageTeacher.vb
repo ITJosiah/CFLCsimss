@@ -514,18 +514,12 @@ Public Class AdminManageTeacher
         End If
     End Sub
 
-    ' Helper function for safe string retrieval from DataGridView
-    Private Function GetSafeString(cell As DataGridViewCell) As String
-        Return If(cell.Value Is Nothing OrElse IsDBNull(cell.Value), "", cell.Value.ToString())
-    End Function
+End Class
 
-    Private Sub txtbxTeacherZipCode_TextChanged(sender As Object, e As EventArgs) Handles txtbxTeacherZipCode.TextChanged
-    End Sub
-
-    Private Sub txtbxTeacherZipCode_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtbxTeacherZipCode.KeyPress
-        If Not Char.IsDigit(e.KeyChar) AndAlso e.KeyChar <> ControlChars.Back Then
-            e.Handled = True
-        End If
-    End Sub
+Private Sub txtbxTeacherZipCode_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtbxTeacherZipCode.KeyPress
+    If Not Char.IsDigit(e.KeyChar) AndAlso e.KeyChar <> ControlChars.Back Then
+        e.Handled = True
+    End If
+End Sub
 
 End Class
