@@ -30,6 +30,9 @@ Public Class AdminManageStudents
         LoadToDGV("SELECT * FROM student", dgvStudents)
 
         txtbxStudentAge.ReadOnly = True
+
+        ' Ensure Add button is enabled by default
+        btnStudentAdd.Enabled = True
     End Sub
 
     Private Sub InitializeRadioButtons()
@@ -155,6 +158,12 @@ Public Class AdminManageStudents
     End Sub
 
     Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnStudentAdd.Click
+        ' If a row is currently selected, prevent adding and show error
+        If currentStudentID <> 0 Then
+            MessageBox.Show("no", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Return
+        End If
+
         ' Validate required fields FIRST
         If Not ValidateInputs() Then
             Return ' Stop execution if validation fails
@@ -441,7 +450,7 @@ Public Class AdminManageStudents
     End Function
 
     Private Sub ClearInputFields()
-        ' Clear all input fields after successful add
+        ' Clear all input fields after successful add or when un-selecting a row
 
         ' LRN (optional)
         txtbxStudentLRN.Clear()
@@ -480,6 +489,15 @@ Public Class AdminManageStudents
         txtbxStudentProvince.Clear()
         txtbxCountry.Clear()
         txtbxZipCode.Clear()
+
+        ' Reset current student selection
+        currentStudentID = 0
+
+        ' Reset grade level control to default (use helper)
+        ResetNumericControl(nudStudentGradeLevel)
+
+        ' Re-enable Add button so user can create a new record
+        btnStudentAdd.Enabled = True
 
         ' Set focus back to first field
         txtbxStudentFirstName.Focus()
@@ -522,12 +540,30 @@ Public Class AdminManageStudents
 
     ' Update the dgvStudents_CellClick method to populate all fields including new ones
     Private Sub dgvStudents_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvStudents.CellClick
-        If e.RowIndex >= 0 Then
-            Dim row As DataGridViewRow = dgvStudents.Rows(e.RowIndex)
+        If e.RowIndex < 0 Then
+            Return
+        End If
 
-            currentStudentID = CInt(row.Cells(0).Value)
+        Dim row As DataGridViewRow = dgvStudents.Rows(e.RowIndex)
 
-            ' Populate all fields including new ones
+        ' Safely read the StudentID in the clicked row
+        Dim clickedID As Integer = 0
+        If row.Cells.Count > 0 AndAlso row.Cells(0).Value IsNot Nothing AndAlso Not IsDBNull(row.Cells(0).Value) Then
+            Integer.TryParse(row.Cells(0).Value.ToString(), clickedID)
+        End If
+
+        ' If the user clicked the already-selected row, clear selection and inputs
+        If clickedID <> 0 AndAlso clickedID = currentStudentID Then
+            dgvStudents.ClearSelection()
+            currentStudentID = 0
+            ClearInputFields() ' clears age and grade level and re-enables Add
+            Return
+        End If
+
+        ' Otherwise populate fields for the newly selected row
+        If clickedID <> 0 Then
+            currentStudentID = clickedID
+
             txtbxStudentLRN.Text = GetSafeString(row.Cells("LRN"))
             txtbxStudentFirstName.Text = GetSafeString(row.Cells("FirstName"))
             txtStudentMiddleName.Text = GetSafeString(row.Cells("MiddleName"))
@@ -582,6 +618,9 @@ Public Class AdminManageStudents
             txtbxStudentProvince.Text = GetSafeString(row.Cells("Province"))
             txtbxCountry.Text = GetSafeString(row.Cells("Country"))
             txtbxZipCode.Text = GetSafeString(row.Cells("ZIPCode"))
+
+            ' Keep Add button enabled so it's clickable; btnAdd will block adding while updating via currentStudentID check
+            btnStudentAdd.Enabled = True
         End If
     End Sub
 
@@ -600,32 +639,32 @@ Public Class AdminManageStudents
             modDBx.openConn(modDBx.db_name)
 
             Dim sql As String = "UPDATE student SET " &
-                            "LRN = @LRN, " &
-                            "FirstName = @FirstName, " &
-                            "MiddleName = @MiddleName, " &
-                            "LastName = @LastName, " &
-                            "ExtensionName = @ExtensionName, " &
-                            "Gender = @Gender, " &
-                            "Birthdate = @Birthdate, " &
-                            "Age = @Age, " &
-                            "BirthPlace = @BirthPlace, " &
-                            "MotherTongue = @MotherTongue, " &
-                            "Indigineous = @Indigineous, " &
-                            "IndigineousSpecific = @IndigineousSpecific, " &
-                            "4Ps = @4Ps, " &
-                            "4PsID = @4PsID, " &
-                            "Religion = @Religion, " &
-                            "GuardianName = @GuardianName, " &
-                            "GuardianContact = @GuardianContact, " &
-                            "GradeLevel = @GradeLevel, " &
-                            "HouseNumber = @HouseNumber, " &
-                            "Street = @Street, " &
-                            "Barangay = @Barangay, " &
-                            "Municipality = @Municipality, " &
-                            "Province = @Province, " &
-                            "Country = @Country, " &
-                            "ZIPCode = @ZIPCode " &
-                            "WHERE StudentID = @StudentID"
+                        "LRN = @LRN, " &
+                        "FirstName = @FirstName, " &
+                        "MiddleName = @MiddleName, " &
+                        "LastName = @LastName, " &
+                        "ExtensionName = @ExtensionName, " &
+                        "Gender = @Gender, " &
+                        "Birthdate = @Birthdate, " &
+                        "Age = @Age, " &
+                        "BirthPlace = @BirthPlace, " &
+                        "MotherTongue = @MotherTongue, " &
+                        "Indigineous = @Indigineous, " &
+                        "IndigineousSpecific = @IndigineousSpecific, " &
+                        "4Ps = @4Ps, " &
+                        "4PsID = @4PsID, " &
+                        "Religion = @Religion, " &
+                        "GuardianName = @GuardianName, " &
+                        "GuardianContact = @GuardianContact, " &
+                        "GradeLevel = @GradeLevel, " &
+                        "HouseNumber = @HouseNumber, " &
+                        "Street = @Street, " &
+                        "Barangay = @Barangay, " &
+                        "Municipality = @Municipality, " &
+                        "Province = @Province, " &
+                        "Country = @Country, " &
+                        "ZIPCode = @ZIPCode " &
+                        "WHERE StudentID = @StudentID"
 
             Using cmd As New MySqlCommand(sql, modDBx.conn)
                 ' Add all parameters including new fields
@@ -660,6 +699,8 @@ Public Class AdminManageStudents
 
                 If rowsAffected > 0 Then
                     MsgBox("Student updated successfully.", MsgBoxStyle.Information, "Update Success")
+                    ' Clear inputs and re-enable Add after successful update
+                    ClearInputFields()
                     LoadToDGV("SELECT * FROM student", dgvStudents)
                     currentStudentID = 0
                 Else

@@ -14,6 +14,9 @@
             TextBoxTeacherFirstName.Text = row.Cells("FirstName").Value.ToString()
             TextBoxTeacherMiddleName.Text = row.Cells("MiddleName").Value.ToString()
             TextBoxTeacherSurname.Text = row.Cells("LastName").Value.ToString()
+
+            'TextBpxTeacherExtensionName.Text = row.Cells("ExtensionName").Value.ToString()
+
             ComboBoxTeacherGender.Text = row.Cells("Gender").Value.ToString()
 
             ' Birthdate (DateTimePicker)
@@ -24,6 +27,8 @@
             If Not IsDBNull(row.Cells("HireDate").Value) Then
                 ManageTeacherHireDate.Text = CDate(row.Cells("HireDate").Value)
             End If
+
+            'Age'
 
             TextBoxTeacherContactNo.Text = row.Cells("ContactNumber").Value.ToString()
             TextBoxTeacherEmail.Text = row.Cells("Email").Value.ToString()
@@ -56,7 +61,7 @@
         InitializeGenderComboBox()
 
         ' Load students data
-        LoadToDGV("SELECT * FROM student", dgvTeacher)
+        LoadToDGV("SELECT * FROM teacher", dgvTeacher)
 
     End Sub
 
