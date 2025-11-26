@@ -669,12 +669,22 @@ Public Class AdminManageSubjects
                     adapter.Fill(dt)
                 End Using
 
+                ' Ensure grid will generate columns for the DataTable if not already configured
+                dgvSubjectList.AutoGenerateColumns = True
                 dgvSubjectList.DataSource = dt
                 dgvSubjectList.Refresh()
 
-                If dgvSubjectList.ColumnCount > 0 Then
-                    dgvSubjectList.Columns(0).Visible = False ' Hide SubjectID column
-                End If
+                ' Make sure any "id" column (SubjectID) is visible and placed as the first column
+                For Each col As DataGridViewColumn In dgvSubjectList.Columns
+                    Dim checkName As String = If(col.DataPropertyName, "").ToLower()
+                    Dim checkHeader As String = If(col.HeaderText, "").ToLower()
+                    If checkName.Contains("subjectid") OrElse checkName.Contains("id") OrElse checkHeader.Contains("subjectid") OrElse checkHeader.Contains("id") Then
+                        col.Visible = True
+                        col.HeaderText = "SubjectID"
+                        col.DisplayIndex = 0
+                        Exit For
+                    End If
+                Next
 
                 If dt.Rows.Count = 0 Then
                     MessageBox.Show("No subject found matching '" & subjectName & "'.", "Search Result", MessageBoxButtons.OK, MessageBoxIcon.Information)
@@ -703,13 +713,22 @@ Public Class AdminManageSubjects
                 adapter.Fill(dt)
             End Using
 
+            ' Let the grid auto-generate columns from the DataTable (unless you intentionally use designer columns)
+            dgv.AutoGenerateColumns = True
             dgv.DataSource = dt
             dgv.Refresh()
 
-            ' Hide the ID column if it exists
-            If dgv.Columns.Count > 0 AndAlso dgv.Columns(0).Name.ToLower().Contains("id") Then
-                dgv.Columns(0).Visible = False
-            End If
+            ' Ensure any ID-like column (SubjectID) is visible and shown as first column
+            For Each col As DataGridViewColumn In dgv.Columns
+                Dim checkName As String = If(col.DataPropertyName, "").ToLower()
+                Dim checkHeader As String = If(col.HeaderText, "").ToLower()
+                If checkName.Contains("subjectid") OrElse checkName.Contains("id") OrElse checkHeader.Contains("subjectid") OrElse checkHeader.Contains("id") Then
+                    col.Visible = True
+                    col.HeaderText = "SubjectID"
+                    col.DisplayIndex = 0
+                    Exit For
+                End If
+            Next
 
         Catch ex As Exception
             MessageBox.Show("Error loading data: " & ex.Message, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -770,13 +789,13 @@ Public Class AdminManageSubjects
 
     Private Sub StyleSidebarButtons()
         Dim buttons() As Button = {
-            btnManageStudents,
-            btnManageTeachers,
-            btnManageSections,
-            btnManageEnrollments,
-            btnManageSubjects,
-            btnGenerateReports
-        }
+        btnManageStudents,
+        btnManageTeachers,
+        btnManageSections,
+        btnManageEnrollments,
+        btnManageSubjects,
+        btnGenerateReports
+    }
 
         For Each btn As Button In buttons
             btn.BackColor = Color.LightGray
