@@ -468,9 +468,7 @@ Public Class AdminManageSections
             MessageBox.Show(errorMessage.ToString(), "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             Return False
         End If
-        If String.IsNullOrWhiteSpace(txtbxManSecCreatedBy).Text Then
-            errors.Add("• Created By is required")
-        End If
+
         Return True
     End Function
 
