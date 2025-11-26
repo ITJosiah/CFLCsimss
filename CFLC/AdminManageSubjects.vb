@@ -69,7 +69,6 @@ Public Class AdminManageSubjects
         ComboBoxSubjectStatus.Items.Clear() ' CHANGED FROM txtbxManSubStatus
         ComboBoxSubjectStatus.Items.Add("Active")
         ComboBoxSubjectStatus.Items.Add("Inactive")
-        ComboBoxSubjectStatus.Items.Add("Under Review")
     End Sub
 
     Private Sub InitializeRoomTypeComboBox()
