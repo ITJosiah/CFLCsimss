@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class AdminManageSections
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class AdminManageSections
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.pnlSidebar = New System.Windows.Forms.Panel()
         Me.flowButtons = New System.Windows.Forms.FlowLayoutPanel()
@@ -58,7 +58,7 @@ Partial Class AdminManageSections
         Me.cmbStudenttGender = New System.Windows.Forms.ComboBox()
         Me.dtpManSecSchoolYear = New System.Windows.Forms.DateTimePicker()
         Me.lblManSecSchoolYear = New System.Windows.Forms.Label()
-        Me.txtbxSchedule = New System.Windows.Forms.TextBox()
+        Me.txtbxSecSchedule = New System.Windows.Forms.TextBox()
         Me.lblManSecSchedule = New System.Windows.Forms.Label()
         Me.lblManSecCapacity = New System.Windows.Forms.Label()
         Me.lblManSecNoOfStudents = New System.Windows.Forms.Label()
@@ -290,7 +290,7 @@ Partial Class AdminManageSections
         Me.grpSectionInfo.Controls.Add(Me.cmbStudenttGender)
         Me.grpSectionInfo.Controls.Add(Me.dtpManSecSchoolYear)
         Me.grpSectionInfo.Controls.Add(Me.lblManSecSchoolYear)
-        Me.grpSectionInfo.Controls.Add(Me.txtbxSchedule)
+        Me.grpSectionInfo.Controls.Add(Me.txtbxSecSchedule)
         Me.grpSectionInfo.Controls.Add(Me.lblManSecSchedule)
         Me.grpSectionInfo.Controls.Add(Me.lblManSecCapacity)
         Me.grpSectionInfo.Controls.Add(Me.lblManSecNoOfStudents)
@@ -476,12 +476,13 @@ Partial Class AdminManageSections
         Me.lblManSecSchoolYear.TabIndex = 21
         Me.lblManSecSchoolYear.Text = "School Year"
         '
-        'txtbxSchedule
+        'txtbxSecSchedule
         '
-        Me.txtbxSchedule.Location = New System.Drawing.Point(474, 39)
+        Me.txtbxSchedule.Location = New System.Drawing.Point(632, 48)
+        Me.txtbxSchedule.Margin = New System.Windows.Forms.Padding(4)
         Me.txtbxSchedule.MaxLength = 20
         Me.txtbxSchedule.Name = "txtbxSchedule"
-        Me.txtbxSchedule.Size = New System.Drawing.Size(133, 23)
+        Me.txtbxSchedule.Size = New System.Drawing.Size(176, 26)
         Me.txtbxSchedule.TabIndex = 10
         '
         'lblManSecSchedule
@@ -683,7 +684,7 @@ Partial Class AdminManageSections
     Friend WithEvents lblManSecStartDate As Label
     Friend WithEvents lblManSecEndDate As Label
     Friend WithEvents lblManSecSchedule As Label
-    Friend WithEvents txtbxSchedule As TextBox
+    Friend WithEvents txtbxSecSchedule As TextBox
     Friend WithEvents lblManSecGradeLevel As Label
     Friend WithEvents txtbxManSecTeacherID As TextBox
     Friend WithEvents lblManSecTeacherID As Label
