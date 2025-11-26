@@ -6,6 +6,10 @@ Public Class AdminManageSections
     Public Property IsEmbedded As Boolean = False
     Private currentSectionID As Integer = 0
 
+    ' Define the current school year (you might want to make this configurable)
+    Private currentSchoolYearStart As Date = New Date(2025, 8, 1) ' August 2025
+    Private currentSchoolYearEnd As Date = New Date(2026, 5, 31) ' May 2026
+
     Private Sub AdminManageSections_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If Not IsEmbedded Then
             Me.WindowState = FormWindowState.Maximized
@@ -75,7 +79,110 @@ Public Class AdminManageSections
         cbxManSecStatus.DropDownStyle = ComboBoxStyle.DropDownList
         cbxManSecStatus.Items.Add("Active")
         cbxManSecStatus.Items.Add("Inactive")
+        cbxManSecStatus.Enabled = False ' Make it read-only since it's auto-determined
     End Sub
+
+    ' ===== TEACHER ID VALIDATION METHODS =====
+
+    Private Function TeacherIDExists(teacherID As String) As Boolean
+        If String.IsNullOrWhiteSpace(teacherID) Then
+            Return False
+        End If
+
+        Try
+            modDBx.openConn(modDBx.db_name)
+            Dim sql As String = "SELECT COUNT(*) FROM teacher WHERE TeacherID = @TeacherID"
+
+            Using cmd As New MySqlCommand(sql, modDBx.conn)
+                cmd.Parameters.AddWithValue("@TeacherID", CInt(teacherID))
+                Dim count As Integer = Convert.ToInt32(cmd.ExecuteScalar())
+                Return count > 0
+            End Using
+
+        Catch ex As Exception
+            MessageBox.Show("Error checking teacher ID: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Return False
+        Finally
+            If modDBx.conn IsNot Nothing AndAlso modDBx.conn.State = ConnectionState.Open Then
+                modDBx.conn.Close()
+            End If
+        End Try
+    End Function
+
+    ' ===== DATE-BASED STATUS CALCULATION METHODS =====
+
+    Private Function CalculateStatusBasedOnDates(startDate As Date, endDate As Date) As String
+        Dim today As Date = DateTime.Today
+
+        ' If section dates fall within current school year, it's active
+        If startDate <= currentSchoolYearEnd AndAlso endDate >= currentSchoolYearStart Then
+            ' Check if currently within the section's date range
+            If today >= startDate AndAlso today <= endDate Then
+                Return "Active"
+            Else
+                Return "Inactive"
+            End If
+        Else
+            ' Section dates don't overlap with current school year
+            Return "Inactive"
+        End If
+    End Function
+
+    Private Sub AutoSetStatusBasedOnDates()
+        Dim calculatedStatus As String = CalculateStatusBasedOnDates(dtpManSecStartDate.Value, dtpManSecEndDate.Value)
+        cbxManSecStatus.SelectedItem = calculatedStatus
+    End Sub
+
+    ' ===== TEACHER ID EVENT HANDLERS =====
+
+    Private Sub txtbxManSecTeacherID_TextChanged(sender As Object, e As EventArgs) Handles txtbxManSecTeacherID.TextChanged
+        ' Validate Teacher ID as user types (for new sections only)
+        If currentSectionID = 0 AndAlso Not String.IsNullOrWhiteSpace(txtbxManSecTeacherID.Text) Then
+            If Not Integer.TryParse(txtbxManSecTeacherID.Text, Nothing) Then
+                ' Show immediate feedback for invalid format
+                txtbxManSecTeacherID.BackColor = Color.LightPink
+            Else
+                txtbxManSecTeacherID.BackColor = SystemColors.Window
+            End If
+        End If
+    End Sub
+
+    Private Sub txtbxManSecTeacherID_Leave(sender As Object, e As EventArgs) Handles txtbxManSecTeacherID.Leave
+        ' Validate Teacher ID when user leaves the field
+        If Not String.IsNullOrWhiteSpace(txtbxManSecTeacherID.Text) Then
+            If Not Integer.TryParse(txtbxManSecTeacherID.Text, Nothing) Then
+                MessageBox.Show("Teacher ID must be a valid number.", "Invalid Teacher ID", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                txtbxManSecTeacherID.BackColor = Color.LightPink
+                txtbxManSecTeacherID.Focus()
+            ElseIf Not TeacherIDExists(txtbxManSecTeacherID.Text.Trim()) Then
+                MessageBox.Show("Teacher ID does not exist in the system.", "Invalid Teacher ID", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                txtbxManSecTeacherID.BackColor = Color.LightPink
+                txtbxManSecTeacherID.Focus()
+            Else
+                txtbxManSecTeacherID.BackColor = SystemColors.Window
+            End If
+        Else
+            txtbxManSecTeacherID.BackColor = SystemColors.Window
+        End If
+    End Sub
+
+    ' ===== DATE EVENT HANDLERS =====
+
+    Private Sub dtpManSecStartDate_ValueChanged(sender As Object, e As EventArgs) Handles dtpManSecStartDate.ValueChanged
+        ' Auto-update status when dates change (only for new sections)
+        If currentSectionID = 0 Then
+            AutoSetStatusBasedOnDates()
+        End If
+    End Sub
+
+    Private Sub dtpManSecEndDate_ValueChanged(sender As Object, e As EventArgs) Handles dtpManSecEndDate.ValueChanged
+        ' Auto-update status when dates change (only for new sections)
+        If currentSectionID = 0 Then
+            AutoSetStatusBasedOnDates()
+        End If
+    End Sub
+
+    ' ===== MAIN SECTION OPERATIONS =====
 
     Private Sub btnSectionAdd_Click(sender As Object, e As EventArgs) Handles btnSectionAdd.Click
         ' If a row is currently selected, prevent adding and show error
@@ -83,6 +190,9 @@ Public Class AdminManageSections
             MessageBox.Show("Please clear the selection before adding a new section.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Return
         End If
+
+        ' Automatically set status based on dates BEFORE validation
+        AutoSetStatusBasedOnDates()
 
         ' Validate required fields FIRST
         If Not ValidateSectionInputs() Then
@@ -122,7 +232,7 @@ Public Class AdminManageSections
                 End If
 
                 cmd.Parameters.AddWithValue("@RoomNo", SafeString(txtbxManSecRoomNo.Text))
-                cmd.Parameters.AddWithValue("@LBuildingName", SafeString(txtbxManSecBuildingName.Text))
+                cmd.Parameters.AddWithValue("@BuildingName", SafeString(txtbxManSecBuildingName.Text))
 
                 ' Learning Mode
                 Dim learningMode As String = ""
@@ -139,7 +249,6 @@ Public Class AdminManageSections
                 cmd.Parameters.AddWithValue("@ClassType", classType)
 
                 ' School Year, Start Date, End Date
-
                 cmd.Parameters.AddWithValue("@StartDate", dtpManSecStartDate.Value.ToString("yyyy-MM-dd"))
                 cmd.Parameters.AddWithValue("@EndDate", dtpManSecEndDate.Value.ToString("yyyy-MM-dd"))
 
@@ -147,7 +256,7 @@ Public Class AdminManageSections
                 cmd.Parameters.AddWithValue("@Remarks", ConvertToProperCase(SafeString(txtbxManSecRemarks.Text)))
                 cmd.Parameters.AddWithValue("@Schedule", SafeString(txtbxManSchedule.Text))
 
-                ' Status
+                ' Status - Auto-determined based on dates
                 Dim status As String = ""
                 If cbxManSecStatus.SelectedItem IsNot Nothing Then
                     status = cbxManSecStatus.SelectedItem.ToString()
@@ -240,6 +349,26 @@ Public Class AdminManageSections
         If currentSectionID = 0 Then
             MessageBox.Show("No section selected for update.", "Update Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
             Return
+        End If
+
+        ' For existing sections, allow manual status override but show warning if dates don't match
+        Dim calculatedStatus As String = CalculateStatusBasedOnDates(dtpManSecStartDate.Value, dtpManSecEndDate.Value)
+        Dim selectedStatus As String = If(cbxManSecStatus.SelectedItem IsNot Nothing, cbxManSecStatus.SelectedItem.ToString(), "")
+
+        If selectedStatus <> calculatedStatus Then
+            Dim result As DialogResult = MessageBox.Show(
+                "The selected status doesn't match the date range." & vbCrLf &
+                "Calculated status based on dates: " & calculatedStatus & vbCrLf & vbCrLf &
+                "Do you want to keep the manually selected status?" & vbCrLf &
+                "Yes = Keep manual status" & vbCrLf &
+                "No = Use calculated status based on dates",
+                "Status Mismatch",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question)
+
+            If result = DialogResult.No Then
+                cbxManSecStatus.SelectedItem = calculatedStatus
+            End If
         End If
 
         ' Validate required fields FIRST using the same validation as Add
@@ -443,16 +572,23 @@ Public Class AdminManageSections
             errors.Add("• Class Type is required")
         End If
 
-        ' 5. School Year Validation
-
-        ' 6. Status Validation
+        ' 5. Status Validation
         If cbxManSecStatus.SelectedIndex = -1 Then
             errors.Add("• Status is required")
         End If
 
-        ' 7. Date Validation
+        ' 6. Date Validation
         If dtpManSecEndDate.Value <= dtpManSecStartDate.Value Then
             errors.Add("• End Date must be after Start Date")
+        End If
+
+        ' 7. Teacher ID validation (optional but if provided, should be valid)
+        If Not String.IsNullOrWhiteSpace(txtbxManSecTeacherID.Text) Then
+            If Not Integer.TryParse(txtbxManSecTeacherID.Text, Nothing) Then
+                errors.Add("• Teacher ID must be a valid number")
+            ElseIf Not TeacherIDExists(txtbxManSecTeacherID.Text.Trim()) Then
+                errors.Add("• Teacher ID does not exist in the system")
+            End If
         End If
 
         ' 8. Check if there are any validation errors
@@ -508,9 +644,9 @@ Public Class AdminManageSections
         cbxManSecStatus.SelectedIndex = -1
 
         ' School Year and Dates
-
         dtpManSecStartDate.Value = DateTime.Now
         dtpManSecEndDate.Value = DateTime.Now.AddMonths(6) ' Default 6-month duration
+        AutoSetStatusBasedOnDates() ' Calculate status for default dates
 
         ' Remarks and Schedule
         txtbxManSecRemarks.Clear()
@@ -519,6 +655,9 @@ Public Class AdminManageSections
         ' Date and Created By (reset to defaults)
         dtpManSecDateCreated.Value = DateTime.Now
         txtbxManSecCreatedBy.Text = ""
+
+        ' Reset Teacher ID background color
+        txtbxManSecTeacherID.BackColor = SystemColors.Window
 
         ' Reset current section selection
         currentSectionID = 0
@@ -568,7 +707,6 @@ Public Class AdminManageSections
             cmbManSecClassType.Text = GetSafeString(row.Cells("ClassType"))
             cbxManSecStatus.Text = GetSafeString(row.Cells("Status"))
 
-
             If Not IsDBNull(row.Cells("StartDate").Value) Then
                 dtpManSecStartDate.Value = CDate(row.Cells("StartDate").Value)
             End If
@@ -585,6 +723,20 @@ Public Class AdminManageSections
             End If
 
             txtbxManSecCreatedBy.Text = GetSafeString(row.Cells("CreatedBy"))
+
+            ' For existing records, enable manual status override
+            cbxManSecStatus.Enabled = True
+
+            ' Validate Teacher ID if present
+            If Not String.IsNullOrWhiteSpace(txtbxManSecTeacherID.Text) Then
+                If TeacherIDExists(txtbxManSecTeacherID.Text.Trim()) Then
+                    txtbxManSecTeacherID.BackColor = SystemColors.Window
+                Else
+                    txtbxManSecTeacherID.BackColor = Color.LightPink
+                End If
+            Else
+                txtbxManSecTeacherID.BackColor = SystemColors.Window
+            End If
 
             ' Keep Add button enabled
             btnSectionAdd.Enabled = True
