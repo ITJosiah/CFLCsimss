@@ -209,11 +209,11 @@ Public Class AdminManageSections
         Try
             Dim query As String = "INSERT INTO section (" &
                             "SectionName, GradeLevel, TeacherID, RoomNo, LearningMode, " &
-                            "ClassType, BuildingName, StartDate, EndDate, Remarks, " &
+                            "ClassType, SchoolYear, StartDate, EndDate, Remarks, " &
                             "Schedule, Status, CreatedBy, DateCreated" &
                             ") VALUES (" &
                             "@SectionName, @GradeLevel, @TeacherID, @RoomNo, @LearningMode, " &
-                            "@ClassType, @BuildingName, @StartDate, @EndDate, @Remarks, " &
+                            "@ClassType, @SchoolYear, @StartDate, @EndDate, @Remarks, " &
                             "@Schedule, @Status, @CreatedBy, @DateCreated)"
 
             modDBx.openConn(modDBx.db_name)
