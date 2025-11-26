@@ -325,7 +325,7 @@ Partial Class AdminManageSections
         'cmbManSecLearningMode
         '
         Me.cmbManSecLearningMode.FormattingEnabled = True
-        Me.cmbManSecLearningMode.Location = New System.Drawing.Point(477, 40)
+        Me.cmbManSecLearningMode.Location = New System.Drawing.Point(295, 190)
         Me.cmbManSecLearningMode.Name = "cmbManSecLearningMode"
         Me.cmbManSecLearningMode.Size = New System.Drawing.Size(154, 24)
         Me.cmbManSecLearningMode.TabIndex = 34
@@ -341,7 +341,7 @@ Partial Class AdminManageSections
         'lblManSecLearningMode
         '
         Me.lblManSecLearningMode.AutoSize = True
-        Me.lblManSecLearningMode.Location = New System.Drawing.Point(474, 19)
+        Me.lblManSecLearningMode.Location = New System.Drawing.Point(292, 169)
         Me.lblManSecLearningMode.Name = "lblManSecLearningMode"
         Me.lblManSecLearningMode.Size = New System.Drawing.Size(103, 17)
         Me.lblManSecLearningMode.TabIndex = 32
@@ -440,7 +440,7 @@ Partial Class AdminManageSections
         '
         'txtbxManSchedule
         '
-        Me.txtbxManSchedule.Location = New System.Drawing.Point(295, 190)
+        Me.txtbxManSchedule.Location = New System.Drawing.Point(477, 41)
         Me.txtbxManSchedule.MaxLength = 20
         Me.txtbxManSchedule.Name = "txtbxManSchedule"
         Me.txtbxManSchedule.Size = New System.Drawing.Size(133, 23)
@@ -449,7 +449,7 @@ Partial Class AdminManageSections
         'lblManSecSchedule
         '
         Me.lblManSecSchedule.AutoSize = True
-        Me.lblManSecSchedule.Location = New System.Drawing.Point(292, 168)
+        Me.lblManSecSchedule.Location = New System.Drawing.Point(474, 19)
         Me.lblManSecSchedule.Name = "lblManSecSchedule"
         Me.lblManSecSchedule.Size = New System.Drawing.Size(67, 17)
         Me.lblManSecSchedule.TabIndex = 11
