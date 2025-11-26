@@ -947,7 +947,7 @@ Public Class AdminManageSubjects
     End Sub
 
     Private Sub lblManSubCategory_Click(sender As Object, e As EventArgs) Handles lblManSubCategory.Click
-        ' Handle label click if needed
+        ' Handle label click if neededd
     End Sub
 
     Private Sub pnlManSubContent_Paint(sender As Object, e As PaintEventArgs) Handles pnlManSubContent.Paint
