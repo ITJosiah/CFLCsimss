@@ -394,4 +394,52 @@ Public Class AdminManageSections
             End If
         End Try
     End Function
+
+    Private Sub btnSectionDelete_Click(sender As Object, e As EventArgs) Handles btnSectionDelete.Click
+        ' Check if a delete is selected
+        If currentSectionID = 0 Then
+            MessageBox.Show("Please select a section to delete.", "Delete section", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+            Return
+        End If
+
+        ' Confirm deletion
+        If MessageBox.Show("Are you sure you want to delete this section?", "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) = DialogResult.No Then
+            Return
+        End If
+
+        Try
+            ' Open database connection
+            modDBx.openConn(modDBx.db_name)
+
+            ' Prepare the DELETE SQL statement
+            Dim sql As String = "DELETE FROM section WHERE SectionID = @SectionID"
+
+            Using cmd As New MySqlCommand(sql, modDBx.conn)
+                cmd.Parameters.AddWithValue("@SectionID", currentSectionID)
+                Dim rowsAffected As Integer = cmd.ExecuteNonQuery()
+
+                If rowsAffected > 0 Then
+                    MessageBox.Show("Section deleted successfully.", "Delete Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                    ' Refresh the DataGridView
+                    LoadToDGV("SELECT * FROM section", dgvSections)
+                    ' Reset current selection and clear input fields
+                    currentSectionID = 0
+                    ClearInputFields()
+                Else
+                    MessageBox.Show("No section was deleted. Please check your selection.", "Delete Failed", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+                End If
+            End Using
+
+        Catch ex As MySqlException
+            MessageBox.Show("Database Error: " & ex.Message, "Delete Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        Catch ex As Exception
+            MessageBox.Show("Error deleting section: " & ex.Message, "Delete Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        Finally
+            ' Close connection safely
+            If modDBx.conn IsNot Nothing AndAlso modDBx.conn.State = ConnectionState.Open Then
+                modDBx.conn.Close()
+            End If
+        End Try
+    End Sub
+
 End Class
