@@ -125,6 +125,7 @@ Public Class AdminManageSections
                 End If
 
                 cmd.Parameters.AddWithValue("@RoomNo", SafeString(txtbxManSecRoomNo.Text))
+                cmd.Parameters.AddWithValue("@LBuildingName", SafeString(txtbxManSecBuildingName.Text))
 
                 ' Learning Mode
                 Dim learningMode As String = ""
@@ -141,7 +142,7 @@ Public Class AdminManageSections
                 cmd.Parameters.AddWithValue("@ClassType", classType)
 
                 ' School Year, Start Date, End Date
-                cmd.Parameters.AddWithValue("@SchoolYear", SafeString(txtbxManSecSchoolYear.Text))
+
                 cmd.Parameters.AddWithValue("@StartDate", dtpManSecStartDate.Value.ToString("yyyy-MM-dd"))
                 cmd.Parameters.AddWithValue("@EndDate", dtpManSecEndDate.Value.ToString("yyyy-MM-dd"))
 
@@ -271,7 +272,7 @@ Public Class AdminManageSections
                 "RoomNo = @RoomNo, " &
                 "LearningMode = @LearningMode, " &
                 "ClassType = @ClassType, " &
-                "SchoolYear = @SchoolYear, " &
+                "BuildingName = @BuildingName, " &
                 "StartDate = @StartDate, " &
                 "EndDate = @EndDate, " &
                 "Remarks = @Remarks, " &
@@ -293,6 +294,7 @@ Public Class AdminManageSections
                 End If
 
                 cmd.Parameters.AddWithValue("@RoomNo", SafeString(txtbxManSecRoomNo.Text))
+                cmd.Parameters.AddWithValue("@BuildingName", (txtbxManSecBuildingName.Text))
 
                 ' Learning Mode
                 Dim learningMode As String = ""
@@ -394,10 +396,11 @@ Public Class AdminManageSections
                         If Convert.ToInt32(reader("GradeLevel")) <> nudManSecGradeLevel.Value Then Return True
                         If GetSafeStringFromDB(reader("TeacherID")) <> txtbxManSecTeacherID.Text.Trim() Then Return True
                         If GetSafeStringFromDB(reader("RoomNo")) <> txtbxManSecRoomNo.Text.Trim() Then Return True
+                        If GetSafeStringFromDB(reader("BuildingName")) <> txtbxManSecBuildingName.Text.Trim() Then Return True
                         If GetSafeStringFromDB(reader("LearningMode")) <> cmbManSecLearningMode.Text.Trim() Then Return True
                         If GetSafeStringFromDB(reader("ClassType")) <> cmbManSecClassType.Text.Trim() Then Return True
                         If GetSafeStringFromDB(reader("Status")) <> cbxManSecStatus.Text.Trim() Then Return True
-                        If GetSafeStringFromDB(reader("SchoolYear")) <> txtbxManSecSchoolYear.Text.Trim() Then Return True
+
                         If Convert.ToDateTime(reader("StartDate")).ToString("yyyy-MM-dd") <> dtpManSecStartDate.Value.ToString("yyyy-MM-dd") Then Return True
                         If Convert.ToDateTime(reader("EndDate")).ToString("yyyy-MM-dd") <> dtpManSecEndDate.Value.ToString("yyyy-MM-dd") Then Return True
                         If GetSafeStringFromDB(reader("Remarks")) <> txtbxManSecRemarks.Text.Trim() Then Return True
@@ -502,12 +505,13 @@ Public Class AdminManageSections
         nudManSecGradeLevel.Value = 1
         txtbxManSecTeacherID.Clear()
         txtbxManSecRoomNo.Clear()
+        txtbxManSecBuildingName.Clear()
         cmbManSecLearningMode.SelectedIndex = -1
         cmbManSecClassType.SelectedIndex = -1
         cbxManSecStatus.SelectedIndex = -1
 
         ' School Year and Dates
-        txtbxManSecSchoolYear.Clear()
+
         dtpManSecStartDate.Value = DateTime.Now
         dtpManSecEndDate.Value = DateTime.Now.AddMonths(6) ' Default 6-month duration
 
@@ -562,10 +566,11 @@ Public Class AdminManageSections
 
             txtbxManSecTeacherID.Text = GetSafeString(row.Cells("TeacherID"))
             txtbxManSecRoomNo.Text = GetSafeString(row.Cells("RoomNo"))
+            txtbxManSecBuildingName.Text = GetSafeString(row.Cells("BuildingName"))
             cmbManSecLearningMode.Text = GetSafeString(row.Cells("LearningMode"))
             cmbManSecClassType.Text = GetSafeString(row.Cells("ClassType"))
             cbxManSecStatus.Text = GetSafeString(row.Cells("Status"))
-            txtbxManSecSchoolYear.Text = GetSafeString(row.Cells("SchoolYear"))
+
 
             If Not IsDBNull(row.Cells("StartDate").Value) Then
                 dtpManSecStartDate.Value = CDate(row.Cells("StartDate").Value)
