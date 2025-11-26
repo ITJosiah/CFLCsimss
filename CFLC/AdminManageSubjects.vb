@@ -12,6 +12,12 @@ Public Class AdminManageSubjects
         cmbSubjectCategory.Items.Add("Elective")
         cmbSubjectCategory.Items.Add("Special")
 
+        cbxManSubRoomType.Items.Clear()
+        cbxManSubRoomType.Items.Add("Lecture")
+        cbxManSubRoomType.Items.Add("Laboratory")
+        cbxManSubRoomType.Items.Add("Lecture/Laboratory")
+
+
         ' Make category and room type read-only (non-editable by user)
         cmbSubjectCategory.DropDownStyle = ComboBoxStyle.DropDownList
         cmbSubjectCategory.Enabled = True
@@ -374,4 +380,15 @@ Public Class AdminManageSubjects
         End If
     End Sub
 
+    Private Sub flowButtons_Paint(sender As Object, e As PaintEventArgs) Handles flowButtons.Paint
+
+    End Sub
+
+    Private Sub btnLogout_Click(sender As Object, e As EventArgs) Handles btnLogout.Click
+
+    End Sub
+
+    Private Sub cbxManSubRoomType_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbxManSubRoomType.SelectedIndexChanged
+
+    End Sub
 End Class
