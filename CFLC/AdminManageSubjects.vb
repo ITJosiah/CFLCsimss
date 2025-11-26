@@ -18,7 +18,6 @@ Public Class AdminManageSubjects
             pnlManSubContent.Dock = DockStyle.Fill
         End If
         nudManSubGradeLevel.Maximum = 6
-        nudManSubQuarter.Maximum = 4
 
         ' Initialize Category ComboBox
         InitializeCategoryComboBox()
@@ -209,7 +208,6 @@ Public Class AdminManageSubjects
 
                 ' Grade Level and Quarter
                 cmd.Parameters.AddWithValue("@GradeLevel", nudManSubGradeLevel.Value)
-                cmd.Parameters.AddWithValue("@Quarter", nudManSubQuarter.Value)
 
                 ' Room Type
                 Dim roomType As String = ""
@@ -230,7 +228,6 @@ Public Class AdminManageSubjects
                 cmd.Parameters.AddWithValue("@Status", status)
 
                 ' Curriculum Information
-                cmd.Parameters.AddWithValue("@CurriculumYear", SafeString(txtbxManSubCurriculumYear.Text))
                 cmd.Parameters.AddWithValue("@DateCreated", dtpManSubDateCreated.Value.ToString("yyyy-MM-dd"))
                 cmd.Parameters.AddWithValue("@CreatedBy", SafeString(txtbxManSubCreatedBy.Text))
 
@@ -350,12 +347,10 @@ Public Class AdminManageSubjects
     "Description = @Description, " &
     "SkillFocus = @SkillFocus, " &
     "GradeLevel = @GradeLevel, " &
-    "Quarter = @Quarter, " &
     "RoomType = @RoomType, " &
     "LearningMaterials = @LearningMaterials, " &
     "Schedule = @Schedule, " &
     "Status = @Status, " &
-    "CurriculumYear = @CurriculumYear, " &
     "TeacherID = @TeacherID " &
     "WHERE SubjectID = @SubjectID"
 
@@ -375,7 +370,6 @@ Public Class AdminManageSubjects
 
                 ' Grade Level and Quarter
                 cmd.Parameters.AddWithValue("@GradeLevel", nudManSubGradeLevel.Value)
-                cmd.Parameters.AddWithValue("@Quarter", nudManSubQuarter.Value)
 
                 ' Room Type
                 Dim roomType As String = ""
@@ -396,7 +390,6 @@ Public Class AdminManageSubjects
                 cmd.Parameters.AddWithValue("@Status", status)
 
                 ' Curriculum Information
-                cmd.Parameters.AddWithValue("@CurriculumYear", SafeString(txtbxManSubCurriculumYear.Text))
 
                 cmd.Parameters.AddWithValue("@SubjectID", currentSubjectID)
 
@@ -473,12 +466,10 @@ Public Class AdminManageSubjects
                         If GetSafeStringFromDB(reader("Description")) <> txtbxManSubDescription.Text.Trim() Then Return True
                         If GetSafeStringFromDB(reader("SkillFocus")) <> txtbxManSubSkillFocus.Text.Trim() Then Return True
                         If Convert.ToInt32(reader("GradeLevel")) <> nudManSubGradeLevel.Value Then Return True
-                        If Convert.ToInt32(reader("Quarter")) <> nudManSubQuarter.Value Then Return True
                         If GetSafeStringFromDB(reader("RoomType")) <> cbxManSubRoomType.Text.Trim() Then Return True
                         If GetSafeStringFromDB(reader("LearningMaterials")) <> txtbxManSubLearningMaterials.Text.Trim() Then Return True
                         If GetSafeStringFromDB(reader("Schedule")) <> txtbxManSubSchedule.Text.Trim() Then Return True
                         If GetSafeStringFromDB(reader("Status")) <> ComboBoxSubjectStatus.Text.Trim() Then Return True ' CHANGED
-                        If GetSafeStringFromDB(reader("CurriculumYear")) <> txtbxManSubCurriculumYear.Text.Trim() Then Return True
                         If GetSafeStringFromDB(reader("TeacherID")) <> txtbxManSubTeacherID.Text.Trim() Then Return True
                     End If
                 End Using
@@ -519,10 +510,6 @@ Public Class AdminManageSubjects
             errors.Add("• Grade Level must be between 1 and 12")
         End If
 
-        If nudManSubQuarter.Value < 1 Or nudManSubQuarter.Value > 4 Then
-            errors.Add("• Quarter must be between 1 and 4")
-        End If
-
         ' 3. Room Type Validation
         If cbxManSubRoomType.SelectedIndex = -1 Then
             errors.Add("• Room Type is required")
@@ -532,17 +519,6 @@ Public Class AdminManageSubjects
         ' 4. Status is now automatically set based on Teacher ID
 
         ' 5. Curriculum Year Validation
-        If String.IsNullOrWhiteSpace(txtbxManSubCurriculumYear.Text) Then
-            errors.Add("• Curriculum Year is required")
-        Else
-            Dim curriculumYear As String = txtbxManSubCurriculumYear.Text.Trim()
-            If curriculumYear.Length <> 9 OrElse Not curriculumYear.Contains("-") Then
-                errors.Add("• Curriculum Year must be in format: YYYY-YYYY (e.g., 2023-2024)")
-            ElseIf Not Integer.TryParse(curriculumYear.Substring(0, 4), Nothing) OrElse
-                   Not Integer.TryParse(curriculumYear.Substring(5, 4), Nothing) Then
-                errors.Add("• Curriculum Year must contain valid years")
-            End If
-        End If
 
         ' 6. Teacher ID validation (optional but if provided, should be valid)
         If Not String.IsNullOrWhiteSpace(txtbxManSubTeacherID.Text) Then
@@ -604,7 +580,6 @@ Public Class AdminManageSubjects
 
         ' Grade Level and Quarter
         nudManSubGradeLevel.Value = 0
-        nudManSubQuarter.Value = 0
 
         ' Room Type and Learning Materials
         cbxManSubRoomType.SelectedIndex = -1
@@ -613,7 +588,6 @@ Public Class AdminManageSubjects
 
         ' Status and Curriculum - CHANGED TO COMBOBOX
         ComboBoxSubjectStatus.SelectedIndex = -1 ' CHANGED FROM txtbxManSubStatus
-        txtbxManSubCurriculumYear.Clear()
 
         ' Date and Created By (reset to defaults)
         dtpManSubDateCreated.Value = DateTime.Now
@@ -666,15 +640,11 @@ Public Class AdminManageSubjects
                 nudManSubGradeLevel.Value = Convert.ToDecimal(row.Cells("GradeLevel").Value)
             End If
 
-            If Not IsDBNull(row.Cells("Quarter").Value) Then
-                nudManSubQuarter.Value = Convert.ToDecimal(row.Cells("Quarter").Value)
-            End If
 
             cbxManSubRoomType.Text = GetSafeString(row.Cells("RoomType"))
             txtbxManSubLearningMaterials.Text = GetSafeString(row.Cells("LearningMaterials"))
             txtbxManSubSchedule.Text = GetSafeString(row.Cells("Schedule"))
             ComboBoxSubjectStatus.Text = GetSafeString(row.Cells("Status")) ' CHANGED
-            txtbxManSubCurriculumYear.Text = GetSafeString(row.Cells("CurriculumYear"))
 
             If Not IsDBNull(row.Cells("DateCreated").Value) Then
                 dtpManSubDateCreated.Value = CDate(row.Cells("DateCreated").Value)
