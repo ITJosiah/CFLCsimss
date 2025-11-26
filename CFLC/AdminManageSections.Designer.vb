@@ -65,7 +65,6 @@ Partial Class AdminManageSections
         Me.txtbxManSecSectionName = New System.Windows.Forms.TextBox()
         Me.lblManSecSectionName = New System.Windows.Forms.Label()
         Me.lblSectionsList = New System.Windows.Forms.Label()
-        Me.btnSectionSearch = New System.Windows.Forms.Button()
         Me.picWatermark = New System.Windows.Forms.PictureBox()
         Me.cbxManSecStatus = New System.Windows.Forms.ComboBox()
         Me.txtbxManSecSchoolYear = New System.Windows.Forms.TextBox()
@@ -190,7 +189,6 @@ Partial Class AdminManageSections
         Me.pnlManSecContent.Controls.Add(Me.dgvSections)
         Me.pnlManSecContent.Controls.Add(Me.grpSectionInfo)
         Me.pnlManSecContent.Controls.Add(Me.lblSectionsList)
-        Me.pnlManSecContent.Controls.Add(Me.btnSectionSearch)
         Me.pnlManSecContent.Controls.Add(Me.picWatermark)
         Me.pnlManSecContent.Location = New System.Drawing.Point(300, 1)
         Me.pnlManSecContent.Name = "pnlManSecContent"
@@ -202,7 +200,7 @@ Partial Class AdminManageSections
         '
         Me.TextBoxStudentSearch.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.TextBoxStudentSearch.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBoxStudentSearch.Location = New System.Drawing.Point(362, 590)
+        Me.TextBoxStudentSearch.Location = New System.Drawing.Point(469, 590)
         Me.TextBoxStudentSearch.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.TextBoxStudentSearch.MaxLength = 50
         Me.TextBoxStudentSearch.Name = "TextBoxStudentSearch"
@@ -530,16 +528,6 @@ Partial Class AdminManageSections
         Me.lblSectionsList.TabIndex = 2
         Me.lblSectionsList.Text = "Sections List"
         '
-        'btnSectionSearch
-        '
-        Me.btnSectionSearch.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnSectionSearch.Location = New System.Drawing.Point(569, 585)
-        Me.btnSectionSearch.Name = "btnSectionSearch"
-        Me.btnSectionSearch.Size = New System.Drawing.Size(90, 35)
-        Me.btnSectionSearch.TabIndex = 1
-        Me.btnSectionSearch.Text = "Search"
-        Me.btnSectionSearch.UseVisualStyleBackColor = True
-        '
         'picWatermark
         '
         Me.picWatermark.Anchor = System.Windows.Forms.AnchorStyles.None
@@ -621,7 +609,6 @@ Partial Class AdminManageSections
     Friend WithEvents txtbxManSecSectionName As TextBox
     Friend WithEvents lblManSecSectionName As Label
     Friend WithEvents lblSectionsList As Label
-    Friend WithEvents btnSectionSearch As Button
     Friend WithEvents picWatermark As PictureBox
     Friend WithEvents dtpManSecEndDate As DateTimePicker
     Friend WithEvents dtpManSecStartDate As DateTimePicker
