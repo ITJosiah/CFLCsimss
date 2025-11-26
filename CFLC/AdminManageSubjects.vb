@@ -351,7 +351,9 @@ Public Class AdminManageSubjects
     "LearningMaterials = @LearningMaterials, " &
     "Schedule = @Schedule, " &
     "Status = @Status, " &
-    "TeacherID = @TeacherID " &
+    "TeacherID = @TeacherID, " &
+    "StartDate = @StartDate, " &
+    "EndDate = @EndDate " &
     "WHERE SubjectID = @SubjectID"
 
             Using cmd As New MySqlCommand(Sql, modDBx.conn)
@@ -370,6 +372,8 @@ Public Class AdminManageSubjects
 
                 ' Grade Level and Quarter
                 cmd.Parameters.AddWithValue("@GradeLevel", nudManSubGradeLevel.Value)
+                cmd.Parameters.AddWithValue("@StartDate", dtpManSubStartDate.Value.Date)
+                cmd.Parameters.AddWithValue("@EndDate", dtpManSubEndDate.Value.Date)
 
                 ' Room Type
                 Dim roomType As String = ""
@@ -471,6 +475,21 @@ Public Class AdminManageSubjects
                         If GetSafeStringFromDB(reader("Schedule")) <> txtbxManSubSchedule.Text.Trim() Then Return True
                         If GetSafeStringFromDB(reader("Status")) <> ComboBoxSubjectStatus.Text.Trim() Then Return True ' CHANGED
                         If GetSafeStringFromDB(reader("TeacherID")) <> txtbxManSubTeacherID.Text.Trim() Then Return True
+                        If Not IsDBNull(reader("StartDate")) Then
+                            Dim dbDate As DateTime = Convert.ToDateTime(reader("StartDate"))
+                            If dbDate.Date <> dtpManSubStartDate.Value.Date Then Return True
+                        Else
+                            ' If DB is null but picker has a value, treat as change
+                            If dtpManSubStartDate.Value <> Date.MinValue Then Return True
+                        End If
+
+                        If Not IsDBNull(reader("EndDate")) Then
+                            Dim dbDate As DateTime = Convert.ToDateTime(reader("EndDate"))
+                            If dbDate.Date <> dtpManSubEndDate.Value.Date Then Return True
+                        Else
+                            If dtpManSubEndDate.Value <> Date.MinValue Then Return True
+                        End If
+
                     End If
                 End Using
             End Using

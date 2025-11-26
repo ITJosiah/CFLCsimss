@@ -41,7 +41,6 @@ Partial Class AdminManageSubjects
         Me.txtbxManSubTeacherID = New System.Windows.Forms.TextBox()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.ComboBoxSubjectStatus = New System.Windows.Forms.ComboBox()
-        Me.txtbxManSubCurriculumYear = New System.Windows.Forms.TextBox()
         Me.cbxManSubRoomType = New System.Windows.Forms.ComboBox()
         Me.txtbxManSubSubjectName = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -57,26 +56,26 @@ Partial Class AdminManageSubjects
         Me.lblManSubCreatedBy = New System.Windows.Forms.Label()
         Me.nudManSubGradeLevel = New System.Windows.Forms.NumericUpDown()
         Me.lblManSubStatus = New System.Windows.Forms.Label()
-        Me.nudManSubQuarter = New System.Windows.Forms.NumericUpDown()
         Me.cmbSubjectCategory = New System.Windows.Forms.ComboBox()
         Me.txtbxManSubSchedule = New System.Windows.Forms.TextBox()
         Me.lblManSubSchedule = New System.Windows.Forms.Label()
         Me.lblManSubCategory = New System.Windows.Forms.Label()
-        Me.lblManSubQuarter = New System.Windows.Forms.Label()
-        Me.lblManSubCurriculumYear = New System.Windows.Forms.Label()
         Me.lblManSubRoomType = New System.Windows.Forms.Label()
         Me.lblManSubGradeLevel = New System.Windows.Forms.Label()
         Me.txtbxManSubSubjectCode = New System.Windows.Forms.TextBox()
         Me.lblManSubSubjectCode = New System.Windows.Forms.Label()
         Me.lblSubjectList = New System.Windows.Forms.Label()
         Me.picWatermark = New System.Windows.Forms.PictureBox()
+        Me.dtpManSubStartDate = New System.Windows.Forms.DateTimePicker()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.dtpManSubEndDate = New System.Windows.Forms.DateTimePicker()
+        Me.Enddate = New System.Windows.Forms.Label()
         Me.pnlSidebar.SuspendLayout()
         Me.flowButtons.SuspendLayout()
         Me.pnlManSubContent.SuspendLayout()
         CType(Me.dgvSubjectList, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpSubjectInformation.SuspendLayout()
         CType(Me.nudManSubGradeLevel, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.nudManSubQuarter, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.picWatermark, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -263,10 +262,13 @@ Partial Class AdminManageSubjects
         Me.grpSubjectInformation.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.grpSubjectInformation.BackColor = System.Drawing.Color.Gainsboro
+        Me.grpSubjectInformation.Controls.Add(Me.dtpManSubEndDate)
+        Me.grpSubjectInformation.Controls.Add(Me.Enddate)
+        Me.grpSubjectInformation.Controls.Add(Me.dtpManSubStartDate)
+        Me.grpSubjectInformation.Controls.Add(Me.Label3)
         Me.grpSubjectInformation.Controls.Add(Me.txtbxManSubTeacherID)
         Me.grpSubjectInformation.Controls.Add(Me.Label2)
         Me.grpSubjectInformation.Controls.Add(Me.ComboBoxSubjectStatus)
-        Me.grpSubjectInformation.Controls.Add(Me.txtbxManSubCurriculumYear)
         Me.grpSubjectInformation.Controls.Add(Me.cbxManSubRoomType)
         Me.grpSubjectInformation.Controls.Add(Me.txtbxManSubSubjectName)
         Me.grpSubjectInformation.Controls.Add(Me.Label1)
@@ -282,13 +284,10 @@ Partial Class AdminManageSubjects
         Me.grpSubjectInformation.Controls.Add(Me.lblManSubCreatedBy)
         Me.grpSubjectInformation.Controls.Add(Me.nudManSubGradeLevel)
         Me.grpSubjectInformation.Controls.Add(Me.lblManSubStatus)
-        Me.grpSubjectInformation.Controls.Add(Me.nudManSubQuarter)
         Me.grpSubjectInformation.Controls.Add(Me.cmbSubjectCategory)
         Me.grpSubjectInformation.Controls.Add(Me.txtbxManSubSchedule)
         Me.grpSubjectInformation.Controls.Add(Me.lblManSubSchedule)
         Me.grpSubjectInformation.Controls.Add(Me.lblManSubCategory)
-        Me.grpSubjectInformation.Controls.Add(Me.lblManSubQuarter)
-        Me.grpSubjectInformation.Controls.Add(Me.lblManSubCurriculumYear)
         Me.grpSubjectInformation.Controls.Add(Me.lblManSubRoomType)
         Me.grpSubjectInformation.Controls.Add(Me.lblManSubGradeLevel)
         Me.grpSubjectInformation.Controls.Add(Me.txtbxManSubSubjectCode)
@@ -322,18 +321,11 @@ Partial Class AdminManageSubjects
         Me.ComboBoxSubjectStatus.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ComboBoxSubjectStatus.FormattingEnabled = True
         Me.ComboBoxSubjectStatus.Items.AddRange(New Object() {"Male", "Female"})
-        Me.ComboBoxSubjectStatus.Location = New System.Drawing.Point(491, 82)
+        Me.ComboBoxSubjectStatus.Location = New System.Drawing.Point(367, 85)
         Me.ComboBoxSubjectStatus.Margin = New System.Windows.Forms.Padding(2)
         Me.ComboBoxSubjectStatus.Name = "ComboBoxSubjectStatus"
         Me.ComboBoxSubjectStatus.Size = New System.Drawing.Size(84, 24)
         Me.ComboBoxSubjectStatus.TabIndex = 44
-        '
-        'txtbxManSubCurriculumYear
-        '
-        Me.txtbxManSubCurriculumYear.Location = New System.Drawing.Point(491, 133)
-        Me.txtbxManSubCurriculumYear.Name = "txtbxManSubCurriculumYear"
-        Me.txtbxManSubCurriculumYear.Size = New System.Drawing.Size(136, 23)
-        Me.txtbxManSubCurriculumYear.TabIndex = 39
         '
         'cbxManSubRoomType
         '
@@ -453,18 +445,11 @@ Partial Class AdminManageSubjects
         'lblManSubStatus
         '
         Me.lblManSubStatus.AutoSize = True
-        Me.lblManSubStatus.Location = New System.Drawing.Point(491, 64)
+        Me.lblManSubStatus.Location = New System.Drawing.Point(381, 67)
         Me.lblManSubStatus.Name = "lblManSubStatus"
         Me.lblManSubStatus.Size = New System.Drawing.Size(48, 17)
         Me.lblManSubStatus.TabIndex = 26
         Me.lblManSubStatus.Text = "Status"
-        '
-        'nudManSubQuarter
-        '
-        Me.nudManSubQuarter.Location = New System.Drawing.Point(383, 84)
-        Me.nudManSubQuarter.Name = "nudManSubQuarter"
-        Me.nudManSubQuarter.Size = New System.Drawing.Size(35, 23)
-        Me.nudManSubQuarter.TabIndex = 24
         '
         'cmbSubjectCategory
         '
@@ -498,24 +483,6 @@ Partial Class AdminManageSubjects
         Me.lblManSubCategory.Size = New System.Drawing.Size(65, 17)
         Me.lblManSubCategory.TabIndex = 19
         Me.lblManSubCategory.Text = "Category"
-        '
-        'lblManSubQuarter
-        '
-        Me.lblManSubQuarter.AutoSize = True
-        Me.lblManSubQuarter.Location = New System.Drawing.Point(377, 67)
-        Me.lblManSubQuarter.Name = "lblManSubQuarter"
-        Me.lblManSubQuarter.Size = New System.Drawing.Size(57, 17)
-        Me.lblManSubQuarter.TabIndex = 17
-        Me.lblManSubQuarter.Text = "Quarter"
-        '
-        'lblManSubCurriculumYear
-        '
-        Me.lblManSubCurriculumYear.AutoSize = True
-        Me.lblManSubCurriculumYear.Location = New System.Drawing.Point(488, 114)
-        Me.lblManSubCurriculumYear.Name = "lblManSubCurriculumYear"
-        Me.lblManSubCurriculumYear.Size = New System.Drawing.Size(109, 17)
-        Me.lblManSubCurriculumYear.TabIndex = 15
-        Me.lblManSubCurriculumYear.Text = "Curriculum Year"
         '
         'lblManSubRoomType
         '
@@ -573,6 +540,40 @@ Partial Class AdminManageSubjects
         Me.picWatermark.TabIndex = 5
         Me.picWatermark.TabStop = False
         '
+        'dtpManSubStartDate
+        '
+        Me.dtpManSubStartDate.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
+        Me.dtpManSubStartDate.Location = New System.Drawing.Point(491, 87)
+        Me.dtpManSubStartDate.Name = "dtpManSubStartDate"
+        Me.dtpManSubStartDate.Size = New System.Drawing.Size(103, 23)
+        Me.dtpManSubStartDate.TabIndex = 48
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Location = New System.Drawing.Point(488, 67)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(72, 17)
+        Me.Label3.TabIndex = 47
+        Me.Label3.Text = "Start Date"
+        '
+        'dtpManSubEndDate
+        '
+        Me.dtpManSubEndDate.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
+        Me.dtpManSubEndDate.Location = New System.Drawing.Point(491, 133)
+        Me.dtpManSubEndDate.Name = "dtpManSubEndDate"
+        Me.dtpManSubEndDate.Size = New System.Drawing.Size(103, 23)
+        Me.dtpManSubEndDate.TabIndex = 50
+        '
+        'Enddate
+        '
+        Me.Enddate.AutoSize = True
+        Me.Enddate.Location = New System.Drawing.Point(488, 113)
+        Me.Enddate.Name = "Enddate"
+        Me.Enddate.Size = New System.Drawing.Size(67, 17)
+        Me.Enddate.TabIndex = 49
+        Me.Enddate.Text = "End Date"
+        '
         'AdminManageSubjects
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -590,7 +591,6 @@ Partial Class AdminManageSubjects
         Me.grpSubjectInformation.ResumeLayout(False)
         Me.grpSubjectInformation.PerformLayout()
         CType(Me.nudManSubGradeLevel, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.nudManSubQuarter, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.picWatermark, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
@@ -615,13 +615,10 @@ Partial Class AdminManageSubjects
     Friend WithEvents lblManSubSkillFocus As Label
     Friend WithEvents nudManSubGradeLevel As NumericUpDown
     Friend WithEvents lblManSubStatus As Label
-    Friend WithEvents nudManSubQuarter As NumericUpDown
     Friend WithEvents cmbSubjectCategory As ComboBox
     Friend WithEvents txtbxManSubSchedule As TextBox
     Friend WithEvents lblManSubSchedule As Label
     Friend WithEvents lblManSubCategory As Label
-    Friend WithEvents lblManSubQuarter As Label
-    Friend WithEvents lblManSubCurriculumYear As Label
     Friend WithEvents lblManSubRoomType As Label
     Friend WithEvents lblManSubGradeLevel As Label
     Friend WithEvents txtbxManSubSubjectCode As TextBox
@@ -640,8 +637,11 @@ Partial Class AdminManageSubjects
     Friend WithEvents txtbxManSubSubjectName As TextBox
     Friend WithEvents Label1 As Label
     Friend WithEvents cbxManSubRoomType As ComboBox
-    Friend WithEvents txtbxManSubCurriculumYear As TextBox
     Friend WithEvents ComboBoxSubjectStatus As ComboBox
     Friend WithEvents txtbxManSubTeacherID As TextBox
     Friend WithEvents Label2 As Label
+    Friend WithEvents dtpManSubEndDate As DateTimePicker
+    Friend WithEvents Enddate As Label
+    Friend WithEvents dtpManSubStartDate As DateTimePicker
+    Friend WithEvents Label3 As Label
 End Class
