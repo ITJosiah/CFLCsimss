@@ -59,7 +59,7 @@ Partial Class AdminManageSections
         Me.txtbxManSecStatus = New System.Windows.Forms.TextBox()
         Me.dtpManSecSchoolYear = New System.Windows.Forms.DateTimePicker()
         Me.lblManSecSchoolYear = New System.Windows.Forms.Label()
-        Me.txtbxSchedule = New System.Windows.Forms.TextBox()
+        Me.txtbxSecSchedule = New System.Windows.Forms.TextBox()
         Me.lblManSecSchedule = New System.Windows.Forms.Label()
         Me.lblManSecCapacity = New System.Windows.Forms.Label()
         Me.lblManSecNoOfStudents = New System.Windows.Forms.Label()
@@ -296,7 +296,7 @@ Partial Class AdminManageSections
         Me.grpSectionInfo.Controls.Add(Me.txtbxManSecStatus)
         Me.grpSectionInfo.Controls.Add(Me.dtpManSecSchoolYear)
         Me.grpSectionInfo.Controls.Add(Me.lblManSecSchoolYear)
-        Me.grpSectionInfo.Controls.Add(Me.txtbxSchedule)
+        Me.grpSectionInfo.Controls.Add(Me.txtbxSecSchedule)
         Me.grpSectionInfo.Controls.Add(Me.lblManSecSchedule)
         Me.grpSectionInfo.Controls.Add(Me.lblManSecCapacity)
         Me.grpSectionInfo.Controls.Add(Me.lblManSecNoOfStudents)
@@ -512,14 +512,14 @@ Partial Class AdminManageSections
         Me.lblManSecSchoolYear.TabIndex = 21
         Me.lblManSecSchoolYear.Text = "School Year"
         '
-        'txtbxSchedule
+        'txtbxSecSchedule
         '
-        Me.txtbxSchedule.Location = New System.Drawing.Point(632, 48)
-        Me.txtbxSchedule.Margin = New System.Windows.Forms.Padding(4)
-        Me.txtbxSchedule.MaxLength = 20
-        Me.txtbxSchedule.Name = "txtbxSchedule"
-        Me.txtbxSchedule.Size = New System.Drawing.Size(176, 26)
-        Me.txtbxSchedule.TabIndex = 10
+        Me.txtbxSecSchedule.Location = New System.Drawing.Point(632, 48)
+        Me.txtbxSecSchedule.Margin = New System.Windows.Forms.Padding(4)
+        Me.txtbxSecSchedule.MaxLength = 20
+        Me.txtbxSecSchedule.Name = "txtbxSecSchedule"
+        Me.txtbxSecSchedule.Size = New System.Drawing.Size(176, 26)
+        Me.txtbxSecSchedule.TabIndex = 10
         '
         'lblManSecSchedule
         '
@@ -729,7 +729,7 @@ Partial Class AdminManageSections
     Friend WithEvents lblManSecEndDate As Label
     Friend WithEvents txtbxManSecStatus As TextBox
     Friend WithEvents lblManSecSchedule As Label
-    Friend WithEvents txtbxSchedule As TextBox
+    Friend WithEvents txtbxSecSchedule As TextBox
     Friend WithEvents lblManSecGradeLevel As Label
     Friend WithEvents txtbxManSecTeacherID As TextBox
     Friend WithEvents lblManSecTeacherID As Label
