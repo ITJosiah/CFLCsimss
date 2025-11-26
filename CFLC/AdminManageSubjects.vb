@@ -166,7 +166,7 @@ Public Class AdminManageSubjects
         WHERE SubjectID = @SubjectID
     "
 
-            Using con As New MySqlConnection("server=192.168.1.30;user=jeje;password=password;database=cflc_db;")
+            Using con As New MySqlConnection("server=192.168.1.27;user=jeje;password=password;database=cflc_db;")
                 Using cmd As New MySqlCommand(query, con)
                     ' Add parameters
                     cmd.Parameters.AddWithValue("@SubjectID", currentSubjectID)
