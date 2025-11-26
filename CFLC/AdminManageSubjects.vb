@@ -53,8 +53,9 @@ Public Class AdminManageSubjects
     End Sub
 
     Private Sub InitializeCategoryComboBox()
-        ' Populate Category dropdown
+        ' Populate Category dropdown and make it a DropDownList (no typing allowed)
         cmbSubjectCategory.Items.Clear()
+        cmbSubjectCategory.DropDownStyle = ComboBoxStyle.DropDownList
         cmbSubjectCategory.Items.Add("Core")
         cmbSubjectCategory.Items.Add("Major")
         cmbSubjectCategory.Items.Add("Elective")
@@ -70,8 +71,9 @@ Public Class AdminManageSubjects
     End Sub
 
     Private Sub InitializeRoomTypeComboBox()
-        ' Populate Room Type dropdown
+        ' Populate Room Type dropdown and make it a DropDownList (no typing allowed)
         cbxManSubRoomType.Items.Clear()
+        cbxManSubRoomType.DropDownStyle = ComboBoxStyle.DropDownList
         cbxManSubRoomType.Items.Add("Regular Classroom")
         cbxManSubRoomType.Items.Add("Laboratory")
         cbxManSubRoomType.Items.Add("Computer Lab")
