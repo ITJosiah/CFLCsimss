@@ -985,8 +985,4 @@ Public Class AdminManageSections
     Private Sub lblManSecSchedule_Click(sender As Object, e As EventArgs) Handles lblManSecSchedule.Click
         ' Label click handler
     End Sub
-
-    Private Sub pnlManSecContent_Paint(sender As Object, e As PaintEventArgs) Handles pnlManSecContent.Paint
-
-    End Sub
 End Class
