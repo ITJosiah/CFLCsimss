@@ -84,7 +84,7 @@ Partial Class AdminManageSections
         Me.pnlSidebar.Controls.Add(Me.btnLogout)
         Me.pnlSidebar.Dock = System.Windows.Forms.DockStyle.Left
         Me.pnlSidebar.Location = New System.Drawing.Point(0, 0)
-        Me.pnlSidebar.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.pnlSidebar.Margin = New System.Windows.Forms.Padding(4)
         Me.pnlSidebar.Name = "pnlSidebar"
         Me.pnlSidebar.Padding = New System.Windows.Forms.Padding(40, 49, 40, 49)
         Me.pnlSidebar.Size = New System.Drawing.Size(400, 775)
@@ -174,7 +174,7 @@ Partial Class AdminManageSections
         Me.btnLogout.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.btnLogout.ForeColor = System.Drawing.Color.White
         Me.btnLogout.Location = New System.Drawing.Point(40, 664)
-        Me.btnLogout.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnLogout.Margin = New System.Windows.Forms.Padding(4)
         Me.btnLogout.Name = "btnLogout"
         Me.btnLogout.Size = New System.Drawing.Size(320, 62)
         Me.btnLogout.TabIndex = 10
@@ -193,7 +193,7 @@ Partial Class AdminManageSections
         Me.pnlManSecContent.Controls.Add(Me.lblSectionsList)
         Me.pnlManSecContent.Controls.Add(Me.picWatermark)
         Me.pnlManSecContent.Location = New System.Drawing.Point(400, 1)
-        Me.pnlManSecContent.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.pnlManSecContent.Margin = New System.Windows.Forms.Padding(4)
         Me.pnlManSecContent.Name = "pnlManSecContent"
         Me.pnlManSecContent.Padding = New System.Windows.Forms.Padding(40, 37, 40, 37)
         Me.pnlManSecContent.Size = New System.Drawing.Size(1333, 779)
@@ -214,7 +214,7 @@ Partial Class AdminManageSections
         '
         Me.btnSectionDelete.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnSectionDelete.Location = New System.Drawing.Point(1211, 720)
-        Me.btnSectionDelete.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnSectionDelete.Margin = New System.Windows.Forms.Padding(4)
         Me.btnSectionDelete.Name = "btnSectionDelete"
         Me.btnSectionDelete.Size = New System.Drawing.Size(115, 43)
         Me.btnSectionDelete.TabIndex = 9
@@ -225,7 +225,7 @@ Partial Class AdminManageSections
         '
         Me.btnSectionUpdate.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnSectionUpdate.Location = New System.Drawing.Point(1061, 720)
-        Me.btnSectionUpdate.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnSectionUpdate.Margin = New System.Windows.Forms.Padding(4)
         Me.btnSectionUpdate.Name = "btnSectionUpdate"
         Me.btnSectionUpdate.Size = New System.Drawing.Size(115, 43)
         Me.btnSectionUpdate.TabIndex = 8
@@ -236,7 +236,7 @@ Partial Class AdminManageSections
         '
         Me.btnSectionAdd.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnSectionAdd.Location = New System.Drawing.Point(912, 720)
-        Me.btnSectionAdd.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnSectionAdd.Margin = New System.Windows.Forms.Padding(4)
         Me.btnSectionAdd.Name = "btnSectionAdd"
         Me.btnSectionAdd.Size = New System.Drawing.Size(115, 43)
         Me.btnSectionAdd.TabIndex = 7
@@ -253,13 +253,13 @@ Partial Class AdminManageSections
         Me.dgvSections.BackgroundColor = System.Drawing.Color.WhiteSmoke
         Me.dgvSections.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvSections.Location = New System.Drawing.Point(44, 501)
-        Me.dgvSections.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.dgvSections.Margin = New System.Windows.Forms.Padding(4)
         Me.dgvSections.Name = "dgvSections"
         Me.dgvSections.ReadOnly = True
         Me.dgvSections.RowHeadersVisible = False
         Me.dgvSections.RowHeadersWidth = 51
         Me.dgvSections.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.dgvSections.Size = New System.Drawing.Size(1245, 145)
+        Me.dgvSections.Size = New System.Drawing.Size(1245, 162)
         Me.dgvSections.TabIndex = 6
         '
         'grpSectionInfo
@@ -297,9 +297,9 @@ Partial Class AdminManageSections
         Me.grpSectionInfo.Controls.Add(Me.lblManSecSectionName)
         Me.grpSectionInfo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.grpSectionInfo.Location = New System.Drawing.Point(44, 97)
-        Me.grpSectionInfo.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.grpSectionInfo.Margin = New System.Windows.Forms.Padding(4)
         Me.grpSectionInfo.Name = "grpSectionInfo"
-        Me.grpSectionInfo.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.grpSectionInfo.Padding = New System.Windows.Forms.Padding(4)
         Me.grpSectionInfo.Size = New System.Drawing.Size(1245, 379)
         Me.grpSectionInfo.TabIndex = 3
         Me.grpSectionInfo.TabStop = False
@@ -308,7 +308,7 @@ Partial Class AdminManageSections
         'txtbxManSecSchoolYear
         '
         Me.txtbxManSecSchoolYear.Location = New System.Drawing.Point(652, 49)
-        Me.txtbxManSecSchoolYear.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtbxManSecSchoolYear.Margin = New System.Windows.Forms.Padding(4)
         Me.txtbxManSecSchoolYear.Name = "txtbxManSecSchoolYear"
         Me.txtbxManSecSchoolYear.Size = New System.Drawing.Size(176, 26)
         Me.txtbxManSecSchoolYear.TabIndex = 38
@@ -317,7 +317,7 @@ Partial Class AdminManageSections
         '
         Me.cbxManSecStatus.FormattingEnabled = True
         Me.cbxManSecStatus.Location = New System.Drawing.Point(868, 48)
-        Me.cbxManSecStatus.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cbxManSecStatus.Margin = New System.Windows.Forms.Padding(4)
         Me.cbxManSecStatus.Name = "cbxManSecStatus"
         Me.cbxManSecStatus.Size = New System.Drawing.Size(204, 28)
         Me.cbxManSecStatus.TabIndex = 37
@@ -325,7 +325,7 @@ Partial Class AdminManageSections
         'txtbxManSecRemarks
         '
         Me.txtbxManSecRemarks.Location = New System.Drawing.Point(73, 234)
-        Me.txtbxManSecRemarks.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtbxManSecRemarks.Margin = New System.Windows.Forms.Padding(4)
         Me.txtbxManSecRemarks.MaxLength = 20
         Me.txtbxManSecRemarks.Multiline = True
         Me.txtbxManSecRemarks.Name = "txtbxManSecRemarks"
@@ -346,7 +346,7 @@ Partial Class AdminManageSections
         '
         Me.cmbManSecLearningMode.FormattingEnabled = True
         Me.cmbManSecLearningMode.Location = New System.Drawing.Point(393, 108)
-        Me.cmbManSecLearningMode.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cmbManSecLearningMode.Margin = New System.Windows.Forms.Padding(4)
         Me.cmbManSecLearningMode.Name = "cmbManSecLearningMode"
         Me.cmbManSecLearningMode.Size = New System.Drawing.Size(204, 28)
         Me.cmbManSecLearningMode.TabIndex = 34
@@ -355,7 +355,7 @@ Partial Class AdminManageSections
         '
         Me.cmbManSecClassType.FormattingEnabled = True
         Me.cmbManSecClassType.Location = New System.Drawing.Point(393, 166)
-        Me.cmbManSecClassType.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cmbManSecClassType.Margin = New System.Windows.Forms.Padding(4)
         Me.cmbManSecClassType.Name = "cmbManSecClassType"
         Me.cmbManSecClassType.Size = New System.Drawing.Size(204, 28)
         Me.cmbManSecClassType.TabIndex = 33
@@ -384,7 +384,7 @@ Partial Class AdminManageSections
         '
         Me.dtpManSecDateCreated.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
         Me.dtpManSecDateCreated.Location = New System.Drawing.Point(868, 108)
-        Me.dtpManSecDateCreated.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.dtpManSecDateCreated.Margin = New System.Windows.Forms.Padding(4)
         Me.dtpManSecDateCreated.Name = "dtpManSecDateCreated"
         Me.dtpManSecDateCreated.Size = New System.Drawing.Size(135, 26)
         Me.dtpManSecDateCreated.TabIndex = 7
@@ -392,7 +392,7 @@ Partial Class AdminManageSections
         'txtbxManSecRoomNo
         '
         Me.txtbxManSecRoomNo.Location = New System.Drawing.Point(393, 50)
-        Me.txtbxManSecRoomNo.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtbxManSecRoomNo.Margin = New System.Windows.Forms.Padding(4)
         Me.txtbxManSecRoomNo.Name = "txtbxManSecRoomNo"
         Me.txtbxManSecRoomNo.Size = New System.Drawing.Size(176, 26)
         Me.txtbxManSecRoomNo.TabIndex = 13
@@ -401,7 +401,7 @@ Partial Class AdminManageSections
         '
         Me.dtpManSecEndDate.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
         Me.dtpManSecEndDate.Location = New System.Drawing.Point(652, 166)
-        Me.dtpManSecEndDate.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.dtpManSecEndDate.Margin = New System.Windows.Forms.Padding(4)
         Me.dtpManSecEndDate.Name = "dtpManSecEndDate"
         Me.dtpManSecEndDate.Size = New System.Drawing.Size(135, 26)
         Me.dtpManSecEndDate.TabIndex = 29
@@ -429,7 +429,7 @@ Partial Class AdminManageSections
         'txtbxManSecCreatedBy
         '
         Me.txtbxManSecCreatedBy.Location = New System.Drawing.Point(868, 169)
-        Me.txtbxManSecCreatedBy.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtbxManSecCreatedBy.Margin = New System.Windows.Forms.Padding(4)
         Me.txtbxManSecCreatedBy.MaxLength = 50
         Me.txtbxManSecCreatedBy.Name = "txtbxManSecCreatedBy"
         Me.txtbxManSecCreatedBy.Size = New System.Drawing.Size(239, 26)
@@ -449,7 +449,7 @@ Partial Class AdminManageSections
         '
         Me.dtpManSecStartDate.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
         Me.dtpManSecStartDate.Location = New System.Drawing.Point(652, 108)
-        Me.dtpManSecStartDate.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.dtpManSecStartDate.Margin = New System.Windows.Forms.Padding(4)
         Me.dtpManSecStartDate.Name = "dtpManSecStartDate"
         Me.dtpManSecStartDate.Size = New System.Drawing.Size(135, 26)
         Me.dtpManSecStartDate.TabIndex = 28
@@ -457,7 +457,7 @@ Partial Class AdminManageSections
         'nudManSecGradeLevel
         '
         Me.nudManSecGradeLevel.Location = New System.Drawing.Point(112, 108)
-        Me.nudManSecGradeLevel.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.nudManSecGradeLevel.Margin = New System.Windows.Forms.Padding(4)
         Me.nudManSecGradeLevel.Name = "nudManSecGradeLevel"
         Me.nudManSecGradeLevel.Size = New System.Drawing.Size(47, 26)
         Me.nudManSecGradeLevel.TabIndex = 27
@@ -485,7 +485,7 @@ Partial Class AdminManageSections
         'txtbxManSchedule
         '
         Me.txtbxManSchedule.Location = New System.Drawing.Point(393, 234)
-        Me.txtbxManSchedule.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtbxManSchedule.Margin = New System.Windows.Forms.Padding(4)
         Me.txtbxManSchedule.MaxLength = 20
         Me.txtbxManSchedule.Name = "txtbxManSchedule"
         Me.txtbxManSchedule.Size = New System.Drawing.Size(176, 26)
@@ -534,7 +534,7 @@ Partial Class AdminManageSections
         'txtbxManSecTeacherID
         '
         Me.txtbxManSecTeacherID.Location = New System.Drawing.Point(73, 167)
-        Me.txtbxManSecTeacherID.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtbxManSecTeacherID.Margin = New System.Windows.Forms.Padding(4)
         Me.txtbxManSecTeacherID.MaxLength = 20
         Me.txtbxManSecTeacherID.Name = "txtbxManSecTeacherID"
         Me.txtbxManSecTeacherID.Size = New System.Drawing.Size(153, 26)
@@ -553,7 +553,7 @@ Partial Class AdminManageSections
         'txtbxManSecSectionName
         '
         Me.txtbxManSecSectionName.Location = New System.Drawing.Point(73, 50)
-        Me.txtbxManSecSectionName.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtbxManSecSectionName.Margin = New System.Windows.Forms.Padding(4)
         Me.txtbxManSecSectionName.MaxLength = 20
         Me.txtbxManSecSectionName.Name = "txtbxManSecSectionName"
         Me.txtbxManSecSectionName.Size = New System.Drawing.Size(252, 26)
@@ -586,7 +586,7 @@ Partial Class AdminManageSections
         Me.picWatermark.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.picWatermark.Image = Global.CFLC.My.Resources.Resources.logo
         Me.picWatermark.Location = New System.Drawing.Point(317, 97)
-        Me.picWatermark.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.picWatermark.Margin = New System.Windows.Forms.Padding(4)
         Me.picWatermark.Name = "picWatermark"
         Me.picWatermark.Size = New System.Drawing.Size(693, 574)
         Me.picWatermark.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
@@ -600,7 +600,7 @@ Partial Class AdminManageSections
         Me.ClientSize = New System.Drawing.Size(1732, 775)
         Me.Controls.Add(Me.pnlManSecContent)
         Me.Controls.Add(Me.pnlSidebar)
-        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Margin = New System.Windows.Forms.Padding(4)
         Me.Name = "AdminManageSections"
         Me.Text = "AdminManageSections"
         Me.pnlSidebar.ResumeLayout(False)
