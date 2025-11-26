@@ -363,7 +363,7 @@ Public Class AdminManageSubjects
                 "WHERE SubjectID = @SubjectID"
 
             Using cmd As New MySqlCommand(Sql, modDBx.conn)
-                ' Subject Information
+                ' Subject Informations
                 cmd.Parameters.AddWithValue("@SubjectCode", txtbxManSubSubjectCode.Text.Trim().ToUpper())
                 cmd.Parameters.AddWithValue("@SubjectName", ConvertToProperCase(SafeString(txtbxManSubSubjectName.Text)))
 
