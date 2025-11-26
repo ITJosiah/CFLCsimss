@@ -75,9 +75,6 @@ Public Class AdminManageSections
         cbxManSecStatus.DropDownStyle = ComboBoxStyle.DropDownList
         cbxManSecStatus.Items.Add("Active")
         cbxManSecStatus.Items.Add("Inactive")
-        cbxManSecStatus.Items.Add("Planning")
-        cbxManSecStatus.Items.Add("Completed")
-        cbxManSecStatus.Items.Add("Cancelled")
     End Sub
 
     Private Sub btnSectionAdd_Click(sender As Object, e As EventArgs) Handles btnSectionAdd.Click
