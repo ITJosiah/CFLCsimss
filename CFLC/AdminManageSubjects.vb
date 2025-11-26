@@ -230,7 +230,7 @@ Public Class AdminManageSubjects
     End Sub
 
     Private Sub UpdateSubject()
-        ' Check if a subject is selected
+        ' Check if a subject is selectedD
         If currentSubjectID = 0 Then
             MessageBox.Show("No subject selected for update.", "Update Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
             Return
