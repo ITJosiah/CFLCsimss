@@ -83,12 +83,91 @@ Public Class AdminManageSubjects
         cbxManSubRoomType.Items.Add("Audio-Visual Room")
     End Sub
 
+    ' ===== TEACHER ID VALIDATION METHODS =====
+
+    Private Function TeacherIDExists(teacherID As String) As Boolean
+        If String.IsNullOrWhiteSpace(teacherID) Then
+            Return False
+        End If
+
+        Try
+            modDBx.openConn(modDBx.db_name)
+            Dim sql As String = "SELECT COUNT(*) FROM teacher WHERE TeacherID = @TeacherID"
+
+            Using cmd As New MySqlCommand(sql, modDBx.conn)
+                cmd.Parameters.AddWithValue("@TeacherID", CInt(teacherID))
+                Dim count As Integer = Convert.ToInt32(cmd.ExecuteScalar())
+                Return count > 0
+            End Using
+
+        Catch ex As Exception
+            MessageBox.Show("Error checking teacher ID: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Return False
+        Finally
+            If modDBx.conn IsNot Nothing AndAlso modDBx.conn.State = ConnectionState.Open Then
+                modDBx.conn.Close()
+            End If
+        End Try
+    End Function
+
+    Private Sub AutoSetStatusBasedOnTeacherID()
+        If String.IsNullOrWhiteSpace(txtbxManSubTeacherID.Text) Then
+            ' No Teacher ID = Inactive
+            ComboBoxSubjectStatus.SelectedItem = "Inactive"
+        Else
+            ' Check if Teacher ID exists and is valid
+            If TeacherIDExists(txtbxManSubTeacherID.Text.Trim()) Then
+                ComboBoxSubjectStatus.SelectedItem = "Active"
+            Else
+                ComboBoxSubjectStatus.SelectedItem = "Inactive"
+                MessageBox.Show("Teacher ID does not exist. Status set to Inactive.", "Invalid Teacher ID", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            End If
+        End If
+    End Sub
+
+    ' ===== TEACHER ID EVENT HANDLERS =====
+
+    Private Sub txtbxManSubTeacherID_TextChanged(sender As Object, e As EventArgs) Handles txtbxManSubTeacherID.TextChanged
+        ' Only auto-update status if we're adding a new subject (not editing existing)
+        If currentSubjectID = 0 Then
+            AutoSetStatusBasedOnTeacherID()
+        End If
+    End Sub
+
+    Private Sub txtbxManSubTeacherID_Leave(sender As Object, e As EventArgs) Handles txtbxManSubTeacherID.Leave
+        ' Validate Teacher ID when user leaves the field
+        If Not String.IsNullOrWhiteSpace(txtbxManSubTeacherID.Text) Then
+            If Not TeacherIDExists(txtbxManSubTeacherID.Text.Trim()) Then
+                MessageBox.Show("Teacher ID does not exist in the system.", "Invalid Teacher ID", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                ' Only auto-set status for new subjects
+                If currentSubjectID = 0 Then
+                    ComboBoxSubjectStatus.SelectedItem = "Inactive"
+                End If
+            Else
+                ' Only auto-set status for new subjects
+                If currentSubjectID = 0 Then
+                    ComboBoxSubjectStatus.SelectedItem = "Active"
+                End If
+            End If
+        Else
+            ' Only auto-set status for new subjects
+            If currentSubjectID = 0 Then
+                ComboBoxSubjectStatus.SelectedItem = "Inactive"
+            End If
+        End If
+    End Sub
+
+    ' ===== MAIN SUBJECT OPERATIONS =====
+
     Private Sub btnSubjectAdd_Click(sender As Object, e As EventArgs) Handles btnSubjectAdd.Click
         ' If a row is currently selected, prevent adding and show error
         If currentSubjectID <> 0 Then
             MessageBox.Show("Please clear the selection before adding a new subject.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Return
         End If
+
+        ' Automatically set status based on Teacher ID BEFORE validation
+        AutoSetStatusBasedOnTeacherID()
 
         ' Validate required fields FIRST
         If Not ValidateSubjectInputs() Then
@@ -235,11 +314,14 @@ Public Class AdminManageSubjects
     End Sub
 
     Private Sub UpdateSubject()
-        ' Check if a subject is selectedD
+        ' Check if a subject is selected
         If currentSubjectID = 0 Then
             MessageBox.Show("No subject selected for update.", "Update Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
             Return
         End If
+
+        ' Automatically set status based on Teacher ID BEFORE validation
+        AutoSetStatusBasedOnTeacherID()
 
         ' Validate required fields FIRST using the same validation as Add
         If Not ValidateSubjectInputs() Then
@@ -446,10 +528,8 @@ Public Class AdminManageSubjects
             errors.Add("• Room Type is required")
         End If
 
-        ' 4. Status Validation - CHANGED TO COMBOBOX
-        If ComboBoxSubjectStatus.SelectedIndex = -1 Then ' CHANGED FROM txtbxManSubStatus
-            errors.Add("• Status is required")
-        End If
+        ' REMOVED: Status validation since it's now automatic
+        ' 4. Status is now automatically set based on Teacher ID
 
         ' 5. Curriculum Year Validation
         If String.IsNullOrWhiteSpace(txtbxManSubCurriculumYear.Text) Then
@@ -464,7 +544,16 @@ Public Class AdminManageSubjects
             End If
         End If
 
-        ' 6. Check if there are any validation errors
+        ' 6. Teacher ID validation (optional but if provided, should be valid)
+        If Not String.IsNullOrWhiteSpace(txtbxManSubTeacherID.Text) Then
+            If Not Integer.TryParse(txtbxManSubTeacherID.Text, Nothing) Then
+                errors.Add("• Teacher ID must be a valid number")
+            ElseIf Not TeacherIDExists(txtbxManSubTeacherID.Text.Trim()) Then
+                errors.Add("• Teacher ID does not exist in the system")
+            End If
+        End If
+
+        ' 7. Check if there are any validation errors
         If errors.Count > 0 Then
             Dim errorMessage As New StringBuilder()
             errorMessage.AppendLine("Please fix the following errors before proceeding:")
@@ -526,7 +615,6 @@ Public Class AdminManageSubjects
         ComboBoxSubjectStatus.SelectedIndex = -1 ' CHANGED FROM txtbxManSubStatus
         txtbxManSubCurriculumYear.Clear()
 
-
         ' Date and Created By (reset to defaults)
         dtpManSubDateCreated.Value = DateTime.Now
         txtbxManSubCreatedBy.Text = "Admin" ' Reset to default or keep current user
@@ -541,7 +629,6 @@ Public Class AdminManageSubjects
 
         ' Set focus back to first field
         txtbxManSubSubjectCode.Focus()
-
     End Sub
 
     Private Sub dgvSubjectList_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvSubjectList.CellClick
@@ -575,7 +662,6 @@ Public Class AdminManageSubjects
             txtbxManSubDescription.Text = GetSafeString(row.Cells("Description"))
             txtbxManSubSkillFocus.Text = GetSafeString(row.Cells("SkillFocus"))
 
-
             If Not IsDBNull(row.Cells("GradeLevel").Value) Then
                 nudManSubGradeLevel.Value = Convert.ToDecimal(row.Cells("GradeLevel").Value)
             End If
@@ -596,6 +682,40 @@ Public Class AdminManageSubjects
 
             txtbxManSubTeacherID.Text = GetSafeString(row.Cells("TeacherID"))
             txtbxManSubCreatedBy.Text = GetSafeString(row.Cells("CreatedBy"))
+
+            ' IMPORTANT: When loading existing data, we respect the stored status from database
+            ' and DON'T automatically override it based on Teacher ID presence
+            ' This allows manual status changes to be preserved when editing existing records
+
+            ' However, we can show a warning if the stored status doesn't match the Teacher ID
+            Dim teacherIDText As String = txtbxManSubTeacherID.Text.Trim()
+            Dim currentStatus As String = ComboBoxSubjectStatus.Text.Trim()
+
+            If Not String.IsNullOrWhiteSpace(teacherIDText) Then
+                ' Check if Teacher ID exists
+                If TeacherIDExists(teacherIDText) Then
+                    ' Teacher ID exists but status is inactive - show warning
+                    If currentStatus = "Inactive" Then
+                        MessageBox.Show("Note: This subject has a valid Teacher ID but is marked as Inactive." & vbCrLf &
+                                        "You can change the status to Active if needed.",
+                                        "Status Notice", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                    End If
+                Else
+                    ' Teacher ID doesn't exist but status is active - show warning
+                    If currentStatus = "Active" Then
+                        MessageBox.Show("Warning: This subject is marked as Active but has an invalid Teacher ID." & vbCrLf &
+                                        "Please update the Teacher ID or change the status to Inactive.",
+                                        "Status Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                    End If
+                End If
+            Else
+                ' No Teacher ID but status is active - show warning
+                If currentStatus = "Active" Then
+                    MessageBox.Show("Warning: This subject is marked as Active but has no Teacher ID assigned." & vbCrLf &
+                                    "Please assign a Teacher ID or change the status to Inactive.",
+                                    "Status Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                End If
+            End If
 
             ' Keep Add button enabled
             btnSubjectAdd.Enabled = True
@@ -817,10 +937,6 @@ Public Class AdminManageSubjects
     End Sub
 
     Private Sub pnlManSubContent_Paint(sender As Object, e As PaintEventArgs) Handles pnlManSubContent.Paint
-
-    End Sub
-
-    Private Sub txtbxManSubTeacherID_TextChanged(sender As Object, e As EventArgs) Handles txtbxManSubTeacherID.TextChanged
 
     End Sub
 End Class
