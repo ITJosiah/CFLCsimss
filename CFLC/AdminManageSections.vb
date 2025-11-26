@@ -521,7 +521,7 @@ Public Class AdminManageSections
 
         ' Date and Created By (reset to defaults)
         dtpManSecDateCreated.Value = DateTime.Now
-        txtbxManSecCreatedBy.Text = "Admin" ' Reset to default or keep current user
+        txtbxManSecCreatedBy.Text = "" ' Reset to default or keep current user
 
         ' Reset current section selection
         currentSectionID = 0
@@ -836,4 +836,6 @@ Public Class AdminManageSections
     Private Sub lblManSecSchedule_Click(sender As Object, e As EventArgs) Handles lblManSecSchedule.Click
         ' Label click handler
     End Sub
+
+
 End Class
