@@ -765,9 +765,16 @@ Public Class AdminManageTeacher
                 dgvTeacher.DataSource = dt
                 dgvTeacher.Refresh()
 
-                If dgvTeacher.ColumnCount > 0 Then
-                    dgvTeacher.Columns(0).Visible = False ' Hide TeacherID column
-                End If
+                ' Ensure StudentID (or any ID-like column) remains visible and is placed first.
+                For Each col As DataGridViewColumn In dgvTeacher.Columns
+                    Dim propName As String = If(col.DataPropertyName, "").ToLower()
+                    Dim header As String = If(col.HeaderText, "").ToLower()
+                    If propName.Contains("teacherid") OrElse propName = "teacherid" OrElse header.Contains("teacherid") OrElse header = "teacherid" Then
+                        col.Visible = True
+                        col.DisplayIndex = 0
+                        Exit For
+                    End If
+                Next
 
                 If dt.Rows.Count = 0 Then
                     MessageBox.Show("No teacher found matching the surname '" & surname & "'.", "Search Result", MessageBoxButtons.OK, MessageBoxIcon.Information)

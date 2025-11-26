@@ -875,9 +875,16 @@ Public Class AdminManageStudents
                 dgvStudents.DataSource = dt
                 dgvStudents.Refresh()
 
-                If dgvStudents.ColumnCount > 0 Then
-                    dgvStudents.Columns(0).Visible = False
-                End If
+                ' Ensure StudentID (or any ID-like column) remains visible and is placed first.
+                For Each col As DataGridViewColumn In dgvStudents.Columns
+                    Dim propName As String = If(col.DataPropertyName, "").ToLower()
+                    Dim header As String = If(col.HeaderText, "").ToLower()
+                    If propName.Contains("studentid") OrElse propName = "studentid" OrElse header.Contains("studentid") OrElse header = "studentid" Then
+                        col.Visible = True
+                        col.DisplayIndex = 0
+                        Exit For
+                    End If
+                Next
 
                 If dt.Rows.Count = 0 Then
                     MsgBox("No student found matching the surname '" & surname & "'.", MsgBoxStyle.Information, "Search Result")

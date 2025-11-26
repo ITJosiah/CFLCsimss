@@ -7,6 +7,9 @@
 
     Private Sub ManageEnrollmentForms_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
+
+        LoadToDGV("SELECT * FROM enrollment", dgvEnrollment)
+
     End Sub
 
 
