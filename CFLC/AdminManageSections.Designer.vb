@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
 Partial Class AdminManageSections
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()>
+    <System.Diagnostics.DebuggerNonUserCode()> _
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class AdminManageSections
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()>
+    <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.pnlSidebar = New System.Windows.Forms.Panel()
         Me.flowButtons = New System.Windows.Forms.FlowLayoutPanel()
@@ -54,14 +54,9 @@ Partial Class AdminManageSections
         Me.dtpManSecStartDate = New System.Windows.Forms.DateTimePicker()
         Me.nudManSecGradeLevel = New System.Windows.Forms.NumericUpDown()
         Me.lblManSecStatus = New System.Windows.Forms.Label()
-        Me.nudManSecNoOfStudents = New System.Windows.Forms.NumericUpDown()
-        Me.cmbStudenttGender = New System.Windows.Forms.ComboBox()
-        Me.dtpManSecSchoolYear = New System.Windows.Forms.DateTimePicker()
         Me.lblManSecSchoolYear = New System.Windows.Forms.Label()
-        Me.txtbxSecSchedule = New System.Windows.Forms.TextBox()
+        Me.txtbxManSchedule = New System.Windows.Forms.TextBox()
         Me.lblManSecSchedule = New System.Windows.Forms.Label()
-        Me.lblManSecCapacity = New System.Windows.Forms.Label()
-        Me.lblManSecNoOfStudents = New System.Windows.Forms.Label()
         Me.lblManSecStartDate = New System.Windows.Forms.Label()
         Me.lblManSecEndDate = New System.Windows.Forms.Label()
         Me.lblManSecGradeLevel = New System.Windows.Forms.Label()
@@ -69,19 +64,17 @@ Partial Class AdminManageSections
         Me.lblManSecTeacherID = New System.Windows.Forms.Label()
         Me.txtbxManSecSectionName = New System.Windows.Forms.TextBox()
         Me.lblManSecSectionName = New System.Windows.Forms.Label()
-        Me.txtbxManSecSectionID = New System.Windows.Forms.TextBox()
-        Me.lblManSecSectionID = New System.Windows.Forms.Label()
         Me.lblSectionsList = New System.Windows.Forms.Label()
         Me.btnSectionSearch = New System.Windows.Forms.Button()
         Me.picWatermark = New System.Windows.Forms.PictureBox()
         Me.cbxManSecStatus = New System.Windows.Forms.ComboBox()
+        Me.txtbxManSecSchoolYear = New System.Windows.Forms.TextBox()
         Me.pnlSidebar.SuspendLayout()
         Me.flowButtons.SuspendLayout()
         Me.pnlManSecContent.SuspendLayout()
         CType(Me.dgvSections, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpSectionInfo.SuspendLayout()
         CType(Me.nudManSecGradeLevel, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.nudManSecNoOfStudents, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.picWatermark, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -255,7 +248,7 @@ Partial Class AdminManageSections
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.dgvSections.BackgroundColor = System.Drawing.Color.WhiteSmoke
         Me.dgvSections.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvSections.Location = New System.Drawing.Point(33, 450)
+        Me.dgvSections.Location = New System.Drawing.Point(33, 407)
         Me.dgvSections.Name = "dgvSections"
         Me.dgvSections.ReadOnly = True
         Me.dgvSections.RowHeadersVisible = False
@@ -269,6 +262,7 @@ Partial Class AdminManageSections
         Me.grpSectionInfo.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.grpSectionInfo.BackColor = System.Drawing.Color.Gainsboro
+        Me.grpSectionInfo.Controls.Add(Me.txtbxManSecSchoolYear)
         Me.grpSectionInfo.Controls.Add(Me.cbxManSecStatus)
         Me.grpSectionInfo.Controls.Add(Me.txtbxManSecRemarks)
         Me.grpSectionInfo.Controls.Add(Me.lblManSecRemarks)
@@ -286,14 +280,9 @@ Partial Class AdminManageSections
         Me.grpSectionInfo.Controls.Add(Me.dtpManSecStartDate)
         Me.grpSectionInfo.Controls.Add(Me.nudManSecGradeLevel)
         Me.grpSectionInfo.Controls.Add(Me.lblManSecStatus)
-        Me.grpSectionInfo.Controls.Add(Me.nudManSecNoOfStudents)
-        Me.grpSectionInfo.Controls.Add(Me.cmbStudenttGender)
-        Me.grpSectionInfo.Controls.Add(Me.dtpManSecSchoolYear)
         Me.grpSectionInfo.Controls.Add(Me.lblManSecSchoolYear)
-        Me.grpSectionInfo.Controls.Add(Me.txtbxSecSchedule)
+        Me.grpSectionInfo.Controls.Add(Me.txtbxManSchedule)
         Me.grpSectionInfo.Controls.Add(Me.lblManSecSchedule)
-        Me.grpSectionInfo.Controls.Add(Me.lblManSecCapacity)
-        Me.grpSectionInfo.Controls.Add(Me.lblManSecNoOfStudents)
         Me.grpSectionInfo.Controls.Add(Me.lblManSecStartDate)
         Me.grpSectionInfo.Controls.Add(Me.lblManSecEndDate)
         Me.grpSectionInfo.Controls.Add(Me.lblManSecGradeLevel)
@@ -301,29 +290,27 @@ Partial Class AdminManageSections
         Me.grpSectionInfo.Controls.Add(Me.lblManSecTeacherID)
         Me.grpSectionInfo.Controls.Add(Me.txtbxManSecSectionName)
         Me.grpSectionInfo.Controls.Add(Me.lblManSecSectionName)
-        Me.grpSectionInfo.Controls.Add(Me.txtbxManSecSectionID)
-        Me.grpSectionInfo.Controls.Add(Me.lblManSecSectionID)
         Me.grpSectionInfo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.grpSectionInfo.Location = New System.Drawing.Point(33, 79)
         Me.grpSectionInfo.Name = "grpSectionInfo"
-        Me.grpSectionInfo.Size = New System.Drawing.Size(934, 356)
+        Me.grpSectionInfo.Size = New System.Drawing.Size(934, 308)
         Me.grpSectionInfo.TabIndex = 3
         Me.grpSectionInfo.TabStop = False
         Me.grpSectionInfo.Text = "Section Information"
         '
         'txtbxManSecRemarks
         '
-        Me.txtbxManSecRemarks.Location = New System.Drawing.Point(55, 277)
+        Me.txtbxManSecRemarks.Location = New System.Drawing.Point(55, 190)
         Me.txtbxManSecRemarks.MaxLength = 20
         Me.txtbxManSecRemarks.Multiline = True
         Me.txtbxManSecRemarks.Name = "txtbxManSecRemarks"
-        Me.txtbxManSecRemarks.Size = New System.Drawing.Size(272, 60)
+        Me.txtbxManSecRemarks.Size = New System.Drawing.Size(194, 60)
         Me.txtbxManSecRemarks.TabIndex = 36
         '
         'lblManSecRemarks
         '
         Me.lblManSecRemarks.AutoSize = True
-        Me.lblManSecRemarks.Location = New System.Drawing.Point(52, 255)
+        Me.lblManSecRemarks.Location = New System.Drawing.Point(52, 168)
         Me.lblManSecRemarks.Name = "lblManSecRemarks"
         Me.lblManSecRemarks.Size = New System.Drawing.Size(64, 17)
         Me.lblManSecRemarks.TabIndex = 35
@@ -332,7 +319,7 @@ Partial Class AdminManageSections
         'cmbManSecLearningMode
         '
         Me.cmbManSecLearningMode.FormattingEnabled = True
-        Me.cmbManSecLearningMode.Location = New System.Drawing.Point(292, 197)
+        Me.cmbManSecLearningMode.Location = New System.Drawing.Point(295, 88)
         Me.cmbManSecLearningMode.Name = "cmbManSecLearningMode"
         Me.cmbManSecLearningMode.Size = New System.Drawing.Size(154, 24)
         Me.cmbManSecLearningMode.TabIndex = 34
@@ -340,7 +327,7 @@ Partial Class AdminManageSections
         'cmbManSecClassType
         '
         Me.cmbManSecClassType.FormattingEnabled = True
-        Me.cmbManSecClassType.Location = New System.Drawing.Point(55, 197)
+        Me.cmbManSecClassType.Location = New System.Drawing.Point(295, 135)
         Me.cmbManSecClassType.Name = "cmbManSecClassType"
         Me.cmbManSecClassType.Size = New System.Drawing.Size(154, 24)
         Me.cmbManSecClassType.TabIndex = 33
@@ -348,7 +335,7 @@ Partial Class AdminManageSections
         'lblManSecLearningMode
         '
         Me.lblManSecLearningMode.AutoSize = True
-        Me.lblManSecLearningMode.Location = New System.Drawing.Point(289, 177)
+        Me.lblManSecLearningMode.Location = New System.Drawing.Point(292, 68)
         Me.lblManSecLearningMode.Name = "lblManSecLearningMode"
         Me.lblManSecLearningMode.Size = New System.Drawing.Size(103, 17)
         Me.lblManSecLearningMode.TabIndex = 32
@@ -357,7 +344,7 @@ Partial Class AdminManageSections
         'lblManSecClassType
         '
         Me.lblManSecClassType.AutoSize = True
-        Me.lblManSecClassType.Location = New System.Drawing.Point(52, 177)
+        Me.lblManSecClassType.Location = New System.Drawing.Point(292, 115)
         Me.lblManSecClassType.Name = "lblManSecClassType"
         Me.lblManSecClassType.Size = New System.Drawing.Size(78, 17)
         Me.lblManSecClassType.TabIndex = 30
@@ -366,14 +353,14 @@ Partial Class AdminManageSections
         'dtpManSecDateCreated
         '
         Me.dtpManSecDateCreated.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.dtpManSecDateCreated.Location = New System.Drawing.Point(747, 314)
+        Me.dtpManSecDateCreated.Location = New System.Drawing.Point(651, 88)
         Me.dtpManSecDateCreated.Name = "dtpManSecDateCreated"
         Me.dtpManSecDateCreated.Size = New System.Drawing.Size(102, 23)
         Me.dtpManSecDateCreated.TabIndex = 7
         '
         'txtbxManSecRoomNo
         '
-        Me.txtbxManSecRoomNo.Location = New System.Drawing.Point(474, 133)
+        Me.txtbxManSecRoomNo.Location = New System.Drawing.Point(295, 41)
         Me.txtbxManSecRoomNo.Name = "txtbxManSecRoomNo"
         Me.txtbxManSecRoomNo.Size = New System.Drawing.Size(133, 23)
         Me.txtbxManSecRoomNo.TabIndex = 13
@@ -381,7 +368,7 @@ Partial Class AdminManageSections
         'dtpManSecEndDate
         '
         Me.dtpManSecEndDate.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.dtpManSecEndDate.Location = New System.Drawing.Point(674, 86)
+        Me.dtpManSecEndDate.Location = New System.Drawing.Point(489, 135)
         Me.dtpManSecEndDate.Name = "dtpManSecEndDate"
         Me.dtpManSecEndDate.Size = New System.Drawing.Size(102, 23)
         Me.dtpManSecEndDate.TabIndex = 29
@@ -389,7 +376,7 @@ Partial Class AdminManageSections
         'lblManSecDateCreated
         '
         Me.lblManSecDateCreated.AutoSize = True
-        Me.lblManSecDateCreated.Location = New System.Drawing.Point(744, 294)
+        Me.lblManSecDateCreated.Location = New System.Drawing.Point(648, 68)
         Me.lblManSecDateCreated.Name = "lblManSecDateCreated"
         Me.lblManSecDateCreated.Size = New System.Drawing.Size(92, 17)
         Me.lblManSecDateCreated.TabIndex = 4
@@ -398,7 +385,7 @@ Partial Class AdminManageSections
         'lblManSecRoomNo
         '
         Me.lblManSecRoomNo.AutoSize = True
-        Me.lblManSecRoomNo.Location = New System.Drawing.Point(471, 114)
+        Me.lblManSecRoomNo.Location = New System.Drawing.Point(292, 19)
         Me.lblManSecRoomNo.Name = "lblManSecRoomNo"
         Me.lblManSecRoomNo.Size = New System.Drawing.Size(71, 17)
         Me.lblManSecRoomNo.TabIndex = 12
@@ -406,7 +393,7 @@ Partial Class AdminManageSections
         '
         'txtbxManSecCreatedBy
         '
-        Me.txtbxManSecCreatedBy.Location = New System.Drawing.Point(537, 316)
+        Me.txtbxManSecCreatedBy.Location = New System.Drawing.Point(651, 137)
         Me.txtbxManSecCreatedBy.MaxLength = 50
         Me.txtbxManSecCreatedBy.Name = "txtbxManSecCreatedBy"
         Me.txtbxManSecCreatedBy.Size = New System.Drawing.Size(180, 23)
@@ -415,7 +402,7 @@ Partial Class AdminManageSections
         'lblManSecCreatedBy
         '
         Me.lblManSecCreatedBy.AutoSize = True
-        Me.lblManSecCreatedBy.Location = New System.Drawing.Point(534, 294)
+        Me.lblManSecCreatedBy.Location = New System.Drawing.Point(648, 115)
         Me.lblManSecCreatedBy.Name = "lblManSecCreatedBy"
         Me.lblManSecCreatedBy.Size = New System.Drawing.Size(78, 17)
         Me.lblManSecCreatedBy.TabIndex = 0
@@ -424,14 +411,14 @@ Partial Class AdminManageSections
         'dtpManSecStartDate
         '
         Me.dtpManSecStartDate.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.dtpManSecStartDate.Location = New System.Drawing.Point(674, 39)
+        Me.dtpManSecStartDate.Location = New System.Drawing.Point(489, 88)
         Me.dtpManSecStartDate.Name = "dtpManSecStartDate"
         Me.dtpManSecStartDate.Size = New System.Drawing.Size(102, 23)
         Me.dtpManSecStartDate.TabIndex = 28
         '
         'nudManSecGradeLevel
         '
-        Me.nudManSecGradeLevel.Location = New System.Drawing.Point(84, 134)
+        Me.nudManSecGradeLevel.Location = New System.Drawing.Point(84, 88)
         Me.nudManSecGradeLevel.Name = "nudManSecGradeLevel"
         Me.nudManSecGradeLevel.Size = New System.Drawing.Size(35, 23)
         Me.nudManSecGradeLevel.TabIndex = 27
@@ -439,83 +426,42 @@ Partial Class AdminManageSections
         'lblManSecStatus
         '
         Me.lblManSecStatus.AutoSize = True
-        Me.lblManSecStatus.Location = New System.Drawing.Point(471, 68)
+        Me.lblManSecStatus.Location = New System.Drawing.Point(648, 19)
         Me.lblManSecStatus.Name = "lblManSecStatus"
         Me.lblManSecStatus.Size = New System.Drawing.Size(48, 17)
         Me.lblManSecStatus.TabIndex = 26
         Me.lblManSecStatus.Text = "Status"
         '
-        'nudManSecNoOfStudents
-        '
-        Me.nudManSecNoOfStudents.Location = New System.Drawing.Point(292, 84)
-        Me.nudManSecNoOfStudents.Name = "nudManSecNoOfStudents"
-        Me.nudManSecNoOfStudents.Size = New System.Drawing.Size(35, 23)
-        Me.nudManSecNoOfStudents.TabIndex = 24
-        '
-        'cmbStudenttGender
-        '
-        Me.cmbStudenttGender.FormattingEnabled = True
-        Me.cmbStudenttGender.Location = New System.Drawing.Point(292, 37)
-        Me.cmbStudenttGender.Name = "cmbStudenttGender"
-        Me.cmbStudenttGender.Size = New System.Drawing.Size(103, 24)
-        Me.cmbStudenttGender.TabIndex = 23
-        '
-        'dtpManSecSchoolYear
-        '
-        Me.dtpManSecSchoolYear.Location = New System.Drawing.Point(654, 134)
-        Me.dtpManSecSchoolYear.Name = "dtpManSecSchoolYear"
-        Me.dtpManSecSchoolYear.Size = New System.Drawing.Size(232, 23)
-        Me.dtpManSecSchoolYear.TabIndex = 22
-        '
         'lblManSecSchoolYear
         '
         Me.lblManSecSchoolYear.AutoSize = True
-        Me.lblManSecSchoolYear.Location = New System.Drawing.Point(671, 114)
+        Me.lblManSecSchoolYear.Location = New System.Drawing.Point(486, 19)
         Me.lblManSecSchoolYear.Name = "lblManSecSchoolYear"
         Me.lblManSecSchoolYear.Size = New System.Drawing.Size(85, 17)
         Me.lblManSecSchoolYear.TabIndex = 21
         Me.lblManSecSchoolYear.Text = "School Year"
         '
-        'txtbxSecSchedule
+        'txtbxManSchedule
         '
-        Me.txtbxSchedule.Location = New System.Drawing.Point(632, 48)
-        Me.txtbxSchedule.Margin = New System.Windows.Forms.Padding(4)
-        Me.txtbxSchedule.MaxLength = 20
-        Me.txtbxSchedule.Name = "txtbxSchedule"
-        Me.txtbxSchedule.Size = New System.Drawing.Size(176, 26)
-        Me.txtbxSchedule.TabIndex = 10
+        Me.txtbxManSchedule.Location = New System.Drawing.Point(295, 190)
+        Me.txtbxManSchedule.MaxLength = 20
+        Me.txtbxManSchedule.Name = "txtbxManSchedule"
+        Me.txtbxManSchedule.Size = New System.Drawing.Size(133, 23)
+        Me.txtbxManSchedule.TabIndex = 10
         '
         'lblManSecSchedule
         '
         Me.lblManSecSchedule.AutoSize = True
-        Me.lblManSecSchedule.Location = New System.Drawing.Point(471, 23)
+        Me.lblManSecSchedule.Location = New System.Drawing.Point(292, 168)
         Me.lblManSecSchedule.Name = "lblManSecSchedule"
         Me.lblManSecSchedule.Size = New System.Drawing.Size(67, 17)
         Me.lblManSecSchedule.TabIndex = 11
         Me.lblManSecSchedule.Text = "Schedule"
         '
-        'lblManSecCapacity
-        '
-        Me.lblManSecCapacity.AutoSize = True
-        Me.lblManSecCapacity.Location = New System.Drawing.Point(289, 19)
-        Me.lblManSecCapacity.Name = "lblManSecCapacity"
-        Me.lblManSecCapacity.Size = New System.Drawing.Size(62, 17)
-        Me.lblManSecCapacity.TabIndex = 19
-        Me.lblManSecCapacity.Text = "Capacity"
-        '
-        'lblManSecNoOfStudents
-        '
-        Me.lblManSecNoOfStudents.AutoSize = True
-        Me.lblManSecNoOfStudents.Location = New System.Drawing.Point(289, 68)
-        Me.lblManSecNoOfStudents.Name = "lblManSecNoOfStudents"
-        Me.lblManSecNoOfStudents.Size = New System.Drawing.Size(106, 17)
-        Me.lblManSecNoOfStudents.TabIndex = 17
-        Me.lblManSecNoOfStudents.Text = "No. of Students"
-        '
         'lblManSecStartDate
         '
         Me.lblManSecStartDate.AutoSize = True
-        Me.lblManSecStartDate.Location = New System.Drawing.Point(671, 19)
+        Me.lblManSecStartDate.Location = New System.Drawing.Point(486, 68)
         Me.lblManSecStartDate.Name = "lblManSecStartDate"
         Me.lblManSecStartDate.Size = New System.Drawing.Size(72, 17)
         Me.lblManSecStartDate.TabIndex = 15
@@ -524,7 +470,7 @@ Partial Class AdminManageSections
         'lblManSecEndDate
         '
         Me.lblManSecEndDate.AutoSize = True
-        Me.lblManSecEndDate.Location = New System.Drawing.Point(671, 65)
+        Me.lblManSecEndDate.Location = New System.Drawing.Point(486, 114)
         Me.lblManSecEndDate.Name = "lblManSecEndDate"
         Me.lblManSecEndDate.Size = New System.Drawing.Size(67, 17)
         Me.lblManSecEndDate.TabIndex = 13
@@ -533,7 +479,7 @@ Partial Class AdminManageSections
         'lblManSecGradeLevel
         '
         Me.lblManSecGradeLevel.AutoSize = True
-        Me.lblManSecGradeLevel.Location = New System.Drawing.Point(52, 114)
+        Me.lblManSecGradeLevel.Location = New System.Drawing.Point(52, 68)
         Me.lblManSecGradeLevel.Name = "lblManSecGradeLevel"
         Me.lblManSecGradeLevel.Size = New System.Drawing.Size(86, 17)
         Me.lblManSecGradeLevel.TabIndex = 9
@@ -541,7 +487,7 @@ Partial Class AdminManageSections
         '
         'txtbxManSecTeacherID
         '
-        Me.txtbxManSecTeacherID.Location = New System.Drawing.Point(292, 134)
+        Me.txtbxManSecTeacherID.Location = New System.Drawing.Point(55, 136)
         Me.txtbxManSecTeacherID.MaxLength = 20
         Me.txtbxManSecTeacherID.Name = "txtbxManSecTeacherID"
         Me.txtbxManSecTeacherID.Size = New System.Drawing.Size(116, 23)
@@ -550,7 +496,7 @@ Partial Class AdminManageSections
         'lblManSecTeacherID
         '
         Me.lblManSecTeacherID.AutoSize = True
-        Me.lblManSecTeacherID.Location = New System.Drawing.Point(289, 114)
+        Me.lblManSecTeacherID.Location = New System.Drawing.Point(52, 116)
         Me.lblManSecTeacherID.Name = "lblManSecTeacherID"
         Me.lblManSecTeacherID.Size = New System.Drawing.Size(78, 17)
         Me.lblManSecTeacherID.TabIndex = 5
@@ -558,7 +504,7 @@ Partial Class AdminManageSections
         '
         'txtbxManSecSectionName
         '
-        Me.txtbxManSecSectionName.Location = New System.Drawing.Point(55, 84)
+        Me.txtbxManSecSectionName.Location = New System.Drawing.Point(55, 41)
         Me.txtbxManSecSectionName.MaxLength = 20
         Me.txtbxManSecSectionName.Name = "txtbxManSecSectionName"
         Me.txtbxManSecSectionName.Size = New System.Drawing.Size(190, 23)
@@ -567,28 +513,11 @@ Partial Class AdminManageSections
         'lblManSecSectionName
         '
         Me.lblManSecSectionName.AutoSize = True
-        Me.lblManSecSectionName.Location = New System.Drawing.Point(52, 64)
+        Me.lblManSecSectionName.Location = New System.Drawing.Point(52, 19)
         Me.lblManSecSectionName.Name = "lblManSecSectionName"
         Me.lblManSecSectionName.Size = New System.Drawing.Size(96, 17)
         Me.lblManSecSectionName.TabIndex = 3
         Me.lblManSecSectionName.Text = "Section Name"
-        '
-        'txtbxManSecSectionID
-        '
-        Me.txtbxManSecSectionID.Location = New System.Drawing.Point(55, 37)
-        Me.txtbxManSecSectionID.MaxLength = 20
-        Me.txtbxManSecSectionID.Name = "txtbxManSecSectionID"
-        Me.txtbxManSecSectionID.Size = New System.Drawing.Size(190, 23)
-        Me.txtbxManSecSectionID.TabIndex = 2
-        '
-        'lblManSecSectionID
-        '
-        Me.lblManSecSectionID.AutoSize = True
-        Me.lblManSecSectionID.Location = New System.Drawing.Point(52, 19)
-        Me.lblManSecSectionID.Name = "lblManSecSectionID"
-        Me.lblManSecSectionID.Size = New System.Drawing.Size(72, 17)
-        Me.lblManSecSectionID.TabIndex = 1
-        Me.lblManSecSectionID.Text = "Section ID"
         '
         'lblSectionsList
         '
@@ -625,10 +554,17 @@ Partial Class AdminManageSections
         'cbxManSecStatus
         '
         Me.cbxManSecStatus.FormattingEnabled = True
-        Me.cbxManSecStatus.Location = New System.Drawing.Point(474, 84)
+        Me.cbxManSecStatus.Location = New System.Drawing.Point(651, 39)
         Me.cbxManSecStatus.Name = "cbxManSecStatus"
         Me.cbxManSecStatus.Size = New System.Drawing.Size(154, 24)
         Me.cbxManSecStatus.TabIndex = 37
+        '
+        'txtbxManSecSchoolYear
+        '
+        Me.txtbxManSecSchoolYear.Location = New System.Drawing.Point(489, 40)
+        Me.txtbxManSecSchoolYear.Name = "txtbxManSecSchoolYear"
+        Me.txtbxManSecSchoolYear.Size = New System.Drawing.Size(133, 23)
+        Me.txtbxManSecSchoolYear.TabIndex = 38
         '
         'AdminManageSections
         '
@@ -647,7 +583,6 @@ Partial Class AdminManageSections
         Me.grpSectionInfo.ResumeLayout(False)
         Me.grpSectionInfo.PerformLayout()
         CType(Me.nudManSecGradeLevel, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.nudManSecNoOfStudents, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.picWatermark, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
@@ -675,23 +610,16 @@ Partial Class AdminManageSections
     Friend WithEvents grpSectionInfo As GroupBox
     Friend WithEvents nudManSecGradeLevel As NumericUpDown
     Friend WithEvents lblManSecStatus As Label
-    Friend WithEvents nudManSecNoOfStudents As NumericUpDown
-    Friend WithEvents cmbStudenttGender As ComboBox
-    Friend WithEvents dtpManSecSchoolYear As DateTimePicker
     Friend WithEvents lblManSecSchoolYear As Label
-    Friend WithEvents lblManSecCapacity As Label
-    Friend WithEvents lblManSecNoOfStudents As Label
     Friend WithEvents lblManSecStartDate As Label
     Friend WithEvents lblManSecEndDate As Label
     Friend WithEvents lblManSecSchedule As Label
-    Friend WithEvents txtbxSecSchedule As TextBox
+    Friend WithEvents txtbxManSchedule As TextBox
     Friend WithEvents lblManSecGradeLevel As Label
     Friend WithEvents txtbxManSecTeacherID As TextBox
     Friend WithEvents lblManSecTeacherID As Label
     Friend WithEvents txtbxManSecSectionName As TextBox
     Friend WithEvents lblManSecSectionName As Label
-    Friend WithEvents txtbxManSecSectionID As TextBox
-    Friend WithEvents lblManSecSectionID As Label
     Friend WithEvents lblSectionsList As Label
     Friend WithEvents btnSectionSearch As Button
     Friend WithEvents picWatermark As PictureBox
@@ -706,4 +634,5 @@ Partial Class AdminManageSections
     Friend WithEvents txtbxManSecRemarks As TextBox
     Friend WithEvents TextBoxStudentSearch As TextBox
     Friend WithEvents cbxManSecStatus As ComboBox
+    Friend WithEvents txtbxManSecSchoolYear As TextBox
 End Class

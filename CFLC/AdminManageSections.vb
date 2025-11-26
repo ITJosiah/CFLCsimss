@@ -101,11 +101,11 @@
 
     End Sub
 
-    Private Sub txtbxManSecSectionID_TextChanged(sender As Object, e As EventArgs) Handles txtbxManSecSectionID.TextChanged
+    Private Sub txtbxManSecSectionID_TextChanged(sender As Object, e As EventArgs)
 
     End Sub
 
-    Private Sub txtbxManSecSectionID_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtbxManSecSectionID.KeyPress
+    Private Sub txtbxManSecSectionID_KeyPress(sender As Object, e As KeyPressEventArgs)
         ' Allow only digits and control characters (like backspace)
         If Not Char.IsControl(e.KeyChar) AndAlso Not Char.IsDigit(e.KeyChar) Then
             e.Handled = True
@@ -113,5 +113,11 @@
 
     End Sub
 
+    Private Sub lblManSecStartDate_Click(sender As Object, e As EventArgs) Handles lblManSecStartDate.Click
 
+    End Sub
+
+    Private Sub lblManSecSchedule_Click(sender As Object, e As EventArgs) Handles lblManSecSchedule.Click
+
+    End Sub
 End Class
