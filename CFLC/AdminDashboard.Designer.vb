@@ -43,7 +43,7 @@ Partial Class AdminDashboard
         '
         Me.PictureBox1.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.PictureBox1.Image = Global.CFLC.My.Resources.Resources.logo
-        Me.PictureBox1.Location = New System.Drawing.Point(760, 356)
+        Me.PictureBox1.Location = New System.Drawing.Point(703, 356)
         Me.PictureBox1.Name = "PictureBox1"
         Me.PictureBox1.Size = New System.Drawing.Size(375, 330)
         Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
@@ -68,8 +68,8 @@ Partial Class AdminDashboard
         Me.flowButtons.Controls.Add(Me.btnManageStudents)
         Me.flowButtons.Controls.Add(Me.btnManageTeachers)
         Me.flowButtons.Controls.Add(Me.btnManageSections)
-        Me.flowButtons.Controls.Add(Me.btnManageEnrollments)
         Me.flowButtons.Controls.Add(Me.btnManageSubjects)
+        Me.flowButtons.Controls.Add(Me.btnManageEnrollments)
         Me.flowButtons.Controls.Add(Me.btnGenerateReports)
         Me.flowButtons.Dock = System.Windows.Forms.DockStyle.Fill
         Me.flowButtons.FlowDirection = System.Windows.Forms.FlowDirection.TopDown
@@ -112,7 +112,7 @@ Partial Class AdminDashboard
         '
         'btnManageEnrollments
         '
-        Me.btnManageEnrollments.Location = New System.Drawing.Point(0, 189)
+        Me.btnManageEnrollments.Location = New System.Drawing.Point(0, 252)
         Me.btnManageEnrollments.Margin = New System.Windows.Forms.Padding(0, 0, 0, 18)
         Me.btnManageEnrollments.Name = "btnManageEnrollments"
         Me.btnManageEnrollments.Size = New System.Drawing.Size(240, 45)
@@ -122,7 +122,7 @@ Partial Class AdminDashboard
         '
         'btnManageSubjects
         '
-        Me.btnManageSubjects.Location = New System.Drawing.Point(0, 252)
+        Me.btnManageSubjects.Location = New System.Drawing.Point(0, 189)
         Me.btnManageSubjects.Margin = New System.Windows.Forms.Padding(0, 0, 0, 18)
         Me.btnManageSubjects.Name = "btnManageSubjects"
         Me.btnManageSubjects.Size = New System.Drawing.Size(240, 45)
@@ -160,7 +160,7 @@ Partial Class AdminDashboard
         Me.pnlMainContent.Dock = System.Windows.Forms.DockStyle.Fill
         Me.pnlMainContent.Location = New System.Drawing.Point(300, 0)
         Me.pnlMainContent.Name = "pnlMainContent"
-        Me.pnlMainContent.Size = New System.Drawing.Size(1115, 633)
+        Me.pnlMainContent.Size = New System.Drawing.Size(1000, 633)
         Me.pnlMainContent.TabIndex = 12
         '
         'AdminDashboard
