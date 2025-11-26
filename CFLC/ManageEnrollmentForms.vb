@@ -17,7 +17,7 @@ Public Class ManageEnrollmentForms
     End Sub
 
     Private Sub btnEnrollDelete_Click(sender As Object, e As EventArgs) Handles btnEnrollDelete.Click
-        ' Check if a enrollment is selected
+        ' Check if a enrollment is selecteddd
         If currentEnrollmentID = 0 Then
             MessageBox.Show("Please select a enrollment to delete.", "Delete Enrollment", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
             Return
