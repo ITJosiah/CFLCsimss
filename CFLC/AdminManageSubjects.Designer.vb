@@ -38,6 +38,8 @@ Partial Class AdminManageSubjects
         Me.btnSubjectAdd = New System.Windows.Forms.Button()
         Me.dgvSubjectList = New System.Windows.Forms.DataGridView()
         Me.grpSubjectInformation = New System.Windows.Forms.GroupBox()
+        Me.txtbxManSubTeacherID = New System.Windows.Forms.TextBox()
+        Me.Label2 = New System.Windows.Forms.Label()
         Me.ComboBoxSubjectStatus = New System.Windows.Forms.ComboBox()
         Me.txtbxManSubCurriculumYear = New System.Windows.Forms.TextBox()
         Me.cbxManSubRoomType = New System.Windows.Forms.ComboBox()
@@ -68,8 +70,6 @@ Partial Class AdminManageSubjects
         Me.lblManSubSubjectCode = New System.Windows.Forms.Label()
         Me.lblSubjectList = New System.Windows.Forms.Label()
         Me.picWatermark = New System.Windows.Forms.PictureBox()
-        Me.txtbxManSubTeacherID = New System.Windows.Forms.TextBox()
-        Me.Label2 = New System.Windows.Forms.Label()
         Me.pnlSidebar.SuspendLayout()
         Me.flowButtons.SuspendLayout()
         Me.pnlManSubContent.SuspendLayout()
@@ -300,6 +300,22 @@ Partial Class AdminManageSubjects
         Me.grpSubjectInformation.TabIndex = 3
         Me.grpSubjectInformation.TabStop = False
         Me.grpSubjectInformation.Text = "Subject Information"
+        '
+        'txtbxManSubTeacherID
+        '
+        Me.txtbxManSubTeacherID.Location = New System.Drawing.Point(651, 37)
+        Me.txtbxManSubTeacherID.Name = "txtbxManSubTeacherID"
+        Me.txtbxManSubTeacherID.Size = New System.Drawing.Size(180, 23)
+        Me.txtbxManSubTeacherID.TabIndex = 46
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Location = New System.Drawing.Point(648, 17)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(78, 17)
+        Me.Label2.TabIndex = 45
+        Me.Label2.Text = "Teacher ID"
         '
         'ComboBoxSubjectStatus
         '
@@ -556,22 +572,6 @@ Partial Class AdminManageSubjects
         Me.picWatermark.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
         Me.picWatermark.TabIndex = 5
         Me.picWatermark.TabStop = False
-        '
-        'txtbxManSubTeacherID
-        '
-        Me.txtbxManSubTeacherID.Location = New System.Drawing.Point(651, 37)
-        Me.txtbxManSubTeacherID.Name = "txtbxManSubTeacherID"
-        Me.txtbxManSubTeacherID.Size = New System.Drawing.Size(180, 23)
-        Me.txtbxManSubTeacherID.TabIndex = 46
-        '
-        'Label2
-        '
-        Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(648, 17)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(78, 17)
-        Me.Label2.TabIndex = 45
-        Me.Label2.Text = "Teacher ID"
         '
         'AdminManageSubjects
         '

@@ -105,13 +105,13 @@ Public Class AdminManageSubjects
         ' Add subject to database
         Try
             Dim query As String = "INSERT INTO subject (" &
-                            "SubjectCode, SubjectName, Category, Description, SkillFocus, " &
-                            "GradeLevel, Quarter, RoomType, LearningMaterials, Schedule, " &
-                            "Status, CurriculumYear, DateCreated, CreatedBy" &
-                            ") VALUES (" &
-                            "@SubjectCode, @SubjectName, @Category, @Description, @SkillFocus, " &
-                            "@GradeLevel, @Quarter, @RoomType, @LearningMaterials, @Schedule, " &
-                            "@Status, @CurriculumYear, @DateCreated, @CreatedBy)"
+                "SubjectCode, SubjectName, Category, Description, SkillFocus, " &
+                "GradeLevel, Quarter, RoomType, LearningMaterials, Schedule, " &
+                "Status, CurriculumYear, DateCreated, CreatedBy, TeacherID" &
+                ") VALUES (" &
+                "@SubjectCode, @SubjectName, @Category, @Description, @SkillFocus, " &
+                "@GradeLevel, @Quarter, @RoomType, @LearningMaterials, @Schedule, " &
+                "@Status, @CurriculumYear, @DateCreated, @CreatedBy, @TeacherID)"
 
             modDBx.openConn(modDBx.db_name)
 
@@ -155,6 +155,8 @@ Public Class AdminManageSubjects
                 cmd.Parameters.AddWithValue("@CurriculumYear", SafeString(txtbxManSubCurriculumYear.Text))
                 cmd.Parameters.AddWithValue("@DateCreated", dtpManSubDateCreated.Value.ToString("yyyy-MM-dd"))
                 cmd.Parameters.AddWithValue("@CreatedBy", SafeString(txtbxManSubCreatedBy.Text))
+
+                cmd.Parameters.AddWithValue("@TeacherID", If(String.IsNullOrWhiteSpace(txtbxManSubTeacherID.Text), DBNull.Value, CInt(txtbxManSubTeacherID.Text)))
 
                 Dim rowsAffected As Integer = cmd.ExecuteNonQuery()
 
@@ -260,20 +262,21 @@ Public Class AdminManageSubjects
         Try
             modDBx.openConn(modDBx.db_name)
 
-            Dim sql As String = "UPDATE subject SET " &
-                "SubjectCode = @SubjectCode, " &
-                "SubjectName = @SubjectName, " &
-                "Category = @Category, " &
-                "Description = @Description, " &
-                "SkillFocus = @SkillFocus, " &
-                "GradeLevel = @GradeLevel, " &
-                "Quarter = @Quarter, " &
-                "RoomType = @RoomType, " &
-                "LearningMaterials = @LearningMaterials, " &
-                "Schedule = @Schedule, " &
-                "Status = @Status, " &
-                "CurriculumYear = @CurriculumYear " &
-                "WHERE SubjectID = @SubjectID"
+            Dim Sql As String = "UPDATE subject SET " &
+    "SubjectCode = @SubjectCode, " &
+    "SubjectName = @SubjectName, " &
+    "Category = @Category, " &
+    "Description = @Description, " &
+    "SkillFocus = @SkillFocus, " &
+    "GradeLevel = @GradeLevel, " &
+    "Quarter = @Quarter, " &
+    "RoomType = @RoomType, " &
+    "LearningMaterials = @LearningMaterials, " &
+    "Schedule = @Schedule, " &
+    "Status = @Status, " &
+    "CurriculumYear = @CurriculumYear, " &
+    "TeacherID = @TeacherID " &
+    "WHERE SubjectID = @SubjectID"
 
             Using cmd As New MySqlCommand(sql, modDBx.conn)
                 ' Subject Information
@@ -315,6 +318,8 @@ Public Class AdminManageSubjects
                 cmd.Parameters.AddWithValue("@CurriculumYear", SafeString(txtbxManSubCurriculumYear.Text))
 
                 cmd.Parameters.AddWithValue("@SubjectID", currentSubjectID)
+
+                cmd.Parameters.AddWithValue("@TeacherID", If(String.IsNullOrWhiteSpace(txtbxManSubTeacherID.Text), DBNull.Value, CInt(txtbxManSubTeacherID.Text)))
 
                 Dim rowsAffected As Integer = cmd.ExecuteNonQuery()
 
@@ -393,6 +398,7 @@ Public Class AdminManageSubjects
                         If GetSafeStringFromDB(reader("Schedule")) <> txtbxManSubSchedule.Text.Trim() Then Return True
                         If GetSafeStringFromDB(reader("Status")) <> ComboBoxSubjectStatus.Text.Trim() Then Return True ' CHANGED
                         If GetSafeStringFromDB(reader("CurriculumYear")) <> txtbxManSubCurriculumYear.Text.Trim() Then Return True
+                        If GetSafeStringFromDB(reader("TeacherID")) <> txtbxManSubTeacherID.Text.Trim() Then Return True
                     End If
                 End Using
             End Using
@@ -521,9 +527,12 @@ Public Class AdminManageSubjects
         ComboBoxSubjectStatus.SelectedIndex = -1 ' CHANGED FROM txtbxManSubStatus
         txtbxManSubCurriculumYear.Clear()
 
+
         ' Date and Created By (reset to defaults)
         dtpManSubDateCreated.Value = DateTime.Now
         txtbxManSubCreatedBy.Text = "Admin" ' Reset to default or keep current user
+
+        txtbxManSubTeacherID.Clear()
 
         ' Reset current subject selection
         currentSubjectID = 0
@@ -533,6 +542,7 @@ Public Class AdminManageSubjects
 
         ' Set focus back to first field
         txtbxManSubSubjectCode.Focus()
+
     End Sub
 
     Private Sub dgvSubjectList_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvSubjectList.CellClick
@@ -566,6 +576,7 @@ Public Class AdminManageSubjects
             txtbxManSubDescription.Text = GetSafeString(row.Cells("Description"))
             txtbxManSubSkillFocus.Text = GetSafeString(row.Cells("SkillFocus"))
 
+
             If Not IsDBNull(row.Cells("GradeLevel").Value) Then
                 nudManSubGradeLevel.Value = Convert.ToDecimal(row.Cells("GradeLevel").Value)
             End If
@@ -584,6 +595,7 @@ Public Class AdminManageSubjects
                 dtpManSubDateCreated.Value = CDate(row.Cells("DateCreated").Value)
             End If
 
+            txtbxManSubTeacherID.Text = GetSafeString(row.Cells("TeacherID"))
             txtbxManSubCreatedBy.Text = GetSafeString(row.Cells("CreatedBy"))
 
             ' Keep Add button enabled
@@ -806,6 +818,10 @@ Public Class AdminManageSubjects
     End Sub
 
     Private Sub pnlManSubContent_Paint(sender As Object, e As PaintEventArgs) Handles pnlManSubContent.Paint
+
+    End Sub
+
+    Private Sub txtbxManSubTeacherID_TextChanged(sender As Object, e As EventArgs) Handles txtbxManSubTeacherID.TextChanged
 
     End Sub
 End Class
