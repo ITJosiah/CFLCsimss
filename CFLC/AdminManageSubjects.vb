@@ -17,6 +17,8 @@ Public Class AdminManageSubjects
             pnlSidebar.Visible = False
             pnlManSubContent.Dock = DockStyle.Fill
         End If
+        nudManSubGradeLevel.Maximum = 6
+        nudManSubQuarter.Maximum = 4
 
         ' Initialize Category ComboBox
         InitializeCategoryComboBox()
@@ -35,7 +37,7 @@ Public Class AdminManageSubjects
         dtpManSubDateCreated.Enabled = False
 
         ' Set CreatedBy to current user (you might want to get this from your authentication system)
-        txtbxManSubCreatedBy.Text = "Admin" ' Replace with actual username
+        txtbxManSubCreatedBy.Clear()
 
         ' Ensure Add button is enabled by default
         btnSubjectAdd.Enabled = True
@@ -124,8 +126,8 @@ Public Class AdminManageSubjects
                 End If
                 cmd.Parameters.AddWithValue("@Category", category)
 
-                cmd.Parameters.AddWithValue("@Description", ConvertToProperCase(SafeString(txtbxManSubDescription.Text)))
-                cmd.Parameters.AddWithValue("@SkillFocus", ConvertToProperCase(SafeString(txtbxManSubSkillFocus.Text)))
+                cmd.Parameters.AddWithValue("@Description", SafeString(txtbxManSubDescription.Text))
+                cmd.Parameters.AddWithValue("@SkillFocus", SafeString(txtbxManSubSkillFocus.Text))
 
                 ' Grade Level and Quarter
                 cmd.Parameters.AddWithValue("@GradeLevel", nudManSubGradeLevel.Value)
@@ -139,7 +141,7 @@ Public Class AdminManageSubjects
                 cmd.Parameters.AddWithValue("@RoomType", roomType)
 
                 ' Learning Materials and Schedule
-                cmd.Parameters.AddWithValue("@LearningMaterials", ConvertToProperCase(SafeString(txtbxManSubLearningMaterials.Text)))
+                cmd.Parameters.AddWithValue("@LearningMaterials", SafeString(txtbxManSubLearningMaterials.Text))
                 cmd.Parameters.AddWithValue("@Schedule", SafeString(txtbxManSubSchedule.Text))
 
                 ' Status - CHANGED TO COMBOBOX
@@ -284,8 +286,8 @@ Public Class AdminManageSubjects
                 End If
                 cmd.Parameters.AddWithValue("@Category", category)
 
-                cmd.Parameters.AddWithValue("@Description", ConvertToProperCase(SafeString(txtbxManSubDescription.Text)))
-                cmd.Parameters.AddWithValue("@SkillFocus", ConvertToProperCase(SafeString(txtbxManSubSkillFocus.Text)))
+                cmd.Parameters.AddWithValue("@Description", SafeString(txtbxManSubDescription.Text))
+                cmd.Parameters.AddWithValue("@SkillFocus", SafeString(txtbxManSubSkillFocus.Text))
 
                 ' Grade Level and Quarter
                 cmd.Parameters.AddWithValue("@GradeLevel", nudManSubGradeLevel.Value)
@@ -299,7 +301,7 @@ Public Class AdminManageSubjects
                 cmd.Parameters.AddWithValue("@RoomType", roomType)
 
                 ' Learning Materials and Schedule
-                cmd.Parameters.AddWithValue("@LearningMaterials", ConvertToProperCase(SafeString(txtbxManSubLearningMaterials.Text)))
+                cmd.Parameters.AddWithValue("@LearningMaterials", SafeString(txtbxManSubLearningMaterials.Text))
                 cmd.Parameters.AddWithValue("@Schedule", SafeString(txtbxManSubSchedule.Text))
 
                 ' Status - CHANGED TO COMBOBOX
@@ -507,8 +509,8 @@ Public Class AdminManageSubjects
         txtbxManSubSkillFocus.Clear()
 
         ' Grade Level and Quarter
-        nudManSubGradeLevel.Value = 1
-        nudManSubQuarter.Value = 1
+        nudManSubGradeLevel.Value = 0
+        nudManSubQuarter.Value = 0
 
         ' Room Type and Learning Materials
         cbxManSubRoomType.SelectedIndex = -1
@@ -598,24 +600,6 @@ Public Class AdminManageSubjects
     Private Sub txtbxManSubSubjectName_Leave(sender As Object, e As EventArgs) Handles txtbxManSubSubjectName.Leave
         If Not String.IsNullOrWhiteSpace(txtbxManSubSubjectName.Text) Then
             txtbxManSubSubjectName.Text = ConvertToProperCase(txtbxManSubSubjectName.Text.Trim())
-        End If
-    End Sub
-
-    Private Sub txtbxManSubDescription_Leave(sender As Object, e As EventArgs) Handles txtbxManSubDescription.Leave
-        If Not String.IsNullOrWhiteSpace(txtbxManSubDescription.Text) Then
-            txtbxManSubDescription.Text = ConvertToProperCase(txtbxManSubDescription.Text.Trim())
-        End If
-    End Sub
-
-    Private Sub txtbxManSubSkillFocus_Leave(sender As Object, e As EventArgs) Handles txtbxManSubSkillFocus.Leave
-        If Not String.IsNullOrWhiteSpace(txtbxManSubSkillFocus.Text) Then
-            txtbxManSubSkillFocus.Text = ConvertToProperCase(txtbxManSubSkillFocus.Text.Trim())
-        End If
-    End Sub
-
-    Private Sub txtbxManSubLearningMaterials_Leave(sender As Object, e As EventArgs) Handles txtbxManSubLearningMaterials.Leave
-        If Not String.IsNullOrWhiteSpace(txtbxManSubLearningMaterials.Text) Then
-            txtbxManSubLearningMaterials.Text = ConvertToProperCase(txtbxManSubLearningMaterials.Text.Trim())
         End If
     End Sub
 
@@ -819,5 +803,9 @@ Public Class AdminManageSubjects
 
     Private Sub lblManSubCategory_Click(sender As Object, e As EventArgs) Handles lblManSubCategory.Click
         ' Handle label click if needed
+    End Sub
+
+    Private Sub pnlManSubContent_Paint(sender As Object, e As PaintEventArgs) Handles pnlManSubContent.Paint
+
     End Sub
 End Class
