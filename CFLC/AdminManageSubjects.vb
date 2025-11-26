@@ -12,8 +12,16 @@ Public Class AdminManageSubjects
         cmbSubjectCategory.Items.Add("Elective")
         cmbSubjectCategory.Items.Add("Special")
 
+        ' Make category and room type read-only (non-editable by user)
+        cmbSubjectCategory.DropDownStyle = ComboBoxStyle.DropDownList
+        cmbSubjectCategory.Enabled = True
+
+        cbxManSubRoomType.DropDownStyle = ComboBoxStyle.DropDownList
+        cbxManSubRoomType.Enabled = True
+
         ' Load subject data
         LoadToDGV("SELECT * FROM subject", dgvSubjectList)
+
 
         ' Ensure the grid doesn't auto-select the first row on load
         dgvSubjectList.ClearSelection()
@@ -39,8 +47,6 @@ Public Class AdminManageSubjects
             pnlSidebar.Visible = False
             pnlManSubContent.Dock = DockStyle.Fill
         End If
-
-
 
     End Sub
 
@@ -195,11 +201,39 @@ Public Class AdminManageSubjects
     End Sub
 
     Private Sub dgvSubjectList_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvSubjectList.CellClick
-        If e.RowIndex >= 0 Then
-            Dim row As DataGridViewRow = dgvSubjectList.Rows(e.RowIndex)
+        ' Toggle selection: if user clicks the same row again, unselect and clear inputs.
+        If e.RowIndex < 0 Then
+            Return
+        End If
 
-            ' Store the SubjectID
-            currentSubjectID = If(row.Cells(0).Value IsNot Nothing, CInt(row.Cells(0).Value), 0)
+        Dim row As DataGridViewRow = dgvSubjectList.Rows(e.RowIndex)
+
+        ' Safely read the SubjectID in the clicked row
+        Dim clickedID As Integer = 0
+        If row.Cells.Count > 0 AndAlso row.Cells(0).Value IsNot Nothing AndAlso Not IsDBNull(row.Cells(0).Value) Then
+            Integer.TryParse(row.Cells(0).Value.ToString(), clickedID)
+        End If
+
+        ' If same row clicked again, clear selection and inputs
+        If clickedID <> 0 AndAlso clickedID = currentSubjectID Then
+            dgvSubjectList.ClearSelection()
+            Try
+                If dgvSubjectList.Rows.Count > 0 AndAlso dgvSubjectList.Columns.Count > 0 Then
+                    dgvSubjectList.CurrentCell = Nothing
+                End If
+            Catch
+                ' ignore timing/layout exceptions
+            End Try
+
+            ' Clear fields and reset selection state
+            ClearInputFields()
+            currentSubjectID = 0
+            Return
+        End If
+
+        ' Otherwise populate fields for the newly selected row
+        If clickedID <> 0 Then
+            currentSubjectID = clickedID
 
             ' Safely assign text values
             txtbxManSubSubjectName.Text = If(row.Cells("SubjectName").Value IsNot DBNull.Value, row.Cells("SubjectName").Value.ToString(), "")
@@ -226,7 +260,6 @@ Public Class AdminManageSubjects
             If row.Cells("DateCreated").Value IsNot DBNull.Value Then
                 dtpManSubDateCreated.Value = CDate(row.Cells("DateCreated").Value)
             End If
-
         End If
 
     End Sub
@@ -287,6 +320,9 @@ Public Class AdminManageSubjects
         txtbxManSubDescription.Clear()
         txtbxManSubSkillFocus.Clear()
         cbxManSubRoomType.SelectedIndex = -1
+        cbxManSubRoomType.Text = "" ' ensure room type string is cleared
+        cmbSubjectCategory.SelectedIndex = -1
+        cmbSubjectCategory.Text = "" ' ensure category string is cleared
         nudManSubGradeLevel.Value = 1
         nudManSubQuarter.Value = 1
         txtbxManSubLearningMaterials.Clear()
@@ -328,6 +364,14 @@ Public Class AdminManageSubjects
 
         ' Move focus to first input so the grid doesn't look focused
         txtbxManSubSubjectName.Focus()
+    End Sub
+
+    Private Sub cmbSubjectCategory_TextChanged(sender As Object, e As EventArgs) Handles cmbSubjectCategory.TextChanged
+        ' No-op handler: ComboBox is non-editable for the user (DropDownList + Disabled).
+        ' Keep DropDownStyle enforced in case something changes it programmatically elsewhere.
+        If cmbSubjectCategory.DropDownStyle <> ComboBoxStyle.DropDownList Then
+            cmbSubjectCategory.DropDownStyle = ComboBoxStyle.DropDownList
+        End If
     End Sub
 
 End Class
