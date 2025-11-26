@@ -68,6 +68,8 @@ Partial Class AdminManageSubjects
         Me.lblManSubSubjectCode = New System.Windows.Forms.Label()
         Me.lblSubjectList = New System.Windows.Forms.Label()
         Me.picWatermark = New System.Windows.Forms.PictureBox()
+        Me.txtbxManSubTeacherID = New System.Windows.Forms.TextBox()
+        Me.Label2 = New System.Windows.Forms.Label()
         Me.pnlSidebar.SuspendLayout()
         Me.flowButtons.SuspendLayout()
         Me.pnlManSubContent.SuspendLayout()
@@ -193,7 +195,7 @@ Partial Class AdminManageSubjects
         Me.pnlManSubContent.Controls.Add(Me.picWatermark)
         Me.pnlManSubContent.Location = New System.Drawing.Point(300, 0)
         Me.pnlManSubContent.Name = "pnlManSubContent"
-        Me.pnlManSubContent.Padding = New System.Windows.Forms.Padding(30, 30, 30, 30)
+        Me.pnlManSubContent.Padding = New System.Windows.Forms.Padding(30)
         Me.pnlManSubContent.Size = New System.Drawing.Size(1000, 633)
         Me.pnlManSubContent.TabIndex = 14
         '
@@ -202,7 +204,7 @@ Partial Class AdminManageSubjects
         Me.TextBoxSubjectSearch.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.TextBoxSubjectSearch.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBoxSubjectSearch.Location = New System.Drawing.Point(472, 592)
-        Me.TextBoxSubjectSearch.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.TextBoxSubjectSearch.Margin = New System.Windows.Forms.Padding(2)
         Me.TextBoxSubjectSearch.MaxLength = 50
         Me.TextBoxSubjectSearch.Name = "TextBoxSubjectSearch"
         Me.TextBoxSubjectSearch.Size = New System.Drawing.Size(186, 30)
@@ -261,6 +263,8 @@ Partial Class AdminManageSubjects
         Me.grpSubjectInformation.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.grpSubjectInformation.BackColor = System.Drawing.Color.Gainsboro
+        Me.grpSubjectInformation.Controls.Add(Me.txtbxManSubTeacherID)
+        Me.grpSubjectInformation.Controls.Add(Me.Label2)
         Me.grpSubjectInformation.Controls.Add(Me.ComboBoxSubjectStatus)
         Me.grpSubjectInformation.Controls.Add(Me.txtbxManSubCurriculumYear)
         Me.grpSubjectInformation.Controls.Add(Me.cbxManSubRoomType)
@@ -303,7 +307,7 @@ Partial Class AdminManageSubjects
         Me.ComboBoxSubjectStatus.FormattingEnabled = True
         Me.ComboBoxSubjectStatus.Items.AddRange(New Object() {"Male", "Female"})
         Me.ComboBoxSubjectStatus.Location = New System.Drawing.Point(491, 82)
-        Me.ComboBoxSubjectStatus.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.ComboBoxSubjectStatus.Margin = New System.Windows.Forms.Padding(2)
         Me.ComboBoxSubjectStatus.Name = "ComboBoxSubjectStatus"
         Me.ComboBoxSubjectStatus.Size = New System.Drawing.Size(84, 24)
         Me.ComboBoxSubjectStatus.TabIndex = 44
@@ -319,7 +323,7 @@ Partial Class AdminManageSubjects
         '
         Me.cbxManSubRoomType.FormattingEnabled = True
         Me.cbxManSubRoomType.Location = New System.Drawing.Point(279, 132)
-        Me.cbxManSubRoomType.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.cbxManSubRoomType.Margin = New System.Windows.Forms.Padding(2)
         Me.cbxManSubRoomType.Name = "cbxManSubRoomType"
         Me.cbxManSubRoomType.Size = New System.Drawing.Size(180, 24)
         Me.cbxManSubRoomType.TabIndex = 37
@@ -464,7 +468,7 @@ Partial Class AdminManageSubjects
         'lblManSubSchedule
         '
         Me.lblManSubSchedule.AutoSize = True
-        Me.lblManSubSchedule.Location = New System.Drawing.Point(488, 21)
+        Me.lblManSubSchedule.Location = New System.Drawing.Point(491, 17)
         Me.lblManSubSchedule.Name = "lblManSubSchedule"
         Me.lblManSubSchedule.Size = New System.Drawing.Size(67, 17)
         Me.lblManSubSchedule.TabIndex = 11
@@ -553,6 +557,22 @@ Partial Class AdminManageSubjects
         Me.picWatermark.TabIndex = 5
         Me.picWatermark.TabStop = False
         '
+        'txtbxManSubTeacherID
+        '
+        Me.txtbxManSubTeacherID.Location = New System.Drawing.Point(651, 37)
+        Me.txtbxManSubTeacherID.Name = "txtbxManSubTeacherID"
+        Me.txtbxManSubTeacherID.Size = New System.Drawing.Size(180, 23)
+        Me.txtbxManSubTeacherID.TabIndex = 46
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Location = New System.Drawing.Point(648, 17)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(78, 17)
+        Me.Label2.TabIndex = 45
+        Me.Label2.Text = "Teacher ID"
+        '
         'AdminManageSubjects
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -622,4 +642,6 @@ Partial Class AdminManageSubjects
     Friend WithEvents cbxManSubRoomType As ComboBox
     Friend WithEvents txtbxManSubCurriculumYear As TextBox
     Friend WithEvents ComboBoxSubjectStatus As ComboBox
+    Friend WithEvents txtbxManSubTeacherID As TextBox
+    Friend WithEvents Label2 As Label
 End Class
