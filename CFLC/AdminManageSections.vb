@@ -309,7 +309,6 @@ Public Class AdminManageSections
                 cmd.Parameters.AddWithValue("@ClassType", classType)
 
                 ' School Year, Start Date, End Date
-                cmd.Parameters.AddWithValue("@SchoolYear", SafeString(txtbxManSecSchoolYear.Text))
                 cmd.Parameters.AddWithValue("@StartDate", dtpManSecStartDate.Value.ToString("yyyy-MM-dd"))
                 cmd.Parameters.AddWithValue("@EndDate", dtpManSecEndDate.Value.ToString("yyyy-MM-dd"))
 
@@ -445,9 +444,6 @@ Public Class AdminManageSections
         End If
 
         ' 5. School Year Validation
-        If String.IsNullOrWhiteSpace(txtbxManSecSchoolYear.Text) Then
-            errors.Add("• School Year is required")
-        End If
 
         ' 6. Status Validation
         If cbxManSecStatus.SelectedIndex = -1 Then
