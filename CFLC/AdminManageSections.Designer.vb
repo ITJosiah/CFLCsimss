@@ -38,6 +38,8 @@ Partial Class AdminManageSections
         Me.btnSectionAdd = New System.Windows.Forms.Button()
         Me.dgvSections = New System.Windows.Forms.DataGridView()
         Me.grpSectionInfo = New System.Windows.Forms.GroupBox()
+        Me.txtbxManSecBuildingName = New System.Windows.Forms.TextBox()
+        Me.Label1 = New System.Windows.Forms.Label()
         Me.cbxManSecStatus = New System.Windows.Forms.ComboBox()
         Me.txtbxManSecRemarks = New System.Windows.Forms.TextBox()
         Me.lblManSecRemarks = New System.Windows.Forms.Label()
@@ -66,8 +68,6 @@ Partial Class AdminManageSections
         Me.lblManSecSectionName = New System.Windows.Forms.Label()
         Me.lblSectionsList = New System.Windows.Forms.Label()
         Me.picWatermark = New System.Windows.Forms.PictureBox()
-        Me.txtbxManSecBuildingName = New System.Windows.Forms.TextBox()
-        Me.Label1 = New System.Windows.Forms.Label()
         Me.pnlSidebar.SuspendLayout()
         Me.flowButtons.SuspendLayout()
         Me.pnlManSecContent.SuspendLayout()
@@ -192,7 +192,7 @@ Partial Class AdminManageSections
         Me.pnlManSecContent.Controls.Add(Me.picWatermark)
         Me.pnlManSecContent.Location = New System.Drawing.Point(300, 1)
         Me.pnlManSecContent.Name = "pnlManSecContent"
-        Me.pnlManSecContent.Padding = New System.Windows.Forms.Padding(30, 30, 30, 30)
+        Me.pnlManSecContent.Padding = New System.Windows.Forms.Padding(30)
         Me.pnlManSecContent.Size = New System.Drawing.Size(1000, 633)
         Me.pnlManSecContent.TabIndex = 13
         '
@@ -201,7 +201,7 @@ Partial Class AdminManageSections
         Me.TextBoxStudentSearch.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.TextBoxStudentSearch.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBoxStudentSearch.Location = New System.Drawing.Point(469, 590)
-        Me.TextBoxStudentSearch.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.TextBoxStudentSearch.Margin = New System.Windows.Forms.Padding(2)
         Me.TextBoxStudentSearch.MaxLength = 50
         Me.TextBoxStudentSearch.Name = "TextBoxStudentSearch"
         Me.TextBoxStudentSearch.Size = New System.Drawing.Size(186, 30)
@@ -295,6 +295,22 @@ Partial Class AdminManageSections
         Me.grpSectionInfo.TabIndex = 3
         Me.grpSectionInfo.TabStop = False
         Me.grpSectionInfo.Text = "Section Information"
+        '
+        'txtbxManSecBuildingName
+        '
+        Me.txtbxManSecBuildingName.Location = New System.Drawing.Point(295, 89)
+        Me.txtbxManSecBuildingName.Name = "txtbxManSecBuildingName"
+        Me.txtbxManSecBuildingName.Size = New System.Drawing.Size(133, 23)
+        Me.txtbxManSecBuildingName.TabIndex = 39
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(292, 67)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(99, 17)
+        Me.Label1.TabIndex = 38
+        Me.Label1.Text = "Building Name"
         '
         'cbxManSecStatus
         '
@@ -537,22 +553,6 @@ Partial Class AdminManageSections
         Me.picWatermark.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
         Me.picWatermark.TabIndex = 5
         Me.picWatermark.TabStop = False
-        '
-        'txtbxManSecBuildingName
-        '
-        Me.txtbxManSecBuildingName.Location = New System.Drawing.Point(295, 89)
-        Me.txtbxManSecBuildingName.Name = "txtbxManSecBuildingName"
-        Me.txtbxManSecBuildingName.Size = New System.Drawing.Size(133, 23)
-        Me.txtbxManSecBuildingName.TabIndex = 39
-        '
-        'Label1
-        '
-        Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(292, 67)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(99, 17)
-        Me.Label1.TabIndex = 38
-        Me.Label1.Text = "Building Name"
         '
         'AdminManageSections
         '

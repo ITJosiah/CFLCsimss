@@ -31,7 +31,7 @@ Public Class AdminManageSections
         dtpManSecDateCreated.Enabled = False
 
         ' Set CreatedBy to current user
-        txtbxManSecCreatedBy.Text = "Admin" ' Replace with actual username
+        txtbxManSecCreatedBy.Text = "" '
 
         ' Ensure Add button is enabled by default
         btnSectionAdd.Enabled = True
@@ -468,7 +468,9 @@ Public Class AdminManageSections
             MessageBox.Show(errorMessage.ToString(), "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             Return False
         End If
-
+        If String.IsNullOrWhiteSpace(txtbxManSecCreatedBy).Text Then
+            errors.Add("• Created By is required")
+        End If
         Return True
     End Function
 
@@ -518,7 +520,7 @@ Public Class AdminManageSections
 
         ' Date and Created By (reset to defaults)
         dtpManSecDateCreated.Value = DateTime.Now
-        txtbxManSecCreatedBy.Text = "Admin" ' Reset to default or keep current user
+        txtbxManSecCreatedBy.Text = ""
 
         ' Reset current section selection
         currentSectionID = 0
@@ -832,5 +834,9 @@ Public Class AdminManageSections
 
     Private Sub lblManSecSchedule_Click(sender As Object, e As EventArgs) Handles lblManSecSchedule.Click
         ' Label click handler
+    End Sub
+
+    Private Sub pnlManSecContent_Paint(sender As Object, e As PaintEventArgs) Handles pnlManSecContent.Paint
+
     End Sub
 End Class
