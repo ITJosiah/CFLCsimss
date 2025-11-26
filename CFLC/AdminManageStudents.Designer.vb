@@ -122,8 +122,8 @@ Partial Class AdminManageStudents
         Me.flowButtons.Controls.Add(Me.btnManageStudents)
         Me.flowButtons.Controls.Add(Me.btnManageTeachers)
         Me.flowButtons.Controls.Add(Me.btnManageSections)
-        Me.flowButtons.Controls.Add(Me.btnManageEnrollments)
         Me.flowButtons.Controls.Add(Me.btnManageSubjects)
+        Me.flowButtons.Controls.Add(Me.btnManageEnrollments)
         Me.flowButtons.Controls.Add(Me.btnGenerateReports)
         Me.flowButtons.Dock = System.Windows.Forms.DockStyle.Fill
         Me.flowButtons.FlowDirection = System.Windows.Forms.FlowDirection.TopDown
@@ -166,7 +166,7 @@ Partial Class AdminManageStudents
         '
         'btnManageEnrollments
         '
-        Me.btnManageEnrollments.Location = New System.Drawing.Point(0, 189)
+        Me.btnManageEnrollments.Location = New System.Drawing.Point(0, 252)
         Me.btnManageEnrollments.Margin = New System.Windows.Forms.Padding(0, 0, 0, 18)
         Me.btnManageEnrollments.Name = "btnManageEnrollments"
         Me.btnManageEnrollments.Size = New System.Drawing.Size(240, 45)
@@ -176,7 +176,7 @@ Partial Class AdminManageStudents
         '
         'btnManageSubjects
         '
-        Me.btnManageSubjects.Location = New System.Drawing.Point(0, 252)
+        Me.btnManageSubjects.Location = New System.Drawing.Point(0, 189)
         Me.btnManageSubjects.Margin = New System.Windows.Forms.Padding(0, 0, 0, 18)
         Me.btnManageSubjects.Name = "btnManageSubjects"
         Me.btnManageSubjects.Size = New System.Drawing.Size(240, 45)
@@ -222,7 +222,7 @@ Partial Class AdminManageStudents
         Me.pnlContent.Dock = System.Windows.Forms.DockStyle.Fill
         Me.pnlContent.Location = New System.Drawing.Point(300, 0)
         Me.pnlContent.Name = "pnlContent"
-        Me.pnlContent.Padding = New System.Windows.Forms.Padding(30, 30, 30, 30)
+        Me.pnlContent.Padding = New System.Windows.Forms.Padding(30)
         Me.pnlContent.Size = New System.Drawing.Size(1143, 800)
         Me.pnlContent.TabIndex = 1
         '
@@ -232,7 +232,7 @@ Partial Class AdminManageStudents
         Me.TextBoxStudentSearch.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.TextBoxStudentSearch.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBoxStudentSearch.Location = New System.Drawing.Point(624, 754)
-        Me.TextBoxStudentSearch.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.TextBoxStudentSearch.Margin = New System.Windows.Forms.Padding(2)
         Me.TextBoxStudentSearch.MaxLength = 50
         Me.TextBoxStudentSearch.Name = "TextBoxStudentSearch"
         Me.TextBoxStudentSearch.Size = New System.Drawing.Size(186, 30)
@@ -363,7 +363,7 @@ Partial Class AdminManageStudents
         '
         Me.RadioButtonStudentIPNO.AutoSize = True
         Me.RadioButtonStudentIPNO.Location = New System.Drawing.Point(116, 238)
-        Me.RadioButtonStudentIPNO.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.RadioButtonStudentIPNO.Margin = New System.Windows.Forms.Padding(2)
         Me.RadioButtonStudentIPNO.Name = "RadioButtonStudentIPNO"
         Me.RadioButtonStudentIPNO.Size = New System.Drawing.Size(44, 21)
         Me.RadioButtonStudentIPNO.TabIndex = 64
@@ -375,7 +375,7 @@ Partial Class AdminManageStudents
         '
         Me.RadioButtonStudentIPYES.AutoSize = True
         Me.RadioButtonStudentIPYES.Location = New System.Drawing.Point(63, 239)
-        Me.RadioButtonStudentIPYES.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.RadioButtonStudentIPYES.Margin = New System.Windows.Forms.Padding(2)
         Me.RadioButtonStudentIPYES.Name = "RadioButtonStudentIPYES"
         Me.RadioButtonStudentIPYES.Size = New System.Drawing.Size(50, 21)
         Me.RadioButtonStudentIPYES.TabIndex = 63
@@ -406,9 +406,9 @@ Partial Class AdminManageStudents
         Me.GroupBox4P.Controls.Add(Me.RadioButtonStudent4PYES)
         Me.GroupBox4P.Controls.Add(Me.RadioButtonStudent4PNO)
         Me.GroupBox4P.Location = New System.Drawing.Point(58, 284)
-        Me.GroupBox4P.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.GroupBox4P.Margin = New System.Windows.Forms.Padding(2)
         Me.GroupBox4P.Name = "GroupBox4P"
-        Me.GroupBox4P.Padding = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.GroupBox4P.Padding = New System.Windows.Forms.Padding(2)
         Me.GroupBox4P.Size = New System.Drawing.Size(100, 36)
         Me.GroupBox4P.TabIndex = 11
         Me.GroupBox4P.TabStop = False
@@ -417,7 +417,7 @@ Partial Class AdminManageStudents
         '
         Me.RadioButtonStudent4PYES.AutoSize = True
         Me.RadioButtonStudent4PYES.Location = New System.Drawing.Point(5, 7)
-        Me.RadioButtonStudent4PYES.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.RadioButtonStudent4PYES.Margin = New System.Windows.Forms.Padding(2)
         Me.RadioButtonStudent4PYES.Name = "RadioButtonStudent4PYES"
         Me.RadioButtonStudent4PYES.Size = New System.Drawing.Size(50, 21)
         Me.RadioButtonStudent4PYES.TabIndex = 65
@@ -429,7 +429,7 @@ Partial Class AdminManageStudents
         '
         Me.RadioButtonStudent4PNO.AutoSize = True
         Me.RadioButtonStudent4PNO.Location = New System.Drawing.Point(58, 7)
-        Me.RadioButtonStudent4PNO.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.RadioButtonStudent4PNO.Margin = New System.Windows.Forms.Padding(2)
         Me.RadioButtonStudent4PNO.Name = "RadioButtonStudent4PNO"
         Me.RadioButtonStudent4PNO.Size = New System.Drawing.Size(44, 21)
         Me.RadioButtonStudent4PNO.TabIndex = 66
