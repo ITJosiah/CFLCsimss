@@ -28,6 +28,10 @@ Public Class AdminManageSubjects
         ' Initialize Room Type ComboBox
         InitializeRoomTypeComboBox()
 
+        ' Set default dates
+        dtpManSubStartDate.Value = DateTime.Now
+        dtpManSubEndDate.Value = DateTime.Now.AddMonths(6) ' Default 6-month duration
+
         ' Load subjects data
         LoadToDGV("SELECT * FROM subject", dgvSubjectList)
 
@@ -183,12 +187,12 @@ Public Class AdminManageSubjects
         Try
             Dim query As String = "INSERT INTO subject (" &
                 "SubjectCode, SubjectName, Category, Description, SkillFocus, " &
-                "GradeLevel, Quarter, RoomType, LearningMaterials, Schedule, " &
-                "Status, CurriculumYear, DateCreated, CreatedBy, TeacherID" &
+                "GradeLevel, RoomType, LearningMaterials, Schedule, " &
+                "Status, DateCreated, CreatedBy, TeacherID, StartDate, EndDate" &
                 ") VALUES (" &
                 "@SubjectCode, @SubjectName, @Category, @Description, @SkillFocus, " &
-                "@GradeLevel, @Quarter, @RoomType, @LearningMaterials, @Schedule, " &
-                "@Status, @CurriculumYear, @DateCreated, @CreatedBy, @TeacherID)"
+                "@GradeLevel, @RoomType, @LearningMaterials, @Schedule, " &
+                "@Status, @DateCreated, @CreatedBy, @TeacherID, @StartDate, @EndDate)"
 
             modDBx.openConn(modDBx.db_name)
 
@@ -206,7 +210,7 @@ Public Class AdminManageSubjects
                 cmd.Parameters.AddWithValue("@Description", SafeString(txtbxManSubDescription.Text))
                 cmd.Parameters.AddWithValue("@SkillFocus", SafeString(txtbxManSubSkillFocus.Text))
 
-                ' Grade Level and Quarter
+                ' Grade Level
                 cmd.Parameters.AddWithValue("@GradeLevel", nudManSubGradeLevel.Value)
 
                 ' Room Type
@@ -227,9 +231,11 @@ Public Class AdminManageSubjects
                 End If
                 cmd.Parameters.AddWithValue("@Status", status)
 
-                ' Curriculum Information
+                ' Date Information
                 cmd.Parameters.AddWithValue("@DateCreated", dtpManSubDateCreated.Value.ToString("yyyy-MM-dd"))
                 cmd.Parameters.AddWithValue("@CreatedBy", SafeString(txtbxManSubCreatedBy.Text))
+                cmd.Parameters.AddWithValue("@StartDate", dtpManSubStartDate.Value.ToString("yyyy-MM-dd"))
+                cmd.Parameters.AddWithValue("@EndDate", dtpManSubEndDate.Value.ToString("yyyy-MM-dd"))
 
                 cmd.Parameters.AddWithValue("@TeacherID", If(String.IsNullOrWhiteSpace(txtbxManSubTeacherID.Text), DBNull.Value, CInt(txtbxManSubTeacherID.Text)))
 
@@ -341,20 +347,20 @@ Public Class AdminManageSubjects
             modDBx.openConn(modDBx.db_name)
 
             Dim Sql As String = "UPDATE subject SET " &
-    "SubjectCode = @SubjectCode, " &
-    "SubjectName = @SubjectName, " &
-    "Category = @Category, " &
-    "Description = @Description, " &
-    "SkillFocus = @SkillFocus, " &
-    "GradeLevel = @GradeLevel, " &
-    "RoomType = @RoomType, " &
-    "LearningMaterials = @LearningMaterials, " &
-    "Schedule = @Schedule, " &
-    "Status = @Status, " &
-    "TeacherID = @TeacherID, " &
-    "StartDate = @StartDate, " &
-    "EndDate = @EndDate " &
-    "WHERE SubjectID = @SubjectID"
+                "SubjectCode = @SubjectCode, " &
+                "SubjectName = @SubjectName, " &
+                "Category = @Category, " &
+                "Description = @Description, " &
+                "SkillFocus = @SkillFocus, " &
+                "GradeLevel = @GradeLevel, " &
+                "RoomType = @RoomType, " &
+                "LearningMaterials = @LearningMaterials, " &
+                "Schedule = @Schedule, " &
+                "Status = @Status, " &
+                "TeacherID = @TeacherID, " &
+                "StartDate = @StartDate, " &
+                "EndDate = @EndDate " &
+                "WHERE SubjectID = @SubjectID"
 
             Using cmd As New MySqlCommand(Sql, modDBx.conn)
                 ' Subject Information
@@ -370,10 +376,8 @@ Public Class AdminManageSubjects
                 cmd.Parameters.AddWithValue("@Description", SafeString(txtbxManSubDescription.Text))
                 cmd.Parameters.AddWithValue("@SkillFocus", SafeString(txtbxManSubSkillFocus.Text))
 
-                ' Grade Level and Quarter
+                ' Grade Level
                 cmd.Parameters.AddWithValue("@GradeLevel", nudManSubGradeLevel.Value)
-                cmd.Parameters.AddWithValue("@StartDate", dtpManSubStartDate.Value.Date)
-                cmd.Parameters.AddWithValue("@EndDate", dtpManSubEndDate.Value.Date)
 
                 ' Room Type
                 Dim roomType As String = ""
@@ -393,10 +397,11 @@ Public Class AdminManageSubjects
                 End If
                 cmd.Parameters.AddWithValue("@Status", status)
 
-                ' Curriculum Information
+                ' Date Information
+                cmd.Parameters.AddWithValue("@StartDate", dtpManSubStartDate.Value.ToString("yyyy-MM-dd"))
+                cmd.Parameters.AddWithValue("@EndDate", dtpManSubEndDate.Value.ToString("yyyy-MM-dd"))
 
                 cmd.Parameters.AddWithValue("@SubjectID", currentSubjectID)
-
                 cmd.Parameters.AddWithValue("@TeacherID", If(String.IsNullOrWhiteSpace(txtbxManSubTeacherID.Text), DBNull.Value, CInt(txtbxManSubTeacherID.Text)))
 
                 Dim rowsAffected As Integer = cmd.ExecuteNonQuery()
@@ -475,6 +480,8 @@ Public Class AdminManageSubjects
                         If GetSafeStringFromDB(reader("Schedule")) <> txtbxManSubSchedule.Text.Trim() Then Return True
                         If GetSafeStringFromDB(reader("Status")) <> ComboBoxSubjectStatus.Text.Trim() Then Return True ' CHANGED
                         If GetSafeStringFromDB(reader("TeacherID")) <> txtbxManSubTeacherID.Text.Trim() Then Return True
+
+                        ' Check StartDate
                         If Not IsDBNull(reader("StartDate")) Then
                             Dim dbDate As DateTime = Convert.ToDateTime(reader("StartDate"))
                             If dbDate.Date <> dtpManSubStartDate.Value.Date Then Return True
@@ -483,6 +490,7 @@ Public Class AdminManageSubjects
                             If dtpManSubStartDate.Value <> Date.MinValue Then Return True
                         End If
 
+                        ' Check EndDate
                         If Not IsDBNull(reader("EndDate")) Then
                             Dim dbDate As DateTime = Convert.ToDateTime(reader("EndDate"))
                             If dbDate.Date <> dtpManSubEndDate.Value.Date Then Return True
@@ -524,7 +532,7 @@ Public Class AdminManageSubjects
             errors.Add("• Category is required")
         End If
 
-        ' 2. Grade Level and Quarter Validation
+        ' 2. Grade Level Validation
         If nudManSubGradeLevel.Value < 1 Or nudManSubGradeLevel.Value > 12 Then
             errors.Add("• Grade Level must be between 1 and 12")
         End If
@@ -534,12 +542,12 @@ Public Class AdminManageSubjects
             errors.Add("• Room Type is required")
         End If
 
-        ' REMOVED: Status validation since it's now automatic
-        ' 4. Status is now automatically set based on Teacher ID
+        ' 4. Date Validation
+        If dtpManSubEndDate.Value < dtpManSubStartDate.Value Then
+            errors.Add("• End Date cannot be earlier than Start Date")
+        End If
 
-        ' 5. Curriculum Year Validation
-
-        ' 6. Teacher ID validation (optional but if provided, should be valid)
+        ' 5. Teacher ID validation (optional but if provided, should be valid)
         If Not String.IsNullOrWhiteSpace(txtbxManSubTeacherID.Text) Then
             If Not Integer.TryParse(txtbxManSubTeacherID.Text, Nothing) Then
                 errors.Add("• Teacher ID must be a valid number")
@@ -548,7 +556,7 @@ Public Class AdminManageSubjects
             End If
         End If
 
-        ' 7. Check if there are any validation errors
+        ' 6. Check if there are any validation errors
         If errors.Count > 0 Then
             Dim errorMessage As New StringBuilder()
             errorMessage.AppendLine("Please fix the following errors before proceeding:")
@@ -597,7 +605,7 @@ Public Class AdminManageSubjects
         txtbxManSubDescription.Clear()
         txtbxManSubSkillFocus.Clear()
 
-        ' Grade Level and Quarter
+        ' Grade Level
         nudManSubGradeLevel.Value = 0
 
         ' Room Type and Learning Materials
@@ -605,8 +613,12 @@ Public Class AdminManageSubjects
         txtbxManSubLearningMaterials.Clear()
         txtbxManSubSchedule.Clear()
 
-        ' Status and Curriculum - CHANGED TO COMBOBOX
+        ' Status and Dates - CHANGED TO COMBOBOX
         ComboBoxSubjectStatus.SelectedIndex = -1 ' CHANGED FROM txtbxManSubStatus
+
+        ' Reset dates to defaults
+        dtpManSubStartDate.Value = DateTime.Now
+        dtpManSubEndDate.Value = DateTime.Now.AddMonths(6)
 
         ' Date and Created By (reset to defaults)
         dtpManSubDateCreated.Value = DateTime.Now
@@ -659,14 +671,27 @@ Public Class AdminManageSubjects
                 nudManSubGradeLevel.Value = Convert.ToDecimal(row.Cells("GradeLevel").Value)
             End If
 
-
             cbxManSubRoomType.Text = GetSafeString(row.Cells("RoomType"))
             txtbxManSubLearningMaterials.Text = GetSafeString(row.Cells("LearningMaterials"))
             txtbxManSubSchedule.Text = GetSafeString(row.Cells("Schedule"))
             ComboBoxSubjectStatus.Text = GetSafeString(row.Cells("Status")) ' CHANGED
 
+            ' Load Date Information
             If Not IsDBNull(row.Cells("DateCreated").Value) Then
                 dtpManSubDateCreated.Value = CDate(row.Cells("DateCreated").Value)
+            End If
+
+            ' Load StartDate and EndDate
+            If Not IsDBNull(row.Cells("StartDate").Value) Then
+                dtpManSubStartDate.Value = CDate(row.Cells("StartDate").Value)
+            Else
+                dtpManSubStartDate.Value = DateTime.Now
+            End If
+
+            If Not IsDBNull(row.Cells("EndDate").Value) Then
+                dtpManSubEndDate.Value = CDate(row.Cells("EndDate").Value)
+            Else
+                dtpManSubEndDate.Value = DateTime.Now.AddMonths(6)
             End If
 
             txtbxManSubTeacherID.Text = GetSafeString(row.Cells("TeacherID"))
