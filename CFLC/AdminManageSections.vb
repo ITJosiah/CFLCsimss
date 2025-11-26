@@ -112,12 +112,4 @@
         End If
 
     End Sub
-
-    Private Sub lblManSecStartDate_Click(sender As Object, e As EventArgs) Handles lblManSecStartDate.Click
-
-    End Sub
-
-    Private Sub lblManSecSchedule_Click(sender As Object, e As EventArgs) Handles lblManSecSchedule.Click
-
-    End Sub
 End Class
