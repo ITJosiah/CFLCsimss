@@ -59,7 +59,6 @@ Public Class ManageEnrollmentForms
         ComboBoxEnrollmentMode.DropDownStyle = ComboBoxStyle.DropDownList
         ComboBoxEnrollmentMode.Items.Add("Online")
         ComboBoxEnrollmentMode.Items.Add("In-Person")
-        ComboBoxEnrollmentMode.Items.Add("Hybrid")
     End Sub
 
     Private Sub InitializeEnrollmentStatusComboBox()
@@ -75,8 +74,6 @@ Public Class ManageEnrollmentForms
     Private Sub InitializePaymentStatusComboBox()
         ComboBoxEnrollmentPaymentStatus.Items.Clear()
         ComboBoxEnrollmentPaymentStatus.DropDownStyle = ComboBoxStyle.DropDownList
-        ComboBoxEnrollmentPaymentStatus.Items.Add("Pending")
-        ComboBoxEnrollmentPaymentStatus.Items.Add("Partial")
         ComboBoxEnrollmentPaymentStatus.Items.Add("Paid")
         ComboBoxEnrollmentPaymentStatus.Items.Add("Overdue")
         ComboBoxEnrollmentPaymentStatus.Items.Add("Refunded")
@@ -87,8 +84,6 @@ Public Class ManageEnrollmentForms
         cmbEnrollmentRequirementStatus.DropDownStyle = ComboBoxStyle.DropDownList
         cmbEnrollmentRequirementStatus.Items.Add("Complete")
         cmbEnrollmentRequirementStatus.Items.Add("Incomplete")
-        cmbEnrollmentRequirementStatus.Items.Add("Pending")
-        cmbEnrollmentRequirementStatus.Items.Add("Waived")
     End Sub
 
     ' ===== ID VALIDATION METHODS =====
