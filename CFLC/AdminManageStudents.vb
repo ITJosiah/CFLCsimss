@@ -182,15 +182,13 @@ Public Class AdminManageStudents
                             "LRN, MiddleName, FirstName, LastName, ExtensionName, " &
                             "Gender, BirthDate, Age, BirthPlace, MotherTongue, " &
                             "Indigineous, IndigineousSpecific, 4Ps, 4PsID, " &
-                            "Religion, GuardianName, GuardianContact, " &
-                            "GradeLevel, SectionID, EnrollmentID, " &
+                            "Religion, GuardianName, GuardianContact, SectionID, EnrollmentID, " &
                             "HouseNumber, Street, Barangay, Municipality, Province, Country, ZipCode" &
                             ") VALUES (" &
                             "@LRN, @MiddleName, @FirstName, @LastName, @ExtensionName, " &
                             "@Gender, @BirthDate, @Age, @BirthPlace, @MotherTongue, " &
                             "@Indigineous, @IndigineousSpecific, @4Ps, @4PsID, " &
-                            "@Religion, @GuardianName, @GuardianContact, " &
-                            "@GradeLevel, @SectionID, @EnrollmentID, " &
+                            "@Religion, @GuardianName, @GuardianContact, @SectionID, @EnrollmentID, " &
                             "@HouseNumber, @Street, @Barangay, @Municipality, @Province, @Country, @ZipCode)"
 
             modDBx.openConn(modDBx.db_name)
@@ -229,9 +227,6 @@ Public Class AdminManageStudents
                 cmd.Parameters.AddWithValue("@Religion", ConvertToProperCase(SafeString(txtbxStudentReligion.Text)))
                 cmd.Parameters.AddWithValue("@GuardianName", ConvertToProperCase(SafeString(txtbxGuardianName.Text)))
                 cmd.Parameters.AddWithValue("@GuardianContact", SafeString(txtbxGuardianContactNo.Text)) ' No conversion (numeric)
-
-                ' Academic Information
-                cmd.Parameters.AddWithValue("@GradeLevel", nudStudentGradeLevel.Value)
 
                 ' Address Information - Convert to Proper Case
                 cmd.Parameters.AddWithValue("@HouseNumber", SafeString(txtbxStudentHouseNo.Text)) ' No conversion (numeric)
@@ -387,10 +382,6 @@ Public Class AdminManageStudents
 
         If cmbStudenttGender.SelectedIndex = -1 Then
             emptyFields.Add("Sex")
-        End If
-
-        If nudStudentGradeLevel.Value <= 0 Then
-            emptyFields.Add("Grade Level")
         End If
 
         If String.IsNullOrWhiteSpace(txtbxStudentPOB.Text) Then
@@ -555,8 +546,6 @@ Public Class AdminManageStudents
         ' Reset current student selection
         currentStudentID = 0
 
-        ' Reset grade level control to default (use helper)
-        ResetNumericControl(nudStudentGradeLevel)
 
         ' Re-enable Add button so user can create a new record
         btnStudentAdd.Enabled = True
@@ -666,12 +655,6 @@ Public Class AdminManageStudents
             If Not IsDBNull(row.Cells("Age").Value) Then
                 txtbxStudentAge.Text = row.Cells("Age").Value.ToString()
             End If
-
-            ' Grade Level
-            If Not IsDBNull(row.Cells("GradeLevel").Value) Then
-                nudStudentGradeLevel.Value = CInt(row.Cells("GradeLevel").Value)
-            End If
-
             ' Address fields
             txtbxStudentHouseNo.Text = GetSafeString(row.Cells("HouseNumber"))
             txtbxstudentStreet.Text = GetSafeString(row.Cells("Street"))
@@ -729,7 +712,6 @@ Public Class AdminManageStudents
                     "Religion = @Religion, " &
                     "GuardianName = @GuardianName, " &
                     "GuardianContact = @GuardianContact, " &
-                    "GradeLevel = @GradeLevel, " &
                     "HouseNumber = @HouseNumber, " &
                     "Street = @Street, " &
                     "Barangay = @Barangay, " &
@@ -758,7 +740,6 @@ Public Class AdminManageStudents
                 cmd.Parameters.AddWithValue("@Religion", ConvertToProperCase(txtbxStudentReligion.Text.Trim()))
                 cmd.Parameters.AddWithValue("@GuardianName", ConvertToProperCase(txtbxGuardianName.Text.Trim()))
                 cmd.Parameters.AddWithValue("@GuardianContact", txtbxGuardianContactNo.Text.Trim())
-                cmd.Parameters.AddWithValue("@GradeLevel", nudStudentGradeLevel.Value)
                 cmd.Parameters.AddWithValue("@HouseNumber", txtbxStudentHouseNo.Text.Trim())
                 cmd.Parameters.AddWithValue("@Street", ConvertToProperCase(txtbxstudentStreet.Text.Trim()))
                 cmd.Parameters.AddWithValue("@Barangay", ConvertToProperCase(txtbxStudentBarangay.Text.Trim()))
@@ -820,7 +801,6 @@ Public Class AdminManageStudents
                         If GetSafeString(reader("Religion")) <> txtbxStudentReligion.Text.Trim() Then Return True
                         If GetSafeString(reader("GuardianName")) <> txtbxGuardianName.Text.Trim() Then Return True
                         If GetSafeString(reader("GuardianContact")) <> txtbxGuardianContactNo.Text.Trim() Then Return True
-                        If CInt(reader("GradeLevel")) <> nudStudentGradeLevel.Value Then Return True
                         If GetSafeString(reader("HouseNumber")) <> txtbxStudentHouseNo.Text.Trim() Then Return True
                         If GetSafeString(reader("Street")) <> txtbxstudentStreet.Text.Trim() Then Return True
                         If GetSafeString(reader("Barangay")) <> txtbxStudentBarangay.Text.Trim() Then Return True
@@ -1148,4 +1128,7 @@ Public Class AdminManageStudents
         txtbxStudentFirstName.Focus()
     End Sub
 
+    Private Sub pnlContent_Paint(sender As Object, e As PaintEventArgs) Handles pnlContent.Paint
+
+    End Sub
 End Class

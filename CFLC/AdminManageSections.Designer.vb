@@ -441,6 +441,7 @@ Partial Class AdminManageSections
         'nudManSecGradeLevel
         '
         Me.nudManSecGradeLevel.Location = New System.Drawing.Point(84, 88)
+        Me.nudManSecGradeLevel.Maximum = New Decimal(New Integer() {6, 0, 0, 0})
         Me.nudManSecGradeLevel.Name = "nudManSecGradeLevel"
         Me.nudManSecGradeLevel.Size = New System.Drawing.Size(35, 23)
         Me.nudManSecGradeLevel.TabIndex = 27
