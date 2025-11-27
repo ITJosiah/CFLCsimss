@@ -27,8 +27,8 @@ Partial Class AdminManageStudents
         Me.btnManageStudents = New System.Windows.Forms.Button()
         Me.btnManageTeachers = New System.Windows.Forms.Button()
         Me.btnManageSections = New System.Windows.Forms.Button()
-        Me.btnManageEnrollments = New System.Windows.Forms.Button()
         Me.btnManageSubjects = New System.Windows.Forms.Button()
+        Me.btnManageEnrollments = New System.Windows.Forms.Button()
         Me.btnGenerateReports = New System.Windows.Forms.Button()
         Me.btnLogout = New System.Windows.Forms.Button()
         Me.pnlContent = New System.Windows.Forms.Panel()
@@ -164,16 +164,6 @@ Partial Class AdminManageStudents
         Me.btnManageSections.Text = "Manage Sections"
         Me.btnManageSections.UseVisualStyleBackColor = True
         '
-        'btnManageEnrollments
-        '
-        Me.btnManageEnrollments.Location = New System.Drawing.Point(0, 252)
-        Me.btnManageEnrollments.Margin = New System.Windows.Forms.Padding(0, 0, 0, 18)
-        Me.btnManageEnrollments.Name = "btnManageEnrollments"
-        Me.btnManageEnrollments.Size = New System.Drawing.Size(240, 45)
-        Me.btnManageEnrollments.TabIndex = 7
-        Me.btnManageEnrollments.Text = "Manage Enrollments"
-        Me.btnManageEnrollments.UseVisualStyleBackColor = True
-        '
         'btnManageSubjects
         '
         Me.btnManageSubjects.Location = New System.Drawing.Point(0, 189)
@@ -183,6 +173,16 @@ Partial Class AdminManageStudents
         Me.btnManageSubjects.TabIndex = 8
         Me.btnManageSubjects.Text = "Manage Subjects"
         Me.btnManageSubjects.UseVisualStyleBackColor = True
+        '
+        'btnManageEnrollments
+        '
+        Me.btnManageEnrollments.Location = New System.Drawing.Point(0, 252)
+        Me.btnManageEnrollments.Margin = New System.Windows.Forms.Padding(0, 0, 0, 18)
+        Me.btnManageEnrollments.Name = "btnManageEnrollments"
+        Me.btnManageEnrollments.Size = New System.Drawing.Size(240, 45)
+        Me.btnManageEnrollments.TabIndex = 7
+        Me.btnManageEnrollments.Text = "Manage Enrollments"
+        Me.btnManageEnrollments.UseVisualStyleBackColor = True
         '
         'btnGenerateReports
         '

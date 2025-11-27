@@ -558,8 +558,8 @@ Public Class AdminManageSections
         End If
 
         ' 2. Grade Level Validation
-        If nudManSecGradeLevel.Value < 1 Or nudManSecGradeLevel.Value > 12 Then
-            errors.Add("• Grade Level must be between 1 and 12")
+        If nudManSecGradeLevel.Value < 1 Or nudManSecGradeLevel.Value > 6 Then
+            errors.Add("• Grade Level must be between 1 and ")
         End If
 
         ' 3. Learning Mode Validation
@@ -987,6 +987,14 @@ Public Class AdminManageSections
     End Sub
 
     Private Sub pnlManSecContent_Paint(sender As Object, e As PaintEventArgs) Handles pnlManSecContent.Paint
+
+    End Sub
+
+    Private Sub nudManSecGradeLevel_ValueChanged(sender As Object, e As EventArgs) Handles nudManSecGradeLevel.ValueChanged
+
+    End Sub
+
+    Private Sub btnManageSubjects_Click(sender As Object, e As EventArgs) Handles btnManageSubjects.Click
 
     End Sub
 End Class
