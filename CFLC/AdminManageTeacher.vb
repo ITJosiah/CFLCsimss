@@ -51,9 +51,10 @@ Public Class AdminManageTeacher
         ' Populate Status dropdown
         ComboBoxTeacherStatus.Items.Clear()
         ComboBoxTeacherStatus.Items.Add("Active")
-        ComboBoxTeacherStatus.Items.Add("Inactive")
         ComboBoxTeacherStatus.Items.Add("On Leave")
         ComboBoxTeacherStatus.Items.Add("Resigned")
+        ComboBoxTeacherStatus.Items.Add("Retired")
+
     End Sub
 
     Private Sub btnTeaAdd_Click(sender As Object, e As EventArgs) Handles btnTeaAdd.Click
