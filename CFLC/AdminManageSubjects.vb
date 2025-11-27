@@ -592,7 +592,7 @@ Public Class AdminManageSubjects
             End If
         End If
 
-        ' 16. Check if there are any validation errors
+        ' 6. Check if there are any validation errors
         If errors.Count > 0 Then
             Dim errorMessage As New StringBuilder()
             errorMessage.AppendLine("Please fix the following errors before proceeding:")
