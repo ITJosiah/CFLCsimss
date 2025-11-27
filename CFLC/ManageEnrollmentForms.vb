@@ -65,7 +65,7 @@ Public Class ManageEnrollmentForms
         ComboBoxEnrollmentStatus.Items.Clear()
         ComboBoxEnrollmentStatus.DropDownStyle = ComboBoxStyle.DropDownList
         ComboBoxEnrollmentStatus.Items.Add("Enrolled")
-        ComboBoxEnrollmentStatus.Items.Add("Unenrolled")
+        ComboBoxEnrollmentStatus.Items.Add("Not Enrolled")
     End Sub
 
     Private Sub InitializePaymentStatusComboBox()
