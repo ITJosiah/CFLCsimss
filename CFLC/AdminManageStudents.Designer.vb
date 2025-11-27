@@ -27,8 +27,8 @@ Partial Class AdminManageStudents
         Me.btnManageStudents = New System.Windows.Forms.Button()
         Me.btnManageTeachers = New System.Windows.Forms.Button()
         Me.btnManageSections = New System.Windows.Forms.Button()
-        Me.btnManageEnrollments = New System.Windows.Forms.Button()
         Me.btnManageSubjects = New System.Windows.Forms.Button()
+        Me.btnManageEnrollments = New System.Windows.Forms.Button()
         Me.btnGenerateReports = New System.Windows.Forms.Button()
         Me.btnLogout = New System.Windows.Forms.Button()
         Me.pnlContent = New System.Windows.Forms.Panel()
@@ -75,7 +75,6 @@ Partial Class AdminManageStudents
         Me.Label2 = New System.Windows.Forms.Label()
         Me.txtbxStudentExtension = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.nudStudentGradeLevel = New System.Windows.Forms.NumericUpDown()
         Me.cmbStudenttGender = New System.Windows.Forms.ComboBox()
         Me.dtpStudentBirthdate = New System.Windows.Forms.DateTimePicker()
         Me.Label11 = New System.Windows.Forms.Label()
@@ -85,7 +84,6 @@ Partial Class AdminManageStudents
         Me.lblStudentGuardianName = New System.Windows.Forms.Label()
         Me.txtbxStudentReligion = New System.Windows.Forms.TextBox()
         Me.lblStudentReligion = New System.Windows.Forms.Label()
-        Me.lblStudentGradeLevel = New System.Windows.Forms.Label()
         Me.txtbxStudentSurname = New System.Windows.Forms.TextBox()
         Me.lblStudentSurname = New System.Windows.Forms.Label()
         Me.txtStudentMiddleName = New System.Windows.Forms.TextBox()
@@ -100,7 +98,6 @@ Partial Class AdminManageStudents
         CType(Me.dgvStudents, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpStudentInfo.SuspendLayout()
         Me.GroupBox4P.SuspendLayout()
-        CType(Me.nudStudentGradeLevel, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.picWatermark, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -164,16 +161,6 @@ Partial Class AdminManageStudents
         Me.btnManageSections.Text = "Manage Sections"
         Me.btnManageSections.UseVisualStyleBackColor = True
         '
-        'btnManageEnrollments
-        '
-        Me.btnManageEnrollments.Location = New System.Drawing.Point(0, 252)
-        Me.btnManageEnrollments.Margin = New System.Windows.Forms.Padding(0, 0, 0, 18)
-        Me.btnManageEnrollments.Name = "btnManageEnrollments"
-        Me.btnManageEnrollments.Size = New System.Drawing.Size(240, 45)
-        Me.btnManageEnrollments.TabIndex = 7
-        Me.btnManageEnrollments.Text = "Manage Enrollments"
-        Me.btnManageEnrollments.UseVisualStyleBackColor = True
-        '
         'btnManageSubjects
         '
         Me.btnManageSubjects.Location = New System.Drawing.Point(0, 189)
@@ -183,6 +170,16 @@ Partial Class AdminManageStudents
         Me.btnManageSubjects.TabIndex = 8
         Me.btnManageSubjects.Text = "Manage Subjects"
         Me.btnManageSubjects.UseVisualStyleBackColor = True
+        '
+        'btnManageEnrollments
+        '
+        Me.btnManageEnrollments.Location = New System.Drawing.Point(0, 252)
+        Me.btnManageEnrollments.Margin = New System.Windows.Forms.Padding(0, 0, 0, 18)
+        Me.btnManageEnrollments.Name = "btnManageEnrollments"
+        Me.btnManageEnrollments.Size = New System.Drawing.Size(240, 45)
+        Me.btnManageEnrollments.TabIndex = 7
+        Me.btnManageEnrollments.Text = "Manage Enrollments"
+        Me.btnManageEnrollments.UseVisualStyleBackColor = True
         '
         'btnGenerateReports
         '
@@ -326,7 +323,6 @@ Partial Class AdminManageStudents
         Me.grpStudentInfo.Controls.Add(Me.Label2)
         Me.grpStudentInfo.Controls.Add(Me.txtbxStudentExtension)
         Me.grpStudentInfo.Controls.Add(Me.Label1)
-        Me.grpStudentInfo.Controls.Add(Me.nudStudentGradeLevel)
         Me.grpStudentInfo.Controls.Add(Me.cmbStudenttGender)
         Me.grpStudentInfo.Controls.Add(Me.dtpStudentBirthdate)
         Me.grpStudentInfo.Controls.Add(Me.Label11)
@@ -336,7 +332,6 @@ Partial Class AdminManageStudents
         Me.grpStudentInfo.Controls.Add(Me.lblStudentGuardianName)
         Me.grpStudentInfo.Controls.Add(Me.txtbxStudentReligion)
         Me.grpStudentInfo.Controls.Add(Me.lblStudentReligion)
-        Me.grpStudentInfo.Controls.Add(Me.lblStudentGradeLevel)
         Me.grpStudentInfo.Controls.Add(Me.txtbxStudentSurname)
         Me.grpStudentInfo.Controls.Add(Me.lblStudentSurname)
         Me.grpStudentInfo.Controls.Add(Me.txtStudentMiddleName)
@@ -687,14 +682,6 @@ Partial Class AdminManageStudents
         Me.Label1.TabIndex = 28
         Me.Label1.Text = "Extension (Jr. III,  etc.)"
         '
-        'nudStudentGradeLevel
-        '
-        Me.nudStudentGradeLevel.Location = New System.Drawing.Point(442, 82)
-        Me.nudStudentGradeLevel.Maximum = New Decimal(New Integer() {6, 0, 0, 0})
-        Me.nudStudentGradeLevel.Name = "nudStudentGradeLevel"
-        Me.nudStudentGradeLevel.Size = New System.Drawing.Size(35, 23)
-        Me.nudStudentGradeLevel.TabIndex = 27
-        '
         'cmbStudenttGender
         '
         Me.cmbStudenttGender.FormattingEnabled = True
@@ -773,15 +760,6 @@ Partial Class AdminManageStudents
         Me.lblStudentReligion.Size = New System.Drawing.Size(59, 17)
         Me.lblStudentReligion.TabIndex = 13
         Me.lblStudentReligion.Text = "Religion"
-        '
-        'lblStudentGradeLevel
-        '
-        Me.lblStudentGradeLevel.AutoSize = True
-        Me.lblStudentGradeLevel.Location = New System.Drawing.Point(421, 62)
-        Me.lblStudentGradeLevel.Name = "lblStudentGradeLevel"
-        Me.lblStudentGradeLevel.Size = New System.Drawing.Size(86, 17)
-        Me.lblStudentGradeLevel.TabIndex = 9
-        Me.lblStudentGradeLevel.Text = "Grade Level"
         '
         'txtbxStudentSurname
         '
@@ -878,7 +856,6 @@ Partial Class AdminManageStudents
         Me.grpStudentInfo.PerformLayout()
         Me.GroupBox4P.ResumeLayout(False)
         Me.GroupBox4P.PerformLayout()
-        CType(Me.nudStudentGradeLevel, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.picWatermark, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
@@ -908,7 +885,6 @@ Partial Class AdminManageStudents
     Friend WithEvents lblStudentGuardianName As Label
     Friend WithEvents txtbxStudentReligion As TextBox
     Friend WithEvents lblStudentReligion As Label
-    Friend WithEvents lblStudentGradeLevel As Label
     Friend WithEvents txtbxStudentSurname As TextBox
     Friend WithEvents lblStudentSurname As Label
     Friend WithEvents txtStudentMiddleName As TextBox
@@ -917,7 +893,6 @@ Partial Class AdminManageStudents
     Friend WithEvents lblStudentFirstName As Label
     Friend WithEvents lblStudentList As Label
     Friend WithEvents cmbStudenttGender As ComboBox
-    Friend WithEvents nudStudentGradeLevel As NumericUpDown
     Friend WithEvents TextBoxStudentSearch As TextBox
     Friend WithEvents txtbxStudentExtension As TextBox
     Friend WithEvents Label1 As Label
