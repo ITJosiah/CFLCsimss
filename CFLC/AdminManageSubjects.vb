@@ -21,7 +21,7 @@ Public Class AdminManageSubjects
             pnlSidebar.Visible = False
             pnlManSubContent.Dock = DockStyle.Fill
         End If
-        nudManSubGradeLevel.Maximum = 6
+
 
         ' Initialize Category ComboBox
         InitializeCategoryComboBox()
@@ -526,8 +526,8 @@ Public Class AdminManageSubjects
         End If
 
         ' 2. Grade Level Validation
-        If nudManSubGradeLevel.Value < 1 Or nudManSubGradeLevel.Value > 12 Then
-            errors.Add("• Grade Level must be between 1 and 12")
+        If nudManSubGradeLevel.Value < 1 Or nudManSubGradeLevel.Value > 6 Then
+            errors.Add("• Grade Level must be between 1 and 6")
         End If
 
         ' 3. Room Type Validation
@@ -642,7 +642,7 @@ Public Class AdminManageSubjects
 
         ' Date and Created By (reset to defaults)
         dtpManSubDateCreated.Value = DateTime.Now
-        txtbxManSubCreatedBy.Text = "Admin" ' Reset to default or keep current user
+        txtbxManSubCreatedBy.Text = "" ' Reset to default or keep current user
 
         txtbxManSubTeacherID.Clear()
 

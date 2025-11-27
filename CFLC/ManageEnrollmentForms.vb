@@ -78,4 +78,7 @@ Public Class ManageEnrollmentForms
         TextBoxEnrollmentRefNum.Text = ""
     End Sub
 
+    Private Sub EnrollmentRequirementStatus_Click(sender As Object, e As EventArgs) Handles EnrollmentRequirementStatus.Click
+
+    End Sub
 End Class

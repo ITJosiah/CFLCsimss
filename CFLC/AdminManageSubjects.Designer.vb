@@ -38,6 +38,10 @@ Partial Class AdminManageSubjects
         Me.btnSubjectAdd = New System.Windows.Forms.Button()
         Me.dgvSubjectList = New System.Windows.Forms.DataGridView()
         Me.grpSubjectInformation = New System.Windows.Forms.GroupBox()
+        Me.dtpManSubEndDate = New System.Windows.Forms.DateTimePicker()
+        Me.Enddate = New System.Windows.Forms.Label()
+        Me.dtpManSubStartDate = New System.Windows.Forms.DateTimePicker()
+        Me.Label3 = New System.Windows.Forms.Label()
         Me.txtbxManSubTeacherID = New System.Windows.Forms.TextBox()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.ComboBoxSubjectStatus = New System.Windows.Forms.ComboBox()
@@ -66,10 +70,6 @@ Partial Class AdminManageSubjects
         Me.lblManSubSubjectCode = New System.Windows.Forms.Label()
         Me.lblSubjectList = New System.Windows.Forms.Label()
         Me.picWatermark = New System.Windows.Forms.PictureBox()
-        Me.dtpManSubStartDate = New System.Windows.Forms.DateTimePicker()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.dtpManSubEndDate = New System.Windows.Forms.DateTimePicker()
-        Me.Enddate = New System.Windows.Forms.Label()
         Me.pnlSidebar.SuspendLayout()
         Me.flowButtons.SuspendLayout()
         Me.pnlManSubContent.SuspendLayout()
@@ -300,6 +300,40 @@ Partial Class AdminManageSubjects
         Me.grpSubjectInformation.TabStop = False
         Me.grpSubjectInformation.Text = "Subject Information"
         '
+        'dtpManSubEndDate
+        '
+        Me.dtpManSubEndDate.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
+        Me.dtpManSubEndDate.Location = New System.Drawing.Point(491, 133)
+        Me.dtpManSubEndDate.Name = "dtpManSubEndDate"
+        Me.dtpManSubEndDate.Size = New System.Drawing.Size(103, 23)
+        Me.dtpManSubEndDate.TabIndex = 50
+        '
+        'Enddate
+        '
+        Me.Enddate.AutoSize = True
+        Me.Enddate.Location = New System.Drawing.Point(488, 113)
+        Me.Enddate.Name = "Enddate"
+        Me.Enddate.Size = New System.Drawing.Size(67, 17)
+        Me.Enddate.TabIndex = 49
+        Me.Enddate.Text = "End Date"
+        '
+        'dtpManSubStartDate
+        '
+        Me.dtpManSubStartDate.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
+        Me.dtpManSubStartDate.Location = New System.Drawing.Point(491, 87)
+        Me.dtpManSubStartDate.Name = "dtpManSubStartDate"
+        Me.dtpManSubStartDate.Size = New System.Drawing.Size(103, 23)
+        Me.dtpManSubStartDate.TabIndex = 48
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Location = New System.Drawing.Point(488, 67)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(72, 17)
+        Me.Label3.TabIndex = 47
+        Me.Label3.Text = "Start Date"
+        '
         'txtbxManSubTeacherID
         '
         Me.txtbxManSubTeacherID.Location = New System.Drawing.Point(651, 37)
@@ -438,6 +472,7 @@ Partial Class AdminManageSubjects
         'nudManSubGradeLevel
         '
         Me.nudManSubGradeLevel.Location = New System.Drawing.Point(300, 84)
+        Me.nudManSubGradeLevel.Maximum = New Decimal(New Integer() {6, 0, 0, 0})
         Me.nudManSubGradeLevel.Name = "nudManSubGradeLevel"
         Me.nudManSubGradeLevel.Size = New System.Drawing.Size(35, 23)
         Me.nudManSubGradeLevel.TabIndex = 27
@@ -539,40 +574,6 @@ Partial Class AdminManageSubjects
         Me.picWatermark.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
         Me.picWatermark.TabIndex = 5
         Me.picWatermark.TabStop = False
-        '
-        'dtpManSubStartDate
-        '
-        Me.dtpManSubStartDate.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.dtpManSubStartDate.Location = New System.Drawing.Point(491, 87)
-        Me.dtpManSubStartDate.Name = "dtpManSubStartDate"
-        Me.dtpManSubStartDate.Size = New System.Drawing.Size(103, 23)
-        Me.dtpManSubStartDate.TabIndex = 48
-        '
-        'Label3
-        '
-        Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(488, 67)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(72, 17)
-        Me.Label3.TabIndex = 47
-        Me.Label3.Text = "Start Date"
-        '
-        'dtpManSubEndDate
-        '
-        Me.dtpManSubEndDate.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.dtpManSubEndDate.Location = New System.Drawing.Point(491, 133)
-        Me.dtpManSubEndDate.Name = "dtpManSubEndDate"
-        Me.dtpManSubEndDate.Size = New System.Drawing.Size(103, 23)
-        Me.dtpManSubEndDate.TabIndex = 50
-        '
-        'Enddate
-        '
-        Me.Enddate.AutoSize = True
-        Me.Enddate.Location = New System.Drawing.Point(488, 113)
-        Me.Enddate.Name = "Enddate"
-        Me.Enddate.Size = New System.Drawing.Size(67, 17)
-        Me.Enddate.TabIndex = 49
-        Me.Enddate.Text = "End Date"
         '
         'AdminManageSubjects
         '
