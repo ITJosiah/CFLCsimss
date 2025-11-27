@@ -40,6 +40,9 @@ Public Class AdminManageSections
         ' Ensure Add button is enabled by default
         btnSectionAdd.Enabled = True
 
+        Dim txt = DirectCast(nudManSecGradeLevel.Controls(1), TextBox)
+        txt.Enabled = False
+
         ' Ensure the grid doesn't auto-select the first row on load
         dgvSections.ClearSelection()
         Try
@@ -989,4 +992,6 @@ Public Class AdminManageSections
     Private Sub pnlManSecContent_Paint(sender As Object, e As PaintEventArgs) Handles pnlManSecContent.Paint
 
     End Sub
+
+
 End Class

@@ -49,6 +49,10 @@ Public Class AdminManageSubjects
         ' Ensure Add button is enabled by default
         btnSubjectAdd.Enabled = True
 
+        ' nud readable only
+        Dim txt = DirectCast(nudManSubGradeLevel.Controls(1), TextBox)
+        txt.Enabled = False
+
         ' Ensure the grid doesn't auto-select the first row on load
         dgvSubjectList.ClearSelection()
         Try
