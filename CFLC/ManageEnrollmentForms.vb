@@ -52,6 +52,9 @@ Public Class ManageEnrollmentForms
             ' ignore potential layout timing exceptions
         End Try
         currentEnrollmentID = 0
+
+        ' Initialize mode of payment based on payment status
+        UpdateModeOfPaymentAvailability()
     End Sub
 
     ' ===== COMBOBOX INITIALIZATION METHODS =====
@@ -145,18 +148,32 @@ Public Class ManageEnrollmentForms
     Private Function CalculateEnrollmentStatus(startDate As Date, endDate As Date) As String
         Dim today As Date = DateTime.Today
 
-        If today < startDate Then
-            Return "Pending"
-        ElseIf today >= startDate AndAlso today <= endDate Then
-            Return "Confirmed"
+        ' If current date is before or equal to end date, status is "Enrolled"
+        ' If current date is after end date, status is "Not Enrolled"
+        If today <= endDate Then
+            Return "Enrolled"
         Else
-            Return "Completed"
+            Return "Not Enrolled"
         End If
     End Function
 
     Private Sub AutoSetStatusBasedOnDates()
         Dim calculatedStatus As String = CalculateEnrollmentStatus(dtpEnrollmentStartDate.Value, dtpEnrollmentEndDate.Value)
         ComboBoxEnrollmentStatus.SelectedItem = calculatedStatus
+    End Sub
+
+    ' ===== PAYMENT STATUS AND MODE OF PAYMENT HANDLING =====
+    Private Sub UpdateModeOfPaymentAvailability()
+        If ComboBoxEnrollmentPaymentStatus.SelectedItem IsNot Nothing AndAlso ComboBoxEnrollmentPaymentStatus.SelectedItem.ToString() = "Paid" Then
+            ComboBoxEnrollmentModeofPayment.Enabled = True
+        Else
+            ComboBoxEnrollmentModeofPayment.Enabled = False
+            ComboBoxEnrollmentModeofPayment.SelectedIndex = -1
+        End If
+    End Sub
+
+    Private Sub ComboBoxEnrollmentPaymentStatus_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBoxEnrollmentPaymentStatus.SelectedIndexChanged
+        UpdateModeOfPaymentAvailability()
     End Sub
 
     ' ===== ID VALIDATION EVENT HANDLERS =====
@@ -179,7 +196,7 @@ Public Class ManageEnrollmentForms
                 txtbxEnrollmentStudentID.BackColor = Color.LightPink
                 txtbxEnrollmentStudentID.Focus()
             ElseIf Not StudentIDExists(txtbxEnrollmentStudentID.Text.Trim()) Then
-                MessageBox.Show("Student ID does not exist in the system.", "Invalid Student ID", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                MessageBox.Show("Student ID does not exist in the system. Please enter a valid Student ID.", "Invalid Student ID", MessageBoxButtons.OK, MessageBoxIcon.Warning)
                 txtbxEnrollmentStudentID.BackColor = Color.LightPink
                 txtbxEnrollmentStudentID.Focus()
             Else
@@ -209,7 +226,7 @@ Public Class ManageEnrollmentForms
                 txtbxEnrollSectionID.BackColor = Color.LightPink
                 txtbxEnrollSectionID.Focus()
             ElseIf Not SectionIDExists(txtbxEnrollSectionID.Text.Trim()) Then
-                MessageBox.Show("Section ID does not exist in the system.", "Invalid Section ID", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                MessageBox.Show("Section ID does not exist in the system. Please enter a valid Section ID.", "Invalid Section ID", MessageBoxButtons.OK, MessageBoxIcon.Warning)
                 txtbxEnrollSectionID.BackColor = Color.LightPink
                 txtbxEnrollSectionID.Focus()
             Else
@@ -299,10 +316,14 @@ Public Class ManageEnrollmentForms
                 End If
                 cmd.Parameters.AddWithValue("@PaymentStatus", paymentStatus)
 
-                If ComboBoxEnrollmentModeofPayment.SelectedItem IsNot Nothing Then
-                    paymentStatus = ComboBoxEnrollmentModeofPayment.SelectedItem.ToString()
+                ' Mode of Payment - only if payment status is Paid
+                Dim modeOfPayment As String = ""
+                If ComboBoxEnrollmentPaymentStatus.SelectedItem IsNot Nothing AndAlso ComboBoxEnrollmentPaymentStatus.SelectedItem.ToString() = "Paid" Then
+                    If ComboBoxEnrollmentModeofPayment.SelectedItem IsNot Nothing Then
+                        modeOfPayment = ComboBoxEnrollmentModeofPayment.SelectedItem.ToString()
+                    End If
                 End If
-                cmd.Parameters.AddWithValue("@ModeOfPayment", paymentStatus)
+                cmd.Parameters.AddWithValue("@ModeOfPayment", modeOfPayment)
 
                 Dim requirementStatus As String = ""
                 If cmbEnrollmentRequirementStatus.SelectedItem IsNot Nothing Then
@@ -482,17 +503,20 @@ Public Class ManageEnrollmentForms
                 End If
                 cmd.Parameters.AddWithValue("@EnrollmentStatus", enrollmentStatus)
 
-
                 Dim paymentStatus As String = ""
                 If ComboBoxEnrollmentPaymentStatus.SelectedItem IsNot Nothing Then
                     paymentStatus = ComboBoxEnrollmentPaymentStatus.SelectedItem.ToString()
                 End If
                 cmd.Parameters.AddWithValue("@PaymentStatus", paymentStatus)
 
-                If ComboBoxEnrollmentModeofPayment.SelectedItem IsNot Nothing Then
-                    paymentStatus = ComboBoxEnrollmentModeofPayment.SelectedItem.ToString()
+                ' Mode of Payment - only if payment status is Paid
+                Dim modeOfPayment As String = ""
+                If ComboBoxEnrollmentPaymentStatus.SelectedItem IsNot Nothing AndAlso ComboBoxEnrollmentPaymentStatus.SelectedItem.ToString() = "Paid" Then
+                    If ComboBoxEnrollmentModeofPayment.SelectedItem IsNot Nothing Then
+                        modeOfPayment = ComboBoxEnrollmentModeofPayment.SelectedItem.ToString()
+                    End If
                 End If
-                cmd.Parameters.AddWithValue("@ModeOfPayment", paymentStatus)
+                cmd.Parameters.AddWithValue("@ModeOfPayment", modeOfPayment)
 
                 Dim requirementStatus As String = ""
                 If cmbEnrollmentRequirementStatus.SelectedItem IsNot Nothing Then
@@ -657,9 +681,11 @@ Public Class ManageEnrollmentForms
             errors.Add("• Reference Number is required")
         End If
 
-        ' 9. Mode of Payment Validation
-        If String.IsNullOrWhiteSpace(ComboBoxEnrollmentModeofPayment.Text) Then
-            errors.Add("• Mode of Payment is required")
+        ' 9. Mode of Payment Validation - Only required if Payment Status is "Paid"
+        If ComboBoxEnrollmentPaymentStatus.SelectedItem IsNot Nothing AndAlso ComboBoxEnrollmentPaymentStatus.SelectedItem.ToString() = "Paid" Then
+            If ComboBoxEnrollmentModeofPayment.SelectedIndex = -1 Then
+                errors.Add("• Mode of Payment is required when Payment Status is 'Paid'")
+            End If
         End If
 
         ' 10. Date Validation
@@ -749,6 +775,9 @@ Public Class ManageEnrollmentForms
         ' Re-enable Add button so user can create a new record
         btnEnrollAdd.Enabled = True
 
+        ' Update mode of payment availability
+        UpdateModeOfPaymentAvailability()
+
         ' Set focus back to first field
         txtbxEnrollmentStudentID.Focus()
     End Sub
@@ -829,6 +858,9 @@ Public Class ManageEnrollmentForms
             Else
                 txtbxEnrollSectionID.BackColor = SystemColors.Window
             End If
+
+            ' Update mode of payment availability
+            UpdateModeOfPaymentAvailability()
 
             ' Keep Add button enabled
             btnEnrollAdd.Enabled = True
@@ -967,5 +999,7 @@ Public Class ManageEnrollmentForms
         End Try
     End Sub
 
+    Private Sub pnlContent_Paint(sender As Object, e As PaintEventArgs) Handles pnlContent.Paint
 
+    End Sub
 End Class

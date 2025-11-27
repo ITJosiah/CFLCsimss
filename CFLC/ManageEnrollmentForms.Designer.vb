@@ -26,6 +26,7 @@ Partial Class ManageEnrollmentForms
         Me.TextBoxEnrollSearch = New System.Windows.Forms.TextBox()
         Me.dgvEnrollment = New System.Windows.Forms.DataGridView()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.ComboBoxEnrollmentModeofPayment = New System.Windows.Forms.ComboBox()
         Me.cmbEnrollmentRequirementStatus = New System.Windows.Forms.ComboBox()
         Me.txtbxEnrollmentRemarks = New System.Windows.Forms.TextBox()
         Me.labelRemarks = New System.Windows.Forms.Label()
@@ -59,7 +60,6 @@ Partial Class ManageEnrollmentForms
         Me.btnEnrollUpdate = New System.Windows.Forms.Button()
         Me.btnEnrollAdd = New System.Windows.Forms.Button()
         Me.picWatermark = New System.Windows.Forms.PictureBox()
-        Me.ComboBoxEnrollmentModeofPayment = New System.Windows.Forms.ComboBox()
         Me.pnlContent.SuspendLayout()
         CType(Me.dgvEnrollment, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
@@ -80,7 +80,7 @@ Partial Class ManageEnrollmentForms
         Me.pnlContent.Controls.Add(Me.picWatermark)
         Me.pnlContent.Dock = System.Windows.Forms.DockStyle.Fill
         Me.pnlContent.Location = New System.Drawing.Point(0, 0)
-        Me.pnlContent.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.pnlContent.Margin = New System.Windows.Forms.Padding(2)
         Me.pnlContent.Name = "pnlContent"
         Me.pnlContent.Size = New System.Drawing.Size(1286, 595)
         Me.pnlContent.TabIndex = 24
@@ -90,7 +90,7 @@ Partial Class ManageEnrollmentForms
         Me.TextBoxEnrollSearch.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.TextBoxEnrollSearch.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBoxEnrollSearch.Location = New System.Drawing.Point(744, 555)
-        Me.TextBoxEnrollSearch.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.TextBoxEnrollSearch.Margin = New System.Windows.Forms.Padding(2)
         Me.TextBoxEnrollSearch.MaxLength = 50
         Me.TextBoxEnrollSearch.Name = "TextBoxEnrollSearch"
         Me.TextBoxEnrollSearch.Size = New System.Drawing.Size(186, 30)
@@ -149,11 +149,22 @@ Partial Class ManageEnrollmentForms
         Me.Panel1.Controls.Add(Me.TextEnrollmentSchoolYear)
         Me.Panel1.Controls.Add(Me.TextEnrollmentGradeLvl)
         Me.Panel1.Location = New System.Drawing.Point(38, 54)
-        Me.Panel1.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.Panel1.Margin = New System.Windows.Forms.Padding(2)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Padding = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.Panel1.Padding = New System.Windows.Forms.Padding(2)
         Me.Panel1.Size = New System.Drawing.Size(1220, 288)
         Me.Panel1.TabIndex = 28
+        '
+        'ComboBoxEnrollmentModeofPayment
+        '
+        Me.ComboBoxEnrollmentModeofPayment.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ComboBoxEnrollmentModeofPayment.FormattingEnabled = True
+        Me.ComboBoxEnrollmentModeofPayment.Items.AddRange(New Object() {"Walk-in", "Online", "Scheduled Appointment"})
+        Me.ComboBoxEnrollmentModeofPayment.Location = New System.Drawing.Point(307, 162)
+        Me.ComboBoxEnrollmentModeofPayment.Margin = New System.Windows.Forms.Padding(2)
+        Me.ComboBoxEnrollmentModeofPayment.Name = "ComboBoxEnrollmentModeofPayment"
+        Me.ComboBoxEnrollmentModeofPayment.Size = New System.Drawing.Size(104, 24)
+        Me.ComboBoxEnrollmentModeofPayment.TabIndex = 68
         '
         'cmbEnrollmentRequirementStatus
         '
@@ -161,7 +172,7 @@ Partial Class ManageEnrollmentForms
         Me.cmbEnrollmentRequirementStatus.FormattingEnabled = True
         Me.cmbEnrollmentRequirementStatus.Items.AddRange(New Object() {"Enrolled", "Un-enrolled"})
         Me.cmbEnrollmentRequirementStatus.Location = New System.Drawing.Point(505, 46)
-        Me.cmbEnrollmentRequirementStatus.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.cmbEnrollmentRequirementStatus.Margin = New System.Windows.Forms.Padding(2)
         Me.cmbEnrollmentRequirementStatus.Name = "cmbEnrollmentRequirementStatus"
         Me.cmbEnrollmentRequirementStatus.Size = New System.Drawing.Size(130, 24)
         Me.cmbEnrollmentRequirementStatus.TabIndex = 67
@@ -170,7 +181,7 @@ Partial Class ManageEnrollmentForms
         '
         Me.txtbxEnrollmentRemarks.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtbxEnrollmentRemarks.Location = New System.Drawing.Point(505, 155)
-        Me.txtbxEnrollmentRemarks.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.txtbxEnrollmentRemarks.Margin = New System.Windows.Forms.Padding(2)
         Me.txtbxEnrollmentRemarks.Multiline = True
         Me.txtbxEnrollmentRemarks.Name = "txtbxEnrollmentRemarks"
         Me.txtbxEnrollmentRemarks.Size = New System.Drawing.Size(156, 77)
@@ -192,7 +203,7 @@ Partial Class ManageEnrollmentForms
         Me.dtpEnrollmentEndDate.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.dtpEnrollmentEndDate.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
         Me.dtpEnrollmentEndDate.Location = New System.Drawing.Point(72, 98)
-        Me.dtpEnrollmentEndDate.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.dtpEnrollmentEndDate.Margin = New System.Windows.Forms.Padding(2)
         Me.dtpEnrollmentEndDate.Name = "dtpEnrollmentEndDate"
         Me.dtpEnrollmentEndDate.Size = New System.Drawing.Size(105, 23)
         Me.dtpEnrollmentEndDate.TabIndex = 64
@@ -202,7 +213,7 @@ Partial Class ManageEnrollmentForms
         Me.dtpEnrollmentStartDate.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.dtpEnrollmentStartDate.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
         Me.dtpEnrollmentStartDate.Location = New System.Drawing.Point(72, 46)
-        Me.dtpEnrollmentStartDate.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.dtpEnrollmentStartDate.Margin = New System.Windows.Forms.Padding(2)
         Me.dtpEnrollmentStartDate.Name = "dtpEnrollmentStartDate"
         Me.dtpEnrollmentStartDate.Size = New System.Drawing.Size(105, 23)
         Me.dtpEnrollmentStartDate.TabIndex = 63
@@ -229,7 +240,7 @@ Partial Class ManageEnrollmentForms
         '
         Me.txtbxEnrollmentStudentID.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtbxEnrollmentStudentID.Location = New System.Drawing.Point(69, 154)
-        Me.txtbxEnrollmentStudentID.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.txtbxEnrollmentStudentID.Margin = New System.Windows.Forms.Padding(2)
         Me.txtbxEnrollmentStudentID.MaxLength = 20
         Me.txtbxEnrollmentStudentID.Name = "txtbxEnrollmentStudentID"
         Me.txtbxEnrollmentStudentID.Size = New System.Drawing.Size(163, 23)
@@ -250,7 +261,7 @@ Partial Class ManageEnrollmentForms
         '
         Me.txtbxEnrollSectionID.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtbxEnrollSectionID.Location = New System.Drawing.Point(67, 208)
-        Me.txtbxEnrollSectionID.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.txtbxEnrollSectionID.Margin = New System.Windows.Forms.Padding(2)
         Me.txtbxEnrollSectionID.MaxLength = 20
         Me.txtbxEnrollSectionID.Name = "txtbxEnrollSectionID"
         Me.txtbxEnrollSectionID.Size = New System.Drawing.Size(89, 23)
@@ -271,7 +282,7 @@ Partial Class ManageEnrollmentForms
         '
         Me.txtbxEnrollCreatedBy.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtbxEnrollCreatedBy.Location = New System.Drawing.Point(753, 100)
-        Me.txtbxEnrollCreatedBy.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.txtbxEnrollCreatedBy.Margin = New System.Windows.Forms.Padding(2)
         Me.txtbxEnrollCreatedBy.MaxLength = 20
         Me.txtbxEnrollCreatedBy.Name = "txtbxEnrollCreatedBy"
         Me.txtbxEnrollCreatedBy.Size = New System.Drawing.Size(176, 23)
@@ -293,7 +304,7 @@ Partial Class ManageEnrollmentForms
         Me.dtpDateCreated.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.dtpDateCreated.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
         Me.dtpDateCreated.Location = New System.Drawing.Point(754, 46)
-        Me.dtpDateCreated.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.dtpDateCreated.Margin = New System.Windows.Forms.Padding(2)
         Me.dtpDateCreated.Name = "dtpDateCreated"
         Me.dtpDateCreated.Size = New System.Drawing.Size(105, 23)
         Me.dtpDateCreated.TabIndex = 53
@@ -304,7 +315,7 @@ Partial Class ManageEnrollmentForms
         Me.ComboBoxEnrollmentMode.FormattingEnabled = True
         Me.ComboBoxEnrollmentMode.Items.AddRange(New Object() {"Walk-in", "Online", "Scheduled Appointment"})
         Me.ComboBoxEnrollmentMode.Location = New System.Drawing.Point(307, 100)
-        Me.ComboBoxEnrollmentMode.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.ComboBoxEnrollmentMode.Margin = New System.Windows.Forms.Padding(2)
         Me.ComboBoxEnrollmentMode.Name = "ComboBoxEnrollmentMode"
         Me.ComboBoxEnrollmentMode.Size = New System.Drawing.Size(84, 24)
         Me.ComboBoxEnrollmentMode.TabIndex = 50
@@ -336,7 +347,7 @@ Partial Class ManageEnrollmentForms
         Me.ComboBoxEnrollmentPaymentStatus.FormattingEnabled = True
         Me.ComboBoxEnrollmentPaymentStatus.Items.AddRange(New Object() {"Paid", "Unpaid"})
         Me.ComboBoxEnrollmentPaymentStatus.Location = New System.Drawing.Point(307, 208)
-        Me.ComboBoxEnrollmentPaymentStatus.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.ComboBoxEnrollmentPaymentStatus.Margin = New System.Windows.Forms.Padding(2)
         Me.ComboBoxEnrollmentPaymentStatus.Name = "ComboBoxEnrollmentPaymentStatus"
         Me.ComboBoxEnrollmentPaymentStatus.Size = New System.Drawing.Size(90, 24)
         Me.ComboBoxEnrollmentPaymentStatus.TabIndex = 46
@@ -345,7 +356,7 @@ Partial Class ManageEnrollmentForms
         '
         Me.TextBoxEnrollmentRefNum.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBoxEnrollmentRefNum.Location = New System.Drawing.Point(505, 101)
-        Me.TextBoxEnrollmentRefNum.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.TextBoxEnrollmentRefNum.Margin = New System.Windows.Forms.Padding(2)
         Me.TextBoxEnrollmentRefNum.Name = "TextBoxEnrollmentRefNum"
         Me.TextBoxEnrollmentRefNum.Size = New System.Drawing.Size(156, 23)
         Me.TextBoxEnrollmentRefNum.TabIndex = 44
@@ -356,7 +367,7 @@ Partial Class ManageEnrollmentForms
         Me.ComboBoxEnrollmentStatus.FormattingEnabled = True
         Me.ComboBoxEnrollmentStatus.Items.AddRange(New Object() {"Enrolled", "Un-enrolled"})
         Me.ComboBoxEnrollmentStatus.Location = New System.Drawing.Point(307, 45)
-        Me.ComboBoxEnrollmentStatus.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.ComboBoxEnrollmentStatus.Margin = New System.Windows.Forms.Padding(2)
         Me.ComboBoxEnrollmentStatus.Name = "ComboBoxEnrollmentStatus"
         Me.ComboBoxEnrollmentStatus.Size = New System.Drawing.Size(84, 24)
         Me.ComboBoxEnrollmentStatus.TabIndex = 43
@@ -499,24 +510,13 @@ Partial Class ManageEnrollmentForms
         Me.picWatermark.TabIndex = 22
         Me.picWatermark.TabStop = False
         '
-        'ComboBoxEnrollmentModeofPayment
-        '
-        Me.ComboBoxEnrollmentModeofPayment.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ComboBoxEnrollmentModeofPayment.FormattingEnabled = True
-        Me.ComboBoxEnrollmentModeofPayment.Items.AddRange(New Object() {"Walk-in", "Online", "Scheduled Appointment"})
-        Me.ComboBoxEnrollmentModeofPayment.Location = New System.Drawing.Point(307, 162)
-        Me.ComboBoxEnrollmentModeofPayment.Margin = New System.Windows.Forms.Padding(2)
-        Me.ComboBoxEnrollmentModeofPayment.Name = "ComboBoxEnrollmentModeofPayment"
-        Me.ComboBoxEnrollmentModeofPayment.Size = New System.Drawing.Size(104, 24)
-        Me.ComboBoxEnrollmentModeofPayment.TabIndex = 68
-        '
         'ManageEnrollmentForms
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1286, 595)
         Me.Controls.Add(Me.pnlContent)
-        Me.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.Margin = New System.Windows.Forms.Padding(2)
         Me.Name = "ManageEnrollmentForms"
         Me.Text = "ManageEnrollmentForms"
         Me.pnlContent.ResumeLayout(False)
