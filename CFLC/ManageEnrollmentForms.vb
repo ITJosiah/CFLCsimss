@@ -27,6 +27,7 @@ Public Class ManageEnrollmentForms
         InitializeEnrollmentStatusComboBox()
         InitializePaymentStatusComboBox()
         InitializeRequirementStatusComboBox()
+        InitializeModeOfPaymentComboBox()
 
         ' Load enrollment data
         LoadToDGV("SELECT * FROM enrollment", dgvEnrollment)
@@ -80,6 +81,13 @@ Public Class ManageEnrollmentForms
         cmbEnrollmentRequirementStatus.DropDownStyle = ComboBoxStyle.DropDownList
         cmbEnrollmentRequirementStatus.Items.Add("Complete")
         cmbEnrollmentRequirementStatus.Items.Add("Incomplete")
+    End Sub
+
+    Private Sub InitializeModeOfPaymentComboBox()
+        ComboBoxEnrollmentModeofPayment.Items.Clear()
+        ComboBoxEnrollmentModeofPayment.DropDownStyle = ComboBoxStyle.DropDownList
+        ComboBoxEnrollmentModeofPayment.Items.Add("Cash")
+        ComboBoxEnrollmentModeofPayment.Items.Add("Online")
     End Sub
 
     ' ===== ID VALIDATION METHODS =====
@@ -285,13 +293,16 @@ Public Class ManageEnrollmentForms
                 End If
                 cmd.Parameters.AddWithValue("@EnrollmentStatus", enrollmentStatus)
 
-                cmd.Parameters.AddWithValue("@ModeOfPayment", SafeString(TextBoxEnrollmentModeOfPayment.Text))
-
                 Dim paymentStatus As String = ""
                 If ComboBoxEnrollmentPaymentStatus.SelectedItem IsNot Nothing Then
                     paymentStatus = ComboBoxEnrollmentPaymentStatus.SelectedItem.ToString()
                 End If
                 cmd.Parameters.AddWithValue("@PaymentStatus", paymentStatus)
+
+                If ComboBoxEnrollmentModeofPayment.SelectedItem IsNot Nothing Then
+                    paymentStatus = ComboBoxEnrollmentModeofPayment.SelectedItem.ToString()
+                End If
+                cmd.Parameters.AddWithValue("@ModeOfPayment", paymentStatus)
 
                 Dim requirementStatus As String = ""
                 If cmbEnrollmentRequirementStatus.SelectedItem IsNot Nothing Then
@@ -471,13 +482,17 @@ Public Class ManageEnrollmentForms
                 End If
                 cmd.Parameters.AddWithValue("@EnrollmentStatus", enrollmentStatus)
 
-                cmd.Parameters.AddWithValue("@ModeOfPayment", SafeString(TextBoxEnrollmentModeOfPayment.Text))
 
                 Dim paymentStatus As String = ""
                 If ComboBoxEnrollmentPaymentStatus.SelectedItem IsNot Nothing Then
                     paymentStatus = ComboBoxEnrollmentPaymentStatus.SelectedItem.ToString()
                 End If
                 cmd.Parameters.AddWithValue("@PaymentStatus", paymentStatus)
+
+                If ComboBoxEnrollmentModeofPayment.SelectedItem IsNot Nothing Then
+                    paymentStatus = ComboBoxEnrollmentModeofPayment.SelectedItem.ToString()
+                End If
+                cmd.Parameters.AddWithValue("@ModeOfPayment", paymentStatus)
 
                 Dim requirementStatus As String = ""
                 If cmbEnrollmentRequirementStatus.SelectedItem IsNot Nothing Then
@@ -565,7 +580,7 @@ Public Class ManageEnrollmentForms
                         If Convert.ToInt32(reader("GradeLevel")) <> nudEnrollmentGradeLevel.Value Then Return True
                         If GetSafeStringFromDB(reader("EnrollmentMode")) <> ComboBoxEnrollmentMode.Text.Trim() Then Return True
                         If GetSafeStringFromDB(reader("EnrollmentStatus")) <> ComboBoxEnrollmentStatus.Text.Trim() Then Return True
-                        If GetSafeStringFromDB(reader("ModeOfPayment")) <> TextBoxEnrollmentModeOfPayment.Text.Trim() Then Return True
+                        If GetSafeStringFromDB(reader("ModeOfPayment")) <> ComboBoxEnrollmentModeofPayment.Text.Trim() Then Return True
                         If GetSafeStringFromDB(reader("PaymentStatus")) <> ComboBoxEnrollmentPaymentStatus.Text.Trim() Then Return True
                         If GetSafeStringFromDB(reader("RequirementStatus")) <> cmbEnrollmentRequirementStatus.Text.Trim() Then Return True
                         If GetSafeStringFromDB(reader("ReferenceNumber")) <> TextBoxEnrollmentRefNum.Text.Trim() Then Return True
@@ -643,7 +658,7 @@ Public Class ManageEnrollmentForms
         End If
 
         ' 9. Mode of Payment Validation
-        If String.IsNullOrWhiteSpace(TextBoxEnrollmentModeOfPayment.Text) Then
+        If String.IsNullOrWhiteSpace(ComboBoxEnrollmentModeofPayment.Text) Then
             errors.Add("• Mode of Payment is required")
         End If
 
@@ -709,7 +724,7 @@ Public Class ManageEnrollmentForms
         ComboBoxEnrollmentStatus.SelectedIndex = -1
         ComboBoxEnrollmentPaymentStatus.SelectedIndex = -1
         cmbEnrollmentRequirementStatus.SelectedIndex = -1
-        TextBoxEnrollmentModeOfPayment.Clear()
+        ComboBoxEnrollmentModeofPayment.SelectedIndex = -1
         TextBoxEnrollmentRefNum.Clear()
 
         ' Dates
@@ -772,7 +787,7 @@ Public Class ManageEnrollmentForms
 
             ComboBoxEnrollmentMode.Text = GetSafeString(row.Cells("EnrollmentMode"))
             ComboBoxEnrollmentStatus.Text = GetSafeString(row.Cells("EnrollmentStatus"))
-            TextBoxEnrollmentModeOfPayment.Text = GetSafeString(row.Cells("ModeOfPayment"))
+            ComboBoxEnrollmentModeofPayment.Text = GetSafeString(row.Cells("ModeOfPayment"))
             ComboBoxEnrollmentPaymentStatus.Text = GetSafeString(row.Cells("PaymentStatus"))
             cmbEnrollmentRequirementStatus.Text = GetSafeString(row.Cells("RequirementStatus"))
             TextBoxEnrollmentRefNum.Text = GetSafeString(row.Cells("ReferenceNumber"))
