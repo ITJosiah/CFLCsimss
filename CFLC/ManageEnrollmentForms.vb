@@ -6,8 +6,6 @@ Public Class ManageEnrollmentForms
 
     Public Property IsEmbedded As Boolean = False
     Private currentEnrollmentID As Integer = 0
-    'ano nangyayari dito
-    Private Sub Chart1_Click(sender As Object, e As EventArgs)
 
     End Sub
 
