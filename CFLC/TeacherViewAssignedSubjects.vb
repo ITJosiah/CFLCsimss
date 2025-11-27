@@ -1,6 +1,5 @@
-﻿Public Class TeacherDashboard
-    Private currentContent As Form
-    Private Sub TeacherDashboard_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+﻿Public Class TeacherViewAssignedSubjects
+    Private Sub TeacherViewAssignedSubjects_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ' Set form properties
         Me.FormBorderStyle = FormBorderStyle.None
         Me.WindowState = FormWindowState.Maximized
@@ -39,15 +38,4 @@
         Me.TopMost = True
         Me.BringToFront()
     End Sub
-
-    Private Sub btnTeacherViewStudents_Click(sender As Object, e As EventArgs) Handles btnTeacherViewStudents.Click
-        Try
-            Dim teacherViewStudents As New TeacherViewStudents
-            teacherViewStudents.Show()
-            Me.Hide()
-        Catch ex As Exception
-            MessageBox.Show("An error occurred while opening the Teacher View Students form: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-        End Try
-    End Sub
-
 End Class

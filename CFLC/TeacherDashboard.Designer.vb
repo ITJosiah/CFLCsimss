@@ -23,17 +23,17 @@ Partial Class TeacherDashboard
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.pnlTeacherMainContent = New System.Windows.Forms.Panel()
-        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.pnlTeacherSidebar = New System.Windows.Forms.Panel()
         Me.flowButtons = New System.Windows.Forms.FlowLayoutPanel()
         Me.btnTeacherViewStudents = New System.Windows.Forms.Button()
         Me.btnViewAssignedSubjects = New System.Windows.Forms.Button()
         Me.btnTeacherGenerateReports = New System.Windows.Forms.Button()
         Me.btnLogout = New System.Windows.Forms.Button()
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.pnlTeacherMainContent.SuspendLayout()
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlTeacherSidebar.SuspendLayout()
         Me.flowButtons.SuspendLayout()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'pnlTeacherMainContent
@@ -46,17 +46,6 @@ Partial Class TeacherDashboard
         Me.pnlTeacherMainContent.Name = "pnlTeacherMainContent"
         Me.pnlTeacherMainContent.Size = New System.Drawing.Size(1300, 633)
         Me.pnlTeacherMainContent.TabIndex = 13
-        '
-        'PictureBox1
-        '
-        Me.PictureBox1.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.PictureBox1.Image = Global.CFLC.My.Resources.Resources.logo
-        Me.PictureBox1.Location = New System.Drawing.Point(853, 356)
-        Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(375, 330)
-        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.PictureBox1.TabIndex = 3
-        Me.PictureBox1.TabStop = False
         '
         'pnlTeacherSidebar
         '
@@ -128,6 +117,17 @@ Partial Class TeacherDashboard
         Me.btnLogout.Text = "Logout"
         Me.btnLogout.UseVisualStyleBackColor = False
         '
+        'PictureBox1
+        '
+        Me.PictureBox1.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.PictureBox1.Image = Global.CFLC.My.Resources.Resources.logo
+        Me.PictureBox1.Location = New System.Drawing.Point(621, 143)
+        Me.PictureBox1.Name = "PictureBox1"
+        Me.PictureBox1.Size = New System.Drawing.Size(375, 330)
+        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.PictureBox1.TabIndex = 3
+        Me.PictureBox1.TabStop = False
+        '
         'TeacherDashboard
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -137,9 +137,9 @@ Partial Class TeacherDashboard
         Me.Name = "TeacherDashboard"
         Me.Text = "TeacherDashboard"
         Me.pnlTeacherMainContent.ResumeLayout(False)
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.pnlTeacherSidebar.ResumeLayout(False)
         Me.flowButtons.ResumeLayout(False)
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub

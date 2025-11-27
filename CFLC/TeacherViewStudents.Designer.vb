@@ -599,6 +599,7 @@ Partial Class TeacherViewStudents
         Me.txtbxStudentExtension.Location = New System.Drawing.Point(55, 175)
         Me.txtbxStudentExtension.MaxLength = 50
         Me.txtbxStudentExtension.Name = "txtbxStudentExtension"
+        Me.txtbxStudentExtension.ReadOnly = True
         Me.txtbxStudentExtension.Size = New System.Drawing.Size(190, 23)
         Me.txtbxStudentExtension.TabIndex = 29
         '
