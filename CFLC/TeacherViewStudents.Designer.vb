@@ -695,6 +695,7 @@ Partial Class TeacherViewStudents
         Me.txtbxStudentSurname.Location = New System.Drawing.Point(55, 130)
         Me.txtbxStudentSurname.MaxLength = 50
         Me.txtbxStudentSurname.Name = "txtbxStudentSurname"
+        Me.txtbxStudentSurname.ReadOnly = True
         Me.txtbxStudentSurname.Size = New System.Drawing.Size(190, 23)
         Me.txtbxStudentSurname.TabIndex = 6
         '
@@ -712,6 +713,7 @@ Partial Class TeacherViewStudents
         Me.txtStudentMiddleName.Location = New System.Drawing.Point(55, 84)
         Me.txtStudentMiddleName.MaxLength = 50
         Me.txtStudentMiddleName.Name = "txtStudentMiddleName"
+        Me.txtStudentMiddleName.ReadOnly = True
         Me.txtStudentMiddleName.Size = New System.Drawing.Size(190, 23)
         Me.txtStudentMiddleName.TabIndex = 4
         '
@@ -729,6 +731,7 @@ Partial Class TeacherViewStudents
         Me.txtbxStudentFirstName.Location = New System.Drawing.Point(55, 37)
         Me.txtbxStudentFirstName.MaxLength = 50
         Me.txtbxStudentFirstName.Name = "txtbxStudentFirstName"
+        Me.txtbxStudentFirstName.ReadOnly = True
         Me.txtbxStudentFirstName.Size = New System.Drawing.Size(190, 23)
         Me.txtbxStudentFirstName.TabIndex = 2
         '
