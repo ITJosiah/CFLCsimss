@@ -565,6 +565,11 @@ Public Class AdminManageSections
             errors.Add("• Grade Level must be between 1 and 12")
         End If
 
+        ' 3. Teacher ID Validation
+        If String.IsNullOrWhiteSpace(txtbxManSecTeacherID.Text) Then
+            errors.Add("• TeacherID. is required")
+        End If
+
         ' 3. Teacher ID validation (optional but if provided, should be valid)
         If Not String.IsNullOrWhiteSpace(txtbxManSecTeacherID.Text) Then
             If Not Integer.TryParse(txtbxManSecTeacherID.Text, Nothing) Then
