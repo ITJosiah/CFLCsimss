@@ -565,27 +565,7 @@ Public Class AdminManageSections
             errors.Add("• Grade Level must be between 1 and 12")
         End If
 
-        ' 3. Learning Mode Validation
-        If cmbManSecLearningMode.SelectedIndex = -1 Then
-            errors.Add("• Learning Mode is required")
-        End If
-
-        ' 4. Class Type Validation
-        If cmbManSecClassType.SelectedIndex = -1 Then
-            errors.Add("• Class Type is required")
-        End If
-
-        ' 5. Status Validation
-        If cbxManSecStatus.SelectedIndex = -1 Then
-            errors.Add("• Status is required")
-        End If
-
-        ' 6. Date Validation
-        If dtpManSecEndDate.Value <= dtpManSecStartDate.Value Then
-            errors.Add("• End Date must be after Start Date")
-        End If
-
-        ' 7. Teacher ID validation (optional but if provided, should be valid)
+        ' 3. Teacher ID validation (optional but if provided, should be valid)
         If Not String.IsNullOrWhiteSpace(txtbxManSecTeacherID.Text) Then
             If Not Integer.TryParse(txtbxManSecTeacherID.Text, Nothing) Then
                 errors.Add("• Teacher ID must be a valid number")
@@ -594,7 +574,47 @@ Public Class AdminManageSections
             End If
         End If
 
-        ' 8. Check if there are any validation errors
+        ' 4. Room No. Validation
+        If String.IsNullOrWhiteSpace(txtbxManSecRoomNo.Text) Then
+            errors.Add("• Room No. is required")
+        End If
+
+        ' 5. Class Type Validation
+        If cmbManSecClassType.SelectedIndex = -1 Then
+            errors.Add("• Class Type is required")
+        End If
+
+        ' 6. Learning Mode Validation
+        If cmbManSecLearningMode.SelectedIndex = -1 Then
+            errors.Add("• Learning Mode is required")
+        End If
+
+        ' 7. Building Name Validation
+        If String.IsNullOrWhiteSpace(txtbxManSecBuildingName.Text) Then
+            errors.Add("• Building Name is required")
+        End If
+
+        ' 8. Schedule Validation
+        If String.IsNullOrWhiteSpace(txtbxManSchedule.Text) Then
+            errors.Add("• Schedule is required")
+        End If
+
+        ' 9. Date Validation
+        If dtpManSecEndDate.Value <= dtpManSecStartDate.Value Then
+            errors.Add("• End Date must be after Start Date")
+        End If
+
+        ' 10. Status Validation
+        If cbxManSecStatus.SelectedIndex = -1 Then
+            errors.Add("• Status is required")
+        End If
+
+        ' 11. Created By Validation
+        If String.IsNullOrWhiteSpace(txtbxManSecCreatedBy.Text) Then
+            errors.Add("• Created By is required")
+        End If
+
+        ' . Check if there are any validation errors
         If errors.Count > 0 Then
             Dim errorMessage As New StringBuilder()
             errorMessage.AppendLine("Please fix the following errors before proceeding:")
