@@ -38,6 +38,8 @@ Public Class AdminManageStudents
         ' Ensure Add button is enabled by default
         btnStudentAdd.Enabled = True
 
+
+
         AddHandler dgvStudents.DataBindingComplete, AddressOf dgvStudents_DataBindingComplete
 
     End Sub
