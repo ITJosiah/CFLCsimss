@@ -466,7 +466,7 @@ Partial Class AdminManageSections
         '
         'nudManSecGradeLevel
         '
-        Me.nudManSecGradeLevel.Location = New System.Drawing.Point(112, 108)
+        Me.nudManSecGradeLevel.Location = New System.Drawing.Point(84, 88)
         Me.nudManSecGradeLevel.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.nudManSecGradeLevel.Name = "nudManSecGradeLevel"
         Me.nudManSecGradeLevel.Size = New System.Drawing.Size(47, 26)
