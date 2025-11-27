@@ -58,25 +58,21 @@ Public Class ManageEnrollmentForms
         ComboBoxEnrollmentMode.Items.Clear()
         ComboBoxEnrollmentMode.DropDownStyle = ComboBoxStyle.DropDownList
         ComboBoxEnrollmentMode.Items.Add("Online")
-        ComboBoxEnrollmentMode.Items.Add("In-Person")
+        ComboBoxEnrollmentMode.Items.Add("Walk-In")
     End Sub
 
     Private Sub InitializeEnrollmentStatusComboBox()
         ComboBoxEnrollmentStatus.Items.Clear()
         ComboBoxEnrollmentStatus.DropDownStyle = ComboBoxStyle.DropDownList
-        ComboBoxEnrollmentStatus.Items.Add("Pending")
-        ComboBoxEnrollmentStatus.Items.Add("Confirmed")
-        ComboBoxEnrollmentStatus.Items.Add("Completed")
-        ComboBoxEnrollmentStatus.Items.Add("Cancelled")
-        ComboBoxEnrollmentStatus.Items.Add("Withdrawn")
+        ComboBoxEnrollmentStatus.Items.Add("Enrolled")
+        ComboBoxEnrollmentStatus.Items.Add("Unenrolled")
     End Sub
 
     Private Sub InitializePaymentStatusComboBox()
         ComboBoxEnrollmentPaymentStatus.Items.Clear()
         ComboBoxEnrollmentPaymentStatus.DropDownStyle = ComboBoxStyle.DropDownList
         ComboBoxEnrollmentPaymentStatus.Items.Add("Paid")
-        ComboBoxEnrollmentPaymentStatus.Items.Add("Overdue")
-        ComboBoxEnrollmentPaymentStatus.Items.Add("Refunded")
+        ComboBoxEnrollmentPaymentStatus.Items.Add("Unpaid")
     End Sub
 
     Private Sub InitializeRequirementStatusComboBox()
