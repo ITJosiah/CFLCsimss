@@ -38,8 +38,7 @@ Public Class AdminManageStudents
         ' Ensure Add button is enabled by default
         btnStudentAdd.Enabled = True
 
-        Dim txt = DirectCast(nudStudentGradeLevel.Controls(1), TextBox)
-        txt.Enabled = False
+
 
         AddHandler dgvStudents.DataBindingComplete, AddressOf dgvStudents_DataBindingComplete
 
