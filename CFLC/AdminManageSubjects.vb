@@ -517,30 +517,73 @@ Public Class AdminManageSubjects
             errors.Add("• Subject Code must be at least 3 characters long")
         End If
 
+        ' 2. Subject Name Validation
         If String.IsNullOrWhiteSpace(txtbxManSubSubjectName.Text) Then
             errors.Add("• Subject Name is required")
         End If
 
+        ' 3. Category Validation
         If cmbSubjectCategory.SelectedIndex = -1 Then
             errors.Add("• Category is required")
         End If
 
-        ' 2. Grade Level Validation
+        ' 4. Skill Focus Validation
+        If String.IsNullOrWhiteSpace(txtbxManSubSkillFocus.Text) Then
+            errors.Add("• Skill Focus is required")
+        End If
+
+        ' 5 Grade Level Validation
         If nudManSubGradeLevel.Value < 1 Or nudManSubGradeLevel.Value > 6 Then
             errors.Add("• Grade Level must be between 1 and 6")
         End If
 
-        ' 3. Room Type Validation
+        ' 6. Status Validation
+        If ComboBoxSubjectStatus.SelectedIndex = -1 Then
+            errors.Add("• Status is required")
+        End If
+
+        ' 7. Room Type Validation
         If cbxManSubRoomType.SelectedIndex = -1 Then
             errors.Add("• Room Type is required")
         End If
 
-        ' 4. Date Validation
+        ' 8. Learning Materials Validation
+        If String.IsNullOrWhiteSpace(txtbxManSubLearningMaterials.Text) Then
+            errors.Add("• Learning Materials is required")
+        End If
+
+        ' 9. Schedule Validation
+        If String.IsNullOrWhiteSpace(txtbxManSubSchedule.Text) Then
+            errors.Add("• Schedule is required")
+        End If
+
+        ' 10. Date Validation
         If dtpManSubEndDate.Value < dtpManSubStartDate.Value Then
             errors.Add("• End Date cannot be earlier than Start Date")
         End If
 
-        ' 5. Teacher ID validation (optional but if provided, should be valid)
+        ' 11. Date Range Validation
+        If dtpManSubStartDate.Value > currentSchoolYearEnd Or dtpManSubEndDate.Value < currentSchoolYearStart Then
+            errors.Add("• Subject dates must overlap with the current school year")
+        End If
+
+        ' 12. Date Created Validation
+        If dtpManSubDateCreated.Value > DateTime.Now Then
+            errors.Add("• Date Created cannot be in the future")
+        End If
+
+        ' 13. Created By Validation
+        If String.IsNullOrWhiteSpace(txtbxManSubCreatedBy.Text) Then
+            errors.Add("• Created By is required")
+        End If
+
+        ' 14. Teacher ID Validation
+        If String.IsNullOrWhiteSpace(txtbxManSubTeacherID.Text) Then
+            errors.Add("• Teacher ID is required")
+        End If
+
+
+        ' 15. Teacher ID validation (optional but if provided, should be valid)
         If Not String.IsNullOrWhiteSpace(txtbxManSubTeacherID.Text) Then
             If Not Integer.TryParse(txtbxManSubTeacherID.Text, Nothing) Then
                 errors.Add("• Teacher ID must be a valid number")
@@ -549,7 +592,7 @@ Public Class AdminManageSubjects
             End If
         End If
 
-        ' 6. Check if there are any validation errors
+        ' 16. Check if there are any validation errors
         If errors.Count > 0 Then
             Dim errorMessage As New StringBuilder()
             errorMessage.AppendLine("Please fix the following errors before proceeding:")
