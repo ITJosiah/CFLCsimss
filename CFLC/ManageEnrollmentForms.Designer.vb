@@ -160,7 +160,7 @@ Partial Class ManageEnrollmentForms
         Me.ComboBoxEnrollmentModeofPayment.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ComboBoxEnrollmentModeofPayment.FormattingEnabled = True
         Me.ComboBoxEnrollmentModeofPayment.Items.AddRange(New Object() {"Walk-in", "Online", "Scheduled Appointment"})
-        Me.ComboBoxEnrollmentModeofPayment.Location = New System.Drawing.Point(307, 162)
+        Me.ComboBoxEnrollmentModeofPayment.Location = New System.Drawing.Point(307, 207)
         Me.ComboBoxEnrollmentModeofPayment.Margin = New System.Windows.Forms.Padding(2)
         Me.ComboBoxEnrollmentModeofPayment.Name = "ComboBoxEnrollmentModeofPayment"
         Me.ComboBoxEnrollmentModeofPayment.Size = New System.Drawing.Size(104, 24)
@@ -334,7 +334,7 @@ Partial Class ManageEnrollmentForms
         '
         Me.TextEnrollmentModeOfPayment.AutoSize = True
         Me.TextEnrollmentModeOfPayment.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextEnrollmentModeOfPayment.Location = New System.Drawing.Point(304, 134)
+        Me.TextEnrollmentModeOfPayment.Location = New System.Drawing.Point(304, 188)
         Me.TextEnrollmentModeOfPayment.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.TextEnrollmentModeOfPayment.Name = "TextEnrollmentModeOfPayment"
         Me.TextEnrollmentModeOfPayment.Size = New System.Drawing.Size(121, 17)
@@ -346,7 +346,7 @@ Partial Class ManageEnrollmentForms
         Me.ComboBoxEnrollmentPaymentStatus.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ComboBoxEnrollmentPaymentStatus.FormattingEnabled = True
         Me.ComboBoxEnrollmentPaymentStatus.Items.AddRange(New Object() {"Paid", "Unpaid"})
-        Me.ComboBoxEnrollmentPaymentStatus.Location = New System.Drawing.Point(307, 208)
+        Me.ComboBoxEnrollmentPaymentStatus.Location = New System.Drawing.Point(307, 153)
         Me.ComboBoxEnrollmentPaymentStatus.Margin = New System.Windows.Forms.Padding(2)
         Me.ComboBoxEnrollmentPaymentStatus.Name = "ComboBoxEnrollmentPaymentStatus"
         Me.ComboBoxEnrollmentPaymentStatus.Size = New System.Drawing.Size(90, 24)
@@ -419,7 +419,7 @@ Partial Class ManageEnrollmentForms
         '
         Me.TextEnrollmentPaymentStatus.AutoSize = True
         Me.TextEnrollmentPaymentStatus.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextEnrollmentPaymentStatus.Location = New System.Drawing.Point(304, 188)
+        Me.TextEnrollmentPaymentStatus.Location = New System.Drawing.Point(304, 134)
         Me.TextEnrollmentPaymentStatus.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.TextEnrollmentPaymentStatus.Name = "TextEnrollmentPaymentStatus"
         Me.TextEnrollmentPaymentStatus.Size = New System.Drawing.Size(107, 17)
