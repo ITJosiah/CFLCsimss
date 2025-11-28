@@ -163,5 +163,4 @@
         pnlMainContent.Controls.Add(PictureBox1)
         CenterLogo()
     End Sub
-    End Sub
 End Class
