@@ -38,6 +38,7 @@ Partial Class SuperAdminManageTeacherAccounts
         Me.lblStudentMiddleName = New System.Windows.Forms.Label()
         Me.txtbxTeacherUserID = New System.Windows.Forms.TextBox()
         Me.lblStudentFirstName = New System.Windows.Forms.Label()
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.pnlTeacherSidebar = New System.Windows.Forms.Panel()
         Me.FlowLayoutPanel1 = New System.Windows.Forms.FlowLayoutPanel()
         Me.btnSuperAdminManageAdmin = New System.Windows.Forms.Button()
@@ -45,14 +46,13 @@ Partial Class SuperAdminManageTeacherAccounts
         Me.btnSuperAdminManageSysCon = New System.Windows.Forms.Button()
         Me.btnSuperAdminGenerateReports = New System.Windows.Forms.Button()
         Me.btnLogout = New System.Windows.Forms.Button()
-        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.pnlSuperAdminMainContent.SuspendLayout()
         CType(Me.dgvTeacher, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.dgvLoginTeacher, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpTeacherAccounts.SuspendLayout()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlTeacherSidebar.SuspendLayout()
         Me.FlowLayoutPanel1.SuspendLayout()
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'pnlSuperAdminMainContent
@@ -65,21 +65,19 @@ Partial Class SuperAdminManageTeacherAccounts
         Me.pnlSuperAdminMainContent.Controls.Add(Me.dgvTeacher)
         Me.pnlSuperAdminMainContent.Controls.Add(Me.dgvLoginTeacher)
         Me.pnlSuperAdminMainContent.Controls.Add(Me.grpTeacherAccounts)
-        Me.pnlSuperAdminMainContent.Controls.Add(Me.pnlTeacherSidebar)
         Me.pnlSuperAdminMainContent.Controls.Add(Me.PictureBox1)
         Me.pnlSuperAdminMainContent.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.pnlSuperAdminMainContent.Location = New System.Drawing.Point(0, 0)
-        Me.pnlSuperAdminMainContent.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.pnlSuperAdminMainContent.Location = New System.Drawing.Point(400, 0)
+        Me.pnlSuperAdminMainContent.Margin = New System.Windows.Forms.Padding(4)
         Me.pnlSuperAdminMainContent.Name = "pnlSuperAdminMainContent"
-        Me.pnlSuperAdminMainContent.Size = New System.Drawing.Size(1712, 731)
+        Me.pnlSuperAdminMainContent.Size = New System.Drawing.Size(1312, 731)
         Me.pnlSuperAdminMainContent.TabIndex = 15
         '
         'txtbxManTeaSearch
         '
-        Me.txtbxManTeaSearch.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtbxManTeaSearch.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtbxManTeaSearch.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtbxManTeaSearch.Location = New System.Drawing.Point(423, 188)
+        Me.txtbxManTeaSearch.Location = New System.Drawing.Point(46, 189)
         Me.txtbxManTeaSearch.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.txtbxManTeaSearch.MaxLength = 50
         Me.txtbxManTeaSearch.Name = "txtbxManTeaSearch"
@@ -88,9 +86,9 @@ Partial Class SuperAdminManageTeacherAccounts
         '
         'btnManTeaDelete
         '
-        Me.btnManTeaDelete.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnManTeaDelete.Location = New System.Drawing.Point(1567, 182)
-        Me.btnManTeaDelete.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnManTeaDelete.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnManTeaDelete.Location = New System.Drawing.Point(1160, 182)
+        Me.btnManTeaDelete.Margin = New System.Windows.Forms.Padding(4)
         Me.btnManTeaDelete.Name = "btnManTeaDelete"
         Me.btnManTeaDelete.Size = New System.Drawing.Size(115, 43)
         Me.btnManTeaDelete.TabIndex = 18
@@ -99,9 +97,9 @@ Partial Class SuperAdminManageTeacherAccounts
         '
         'btnManTeaUpdate
         '
-        Me.btnManTeaUpdate.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnManTeaUpdate.Location = New System.Drawing.Point(1417, 182)
-        Me.btnManTeaUpdate.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnManTeaUpdate.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnManTeaUpdate.Location = New System.Drawing.Point(1010, 182)
+        Me.btnManTeaUpdate.Margin = New System.Windows.Forms.Padding(4)
         Me.btnManTeaUpdate.Name = "btnManTeaUpdate"
         Me.btnManTeaUpdate.Size = New System.Drawing.Size(115, 43)
         Me.btnManTeaUpdate.TabIndex = 17
@@ -110,9 +108,9 @@ Partial Class SuperAdminManageTeacherAccounts
         '
         'btnManTeacherAdd
         '
-        Me.btnManTeacherAdd.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnManTeacherAdd.Location = New System.Drawing.Point(1267, 182)
-        Me.btnManTeacherAdd.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnManTeacherAdd.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnManTeacherAdd.Location = New System.Drawing.Point(860, 182)
+        Me.btnManTeacherAdd.Margin = New System.Windows.Forms.Padding(4)
         Me.btnManTeacherAdd.Name = "btnManTeacherAdd"
         Me.btnManTeacherAdd.Size = New System.Drawing.Size(115, 43)
         Me.btnManTeacherAdd.TabIndex = 16
@@ -128,8 +126,8 @@ Partial Class SuperAdminManageTeacherAccounts
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.dgvTeacher.BackgroundColor = System.Drawing.Color.WhiteSmoke
         Me.dgvTeacher.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvTeacher.Location = New System.Drawing.Point(1093, 249)
-        Me.dgvTeacher.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.dgvTeacher.Location = New System.Drawing.Point(687, 280)
+        Me.dgvTeacher.Margin = New System.Windows.Forms.Padding(4)
         Me.dgvTeacher.Name = "dgvTeacher"
         Me.dgvTeacher.ReadOnly = True
         Me.dgvTeacher.RowHeadersVisible = False
@@ -142,13 +140,12 @@ Partial Class SuperAdminManageTeacherAccounts
         '
         Me.dgvLoginTeacher.AllowUserToAddRows = False
         Me.dgvLoginTeacher.AllowUserToDeleteRows = False
-        Me.dgvLoginTeacher.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.dgvLoginTeacher.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.dgvLoginTeacher.BackgroundColor = System.Drawing.Color.WhiteSmoke
         Me.dgvLoginTeacher.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvLoginTeacher.Location = New System.Drawing.Point(423, 249)
-        Me.dgvLoginTeacher.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.dgvLoginTeacher.Location = New System.Drawing.Point(46, 280)
+        Me.dgvLoginTeacher.Margin = New System.Windows.Forms.Padding(4)
         Me.dgvLoginTeacher.Name = "dgvLoginTeacher"
         Me.dgvLoginTeacher.ReadOnly = True
         Me.dgvLoginTeacher.RowHeadersVisible = False
@@ -171,11 +168,11 @@ Partial Class SuperAdminManageTeacherAccounts
         Me.grpTeacherAccounts.Controls.Add(Me.txtbxTeacherUserID)
         Me.grpTeacherAccounts.Controls.Add(Me.lblStudentFirstName)
         Me.grpTeacherAccounts.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.grpTeacherAccounts.Location = New System.Drawing.Point(423, 28)
-        Me.grpTeacherAccounts.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.grpTeacherAccounts.Location = New System.Drawing.Point(46, 28)
+        Me.grpTeacherAccounts.Margin = New System.Windows.Forms.Padding(4)
         Me.grpTeacherAccounts.Name = "grpTeacherAccounts"
-        Me.grpTeacherAccounts.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
-        Me.grpTeacherAccounts.Size = New System.Drawing.Size(1259, 133)
+        Me.grpTeacherAccounts.Padding = New System.Windows.Forms.Padding(4)
+        Me.grpTeacherAccounts.Size = New System.Drawing.Size(1229, 133)
         Me.grpTeacherAccounts.TabIndex = 13
         Me.grpTeacherAccounts.TabStop = False
         Me.grpTeacherAccounts.Text = "Teacher Accounts"
@@ -183,7 +180,7 @@ Partial Class SuperAdminManageTeacherAccounts
         'txtbxTeaAccountTeacherID
         '
         Me.txtbxTeaAccountTeacherID.Location = New System.Drawing.Point(972, 60)
-        Me.txtbxTeaAccountTeacherID.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtbxTeaAccountTeacherID.Margin = New System.Windows.Forms.Padding(4)
         Me.txtbxTeaAccountTeacherID.MaxLength = 50
         Me.txtbxTeaAccountTeacherID.Name = "txtbxTeaAccountTeacherID"
         Me.txtbxTeaAccountTeacherID.Size = New System.Drawing.Size(252, 26)
@@ -202,7 +199,7 @@ Partial Class SuperAdminManageTeacherAccounts
         'txtbxTeacherUserType
         '
         Me.txtbxTeacherUserType.Location = New System.Drawing.Point(671, 60)
-        Me.txtbxTeacherUserType.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtbxTeacherUserType.Margin = New System.Windows.Forms.Padding(4)
         Me.txtbxTeacherUserType.MaxLength = 50
         Me.txtbxTeacherUserType.Name = "txtbxTeacherUserType"
         Me.txtbxTeacherUserType.Size = New System.Drawing.Size(252, 26)
@@ -221,7 +218,7 @@ Partial Class SuperAdminManageTeacherAccounts
         'txtbxTeacherPassword
         '
         Me.txtbxTeacherPassword.Location = New System.Drawing.Point(361, 60)
-        Me.txtbxTeacherPassword.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtbxTeacherPassword.Margin = New System.Windows.Forms.Padding(4)
         Me.txtbxTeacherPassword.MaxLength = 50
         Me.txtbxTeacherPassword.Name = "txtbxTeacherPassword"
         Me.txtbxTeacherPassword.Size = New System.Drawing.Size(252, 26)
@@ -240,7 +237,7 @@ Partial Class SuperAdminManageTeacherAccounts
         'txtbxTeacherUserID
         '
         Me.txtbxTeacherUserID.Location = New System.Drawing.Point(52, 60)
-        Me.txtbxTeacherUserID.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtbxTeacherUserID.Margin = New System.Windows.Forms.Padding(4)
         Me.txtbxTeacherUserID.MaxLength = 50
         Me.txtbxTeacherUserID.Name = "txtbxTeacherUserID"
         Me.txtbxTeacherUserID.Size = New System.Drawing.Size(252, 26)
@@ -256,6 +253,18 @@ Partial Class SuperAdminManageTeacherAccounts
         Me.lblStudentFirstName.TabIndex = 1
         Me.lblStudentFirstName.Text = "User ID"
         '
+        'PictureBox1
+        '
+        Me.PictureBox1.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.PictureBox1.Image = Global.CFLC.My.Resources.Resources.logo
+        Me.PictureBox1.Location = New System.Drawing.Point(617, 182)
+        Me.PictureBox1.Margin = New System.Windows.Forms.Padding(4)
+        Me.PictureBox1.Name = "PictureBox1"
+        Me.PictureBox1.Size = New System.Drawing.Size(500, 406)
+        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.PictureBox1.TabIndex = 3
+        Me.PictureBox1.TabStop = False
+        '
         'pnlTeacherSidebar
         '
         Me.pnlTeacherSidebar.BackColor = System.Drawing.Color.FromArgb(CType(CType(40, Byte), Integer), CType(CType(130, Byte), Integer), CType(CType(61, Byte), Integer))
@@ -263,7 +272,7 @@ Partial Class SuperAdminManageTeacherAccounts
         Me.pnlTeacherSidebar.Controls.Add(Me.btnLogout)
         Me.pnlTeacherSidebar.Dock = System.Windows.Forms.DockStyle.Left
         Me.pnlTeacherSidebar.Location = New System.Drawing.Point(0, 0)
-        Me.pnlTeacherSidebar.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.pnlTeacherSidebar.Margin = New System.Windows.Forms.Padding(4)
         Me.pnlTeacherSidebar.Name = "pnlTeacherSidebar"
         Me.pnlTeacherSidebar.Padding = New System.Windows.Forms.Padding(40, 49, 40, 49)
         Me.pnlTeacherSidebar.Size = New System.Drawing.Size(400, 731)
@@ -338,25 +347,14 @@ Partial Class SuperAdminManageTeacherAccounts
         Me.btnLogout.Text = "Logout"
         Me.btnLogout.UseVisualStyleBackColor = False
         '
-        'PictureBox1
-        '
-        Me.PictureBox1.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.PictureBox1.Image = Global.CFLC.My.Resources.Resources.logo
-        Me.PictureBox1.Location = New System.Drawing.Point(817, 182)
-        Me.PictureBox1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
-        Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(500, 406)
-        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.PictureBox1.TabIndex = 3
-        Me.PictureBox1.TabStop = False
-        '
         'SuperAdminManageTeacherAccounts
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1712, 731)
         Me.Controls.Add(Me.pnlSuperAdminMainContent)
-        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Controls.Add(Me.pnlTeacherSidebar)
+        Me.Margin = New System.Windows.Forms.Padding(4)
         Me.Name = "SuperAdminManageTeacherAccounts"
         Me.Text = "SuperAdminManageTeacherAccounts"
         Me.pnlSuperAdminMainContent.ResumeLayout(False)
@@ -365,9 +363,9 @@ Partial Class SuperAdminManageTeacherAccounts
         CType(Me.dgvLoginTeacher, System.ComponentModel.ISupportInitialize).EndInit()
         Me.grpTeacherAccounts.ResumeLayout(False)
         Me.grpTeacherAccounts.PerformLayout()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.pnlTeacherSidebar.ResumeLayout(False)
         Me.FlowLayoutPanel1.ResumeLayout(False)
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub

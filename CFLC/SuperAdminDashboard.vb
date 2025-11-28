@@ -1,10 +1,13 @@
 ﻿Public Class SuperAdminDashboard
+
+    Private currentContent As Form
+    Public Property IsEmbedded As Boolean = False
     Private Sub SuperAdminDashboard_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Me.FormBorderStyle = FormBorderStyle.None
-        Me.WindowState = FormWindowState.Maximized
-        Me.Bounds = Screen.PrimaryScreen.Bounds
-        Me.TopMost = True
-        Me.BackColor = Color.FromArgb(7, 77, 39) ' Dark green background
+        If Not IsEmbedded Then
+            Me.WindowState = FormWindowState.Maximized
+            Me.BackColor = Color.FromArgb(15, 56, 32)
+            Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        End If
         Me.Text = "Dashboard-SuperAdmin"
 
 
@@ -127,6 +130,35 @@
         btnLogout.Height = buttonHeight
     End Sub
 
+    Private Sub LoadContentForm(child As Form)
+        If currentContent IsNot Nothing Then
+            currentContent.Close()
+            currentContent.Dispose()
+            currentContent = Nothing
+        End If
+
+        ' Remove only the main content controls — do not remove the sidebar panel
+        ClearMainContentExceptSidebar()
+
+        currentContent = child
+        child.TopLevel = False
+        child.FormBorderStyle = FormBorderStyle.None
+        child.Dock = DockStyle.Fill
+        pnlSuperAdminMainContent.Controls.Add(child)
+        child.Show()
+    End Sub
+
+    ' Utility: remove everything from pnlTeacherMainContent except the left sidebar
+    Private Sub ClearMainContentExceptSidebar()
+        For i As Integer = pnlSuperAdminMainContent.Controls.Count - 1 To 0 Step -1
+            Dim c As Control = pnlSuperAdminMainContent.Controls(i)
+            If c Is pnlTeacherSidebar Then
+                Continue For
+            End If
+            pnlSuperAdminMainContent.Controls.RemoveAt(i)
+        Next
+    End Sub
+
     Private Sub LoadFormInPanel(childForm As Form)
         pnlSuperAdminMainContent.Controls.Clear()
         childForm.TopLevel = False
@@ -144,11 +176,17 @@
     End Sub
 
     Private Sub btnSuperAdminManageAdmin_Click(sender As Object, e As EventArgs) Handles btnSuperAdminManageAdmin.Click
-        LoadFormInPanel(New SuperAdminManageAdminAccounts())
+        Dim viewSuperAdminManageAdmin As New SuperAdminManageAdminAccounts() With {
+            .IsEmbedded = True
+        }
+        LoadContentForm(viewSuperAdminManageAdmin)
     End Sub
 
     Private Sub btnSuperAdminManageTea_Click(sender As Object, e As EventArgs) Handles btnSuperAdminManageTea.Click
-        LoadFormInPanel(New SuperAdminManageTeacherAccounts())
+        Dim viewSuperAdminManageTeacher As New SuperAdminManageTeacherAccounts() With {
+         .IsEmbedded = True
+        }
+        LoadContentForm(viewSuperAdminManageTeacher)
     End Sub
 
 End Class

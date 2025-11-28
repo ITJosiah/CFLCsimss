@@ -1,16 +1,16 @@
 ﻿Public Class SuperAdminManageAdminAccounts
+
+    Public Property IsEmbedded As Boolean = False
     Private Sub SuperAdminManageAdminAccounts_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Me.FormBorderStyle = FormBorderStyle.None
-        Me.WindowState = FormWindowState.Maximized
-        Me.Bounds = Screen.PrimaryScreen.Bounds
-        Me.TopMost = True
-        Me.BackColor = Color.FromArgb(7, 77, 39) ' Dark green background
+        If Not IsEmbedded Then
+            Me.WindowState = FormWindowState.Maximized
+            Me.BackColor = Color.FromArgb(15, 56, 32)
+            Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        End If
         Me.Text = "Dashboard-SuperAdminManageAdminAccounts"
 
 
         PositionSidebarButtons()
-
-        ShowHomeContent()
 
         StyleSidebarButtons()
 
@@ -54,42 +54,6 @@
         btnLogout.TextAlign = ContentAlignment.MiddleCenter ' Center text for logout
     End Sub
 
-
-
-    Protected Overrides Function ProcessCmdKey(ByRef msg As Message, keyData As Keys) As Boolean
-        If keyData = Keys.Escape Then
-            ExitFullScreen()
-            Return True
-        End If
-
-        If keyData = Keys.F Then
-            MakeItFullScreen()
-            Return True
-        End If
-
-        Return MyBase.ProcessCmdKey(msg, keyData)
-
-
-    End Function
-
-    Private Sub ExitFullScreen()
-        Me.FormBorderStyle = FormBorderStyle.Sizable
-        Me.WindowState = FormWindowState.Maximized
-        Me.TopMost = False
-    End Sub
-
-    Private Sub MakeItFullScreen()
-        Me.FormBorderStyle = FormBorderStyle.None
-        Me.WindowState = FormWindowState.Maximized
-        Me.Bounds = Screen.PrimaryScreen.Bounds
-        Me.TopMost = True
-        Me.BringToFront()
-    End Sub
-    Private Sub AdminDashboard_Resize(sender As Object, e As EventArgs) Handles MyBase.Resize
-        CenterLogo()
-        PositionSidebarButtons()
-    End Sub
-
     Private Sub PositionSidebarButtons()
         ' Position sidebar buttons vertically with better spacing
         Dim sidebarWidth As Integer = 250
@@ -127,28 +91,5 @@
         btnLogout.Height = buttonHeight
     End Sub
 
-    Private Sub ShowHomeContent()
-        pnlSuperAdminMainContent.Controls.Clear()
-        pnlSuperAdminMainContent.Controls.Add(PictureBox1)
-        PictureBox1.BringToFront()
-        CenterLogo()
-    End Sub
-
-    Private Sub LoadFormInPanel(childForm As Form)
-        pnlSuperAdminMainContent.Controls.Clear()
-        childForm.TopLevel = False
-        childForm.FormBorderStyle = FormBorderStyle.None
-        childForm.Dock = DockStyle.Fill
-        pnlSuperAdminMainContent.Controls.Add(childForm)
-        childForm.Show()
-    End Sub
-
-    Private Sub btnSuperAdminManageAdmin_Click(sender As Object, e As EventArgs) Handles btnSuperAdminManageAdmin.Click
-        LoadFormInPanel(New SuperAdminManageAdminAccounts())
-    End Sub
-
-    Private Sub btnSuperAdminManageTea_Click(sender As Object, e As EventArgs) Handles btnSuperAdminManageTea.Click
-        LoadFormInPanel(New SuperAdminManageTeacherAccounts())
-    End Sub
 
 End Class
