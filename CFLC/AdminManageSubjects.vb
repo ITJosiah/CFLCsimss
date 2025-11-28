@@ -70,9 +70,8 @@ Public Class AdminManageSubjects
         cmbSubjectCategory.Items.Clear()
         cmbSubjectCategory.DropDownStyle = ComboBoxStyle.DropDownList
         cmbSubjectCategory.Items.Add("Core")
-        cmbSubjectCategory.Items.Add("Major")
-        cmbSubjectCategory.Items.Add("Elective")
-        cmbSubjectCategory.Items.Add("Specialization")
+        cmbSubjectCategory.Items.Add("Special")
+
     End Sub
 
     Private Sub InitializeStatusComboBox()
@@ -89,11 +88,8 @@ Public Class AdminManageSubjects
         cbxManSubRoomType.Items.Clear()
         cbxManSubRoomType.DropDownStyle = ComboBoxStyle.DropDownList
         cbxManSubRoomType.Items.Add("Regular Classroom")
-        cbxManSubRoomType.Items.Add("Laboratory")
-        cbxManSubRoomType.Items.Add("Computer Lab")
         cbxManSubRoomType.Items.Add("Science Lab")
-        cbxManSubRoomType.Items.Add("Workshop")
-        cbxManSubRoomType.Items.Add("Audio-Visual Room")
+        cbxManSubRoomType.Items.Add("Covered Court")
     End Sub
 
     ' ===== DATE-BASED STATUS CALCULATION METHODS =====
