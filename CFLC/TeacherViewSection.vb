@@ -9,6 +9,30 @@
         Me.Text = "Dashboard-Teacher"
         StyleSidebarButtons()
         PositionSidebarButtons()
+
+        txtbxManSecSectionName.ReadOnly = True
+        txtbxManSecSectionName.Enabled = False
+
+        nudManSecGradeLevel.ReadOnly = True
+        nudManSecGradeLevel.Enabled = False
+
+        txtbxManSecTeacherID.ReadOnly = True
+        txtbxManSecTeacherID.Enabled = False
+
+        txtbxManSecRoomNo.ReadOnly = True
+        txtbxManSecRoomNo.Enabled = False
+
+        txtbxManSecBuildingName.ReadOnly = True
+        txtbxManSecBuildingName.Enabled = False
+
+
+        cmbManSecClassType.Enabled = False
+
+        cmbManSecLearningMode.Enabled = False
+
+        txtbxManSchedule.ReadOnly = True
+        txtbxManSchedule.Enabled = False
+
     End Sub
 
     Private Sub PositionSidebarButtons()
