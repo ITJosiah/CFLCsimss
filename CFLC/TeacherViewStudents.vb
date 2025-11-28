@@ -29,10 +29,6 @@ Public Class TeacherViewStudents
         txtbbxStudentIPGroup.ReadOnly = True
         txtbbxStudentIPGroup.Enabled = False
 
-        RadioButtonStudentIPNO.Enabled = False
-        RadioButtonStudentIPYES.Enabled = False
-        RadioButtonStudent4PNO.Enabled = False
-        RadioButtonStudent4PYES.Enabled = False
 
         txtbx4ps.ReadOnly = True
         txtbx4ps.Enabled = False
@@ -212,21 +208,9 @@ Public Class TeacherViewStudents
             txtbxStudentReligion.Text = GetSafeString(row.Cells("Religion"))
 
             ' Indigineous fields
-            Dim indigineous As String = GetSafeString(row.Cells("Indigineous"))
-            If indigineous = "Yes" Then
-                RadioButtonStudentIPYES.Checked = True
-            Else
-                RadioButtonStudentIPNO.Checked = True
-            End If
             txtbbxStudentIPGroup.Text = GetSafeString(row.Cells("IndigineousSpecific"))
 
             ' 4Ps fields
-            Dim is4Ps As String = GetSafeString(row.Cells("4Ps"))
-            If is4Ps = "Yes" Then
-                RadioButtonStudent4PYES.Checked = True
-            Else
-                RadioButtonStudent4PNO.Checked = True
-            End If
             txtbx4ps.Text = GetSafeString(row.Cells("4PsID"))
 
             txtbxGuardianName.Text = GetSafeString(row.Cells("GuardianName"))
