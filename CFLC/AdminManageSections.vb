@@ -81,8 +81,6 @@ Public Class AdminManageSections
         cmbManSecClassType.Items.Clear()
         cmbManSecClassType.DropDownStyle = ComboBoxStyle.DropDownList
         cmbManSecClassType.Items.Add("Regular")
-        cmbManSecClassType.Items.Add("Honors")
-        cmbManSecClassType.Items.Add("Advanced")
         cmbManSecClassType.Items.Add("Special Education")
         cmbManSecClassType.Items.Add("Accelerated")
     End Sub
