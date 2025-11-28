@@ -89,7 +89,7 @@ Public Class AdminManageSubjects
         cbxManSubRoomType.DropDownStyle = ComboBoxStyle.DropDownList
         cbxManSubRoomType.Items.Add("Regular Classroom")
         cbxManSubRoomType.Items.Add("Science Lab")
-        cbxManSubRoomType.Items.Add("Covered Court")
+        cbxManSubRoomType.Items.Add("Covered Court/Workshop")
     End Sub
 
     ' ===== DATE-BASED STATUS CALCULATION METHODS =====
