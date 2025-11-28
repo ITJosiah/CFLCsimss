@@ -26,6 +26,7 @@ Public Class AdminManageSections
         InitializeLearningModeComboBox()
         InitializeClassTypeComboBox()
         InitializeStatusComboBox()
+        InitializeFloorLevelComboBox()
 
         ' Load sections data
         LoadToDGV("SELECT * FROM section", dgvSections)
@@ -43,6 +44,9 @@ Public Class AdminManageSections
         Dim txt = DirectCast(nudManSecGradeLevel.Controls(1), TextBox)
         txt.Enabled = False
 
+        ' Initialize location fields based on default learning mode
+        ToggleLocationFieldsBasedOnLearningMode()
+
         ' Ensure the grid doesn't auto-select the first row on load
         dgvSections.ClearSelection()
         Try
@@ -55,6 +59,34 @@ Public Class AdminManageSections
         currentSectionID = 0
     End Sub
 
+    ' Method to enable/disable location fields based on learning mode
+    Private Sub ToggleLocationFieldsBasedOnLearningMode()
+        Dim isOnline As Boolean = (cmbManSecLearningMode.SelectedItem IsNot Nothing AndAlso
+                                 cmbManSecLearningMode.SelectedItem.ToString() = "Online")
+
+        ' Enable/disable location-related fields
+        txtbxManSecRoomNo.Enabled = Not isOnline
+        txtbxManSecBuildingName.Enabled = Not isOnline
+        ComboBoxManSecFloorLevel.Enabled = Not isOnline
+
+        ' Clear location fields if online mode is selected
+        If isOnline Then
+            txtbxManSecRoomNo.Clear()
+            txtbxManSecBuildingName.Clear()
+            ComboBoxManSecFloorLevel.SelectedIndex = -1
+        End If
+    End Sub
+
+    Private Sub InitializeFloorLevelComboBox()
+        ' Populate Learning Mode dropdown
+        ComboBoxManSecFloorLevel.Items.Clear()
+        ComboBoxManSecFloorLevel.DropDownStyle = ComboBoxStyle.DropDownList
+        ComboBoxManSecFloorLevel.Items.Add("1st Floor")
+        ComboBoxManSecFloorLevel.Items.Add("2nd Floor")
+        ComboBoxManSecFloorLevel.Items.Add("3rd Floor")
+        ComboBoxManSecFloorLevel.Items.Add("4th FLoor")
+    End Sub
+
     Private Sub InitializeLearningModeComboBox()
         ' Populate Learning Mode dropdown
         cmbManSecLearningMode.Items.Clear()
@@ -62,7 +94,6 @@ Public Class AdminManageSections
         cmbManSecLearningMode.Items.Add("Face-to-Face")
         cmbManSecLearningMode.Items.Add("Online")
         cmbManSecLearningMode.Items.Add("Hybrid")
-        cmbManSecLearningMode.Items.Add("Blended")
     End Sub
 
     Private Sub InitializeClassTypeComboBox()
@@ -70,10 +101,8 @@ Public Class AdminManageSections
         cmbManSecClassType.Items.Clear()
         cmbManSecClassType.DropDownStyle = ComboBoxStyle.DropDownList
         cmbManSecClassType.Items.Add("Regular")
-        cmbManSecClassType.Items.Add("Honors")
-        cmbManSecClassType.Items.Add("Advanced")
         cmbManSecClassType.Items.Add("Special Education")
-        cmbManSecClassType.Items.Add("Accelerated")
+
     End Sub
 
     Private Sub InitializeStatusComboBox()
@@ -185,6 +214,12 @@ Public Class AdminManageSections
         End If
     End Sub
 
+    ' ===== LEARNING MODE EVENT HANDLER =====
+
+    Private Sub cmbManSecLearningMode_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbManSecLearningMode.SelectedIndexChanged
+        ToggleLocationFieldsBasedOnLearningMode()
+    End Sub
+
     ' ===== MAIN SECTION OPERATIONS =====
 
     Private Sub btnSectionAdd_Click(sender As Object, e As EventArgs) Handles btnSectionAdd.Click
@@ -213,11 +248,11 @@ Public Class AdminManageSections
             Dim query As String = "INSERT INTO section (" &
                             "SectionName, GradeLevel, TeacherID, RoomNo, LearningMode, " &
                             "ClassType, BuildingName, StartDate, EndDate, Remarks, " &
-                            "Schedule, Status, CreatedBy, DateCreated" &
+                            "FloorLevel, Status, CreatedBy, DateCreated" &
                             ") VALUES (" &
                             "@SectionName, @GradeLevel, @TeacherID, @RoomNo, @LearningMode, " &
                             "@ClassType, @BuildingName, @StartDate, @EndDate, @Remarks, " &
-                            "@Schedule, @Status, @CreatedBy, @DateCreated)"
+                            "@FloorLevel, @Status, @CreatedBy, @DateCreated)"
 
             modDBx.openConn(modDBx.db_name)
 
@@ -234,8 +269,26 @@ Public Class AdminManageSections
                     cmd.Parameters.AddWithValue("@TeacherID", teacherID)
                 End If
 
-                cmd.Parameters.AddWithValue("@RoomNo", SafeString(txtbxManSecRoomNo.Text))
-                cmd.Parameters.AddWithValue("@BuildingName", SafeString(txtbxManSecBuildingName.Text))
+                ' Handle location fields based on learning mode
+                Dim isOnline As Boolean = (cmbManSecLearningMode.SelectedItem IsNot Nothing AndAlso
+                                         cmbManSecLearningMode.SelectedItem.ToString() = "Online")
+
+                If isOnline Then
+                    ' For online learning, set location fields to empty or NULL
+                    cmd.Parameters.AddWithValue("@RoomNo", DBNull.Value)
+                    cmd.Parameters.AddWithValue("@BuildingName", DBNull.Value)
+                    cmd.Parameters.AddWithValue("@FloorLevel", DBNull.Value)
+                Else
+                    ' For other learning modes, use the entered values
+                    cmd.Parameters.AddWithValue("@RoomNo", SafeString(txtbxManSecRoomNo.Text))
+                    cmd.Parameters.AddWithValue("@BuildingName", SafeString(txtbxManSecBuildingName.Text))
+
+                    Dim floorLevel As String = ""
+                    If ComboBoxManSecFloorLevel.SelectedItem IsNot Nothing Then
+                        floorLevel = ComboBoxManSecFloorLevel.SelectedItem.ToString()
+                    End If
+                    cmd.Parameters.AddWithValue("@FloorLevel", floorLevel)
+                End If
 
                 ' Learning Mode
                 Dim learningMode As String = ""
@@ -257,7 +310,6 @@ Public Class AdminManageSections
 
                 ' Remarks and Schedule
                 cmd.Parameters.AddWithValue("@Remarks", ConvertToProperCase(SafeString(txtbxManSecRemarks.Text)))
-                cmd.Parameters.AddWithValue("@Schedule", SafeString(txtbxManSchedule.Text))
 
                 ' Status - Auto-determined based on dates
                 Dim status As String = ""
@@ -405,7 +457,7 @@ Public Class AdminManageSections
                 "StartDate = @StartDate, " &
                 "EndDate = @EndDate, " &
                 "Remarks = @Remarks, " &
-                "Schedule = @Schedule, " &
+                "FloorLevel = @FloorLevel, " &
                 "Status = @Status " &
                 "WHERE SectionID = @SectionID"
 
@@ -422,8 +474,26 @@ Public Class AdminManageSections
                     cmd.Parameters.AddWithValue("@TeacherID", teacherID)
                 End If
 
-                cmd.Parameters.AddWithValue("@RoomNo", SafeString(txtbxManSecRoomNo.Text))
-                cmd.Parameters.AddWithValue("@BuildingName", (txtbxManSecBuildingName.Text))
+                ' Handle location fields based on learning mode
+                Dim isOnline As Boolean = (cmbManSecLearningMode.SelectedItem IsNot Nothing AndAlso
+                                         cmbManSecLearningMode.SelectedItem.ToString() = "Online")
+
+                If isOnline Then
+                    ' For online learning, set location fields to empty or NULL
+                    cmd.Parameters.AddWithValue("@RoomNo", DBNull.Value)
+                    cmd.Parameters.AddWithValue("@BuildingName", DBNull.Value)
+                    cmd.Parameters.AddWithValue("@FloorLevel", DBNull.Value)
+                Else
+                    ' For other learning modes, use the entered values
+                    cmd.Parameters.AddWithValue("@RoomNo", SafeString(txtbxManSecRoomNo.Text))
+                    cmd.Parameters.AddWithValue("@BuildingName", SafeString(txtbxManSecBuildingName.Text))
+
+                    Dim floorLevel As String = ""
+                    If ComboBoxManSecFloorLevel.SelectedItem IsNot Nothing Then
+                        floorLevel = ComboBoxManSecFloorLevel.SelectedItem.ToString()
+                    End If
+                    cmd.Parameters.AddWithValue("@FloorLevel", floorLevel)
+                End If
 
                 ' Learning Mode
                 Dim learningMode As String = ""
@@ -445,7 +515,6 @@ Public Class AdminManageSections
 
                 ' Remarks and Schedule
                 cmd.Parameters.AddWithValue("@Remarks", ConvertToProperCase(SafeString(txtbxManSecRemarks.Text)))
-                cmd.Parameters.AddWithValue("@Schedule", SafeString(txtbxManSchedule.Text))
 
                 ' Status
                 Dim status As String = ""
@@ -524,8 +593,17 @@ Public Class AdminManageSections
                         If GetSafeStringFromDB(reader("SectionName")) <> txtbxManSecSectionName.Text.Trim() Then Return True
                         If Convert.ToInt32(reader("GradeLevel")) <> nudManSecGradeLevel.Value Then Return True
                         If GetSafeStringFromDB(reader("TeacherID")) <> txtbxManSecTeacherID.Text.Trim() Then Return True
-                        If GetSafeStringFromDB(reader("RoomNo")) <> txtbxManSecRoomNo.Text.Trim() Then Return True
-                        If GetSafeStringFromDB(reader("BuildingName")) <> txtbxManSecBuildingName.Text.Trim() Then Return True
+
+                        ' Handle location fields - only compare if not online
+                        Dim isOnline As Boolean = (cmbManSecLearningMode.SelectedItem IsNot Nothing AndAlso
+                                                 cmbManSecLearningMode.SelectedItem.ToString() = "Online")
+
+                        If Not isOnline Then
+                            If GetSafeStringFromDB(reader("RoomNo")) <> txtbxManSecRoomNo.Text.Trim() Then Return True
+                            If GetSafeStringFromDB(reader("BuildingName")) <> txtbxManSecBuildingName.Text.Trim() Then Return True
+                            If GetSafeStringFromDB(reader("FloorLevel")) <> ComboBoxManSecFloorLevel.Text.Trim() Then Return True
+                        End If
+
                         If GetSafeStringFromDB(reader("LearningMode")) <> cmbManSecLearningMode.Text.Trim() Then Return True
                         If GetSafeStringFromDB(reader("ClassType")) <> cmbManSecClassType.Text.Trim() Then Return True
                         If GetSafeStringFromDB(reader("Status")) <> cbxManSecStatus.Text.Trim() Then Return True
@@ -533,7 +611,6 @@ Public Class AdminManageSections
                         If Convert.ToDateTime(reader("StartDate")).ToString("yyyy-MM-dd") <> dtpManSecStartDate.Value.ToString("yyyy-MM-dd") Then Return True
                         If Convert.ToDateTime(reader("EndDate")).ToString("yyyy-MM-dd") <> dtpManSecEndDate.Value.ToString("yyyy-MM-dd") Then Return True
                         If GetSafeStringFromDB(reader("Remarks")) <> txtbxManSecRemarks.Text.Trim() Then Return True
-                        If GetSafeStringFromDB(reader("Schedule")) <> txtbxManSchedule.Text.Trim() Then Return True
                     End If
                 End Using
             End Using
@@ -552,6 +629,8 @@ Public Class AdminManageSections
 
     Private Function ValidateSectionInputs() As Boolean
         Dim errors As New List(Of String)
+        Dim isOnline As Boolean = (cmbManSecLearningMode.SelectedItem IsNot Nothing AndAlso
+                                 cmbManSecLearningMode.SelectedItem.ToString() = "Online")
 
         ' 1. Basic Section Information Validation
         If String.IsNullOrWhiteSpace(txtbxManSecSectionName.Text) Then
@@ -567,7 +646,7 @@ Public Class AdminManageSections
 
         ' 3. Teacher ID Validation
         If String.IsNullOrWhiteSpace(txtbxManSecTeacherID.Text) Then
-            errors.Add("• TeacherID. is required")
+            errors.Add("• TeacherID is required")
         End If
 
         ' 3. Teacher ID validation (optional but if provided, should be valid)
@@ -579,9 +658,9 @@ Public Class AdminManageSections
             End If
         End If
 
-        ' 4. Room No. Validation
-        If String.IsNullOrWhiteSpace(txtbxManSecRoomNo.Text) Then
-            errors.Add("• Room No. is required")
+        ' 4. Room No. Validation - Only required if NOT online
+        If Not isOnline AndAlso String.IsNullOrWhiteSpace(txtbxManSecRoomNo.Text) Then
+            errors.Add("• Room No. is required for Face-to-Face and Hybrid learning modes")
         End If
 
         ' 5. Class Type Validation
@@ -594,14 +673,14 @@ Public Class AdminManageSections
             errors.Add("• Learning Mode is required")
         End If
 
-        ' 7. Building Name Validation
-        If String.IsNullOrWhiteSpace(txtbxManSecBuildingName.Text) Then
-            errors.Add("• Building Name is required")
+        ' 7. Building Name Validation - Only required if NOT online
+        If Not isOnline AndAlso String.IsNullOrWhiteSpace(txtbxManSecBuildingName.Text) Then
+            errors.Add("• Building Name is required for Face-to-Face and Hybrid learning modes")
         End If
 
-        ' 8. Schedule Validation
-        If String.IsNullOrWhiteSpace(txtbxManSchedule.Text) Then
-            errors.Add("• Schedule is required")
+        ' 8. Floor Level Validation - Only required if NOT online
+        If Not isOnline AndAlso ComboBoxManSecFloorLevel.SelectedIndex = -1 Then
+            errors.Add("• Floor Level is required for Face-to-Face and Hybrid learning modes")
         End If
 
         ' 9. Date Validation
@@ -678,7 +757,7 @@ Public Class AdminManageSections
 
         ' Remarks and Schedule
         txtbxManSecRemarks.Clear()
-        txtbxManSchedule.Clear()
+        ComboBoxManSecFloorLevel.SelectedIndex = -1
 
         ' Date and Created By (reset to defaults)
         dtpManSecDateCreated.Value = DateTime.Now
@@ -692,6 +771,9 @@ Public Class AdminManageSections
 
         ' Re-enable Add button so user can create a new record
         btnSectionAdd.Enabled = True
+
+        ' Reset location fields state
+        ToggleLocationFieldsBasedOnLearningMode()
 
         ' Set focus back to first field
         txtbxManSecSectionName.Focus()
@@ -722,6 +804,15 @@ Public Class AdminManageSections
         If clickedID <> 0 Then
             currentSectionID = clickedID
 
+            ' Set location fields first
+            txtbxManSecRoomNo.Text = GetSafeString(row.Cells("RoomNo"))
+            txtbxManSecBuildingName.Text = GetSafeString(row.Cells("BuildingName"))
+            ComboBoxManSecFloorLevel.Text = GetSafeString(row.Cells("FloorLevel"))
+
+            ' Then set learning mode (this will enable/disable location fields appropriately)
+            cmbManSecLearningMode.Text = GetSafeString(row.Cells("LearningMode"))
+
+            ' Set other fields
             txtbxManSecSectionName.Text = GetSafeString(row.Cells("SectionName"))
 
             If Not IsDBNull(row.Cells("GradeLevel").Value) Then
@@ -729,9 +820,6 @@ Public Class AdminManageSections
             End If
 
             txtbxManSecTeacherID.Text = GetSafeString(row.Cells("TeacherID"))
-            txtbxManSecRoomNo.Text = GetSafeString(row.Cells("RoomNo"))
-            txtbxManSecBuildingName.Text = GetSafeString(row.Cells("BuildingName"))
-            cmbManSecLearningMode.Text = GetSafeString(row.Cells("LearningMode"))
             cmbManSecClassType.Text = GetSafeString(row.Cells("ClassType"))
             cbxManSecStatus.Text = GetSafeString(row.Cells("Status"))
 
@@ -744,7 +832,6 @@ Public Class AdminManageSections
             End If
 
             txtbxManSecRemarks.Text = GetSafeString(row.Cells("Remarks"))
-            txtbxManSchedule.Text = GetSafeString(row.Cells("Schedule"))
 
             If Not IsDBNull(row.Cells("DateCreated").Value) Then
                 dtpManSecDateCreated.Value = CDate(row.Cells("DateCreated").Value)

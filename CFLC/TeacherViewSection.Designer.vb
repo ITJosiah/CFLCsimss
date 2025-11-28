@@ -40,8 +40,6 @@ Partial Class TeacherViewSection
         Me.txtbxManSecRoomNo = New System.Windows.Forms.TextBox()
         Me.lblManSecRoomNo = New System.Windows.Forms.Label()
         Me.nudManSecGradeLevel = New System.Windows.Forms.NumericUpDown()
-        Me.txtbxManSchedule = New System.Windows.Forms.TextBox()
-        Me.lblManSecSchedule = New System.Windows.Forms.Label()
         Me.lblManSecGradeLevel = New System.Windows.Forms.Label()
         Me.txtbxManSecTeacherID = New System.Windows.Forms.TextBox()
         Me.lblManSecTeacherID = New System.Windows.Forms.Label()
@@ -49,6 +47,8 @@ Partial Class TeacherViewSection
         Me.lblManSecSectionName = New System.Windows.Forms.Label()
         Me.lblSectionsList = New System.Windows.Forms.Label()
         Me.picWatermark = New System.Windows.Forms.PictureBox()
+        Me.ComboBoxTeacherFloorLevel = New System.Windows.Forms.ComboBox()
+        Me.Label2 = New System.Windows.Forms.Label()
         Me.pnlTeacherSidebar.SuspendLayout()
         Me.flowButtons.SuspendLayout()
         Me.pnlManSecContent.SuspendLayout()
@@ -157,6 +157,8 @@ Partial Class TeacherViewSection
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.grpSectionInfo.AutoSize = True
         Me.grpSectionInfo.BackColor = System.Drawing.Color.Gainsboro
+        Me.grpSectionInfo.Controls.Add(Me.ComboBoxTeacherFloorLevel)
+        Me.grpSectionInfo.Controls.Add(Me.Label2)
         Me.grpSectionInfo.Controls.Add(Me.txtbxManSecBuildingName)
         Me.grpSectionInfo.Controls.Add(Me.Label1)
         Me.grpSectionInfo.Controls.Add(Me.cmbManSecLearningMode)
@@ -166,8 +168,6 @@ Partial Class TeacherViewSection
         Me.grpSectionInfo.Controls.Add(Me.txtbxManSecRoomNo)
         Me.grpSectionInfo.Controls.Add(Me.lblManSecRoomNo)
         Me.grpSectionInfo.Controls.Add(Me.nudManSecGradeLevel)
-        Me.grpSectionInfo.Controls.Add(Me.txtbxManSchedule)
-        Me.grpSectionInfo.Controls.Add(Me.lblManSecSchedule)
         Me.grpSectionInfo.Controls.Add(Me.lblManSecGradeLevel)
         Me.grpSectionInfo.Controls.Add(Me.txtbxManSecTeacherID)
         Me.grpSectionInfo.Controls.Add(Me.lblManSecTeacherID)
@@ -183,7 +183,7 @@ Partial Class TeacherViewSection
         '
         'txtbxManSecBuildingName
         '
-        Me.txtbxManSecBuildingName.Location = New System.Drawing.Point(542, 206)
+        Me.txtbxManSecBuildingName.Location = New System.Drawing.Point(542, 328)
         Me.txtbxManSecBuildingName.Name = "txtbxManSecBuildingName"
         Me.txtbxManSecBuildingName.Size = New System.Drawing.Size(235, 47)
         Me.txtbxManSecBuildingName.TabIndex = 39
@@ -191,7 +191,7 @@ Partial Class TeacherViewSection
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(535, 164)
+        Me.Label1.Location = New System.Drawing.Point(535, 286)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(242, 39)
         Me.Label1.TabIndex = 38
@@ -208,7 +208,7 @@ Partial Class TeacherViewSection
         'cmbManSecClassType
         '
         Me.cmbManSecClassType.FormattingEnabled = True
-        Me.cmbManSecClassType.Location = New System.Drawing.Point(542, 330)
+        Me.cmbManSecClassType.Location = New System.Drawing.Point(177, 446)
         Me.cmbManSecClassType.Name = "cmbManSecClassType"
         Me.cmbManSecClassType.Size = New System.Drawing.Size(235, 47)
         Me.cmbManSecClassType.TabIndex = 33
@@ -225,7 +225,7 @@ Partial Class TeacherViewSection
         'lblManSecClassType
         '
         Me.lblManSecClassType.AutoSize = True
-        Me.lblManSecClassType.Location = New System.Drawing.Point(535, 286)
+        Me.lblManSecClassType.Location = New System.Drawing.Point(170, 402)
         Me.lblManSecClassType.Name = "lblManSecClassType"
         Me.lblManSecClassType.Size = New System.Drawing.Size(191, 39)
         Me.lblManSecClassType.TabIndex = 30
@@ -256,23 +256,6 @@ Partial Class TeacherViewSection
         Me.nudManSecGradeLevel.Name = "nudManSecGradeLevel"
         Me.nudManSecGradeLevel.Size = New System.Drawing.Size(47, 47)
         Me.nudManSecGradeLevel.TabIndex = 27
-        '
-        'txtbxManSchedule
-        '
-        Me.txtbxManSchedule.Location = New System.Drawing.Point(177, 446)
-        Me.txtbxManSchedule.MaxLength = 20
-        Me.txtbxManSchedule.Name = "txtbxManSchedule"
-        Me.txtbxManSchedule.Size = New System.Drawing.Size(224, 47)
-        Me.txtbxManSchedule.TabIndex = 10
-        '
-        'lblManSecSchedule
-        '
-        Me.lblManSecSchedule.AutoSize = True
-        Me.lblManSecSchedule.Location = New System.Drawing.Point(170, 404)
-        Me.lblManSecSchedule.Name = "lblManSecSchedule"
-        Me.lblManSecSchedule.Size = New System.Drawing.Size(161, 39)
-        Me.lblManSecSchedule.TabIndex = 11
-        Me.lblManSecSchedule.Text = "Schedule"
         '
         'lblManSecGradeLevel
         '
@@ -342,6 +325,23 @@ Partial Class TeacherViewSection
         Me.picWatermark.TabIndex = 5
         Me.picWatermark.TabStop = False
         '
+        'ComboBoxTeacherFloorLevel
+        '
+        Me.ComboBoxTeacherFloorLevel.FormattingEnabled = True
+        Me.ComboBoxTeacherFloorLevel.Location = New System.Drawing.Point(542, 207)
+        Me.ComboBoxTeacherFloorLevel.Name = "ComboBoxTeacherFloorLevel"
+        Me.ComboBoxTeacherFloorLevel.Size = New System.Drawing.Size(235, 47)
+        Me.ComboBoxTeacherFloorLevel.TabIndex = 41
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Location = New System.Drawing.Point(535, 164)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(191, 39)
+        Me.Label2.TabIndex = 40
+        Me.Label2.Text = "Class Type"
+        '
         'TeacherViewSection
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -381,8 +381,6 @@ Partial Class TeacherViewSection
     Friend WithEvents txtbxManSecRoomNo As TextBox
     Friend WithEvents lblManSecRoomNo As Label
     Friend WithEvents nudManSecGradeLevel As NumericUpDown
-    Friend WithEvents txtbxManSchedule As TextBox
-    Friend WithEvents lblManSecSchedule As Label
     Friend WithEvents lblManSecGradeLevel As Label
     Friend WithEvents txtbxManSecTeacherID As TextBox
     Friend WithEvents lblManSecTeacherID As Label
@@ -390,4 +388,6 @@ Partial Class TeacherViewSection
     Friend WithEvents lblManSecSectionName As Label
     Friend WithEvents lblSectionsList As Label
     Friend WithEvents picWatermark As PictureBox
+    Friend WithEvents ComboBoxTeacherFloorLevel As ComboBox
+    Friend WithEvents Label2 As Label
 End Class

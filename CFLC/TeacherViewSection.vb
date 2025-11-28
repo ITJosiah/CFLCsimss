@@ -29,8 +29,9 @@
 
         cmbManSecLearningMode.Enabled = False
 
-        txtbxManSchedule.ReadOnly = True
-        txtbxManSchedule.Enabled = False
+        ComboBoxTeacherFloorLevel.Enabled = False
+
+
 
     End Sub
 
