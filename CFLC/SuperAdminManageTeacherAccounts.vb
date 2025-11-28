@@ -1,155 +1,318 @@
-﻿Public Class SuperAdminManageTeacherAccounts
+﻿Imports MySql.Data.MySqlClient
+
+Public Class SuperAdminManageTeacherAccounts
     Private Sub SuperAdminManageTeacherAccounts_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        InitializeForm()
+        SetupDataGridView()
+        LoadTeacherData()
+        SetDefaultValues()
+    End Sub
+
+    Private Sub InitializeForm()
         Me.FormBorderStyle = FormBorderStyle.None
         Me.WindowState = FormWindowState.Maximized
         Me.Bounds = Screen.PrimaryScreen.Bounds
         Me.TopMost = True
-        Me.BackColor = Color.FromArgb(7, 77, 39) ' Dark green background
-        Me.Text = "Dashboard-SuperAdminManageTeacherAccounts"
+        Me.BackColor = Color.FromArgb(7, 77, 39)
+        Me.Text = "Manage Teacher Accounts"
 
-
-        PositionSidebarButtons()
-
-        ShowHomeContent()
-
-        StyleSidebarButtons()
-
+        ' Initialize controls if not done in designer
+        InitializeControls()
+        StyleControls()
     End Sub
 
+    Private Sub InitializeControls()
+        ' Set default values
+        txtbxTeacherUserType.Text = "teacher" ' Lowercase to match your login form
+        txtbxTeacherUserType.Enabled = False ' Make it read-only since it's always "teacher"
+    End Sub
+
+    Private Sub SetDefaultValues()
+        ' Generate initial user_id format display
+        txtbxTeacherUserID.Text = "00-0000"
+        txtbxTeacherUserID.ForeColor = Color.Gray ' Indicate it's a format hint
+    End Sub
+
+    Private Sub SetupDataGridView()
+        ' Configure DataGridView appearance and columns
+        dgvLoginTeacher.AutoGenerateColumns = False
+        dgvLoginTeacher.SelectionMode = DataGridViewSelectionMode.FullRowSelect
+        dgvLoginTeacher.ReadOnly = True
+        dgvLoginTeacher.AllowUserToAddRows = False
+
+        ' Add columns if not already added in designer
+        If dgvLoginTeacher.Columns.Count = 0 Then
+            dgvLoginTeacher.Columns.Add("user_id", "User ID")
+            dgvLoginTeacher.Columns.Add("password", "Password")
+            dgvLoginTeacher.Columns.Add("user_type", "User Type")
+            dgvLoginTeacher.Columns.Add("TeacherID", "Teacher ID")
+        End If
+    End Sub
+
+    Private Sub StyleControls()
+        ' Style input controls
+        Dim textBoxes() As TextBox = {txtbxTeacherUserID, txtbxTeacherPassword, txtbxTeacherUserType, txtbxTeaAccountTeacherID}
+
+        For Each txt As TextBox In textBoxes
+            txt.BackColor = Color.White
+            txt.ForeColor = Color.Black
+            txt.Font = New Font("Arial", 10, FontStyle.Regular)
+            txt.BorderStyle = BorderStyle.FixedSingle
+        Next
+
+        ' Style buttons
+        btnManTeacherAdd.BackColor = Color.FromArgb(0, 123, 255)
+        btnManTeacherAdd.ForeColor = Color.White
+        btnManTeacherAdd.FlatStyle = FlatStyle.Flat
+        btnManTeacherAdd.FlatAppearance.BorderSize = 0
+        btnManTeacherAdd.Font = New Font("Arial", 10, FontStyle.Bold)
+
+        ' Style DataGridView
+        dgvLoginTeacher.BackgroundColor = Color.White
+        dgvLoginTeacher.BorderStyle = BorderStyle.None
+        dgvLoginTeacher.Font = New Font("Arial", 9, FontStyle.Regular)
+        dgvLoginTeacher.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(240, 240, 240)
+    End Sub
+
+    Private Sub LoadTeacherData()
+        Try
+            modDBx.openConn(modDBx.db_name)
+
+            Dim query As String = "SELECT user_id, password, user_type, TeacherID FROM login WHERE user_type = 'teacher'"
+            Using command As New MySqlCommand(query, modDBx.conn)
+                Using adapter As New MySqlDataAdapter(command)
+                    Dim table As New DataTable()
+                    adapter.Fill(table)
+                    dgvLoginTeacher.DataSource = table
+                End Using
+            End Using
+        Catch ex As Exception
+            MessageBox.Show("Error loading teacher data: " & ex.Message, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        Finally
+            If modDBx.conn.State = ConnectionState.Open Then
+                modDBx.conn.Close()
+            End If
+        End Try
+    End Sub
+
+    Private Sub btnManTeacherAdd_Click(sender As Object, e As EventArgs) Handles btnManTeacherAdd.Click
+        If ValidateInputs() Then
+            AddTeacherAccount()
+        End If
+    End Sub
+
+    Private Function ValidateInputs() As Boolean
+        ' Validate User ID format (00-0000)
+        If Not IsValidUserID(txtbxTeacherUserID.Text) Then
+            MessageBox.Show("Please enter a valid User ID in the format 00-0000", "Invalid User ID", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            txtbxTeacherUserID.Focus()
+            Return False
+        End If
+
+        ' Validate Password
+        If String.IsNullOrWhiteSpace(txtbxTeacherPassword.Text) Then
+            MessageBox.Show("Please enter a password", "Password Required", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            txtbxTeacherPassword.Focus()
+            Return False
+        End If
+
+        If txtbxTeacherPassword.Text.Length < 4 Then
+            MessageBox.Show("Password must be at least 4 characters long", "Password Too Short", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            txtbxTeacherPassword.Focus()
+            Return False
+        End If
+
+        ' Validate Teacher ID
+        If String.IsNullOrWhiteSpace(txtbxTeaAccountTeacherID.Text) Then
+            MessageBox.Show("Please enter a Teacher ID", "Teacher ID Required", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            txtbxTeaAccountTeacherID.Focus()
+            Return False
+        End If
+
+        ' Check if Teacher ID exists in the system (you might need to adjust this based on your actual teacher table)
+        If Not TeacherIDExists(txtbxTeaAccountTeacherID.Text) Then
+            MessageBox.Show("The specified Teacher ID does not exist in the system", "Invalid Teacher ID", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            txtbxTeaAccountTeacherID.Focus()
+            Return False
+        End If
+
+        ' Check if User ID already exists
+        If UserIDExists(txtbxTeacherUserID.Text) Then
+            MessageBox.Show("This User ID already exists. Please choose a different one.", "Duplicate User ID", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            txtbxTeacherUserID.Focus()
+            Return False
+        End If
+
+        ' Check if Teacher ID already has an account
+        If TeacherHasAccount(txtbxTeaAccountTeacherID.Text) Then
+            MessageBox.Show("This Teacher ID already has an account. Cannot create duplicate accounts.", "Account Exists", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            txtbxTeaAccountTeacherID.Focus()
+            Return False
+        End If
+
+        Return True
+    End Function
+
+    Private Function IsValidUserID(userID As String) As Boolean
+        ' Validate format: 00-0000 (2 digits, hyphen, 4 digits)
+        Dim pattern As String = "^\d{2}-\d{4}$"
+        Return System.Text.RegularExpressions.Regex.IsMatch(userID, pattern)
+    End Function
+
+    Private Function TeacherIDExists(teacherID As String) As Boolean
+        Try
+            modDBx.openConn(modDBx.db_name)
+
+            ' NOTE: You need to adjust this query based on your actual teacher table name and structure
+            ' If you have a separate teachers table, use: "SELECT COUNT(*) FROM teachers WHERE TeacherID = @TeacherID"
+            ' If you don't have a separate table, you might need to remove this validation or adjust it
+            Dim query As String = "SELECT COUNT(*) FROM login WHERE TeacherID = @TeacherID"
+            Using command As New MySqlCommand(query, modDBx.conn)
+                command.Parameters.AddWithValue("@TeacherID", teacherID)
+                Return Convert.ToInt32(command.ExecuteScalar()) > 0
+            End Using
+        Catch ex As Exception
+            MessageBox.Show("Error checking Teacher ID: " & ex.Message, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Return False
+        Finally
+            If modDBx.conn.State = ConnectionState.Open Then
+                modDBx.conn.Close()
+            End If
+        End Try
+    End Function
+
+    Private Function UserIDExists(userID As String) As Boolean
+        Try
+            modDBx.openConn(modDBx.db_name)
+
+            Dim query As String = "SELECT COUNT(*) FROM login WHERE user_id = @user_id"
+            Using command As New MySqlCommand(query, modDBx.conn)
+                command.Parameters.AddWithValue("@user_id", userID)
+                Return Convert.ToInt32(command.ExecuteScalar()) > 0
+            End Using
+        Catch ex As Exception
+            MessageBox.Show("Error checking User ID: " & ex.Message, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Return False
+        Finally
+            If modDBx.conn.State = ConnectionState.Open Then
+                modDBx.conn.Close()
+            End If
+        End Try
+    End Function
+
+    Private Function TeacherHasAccount(teacherID As String) As Boolean
+        Try
+            modDBx.openConn(modDBx.db_name)
+
+            Dim query As String = "SELECT COUNT(*) FROM login WHERE TeacherID = @TeacherID AND user_type = 'teacher'"
+            Using command As New MySqlCommand(query, modDBx.conn)
+                command.Parameters.AddWithValue("@TeacherID", teacherID)
+                Return Convert.ToInt32(command.ExecuteScalar()) > 0
+            End Using
+        Catch ex As Exception
+            MessageBox.Show("Error checking teacher account: " & ex.Message, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Return False
+        Finally
+            If modDBx.conn.State = ConnectionState.Open Then
+                modDBx.conn.Close()
+            End If
+        End Try
+    End Function
+
+    Private Sub AddTeacherAccount()
+        Try
+            modDBx.openConn(modDBx.db_name)
+
+            ' Encrypt the password before storing
+            Dim encryptedPassword As String = modDBx.Encrypt(txtbxTeacherPassword.Text.Trim())
+
+            Dim query As String = "INSERT INTO login (user_id, password, user_type, TeacherID) VALUES (@user_id, @password, @user_type, @TeacherID)"
+
+            Using command As New MySqlCommand(query, modDBx.conn)
+                command.Parameters.AddWithValue("@user_id", txtbxTeacherUserID.Text.Trim())
+                command.Parameters.AddWithValue("@password", encryptedPassword)
+                command.Parameters.AddWithValue("@user_type", "teacher") ' Always "teacher" (lowercase)
+                command.Parameters.AddWithValue("@TeacherID", txtbxTeaAccountTeacherID.Text.Trim())
+
+                Dim rowsAffected As Integer = command.ExecuteNonQuery()
+
+                If rowsAffected > 0 Then
+                    MessageBox.Show("Teacher account created successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                    ClearInputs()
+                    LoadTeacherData() ' Refresh the DataGridView
+                Else
+                    MessageBox.Show("Failed to create teacher account", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                End If
+            End Using
+        Catch ex As Exception
+            MessageBox.Show("Error creating teacher account: " & ex.Message, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        Finally
+            If modDBx.conn.State = ConnectionState.Open Then
+                modDBx.conn.Close()
+            End If
+        End Try
+    End Sub
+
+    Private Sub ClearInputs()
+        txtbxTeacherUserID.Text = "00-0000"
+        txtbxTeacherUserID.ForeColor = Color.Gray
+        txtbxTeacherPassword.Clear()
+        txtbxTeacherUserType.Text = "teacher" ' Lowercase to match login
+        txtbxTeaAccountTeacherID.Clear()
+        txtbxTeacherUserID.Focus()
+    End Sub
+
+    ' Event handlers for better user experience
+    Private Sub txtbxTeacherUserID_Enter(sender As Object, e As EventArgs) Handles txtbxTeacherUserID.Enter
+        If txtbxTeacherUserID.Text = "00-0000" Then
+            txtbxTeacherUserID.Text = ""
+            txtbxTeacherUserID.ForeColor = Color.Black
+        End If
+    End Sub
+
+    Private Sub txtbxTeacherUserID_Leave(sender As Object, e As EventArgs) Handles txtbxTeacherUserID.Leave
+        If String.IsNullOrWhiteSpace(txtbxTeacherUserID.Text) Then
+            txtbxTeacherUserID.Text = "00-0000"
+            txtbxTeacherUserID.ForeColor = Color.Gray
+        End If
+    End Sub
+
+    Private Sub txtbxTeacherUserID_TextChanged(sender As Object, e As EventArgs) Handles txtbxTeacherUserID.TextChanged
+        ' Real-time format validation
+        If txtbxTeacherUserID.Text <> "00-0000" AndAlso txtbxTeacherUserID.ForeColor <> Color.Gray Then
+            If IsValidUserID(txtbxTeacherUserID.Text) Then
+                txtbxTeacherUserID.ForeColor = Color.Green
+            Else
+                txtbxTeacherUserID.ForeColor = Color.Red
+            End If
+        End If
+    End Sub
+
+    ' Keyboard shortcuts
+    Protected Overrides Function ProcessCmdKey(ByRef msg As Message, keyData As Keys) As Boolean
+        If keyData = (Keys.Control Or Keys.A) Then
+            btnManTeacherAdd.PerformClick()
+            Return True
+        End If
+
+        If keyData = Keys.Escape Then
+            ClearInputs()
+            Return True
+        End If
+
+        Return MyBase.ProcessCmdKey(msg, keyData)
+    End Function
+
+    ' Make sure to add these methods for the base class requirements
     Private Sub CenterLogo()
-            If Not pnlSuperAdminMainContent.Controls.Contains(PictureBox1) Then
-                Return
-            End If
-
-            Dim areaWidth As Integer = pnlSuperAdminMainContent.ClientSize.Width
-            Dim areaHeight As Integer = pnlSuperAdminMainContent.ClientSize.Height
-
-            PictureBox1.Left = (areaWidth - PictureBox1.Width) \ 2
-            PictureBox1.Top = (areaHeight - PictureBox1.Height) \ 2
-        End Sub
-
-        Private Sub StyleSidebarButtons()
-            ' Style all sidebar buttons
-            Dim buttons() As Button = {btnSuperAdminManageAdmin, btnSuperAdminManageTea, btnSuperAdminManageSysCon,
-                                       btnSuperAdminGenerateReports}
-
-            For Each btn As Button In buttons
-                btn.BackColor = Color.LightGray
-                btn.ForeColor = Color.Black
-                btn.FlatStyle = FlatStyle.Flat
-                btn.FlatAppearance.BorderSize = 0
-                btn.FlatAppearance.MouseOverBackColor = Color.Gainsboro ' Slight hover effect
-                btn.Font = New Font(btn.Font.FontFamily, 15, FontStyle.Bold)
-                btn.TextAlign = ContentAlignment.MiddleLeft
-                btn.Padding = New Padding(15, 0, 0, 0) ' More left padding for text
-            Next
-
-            ' Style logout button differently (red)
-            btnLogout.BackColor = Color.Red
-            btnLogout.ForeColor = Color.White
-            btnLogout.FlatStyle = FlatStyle.Flat
-            btnLogout.FlatAppearance.BorderSize = 0
-            btnLogout.FlatAppearance.MouseOverBackColor = Color.DarkRed ' Darker red on hover
-            btnLogout.Font = New Font(btnLogout.Font.FontFamily, 12, FontStyle.Bold)
-            btnLogout.TextAlign = ContentAlignment.MiddleCenter ' Center text for logout
-        End Sub
-
-
-
-        Protected Overrides Function ProcessCmdKey(ByRef msg As Message, keyData As Keys) As Boolean
-            If keyData = Keys.Escape Then
-                ExitFullScreen()
-                Return True
-            End If
-
-            If keyData = Keys.F Then
-                MakeItFullScreen()
-                Return True
-            End If
-
-            Return MyBase.ProcessCmdKey(msg, keyData)
-
-
-        End Function
-
-        Private Sub ExitFullScreen()
-            Me.FormBorderStyle = FormBorderStyle.Sizable
-            Me.WindowState = FormWindowState.Maximized
-            Me.TopMost = False
-        End Sub
-
-        Private Sub MakeItFullScreen()
-            Me.FormBorderStyle = FormBorderStyle.None
-            Me.WindowState = FormWindowState.Maximized
-            Me.Bounds = Screen.PrimaryScreen.Bounds
-            Me.TopMost = True
-            Me.BringToFront()
-        End Sub
-        Private Sub AdminDashboard_Resize(sender As Object, e As EventArgs) Handles MyBase.Resize
-            CenterLogo()
-            PositionSidebarButtons()
-        End Sub
-
-        Private Sub PositionSidebarButtons()
-            ' Position sidebar buttons vertically with better spacing
-            Dim sidebarWidth As Integer = 250
-            Dim sidebarPadding As Integer = 10 ' Padding on left and right sides
-            Dim buttonHeight As Integer = 70 ' Slightly taller for better appearance
-            Dim buttonSpacing As Integer = 50 ' More space between buttons for better visual separation
-            Dim startTop As Integer = 60 ' More space from top
-            Dim buttonWidth As Integer = 70
-            ' Position each button with padding
-            btnSuperAdminManageAdmin.Top = startTop
-            btnSuperAdminManageAdmin.Left = sidebarPadding
-            btnSuperAdminManageAdmin.Width = sidebarWidth - (sidebarPadding * 2)
-            btnSuperAdminManageAdmin.Height = buttonHeight
-
-            btnSuperAdminManageTea.Top = btnSuperAdminManageAdmin.Bottom + buttonSpacing
-            btnSuperAdminManageTea.Left = sidebarPadding
-            btnSuperAdminManageTea.Width = sidebarWidth - (sidebarPadding * 2)
-            btnSuperAdminManageTea.Height = buttonHeight
-
-            btnSuperAdminManageSysCon.Top = btnSuperAdminManageTea.Bottom + buttonSpacing
-            btnSuperAdminManageSysCon.Left = sidebarPadding
-            btnSuperAdminManageSysCon.Width = sidebarWidth - (sidebarPadding * 2)
-            btnSuperAdminManageSysCon.Height = buttonHeight
-
-            btnSuperAdminGenerateReports.Top = btnSuperAdminManageSysCon.Bottom + buttonSpacing
-            btnSuperAdminGenerateReports.Left = sidebarPadding
-            btnSuperAdminGenerateReports.Width = sidebarWidth - (sidebarPadding * 2)
-            btnSuperAdminGenerateReports.Height = buttonHeight
-
-            ' Position logout button at the bottom with more spacing
-            Dim logoutBottomPadding As Integer = 30 ' More space from bottom
-            btnLogout.Top = Me.ClientSize.Height - buttonHeight - logoutBottomPadding
-            btnLogout.Left = sidebarPadding
-            btnLogout.Width = sidebarWidth - (sidebarPadding * 2)
-            btnLogout.Height = buttonHeight
-        End Sub
-
-        Private Sub LoadFormInPanel(childForm As Form)
-            pnlSuperAdminMainContent.Controls.Clear()
-            childForm.TopLevel = False
-            childForm.FormBorderStyle = FormBorderStyle.None
-            childForm.Dock = DockStyle.Fill
-            pnlSuperAdminMainContent.Controls.Add(childForm)
-            childForm.Show()
-        End Sub
-
-        Private Sub ShowHomeContent()
-            pnlSuperAdminMainContent.Controls.Clear()
-            pnlSuperAdminMainContent.Controls.Add(PictureBox1)
-            PictureBox1.BringToFront()
-            CenterLogo()
-        End Sub
-
-        Private Sub btnSuperAdminManageAdmin_Click(sender As Object, e As EventArgs) Handles btnSuperAdminManageAdmin.Click
-        LoadFormInPanel(New SuperAdminManageAdminAccounts())
+        ' Implementation if needed
     End Sub
 
-
-    Private Sub btnSuperAdminManageTea_Click(sender As Object, e As EventArgs) Handles btnSuperAdminManageTea.Click
-        LoadFormInPanel(New SuperAdminManageTeacherAccounts())
+    Private Sub PositionSidebarButtons()
+        ' Implementation if needed
     End Sub
 
+    Private Sub StyleSidebarButtons()
+        ' Implementation if needed
+    End Sub
 End Class
