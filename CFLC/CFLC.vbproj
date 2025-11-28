@@ -216,6 +216,12 @@
     <Compile Include="TeacherViewAssignedSubjects.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="TeacherViewSection.Designer.vb">
+      <DependentUpon>TeacherViewSection.vb</DependentUpon>
+    </Compile>
+    <Compile Include="TeacherViewSection.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="TeacherViewStudents.Designer.vb">
       <DependentUpon>TeacherViewStudents.vb</DependentUpon>
     </Compile>
@@ -263,6 +269,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="TeacherViewAssignedSubjects.resx">
       <DependentUpon>TeacherViewAssignedSubjects.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TeacherViewSection.resx">
+      <DependentUpon>TeacherViewSection.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TeacherViewStudents.resx">
       <DependentUpon>TeacherViewStudents.vb</DependentUpon>

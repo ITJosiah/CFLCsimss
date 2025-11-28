@@ -89,7 +89,12 @@ Public Class TeacherViewStudents
         Dim buttonSpacing As Integer = 50
         Dim startTop As Integer = 60
 
-        btnTeacherViewStudents.Top = startTop
+        btnTeacherViewSection.Top = startTop
+        btnTeacherViewSection.Left = sidebarPadding
+        btnTeacherViewSection.Width = sidebarWidth - (sidebarPadding * 2)
+        btnTeacherViewSection.Height = buttonHeight
+
+        btnTeacherViewStudents.Top = btnTeacherViewSection.Bottom + buttonSpacing
         btnTeacherViewStudents.Left = sidebarPadding
         btnTeacherViewStudents.Width = sidebarWidth - (sidebarPadding * 2)
         btnTeacherViewStudents.Height = buttonHeight
@@ -114,6 +119,7 @@ Public Class TeacherViewStudents
 
     Private Sub StyleSidebarButtons()
         Dim buttons() As Button = {
+            btnTeacherViewSection,
             btnTeacherViewStudents,
             btnViewAssignedSubjects,
             btnTeacherGenerateReports
@@ -207,11 +213,11 @@ Public Class TeacherViewStudents
             txtbxStudentMotherTongue.Text = GetSafeString(row.Cells("MotherTongue"))
             txtbxStudentReligion.Text = GetSafeString(row.Cells("Religion"))
 
-            ' Indigineous fields
-            txtbbxStudentIPGroup.Text = GetSafeString(row.Cells("IndigineousSpecific"))
+        ' Indigineous fields
+        txtbbxStudentIPGroup.Text = GetSafeString(row.Cells("IndigineousSpecific"))
 
-            ' 4Ps fields
-            txtbx4ps.Text = GetSafeString(row.Cells("4PsID"))
+        ' 4Ps fields
+        txtbx4ps.Text = GetSafeString(row.Cells("4PsID"))
 
             txtbxGuardianName.Text = GetSafeString(row.Cells("GuardianName"))
             txtbxGuardianContactNo.Text = GetSafeString(row.Cells("GuardianContact"))

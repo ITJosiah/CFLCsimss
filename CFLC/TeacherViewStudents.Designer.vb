@@ -33,13 +33,9 @@ Partial Class TeacherViewStudents
         Me.dgvStudents = New System.Windows.Forms.DataGridView()
         Me.grpStudentInfo = New System.Windows.Forms.GroupBox()
         Me.txtbxStudentAge = New System.Windows.Forms.TextBox()
-        Me.RadioButtonStudentIPNO = New System.Windows.Forms.RadioButton()
-        Me.RadioButtonStudentIPYES = New System.Windows.Forms.RadioButton()
         Me.txtbxZipCode = New System.Windows.Forms.TextBox()
         Me.Label18 = New System.Windows.Forms.Label()
         Me.GroupBox4P = New System.Windows.Forms.GroupBox()
-        Me.RadioButtonStudent4PYES = New System.Windows.Forms.RadioButton()
-        Me.RadioButtonStudent4PNO = New System.Windows.Forms.RadioButton()
         Me.txtbxCountry = New System.Windows.Forms.TextBox()
         Me.Label15 = New System.Windows.Forms.Label()
         Me.txtbxStudentProvince = New System.Windows.Forms.TextBox()
@@ -54,11 +50,9 @@ Partial Class TeacherViewStudents
         Me.Label14 = New System.Windows.Forms.Label()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.txtbx4ps = New System.Windows.Forms.TextBox()
-        Me.Label8 = New System.Windows.Forms.Label()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.txtbxGuardianContactNo = New System.Windows.Forms.TextBox()
         Me.Label7 = New System.Windows.Forms.Label()
-        Me.Label6 = New System.Windows.Forms.Label()
         Me.txtbbxStudentIPGroup = New System.Windows.Forms.TextBox()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.txtbxStudentMotherTongue = New System.Windows.Forms.TextBox()
@@ -92,7 +86,6 @@ Partial Class TeacherViewStudents
         Me.pnlContent.SuspendLayout()
         CType(Me.dgvStudents, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpStudentInfo.SuspendLayout()
-        Me.GroupBox4P.SuspendLayout()
         CType(Me.picWatermark, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -220,8 +213,6 @@ Partial Class TeacherViewStudents
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.grpStudentInfo.BackColor = System.Drawing.Color.Gainsboro
         Me.grpStudentInfo.Controls.Add(Me.txtbxStudentAge)
-        Me.grpStudentInfo.Controls.Add(Me.RadioButtonStudentIPNO)
-        Me.grpStudentInfo.Controls.Add(Me.RadioButtonStudentIPYES)
         Me.grpStudentInfo.Controls.Add(Me.txtbxZipCode)
         Me.grpStudentInfo.Controls.Add(Me.Label18)
         Me.grpStudentInfo.Controls.Add(Me.GroupBox4P)
@@ -239,11 +230,9 @@ Partial Class TeacherViewStudents
         Me.grpStudentInfo.Controls.Add(Me.Label14)
         Me.grpStudentInfo.Controls.Add(Me.Label10)
         Me.grpStudentInfo.Controls.Add(Me.txtbx4ps)
-        Me.grpStudentInfo.Controls.Add(Me.Label8)
         Me.grpStudentInfo.Controls.Add(Me.Label9)
         Me.grpStudentInfo.Controls.Add(Me.txtbxGuardianContactNo)
         Me.grpStudentInfo.Controls.Add(Me.Label7)
-        Me.grpStudentInfo.Controls.Add(Me.Label6)
         Me.grpStudentInfo.Controls.Add(Me.txtbbxStudentIPGroup)
         Me.grpStudentInfo.Controls.Add(Me.Label5)
         Me.grpStudentInfo.Controls.Add(Me.txtbxStudentMotherTongue)
@@ -285,30 +274,6 @@ Partial Class TeacherViewStudents
         Me.txtbxStudentAge.Size = New System.Drawing.Size(47, 23)
         Me.txtbxStudentAge.TabIndex = 65
         '
-        'RadioButtonStudentIPNO
-        '
-        Me.RadioButtonStudentIPNO.AutoSize = True
-        Me.RadioButtonStudentIPNO.Location = New System.Drawing.Point(116, 238)
-        Me.RadioButtonStudentIPNO.Margin = New System.Windows.Forms.Padding(2)
-        Me.RadioButtonStudentIPNO.Name = "RadioButtonStudentIPNO"
-        Me.RadioButtonStudentIPNO.Size = New System.Drawing.Size(44, 21)
-        Me.RadioButtonStudentIPNO.TabIndex = 64
-        Me.RadioButtonStudentIPNO.TabStop = True
-        Me.RadioButtonStudentIPNO.Text = "No"
-        Me.RadioButtonStudentIPNO.UseVisualStyleBackColor = True
-        '
-        'RadioButtonStudentIPYES
-        '
-        Me.RadioButtonStudentIPYES.AutoSize = True
-        Me.RadioButtonStudentIPYES.Location = New System.Drawing.Point(63, 239)
-        Me.RadioButtonStudentIPYES.Margin = New System.Windows.Forms.Padding(2)
-        Me.RadioButtonStudentIPYES.Name = "RadioButtonStudentIPYES"
-        Me.RadioButtonStudentIPYES.Size = New System.Drawing.Size(50, 21)
-        Me.RadioButtonStudentIPYES.TabIndex = 63
-        Me.RadioButtonStudentIPYES.TabStop = True
-        Me.RadioButtonStudentIPYES.Text = "Yes"
-        Me.RadioButtonStudentIPYES.UseVisualStyleBackColor = True
-        '
         'txtbxZipCode
         '
         Me.txtbxZipCode.Location = New System.Drawing.Point(555, 363)
@@ -329,8 +294,6 @@ Partial Class TeacherViewStudents
         'GroupBox4P
         '
         Me.GroupBox4P.BackColor = System.Drawing.Color.Gainsboro
-        Me.GroupBox4P.Controls.Add(Me.RadioButtonStudent4PYES)
-        Me.GroupBox4P.Controls.Add(Me.RadioButtonStudent4PNO)
         Me.GroupBox4P.Location = New System.Drawing.Point(58, 284)
         Me.GroupBox4P.Margin = New System.Windows.Forms.Padding(2)
         Me.GroupBox4P.Name = "GroupBox4P"
@@ -338,30 +301,6 @@ Partial Class TeacherViewStudents
         Me.GroupBox4P.Size = New System.Drawing.Size(100, 36)
         Me.GroupBox4P.TabIndex = 11
         Me.GroupBox4P.TabStop = False
-        '
-        'RadioButtonStudent4PYES
-        '
-        Me.RadioButtonStudent4PYES.AutoSize = True
-        Me.RadioButtonStudent4PYES.Location = New System.Drawing.Point(5, 7)
-        Me.RadioButtonStudent4PYES.Margin = New System.Windows.Forms.Padding(2)
-        Me.RadioButtonStudent4PYES.Name = "RadioButtonStudent4PYES"
-        Me.RadioButtonStudent4PYES.Size = New System.Drawing.Size(50, 21)
-        Me.RadioButtonStudent4PYES.TabIndex = 65
-        Me.RadioButtonStudent4PYES.TabStop = True
-        Me.RadioButtonStudent4PYES.Text = "Yes"
-        Me.RadioButtonStudent4PYES.UseVisualStyleBackColor = True
-        '
-        'RadioButtonStudent4PNO
-        '
-        Me.RadioButtonStudent4PNO.AutoSize = True
-        Me.RadioButtonStudent4PNO.Location = New System.Drawing.Point(58, 7)
-        Me.RadioButtonStudent4PNO.Margin = New System.Windows.Forms.Padding(2)
-        Me.RadioButtonStudent4PNO.Name = "RadioButtonStudent4PNO"
-        Me.RadioButtonStudent4PNO.Size = New System.Drawing.Size(44, 21)
-        Me.RadioButtonStudent4PNO.TabIndex = 66
-        Me.RadioButtonStudent4PNO.TabStop = True
-        Me.RadioButtonStudent4PNO.Text = "No"
-        Me.RadioButtonStudent4PNO.UseVisualStyleBackColor = True
         '
         'txtbxCountry
         '
@@ -476,29 +415,20 @@ Partial Class TeacherViewStudents
         '
         'txtbx4ps
         '
-        Me.txtbx4ps.Location = New System.Drawing.Point(497, 289)
+        Me.txtbx4ps.Location = New System.Drawing.Point(308, 233)
         Me.txtbx4ps.MaxLength = 50
         Me.txtbx4ps.Name = "txtbx4ps"
         Me.txtbx4ps.Size = New System.Drawing.Size(228, 23)
         Me.txtbx4ps.TabIndex = 47
         '
-        'Label8
-        '
-        Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(163, 292)
-        Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(328, 17)
-        Me.Label8.TabIndex = 46
-        Me.Label8.Text = "If Yes, please write the 4P's Household ID Number:"
-        '
         'Label9
         '
         Me.Label9.AutoSize = True
-        Me.Label9.Location = New System.Drawing.Point(52, 266)
+        Me.Label9.Location = New System.Drawing.Point(306, 213)
         Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(225, 17)
+        Me.Label9.Size = New System.Drawing.Size(52, 17)
         Me.Label9.TabIndex = 43
-        Me.Label9.Text = "Is your family a benificiary of 4P's?"
+        Me.Label9.Text = "4P's ID"
         '
         'txtbxGuardianContactNo
         '
@@ -518,18 +448,9 @@ Partial Class TeacherViewStudents
         Me.Label7.TabIndex = 41
         Me.Label7.Text = "Guardian Contact Number"
         '
-        'Label6
-        '
-        Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(163, 238)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(145, 17)
-        Me.Label6.TabIndex = 40
-        Me.Label6.Text = "If Yes, please specify:"
-        '
         'txtbbxStudentIPGroup
         '
-        Me.txtbbxStudentIPGroup.Location = New System.Drawing.Point(312, 236)
+        Me.txtbbxStudentIPGroup.Location = New System.Drawing.Point(58, 233)
         Me.txtbbxStudentIPGroup.MaxLength = 50
         Me.txtbbxStudentIPGroup.Name = "txtbbxStudentIPGroup"
         Me.txtbbxStudentIPGroup.Size = New System.Drawing.Size(198, 23)
@@ -540,9 +461,9 @@ Partial Class TeacherViewStudents
         Me.Label5.AutoSize = True
         Me.Label5.Location = New System.Drawing.Point(52, 213)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(345, 17)
+        Me.Label5.Size = New System.Drawing.Size(227, 17)
         Me.Label5.TabIndex = 36
-        Me.Label5.Text = "Belonging to any Indigineous People (IP) Community?"
+        Me.Label5.Text = "Indigineous People (IP) Community"
         '
         'txtbxStudentMotherTongue
         '
@@ -795,8 +716,6 @@ Partial Class TeacherViewStudents
         CType(Me.dgvStudents, System.ComponentModel.ISupportInitialize).EndInit()
         Me.grpStudentInfo.ResumeLayout(False)
         Me.grpStudentInfo.PerformLayout()
-        Me.GroupBox4P.ResumeLayout(False)
-        Me.GroupBox4P.PerformLayout()
         CType(Me.picWatermark, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
@@ -813,13 +732,9 @@ Partial Class TeacherViewStudents
     Friend WithEvents dgvStudents As DataGridView
     Friend WithEvents grpStudentInfo As GroupBox
     Friend WithEvents txtbxStudentAge As TextBox
-    Friend WithEvents RadioButtonStudentIPNO As RadioButton
-    Friend WithEvents RadioButtonStudentIPYES As RadioButton
     Friend WithEvents txtbxZipCode As TextBox
     Friend WithEvents Label18 As Label
     Friend WithEvents GroupBox4P As GroupBox
-    Friend WithEvents RadioButtonStudent4PYES As RadioButton
-    Friend WithEvents RadioButtonStudent4PNO As RadioButton
     Friend WithEvents txtbxCountry As TextBox
     Friend WithEvents Label15 As Label
     Friend WithEvents txtbxStudentProvince As TextBox
@@ -834,11 +749,9 @@ Partial Class TeacherViewStudents
     Friend WithEvents Label14 As Label
     Friend WithEvents Label10 As Label
     Friend WithEvents txtbx4ps As TextBox
-    Friend WithEvents Label8 As Label
     Friend WithEvents Label9 As Label
     Friend WithEvents txtbxGuardianContactNo As TextBox
     Friend WithEvents Label7 As Label
-    Friend WithEvents Label6 As Label
     Friend WithEvents txtbbxStudentIPGroup As TextBox
     Friend WithEvents Label5 As Label
     Friend WithEvents txtbxStudentMotherTongue As TextBox

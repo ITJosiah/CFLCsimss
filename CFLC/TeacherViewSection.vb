@@ -1,7 +1,6 @@
-﻿Public Class TeacherDashboard
-    Private currentContent As Form
-    Private Sub TeacherDashboard_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        ' Set form properties
+﻿Public Class TeacherViewSection
+
+    Private Sub TeacherViewSection_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.FormBorderStyle = FormBorderStyle.None
         Me.WindowState = FormWindowState.Maximized
         Me.Bounds = Screen.PrimaryScreen.Bounds
@@ -106,24 +105,15 @@
         Me.BringToFront()
     End Sub
 
-    Private Sub btnTeacherViewStudents_Click(sender As Object, e As EventArgs) Handles btnTeacherViewStudents.Click
-        Try
-            Dim teacherViewStudents As New TeacherViewStudents
-            teacherViewStudents.Show()
-            Me.Hide()
-        Catch ex As Exception
-            MessageBox.Show("An error occurred while opening the Teacher View Students form: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-        End Try
+    Private Sub txtbxManSecTeacherID_TextChanged(sender As Object, e As EventArgs) Handles txtbxManSecTeacherID.TextChanged
+
     End Sub
 
-    Private Sub btnTeacherViewSection_Click(sender As Object, e As EventArgs) Handles btnTeacherViewSection.Click
-        Try
-            Dim teacherViewSection As New TeacherViewSection
-            teacherViewSection.Show()
-            Me.Hide()
-        Catch ex As Exception
-            MessageBox.Show("An error occurred while opening the Teacher View Students form: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-        End Try
+    Private Sub lblManSecTeacherID_Click(sender As Object, e As EventArgs) Handles lblManSecTeacherID.Click
+
     End Sub
 
+    Private Sub picWatermark_Click(sender As Object, e As EventArgs) Handles picWatermark.Click
+
+    End Sub
 End Class

@@ -29,8 +29,8 @@ Partial Class TeacherDashboard
         Me.btnViewAssignedSubjects = New System.Windows.Forms.Button()
         Me.btnTeacherGenerateReports = New System.Windows.Forms.Button()
         Me.btnLogout = New System.Windows.Forms.Button()
-        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.btnTeacherViewSection = New System.Windows.Forms.Button()
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.pnlTeacherMainContent.SuspendLayout()
         Me.pnlTeacherSidebar.SuspendLayout()
         Me.flowButtons.SuspendLayout()
@@ -119,6 +119,16 @@ Partial Class TeacherDashboard
         Me.btnLogout.Text = "Logout"
         Me.btnLogout.UseVisualStyleBackColor = False
         '
+        'btnTeacherViewSection
+        '
+        Me.btnTeacherViewSection.Location = New System.Drawing.Point(0, 0)
+        Me.btnTeacherViewSection.Margin = New System.Windows.Forms.Padding(0, 0, 0, 18)
+        Me.btnTeacherViewSection.Name = "btnTeacherViewSection"
+        Me.btnTeacherViewSection.Size = New System.Drawing.Size(240, 45)
+        Me.btnTeacherViewSection.TabIndex = 11
+        Me.btnTeacherViewSection.Text = "View Section"
+        Me.btnTeacherViewSection.UseVisualStyleBackColor = True
+        '
         'PictureBox1
         '
         Me.PictureBox1.Anchor = System.Windows.Forms.AnchorStyles.None
@@ -129,16 +139,6 @@ Partial Class TeacherDashboard
         Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
         Me.PictureBox1.TabIndex = 3
         Me.PictureBox1.TabStop = False
-        '
-        'btnTeacherViewSection
-        '
-        Me.btnTeacherViewSection.Location = New System.Drawing.Point(0, 0)
-        Me.btnTeacherViewSection.Margin = New System.Windows.Forms.Padding(0, 0, 0, 18)
-        Me.btnTeacherViewSection.Name = "btnTeacherViewSection"
-        Me.btnTeacherViewSection.Size = New System.Drawing.Size(240, 45)
-        Me.btnTeacherViewSection.TabIndex = 11
-        Me.btnTeacherViewSection.Text = "View Section"
-        Me.btnTeacherViewSection.UseVisualStyleBackColor = True
         '
         'TeacherDashboard
         '
