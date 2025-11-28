@@ -33,11 +33,11 @@ Partial Class SuperAdminManageAdminAccounts
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.grpAdminAccounts = New System.Windows.Forms.GroupBox()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.txtbxTeacherPassword = New System.Windows.Forms.TextBox()
+        Me.txtbxAdminPassword = New System.Windows.Forms.TextBox()
         Me.lblStudentMiddleName = New System.Windows.Forms.Label()
-        Me.txtbxTeacherUserID = New System.Windows.Forms.TextBox()
+        Me.txtbxAdminUserID = New System.Windows.Forms.TextBox()
         Me.lblStudentFirstName = New System.Windows.Forms.Label()
-        Me.ComboBoxAdminAccountsUserType = New System.Windows.Forms.ComboBox()
+        Me.ComboBoxAdminUserType = New System.Windows.Forms.ComboBox()
         Me.txtbxManAdminSearch = New System.Windows.Forms.TextBox()
         Me.btnManAdDelete = New System.Windows.Forms.Button()
         Me.btnManAdUpdate = New System.Windows.Forms.Button()
@@ -165,11 +165,11 @@ Partial Class SuperAdminManageAdminAccounts
         Me.grpAdminAccounts.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.grpAdminAccounts.BackColor = System.Drawing.Color.Gainsboro
-        Me.grpAdminAccounts.Controls.Add(Me.ComboBoxAdminAccountsUserType)
+        Me.grpAdminAccounts.Controls.Add(Me.ComboBoxAdminUserType)
         Me.grpAdminAccounts.Controls.Add(Me.Label1)
-        Me.grpAdminAccounts.Controls.Add(Me.txtbxTeacherPassword)
+        Me.grpAdminAccounts.Controls.Add(Me.txtbxAdminPassword)
         Me.grpAdminAccounts.Controls.Add(Me.lblStudentMiddleName)
-        Me.grpAdminAccounts.Controls.Add(Me.txtbxTeacherUserID)
+        Me.grpAdminAccounts.Controls.Add(Me.txtbxAdminUserID)
         Me.grpAdminAccounts.Controls.Add(Me.lblStudentFirstName)
         Me.grpAdminAccounts.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.grpAdminAccounts.Location = New System.Drawing.Point(317, 40)
@@ -188,13 +188,13 @@ Partial Class SuperAdminManageAdminAccounts
         Me.Label1.TabIndex = 5
         Me.Label1.Text = "User Type "
         '
-        'txtbxTeacherPassword
+        'txtbxAdminPassword
         '
-        Me.txtbxTeacherPassword.Location = New System.Drawing.Point(271, 49)
-        Me.txtbxTeacherPassword.MaxLength = 50
-        Me.txtbxTeacherPassword.Name = "txtbxTeacherPassword"
-        Me.txtbxTeacherPassword.Size = New System.Drawing.Size(190, 23)
-        Me.txtbxTeacherPassword.TabIndex = 4
+        Me.txtbxAdminPassword.Location = New System.Drawing.Point(271, 49)
+        Me.txtbxAdminPassword.MaxLength = 50
+        Me.txtbxAdminPassword.Name = "txtbxAdminPassword"
+        Me.txtbxAdminPassword.Size = New System.Drawing.Size(190, 23)
+        Me.txtbxAdminPassword.TabIndex = 4
         '
         'lblStudentMiddleName
         '
@@ -205,13 +205,13 @@ Partial Class SuperAdminManageAdminAccounts
         Me.lblStudentMiddleName.TabIndex = 3
         Me.lblStudentMiddleName.Text = "Password"
         '
-        'txtbxTeacherUserID
+        'txtbxAdminUserID
         '
-        Me.txtbxTeacherUserID.Location = New System.Drawing.Point(39, 49)
-        Me.txtbxTeacherUserID.MaxLength = 50
-        Me.txtbxTeacherUserID.Name = "txtbxTeacherUserID"
-        Me.txtbxTeacherUserID.Size = New System.Drawing.Size(190, 23)
-        Me.txtbxTeacherUserID.TabIndex = 2
+        Me.txtbxAdminUserID.Location = New System.Drawing.Point(39, 49)
+        Me.txtbxAdminUserID.MaxLength = 50
+        Me.txtbxAdminUserID.Name = "txtbxAdminUserID"
+        Me.txtbxAdminUserID.Size = New System.Drawing.Size(190, 23)
+        Me.txtbxAdminUserID.TabIndex = 2
         '
         'lblStudentFirstName
         '
@@ -222,13 +222,13 @@ Partial Class SuperAdminManageAdminAccounts
         Me.lblStudentFirstName.TabIndex = 1
         Me.lblStudentFirstName.Text = "User ID"
         '
-        'ComboBoxAdminAccountsUserType
+        'ComboBoxAdminUserType
         '
-        Me.ComboBoxAdminAccountsUserType.FormattingEnabled = True
-        Me.ComboBoxAdminAccountsUserType.Location = New System.Drawing.Point(503, 49)
-        Me.ComboBoxAdminAccountsUserType.Name = "ComboBoxAdminAccountsUserType"
-        Me.ComboBoxAdminAccountsUserType.Size = New System.Drawing.Size(141, 24)
-        Me.ComboBoxAdminAccountsUserType.TabIndex = 6
+        Me.ComboBoxAdminUserType.FormattingEnabled = True
+        Me.ComboBoxAdminUserType.Location = New System.Drawing.Point(503, 49)
+        Me.ComboBoxAdminUserType.Name = "ComboBoxAdminUserType"
+        Me.ComboBoxAdminUserType.Size = New System.Drawing.Size(141, 24)
+        Me.ComboBoxAdminUserType.TabIndex = 6
         '
         'txtbxManAdminSearch
         '
@@ -321,11 +321,11 @@ Partial Class SuperAdminManageAdminAccounts
     Friend WithEvents PictureBox1 As PictureBox
     Friend WithEvents grpAdminAccounts As GroupBox
     Friend WithEvents Label1 As Label
-    Friend WithEvents txtbxTeacherPassword As TextBox
+    Friend WithEvents txtbxAdminPassword As TextBox
     Friend WithEvents lblStudentMiddleName As Label
-    Friend WithEvents txtbxTeacherUserID As TextBox
+    Friend WithEvents txtbxAdminUserID As TextBox
     Friend WithEvents lblStudentFirstName As Label
-    Friend WithEvents ComboBoxAdminAccountsUserType As ComboBox
+    Friend WithEvents ComboBoxAdminUserType As ComboBox
     Friend WithEvents txtbxManAdminSearch As TextBox
     Friend WithEvents btnManAdDelete As Button
     Friend WithEvents btnManAdUpdate As Button
