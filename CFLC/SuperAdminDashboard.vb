@@ -29,8 +29,8 @@
 
     Private Sub StyleSidebarButtons()
         ' Style all sidebar buttons
-        Dim buttons() As Button = {btnSuperAdminManageAdmin, btnManageTeachers, btnManageSections,
-                                   btnManageEnrollments, btnManageSubjects, btnGenerateReports}
+        Dim buttons() As Button = {btnSuperAdminManageAdmin, btnSuperAdminManageTea, btnSuperAdminManageSysCon,
+                                   btnSuperAdminGenerateReports}
 
         For Each btn As Button In buttons
             btn.BackColor = Color.LightGray
