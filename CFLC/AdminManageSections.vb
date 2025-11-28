@@ -26,6 +26,7 @@ Public Class AdminManageSections
         InitializeLearningModeComboBox()
         InitializeClassTypeComboBox()
         InitializeStatusComboBox()
+        InitializeFloorLevelComboBox()
 
         ' Load sections data
         LoadToDGV("SELECT * FROM section", dgvSections)
@@ -53,6 +54,16 @@ Public Class AdminManageSections
             ' ignore potential layout timing exceptions
         End Try
         currentSectionID = 0
+    End Sub
+
+    Private Sub InitializeFloorLevelComboBox()
+        ' Populate Learning Mode dropdown
+        ComboBoxManSecFloorLevel.Items.Clear()
+        ComboBoxManSecFloorLevel.DropDownStyle = ComboBoxStyle.DropDownList
+        ComboBoxManSecFloorLevel.Items.Add("1st Floor")
+        ComboBoxManSecFloorLevel.Items.Add("2nd Floor")
+        ComboBoxManSecFloorLevel.Items.Add("3rd Floor")
+        ComboBoxManSecFloorLevel.Items.Add("4th FLoor")
     End Sub
 
     Private Sub InitializeLearningModeComboBox()
@@ -213,11 +224,11 @@ Public Class AdminManageSections
             Dim query As String = "INSERT INTO section (" &
                             "SectionName, GradeLevel, TeacherID, RoomNo, LearningMode, " &
                             "ClassType, BuildingName, StartDate, EndDate, Remarks, " &
-                            "Schedule, Status, CreatedBy, DateCreated" &
+                            "FloorLevel, Status, CreatedBy, DateCreated" &
                             ") VALUES (" &
                             "@SectionName, @GradeLevel, @TeacherID, @RoomNo, @LearningMode, " &
                             "@ClassType, @BuildingName, @StartDate, @EndDate, @Remarks, " &
-                            "@Schedule, @Status, @CreatedBy, @DateCreated)"
+                            "@FloorLevel, @Status, @CreatedBy, @DateCreated)"
 
             modDBx.openConn(modDBx.db_name)
 
@@ -251,13 +262,18 @@ Public Class AdminManageSections
                 End If
                 cmd.Parameters.AddWithValue("@ClassType", classType)
 
+                Dim floorLevel As String = ""
+                If ComboBoxManSecFloorLevel.SelectedItem IsNot Nothing Then
+                    classType = ComboBoxManSecFloorLevel.SelectedItem.ToString()
+                End If
+                cmd.Parameters.AddWithValue("@FloorLevel", floorLevel)
+
                 ' School Year, Start Date, End Date
                 cmd.Parameters.AddWithValue("@StartDate", dtpManSecStartDate.Value.ToString("yyyy-MM-dd"))
                 cmd.Parameters.AddWithValue("@EndDate", dtpManSecEndDate.Value.ToString("yyyy-MM-dd"))
 
                 ' Remarks and Schedule
                 cmd.Parameters.AddWithValue("@Remarks", ConvertToProperCase(SafeString(txtbxManSecRemarks.Text)))
-                cmd.Parameters.AddWithValue("@Schedule", SafeString(txtbxManSchedule.Text))
 
                 ' Status - Auto-determined based on dates
                 Dim status As String = ""
@@ -405,7 +421,7 @@ Public Class AdminManageSections
                 "StartDate = @StartDate, " &
                 "EndDate = @EndDate, " &
                 "Remarks = @Remarks, " &
-                "Schedule = @Schedule, " &
+                "FloorLevel = @FloorLevel, " &
                 "Status = @Status " &
                 "WHERE SectionID = @SectionID"
 
@@ -439,13 +455,19 @@ Public Class AdminManageSections
                 End If
                 cmd.Parameters.AddWithValue("@ClassType", classType)
 
+                Dim floorLevel As String = ""
+                If ComboBoxManSecFloorLevel.SelectedItem IsNot Nothing Then
+                    classType = ComboBoxManSecFloorLevel.SelectedItem.ToString()
+                End If
+                cmd.Parameters.AddWithValue("@FloorLevel", floorLevel)
+
+
                 ' School Year, Start Date, End Date
                 cmd.Parameters.AddWithValue("@StartDate", dtpManSecStartDate.Value.ToString("yyyy-MM-dd"))
                 cmd.Parameters.AddWithValue("@EndDate", dtpManSecEndDate.Value.ToString("yyyy-MM-dd"))
 
                 ' Remarks and Schedule
                 cmd.Parameters.AddWithValue("@Remarks", ConvertToProperCase(SafeString(txtbxManSecRemarks.Text)))
-                cmd.Parameters.AddWithValue("@Schedule", SafeString(txtbxManSchedule.Text))
 
                 ' Status
                 Dim status As String = ""
@@ -533,7 +555,7 @@ Public Class AdminManageSections
                         If Convert.ToDateTime(reader("StartDate")).ToString("yyyy-MM-dd") <> dtpManSecStartDate.Value.ToString("yyyy-MM-dd") Then Return True
                         If Convert.ToDateTime(reader("EndDate")).ToString("yyyy-MM-dd") <> dtpManSecEndDate.Value.ToString("yyyy-MM-dd") Then Return True
                         If GetSafeStringFromDB(reader("Remarks")) <> txtbxManSecRemarks.Text.Trim() Then Return True
-                        If GetSafeStringFromDB(reader("Schedule")) <> txtbxManSchedule.Text.Trim() Then Return True
+                        If GetSafeStringFromDB(reader("FloorLevel")) <> ComboBoxManSecFloorLevel.Text.Trim() Then Return True
                     End If
                 End Using
             End Using
@@ -600,7 +622,7 @@ Public Class AdminManageSections
         End If
 
         ' 8. Schedule Validation
-        If String.IsNullOrWhiteSpace(txtbxManSchedule.Text) Then
+        If ComboBoxManSecFloorLevel.SelectedIndex = -1 Then
             errors.Add("• Schedule is required")
         End If
 
@@ -678,7 +700,7 @@ Public Class AdminManageSections
 
         ' Remarks and Schedule
         txtbxManSecRemarks.Clear()
-        txtbxManSchedule.Clear()
+        ComboBoxManSecFloorLevel.SelectedIndex = -1
 
         ' Date and Created By (reset to defaults)
         dtpManSecDateCreated.Value = DateTime.Now
@@ -744,7 +766,7 @@ Public Class AdminManageSections
             End If
 
             txtbxManSecRemarks.Text = GetSafeString(row.Cells("Remarks"))
-            txtbxManSchedule.Text = GetSafeString(row.Cells("Schedule"))
+            ComboBoxManSecFloorLevel.Text = GetSafeString(row.Cells("ClassType"))
 
             If Not IsDBNull(row.Cells("DateCreated").Value) Then
                 dtpManSecDateCreated.Value = CDate(row.Cells("DateCreated").Value)
