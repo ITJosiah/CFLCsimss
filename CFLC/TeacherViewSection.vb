@@ -5,7 +5,7 @@
         Me.WindowState = FormWindowState.Maximized
         Me.Bounds = Screen.PrimaryScreen.Bounds
         Me.TopMost = True
-        Me.BackColor = Color.FromArgb(7, 77, 39) ' Dark green background
+        Me.BackColor = Color.FromArgb(7, 77, 39) ' Dark green background ni nio
         Me.Text = "Dashboard-Teacher"
         StyleSidebarButtons()
         PositionSidebarButtons()
