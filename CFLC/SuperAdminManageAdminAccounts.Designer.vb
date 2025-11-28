@@ -31,15 +31,35 @@ Partial Class SuperAdminManageAdminAccounts
         Me.btnSuperAdminGenerateReports = New System.Windows.Forms.Button()
         Me.btnLogout = New System.Windows.Forms.Button()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
+        Me.grpAdminAccounts = New System.Windows.Forms.GroupBox()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.txtbxTeacherPassword = New System.Windows.Forms.TextBox()
+        Me.lblStudentMiddleName = New System.Windows.Forms.Label()
+        Me.txtbxTeacherUserID = New System.Windows.Forms.TextBox()
+        Me.lblStudentFirstName = New System.Windows.Forms.Label()
+        Me.ComboBoxAdminAccountsUserType = New System.Windows.Forms.ComboBox()
+        Me.txtbxManAdminSearch = New System.Windows.Forms.TextBox()
+        Me.btnManAdDelete = New System.Windows.Forms.Button()
+        Me.btnManAdUpdate = New System.Windows.Forms.Button()
+        Me.btnManAdAdd = New System.Windows.Forms.Button()
+        Me.dgvLoginAdmin = New System.Windows.Forms.DataGridView()
         Me.pnlSuperAdminMainContent.SuspendLayout()
         Me.pnlTeacherSidebar.SuspendLayout()
         Me.FlowLayoutPanel1.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.grpAdminAccounts.SuspendLayout()
+        CType(Me.dgvLoginAdmin, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'pnlSuperAdminMainContent
         '
         Me.pnlSuperAdminMainContent.BackColor = System.Drawing.Color.FromArgb(CType(CType(7, Byte), Integer), CType(CType(77, Byte), Integer), CType(CType(39, Byte), Integer))
+        Me.pnlSuperAdminMainContent.Controls.Add(Me.dgvLoginAdmin)
+        Me.pnlSuperAdminMainContent.Controls.Add(Me.txtbxManAdminSearch)
+        Me.pnlSuperAdminMainContent.Controls.Add(Me.btnManAdDelete)
+        Me.pnlSuperAdminMainContent.Controls.Add(Me.btnManAdUpdate)
+        Me.pnlSuperAdminMainContent.Controls.Add(Me.btnManAdAdd)
+        Me.pnlSuperAdminMainContent.Controls.Add(Me.grpAdminAccounts)
         Me.pnlSuperAdminMainContent.Controls.Add(Me.pnlTeacherSidebar)
         Me.pnlSuperAdminMainContent.Controls.Add(Me.PictureBox1)
         Me.pnlSuperAdminMainContent.Dock = System.Windows.Forms.DockStyle.Fill
@@ -140,6 +160,136 @@ Partial Class SuperAdminManageAdminAccounts
         Me.PictureBox1.TabIndex = 3
         Me.PictureBox1.TabStop = False
         '
+        'grpAdminAccounts
+        '
+        Me.grpAdminAccounts.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.grpAdminAccounts.BackColor = System.Drawing.Color.Gainsboro
+        Me.grpAdminAccounts.Controls.Add(Me.ComboBoxAdminAccountsUserType)
+        Me.grpAdminAccounts.Controls.Add(Me.Label1)
+        Me.grpAdminAccounts.Controls.Add(Me.txtbxTeacherPassword)
+        Me.grpAdminAccounts.Controls.Add(Me.lblStudentMiddleName)
+        Me.grpAdminAccounts.Controls.Add(Me.txtbxTeacherUserID)
+        Me.grpAdminAccounts.Controls.Add(Me.lblStudentFirstName)
+        Me.grpAdminAccounts.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.grpAdminAccounts.Location = New System.Drawing.Point(317, 40)
+        Me.grpAdminAccounts.Name = "grpAdminAccounts"
+        Me.grpAdminAccounts.Size = New System.Drawing.Size(944, 108)
+        Me.grpAdminAccounts.TabIndex = 14
+        Me.grpAdminAccounts.TabStop = False
+        Me.grpAdminAccounts.Text = "Admin Accounts"
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(500, 29)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(78, 17)
+        Me.Label1.TabIndex = 5
+        Me.Label1.Text = "User Type "
+        '
+        'txtbxTeacherPassword
+        '
+        Me.txtbxTeacherPassword.Location = New System.Drawing.Point(271, 49)
+        Me.txtbxTeacherPassword.MaxLength = 50
+        Me.txtbxTeacherPassword.Name = "txtbxTeacherPassword"
+        Me.txtbxTeacherPassword.Size = New System.Drawing.Size(190, 23)
+        Me.txtbxTeacherPassword.TabIndex = 4
+        '
+        'lblStudentMiddleName
+        '
+        Me.lblStudentMiddleName.AutoSize = True
+        Me.lblStudentMiddleName.Location = New System.Drawing.Point(268, 29)
+        Me.lblStudentMiddleName.Name = "lblStudentMiddleName"
+        Me.lblStudentMiddleName.Size = New System.Drawing.Size(69, 17)
+        Me.lblStudentMiddleName.TabIndex = 3
+        Me.lblStudentMiddleName.Text = "Password"
+        '
+        'txtbxTeacherUserID
+        '
+        Me.txtbxTeacherUserID.Location = New System.Drawing.Point(39, 49)
+        Me.txtbxTeacherUserID.MaxLength = 50
+        Me.txtbxTeacherUserID.Name = "txtbxTeacherUserID"
+        Me.txtbxTeacherUserID.Size = New System.Drawing.Size(190, 23)
+        Me.txtbxTeacherUserID.TabIndex = 2
+        '
+        'lblStudentFirstName
+        '
+        Me.lblStudentFirstName.AutoSize = True
+        Me.lblStudentFirstName.Location = New System.Drawing.Point(36, 31)
+        Me.lblStudentFirstName.Name = "lblStudentFirstName"
+        Me.lblStudentFirstName.Size = New System.Drawing.Size(55, 17)
+        Me.lblStudentFirstName.TabIndex = 1
+        Me.lblStudentFirstName.Text = "User ID"
+        '
+        'ComboBoxAdminAccountsUserType
+        '
+        Me.ComboBoxAdminAccountsUserType.FormattingEnabled = True
+        Me.ComboBoxAdminAccountsUserType.Location = New System.Drawing.Point(503, 49)
+        Me.ComboBoxAdminAccountsUserType.Name = "ComboBoxAdminAccountsUserType"
+        Me.ComboBoxAdminAccountsUserType.Size = New System.Drawing.Size(141, 24)
+        Me.ComboBoxAdminAccountsUserType.TabIndex = 6
+        '
+        'txtbxManAdminSearch
+        '
+        Me.txtbxManAdminSearch.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtbxManAdminSearch.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtbxManAdminSearch.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtbxManAdminSearch.Location = New System.Drawing.Point(317, 166)
+        Me.txtbxManAdminSearch.Margin = New System.Windows.Forms.Padding(2)
+        Me.txtbxManAdminSearch.MaxLength = 50
+        Me.txtbxManAdminSearch.Name = "txtbxManAdminSearch"
+        Me.txtbxManAdminSearch.Size = New System.Drawing.Size(186, 30)
+        Me.txtbxManAdminSearch.TabIndex = 23
+        '
+        'btnManAdDelete
+        '
+        Me.btnManAdDelete.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnManAdDelete.Location = New System.Drawing.Point(1175, 161)
+        Me.btnManAdDelete.Name = "btnManAdDelete"
+        Me.btnManAdDelete.Size = New System.Drawing.Size(86, 35)
+        Me.btnManAdDelete.TabIndex = 22
+        Me.btnManAdDelete.Text = "Delete"
+        Me.btnManAdDelete.UseVisualStyleBackColor = True
+        '
+        'btnManAdUpdate
+        '
+        Me.btnManAdUpdate.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnManAdUpdate.Location = New System.Drawing.Point(1063, 161)
+        Me.btnManAdUpdate.Name = "btnManAdUpdate"
+        Me.btnManAdUpdate.Size = New System.Drawing.Size(86, 35)
+        Me.btnManAdUpdate.TabIndex = 21
+        Me.btnManAdUpdate.Text = "Update"
+        Me.btnManAdUpdate.UseVisualStyleBackColor = True
+        '
+        'btnManAdAdd
+        '
+        Me.btnManAdAdd.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnManAdAdd.Location = New System.Drawing.Point(950, 161)
+        Me.btnManAdAdd.Name = "btnManAdAdd"
+        Me.btnManAdAdd.Size = New System.Drawing.Size(86, 35)
+        Me.btnManAdAdd.TabIndex = 20
+        Me.btnManAdAdd.Text = "Add"
+        Me.btnManAdAdd.UseVisualStyleBackColor = True
+        '
+        'dgvLoginAdmin
+        '
+        Me.dgvLoginAdmin.AllowUserToAddRows = False
+        Me.dgvLoginAdmin.AllowUserToDeleteRows = False
+        Me.dgvLoginAdmin.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.dgvLoginAdmin.BackgroundColor = System.Drawing.Color.WhiteSmoke
+        Me.dgvLoginAdmin.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dgvLoginAdmin.Location = New System.Drawing.Point(317, 217)
+        Me.dgvLoginAdmin.Name = "dgvLoginAdmin"
+        Me.dgvLoginAdmin.ReadOnly = True
+        Me.dgvLoginAdmin.RowHeadersVisible = False
+        Me.dgvLoginAdmin.RowHeadersWidth = 51
+        Me.dgvLoginAdmin.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.dgvLoginAdmin.Size = New System.Drawing.Size(944, 376)
+        Me.dgvLoginAdmin.TabIndex = 24
+        '
         'SuperAdminManageAdminAccounts
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -149,9 +299,13 @@ Partial Class SuperAdminManageAdminAccounts
         Me.Name = "SuperAdminManageAdminAccounts"
         Me.Text = "SuperAdminManageAdminAccounts"
         Me.pnlSuperAdminMainContent.ResumeLayout(False)
+        Me.pnlSuperAdminMainContent.PerformLayout()
         Me.pnlTeacherSidebar.ResumeLayout(False)
         Me.FlowLayoutPanel1.ResumeLayout(False)
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.grpAdminAccounts.ResumeLayout(False)
+        Me.grpAdminAccounts.PerformLayout()
+        CType(Me.dgvLoginAdmin, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -165,4 +319,16 @@ Partial Class SuperAdminManageAdminAccounts
     Friend WithEvents btnSuperAdminGenerateReports As Button
     Friend WithEvents btnLogout As Button
     Friend WithEvents PictureBox1 As PictureBox
+    Friend WithEvents grpAdminAccounts As GroupBox
+    Friend WithEvents Label1 As Label
+    Friend WithEvents txtbxTeacherPassword As TextBox
+    Friend WithEvents lblStudentMiddleName As Label
+    Friend WithEvents txtbxTeacherUserID As TextBox
+    Friend WithEvents lblStudentFirstName As Label
+    Friend WithEvents ComboBoxAdminAccountsUserType As ComboBox
+    Friend WithEvents txtbxManAdminSearch As TextBox
+    Friend WithEvents btnManAdDelete As Button
+    Friend WithEvents btnManAdUpdate As Button
+    Friend WithEvents btnManAdAdd As Button
+    Friend WithEvents dgvLoginAdmin As DataGridView
 End Class
