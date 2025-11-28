@@ -22,31 +22,31 @@ Partial Class SuperAdminDashboard
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.pnlTeacherMainContent = New System.Windows.Forms.Panel()
+        Me.pnlSuperAdminMainContent = New System.Windows.Forms.Panel()
         Me.pnlTeacherSidebar = New System.Windows.Forms.Panel()
         Me.FlowLayoutPanel1 = New System.Windows.Forms.FlowLayoutPanel()
-        Me.btnTeacherViewSection = New System.Windows.Forms.Button()
-        Me.btnTeacherViewStudents = New System.Windows.Forms.Button()
-        Me.btnViewAssignedSubjects = New System.Windows.Forms.Button()
-        Me.btnTeacherGenerateReports = New System.Windows.Forms.Button()
+        Me.btnSuperAdminManageAdmin = New System.Windows.Forms.Button()
+        Me.btnSuperAdminManageTea = New System.Windows.Forms.Button()
+        Me.btnSuperAdminManageSysCon = New System.Windows.Forms.Button()
+        Me.btnSuperAdminGenerateReports = New System.Windows.Forms.Button()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
-        Me.pnlTeacherMainContent.SuspendLayout()
+        Me.pnlSuperAdminMainContent.SuspendLayout()
         Me.pnlTeacherSidebar.SuspendLayout()
         Me.FlowLayoutPanel1.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
-        'pnlTeacherMainContent
+        'pnlSuperAdminMainContent
         '
-        Me.pnlTeacherMainContent.BackColor = System.Drawing.Color.FromArgb(CType(CType(7, Byte), Integer), CType(CType(77, Byte), Integer), CType(CType(39, Byte), Integer))
-        Me.pnlTeacherMainContent.Controls.Add(Me.pnlTeacherSidebar)
-        Me.pnlTeacherMainContent.Controls.Add(Me.PictureBox1)
-        Me.pnlTeacherMainContent.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.pnlTeacherMainContent.Location = New System.Drawing.Point(0, 0)
-        Me.pnlTeacherMainContent.Name = "pnlTeacherMainContent"
-        Me.pnlTeacherMainContent.Size = New System.Drawing.Size(1300, 633)
-        Me.pnlTeacherMainContent.TabIndex = 14
+        Me.pnlSuperAdminMainContent.BackColor = System.Drawing.Color.FromArgb(CType(CType(7, Byte), Integer), CType(CType(77, Byte), Integer), CType(CType(39, Byte), Integer))
+        Me.pnlSuperAdminMainContent.Controls.Add(Me.pnlTeacherSidebar)
+        Me.pnlSuperAdminMainContent.Controls.Add(Me.PictureBox1)
+        Me.pnlSuperAdminMainContent.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.pnlSuperAdminMainContent.Location = New System.Drawing.Point(0, 0)
+        Me.pnlSuperAdminMainContent.Name = "pnlSuperAdminMainContent"
+        Me.pnlSuperAdminMainContent.Size = New System.Drawing.Size(1300, 633)
+        Me.pnlSuperAdminMainContent.TabIndex = 14
         '
         'pnlTeacherSidebar
         '
@@ -63,10 +63,10 @@ Partial Class SuperAdminDashboard
         'FlowLayoutPanel1
         '
         Me.FlowLayoutPanel1.BackColor = System.Drawing.Color.Transparent
-        Me.FlowLayoutPanel1.Controls.Add(Me.btnTeacherViewSection)
-        Me.FlowLayoutPanel1.Controls.Add(Me.btnTeacherViewStudents)
-        Me.FlowLayoutPanel1.Controls.Add(Me.btnViewAssignedSubjects)
-        Me.FlowLayoutPanel1.Controls.Add(Me.btnTeacherGenerateReports)
+        Me.FlowLayoutPanel1.Controls.Add(Me.btnSuperAdminManageAdmin)
+        Me.FlowLayoutPanel1.Controls.Add(Me.btnSuperAdminManageTea)
+        Me.FlowLayoutPanel1.Controls.Add(Me.btnSuperAdminManageSysCon)
+        Me.FlowLayoutPanel1.Controls.Add(Me.btnSuperAdminGenerateReports)
         Me.FlowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.FlowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.TopDown
         Me.FlowLayoutPanel1.Location = New System.Drawing.Point(30, 40)
@@ -76,44 +76,45 @@ Partial Class SuperAdminDashboard
         Me.FlowLayoutPanel1.TabIndex = 0
         Me.FlowLayoutPanel1.WrapContents = False
         '
-        'btnTeacherViewSection
+        'btnSuperAdminManageAdmin
         '
-        Me.btnTeacherViewSection.Location = New System.Drawing.Point(0, 0)
-        Me.btnTeacherViewSection.Margin = New System.Windows.Forms.Padding(0, 0, 0, 18)
-        Me.btnTeacherViewSection.Name = "btnTeacherViewSection"
-        Me.btnTeacherViewSection.Size = New System.Drawing.Size(240, 45)
-        Me.btnTeacherViewSection.TabIndex = 11
-        Me.btnTeacherViewSection.Text = "Manage Admin Accounts"
-        Me.btnTeacherViewSection.UseVisualStyleBackColor = True
+        Me.btnSuperAdminManageAdmin.Location = New System.Drawing.Point(0, 0)
+        Me.btnSuperAdminManageAdmin.Margin = New System.Windows.Forms.Padding(0, 0, 0, 18)
+        Me.btnSuperAdminManageAdmin.Name = "btnSuperAdminManageAdmin"
+        Me.btnSuperAdminManageAdmin.Size = New System.Drawing.Size(240, 45)
+        Me.btnSuperAdminManageAdmin.TabIndex = 11
+        Me.btnSuperAdminManageAdmin.Text = "Manage Admin Accounts"
+        Me.btnSuperAdminManageAdmin.UseVisualStyleBackColor = True
         '
-        'btnTeacherViewStudents
+        'btnSuperAdminManageTea
         '
-        Me.btnTeacherViewStudents.Location = New System.Drawing.Point(0, 63)
-        Me.btnTeacherViewStudents.Margin = New System.Windows.Forms.Padding(0, 0, 0, 18)
-        Me.btnTeacherViewStudents.Name = "btnTeacherViewStudents"
-        Me.btnTeacherViewStudents.Size = New System.Drawing.Size(240, 45)
-        Me.btnTeacherViewStudents.TabIndex = 4
-        Me.btnTeacherViewStudents.Text = "Manage Teacher Accounts"
-        Me.btnTeacherViewStudents.UseVisualStyleBackColor = True
+        Me.btnSuperAdminManageTea.Location = New System.Drawing.Point(0, 63)
+        Me.btnSuperAdminManageTea.Margin = New System.Windows.Forms.Padding(0, 0, 0, 18)
+        Me.btnSuperAdminManageTea.Name = "btnSuperAdminManageTea"
+        Me.btnSuperAdminManageTea.Size = New System.Drawing.Size(240, 45)
+        Me.btnSuperAdminManageTea.TabIndex = 4
+        Me.btnSuperAdminManageTea.Text = "Manage Teacher Accounts"
+        Me.btnSuperAdminManageTea.UseVisualStyleBackColor = True
         '
-        'btnViewAssignedSubjects
+        'btnSuperAdminManageSysCon
         '
-        Me.btnViewAssignedSubjects.Location = New System.Drawing.Point(0, 126)
-        Me.btnViewAssignedSubjects.Margin = New System.Windows.Forms.Padding(0, 0, 0, 18)
-        Me.btnViewAssignedSubjects.Name = "btnViewAssignedSubjects"
-        Me.btnViewAssignedSubjects.Size = New System.Drawing.Size(240, 45)
-        Me.btnViewAssignedSubjects.TabIndex = 5
-        Me.btnViewAssignedSubjects.UseVisualStyleBackColor = True
+        Me.btnSuperAdminManageSysCon.Location = New System.Drawing.Point(0, 126)
+        Me.btnSuperAdminManageSysCon.Margin = New System.Windows.Forms.Padding(0, 0, 0, 18)
+        Me.btnSuperAdminManageSysCon.Name = "btnSuperAdminManageSysCon"
+        Me.btnSuperAdminManageSysCon.Size = New System.Drawing.Size(240, 45)
+        Me.btnSuperAdminManageSysCon.TabIndex = 5
+        Me.btnSuperAdminManageSysCon.Text = "Manage System Configuration"
+        Me.btnSuperAdminManageSysCon.UseVisualStyleBackColor = True
         '
-        'btnTeacherGenerateReports
+        'btnSuperAdminGenerateReports
         '
-        Me.btnTeacherGenerateReports.Location = New System.Drawing.Point(0, 189)
-        Me.btnTeacherGenerateReports.Margin = New System.Windows.Forms.Padding(0, 0, 0, 18)
-        Me.btnTeacherGenerateReports.Name = "btnTeacherGenerateReports"
-        Me.btnTeacherGenerateReports.Size = New System.Drawing.Size(240, 45)
-        Me.btnTeacherGenerateReports.TabIndex = 9
-        Me.btnTeacherGenerateReports.Text = "Generate Reports"
-        Me.btnTeacherGenerateReports.UseVisualStyleBackColor = True
+        Me.btnSuperAdminGenerateReports.Location = New System.Drawing.Point(0, 189)
+        Me.btnSuperAdminGenerateReports.Margin = New System.Windows.Forms.Padding(0, 0, 0, 18)
+        Me.btnSuperAdminGenerateReports.Name = "btnSuperAdminGenerateReports"
+        Me.btnSuperAdminGenerateReports.Size = New System.Drawing.Size(240, 45)
+        Me.btnSuperAdminGenerateReports.TabIndex = 9
+        Me.btnSuperAdminGenerateReports.Text = "Generate Reports"
+        Me.btnSuperAdminGenerateReports.UseVisualStyleBackColor = True
         '
         'Button1
         '
@@ -144,23 +145,23 @@ Partial Class SuperAdminDashboard
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1300, 633)
-        Me.Controls.Add(Me.pnlTeacherMainContent)
+        Me.Controls.Add(Me.pnlSuperAdminMainContent)
         Me.Name = "SuperAdminDashboard"
         Me.Text = "SuperAdminDashboard"
-        Me.pnlTeacherMainContent.ResumeLayout(False)
+        Me.pnlSuperAdminMainContent.ResumeLayout(False)
         Me.pnlTeacherSidebar.ResumeLayout(False)
         Me.FlowLayoutPanel1.ResumeLayout(False)
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
-    Friend WithEvents pnlTeacherMainContent As Panel
+    Friend WithEvents pnlSuperAdminMainContent As Panel
     Friend WithEvents pnlTeacherSidebar As Panel
     Friend WithEvents FlowLayoutPanel1 As FlowLayoutPanel
-    Friend WithEvents btnTeacherViewSection As Button
-    Friend WithEvents btnTeacherViewStudents As Button
-    Friend WithEvents btnViewAssignedSubjects As Button
-    Friend WithEvents btnTeacherGenerateReports As Button
+    Friend WithEvents btnSuperAdminManageAdmin As Button
+    Friend WithEvents btnSuperAdminManageTea As Button
+    Friend WithEvents btnSuperAdminManageSysCon As Button
+    Friend WithEvents btnSuperAdminGenerateReports As Button
     Friend WithEvents Button1 As Button
     Friend WithEvents PictureBox1 As PictureBox
 End Class
