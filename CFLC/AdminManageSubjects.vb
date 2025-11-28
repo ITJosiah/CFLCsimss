@@ -90,6 +90,7 @@ Public Class AdminManageSubjects
         cbxManSubRoomType.Items.Add("Regular Classroom")
         cbxManSubRoomType.Items.Add("Science Lab")
         cbxManSubRoomType.Items.Add("Covered Court")
+        cbxManSubRoomType.Items.Add("Workshop")
     End Sub
 
     ' ===== DATE-BASED STATUS CALCULATION METHODS =====
