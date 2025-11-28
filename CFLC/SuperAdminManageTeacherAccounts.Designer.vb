@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class SuperAdminDashboard
+Partial Class SuperAdminManageTeacherAccounts
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -45,8 +45,8 @@ Partial Class SuperAdminDashboard
         Me.pnlSuperAdminMainContent.Dock = System.Windows.Forms.DockStyle.Fill
         Me.pnlSuperAdminMainContent.Location = New System.Drawing.Point(0, 0)
         Me.pnlSuperAdminMainContent.Name = "pnlSuperAdminMainContent"
-        Me.pnlSuperAdminMainContent.Size = New System.Drawing.Size(1300, 633)
-        Me.pnlSuperAdminMainContent.TabIndex = 14
+        Me.pnlSuperAdminMainContent.Size = New System.Drawing.Size(1284, 594)
+        Me.pnlSuperAdminMainContent.TabIndex = 15
         '
         'pnlTeacherSidebar
         '
@@ -57,7 +57,7 @@ Partial Class SuperAdminDashboard
         Me.pnlTeacherSidebar.Location = New System.Drawing.Point(0, 0)
         Me.pnlTeacherSidebar.Name = "pnlTeacherSidebar"
         Me.pnlTeacherSidebar.Padding = New System.Windows.Forms.Padding(30, 40, 30, 40)
-        Me.pnlTeacherSidebar.Size = New System.Drawing.Size(300, 633)
+        Me.pnlTeacherSidebar.Size = New System.Drawing.Size(300, 594)
         Me.pnlTeacherSidebar.TabIndex = 12
         '
         'FlowLayoutPanel1
@@ -72,7 +72,7 @@ Partial Class SuperAdminDashboard
         Me.FlowLayoutPanel1.Location = New System.Drawing.Point(30, 40)
         Me.FlowLayoutPanel1.Margin = New System.Windows.Forms.Padding(0)
         Me.FlowLayoutPanel1.Name = "FlowLayoutPanel1"
-        Me.FlowLayoutPanel1.Size = New System.Drawing.Size(240, 503)
+        Me.FlowLayoutPanel1.Size = New System.Drawing.Size(240, 464)
         Me.FlowLayoutPanel1.TabIndex = 0
         Me.FlowLayoutPanel1.WrapContents = False
         '
@@ -121,7 +121,7 @@ Partial Class SuperAdminDashboard
         Me.btnLogout.BackColor = System.Drawing.Color.Red
         Me.btnLogout.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.btnLogout.ForeColor = System.Drawing.Color.White
-        Me.btnLogout.Location = New System.Drawing.Point(30, 543)
+        Me.btnLogout.Location = New System.Drawing.Point(30, 504)
         Me.btnLogout.Margin = New System.Windows.Forms.Padding(0)
         Me.btnLogout.Name = "btnLogout"
         Me.btnLogout.Size = New System.Drawing.Size(240, 50)
@@ -133,21 +133,21 @@ Partial Class SuperAdminDashboard
         '
         Me.PictureBox1.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.PictureBox1.Image = Global.CFLC.My.Resources.Resources.logo
-        Me.PictureBox1.Location = New System.Drawing.Point(621, 143)
+        Me.PictureBox1.Location = New System.Drawing.Point(613, 124)
         Me.PictureBox1.Name = "PictureBox1"
         Me.PictureBox1.Size = New System.Drawing.Size(375, 330)
         Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
         Me.PictureBox1.TabIndex = 3
         Me.PictureBox1.TabStop = False
         '
-        'SuperAdminDashboard
+        'SuperAdminManageTeacherAccounts
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1300, 633)
+        Me.ClientSize = New System.Drawing.Size(1284, 594)
         Me.Controls.Add(Me.pnlSuperAdminMainContent)
-        Me.Name = "SuperAdminDashboard"
-        Me.Text = "SuperAdminDashboard"
+        Me.Name = "SuperAdminManageTeacherAccounts"
+        Me.Text = "SuperAdminManageTeacherAccounts"
         Me.pnlSuperAdminMainContent.ResumeLayout(False)
         Me.pnlTeacherSidebar.ResumeLayout(False)
         Me.FlowLayoutPanel1.ResumeLayout(False)
@@ -155,6 +155,7 @@ Partial Class SuperAdminDashboard
         Me.ResumeLayout(False)
 
     End Sub
+
     Friend WithEvents pnlSuperAdminMainContent As Panel
     Friend WithEvents pnlTeacherSidebar As Panel
     Friend WithEvents FlowLayoutPanel1 As FlowLayoutPanel

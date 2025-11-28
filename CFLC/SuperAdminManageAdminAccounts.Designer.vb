@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class SuperAdminDashboard
+Partial Class SuperAdminManageAdminAccounts
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -46,7 +46,7 @@ Partial Class SuperAdminDashboard
         Me.pnlSuperAdminMainContent.Location = New System.Drawing.Point(0, 0)
         Me.pnlSuperAdminMainContent.Name = "pnlSuperAdminMainContent"
         Me.pnlSuperAdminMainContent.Size = New System.Drawing.Size(1300, 633)
-        Me.pnlSuperAdminMainContent.TabIndex = 14
+        Me.pnlSuperAdminMainContent.TabIndex = 15
         '
         'pnlTeacherSidebar
         '
@@ -140,14 +140,14 @@ Partial Class SuperAdminDashboard
         Me.PictureBox1.TabIndex = 3
         Me.PictureBox1.TabStop = False
         '
-        'SuperAdminDashboard
+        'SuperAdminManageAdminAccounts
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1300, 633)
         Me.Controls.Add(Me.pnlSuperAdminMainContent)
-        Me.Name = "SuperAdminDashboard"
-        Me.Text = "SuperAdminDashboard"
+        Me.Name = "SuperAdminManageAdminAccounts"
+        Me.Text = "SuperAdminManageAdminAccounts"
         Me.pnlSuperAdminMainContent.ResumeLayout(False)
         Me.pnlTeacherSidebar.ResumeLayout(False)
         Me.FlowLayoutPanel1.ResumeLayout(False)
@@ -155,6 +155,7 @@ Partial Class SuperAdminDashboard
         Me.ResumeLayout(False)
 
     End Sub
+
     Friend WithEvents pnlSuperAdminMainContent As Panel
     Friend WithEvents pnlTeacherSidebar As Panel
     Friend WithEvents FlowLayoutPanel1 As FlowLayoutPanel
