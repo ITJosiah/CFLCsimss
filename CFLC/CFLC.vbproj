@@ -210,6 +210,18 @@
     <Compile Include="SuperAdminDashboard.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="SuperAdminManageAdminAccounts.Designer.vb">
+      <DependentUpon>SuperAdminManageAdminAccounts.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SuperAdminManageAdminAccounts.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SuperAdminManageTeacherAccounts.Designer.vb">
+      <DependentUpon>SuperAdminManageTeacherAccounts.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SuperAdminManageTeacherAccounts.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="TeacherDashboard.Designer.vb">
       <DependentUpon>TeacherDashboard.vb</DependentUpon>
     </Compile>
@@ -272,6 +284,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="SuperAdminDashboard.resx">
       <DependentUpon>SuperAdminDashboard.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SuperAdminManageAdminAccounts.resx">
+      <DependentUpon>SuperAdminManageAdminAccounts.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SuperAdminManageTeacherAccounts.resx">
+      <DependentUpon>SuperAdminManageTeacherAccounts.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TeacherDashboard.resx">
       <DependentUpon>TeacherDashboard.vb</DependentUpon>
