@@ -1,18 +1,37 @@
-﻿Public Class SuperAdminManageTeacherAccounts
+﻿Imports MySql.Data.MySqlClient
+
+Public Class SuperAdminManageTeacherAccounts
     Public Property IsEmbedded As Boolean = False
     Private Sub SuperAdminManageTeacherAccounts_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        If Not IsEmbedded Then
-            Me.WindowState = FormWindowState.Maximized
-            Me.BackColor = Color.FromArgb(15, 56, 32)
-            Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
-        End If
+        Me.FormBorderStyle = FormBorderStyle.None
+        Me.WindowState = FormWindowState.Maximized
+        Me.Bounds = Screen.PrimaryScreen.Bounds
+        Me.TopMost = True
+        Me.BackColor = Color.FromArgb(7, 77, 39) ' Dark green background
         Me.Text = "Dashboard-SuperAdminManageTeacherAccounts"
 
+        ' Initialize controls if not done in designer
+        InitializeControls()
+        StyleControls()
+    End Sub
 
-        PositionSidebarButtons()
+    Private Sub InitializeControls()
+        ' Set default values
+        txtbxTeacherUserType.Text = "teacher" ' Lowercase to match your login form
+        txtbxTeacherUserType.Enabled = False ' Make it read-only since it's always "teacher"
+    End Sub
+
+        ShowHomeContent()
 
         StyleSidebarButtons()
 
+        ' Add columns if not already added in designer
+        If dgvLoginTeacher.Columns.Count = 0 Then
+            dgvLoginTeacher.Columns.Add("user_id", "User ID")
+            dgvLoginTeacher.Columns.Add("password", "Password")
+            dgvLoginTeacher.Columns.Add("user_type", "User Type")
+            dgvLoginTeacher.Columns.Add("TeacherID", "Teacher ID")
+        End If
     End Sub
 
     Private Sub CenterLogo()
@@ -53,6 +72,37 @@
         btnLogout.TextAlign = ContentAlignment.MiddleCenter ' Center text for logout
     End Sub
 
+
+
+    Protected Overrides Function ProcessCmdKey(ByRef msg As Message, keyData As Keys) As Boolean
+        If keyData = Keys.Escape Then
+            ExitFullScreen()
+            Return True
+        End If
+
+        If keyData = Keys.F Then
+            MakeItFullScreen()
+            Return True
+        End If
+
+        Return MyBase.ProcessCmdKey(msg, keyData)
+
+
+    End Function
+
+    Private Sub ExitFullScreen()
+        Me.FormBorderStyle = FormBorderStyle.Sizable
+        Me.WindowState = FormWindowState.Maximized
+        Me.TopMost = False
+    End Sub
+
+    Private Sub MakeItFullScreen()
+        Me.FormBorderStyle = FormBorderStyle.None
+        Me.WindowState = FormWindowState.Maximized
+        Me.Bounds = Screen.PrimaryScreen.Bounds
+        Me.TopMost = True
+        Me.BringToFront()
+    End Sub
     Private Sub AdminDashboard_Resize(sender As Object, e As EventArgs) Handles MyBase.Resize
         CenterLogo()
         PositionSidebarButtons()
@@ -93,6 +143,31 @@
         btnLogout.Left = sidebarPadding
         btnLogout.Width = sidebarWidth - (sidebarPadding * 2)
         btnLogout.Height = buttonHeight
+    End Sub
+
+    Private Sub LoadFormInPanel(childForm As Form)
+        pnlSuperAdminMainContent.Controls.Clear()
+        childForm.TopLevel = False
+        childForm.FormBorderStyle = FormBorderStyle.None
+        childForm.Dock = DockStyle.Fill
+        pnlSuperAdminMainContent.Controls.Add(childForm)
+        childForm.Show()
+    End Sub
+
+    Private Sub ShowHomeContent()
+        pnlSuperAdminMainContent.Controls.Clear()
+        pnlSuperAdminMainContent.Controls.Add(PictureBox1)
+        PictureBox1.BringToFront()
+        CenterLogo()
+    End Sub
+
+    Private Sub btnSuperAdminManageAdmin_Click(sender As Object, e As EventArgs) Handles btnSuperAdminManageAdmin.Click
+        LoadFormInPanel(New SuperAdminManageAdminAccounts())
+    End Sub
+
+
+    Private Sub btnSuperAdminManageTea_Click(sender As Object, e As EventArgs) Handles btnSuperAdminManageTea.Click
+        LoadFormInPanel(New SuperAdminManageTeacherAccounts())
     End Sub
 
 End Class
