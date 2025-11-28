@@ -44,7 +44,7 @@
             btn.Padding = New Padding(15, 0, 0, 0) ' More left padding for text
         Next
 
-        ' Style logout button differently (red)
+        ' Style logout button differentlyy (red)
         btnLogout.BackColor = Color.Red
         btnLogout.ForeColor = Color.White
         btnLogout.FlatStyle = FlatStyle.Flat
