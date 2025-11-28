@@ -73,7 +73,6 @@ Public Class AdminManageSections
         cmbManSecLearningMode.Items.Add("Face-to-Face")
         cmbManSecLearningMode.Items.Add("Online")
         cmbManSecLearningMode.Items.Add("Hybrid")
-        cmbManSecLearningMode.Items.Add("Blended")
     End Sub
 
     Private Sub InitializeClassTypeComboBox()
@@ -82,7 +81,7 @@ Public Class AdminManageSections
         cmbManSecClassType.DropDownStyle = ComboBoxStyle.DropDownList
         cmbManSecClassType.Items.Add("Regular")
         cmbManSecClassType.Items.Add("Special Education")
-        cmbManSecClassType.Items.Add("Accelerated")
+
     End Sub
 
     Private Sub InitializeStatusComboBox()
