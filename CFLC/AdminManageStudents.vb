@@ -831,6 +831,38 @@ Public Class AdminManageStudents
         Return If(dbValue Is Nothing OrElse IsDBNull(dbValue), "", dbValue.ToString())
     End Function
 
+
+    ' Allow typing "f" into the search TextBox while preventing the parent/dashboard full-screen handler.
+    Protected Overrides Function ProcessCmdKey(ByRef msg As Message, keyData As Keys) As Boolean
+        ' Check only the key code (ignore modifiers in comparison)
+        If (keyData And Keys.KeyCode) = Keys.F AndAlso TextBoxStudentSearch IsNot Nothing AndAlso TextBoxStudentSearch.Focused Then
+            ' Insert the character into the textbox manually (preserve selection/replacement).
+            Dim tb = TextBoxStudentSearch
+            Dim s As String = tb.Text
+            Dim selStart As Integer = tb.SelectionStart
+            Dim selLen As Integer = tb.SelectionLength
+
+            ' Determine case: Shift toggles, CapsLock toggles
+            Dim shiftPressed As Boolean = (keyData And Keys.Shift) = Keys.Shift
+            Dim capsOn As Boolean = Control.IsKeyLocked(Keys.CapsLock)
+            Dim useUpper As Boolean = shiftPressed Xor capsOn
+            Dim ch As Char = If(useUpper, "F"c, "f"c)
+
+            Dim before As String = If(selStart > 0, s.Substring(0, selStart), String.Empty)
+            Dim afterIndex As Integer = Math.Min(selStart + selLen, s.Length)
+            Dim after As String = If(afterIndex < s.Length, s.Substring(afterIndex), String.Empty)
+
+            tb.Text = before & ch & after
+            tb.SelectionStart = selStart + 1
+            tb.SelectionLength = 0
+
+            ' Consume the key so parent doesn't trigger full-screen
+            Return True
+        End If
+
+        Return MyBase.ProcessCmdKey(msg, keyData)
+    End Function
+
     Private Sub SearchStudentsBySurname(ByVal surname As String)
         ' If the search box is empty, load all students (default view)
         If String.IsNullOrWhiteSpace(surname) Then
