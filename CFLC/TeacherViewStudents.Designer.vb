@@ -86,6 +86,7 @@ Partial Class TeacherViewStudents
         Me.lblStudentFirstName = New System.Windows.Forms.Label()
         Me.lblStudentList = New System.Windows.Forms.Label()
         Me.picWatermark = New System.Windows.Forms.PictureBox()
+        Me.btnTeacherViewSection = New System.Windows.Forms.Button()
         Me.pnlTeacherSidebar.SuspendLayout()
         Me.flowButtons.SuspendLayout()
         Me.pnlContent.SuspendLayout()
@@ -110,6 +111,7 @@ Partial Class TeacherViewStudents
         'flowButtons
         '
         Me.flowButtons.BackColor = System.Drawing.Color.Transparent
+        Me.flowButtons.Controls.Add(Me.btnTeacherViewSection)
         Me.flowButtons.Controls.Add(Me.btnTeacherViewStudents)
         Me.flowButtons.Controls.Add(Me.btnViewAssignedSubjects)
         Me.flowButtons.Controls.Add(Me.btnTeacherGenerateReports)
@@ -124,7 +126,7 @@ Partial Class TeacherViewStudents
         '
         'btnTeacherViewStudents
         '
-        Me.btnTeacherViewStudents.Location = New System.Drawing.Point(0, 0)
+        Me.btnTeacherViewStudents.Location = New System.Drawing.Point(0, 63)
         Me.btnTeacherViewStudents.Margin = New System.Windows.Forms.Padding(0, 0, 0, 18)
         Me.btnTeacherViewStudents.Name = "btnTeacherViewStudents"
         Me.btnTeacherViewStudents.Size = New System.Drawing.Size(240, 45)
@@ -134,7 +136,7 @@ Partial Class TeacherViewStudents
         '
         'btnViewAssignedSubjects
         '
-        Me.btnViewAssignedSubjects.Location = New System.Drawing.Point(0, 63)
+        Me.btnViewAssignedSubjects.Location = New System.Drawing.Point(0, 126)
         Me.btnViewAssignedSubjects.Margin = New System.Windows.Forms.Padding(0, 0, 0, 18)
         Me.btnViewAssignedSubjects.Name = "btnViewAssignedSubjects"
         Me.btnViewAssignedSubjects.Size = New System.Drawing.Size(240, 45)
@@ -144,7 +146,7 @@ Partial Class TeacherViewStudents
         '
         'btnTeacherGenerateReports
         '
-        Me.btnTeacherGenerateReports.Location = New System.Drawing.Point(0, 126)
+        Me.btnTeacherGenerateReports.Location = New System.Drawing.Point(0, 189)
         Me.btnTeacherGenerateReports.Margin = New System.Windows.Forms.Padding(0, 0, 0, 18)
         Me.btnTeacherGenerateReports.Name = "btnTeacherGenerateReports"
         Me.btnTeacherGenerateReports.Size = New System.Drawing.Size(240, 45)
@@ -767,6 +769,16 @@ Partial Class TeacherViewStudents
         Me.picWatermark.TabIndex = 5
         Me.picWatermark.TabStop = False
         '
+        'btnTeacherViewSection
+        '
+        Me.btnTeacherViewSection.Location = New System.Drawing.Point(0, 0)
+        Me.btnTeacherViewSection.Margin = New System.Windows.Forms.Padding(0, 0, 0, 18)
+        Me.btnTeacherViewSection.Name = "btnTeacherViewSection"
+        Me.btnTeacherViewSection.Size = New System.Drawing.Size(240, 45)
+        Me.btnTeacherViewSection.TabIndex = 10
+        Me.btnTeacherViewSection.Text = "View Section"
+        Me.btnTeacherViewSection.UseVisualStyleBackColor = True
+        '
         'TeacherViewStudents
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -854,4 +866,5 @@ Partial Class TeacherViewStudents
     Friend WithEvents lblStudentFirstName As Label
     Friend WithEvents lblStudentList As Label
     Friend WithEvents picWatermark As PictureBox
+    Friend WithEvents btnTeacherViewSection As Button
 End Class
