@@ -147,4 +147,8 @@
         LoadFormInPanel(New SuperAdminManageAdminAccounts())
     End Sub
 
+    Private Sub btnSuperAdminManageTea_Click(sender As Object, e As EventArgs) Handles btnSuperAdminManageTea.Click
+        LoadFormInPanel(New SuperAdminManageTeacherAccounts())
+    End Sub
+
 End Class

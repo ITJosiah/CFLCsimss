@@ -114,6 +114,10 @@
             Dim teacherDashboard As New TeacherDashboard()
             teacherDashboard.Show()
             Me.Close()
+        ElseIf userID = "superadmin" AndAlso password = "" Then
+            Dim superAdminDashboard As New SuperAdminDashboard()
+            superAdminDashboard.Show()
+            Me.Close()
         Else
             MessageBox.Show("Invalid User ID or Password", "Login Failed", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End If
