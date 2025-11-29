@@ -204,9 +204,10 @@ Public Class TeacherDashboard
     End Sub
 
     Private Sub btnViewAssignedSubjects_Click(sender As Object, e As EventArgs) Handles btnViewAssignedSubjects.Click
-        Dim viewTeacherAssignSubjectsForm As New TeacherViewAssignedSubjects() With {
-            .IsEmbedded = True
+        Dim viewTeacherAssignSubjectsForm As New TeacherViewAssignedSubjects(Me.TeacherID) With {
+        .IsEmbedded = True
         }
+
         LoadContentForm(viewTeacherAssignSubjectsForm)
     End Sub
 
