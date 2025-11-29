@@ -785,40 +785,6 @@ Public Class SuperAdminManageTeacherAccounts
 
     ' Allow typing "f" into the search TextBox while preventing the parent/dashboard full-screen handler.
     Protected Overrides Function ProcessCmdKey(ByRef msg As Message, keyData As Keys) As Boolean
-        ' Check only the key code (ignore modifiers in comparison)
-        If (keyData And Keys.KeyCode) = Keys.F AndAlso txtbxManTeaSearch IsNot Nothing AndAlso txtbxManTeaSearch.Focused Then
-            ' Insert the character into the textbox manually (preserve selection/replacement).
-            Dim tb = txtbxManTeaSearch
-            Dim s As String = tb.Text
-            Dim selStart As Integer = tb.SelectionStart
-            Dim selLen As Integer = tb.SelectionLength
-
-            ' Determine case: Shift toggles, CapsLock toggles
-            Dim shiftPressed As Boolean = (keyData And Keys.Shift) = Keys.Shift
-            Dim capsOn As Boolean = Control.IsKeyLocked(Keys.CapsLock)
-            Dim useUpper As Boolean = shiftPressed Xor capsOn
-            Dim ch As Char = If(useUpper, "F"c, "f"c)
-
-            ' Remove placeholder text if it's there
-            If s = "Search by User ID or Teacher ID..." Then
-                s = ""
-                selStart = 0
-                selLen = 0
-            End If
-
-            Dim before As String = If(selStart > 0, s.Substring(0, selStart), String.Empty)
-            Dim afterIndex As Integer = Math.Min(selStart + selLen, s.Length)
-            Dim after As String = If(afterIndex < s.Length, s.Substring(afterIndex), String.Empty)
-
-            tb.Text = before & ch & after
-            tb.SelectionStart = selStart + 1
-            tb.SelectionLength = 0
-            tb.ForeColor = Color.Black
-
-            ' Consume the key so parent doesn't trigger full-screen
-            Return True
-        End If
-
         ' Ctrl+A to add account
         If keyData = (Keys.Control Or Keys.A) Then
             If btnManTeacherAdd IsNot Nothing Then
