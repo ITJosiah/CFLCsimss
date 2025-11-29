@@ -390,6 +390,12 @@ Public Class AdminDashboard
 
     End Sub
 
-
+    Private Sub btnBackToDashboard_Click(sender As Object, e As EventArgs) Handles btnBackToDashboard.Click
+        Dim backtoDashboard As New AdminDashboard() With {
+            .IsEmbedded = True
+        }
+        LoadContentForm(manageSectionsForm)
+    End Sub
+    End Sub
 End Class
 
