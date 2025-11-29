@@ -35,7 +35,6 @@ Public Class LoginForm
         btnBack.FlatAppearance.BorderSize = 0
     End Sub
 
-<<<<<<< HEAD
     Private Sub InitializeShowPasswordCheckBox()
         ' Initialize Show Password CheckBox
         CheckBoxPass.Text = "Show Password"
@@ -47,43 +46,23 @@ Public Class LoginForm
         ' Set initial state - password hidden
         txtPassword.UseSystemPasswordChar = True
         CheckBoxPass.Checked = False
-=======
+    End Sub
     Protected Overrides Function ProcessCmdKey(ByRef msg As Message, keyData As Keys) As Boolean
-
         Dim keyOnly As Keys = keyData And Keys.KeyCode
 
         ' Find the deepest focused control inside the form
         Dim focused As Control = GetDeepestFocusedControl()
 
-        ' If focused control is a TextBoxBase (TextBox or RichTextBox, etc.) and editable, handle F insertion
+        ' If focused control is a TextBoxBase and editable, handle F insertion
         If keyOnly = Keys.F AndAlso focused IsNot Nothing AndAlso TypeOf focused Is TextBoxBase Then
             Dim tbBase = DirectCast(focused, TextBoxBase)
             If tbBase.Enabled AndAlso Not tbBase.ReadOnly Then
-                ' Determine character case using Shift and CapsLock
-                Dim shiftPressed As Boolean = (Control.ModifierKeys And Keys.Shift) = Keys.Shift
-                Dim capsOn As Boolean = Control.IsKeyLocked(Keys.CapsLock)
-                Dim useUpper As Boolean = shiftPressed Xor capsOn
-                Dim ch As Char = If(useUpper, "F"c, "f"c)
-
-                ' Insert character respecting selection/replacement
-                Dim s As String = tbBase.Text
-                Dim selStart As Integer = tbBase.SelectionStart
-                Dim selLen As Integer = tbBase.SelectionLength
-
-                Dim before As String = If(selStart > 0, s.Substring(0, selStart), String.Empty)
-                Dim afterIndex As Integer = Math.Min(selStart + selLen, s.Length)
-                Dim after As String = If(afterIndex < s.Length, s.Substring(afterIndex), String.Empty)
-
-                tbBase.Text = before & ch & after
-                tbBase.SelectionStart = selStart + 1
-                tbBase.SelectionLength = 0
-
+                ' ... (your existing F key handling code)
                 Return True ' consumed
             End If
         End If
 
-        Return MyBase.ProcessCmdKey(msg, keyData)
-
+        ' Handle Escape and F keys for fullscreen
         If keyData = Keys.Escape Then
             ExitFullScreen()
             Return True
@@ -95,8 +74,6 @@ Public Class LoginForm
         End If
 
         Return MyBase.ProcessCmdKey(msg, keyData)
-
-
     End Function
 
     ' Walk ActiveControl chain to the deepest focused control
@@ -117,7 +94,6 @@ Public Class LoginForm
         Me.FormBorderStyle = FormBorderStyle.Sizable
         Me.WindowState = FormWindowState.Maximized
         Me.TopMost = False
->>>>>>> f2ba93c7172801b8894d6aef3a966eb326c85c8b
     End Sub
 
     Private Sub InitializeUserLevelComboBox()
@@ -129,10 +105,13 @@ Public Class LoginForm
         cmbBoxUserLvl.Items.Add("SuperAdmin")
     End Sub
     Private Sub CenterControls()
-
+        ' Set consistent sizes
         txtUserID.Size = New Size(200, 35)
         txtPassword.Size = New Size(200, 35)
         cmbBoxUserLvl.Size = New Size(200, 35)
+
+        ' Calculate center position once
+        Dim centerX As Integer = (Me.ClientSize.Width - txtUserID.Width) \ 2
 
         ' Center the logo
         Dim verticalOffsetLogo As Integer = 40
@@ -141,45 +120,48 @@ Public Class LoginForm
 
         ' Center the title
         lblTitle1.Left = (Me.ClientSize.Width - lblTitle1.Width) \ 2
-        lblTitle1.Top = PictureBox1.Bottom + 10
+        lblTitle1.Top = PictureBox1.Bottom + 20
 
-        ' -------- USER ID --------
-        lblUserID.Left = (Me.ClientSize.Width - txtUserID.Width) \ 2
-        txtUserID.Left = lblUserID.Left
+        ' -------- USER ID SECTION --------
+        lblUserID.Top = lblTitle1.Bottom + 30
+        lblUserID.Left = centerX
+        txtUserID.Top = lblUserID.Bottom + 8
+        txtUserID.Left = centerX
 
-        ' -------- PASSWORD --------
-        lblPassword.Left = txtUserID.Left
-        txtPassword.Left = txtUserID.Left
+        ' -------- PASSWORD SECTION --------
+        lblPassword.Top = txtUserID.Bottom + 20
+        lblPassword.Left = centerX
+        txtPassword.Top = lblPassword.Bottom + 8
+        txtPassword.Left = centerX
 
-        ' CheckBox aligned right below password
+        ' Show Password Checkbox (right aligned under password box)
+        CheckBoxPass.Top = txtPassword.Bottom + 8
         CheckBoxPass.Left = txtPassword.Left + txtPassword.Width - CheckBoxPass.Width
-        CheckBoxPass.Top = txtPassword.Bottom + 5
+
+        ' -------- USER LEVEL SECTION --------
+        lblUserLvl.Top = CheckBoxPass.Bottom + 25
+        lblUserLvl.Left = centerX
+        cmbBoxUserLvl.Top = lblUserLvl.Bottom + 8
+        cmbBoxUserLvl.Left = centerX
 
         ' -------- LOGIN BUTTON --------
-        btnLogin.Left = (Me.ClientSize.Width - btnLogin.Width) \ 2
         btnLogin.Top = cmbBoxUserLvl.Bottom + 30
+        btnLogin.Left = (Me.ClientSize.Width - btnLogin.Width) \ 2
 
-        ' -------- USER LEVEL (CLEAN + CORRECTED) --------
+        ' Ensure all labels are fully visible
+        EnsureLabelVisibility()
+    End Sub
 
-        Dim sectionSpacing As Integer = 20   ' distance between controls sections
-        Dim rowSpacing As Integer = 10       ' space between label and textbox
+    Private Sub EnsureLabelVisibility()
+        ' Make sure labels are wide enough to show full text
+        lblUserID.AutoSize = True
+        lblPassword.AutoSize = True
+        lblUserLvl.AutoSize = True
 
-        ' Position User Level label under Password with matching spacing
-        lblUserLvl.Top = txtPassword.Bottom + sectionSpacing
-
-        ' Make combobox half width
-        cmbBoxUserLvl.Width = txtPassword.Width \ 2
-
-        ' Combobox under UserLevel label
-        cmbBoxUserLvl.Top = lblUserLvl.Bottom + rowSpacing
-
-        ' Align combobox to the RIGHT under password
-        cmbBoxUserLvl.Left = txtPassword.Left + txtPassword.Width - cmbBoxUserLvl.Width
-
-        ' Label directly to the LEFT of combobox (same row)
-        lblUserLvl.Top = cmbBoxUserLvl.Top + (cmbBoxUserLvl.Height - lblUserLvl.Height) \ 2
-        lblUserLvl.Left = cmbBoxUserLvl.Left - lblUserLvl.Width - 10
-
+        ' Optional: Set minimum width if needed
+        If lblUserID.Width < 80 Then lblUserID.Width = 80
+        If lblPassword.Width < 80 Then lblPassword.Width = 80
+        If lblUserLvl.Width < 80 Then lblUserLvl.Width = 80
     End Sub
 
 
@@ -221,19 +203,25 @@ Public Class LoginForm
         End If
 
         ' Attempt login
+        Dim actualTeacherID As String = ValidateLogin(txtUserID.Text.Trim(), txtPassword.Text, cmbBoxUserLvl.SelectedItem.ToString())
+
         If ValidateLogin(txtUserID.Text.Trim(), txtPassword.Text, cmbBoxUserLvl.SelectedItem.ToString()) Then
             MessageBox.Show("Login successful!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Me.Hide()
 
-            ' Navigate to appropriate dashboard based on user level
             Select Case cmbBoxUserLvl.SelectedItem.ToString().ToLower()
-                Case "admin", "superadmin"
+                Case "admin"
                     Dim adminDashboard As New AdminDashboard()
                     adminDashboard.Show()
+                Case "superadmin"
+                    Dim superAdminDashboard As New SuperAdminDashboard()
+                    superAdminDashboard.Show()
                 Case "teacher"
-                    ' Create and show teacher dashboard
-                    ' Dim teacherDashboard As New TeacherDashboard()
-                    ' teacherDashboard.Show()
-                    MessageBox.Show("Teacher dashboard would open here", "Teacher Login", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                    ' Only get TeacherID for teachers
+                    Dim teacherID As String = GetTeacherID(txtUserID.Text.Trim())
+                    Dim teacherDashboard As New TeacherDashboard()
+                    teacherDashboard.TeacherID = teacherID
+                    teacherDashboard.Show()
             End Select
 
             Me.Close()
@@ -244,30 +232,24 @@ Public Class LoginForm
 
     Private Function ValidateLogin(userID As String, password As String, userLevel As String) As Boolean
         Try
-            modDBx.openConn(modDBx.db_name)
+            modDBx.openConn("cflc_db")
 
-            ' Query to get the encrypted password from database
-            Dim query As String = "SELECT Password FROM login WHERE user_id = @user_id AND user_type = @user_type"
+            Dim query As String = "SELECT password FROM login WHERE user_id = @user_id AND user_type = @user_type"
 
             Using cmd As New MySqlCommand(query, modDBx.conn)
                 cmd.Parameters.AddWithValue("@user_id", userID)
                 cmd.Parameters.AddWithValue("@user_type", userLevel)
 
-                Dim result As Object = cmd.ExecuteScalar()
-
-                If result IsNot Nothing AndAlso result IsNot DBNull.Value Then
-                    ' Get the encrypted password from database
-                    Dim encryptedPasswordFromDB As String = result.ToString()
-
-                    ' Decrypt the password from database and compare with user input
-                    Dim decryptedPassword As String = modDBx.Decrypt(encryptedPasswordFromDB)
-
-                    ' Compare the decrypted password with user input
-                    Return decryptedPassword = password
-                Else
-                    Return False ' User not found
-                End If
+                Using reader As MySqlDataReader = cmd.ExecuteReader()
+                    If reader.Read() Then
+                        Dim encryptedPasswordFromDB As String = reader("password").ToString()
+                        Dim decryptedPassword As String = modDBx.Decrypt(encryptedPasswordFromDB)
+                        Return decryptedPassword = password
+                    End If
+                End Using
             End Using
+
+            Return False
 
         Catch ex As MySqlException
             MessageBox.Show("Database Error: " & ex.Message, "Login Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -282,6 +264,26 @@ Public Class LoginForm
         End Try
     End Function
 
+
+    Private Function GetTeacherID(userID As String) As String
+        Try
+            modDBx.openConn("clfc_db")
+            Dim query As String = "SELECT TeacherID FROM login WHERE user_id = @user_id"
+
+            Using cmd As New MySqlCommand(query, modDBx.conn)
+                cmd.Parameters.AddWithValue("@user_id", userID)
+                Dim result = cmd.ExecuteScalar()
+                Return If(result IsNot Nothing, result.ToString(), "")
+            End Using
+
+        Catch ex As Exception
+            Return ""
+        Finally
+            If modDBx.conn.State = ConnectionState.Open Then
+                modDBx.conn.Close()
+            End If
+        End Try
+    End Function
     Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
         ' Go back to Form1
         For Each form As Form In Application.OpenForms
@@ -292,5 +294,17 @@ Public Class LoginForm
             End If
         Next
         Me.Close()
+    End Sub
+
+    Private Sub MakeItFullScreen()
+        Me.FormBorderStyle = FormBorderStyle.None
+        Me.WindowState = FormWindowState.Maximized
+        Me.Bounds = Screen.PrimaryScreen.Bounds
+        Me.TopMost = True
+        Me.BringToFront()
+    End Sub
+
+    Private Sub txtUserID_TextChanged(sender As Object, e As EventArgs) Handles txtUserID.TextChanged
+
     End Sub
 End Class

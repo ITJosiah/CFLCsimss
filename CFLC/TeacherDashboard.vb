@@ -1,7 +1,11 @@
-﻿
+﻿Imports System.Data.SqlClient
+Imports System.Text
+Imports MySql.Data.MySqlClient
+
 Public Class TeacherDashboard
     Private currentContent As Form
     Public Property IsEmbedded As Boolean = False
+    Public Property TeacherID As String = ""
 
     Private Sub TeacherDashboard_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ' Set form properties
@@ -10,12 +14,20 @@ Public Class TeacherDashboard
             Me.BackColor = Color.FromArgb(15, 56, 32)
             Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         End If
-        StyleSidebarButtons()
-            PositionSidebarButtons()
-            ShowHomeContent()
-        End Sub
 
-        Private Sub CenterLogo()
+        ' DEBUG: Verify TeacherID is received
+        If String.IsNullOrEmpty(TeacherID) Then
+            MessageBox.Show("ERROR: TeacherID is empty in Dashboard!", "Debug", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        Else
+            MessageBox.Show($"TeacherDashboard loaded with TeacherID: {TeacherID}", "Debug", MessageBoxButtons.OK, MessageBoxIcon.Information)
+        End If
+
+        StyleSidebarButtons()
+        PositionSidebarButtons()
+        ShowHomeContent()
+    End Sub
+
+    Private Sub CenterLogo()
             If Not pnlTeacherMainContent.Controls.Contains(PictureBox1) Then
                 Return
             End If
@@ -171,8 +183,14 @@ Public Class TeacherDashboard
     End Sub
 
     Private Sub btnTeacherViewSection_Click(sender As Object, e As EventArgs) Handles btnTeacherViewSection.Click
+        If String.IsNullOrEmpty(TeacherID) Then
+            MessageBox.Show("Cannot open section view - TeacherID is missing!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Return
+        End If
+
         Dim viewTeacherSectionsForms As New TeacherViewSection() With {
-            .IsEmbedded = True
+            .IsEmbedded = True,
+            .TeacherID = Me.TeacherID
         }
         LoadContentForm(viewTeacherSectionsForms)
     End Sub

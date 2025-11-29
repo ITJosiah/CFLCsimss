@@ -107,7 +107,7 @@ Partial Class LoginForm
         Me.btnLogin.Anchor = System.Windows.Forms.AnchorStyles.Bottom
         Me.btnLogin.BackColor = System.Drawing.Color.FromArgb(CType(CType(31, Byte), Integer), CType(CType(168, Byte), Integer), CType(CType(67, Byte), Integer))
         Me.btnLogin.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnLogin.Location = New System.Drawing.Point(595, 592)
+        Me.btnLogin.Location = New System.Drawing.Point(568, 595)
         Me.btnLogin.Name = "btnLogin"
         Me.btnLogin.Size = New System.Drawing.Size(150, 40)
         Me.btnLogin.TabIndex = 8
@@ -126,27 +126,30 @@ Partial Class LoginForm
         'CheckBoxPass
         '
         Me.CheckBoxPass.AutoSize = True
-        Me.CheckBoxPass.Location = New System.Drawing.Point(710, 550)
+        Me.CheckBoxPass.ForeColor = System.Drawing.SystemColors.ControlLight
+        Me.CheckBoxPass.Location = New System.Drawing.Point(690, 550)
         Me.CheckBoxPass.Name = "CheckBoxPass"
-        Me.CheckBoxPass.Size = New System.Drawing.Size(81, 17)
+        Me.CheckBoxPass.Size = New System.Drawing.Size(98, 17)
         Me.CheckBoxPass.TabIndex = 10
-        Me.CheckBoxPass.Text = "CheckBox1"
+        Me.CheckBoxPass.Text = "View Password"
         Me.CheckBoxPass.UseVisualStyleBackColor = True
         '
         'cmbBoxUserLvl
         '
         Me.cmbBoxUserLvl.FormattingEnabled = True
-        Me.cmbBoxUserLvl.Location = New System.Drawing.Point(842, 544)
+        Me.cmbBoxUserLvl.Location = New System.Drawing.Point(665, 568)
         Me.cmbBoxUserLvl.Name = "cmbBoxUserLvl"
-        Me.cmbBoxUserLvl.Size = New System.Drawing.Size(162, 21)
+        Me.cmbBoxUserLvl.Size = New System.Drawing.Size(80, 21)
         Me.cmbBoxUserLvl.TabIndex = 11
         '
         'lblUserLvl
         '
         Me.lblUserLvl.AutoSize = True
-        Me.lblUserLvl.Location = New System.Drawing.Point(447, 566)
+        Me.lblUserLvl.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblUserLvl.ForeColor = System.Drawing.SystemColors.ControlLight
+        Me.lblUserLvl.Location = New System.Drawing.Point(521, 569)
         Me.lblUserLvl.Name = "lblUserLvl"
-        Me.lblUserLvl.Size = New System.Drawing.Size(61, 13)
+        Me.lblUserLvl.Size = New System.Drawing.Size(88, 20)
         Me.lblUserLvl.TabIndex = 12
         Me.lblUserLvl.Text = "User Level:"
         '
