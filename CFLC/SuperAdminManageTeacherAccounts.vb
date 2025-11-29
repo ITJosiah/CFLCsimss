@@ -1,7 +1,10 @@
-﻿Imports MySql.Data.MySqlClient
+﻿Imports System.Text
+Imports MySql.Data.MySqlClient
 
 Public Class SuperAdminManageTeacherAccounts
     Public Property IsEmbedded As Boolean = False
+    Private currentUserID As String = String.Empty
+    Private originalData As New Dictionary(Of String, Object)()
 
     Private Sub SuperAdminManageTeacherAccounts_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If Not IsEmbedded Then
@@ -31,6 +34,20 @@ Public Class SuperAdminManageTeacherAccounts
         SetDefaultValues()
         StyleControls()
         LoadTeacherData()
+
+        ' Ensure Add button is enabled by default
+        btnManTeacherAdd.Enabled = True
+
+        ' Ensure the grid doesn't auto-select the first row on load
+        dgvLoginTeacher.ClearSelection()
+        Try
+            If dgvLoginTeacher.Rows.Count > 0 AndAlso dgvLoginTeacher.Columns.Count > 0 Then
+                dgvLoginTeacher.CurrentCell = Nothing
+            End If
+        Catch
+            ' ignore potential layout timing exceptions
+        End Try
+        currentUserID = String.Empty
     End Sub
 
     Private Sub InitializeControls()
@@ -38,6 +55,12 @@ Public Class SuperAdminManageTeacherAccounts
         If txtbxTeacherUserType IsNot Nothing Then
             txtbxTeacherUserType.Text = "teacher"
             txtbxTeacherUserType.Enabled = False
+        End If
+
+        ' Initialize search textbox with placeholder
+        If txtbxManTeaSearch IsNot Nothing Then
+            txtbxManTeaSearch.Text = "Search by User ID or Teacher ID..."
+            txtbxManTeaSearch.ForeColor = Color.Gray
         End If
     End Sub
 
@@ -92,7 +115,7 @@ Public Class SuperAdminManageTeacherAccounts
     Private Sub StyleControls()
         ' Style input controls
         Dim textBoxes() As TextBox = {txtbxTeacherUserID, txtbxTeacherPassword,
-                                       txtbxTeacherUserType, txtbxTeaAccountTeacherID}
+                                       txtbxTeacherUserType, txtbxTeaAccountTeacherID, txtbxManTeaSearch}
 
         For Each txt As TextBox In textBoxes
             If txt IsNot Nothing Then
@@ -110,6 +133,24 @@ Public Class SuperAdminManageTeacherAccounts
             btnManTeacherAdd.FlatStyle = FlatStyle.Flat
             btnManTeacherAdd.FlatAppearance.BorderSize = 0
             btnManTeacherAdd.Font = New Font("Arial", 10, FontStyle.Bold)
+        End If
+
+        ' Style Update button
+        If btnManTeaUpdate IsNot Nothing Then
+            btnManTeaUpdate.BackColor = Color.FromArgb(40, 167, 69)
+            btnManTeaUpdate.ForeColor = Color.White
+            btnManTeaUpdate.FlatStyle = FlatStyle.Flat
+            btnManTeaUpdate.FlatAppearance.BorderSize = 0
+            btnManTeaUpdate.Font = New Font("Arial", 10, FontStyle.Bold)
+        End If
+
+        ' Style Delete button
+        If btnManTeaDelete IsNot Nothing Then
+            btnManTeaDelete.BackColor = Color.FromArgb(220, 53, 69)
+            btnManTeaDelete.ForeColor = Color.White
+            btnManTeaDelete.FlatStyle = FlatStyle.Flat
+            btnManTeaDelete.FlatAppearance.BorderSize = 0
+            btnManTeaDelete.Font = New Font("Arial", 10, FontStyle.Bold)
         End If
 
         ' Style DataGridView
@@ -177,65 +218,132 @@ Public Class SuperAdminManageTeacherAccounts
         End Try
     End Sub
 
+    ' ==================== SEARCH FUNCTIONALITY ====================
+    Private Sub SearchTeachers(ByVal searchTerm As String)
+        ' If the search box is empty, load all teachers (default view)
+        If String.IsNullOrWhiteSpace(searchTerm) OrElse searchTerm = "Search by User ID or Teacher ID..." Then
+            LoadTeacherData()
+            Return
+        End If
+
+        Try
+            ' Open Connection
+            modDBx.openConn(modDBx.db_name)
+
+            ' Search by user_id or TeacherID
+            Dim sql As String = "SELECT user_id, password, user_type, TeacherID FROM login 
+                               WHERE user_type = 'teacher' 
+                               AND (user_id LIKE @searchTerm OR TeacherID LIKE @searchTerm)
+                               ORDER BY user_id"
+
+            Using cmd As New MySqlCommand(sql, modDBx.conn)
+                ' Use searchTerm + '%' to match from the beginning
+                cmd.Parameters.AddWithValue("@searchTerm", searchTerm.Trim() & "%")
+
+                Dim dt As New System.Data.DataTable
+                Using adapter As New MySql.Data.MySqlClient.MySqlDataAdapter(cmd)
+                    adapter.Fill(dt)
+                End Using
+
+                dgvLoginTeacher.DataSource = dt
+                dgvLoginTeacher.Refresh()
+
+                If dt.Rows.Count = 0 Then
+                    ' Optional: Show message when no results found
+                    ' MessageBox.Show("No teacher account found matching '" & searchTerm & "'.", "Search Result", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                End If
+            End Using
+
+        Catch ex As Exception
+            MessageBox.Show("Error searching teacher accounts: " & ex.Message, "Search Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        Finally
+            If modDBx.conn IsNot Nothing AndAlso modDBx.conn.State = System.Data.ConnectionState.Open Then
+                modDBx.conn.Close()
+            End If
+        End Try
+    End Sub
+
+    ' Real-time search as user types
+    Private Sub txtbxManTeaSearch_TextChanged(sender As Object, e As EventArgs) Handles txtbxManTeaSearch.TextChanged
+        SearchTeachers(txtbxManTeaSearch.Text)
+    End Sub
+
+    Private Sub txtbxManTeaSearch_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtbxManTeaSearch.KeyPress
+        ' Allow Enter key to trigger search (optional, since we have real-time search)
+        If e.KeyChar = ChrW(Keys.Enter) Then
+            SearchTeachers(txtbxManTeaSearch.Text)
+            e.Handled = True
+        End If
+    End Sub
+
+    ' Placeholder text for search box
+    Private Sub txtbxManTeaSearch_Enter(sender As Object, e As EventArgs) Handles txtbxManTeaSearch.Enter
+        If txtbxManTeaSearch.Text = "Search by User ID or Teacher ID..." Then
+            txtbxManTeaSearch.Text = ""
+            txtbxManTeaSearch.ForeColor = Color.Black
+        End If
+    End Sub
+
+    Private Sub txtbxManTeaSearch_Leave(sender As Object, e As EventArgs) Handles txtbxManTeaSearch.Leave
+        If String.IsNullOrWhiteSpace(txtbxManTeaSearch.Text) Then
+            txtbxManTeaSearch.Text = "Search by User ID or Teacher ID..."
+            txtbxManTeaSearch.ForeColor = Color.Gray
+        End If
+    End Sub
+    ' ==================== END SEARCH FUNCTIONALITY ====================
+
     Private Sub btnManTeacherAdd_Click(sender As Object, e As EventArgs) Handles btnManTeacherAdd.Click
+        ' If a row is currently selected, prevent adding and show error
+        If Not String.IsNullOrEmpty(currentUserID) Then
+            MessageBox.Show("Please clear the selection before adding a new teacher account.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Return
+        End If
+
         If ValidateInputs() Then
             AddTeacherAccount()
         End If
     End Sub
 
     Private Function ValidateInputs() As Boolean
+        Dim errors As New List(Of String)
+
         ' Validate User ID format (00-0000)
         If Not IsValidUserID(txtbxTeacherUserID.Text) Then
-            MessageBox.Show("Please enter a valid User ID in the format 00-0000",
-                          "Invalid User ID", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            txtbxTeacherUserID.Focus()
-            Return False
+            errors.Add("• User ID must be in the format 00-0000")
         End If
 
-        ' Validate Password
+        ' Validate Password - CHANGED TO 8 CHARACTERS
         If String.IsNullOrWhiteSpace(txtbxTeacherPassword.Text) Then
-            MessageBox.Show("Please enter a password", "Password Required",
-                          MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            txtbxTeacherPassword.Focus()
-            Return False
-        End If
-
-        If txtbxTeacherPassword.Text.Length < 4 Then
-            MessageBox.Show("Password must be at least 4 characters long",
-                          "Password Too Short", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            txtbxTeacherPassword.Focus()
-            Return False
+            errors.Add("• Password is required")
+        ElseIf txtbxTeacherPassword.Text.Length < 8 Then
+            errors.Add("• Password must be at least 8 characters long")
         End If
 
         ' Validate Teacher ID
         If String.IsNullOrWhiteSpace(txtbxTeaAccountTeacherID.Text) Then
-            MessageBox.Show("Please enter a Teacher ID", "Teacher ID Required",
-                          MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            txtbxTeaAccountTeacherID.Focus()
-            Return False
-        End If
-
-        ' Check if Teacher ID exists in the system
-        If Not TeacherIDExists(txtbxTeaAccountTeacherID.Text) Then
-            MessageBox.Show("The specified Teacher ID does not exist in the system",
-                          "Invalid Teacher ID", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            txtbxTeaAccountTeacherID.Focus()
-            Return False
+            errors.Add("• Teacher ID is required")
+        ElseIf Not TeacherIDExists(txtbxTeaAccountTeacherID.Text) Then
+            errors.Add("• The specified Teacher ID does not exist in the system")
+        ElseIf TeacherHasAccount(txtbxTeaAccountTeacherID.Text) Then
+            errors.Add("• This Teacher ID already has an account")
         End If
 
         ' Check if User ID already exists
         If UserIDExists(txtbxTeacherUserID.Text) Then
-            MessageBox.Show("This User ID already exists. Please choose a different one.",
-                          "Duplicate User ID", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            txtbxTeacherUserID.Focus()
-            Return False
+            errors.Add("• This User ID already exists")
         End If
 
-        ' Check if Teacher ID already has an account
-        If TeacherHasAccount(txtbxTeaAccountTeacherID.Text) Then
-            MessageBox.Show("This Teacher ID already has an account. Cannot create duplicate accounts.",
-                          "Account Exists", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            txtbxTeaAccountTeacherID.Focus()
+        ' Display validation errors if any
+        If errors.Count > 0 Then
+            Dim errorMessage As New StringBuilder()
+            errorMessage.AppendLine("Please fix the following errors before proceeding:")
+            errorMessage.AppendLine()
+
+            For Each [error] As String In errors
+                errorMessage.AppendLine([error])
+            Next
+
+            MessageBox.Show(errorMessage.ToString(), "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             Return False
         End If
 
@@ -365,11 +473,394 @@ Public Class SuperAdminManageTeacherAccounts
             txtbxTeaAccountTeacherID.Clear()
         End If
 
+        ' Reset current selection
+        currentUserID = String.Empty
+        originalData.Clear()
+
+        ' Re-enable Add button so user can create a new record
+        btnManTeacherAdd.Enabled = True
+
+        ' Set focus back to first field
         If txtbxTeacherUserID IsNot Nothing Then
             txtbxTeacherUserID.Focus()
         End If
     End Sub
 
+    ' ==================== DGV CLICK HANDLER ====================
+    Private Sub dgvLoginTeacher_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvLoginTeacher.CellClick
+        If e.RowIndex < 0 Then
+            Return
+        End If
+
+        Dim row As DataGridViewRow = dgvLoginTeacher.Rows(e.RowIndex)
+
+        ' Safely read the user_id in the clicked row
+        Dim clickedUserID As String = String.Empty
+        If row.Cells.Count > 0 AndAlso row.Cells("user_id").Value IsNot Nothing AndAlso Not IsDBNull(row.Cells("user_id").Value) Then
+            clickedUserID = row.Cells("user_id").Value.ToString()
+        End If
+
+        ' If the user clicked the already-selected row, clear selection and inputs
+        If Not String.IsNullOrEmpty(clickedUserID) AndAlso clickedUserID = currentUserID Then
+            dgvLoginTeacher.ClearSelection()
+            currentUserID = String.Empty
+            originalData.Clear()
+            ClearInputs()
+            Return
+        End If
+
+        ' Otherwise populate fields for the newly selected row
+        If Not String.IsNullOrEmpty(clickedUserID) Then
+            currentUserID = clickedUserID
+
+            ' Store original data for change detection
+            originalData.Clear()
+            originalData("user_id") = GetSafeString(row.Cells("user_id"))
+            originalData("password") = GetSafeString(row.Cells("password"))
+            originalData("TeacherID") = GetSafeString(row.Cells("TeacherID"))
+
+            ' Populate form fields
+            txtbxTeacherUserID.Text = originalData("user_id")
+            txtbxTeacherUserID.ForeColor = Color.Black
+            txtbxTeacherPassword.Text = "" ' Don't show encrypted password
+            txtbxTeacherUserType.Text = "teacher"
+            txtbxTeaAccountTeacherID.Text = originalData("TeacherID")
+
+            ' Keep Add button enabled
+            btnManTeacherAdd.Enabled = True
+        End If
+    End Sub
+
+    ' Helper function for safe string retrieval from DataGridView
+    Private Function GetSafeString(cell As DataGridViewCell) As String
+        Return If(cell.Value Is Nothing OrElse IsDBNull(cell.Value), "", cell.Value.ToString())
+    End Function
+    ' ==================== END DGV CLICK HANDLER ====================
+
+    ' ==================== UPDATE WITH CHANGE DETECTION ====================
+    Private Sub btnManTeaUpdate_Click(sender As Object, e As EventArgs) Handles btnManTeaUpdate.Click
+        UpdateTeacherAccount()
+    End Sub
+
+    Private Sub UpdateTeacherAccount()
+        ' Check if a teacher account is selected
+        If String.IsNullOrEmpty(currentUserID) Then
+            MessageBox.Show("No teacher account selected for update.", "Update Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+            Return
+        End If
+
+        ' Validate required fields FIRST
+        If Not ValidateInputsForUpdate() Then
+            Return ' Stop execution if validation fails
+        End If
+
+        ' Check if any data has actually changed
+        If Not HasTeacherAccountDataChanged() Then
+            MessageBox.Show("No changes were made to the teacher account data.", "No Changes", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Return
+        End If
+
+        Try
+            ' Get the original user_id from the selected row
+            Dim originalUserID As String = currentUserID
+
+            modDBx.openConn(modDBx.db_name)
+
+            Dim query As String
+            Dim command As MySqlCommand
+
+            ' Check if password is being updated
+            If String.IsNullOrWhiteSpace(txtbxTeacherPassword.Text) Then
+                ' Update without changing password
+                query = "UPDATE login SET user_id = @new_user_id, TeacherID = @TeacherID " &
+                   "WHERE user_id = @original_user_id AND user_type = 'teacher'"
+                command = New MySqlCommand(query, modDBx.conn)
+                command.Parameters.AddWithValue("@new_user_id", txtbxTeacherUserID.Text.Trim())
+                command.Parameters.AddWithValue("@TeacherID", txtbxTeaAccountTeacherID.Text.Trim())
+                command.Parameters.AddWithValue("@original_user_id", originalUserID)
+            Else
+                ' Update with new password - CHANGED TO 8 CHARACTERS VALIDATION
+                If txtbxTeacherPassword.Text.Length < 8 Then
+                    MessageBox.Show("Password must be at least 8 characters long", "Password Too Short", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                    Return
+                End If
+
+                Dim encryptedPassword As String = modDBx.Encrypt(txtbxTeacherPassword.Text.Trim())
+                query = "UPDATE login SET user_id = @new_user_id, password = @password, TeacherID = @TeacherID " &
+                   "WHERE user_id = @original_user_id AND user_type = 'teacher'"
+                command = New MySqlCommand(query, modDBx.conn)
+                command.Parameters.AddWithValue("@new_user_id", txtbxTeacherUserID.Text.Trim())
+                command.Parameters.AddWithValue("@password", encryptedPassword)
+                command.Parameters.AddWithValue("@TeacherID", txtbxTeaAccountTeacherID.Text.Trim())
+                command.Parameters.AddWithValue("@original_user_id", originalUserID)
+            End If
+
+            Dim rowsAffected As Integer = command.ExecuteNonQuery()
+
+            If rowsAffected > 0 Then
+                MessageBox.Show("Teacher account updated successfully!", "Success",
+                          MessageBoxButtons.OK, MessageBoxIcon.Information)
+                ClearInputs()
+                LoadTeacherData()
+            Else
+                MessageBox.Show("Failed to update teacher account", "Error",
+                          MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End If
+
+            command.Dispose()
+
+        Catch ex As Exception
+            MessageBox.Show("Error updating teacher account: " & ex.Message,
+                      "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        Finally
+            If modDBx.conn IsNot Nothing AndAlso modDBx.conn.State = ConnectionState.Open Then
+                modDBx.conn.Close()
+            End If
+        End Try
+    End Sub
+
+    Private Function ValidateInputsForUpdate() As Boolean
+        Dim errors As New List(Of String)
+
+        ' Validate User ID format (00-0000)
+        If Not IsValidUserID(txtbxTeacherUserID.Text) Then
+            errors.Add("• User ID must be in the format 00-0000")
+        End If
+
+        ' Validate Password (optional for update - only validate if not empty) - CHANGED TO 8 CHARACTERS
+        If Not String.IsNullOrWhiteSpace(txtbxTeacherPassword.Text) Then
+            If txtbxTeacherPassword.Text.Length < 8 Then
+                errors.Add("• Password must be at least 8 characters long")
+            End If
+        End If
+
+        ' Validate Teacher ID
+        If String.IsNullOrWhiteSpace(txtbxTeaAccountTeacherID.Text) Then
+            errors.Add("• Teacher ID is required")
+        ElseIf Not TeacherIDExists(txtbxTeaAccountTeacherID.Text) Then
+            errors.Add("• The specified Teacher ID does not exist in the system")
+        End If
+
+        ' Get the original teacher_id from stored data
+        Dim originalTeacherID As String = If(originalData.ContainsKey("TeacherID"), originalData("TeacherID").ToString(), "")
+
+        ' Check if Teacher ID already has an account (only if it's different from the original)
+        If txtbxTeaAccountTeacherID.Text <> originalTeacherID AndAlso TeacherHasAccount(txtbxTeaAccountTeacherID.Text) Then
+            errors.Add("• This Teacher ID already has an account")
+        End If
+
+        ' Check if User ID already exists (only if it's different from the original)
+        If txtbxTeacherUserID.Text <> currentUserID AndAlso UserIDExists(txtbxTeacherUserID.Text) Then
+            errors.Add("• This User ID already exists")
+        End If
+
+        ' Display validation errors if any
+        If errors.Count > 0 Then
+            Dim errorMessage As New StringBuilder()
+            errorMessage.AppendLine("Please fix the following errors before proceeding:")
+            errorMessage.AppendLine()
+
+            For Each [error] As String In errors
+                errorMessage.AppendLine([error])
+            Next
+
+            MessageBox.Show(errorMessage.ToString(), "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Return False
+        End If
+
+        Return True
+    End Function
+
+    ' Add this function to check if any data has changed
+    Private Function HasTeacherAccountDataChanged() As Boolean
+        ' Compare current form values with original data
+        If originalData.Count = 0 Then Return False
+
+        If txtbxTeacherUserID.Text <> originalData("user_id").ToString() Then Return True
+        If txtbxTeaAccountTeacherID.Text <> originalData("TeacherID").ToString() Then Return True
+
+        ' Only check password if it's not empty (user wants to change it)
+        If Not String.IsNullOrWhiteSpace(txtbxTeacherPassword.Text) Then
+            ' Note: We can't compare encrypted passwords directly, so if user entered any password, consider it changed
+            Return True
+        End If
+
+        Return False ' No changes detected
+    End Function
+    ' ==================== END UPDATE WITH CHANGE DETECTION ====================
+
+    Private Sub btnManTeaDelete_Click(sender As Object, e As EventArgs) Handles btnManTeaDelete.Click
+        ' Check if a teacher account is selected
+        If String.IsNullOrEmpty(currentUserID) Then
+            MessageBox.Show("Please select a teacher account to delete.", "Delete Teacher Account", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+            Return
+        End If
+
+        ' Confirm deletion
+        If MessageBox.Show("Are you sure you want to delete this teacher account?", "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) = DialogResult.No Then
+            Return
+        End If
+
+        Try
+            modDBx.openConn(modDBx.db_name)
+
+            Dim query As String = "DELETE FROM login WHERE user_id = @user_id AND user_type = 'teacher'"
+            Using command As New MySqlCommand(query, modDBx.conn)
+                command.Parameters.AddWithValue("@user_id", currentUserID)
+
+                Dim rowsAffected As Integer = command.ExecuteNonQuery()
+
+                If rowsAffected > 0 Then
+                    MessageBox.Show("Teacher account deleted successfully!", "Success",
+                              MessageBoxButtons.OK, MessageBoxIcon.Information)
+                    ClearInputs()
+                    LoadTeacherData()
+                Else
+                    MessageBox.Show("Failed to delete teacher account", "Error",
+                              MessageBoxButtons.OK, MessageBoxIcon.Error)
+                End If
+            End Using
+        Catch ex As Exception
+            MessageBox.Show("Error deleting teacher account: " & ex.Message,
+                      "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        Finally
+            If modDBx.conn IsNot Nothing AndAlso modDBx.conn.State = ConnectionState.Open Then
+                modDBx.conn.Close()
+            End If
+        End Try
+    End Sub
+
+    ' ==================== KEYBOARD SHORTCUTS AND OTHER METHODS ====================
+    Private Sub txtbxTeacherUserID_Enter(sender As Object, e As EventArgs) Handles txtbxTeacherUserID.Enter
+        If txtbxTeacherUserID.Text = "00-0000" Then
+            txtbxTeacherUserID.Text = ""
+            txtbxTeacherUserID.ForeColor = Color.Black
+        End If
+    End Sub
+
+    Private Sub txtbxTeacherUserID_Leave(sender As Object, e As EventArgs) Handles txtbxTeacherUserID.Leave
+        If String.IsNullOrWhiteSpace(txtbxTeacherUserID.Text) Then
+            txtbxTeacherUserID.Text = "00-0000"
+            txtbxTeacherUserID.ForeColor = Color.Gray
+        End If
+    End Sub
+
+    Private Sub txtbxTeacherUserID_TextChanged(sender As Object, e As EventArgs) Handles txtbxTeacherUserID.TextChanged
+        If txtbxTeacherUserID.Text <> "00-0000" AndAlso txtbxTeacherUserID.ForeColor <> Color.Gray Then
+            If IsValidUserID(txtbxTeacherUserID.Text) Then
+                txtbxTeacherUserID.ForeColor = Color.Green
+            Else
+                txtbxTeacherUserID.ForeColor = Color.Red
+            End If
+        End If
+    End Sub
+
+    ' Ensure selection is cleared after any data binding operation
+    Private Sub dgvLoginTeacher_DataBindingComplete(sender As Object, e As DataGridViewBindingCompleteEventArgs) Handles dgvLoginTeacher.DataBindingComplete
+        dgvLoginTeacher.ClearSelection()
+        Try
+            If dgvLoginTeacher.Rows.Count > 0 AndAlso dgvLoginTeacher.Columns.Count > 0 Then
+                dgvLoginTeacher.CurrentCell = Nothing
+            End If
+        Catch
+            ' ignore - layout timing may prevent clearing CurrentCell
+        End Try
+    End Sub
+
+    ' Final fallback after form is shown
+    Private Sub SuperAdminManageTeacherAccounts_Shown(sender As Object, e As EventArgs) Handles Me.Shown
+        dgvLoginTeacher.ClearSelection()
+        Try
+            If dgvLoginTeacher.Rows.Count > 0 AndAlso dgvLoginTeacher.Columns.Count > 0 Then
+                dgvLoginTeacher.CurrentCell = Nothing
+            End If
+        Catch
+        End Try
+
+        ' Move focus to first input so the grid doesn't appear focused
+        If txtbxTeacherUserID IsNot Nothing Then
+            txtbxTeacherUserID.Focus()
+        End If
+    End Sub
+
+    ' Allow typing "f" into the search TextBox while preventing the parent/dashboard full-screen handler.
+    Protected Overrides Function ProcessCmdKey(ByRef msg As Message, keyData As Keys) As Boolean
+        ' Check only the key code (ignore modifiers in comparison)
+        If (keyData And Keys.KeyCode) = Keys.F AndAlso txtbxManTeaSearch IsNot Nothing AndAlso txtbxManTeaSearch.Focused Then
+            ' Insert the character into the textbox manually (preserve selection/replacement).
+            Dim tb = txtbxManTeaSearch
+            Dim s As String = tb.Text
+            Dim selStart As Integer = tb.SelectionStart
+            Dim selLen As Integer = tb.SelectionLength
+
+            ' Determine case: Shift toggles, CapsLock toggles
+            Dim shiftPressed As Boolean = (keyData And Keys.Shift) = Keys.Shift
+            Dim capsOn As Boolean = Control.IsKeyLocked(Keys.CapsLock)
+            Dim useUpper As Boolean = shiftPressed Xor capsOn
+            Dim ch As Char = If(useUpper, "F"c, "f"c)
+
+            ' Remove placeholder text if it's there
+            If s = "Search by User ID or Teacher ID..." Then
+                s = ""
+                selStart = 0
+                selLen = 0
+            End If
+
+            Dim before As String = If(selStart > 0, s.Substring(0, selStart), String.Empty)
+            Dim afterIndex As Integer = Math.Min(selStart + selLen, s.Length)
+            Dim after As String = If(afterIndex < s.Length, s.Substring(afterIndex), String.Empty)
+
+            tb.Text = before & ch & after
+            tb.SelectionStart = selStart + 1
+            tb.SelectionLength = 0
+            tb.ForeColor = Color.Black
+
+            ' Consume the key so parent doesn't trigger full-screen
+            Return True
+        End If
+
+        ' Ctrl+A to add account
+        If keyData = (Keys.Control Or Keys.A) Then
+            If btnManTeacherAdd IsNot Nothing Then
+                btnManTeacherAdd.PerformClick()
+            End If
+            Return True
+        End If
+
+        ' Escape to clear inputs
+        If keyData = Keys.Escape Then
+            If IsEmbedded Then
+                ClearInputs()
+            Else
+                ExitFullScreen()
+            End If
+            Return True
+        End If
+
+        ' F for fullscreen (only if not embedded)
+        If keyData = Keys.F AndAlso Not IsEmbedded Then
+            MakeItFullScreen()
+            Return True
+        End If
+
+        Return MyBase.ProcessCmdKey(msg, keyData)
+    End Function
+
+    Private Sub ExitFullScreen()
+        Me.FormBorderStyle = FormBorderStyle.Sizable
+        Me.WindowState = FormWindowState.Maximized
+        Me.TopMost = False
+    End Sub
+
+    Private Sub MakeItFullScreen()
+        Me.FormBorderStyle = FormBorderStyle.None
+        Me.WindowState = FormWindowState.Maximized
+        Me.Bounds = Screen.PrimaryScreen.Bounds
+        Me.TopMost = True
+        Me.BringToFront()
+    End Sub
+
+    ' ==================== SIDEBAR AND NAVIGATION METHODS ====================
     Private Sub CenterLogo()
         If pnlSuperAdminMainContent Is Nothing OrElse PictureBox1 Is Nothing Then Return
         If Not pnlSuperAdminMainContent.Controls.Contains(PictureBox1) Then Return
@@ -464,256 +955,10 @@ Public Class SuperAdminManageTeacherAccounts
                        "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
     End Sub
 
-    Private Sub txtbxTeacherUserID_Enter(sender As Object, e As EventArgs) Handles txtbxTeacherUserID.Enter
-        If txtbxTeacherUserID.Text = "00-0000" Then
-            txtbxTeacherUserID.Text = ""
-            txtbxTeacherUserID.ForeColor = Color.Black
-        End If
-    End Sub
-
-    Private Sub txtbxTeacherUserID_Leave(sender As Object, e As EventArgs) Handles txtbxTeacherUserID.Leave
-        If String.IsNullOrWhiteSpace(txtbxTeacherUserID.Text) Then
-            txtbxTeacherUserID.Text = "00-0000"
-            txtbxTeacherUserID.ForeColor = Color.Gray
-        End If
-    End Sub
-
-    Private Sub txtbxTeacherUserID_TextChanged(sender As Object, e As EventArgs) Handles txtbxTeacherUserID.TextChanged
-        If txtbxTeacherUserID.Text <> "00-0000" AndAlso txtbxTeacherUserID.ForeColor <> Color.Gray Then
-            If IsValidUserID(txtbxTeacherUserID.Text) Then
-                txtbxTeacherUserID.ForeColor = Color.Green
-            Else
-                txtbxTeacherUserID.ForeColor = Color.Red
-            End If
-        End If
-    End Sub
-
     Private Sub AdminDashboard_Resize(sender As Object, e As EventArgs) Handles MyBase.Resize
         If Not IsEmbedded Then
             CenterLogo()
             PositionSidebarButtons()
         End If
-    End Sub
-
-    Protected Overrides Function ProcessCmdKey(ByRef msg As Message, keyData As Keys) As Boolean
-        ' Ctrl+A to add account
-        If keyData = (Keys.Control Or Keys.A) Then
-            If btnManTeacherAdd IsNot Nothing Then
-                btnManTeacherAdd.PerformClick()
-            End If
-            Return True
-        End If
-
-        ' Escape to clear inputs
-        If keyData = Keys.Escape Then
-            If IsEmbedded Then
-                ClearInputs()
-            Else
-                ExitFullScreen()
-            End If
-            Return True
-        End If
-
-        ' F for fullscreen (only if not embedded)
-        If keyData = Keys.F AndAlso Not IsEmbedded Then
-            MakeItFullScreen()
-            Return True
-        End If
-
-        Return MyBase.ProcessCmdKey(msg, keyData)
-    End Function
-
-    Private Sub ExitFullScreen()
-        Me.FormBorderStyle = FormBorderStyle.Sizable
-        Me.WindowState = FormWindowState.Maximized
-        Me.TopMost = False
-    End Sub
-
-    Private Sub MakeItFullScreen()
-        Me.FormBorderStyle = FormBorderStyle.None
-        Me.WindowState = FormWindowState.Maximized
-        Me.Bounds = Screen.PrimaryScreen.Bounds
-        Me.TopMost = True
-        Me.BringToFront()
-    End Sub
-
-    Private Sub btnManTeaDelete_Click(sender As Object, e As EventArgs) Handles btnManTeaDelete.Click
-        If dgvLoginTeacher.SelectedRows.Count = 0 Then
-            MessageBox.Show("Please select a teacher account to delete", "No Selection",
-                      MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            Return
-        End If
-
-        ' Get the user_id from the selected row
-        Dim userID As String = dgvLoginTeacher.SelectedRows(0).Cells("user_id").Value.ToString()
-
-        ' Confirm deletion
-        Dim result As DialogResult = MessageBox.Show(
-        "Are you sure you want to delete the teacher account with User ID: " & userID & "?" & vbCrLf & vbCrLf &
-        "This action cannot be undone.",
-        "Confirm Deletion",
-        MessageBoxButtons.YesNo,
-        MessageBoxIcon.Question)
-
-        If result = DialogResult.Yes Then
-            DeleteTeacherAccount(userID)
-        End If
-    End Sub
-
-    Private Sub DeleteTeacherAccount(userID As String)
-        Try
-            modDBx.openConn(modDBx.db_name)
-
-            Dim query As String = "DELETE FROM login WHERE user_id = @user_id AND user_type = 'teacher'"
-            Using command As New MySqlCommand(query, modDBx.conn)
-                command.Parameters.AddWithValue("@user_id", userID)
-
-                Dim rowsAffected As Integer = command.ExecuteNonQuery()
-
-                If rowsAffected > 0 Then
-                    MessageBox.Show("Teacher account deleted successfully!", "Success",
-                              MessageBoxButtons.OK, MessageBoxIcon.Information)
-                    ClearInputs()
-                    LoadTeacherData()
-                Else
-                    MessageBox.Show("Failed to delete teacher account", "Error",
-                              MessageBoxButtons.OK, MessageBoxIcon.Error)
-                End If
-            End Using
-        Catch ex As Exception
-            MessageBox.Show("Error deleting teacher account: " & ex.Message,
-                      "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-        Finally
-            If modDBx.conn IsNot Nothing AndAlso modDBx.conn.State = ConnectionState.Open Then
-                modDBx.conn.Close()
-            End If
-        End Try
-    End Sub
-
-    Private Sub btnManTeaUpdate_Click(sender As Object, e As EventArgs) Handles btnManTeaUpdate.Click
-        If dgvLoginTeacher.SelectedRows.Count = 0 Then
-            MessageBox.Show("Please select a teacher account to update", "No Selection",
-                      MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            Return
-        End If
-
-        If ValidateInputsForUpdate() Then
-            UpdateTeacherAccount()
-        End If
-    End Sub
-
-    Private Function ValidateInputsForUpdate() As Boolean
-        ' Validate User ID format (00-0000)
-        If Not IsValidUserID(txtbxTeacherUserID.Text) Then
-            MessageBox.Show("Please enter a valid User ID in the format 00-0000",
-                      "Invalid User ID", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            txtbxTeacherUserID.Focus()
-            Return False
-        End If
-
-        ' Validate Password (optional for update - only validate if not empty)
-        If Not String.IsNullOrWhiteSpace(txtbxTeacherPassword.Text) Then
-            If txtbxTeacherPassword.Text.Length < 4 Then
-                MessageBox.Show("Password must be at least 4 characters long",
-                          "Password Too Short", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-                txtbxTeacherPassword.Focus()
-                Return False
-            End If
-        End If
-
-        ' Validate Teacher ID
-        If String.IsNullOrWhiteSpace(txtbxTeaAccountTeacherID.Text) Then
-            MessageBox.Show("Please enter a Teacher ID", "Teacher ID Required",
-                      MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            txtbxTeaAccountTeacherID.Focus()
-            Return False
-        End If
-
-        ' Check if Teacher ID exists in the system
-        If Not TeacherIDExists(txtbxTeaAccountTeacherID.Text) Then
-            MessageBox.Show("The specified Teacher ID does not exist in the system",
-                      "Invalid Teacher ID", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            txtbxTeaAccountTeacherID.Focus()
-            Return False
-        End If
-
-        ' Get the original user_id from the selected row
-        Dim originalUserID As String = dgvLoginTeacher.SelectedRows(0).Cells("user_id").Value.ToString()
-
-        ' Check if User ID already exists (only if it's different from the original)
-        If txtbxTeacherUserID.Text <> originalUserID AndAlso UserIDExists(txtbxTeacherUserID.Text) Then
-            MessageBox.Show("This User ID already exists. Please choose a different one.",
-                      "Duplicate User ID", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            txtbxTeacherUserID.Focus()
-            Return False
-        End If
-
-        ' Get the original teacher_id from the selected row
-        Dim originalTeacherID As String = dgvLoginTeacher.SelectedRows(0).Cells("TeacherID").Value.ToString()
-
-        ' Check if Teacher ID already has an account (only if it's different from the original)
-        If txtbxTeaAccountTeacherID.Text <> originalTeacherID AndAlso TeacherHasAccount(txtbxTeaAccountTeacherID.Text) Then
-            MessageBox.Show("This Teacher ID already has an account. Cannot assign duplicate accounts.",
-                      "Account Exists", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            txtbxTeaAccountTeacherID.Focus()
-            Return False
-        End If
-
-        Return True
-    End Function
-
-    Private Sub UpdateTeacherAccount()
-        Try
-            ' Get the original user_id from the selected row
-            Dim originalUserID As String = dgvLoginTeacher.SelectedRows(0).Cells("user_id").Value.ToString()
-
-            modDBx.openConn(modDBx.db_name)
-
-            Dim query As String
-            Dim command As MySqlCommand
-
-            ' Check if password is being updated
-            If String.IsNullOrWhiteSpace(txtbxTeacherPassword.Text) Then
-                ' Update without changing password
-                query = "UPDATE login SET user_id = @new_user_id, TeacherID = @TeacherID " &
-                   "WHERE user_id = @original_user_id AND user_type = 'teacher'"
-                command = New MySqlCommand(query, modDBx.conn)
-                command.Parameters.AddWithValue("@new_user_id", txtbxTeacherUserID.Text.Trim())
-                command.Parameters.AddWithValue("@TeacherID", txtbxTeaAccountTeacherID.Text.Trim())
-                command.Parameters.AddWithValue("@original_user_id", originalUserID)
-            Else
-                ' Update with new password
-                Dim encryptedPassword As String = modDBx.Encrypt(txtbxTeacherPassword.Text.Trim())
-                query = "UPDATE login SET user_id = @new_user_id, password = @password, TeacherID = @TeacherID " &
-                   "WHERE user_id = @original_user_id AND user_type = 'teacher'"
-                command = New MySqlCommand(query, modDBx.conn)
-                command.Parameters.AddWithValue("@new_user_id", txtbxTeacherUserID.Text.Trim())
-                command.Parameters.AddWithValue("@password", encryptedPassword)
-                command.Parameters.AddWithValue("@TeacherID", txtbxTeaAccountTeacherID.Text.Trim())
-                command.Parameters.AddWithValue("@original_user_id", originalUserID)
-            End If
-
-            Dim rowsAffected As Integer = command.ExecuteNonQuery()
-
-            If rowsAffected > 0 Then
-                MessageBox.Show("Teacher account updated successfully!", "Success",
-                          MessageBoxButtons.OK, MessageBoxIcon.Information)
-                ClearInputs()
-                LoadTeacherData()
-            Else
-                MessageBox.Show("Failed to update teacher account", "Error",
-                          MessageBoxButtons.OK, MessageBoxIcon.Error)
-            End If
-
-            command.Dispose()
-
-        Catch ex As Exception
-            MessageBox.Show("Error updating teacher account: " & ex.Message,
-                      "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-        Finally
-            If modDBx.conn IsNot Nothing AndAlso modDBx.conn.State = ConnectionState.Open Then
-                modDBx.conn.Close()
-            End If
-        End Try
     End Sub
 End Class
