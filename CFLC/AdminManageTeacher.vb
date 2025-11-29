@@ -43,6 +43,7 @@ Public Class AdminManageTeacher
     Private Sub InitializeGenderComboBox()
         ' Populate Gender dropdown
         ComboBoxTeacherGender.Items.Clear()
+        ComboBoxTeacherGender.DropDownStyle = ComboBoxStyle.DropDownList
         ComboBoxTeacherGender.Items.Add("Male")
         ComboBoxTeacherGender.Items.Add("Female")
     End Sub
@@ -50,6 +51,7 @@ Public Class AdminManageTeacher
     Private Sub InitializeStatusComboBox()
         ' Populate Status dropdown
         ComboBoxTeacherStatus.Items.Clear()
+        ComboBoxTeacherStatus.DropDownStyle = ComboBoxStyle.DropDownList
         ComboBoxTeacherStatus.Items.Add("Active")
         ComboBoxTeacherStatus.Items.Add("On Leave")
         ComboBoxTeacherStatus.Items.Add("Resigned")
@@ -702,6 +704,14 @@ Public Class AdminManageTeacher
     End Function
 
     Private Sub txtbxTeacherZipCode_TextChanged(sender As Object, e As EventArgs) Handles txtbxTeacherZipCode.TextChanged
+        ' Validate Section ID as user types (for new enrollments only)
+        If currentTeacherID = 0 AndAlso Not String.IsNullOrWhiteSpace(txtbxTeacherZipCode.Text) Then
+            If Not Integer.TryParse(txtbxTeacherZipCode.Text, Nothing) Then
+                txtbxTeacherZipCode.BackColor = Color.LightPink
+            Else
+                txtbxTeacherZipCode.BackColor = SystemColors.Window
+            End If
+        End If
     End Sub
 
     Private Sub txtbxTeacherZipCode_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtbxTeacherZipCode.KeyPress
@@ -844,6 +854,17 @@ Public Class AdminManageTeacher
 
     Private Sub TextBoxTeacherSearch_TextChanged(sender As Object, e As EventArgs) Handles TextBoxTeacherSearch.TextChanged
         SearchTeachersBySurname(TextBoxTeacherSearch.Text)
+    End Sub
+
+    Private Sub txtbxTeacherHouseNo_TextChanged(sender As Object, e As EventArgs) Handles txtbxTeacherHouseNo.TextChanged
+        ' Validate Section ID as user types (for new enrollments only)
+        If currentTeacherID = 0 AndAlso Not String.IsNullOrWhiteSpace(txtbxTeacherHouseNo.Text) Then
+            If Not Integer.TryParse(txtbxTeacherHouseNo.Text, Nothing) Then
+                txtbxTeacherHouseNo.BackColor = Color.LightPink
+            Else
+                txtbxTeacherHouseNo.BackColor = SystemColors.Window
+            End If
+        End If
     End Sub
 End Class
 

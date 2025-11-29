@@ -384,7 +384,8 @@ Public Class AdminManageSections
             End Using
 
         Catch ex As MySqlException
-            MessageBox.Show("Database Error: " & ex.Message, "Delete Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            ' Show detailed DB error to help diagnose (FK violation, permissions, etc.)
+            MessageBox.Show("Database Error: " & ex.Number.ToString() & " - " & ex.Message, "Delete Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         Catch ex As Exception
             MessageBox.Show("Error deleting section: " & ex.Message, "Delete Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         Finally

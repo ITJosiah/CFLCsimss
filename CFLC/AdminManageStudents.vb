@@ -57,6 +57,7 @@ Public Class AdminManageStudents
     Private Sub InitializeGenderComboBox()
         ' Populate Gender dropdown
         cmbStudenttGender.Items.Clear()
+        cmbStudenttGender.DropDownStyle = ComboBoxStyle.DropDownList
         cmbStudenttGender.Items.Add("Male")
         cmbStudenttGender.Items.Add("Female")
     End Sub
@@ -169,7 +170,7 @@ Public Class AdminManageStudents
     Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnStudentAdd.Click
         ' If a row is currently selected, prevent adding and show error
         If currentStudentID <> 0 Then
-            MessageBox.Show("no", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            MessageBox.Show("Plase clear the selection before adding a new student", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Return
         End If
 
@@ -184,13 +185,13 @@ Public Class AdminManageStudents
                             "LRN, MiddleName, FirstName, LastName, ExtensionName, " &
                             "Gender, BirthDate, Age, BirthPlace, MotherTongue, " &
                             "Indigineous, IndigineousSpecific, 4Ps, 4PsID, " &
-                            "Religion, GuardianName, GuardianContact, SectionID, EnrollmentID, " &
+                            "Religion, GuardianName, GuardianContact, " &
                             "HouseNumber, Street, Barangay, Municipality, Province, Country, ZipCode" &
                             ") VALUES (" &
                             "@LRN, @MiddleName, @FirstName, @LastName, @ExtensionName, " &
                             "@Gender, @BirthDate, @Age, @BirthPlace, @MotherTongue, " &
                             "@Indigineous, @IndigineousSpecific, @4Ps, @4PsID, " &
-                            "@Religion, @GuardianName, @GuardianContact, @SectionID, @EnrollmentID, " &
+                            "@Religion, @GuardianName, @GuardianContact, " &
                             "@HouseNumber, @Street, @Barangay, @Municipality, @Province, @Country, @ZipCode)"
 
             modDBx.openConn(modDBx.db_name)
@@ -1182,5 +1183,27 @@ Public Class AdminManageStudents
 
     Private Sub pnlContent_Paint(sender As Object, e As PaintEventArgs) Handles pnlContent.Paint
 
+    End Sub
+
+    Private Sub txtbxStudentHouseNo_TextChanged(sender As Object, e As EventArgs) Handles txtbxStudentHouseNo.TextChanged
+        ' Validate Section ID as user types (for new enrollments only)
+        If currentStudentID = 0 AndAlso Not String.IsNullOrWhiteSpace(txtbxStudentHouseNo.Text) Then
+            If Not Integer.TryParse(txtbxStudentHouseNo.Text, Nothing) Then
+                txtbxStudentHouseNo.BackColor = Color.LightPink
+            Else
+                txtbxStudentHouseNo.BackColor = SystemColors.Window
+            End If
+        End If
+    End Sub
+
+    Private Sub txtbxZipCode_TextChanged(sender As Object, e As EventArgs) Handles txtbxZipCode.TextChanged
+        ' Validate Section ID as user types (for new enrollments only)
+        If currentStudentID = 0 AndAlso Not String.IsNullOrWhiteSpace(txtbxZipCode.Text) Then
+            If Not Integer.TryParse(txtbxStudentHouseNo.Text, Nothing) Then
+                txtbxZipCode.BackColor = Color.LightPink
+            Else
+                txtbxZipCode.BackColor = SystemColors.Window
+            End If
+        End If
     End Sub
 End Class
