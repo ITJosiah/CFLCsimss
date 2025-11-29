@@ -194,11 +194,13 @@ Public Class TeacherDashboard
         }
         LoadContentForm(viewTeacherSectionsForms)
     End Sub
-    Private Sub btnTeacherViewStudents_Click(sender As Object, e As EventArgs) Handles btnTeacherViewStudents.Click
-        Dim viewTeacherStudentsForm As New TeacherViewStudents() With {
-                .IsEmbedded = True
-            }
-        LoadContentForm(viewTeacherStudentsForm)
+    Private Sub btnViewStudents_Click(sender As Object, e As EventArgs) Handles btnTeacherViewStudents.Click
+        Dim viewStudentsForm As New TeacherViewStudents() With {
+            .IsEmbedded = True
+        }
+        viewStudentsForm.TeacherID = Me.TeacherID ' Set the TeacherID before showing
+        LoadContentForm(viewStudentsForm)
+
     End Sub
 
     Private Sub btnViewAssignedSubjects_Click(sender As Object, e As EventArgs) Handles btnViewAssignedSubjects.Click

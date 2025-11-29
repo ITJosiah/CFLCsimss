@@ -2,8 +2,8 @@
 Imports MySql.Data.MySqlClient
 
 Public Class TeacherViewStudents
-
     Public Property IsEmbedded As Boolean = False
+    Public Property TeacherID As String = "" ' The logged-in teacher's ID
     Private isInitializing As Boolean = False
     Private lastSelectedIndex As Integer = -1
 
@@ -15,14 +15,55 @@ Public Class TeacherViewStudents
             Me.BackColor = Color.FromArgb(15, 56, 32)
             Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         End If
-        Me.Text = "Dashboard-Teacher"
+        Me.Text = "My Students - Teacher"
 
-        LoadToDGV("SELECT * FROM student", dgvStudents)
+        ' Load students from teacher's section
+        If Not String.IsNullOrEmpty(TeacherID) Then
+            LoadStudentsInTeacherSection()
+        Else
+            MessageBox.Show("TeacherID is not available.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End If
+
+        ' Set all detail controls to read-only
+        SetControlsReadOnly()
 
         ' Ensure no row is selected on initial load and details are cleared
         dgvStudents.ClearSelection()
         ClearStudentDetails()
 
+        isInitializing = False
+    End Sub
+
+    Private Sub LoadStudentsInTeacherSection()
+        Try
+            modDBx.openConn("cflc_db")
+            ' Query to get students enrolled in the teacher's section
+            Dim query As String = "SELECT st.* 
+                                  FROM student st 
+                                  INNER JOIN enrollment se ON st.StudentID = se.StudentID 
+                                  INNER JOIN section s ON se.SectionID = s.SectionID 
+                                  WHERE s.TeacherID = @teacher_id"
+
+            Using cmd As New MySqlCommand(query, modDBx.conn)
+                cmd.Parameters.AddWithValue("@teacher_id", TeacherID)
+
+                ' Load into DataGridView
+                Dim adapter As New MySqlDataAdapter(cmd)
+                Dim dt As New DataTable()
+                adapter.Fill(dt)
+                dgvStudents.DataSource = dt
+            End Using
+        Catch ex As Exception
+            MessageBox.Show("Error loading students: " & ex.Message, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        Finally
+            If modDBx.conn.State = ConnectionState.Open Then
+                modDBx.conn.Close()
+            End If
+        End Try
+    End Sub
+
+    Private Sub SetControlsReadOnly()
+        ' Set all student detail controls to read-only
         txtbxStudentFirstName.ReadOnly = True
         txtbxStudentFirstName.Enabled = False
 
@@ -86,13 +127,9 @@ Public Class TeacherViewStudents
 
         txtbxZipCode.ReadOnly = True
         txtbxZipCode.Enabled = False
-
-        isInitializing = False
     End Sub
 
     ' Generalized ProcessCmdKey:
-    ' - If an editable TextBox/TextBoxBase has focus and user presses F, insert 'f' (respect Shift/CapsLock)
-    ' - Otherwise preserve existing global shortcuts (Escape, F -> full screen)
     Protected Overrides Function ProcessCmdKey(ByRef msg As Message, keyData As Keys) As Boolean
         ' Preserve existing global shortcuts when not editing text
         If keyData = Keys.Escape Then
@@ -122,16 +159,6 @@ Public Class TeacherViewStudents
         Me.BringToFront()
     End Sub
 
-    Private Sub txtbxStudentFirstName_TextChanged(sender As Object, e As EventArgs) Handles txtbxStudentFirstName.TextChanged
-        txtbxStudentFirstName.ReadOnly = True
-        txtbxStudentFirstName.Enabled = False
-        txtbxStudentFirstName.TabStop = False
-    End Sub
-
-    Private Sub txtbxStudentPOB_TextChanged(sender As Object, e As EventArgs) Handles txtbxStudentPOB.TextChanged
-
-    End Sub
-
     ' Populate the student detail controls when a row in dgvStudents is clicked
     Private Sub dgvStudents_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvStudents.CellClick
         If isInitializing Then
@@ -157,12 +184,7 @@ Public Class TeacherViewStudents
         row.Selected = True
         lastSelectedIndex = e.RowIndex
 
-        ' Safely read the StudentID in the clicked row
-        Dim clickedID As Integer = 0
-        If row.Cells.Count > 0 AndAlso row.Cells(0).Value IsNot Nothing AndAlso Not IsDBNull(row.Cells(0).Value) Then
-            Integer.TryParse(row.Cells(0).Value.ToString(), clickedID)
-        End If
-
+        ' Populate student details
         txtbxStudentLRN.Text = GetSafeString(row.Cells("LRN"))
         txtbxStudentFirstName.Text = GetSafeString(row.Cells("FirstName"))
         txtStudentMiddleName.Text = GetSafeString(row.Cells("MiddleName"))
@@ -234,20 +256,48 @@ Public Class TeacherViewStudents
         lastSelectedIndex = -1
     End Sub
 
-    ' Perform a search using the TextBox input. Safe-escape single quotes for SQL string composition.
+    ' Perform a search within the teacher's section students
     Private Sub PerformSearch(query As String)
-        Dim trimmed As String = query?.Trim()
-        If String.IsNullOrEmpty(trimmed) Then
-            LoadToDGV("SELECT * FROM student", dgvStudents)
-        Else
-            Dim safe As String = trimmed.Replace("'", "''")
-            Dim sql As String = "SELECT * FROM student WHERE LRN LIKE '%" & safe & "%' OR FirstName LIKE '%" & safe & "%' OR LastName LIKE '%" & safe & "%' OR MiddleName LIKE '%" & safe & "%'"
-            LoadToDGV(sql, dgvStudents)
-        End If
+        Try
+            modDBx.openConn("cflc_db")
+            Dim trimmed As String = query?.Trim()
 
-        ' After reloading results, clear selection and details
-        dgvStudents.ClearSelection()
-        ClearStudentDetails()
+            If String.IsNullOrEmpty(trimmed) Then
+                ' Show all students in teacher's section
+                LoadStudentsInTeacherSection()
+            Else
+                Dim safe As String = trimmed.Replace("'", "''")
+                Dim sql As String = "SELECT st.* 
+                                    FROM student st 
+                                    INNER JOIN enrollment se ON st.StudentID = se.StudentID 
+                                    INNER JOIN section s ON se.SectionID = s.SectionID 
+                                    WHERE s.TeacherID = @teacher_id 
+                                    AND (st.LRN LIKE '%" & safe & "%' 
+                                         OR st.FirstName LIKE '%" & safe & "%' 
+                                         OR st.LastName LIKE '%" & safe & "%' 
+                                         OR st.MiddleName LIKE '%" & safe & "%')"
+
+                Using cmd As New MySqlCommand(sql, modDBx.conn)
+                    cmd.Parameters.AddWithValue("@teacher_id", TeacherID)
+
+                    Dim adapter As New MySqlDataAdapter(cmd)
+                    Dim dt As New DataTable()
+                    adapter.Fill(dt)
+                    dgvStudents.DataSource = dt
+                End Using
+            End If
+
+            ' After reloading results, clear selection and details
+            dgvStudents.ClearSelection()
+            ClearStudentDetails()
+
+        Catch ex As Exception
+            MessageBox.Show("Error searching students: " & ex.Message, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        Finally
+            If modDBx.conn.State = ConnectionState.Open Then
+                modDBx.conn.Close()
+            End If
+        End Try
     End Sub
 
     ' Search when user types and presses Enter
@@ -264,8 +314,17 @@ Public Class TeacherViewStudents
         PerformSearch(TextBoxStudentSearch.Text)
     End Sub
 
-    ' If you add a Search button in the Designer, wire its Click to this sub (no Handles so designer can attach it)
+    ' If you add a Search button in the Designer, wire its Click to this sub
     Public Sub btnStudentSearch_Click(sender As Object, e As EventArgs)
         PerformSearch(TextBoxStudentSearch.Text)
+    End Sub
+
+    ' Keep your existing event handlers
+    Private Sub txtbxStudentFirstName_TextChanged(sender As Object, e As EventArgs) Handles txtbxStudentFirstName.TextChanged
+        ' Add any specific logic here if needed
+    End Sub
+
+    Private Sub txtbxStudentPOB_TextChanged(sender As Object, e As EventArgs) Handles txtbxStudentPOB.TextChanged
+        ' Add any specific logic here if needed
     End Sub
 End Class
