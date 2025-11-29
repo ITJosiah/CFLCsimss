@@ -31,6 +31,8 @@ Partial Class TeacherViewSection
         Me.btnLogout = New System.Windows.Forms.Button()
         Me.pnlManSecContent = New System.Windows.Forms.Panel()
         Me.grpSectionInfo = New System.Windows.Forms.GroupBox()
+        Me.ComboBoxTeacherFloorLevel = New System.Windows.Forms.ComboBox()
+        Me.ComboBoxFloorLevel = New System.Windows.Forms.Label()
         Me.txtbxManSecBuildingName = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.cmbManSecLearningMode = New System.Windows.Forms.ComboBox()
@@ -47,8 +49,6 @@ Partial Class TeacherViewSection
         Me.lblManSecSectionName = New System.Windows.Forms.Label()
         Me.lblSectionsList = New System.Windows.Forms.Label()
         Me.picWatermark = New System.Windows.Forms.PictureBox()
-        Me.ComboBoxTeacherFloorLevel = New System.Windows.Forms.ComboBox()
-        Me.Label2 = New System.Windows.Forms.Label()
         Me.pnlTeacherSidebar.SuspendLayout()
         Me.flowButtons.SuspendLayout()
         Me.pnlManSecContent.SuspendLayout()
@@ -158,7 +158,7 @@ Partial Class TeacherViewSection
         Me.grpSectionInfo.AutoSize = True
         Me.grpSectionInfo.BackColor = System.Drawing.Color.Gainsboro
         Me.grpSectionInfo.Controls.Add(Me.ComboBoxTeacherFloorLevel)
-        Me.grpSectionInfo.Controls.Add(Me.Label2)
+        Me.grpSectionInfo.Controls.Add(Me.ComboBoxFloorLevel)
         Me.grpSectionInfo.Controls.Add(Me.txtbxManSecBuildingName)
         Me.grpSectionInfo.Controls.Add(Me.Label1)
         Me.grpSectionInfo.Controls.Add(Me.cmbManSecLearningMode)
@@ -180,6 +180,23 @@ Partial Class TeacherViewSection
         Me.grpSectionInfo.TabIndex = 3
         Me.grpSectionInfo.TabStop = False
         Me.grpSectionInfo.Text = "Section Information"
+        '
+        'ComboBoxTeacherFloorLevel
+        '
+        Me.ComboBoxTeacherFloorLevel.FormattingEnabled = True
+        Me.ComboBoxTeacherFloorLevel.Location = New System.Drawing.Point(542, 207)
+        Me.ComboBoxTeacherFloorLevel.Name = "ComboBoxTeacherFloorLevel"
+        Me.ComboBoxTeacherFloorLevel.Size = New System.Drawing.Size(235, 47)
+        Me.ComboBoxTeacherFloorLevel.TabIndex = 41
+        '
+        'ComboBoxFloorLevel
+        '
+        Me.ComboBoxFloorLevel.AutoSize = True
+        Me.ComboBoxFloorLevel.Location = New System.Drawing.Point(535, 164)
+        Me.ComboBoxFloorLevel.Name = "ComboBoxFloorLevel"
+        Me.ComboBoxFloorLevel.Size = New System.Drawing.Size(188, 39)
+        Me.ComboBoxFloorLevel.TabIndex = 40
+        Me.ComboBoxFloorLevel.Text = "Floor Level"
         '
         'txtbxManSecBuildingName
         '
@@ -325,23 +342,6 @@ Partial Class TeacherViewSection
         Me.picWatermark.TabIndex = 5
         Me.picWatermark.TabStop = False
         '
-        'ComboBoxTeacherFloorLevel
-        '
-        Me.ComboBoxTeacherFloorLevel.FormattingEnabled = True
-        Me.ComboBoxTeacherFloorLevel.Location = New System.Drawing.Point(542, 207)
-        Me.ComboBoxTeacherFloorLevel.Name = "ComboBoxTeacherFloorLevel"
-        Me.ComboBoxTeacherFloorLevel.Size = New System.Drawing.Size(235, 47)
-        Me.ComboBoxTeacherFloorLevel.TabIndex = 41
-        '
-        'Label2
-        '
-        Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(535, 164)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(191, 39)
-        Me.Label2.TabIndex = 40
-        Me.Label2.Text = "Class Type"
-        '
         'TeacherViewSection
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -389,5 +389,5 @@ Partial Class TeacherViewSection
     Friend WithEvents lblSectionsList As Label
     Friend WithEvents picWatermark As PictureBox
     Friend WithEvents ComboBoxTeacherFloorLevel As ComboBox
-    Friend WithEvents Label2 As Label
+    Friend WithEvents ComboBoxFloorLevel As Label
 End Class
