@@ -209,7 +209,7 @@ Partial Class AdminDashboard
         Me.pnlTeacherListDashboard.Controls.Add(Me.Panel3)
         Me.pnlTeacherListDashboard.Controls.Add(Me.lblTeacherListDashboard)
         Me.pnlTeacherListDashboard.Controls.Add(Me.Label9)
-        Me.pnlTeacherListDashboard.Location = New System.Drawing.Point(558, 36)
+        Me.pnlTeacherListDashboard.Location = New System.Drawing.Point(569, 36)
         Me.pnlTeacherListDashboard.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.pnlTeacherListDashboard.Name = "pnlTeacherListDashboard"
         Me.pnlTeacherListDashboard.Size = New System.Drawing.Size(466, 212)
@@ -284,7 +284,7 @@ Partial Class AdminDashboard
         Me.pnlSubjectListDashboard.Controls.Add(Me.Panel2)
         Me.pnlSubjectListDashboard.Controls.Add(Me.lblSubjectListDashboard)
         Me.pnlSubjectListDashboard.Controls.Add(Me.Label7)
-        Me.pnlSubjectListDashboard.Location = New System.Drawing.Point(63, 280)
+        Me.pnlSubjectListDashboard.Location = New System.Drawing.Point(1070, 36)
         Me.pnlSubjectListDashboard.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.pnlSubjectListDashboard.Name = "pnlSubjectListDashboard"
         Me.pnlSubjectListDashboard.Size = New System.Drawing.Size(466, 212)

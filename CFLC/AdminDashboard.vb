@@ -157,7 +157,7 @@ Public Class AdminDashboard
                     RemoveHandler oldForm.StudentCountChanged, AddressOf OnStudentCountChanged
                 End If
             End If
-            
+
             ' Unsubscribe from events if it's AdminManageSubjects
             If TypeOf currentContent Is AdminManageSubjects Then
                 Dim oldForm As AdminManageSubjects = TryCast(currentContent, AdminManageSubjects)
@@ -165,7 +165,7 @@ Public Class AdminDashboard
                     RemoveHandler oldForm.SubjectCountChanged, AddressOf OnSubjectCountChanged
                 End If
             End If
-            
+
             ' Unsubscribe from events if it's AdminManageTeacher
             If TypeOf currentContent Is AdminManageTeacher Then
                 Dim oldForm As AdminManageTeacher = TryCast(currentContent, AdminManageTeacher)
@@ -197,7 +197,7 @@ Public Class AdminDashboard
                     RemoveHandler oldForm.StudentCountChanged, AddressOf OnStudentCountChanged
                 End If
             End If
-            
+
             ' Unsubscribe from events if it's AdminManageSubjects
             If TypeOf currentContent Is AdminManageSubjects Then
                 Dim oldForm As AdminManageSubjects = TryCast(currentContent, AdminManageSubjects)
@@ -205,7 +205,7 @@ Public Class AdminDashboard
                     RemoveHandler oldForm.SubjectCountChanged, AddressOf OnSubjectCountChanged
                 End If
             End If
-            
+
             ' Unsubscribe from events if it's AdminManageTeacher
             If TypeOf currentContent Is AdminManageTeacher Then
                 Dim oldForm As AdminManageTeacher = TryCast(currentContent, AdminManageTeacher)
@@ -265,7 +265,7 @@ Public Class AdminDashboard
             End If
         End Try
     End Sub
-    
+
     ' Method to update subject count from database (fallback when form is not loaded)
     Private Sub UpdateSubjectCountFromDatabase()
         Try
@@ -288,7 +288,7 @@ Public Class AdminDashboard
             End If
         End Try
     End Sub
-    
+
     ' Method to update teacher count from database (fallback when form is not loaded)
     Private Sub UpdateTeacherCountFromDatabase()
         Try
@@ -371,14 +371,14 @@ Public Class AdminDashboard
         ' Update count immediately
         UpdateTeacherCountFromForm()
     End Sub
-    
+
     ' Event handler for teacher count changes
     Private Sub OnTeacherCountChanged(count As Integer)
         If lblTeacherListDashboard IsNot Nothing Then
             lblTeacherListDashboard.Text = count.ToString()
         End If
     End Sub
-    
+
     ' Method to update teacher count from the form
     Private Sub UpdateTeacherCountFromForm()
         If manageTeachersForm IsNot Nothing Then
