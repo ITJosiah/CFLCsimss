@@ -4,6 +4,7 @@ Public Class AdminDashboard
     Private currentContent As Form
     Private manageStudentsForm As AdminManageStudents = Nothing
     Private manageSubjectsForm As AdminManageSubjects = Nothing
+    Private manageTeachersForm As AdminManageTeacher = Nothing
     Private Sub AdminDashboard_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ' Set form properties
         Me.FormBorderStyle = FormBorderStyle.None
@@ -23,6 +24,7 @@ Public Class AdminDashboard
         ' Load initial counts
         UpdateStudentCountFromDatabase()
         UpdateSubjectCountFromDatabase()
+        UpdateTeacherCountFromDatabase()
     End Sub
 
     Private Sub CenterLogo()
@@ -163,6 +165,14 @@ Public Class AdminDashboard
                     RemoveHandler oldForm.SubjectCountChanged, AddressOf OnSubjectCountChanged
                 End If
             End If
+            
+            ' Unsubscribe from events if it's AdminManageTeacher
+            If TypeOf currentContent Is AdminManageTeacher Then
+                Dim oldForm As AdminManageTeacher = TryCast(currentContent, AdminManageTeacher)
+                If oldForm IsNot Nothing Then
+                    RemoveHandler oldForm.TeacherCountChanged, AddressOf OnTeacherCountChanged
+                End If
+            End If
 
             currentContent.Close()
             currentContent.Dispose()
@@ -195,6 +205,14 @@ Public Class AdminDashboard
                     RemoveHandler oldForm.SubjectCountChanged, AddressOf OnSubjectCountChanged
                 End If
             End If
+            
+            ' Unsubscribe from events if it's AdminManageTeacher
+            If TypeOf currentContent Is AdminManageTeacher Then
+                Dim oldForm As AdminManageTeacher = TryCast(currentContent, AdminManageTeacher)
+                If oldForm IsNot Nothing Then
+                    RemoveHandler oldForm.TeacherCountChanged, AddressOf OnTeacherCountChanged
+                End If
+            End If
 
             currentContent.Close()
             currentContent.Dispose()
@@ -204,18 +222,21 @@ Public Class AdminDashboard
         ' Clear the form references when showing home
         manageStudentsForm = Nothing
         manageSubjectsForm = Nothing
+        manageTeachersForm = Nothing
 
         pnlMainContent.Controls.Clear()
         ' Add both the student list dashboard panel and the logo
         ' Order matters for z-ordering (last added appears on top)
         pnlMainContent.Controls.Add(pnlStudentListDashboard)
         pnlMainContent.Controls.Add(pnlSubjectListDashboard)
+        pnlMainContent.Controls.Add(pnlTeacherListDashboard)
         pnlMainContent.Controls.Add(PictureBox1)
         CenterLogo()
 
         ' Update counts from database when showing home (in case form is closed)
         UpdateStudentCountFromDatabase()
         UpdateSubjectCountFromDatabase()
+        UpdateTeacherCountFromDatabase()
     End Sub
 
     ' Method to update student count from database (fallback when form is not loaded)
@@ -267,6 +288,29 @@ Public Class AdminDashboard
             End If
         End Try
     End Sub
+    
+    ' Method to update teacher count from database (fallback when form is not loaded)
+    Private Sub UpdateTeacherCountFromDatabase()
+        Try
+            modDBx.openConn(modDBx.db_name)
+            Dim sql As String = "SELECT COUNT(*) FROM teacher"
+
+            Using cmd As New MySql.Data.MySqlClient.MySqlCommand(sql, modDBx.conn)
+                Dim count As Integer = Convert.ToInt32(cmd.ExecuteScalar())
+
+                If lblTeacherListDashboard IsNot Nothing Then
+                    lblTeacherListDashboard.Text = count.ToString()
+                End If
+            End Using
+        Catch ex As Exception
+            ' If there's an error, keep current value or set to 0
+            System.Diagnostics.Debug.WriteLine("Error updating teacher count from database: " & ex.Message)
+        Finally
+            If modDBx.conn IsNot Nothing AndAlso modDBx.conn.State = ConnectionState.Open Then
+                modDBx.conn.Close()
+            End If
+        End Try
+    End Sub
 
     ' Button click handlers
     Private Sub btnManageStudents_Click(sender As Object, e As EventArgs) Handles btnManageStudents.Click
@@ -309,11 +353,38 @@ Public Class AdminDashboard
     End Sub
 
     Private Sub btnManageTeachers_Click(sender As Object, e As EventArgs) Handles btnManageTeachers.Click
-        Dim manageTeachersForm As New AdminManageTeacher() With {
+        ' Dispose previous instance if exists
+        If manageTeachersForm IsNot Nothing Then
+            RemoveHandler manageTeachersForm.TeacherCountChanged, AddressOf OnTeacherCountChanged
+            manageTeachersForm = Nothing
+        End If
+
+        manageTeachersForm = New AdminManageTeacher() With {
             .IsEmbedded = True
         }
+
+        ' Subscribe to teacher count changed event
+        AddHandler manageTeachersForm.TeacherCountChanged, AddressOf OnTeacherCountChanged
+
         LoadContentForm(manageTeachersForm)
 
+        ' Update count immediately
+        UpdateTeacherCountFromForm()
+    End Sub
+    
+    ' Event handler for teacher count changes
+    Private Sub OnTeacherCountChanged(count As Integer)
+        If lblTeacherListDashboard IsNot Nothing Then
+            lblTeacherListDashboard.Text = count.ToString()
+        End If
+    End Sub
+    
+    ' Method to update teacher count from the form
+    Private Sub UpdateTeacherCountFromForm()
+        If manageTeachersForm IsNot Nothing Then
+            Dim count As Integer = manageTeachersForm.GetTeacherCount()
+            OnTeacherCountChanged(count)
+        End If
     End Sub
 
     Private Sub btnManageSections_Click(sender As Object, e As EventArgs) Handles btnManageSections.Click
@@ -393,5 +464,7 @@ Public Class AdminDashboard
     Private Sub btnBackToDashboard_Click(sender As Object, e As EventArgs) Handles btnBackToDashboard.Click
         ShowHomeContent()
     End Sub
+
+
 End Class
 

@@ -5,6 +5,21 @@ Imports MySql.Data.MySqlClient
 Public Class AdminManageTeacher
     Public Property IsEmbedded As Boolean = False
     Private currentTeacherID As Integer = 0
+    
+    ' Event to notify when teacher count changes
+    Public Event TeacherCountChanged(count As Integer)
+    
+    ' Public method to get current teacher count
+    Public Function GetTeacherCount() As Integer
+        If dgvTeacher IsNot Nothing AndAlso dgvTeacher.DataSource IsNot Nothing Then
+            Dim dt As DataTable = TryCast(dgvTeacher.DataSource, DataTable)
+            If dt IsNot Nothing Then
+                Return dt.Rows.Count
+            End If
+            Return dgvTeacher.Rows.Count
+        End If
+        Return 0
+    End Function
 
     Private Sub AdminManageTeacher_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If Not IsEmbedded Then
@@ -734,6 +749,9 @@ Public Class AdminManageTeacher
         Catch
             ' ignore - layout timing may prevent clearing CurrentCell
         End Try
+        
+        ' Notify that teacher count has changed
+        RaiseEvent TeacherCountChanged(GetTeacherCount())
     End Sub
 
     ' Final fallback after form is shown

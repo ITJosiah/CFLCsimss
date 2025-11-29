@@ -34,6 +34,13 @@ Partial Class AdminDashboard
         Me.btnBackToDashboard = New System.Windows.Forms.Button()
         Me.btnLogout = New System.Windows.Forms.Button()
         Me.pnlMainContent = New System.Windows.Forms.Panel()
+        Me.pnlTeacherListDashboard = New System.Windows.Forms.Panel()
+        Me.PictureBox3 = New System.Windows.Forms.PictureBox()
+        Me.Panel3 = New System.Windows.Forms.Panel()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.lblTeacherListDashboard = New System.Windows.Forms.Label()
+        Me.Label9 = New System.Windows.Forms.Label()
         Me.pnlSubjectListDashboard = New System.Windows.Forms.Panel()
         Me.PictureBox2 = New System.Windows.Forms.PictureBox()
         Me.Panel2 = New System.Windows.Forms.Panel()
@@ -52,6 +59,9 @@ Partial Class AdminDashboard
         Me.pnlSidebar.SuspendLayout()
         Me.flowButtons.SuspendLayout()
         Me.pnlMainContent.SuspendLayout()
+        Me.pnlTeacherListDashboard.SuspendLayout()
+        CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.Panel3.SuspendLayout()
         Me.pnlSubjectListDashboard.SuspendLayout()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel2.SuspendLayout()
@@ -68,9 +78,10 @@ Partial Class AdminDashboard
         Me.pnlSidebar.Controls.Add(Me.btnLogout)
         Me.pnlSidebar.Dock = System.Windows.Forms.DockStyle.Left
         Me.pnlSidebar.Location = New System.Drawing.Point(0, 0)
+        Me.pnlSidebar.Margin = New System.Windows.Forms.Padding(4)
         Me.pnlSidebar.Name = "pnlSidebar"
-        Me.pnlSidebar.Padding = New System.Windows.Forms.Padding(30, 40, 30, 40)
-        Me.pnlSidebar.Size = New System.Drawing.Size(300, 860)
+        Me.pnlSidebar.Padding = New System.Windows.Forms.Padding(40, 49, 40, 49)
+        Me.pnlSidebar.Size = New System.Drawing.Size(400, 1058)
         Me.pnlSidebar.TabIndex = 11
         '
         'flowButtons
@@ -85,69 +96,69 @@ Partial Class AdminDashboard
         Me.flowButtons.Controls.Add(Me.btnBackToDashboard)
         Me.flowButtons.Dock = System.Windows.Forms.DockStyle.Fill
         Me.flowButtons.FlowDirection = System.Windows.Forms.FlowDirection.TopDown
-        Me.flowButtons.Location = New System.Drawing.Point(30, 40)
+        Me.flowButtons.Location = New System.Drawing.Point(40, 49)
         Me.flowButtons.Margin = New System.Windows.Forms.Padding(0)
         Me.flowButtons.Name = "flowButtons"
-        Me.flowButtons.Size = New System.Drawing.Size(240, 730)
+        Me.flowButtons.Size = New System.Drawing.Size(320, 898)
         Me.flowButtons.TabIndex = 0
         Me.flowButtons.WrapContents = False
         '
         'btnManageStudents
         '
         Me.btnManageStudents.Location = New System.Drawing.Point(0, 0)
-        Me.btnManageStudents.Margin = New System.Windows.Forms.Padding(0, 0, 0, 18)
+        Me.btnManageStudents.Margin = New System.Windows.Forms.Padding(0, 0, 0, 22)
         Me.btnManageStudents.Name = "btnManageStudents"
-        Me.btnManageStudents.Size = New System.Drawing.Size(240, 45)
+        Me.btnManageStudents.Size = New System.Drawing.Size(320, 55)
         Me.btnManageStudents.TabIndex = 4
         Me.btnManageStudents.Text = "Manage Students"
         Me.btnManageStudents.UseVisualStyleBackColor = True
         '
         'btnManageTeachers
         '
-        Me.btnManageTeachers.Location = New System.Drawing.Point(0, 63)
-        Me.btnManageTeachers.Margin = New System.Windows.Forms.Padding(0, 0, 0, 18)
+        Me.btnManageTeachers.Location = New System.Drawing.Point(0, 77)
+        Me.btnManageTeachers.Margin = New System.Windows.Forms.Padding(0, 0, 0, 22)
         Me.btnManageTeachers.Name = "btnManageTeachers"
-        Me.btnManageTeachers.Size = New System.Drawing.Size(240, 45)
+        Me.btnManageTeachers.Size = New System.Drawing.Size(320, 55)
         Me.btnManageTeachers.TabIndex = 5
         Me.btnManageTeachers.Text = "Manage Teachers"
         Me.btnManageTeachers.UseVisualStyleBackColor = True
         '
         'btnManageSections
         '
-        Me.btnManageSections.Location = New System.Drawing.Point(0, 126)
-        Me.btnManageSections.Margin = New System.Windows.Forms.Padding(0, 0, 0, 18)
+        Me.btnManageSections.Location = New System.Drawing.Point(0, 154)
+        Me.btnManageSections.Margin = New System.Windows.Forms.Padding(0, 0, 0, 22)
         Me.btnManageSections.Name = "btnManageSections"
-        Me.btnManageSections.Size = New System.Drawing.Size(240, 45)
+        Me.btnManageSections.Size = New System.Drawing.Size(320, 55)
         Me.btnManageSections.TabIndex = 6
         Me.btnManageSections.Text = "Manage Sections"
         Me.btnManageSections.UseVisualStyleBackColor = True
         '
         'btnManageSubjects
         '
-        Me.btnManageSubjects.Location = New System.Drawing.Point(0, 189)
-        Me.btnManageSubjects.Margin = New System.Windows.Forms.Padding(0, 0, 0, 18)
+        Me.btnManageSubjects.Location = New System.Drawing.Point(0, 231)
+        Me.btnManageSubjects.Margin = New System.Windows.Forms.Padding(0, 0, 0, 22)
         Me.btnManageSubjects.Name = "btnManageSubjects"
-        Me.btnManageSubjects.Size = New System.Drawing.Size(240, 45)
+        Me.btnManageSubjects.Size = New System.Drawing.Size(320, 55)
         Me.btnManageSubjects.TabIndex = 8
         Me.btnManageSubjects.Text = "Manage Subjects"
         Me.btnManageSubjects.UseVisualStyleBackColor = True
         '
         'btnManageEnrollments
         '
-        Me.btnManageEnrollments.Location = New System.Drawing.Point(0, 252)
-        Me.btnManageEnrollments.Margin = New System.Windows.Forms.Padding(0, 0, 0, 18)
+        Me.btnManageEnrollments.Location = New System.Drawing.Point(0, 308)
+        Me.btnManageEnrollments.Margin = New System.Windows.Forms.Padding(0, 0, 0, 22)
         Me.btnManageEnrollments.Name = "btnManageEnrollments"
-        Me.btnManageEnrollments.Size = New System.Drawing.Size(240, 45)
+        Me.btnManageEnrollments.Size = New System.Drawing.Size(320, 55)
         Me.btnManageEnrollments.TabIndex = 7
         Me.btnManageEnrollments.Text = "Manage Enrollments"
         Me.btnManageEnrollments.UseVisualStyleBackColor = True
         '
         'btnGenerateReports
         '
-        Me.btnGenerateReports.Location = New System.Drawing.Point(0, 315)
-        Me.btnGenerateReports.Margin = New System.Windows.Forms.Padding(0, 0, 0, 18)
+        Me.btnGenerateReports.Location = New System.Drawing.Point(0, 385)
+        Me.btnGenerateReports.Margin = New System.Windows.Forms.Padding(0, 0, 0, 22)
         Me.btnGenerateReports.Name = "btnGenerateReports"
-        Me.btnGenerateReports.Size = New System.Drawing.Size(240, 45)
+        Me.btnGenerateReports.Size = New System.Drawing.Size(320, 55)
         Me.btnGenerateReports.TabIndex = 9
         Me.btnGenerateReports.Text = "Generate Reports"
         Me.btnGenerateReports.UseVisualStyleBackColor = True
@@ -156,10 +167,10 @@ Partial Class AdminDashboard
         '
         Me.btnBackToDashboard.Anchor = System.Windows.Forms.AnchorStyles.Bottom
         Me.btnBackToDashboard.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.btnBackToDashboard.Location = New System.Drawing.Point(56, 378)
-        Me.btnBackToDashboard.Margin = New System.Windows.Forms.Padding(0, 0, 0, 18)
+        Me.btnBackToDashboard.Location = New System.Drawing.Point(75, 462)
+        Me.btnBackToDashboard.Margin = New System.Windows.Forms.Padding(0, 0, 0, 22)
         Me.btnBackToDashboard.Name = "btnBackToDashboard"
-        Me.btnBackToDashboard.Size = New System.Drawing.Size(127, 45)
+        Me.btnBackToDashboard.Size = New System.Drawing.Size(169, 55)
         Me.btnBackToDashboard.TabIndex = 10
         Me.btnBackToDashboard.Text = "Back to Dashboard"
         Me.btnBackToDashboard.UseVisualStyleBackColor = True
@@ -169,10 +180,10 @@ Partial Class AdminDashboard
         Me.btnLogout.BackColor = System.Drawing.Color.Red
         Me.btnLogout.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.btnLogout.ForeColor = System.Drawing.Color.White
-        Me.btnLogout.Location = New System.Drawing.Point(30, 770)
+        Me.btnLogout.Location = New System.Drawing.Point(40, 947)
         Me.btnLogout.Margin = New System.Windows.Forms.Padding(0)
         Me.btnLogout.Name = "btnLogout"
-        Me.btnLogout.Size = New System.Drawing.Size(240, 50)
+        Me.btnLogout.Size = New System.Drawing.Size(320, 62)
         Me.btnLogout.TabIndex = 10
         Me.btnLogout.Text = "Logout"
         Me.btnLogout.UseVisualStyleBackColor = False
@@ -180,14 +191,91 @@ Partial Class AdminDashboard
         'pnlMainContent
         '
         Me.pnlMainContent.BackColor = System.Drawing.Color.FromArgb(CType(CType(7, Byte), Integer), CType(CType(77, Byte), Integer), CType(CType(39, Byte), Integer))
+        Me.pnlMainContent.Controls.Add(Me.pnlTeacherListDashboard)
         Me.pnlMainContent.Controls.Add(Me.pnlSubjectListDashboard)
         Me.pnlMainContent.Controls.Add(Me.pnlStudentListDashboard)
         Me.pnlMainContent.Controls.Add(Me.PictureBox1)
         Me.pnlMainContent.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.pnlMainContent.Location = New System.Drawing.Point(300, 0)
+        Me.pnlMainContent.Location = New System.Drawing.Point(400, 0)
+        Me.pnlMainContent.Margin = New System.Windows.Forms.Padding(4)
         Me.pnlMainContent.Name = "pnlMainContent"
-        Me.pnlMainContent.Size = New System.Drawing.Size(1143, 860)
+        Me.pnlMainContent.Size = New System.Drawing.Size(1524, 1058)
         Me.pnlMainContent.TabIndex = 12
+        '
+        'pnlTeacherListDashboard
+        '
+        Me.pnlTeacherListDashboard.BackColor = System.Drawing.Color.ForestGreen
+        Me.pnlTeacherListDashboard.Controls.Add(Me.PictureBox3)
+        Me.pnlTeacherListDashboard.Controls.Add(Me.Panel3)
+        Me.pnlTeacherListDashboard.Controls.Add(Me.lblTeacherListDashboard)
+        Me.pnlTeacherListDashboard.Controls.Add(Me.Label9)
+        Me.pnlTeacherListDashboard.Location = New System.Drawing.Point(558, 36)
+        Me.pnlTeacherListDashboard.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.pnlTeacherListDashboard.Name = "pnlTeacherListDashboard"
+        Me.pnlTeacherListDashboard.Size = New System.Drawing.Size(466, 212)
+        Me.pnlTeacherListDashboard.TabIndex = 7
+        '
+        'PictureBox3
+        '
+        Me.PictureBox3.Image = CType(resources.GetObject("PictureBox3.Image"), System.Drawing.Image)
+        Me.PictureBox3.Location = New System.Drawing.Point(17, 69)
+        Me.PictureBox3.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.PictureBox3.Name = "PictureBox3"
+        Me.PictureBox3.Size = New System.Drawing.Size(153, 130)
+        Me.PictureBox3.TabIndex = 6
+        Me.PictureBox3.TabStop = False
+        '
+        'Panel3
+        '
+        Me.Panel3.BackColor = System.Drawing.Color.Green
+        Me.Panel3.Controls.Add(Me.Label5)
+        Me.Panel3.Controls.Add(Me.Label6)
+        Me.Panel3.Dock = System.Windows.Forms.DockStyle.Top
+        Me.Panel3.Location = New System.Drawing.Point(0, 0)
+        Me.Panel3.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.Panel3.Name = "Panel3"
+        Me.Panel3.Size = New System.Drawing.Size(466, 59)
+        Me.Panel3.TabIndex = 5
+        '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 50.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label5.Location = New System.Drawing.Point(115, 80)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(87, 95)
+        Me.Label5.TabIndex = 1
+        Me.Label5.Text = "0"
+        '
+        'Label6
+        '
+        Me.Label6.AutoSize = True
+        Me.Label6.Font = New System.Drawing.Font("Microsoft Sans Serif", 20.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label6.Location = New System.Drawing.Point(124, 10)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(204, 39)
+        Me.Label6.TabIndex = 0
+        Me.Label6.Text = "Teacher List"
+        '
+        'lblTeacherListDashboard
+        '
+        Me.lblTeacherListDashboard.AutoSize = True
+        Me.lblTeacherListDashboard.Font = New System.Drawing.Font("Microsoft Sans Serif", 40.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblTeacherListDashboard.Location = New System.Drawing.Point(231, 98)
+        Me.lblTeacherListDashboard.Name = "lblTeacherListDashboard"
+        Me.lblTeacherListDashboard.Size = New System.Drawing.Size(69, 76)
+        Me.lblTeacherListDashboard.TabIndex = 1
+        Me.lblTeacherListDashboard.Text = "0"
+        '
+        'Label9
+        '
+        Me.Label9.AutoSize = True
+        Me.Label9.Font = New System.Drawing.Font("Microsoft Sans Serif", 20.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label9.Location = New System.Drawing.Point(64, 14)
+        Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(196, 39)
+        Me.Label9.TabIndex = 0
+        Me.Label9.Text = "Student List"
         '
         'pnlSubjectListDashboard
         '
@@ -196,20 +284,20 @@ Partial Class AdminDashboard
         Me.pnlSubjectListDashboard.Controls.Add(Me.Panel2)
         Me.pnlSubjectListDashboard.Controls.Add(Me.lblSubjectListDashboard)
         Me.pnlSubjectListDashboard.Controls.Add(Me.Label7)
-        Me.pnlSubjectListDashboard.Location = New System.Drawing.Point(50, 290)
-        Me.pnlSubjectListDashboard.Margin = New System.Windows.Forms.Padding(2)
+        Me.pnlSubjectListDashboard.Location = New System.Drawing.Point(63, 280)
+        Me.pnlSubjectListDashboard.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.pnlSubjectListDashboard.Name = "pnlSubjectListDashboard"
-        Me.pnlSubjectListDashboard.Size = New System.Drawing.Size(396, 172)
+        Me.pnlSubjectListDashboard.Size = New System.Drawing.Size(466, 212)
         Me.pnlSubjectListDashboard.TabIndex = 7
         '
         'PictureBox2
         '
         Me.PictureBox2.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.PictureBox2.Image = CType(resources.GetObject("PictureBox2.Image"), System.Drawing.Image)
-        Me.PictureBox2.Location = New System.Drawing.Point(18, 58)
-        Me.PictureBox2.Margin = New System.Windows.Forms.Padding(2)
+        Me.PictureBox2.Location = New System.Drawing.Point(16, 70)
+        Me.PictureBox2.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.PictureBox2.Name = "PictureBox2"
-        Me.PictureBox2.Size = New System.Drawing.Size(115, 105)
+        Me.PictureBox2.Size = New System.Drawing.Size(153, 129)
         Me.PictureBox2.TabIndex = 6
         Me.PictureBox2.TabStop = False
         '
@@ -220,19 +308,18 @@ Partial Class AdminDashboard
         Me.Panel2.Controls.Add(Me.lblNameSubjectListDashboard)
         Me.Panel2.Dock = System.Windows.Forms.DockStyle.Top
         Me.Panel2.Location = New System.Drawing.Point(0, 0)
-        Me.Panel2.Margin = New System.Windows.Forms.Padding(2)
+        Me.Panel2.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(396, 48)
+        Me.Panel2.Size = New System.Drawing.Size(466, 59)
         Me.Panel2.TabIndex = 5
         '
         'Label2
         '
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 50.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(86, 65)
-        Me.Label2.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.Label2.Location = New System.Drawing.Point(115, 80)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(69, 76)
+        Me.Label2.Size = New System.Drawing.Size(87, 95)
         Me.Label2.TabIndex = 1
         Me.Label2.Text = "0"
         '
@@ -240,10 +327,9 @@ Partial Class AdminDashboard
         '
         Me.lblNameSubjectListDashboard.AutoSize = True
         Me.lblNameSubjectListDashboard.Font = New System.Drawing.Font("Microsoft Sans Serif", 20.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblNameSubjectListDashboard.Location = New System.Drawing.Point(119, 6)
-        Me.lblNameSubjectListDashboard.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.lblNameSubjectListDashboard.Location = New System.Drawing.Point(124, 9)
         Me.lblNameSubjectListDashboard.Name = "lblNameSubjectListDashboard"
-        Me.lblNameSubjectListDashboard.Size = New System.Drawing.Size(155, 31)
+        Me.lblNameSubjectListDashboard.Size = New System.Drawing.Size(193, 39)
         Me.lblNameSubjectListDashboard.TabIndex = 0
         Me.lblNameSubjectListDashboard.Text = "Subject List"
         '
@@ -251,10 +337,9 @@ Partial Class AdminDashboard
         '
         Me.lblSubjectListDashboard.AutoSize = True
         Me.lblSubjectListDashboard.Font = New System.Drawing.Font("Microsoft Sans Serif", 40.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblSubjectListDashboard.Location = New System.Drawing.Point(177, 80)
-        Me.lblSubjectListDashboard.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.lblSubjectListDashboard.Location = New System.Drawing.Point(236, 98)
         Me.lblSubjectListDashboard.Name = "lblSubjectListDashboard"
-        Me.lblSubjectListDashboard.Size = New System.Drawing.Size(57, 63)
+        Me.lblSubjectListDashboard.Size = New System.Drawing.Size(69, 76)
         Me.lblSubjectListDashboard.TabIndex = 1
         Me.lblSubjectListDashboard.Text = "0"
         '
@@ -262,10 +347,9 @@ Partial Class AdminDashboard
         '
         Me.Label7.AutoSize = True
         Me.Label7.Font = New System.Drawing.Font("Microsoft Sans Serif", 20.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label7.Location = New System.Drawing.Point(48, 11)
-        Me.Label7.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.Label7.Location = New System.Drawing.Point(64, 14)
         Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(158, 31)
+        Me.Label7.Size = New System.Drawing.Size(196, 39)
         Me.Label7.TabIndex = 0
         Me.Label7.Text = "Student List"
         '
@@ -276,19 +360,19 @@ Partial Class AdminDashboard
         Me.pnlStudentListDashboard.Controls.Add(Me.Panel6)
         Me.pnlStudentListDashboard.Controls.Add(Me.lblStudentListDashboard)
         Me.pnlStudentListDashboard.Controls.Add(Me.Label1)
-        Me.pnlStudentListDashboard.Location = New System.Drawing.Point(47, 30)
-        Me.pnlStudentListDashboard.Margin = New System.Windows.Forms.Padding(2)
+        Me.pnlStudentListDashboard.Location = New System.Drawing.Point(63, 36)
+        Me.pnlStudentListDashboard.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.pnlStudentListDashboard.Name = "pnlStudentListDashboard"
-        Me.pnlStudentListDashboard.Size = New System.Drawing.Size(396, 229)
+        Me.pnlStudentListDashboard.Size = New System.Drawing.Size(466, 212)
         Me.pnlStudentListDashboard.TabIndex = 4
         '
         'PictureBoxStudentListIcon
         '
         Me.PictureBoxStudentListIcon.Image = CType(resources.GetObject("PictureBoxStudentListIcon.Image"), System.Drawing.Image)
-        Me.PictureBoxStudentListIcon.Location = New System.Drawing.Point(2, 58)
-        Me.PictureBoxStudentListIcon.Margin = New System.Windows.Forms.Padding(2)
+        Me.PictureBoxStudentListIcon.Location = New System.Drawing.Point(16, 70)
+        Me.PictureBoxStudentListIcon.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.PictureBoxStudentListIcon.Name = "PictureBoxStudentListIcon"
-        Me.PictureBoxStudentListIcon.Size = New System.Drawing.Size(195, 162)
+        Me.PictureBoxStudentListIcon.Size = New System.Drawing.Size(153, 130)
         Me.PictureBoxStudentListIcon.TabIndex = 6
         Me.PictureBoxStudentListIcon.TabStop = False
         '
@@ -299,19 +383,18 @@ Partial Class AdminDashboard
         Me.Panel6.Controls.Add(Me.Label4)
         Me.Panel6.Dock = System.Windows.Forms.DockStyle.Top
         Me.Panel6.Location = New System.Drawing.Point(0, 0)
-        Me.Panel6.Margin = New System.Windows.Forms.Padding(2)
+        Me.Panel6.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Panel6.Name = "Panel6"
-        Me.Panel6.Size = New System.Drawing.Size(396, 48)
+        Me.Panel6.Size = New System.Drawing.Size(466, 59)
         Me.Panel6.TabIndex = 5
         '
         'Label3
         '
         Me.Label3.AutoSize = True
         Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 50.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(86, 65)
-        Me.Label3.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.Label3.Location = New System.Drawing.Point(115, 80)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(69, 76)
+        Me.Label3.Size = New System.Drawing.Size(87, 95)
         Me.Label3.TabIndex = 1
         Me.Label3.Text = "0"
         '
@@ -319,10 +402,9 @@ Partial Class AdminDashboard
         '
         Me.Label4.AutoSize = True
         Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 20.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.Location = New System.Drawing.Point(119, 6)
-        Me.Label4.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.Label4.Location = New System.Drawing.Point(124, 8)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(158, 31)
+        Me.Label4.Size = New System.Drawing.Size(196, 39)
         Me.Label4.TabIndex = 0
         Me.Label4.Text = "Student List"
         '
@@ -330,10 +412,9 @@ Partial Class AdminDashboard
         '
         Me.lblStudentListDashboard.AutoSize = True
         Me.lblStudentListDashboard.Font = New System.Drawing.Font("Microsoft Sans Serif", 40.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblStudentListDashboard.Location = New System.Drawing.Point(203, 110)
-        Me.lblStudentListDashboard.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.lblStudentListDashboard.Location = New System.Drawing.Point(236, 99)
         Me.lblStudentListDashboard.Name = "lblStudentListDashboard"
-        Me.lblStudentListDashboard.Size = New System.Drawing.Size(57, 63)
+        Me.lblStudentListDashboard.Size = New System.Drawing.Size(69, 76)
         Me.lblStudentListDashboard.TabIndex = 1
         Me.lblStudentListDashboard.Text = "0"
         '
@@ -341,10 +422,9 @@ Partial Class AdminDashboard
         '
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 20.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(48, 11)
-        Me.Label1.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.Label1.Location = New System.Drawing.Point(64, 14)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(158, 31)
+        Me.Label1.Size = New System.Drawing.Size(196, 39)
         Me.Label1.TabIndex = 0
         Me.Label1.Text = "Student List"
         '
@@ -352,26 +432,33 @@ Partial Class AdminDashboard
         '
         Me.PictureBox1.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.PictureBox1.Image = Global.CFLC.My.Resources.Resources.logo
-        Me.PictureBox1.Location = New System.Drawing.Point(393, 247)
+        Me.PictureBox1.Location = New System.Drawing.Point(524, 304)
+        Me.PictureBox1.Margin = New System.Windows.Forms.Padding(4)
         Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(375, 330)
+        Me.PictureBox1.Size = New System.Drawing.Size(500, 406)
         Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
         Me.PictureBox1.TabIndex = 3
         Me.PictureBox1.TabStop = False
         '
         'AdminDashboard
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(15, Byte), Integer), CType(CType(56, Byte), Integer), CType(CType(32, Byte), Integer))
-        Me.ClientSize = New System.Drawing.Size(1443, 860)
+        Me.ClientSize = New System.Drawing.Size(1924, 1058)
         Me.Controls.Add(Me.pnlMainContent)
         Me.Controls.Add(Me.pnlSidebar)
+        Me.Margin = New System.Windows.Forms.Padding(4)
         Me.Name = "AdminDashboard"
         Me.Text = "AdminDashboard"
         Me.pnlSidebar.ResumeLayout(False)
         Me.flowButtons.ResumeLayout(False)
         Me.pnlMainContent.ResumeLayout(False)
+        Me.pnlTeacherListDashboard.ResumeLayout(False)
+        Me.pnlTeacherListDashboard.PerformLayout()
+        CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.Panel3.ResumeLayout(False)
+        Me.Panel3.PerformLayout()
         Me.pnlSubjectListDashboard.ResumeLayout(False)
         Me.pnlSubjectListDashboard.PerformLayout()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
@@ -413,4 +500,11 @@ Partial Class AdminDashboard
     Friend WithEvents lblSubjectListDashboard As Label
     Friend WithEvents Label7 As Label
     Friend WithEvents btnBackToDashboard As Button
+    Friend WithEvents pnlTeacherListDashboard As Panel
+    Friend WithEvents PictureBox3 As PictureBox
+    Friend WithEvents Panel3 As Panel
+    Friend WithEvents Label5 As Label
+    Friend WithEvents Label6 As Label
+    Friend WithEvents lblTeacherListDashboard As Label
+    Friend WithEvents Label9 As Label
 End Class
