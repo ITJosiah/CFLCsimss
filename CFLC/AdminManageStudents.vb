@@ -184,13 +184,13 @@ Public Class AdminManageStudents
                             "LRN, MiddleName, FirstName, LastName, ExtensionName, " &
                             "Gender, BirthDate, Age, BirthPlace, MotherTongue, " &
                             "Indigineous, IndigineousSpecific, 4Ps, 4PsID, " &
-                            "Religion, GuardianName, GuardianContact, SectionID, EnrollmentID, " &
+                            "Religion, GuardianName, GuardianContact, " &
                             "HouseNumber, Street, Barangay, Municipality, Province, Country, ZipCode" &
                             ") VALUES (" &
                             "@LRN, @MiddleName, @FirstName, @LastName, @ExtensionName, " &
                             "@Gender, @BirthDate, @Age, @BirthPlace, @MotherTongue, " &
                             "@Indigineous, @IndigineousSpecific, @4Ps, @4PsID, " &
-                            "@Religion, @GuardianName, @GuardianContact, @SectionID, @EnrollmentID, " &
+                            "@Religion, @GuardianName, @GuardianContact, " &
                             "@HouseNumber, @Street, @Barangay, @Municipality, @Province, @Country, @ZipCode)"
 
             modDBx.openConn(modDBx.db_name)
