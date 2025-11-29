@@ -909,6 +909,111 @@ Public Class ManageEnrollmentForms
 
     ' Allow typing "f" into the search TextBox while preventing the parent/dashboard full-screen handler.
     Protected Overrides Function ProcessCmdKey(ByRef msg As Message, keyData As Keys) As Boolean
+
+        ' If TextBox exists and has focus and key is F, insert the char and consume the key.
+        If (keyData And Keys.KeyCode) = Keys.F AndAlso
+           TextBoxEnrollSearch IsNot Nothing AndAlso TextBoxEnrollSearch.Focused Then
+
+            Dim tb = TextBoxEnrollSearch
+            Dim s As String = tb.Text
+            Dim selStart As Integer = tb.SelectionStart
+            Dim selLen As Integer = tb.SelectionLength
+
+            Dim shiftPressed As Boolean = (Control.ModifierKeys And Keys.Shift) = Keys.Shift
+            Dim capsOn As Boolean = Control.IsKeyLocked(Keys.CapsLock)
+            Dim useUpper As Boolean = shiftPressed Xor capsOn
+            Dim ch As Char = If(useUpper, "F"c, "f"c)
+
+            Dim before As String = If(selStart > 0, s.Substring(0, selStart), String.Empty)
+            Dim afterIndex As Integer = Math.Min(selStart + selLen, s.Length)
+            Dim after As String = If(afterIndex < s.Length, s.Substring(afterIndex), String.Empty)
+
+            tb.Text = before & ch & after
+            tb.SelectionStart = selStart + 1
+            tb.SelectionLength = 0
+
+            Return True
+
+        End If
+
+        ' If TextBox exists and has focus and key is F, insert the char and consume the key.
+        If (keyData And Keys.KeyCode) = Keys.F AndAlso
+           txtbxEnrollmentRemarks IsNot Nothing AndAlso txtbxEnrollmentRemarks.Focused Then
+
+            Dim tb = txtbxEnrollmentRemarks
+            Dim s As String = tb.Text
+            Dim selStart As Integer = tb.SelectionStart
+            Dim selLen As Integer = tb.SelectionLength
+
+            Dim shiftPressed As Boolean = (Control.ModifierKeys And Keys.Shift) = Keys.Shift
+            Dim capsOn As Boolean = Control.IsKeyLocked(Keys.CapsLock)
+            Dim useUpper As Boolean = shiftPressed Xor capsOn
+            Dim ch As Char = If(useUpper, "F"c, "f"c)
+
+            Dim before As String = If(selStart > 0, s.Substring(0, selStart), String.Empty)
+            Dim afterIndex As Integer = Math.Min(selStart + selLen, s.Length)
+            Dim after As String = If(afterIndex < s.Length, s.Substring(afterIndex), String.Empty)
+
+            tb.Text = before & ch & after
+            tb.SelectionStart = selStart + 1
+            tb.SelectionLength = 0
+
+            Return True
+
+        End If
+
+        ' If TextBox exists and has focus and key is F, insert the char and consume the key.
+        If (keyData And Keys.KeyCode) = Keys.F AndAlso
+           txtbxEnrollCreatedBy IsNot Nothing AndAlso txtbxEnrollCreatedBy.Focused Then
+
+            Dim tb = txtbxEnrollCreatedBy
+            Dim s As String = tb.Text
+            Dim selStart As Integer = tb.SelectionStart
+            Dim selLen As Integer = tb.SelectionLength
+
+            Dim shiftPressed As Boolean = (Control.ModifierKeys And Keys.Shift) = Keys.Shift
+            Dim capsOn As Boolean = Control.IsKeyLocked(Keys.CapsLock)
+            Dim useUpper As Boolean = shiftPressed Xor capsOn
+            Dim ch As Char = If(useUpper, "F"c, "f"c)
+
+            Dim before As String = If(selStart > 0, s.Substring(0, selStart), String.Empty)
+            Dim afterIndex As Integer = Math.Min(selStart + selLen, s.Length)
+            Dim after As String = If(afterIndex < s.Length, s.Substring(afterIndex), String.Empty)
+
+            tb.Text = before & ch & after
+            tb.SelectionStart = selStart + 1
+            tb.SelectionLength = 0
+
+            Return True
+
+        End If
+
+        ' If TextBox exists and has focus and key is F, insert the char and consume the key.
+        If (keyData And Keys.KeyCode) = Keys.F AndAlso
+           TextBoxEnrollmentRefNum IsNot Nothing AndAlso TextBoxEnrollmentRefNum.Focused Then
+
+            Dim tb = TextBoxEnrollmentRefNum
+            Dim s As String = tb.Text
+            Dim selStart As Integer = tb.SelectionStart
+            Dim selLen As Integer = tb.SelectionLength
+
+            Dim shiftPressed As Boolean = (Control.ModifierKeys And Keys.Shift) = Keys.Shift
+            Dim capsOn As Boolean = Control.IsKeyLocked(Keys.CapsLock)
+            Dim useUpper As Boolean = shiftPressed Xor capsOn
+            Dim ch As Char = If(useUpper, "F"c, "f"c)
+
+            Dim before As String = If(selStart > 0, s.Substring(0, selStart), String.Empty)
+            Dim afterIndex As Integer = Math.Min(selStart + selLen, s.Length)
+            Dim after As String = If(afterIndex < s.Length, s.Substring(afterIndex), String.Empty)
+
+            tb.Text = before & ch & after
+            tb.SelectionStart = selStart + 1
+            tb.SelectionLength = 0
+
+            Return True
+
+        End If
+
         ' Check only the key code (ignore modifiers in comparison)
         If (keyData And Keys.KeyCode) = Keys.F AndAlso TextBoxEnrollSearch IsNot Nothing AndAlso TextBoxEnrollSearch.Focused Then
             ' Insert the character into the textbox manually (preserve selection/replacement).

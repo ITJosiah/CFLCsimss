@@ -90,34 +90,11 @@ Public Class TeacherViewStudents
         isInitializing = False
     End Sub
 
-    ' Allow typing "f" into the student search TextBox while preventing the parent/dashboard full-screen handler.
+    ' Generalized ProcessCmdKey:
+    ' - If an editable TextBox/TextBoxBase has focus and user presses F, insert 'f' (respect Shift/CapsLock)
+    ' - Otherwise preserve existing global shortcuts (Escape, F -> full screen)
     Protected Overrides Function ProcessCmdKey(ByRef msg As Message, keyData As Keys) As Boolean
-        ' If the search TextBox exists and has focus and key is F, insert the char and consume the key.
-        If (keyData And Keys.KeyCode) = Keys.F AndAlso
-           TextBoxStudentSearch IsNot Nothing AndAlso TextBoxStudentSearch.Focused Then
-
-            Dim tb = TextBoxStudentSearch
-            Dim s As String = tb.Text
-            Dim selStart As Integer = tb.SelectionStart
-            Dim selLen As Integer = tb.SelectionLength
-
-            Dim shiftPressed As Boolean = (Control.ModifierKeys And Keys.Shift) = Keys.Shift
-            Dim capsOn As Boolean = Control.IsKeyLocked(Keys.CapsLock)
-            Dim useUpper As Boolean = shiftPressed Xor capsOn
-            Dim ch As Char = If(useUpper, "F"c, "f"c)
-
-            Dim before As String = If(selStart > 0, s.Substring(0, selStart), String.Empty)
-            Dim afterIndex As Integer = Math.Min(selStart + selLen, s.Length)
-            Dim after As String = If(afterIndex < s.Length, s.Substring(afterIndex), String.Empty)
-
-            tb.Text = before & ch & after
-            tb.SelectionStart = selStart + 1
-            tb.SelectionLength = 0
-
-            Return True
-        End If
-
-        ' Existing global shortcuts preserved when search box not focused
+        ' Preserve existing global shortcuts when not editing text
         If keyData = Keys.Escape Then
             ExitFullScreen()
             Return True

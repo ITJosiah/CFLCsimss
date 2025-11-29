@@ -496,6 +496,33 @@ Public Class SuperAdminManageTeacherAccounts
     End Sub
 
     Protected Overrides Function ProcessCmdKey(ByRef msg As Message, keyData As Keys) As Boolean
+
+        ' If TextBox exists and has focus and key is F, insert the char and consume the key.
+        If (keyData And Keys.KeyCode) = Keys.F AndAlso
+           txtbxTeacherPassword IsNot Nothing AndAlso txtbxTeacherPassword.Focused Then
+
+            Dim tb = txtbxTeacherPassword
+            Dim s As String = tb.Text
+            Dim selStart As Integer = tb.SelectionStart
+            Dim selLen As Integer = tb.SelectionLength
+
+            Dim shiftPressed As Boolean = (Control.ModifierKeys And Keys.Shift) = Keys.Shift
+            Dim capsOn As Boolean = Control.IsKeyLocked(Keys.CapsLock)
+            Dim useUpper As Boolean = shiftPressed Xor capsOn
+            Dim ch As Char = If(useUpper, "F"c, "f"c)
+
+            Dim before As String = If(selStart > 0, s.Substring(0, selStart), String.Empty)
+            Dim afterIndex As Integer = Math.Min(selStart + selLen, s.Length)
+            Dim after As String = If(afterIndex < s.Length, s.Substring(afterIndex), String.Empty)
+
+            tb.Text = before & ch & after
+            tb.SelectionStart = selStart + 1
+            tb.SelectionLength = 0
+
+            Return True
+
+        End If
+
         ' Ctrl+A to add account
         If keyData = (Keys.Control Or Keys.A) Then
             If btnManTeacherAdd IsNot Nothing Then

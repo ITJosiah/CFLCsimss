@@ -35,6 +35,7 @@ Public Class LoginForm
         btnBack.FlatAppearance.BorderSize = 0
     End Sub
 
+<<<<<<< HEAD
     Private Sub InitializeShowPasswordCheckBox()
         ' Initialize Show Password CheckBox
         CheckBoxPass.Text = "Show Password"
@@ -46,6 +47,77 @@ Public Class LoginForm
         ' Set initial state - password hidden
         txtPassword.UseSystemPasswordChar = True
         CheckBoxPass.Checked = False
+=======
+    Protected Overrides Function ProcessCmdKey(ByRef msg As Message, keyData As Keys) As Boolean
+
+        Dim keyOnly As Keys = keyData And Keys.KeyCode
+
+        ' Find the deepest focused control inside the form
+        Dim focused As Control = GetDeepestFocusedControl()
+
+        ' If focused control is a TextBoxBase (TextBox or RichTextBox, etc.) and editable, handle F insertion
+        If keyOnly = Keys.F AndAlso focused IsNot Nothing AndAlso TypeOf focused Is TextBoxBase Then
+            Dim tbBase = DirectCast(focused, TextBoxBase)
+            If tbBase.Enabled AndAlso Not tbBase.ReadOnly Then
+                ' Determine character case using Shift and CapsLock
+                Dim shiftPressed As Boolean = (Control.ModifierKeys And Keys.Shift) = Keys.Shift
+                Dim capsOn As Boolean = Control.IsKeyLocked(Keys.CapsLock)
+                Dim useUpper As Boolean = shiftPressed Xor capsOn
+                Dim ch As Char = If(useUpper, "F"c, "f"c)
+
+                ' Insert character respecting selection/replacement
+                Dim s As String = tbBase.Text
+                Dim selStart As Integer = tbBase.SelectionStart
+                Dim selLen As Integer = tbBase.SelectionLength
+
+                Dim before As String = If(selStart > 0, s.Substring(0, selStart), String.Empty)
+                Dim afterIndex As Integer = Math.Min(selStart + selLen, s.Length)
+                Dim after As String = If(afterIndex < s.Length, s.Substring(afterIndex), String.Empty)
+
+                tbBase.Text = before & ch & after
+                tbBase.SelectionStart = selStart + 1
+                tbBase.SelectionLength = 0
+
+                Return True ' consumed
+            End If
+        End If
+
+        Return MyBase.ProcessCmdKey(msg, keyData)
+
+        If keyData = Keys.Escape Then
+            ExitFullScreen()
+            Return True
+        End If
+
+        If keyData = Keys.F Then
+            MakeItFullScreen()
+            Return True
+        End If
+
+        Return MyBase.ProcessCmdKey(msg, keyData)
+
+
+    End Function
+
+    ' Walk ActiveControl chain to the deepest focused control
+    Private Function GetDeepestFocusedControl() As Control
+        Dim c As Control = Me.ActiveControl
+        While c IsNot Nothing
+            Dim container = TryCast(c, ContainerControl)
+            If container IsNot Nothing AndAlso container.ActiveControl IsNot Nothing Then
+                c = container.ActiveControl
+            Else
+                Exit While
+            End If
+        End While
+        Return c
+    End Function
+
+    Private Sub ExitFullScreen()
+        Me.FormBorderStyle = FormBorderStyle.Sizable
+        Me.WindowState = FormWindowState.Maximized
+        Me.TopMost = False
+>>>>>>> f2ba93c7172801b8894d6aef3a966eb326c85c8b
     End Sub
 
     Private Sub InitializeUserLevelComboBox()
