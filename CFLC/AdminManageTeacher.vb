@@ -742,33 +742,53 @@ Public Class AdminManageTeacher
 
     ' Allow typing "f" into the search TextBox while preventing the parent/dashboard full-screen handler.
     Protected Overrides Function ProcessCmdKey(ByRef msg As Message, keyData As Keys) As Boolean
-        ' Check only the key code (ignore modifiers in comparison)
-        If (keyData And Keys.KeyCode) = Keys.F AndAlso TextBoxTeacherSearch IsNot Nothing AndAlso TextBoxTeacherSearch.Focused Then
-            ' Insert the character into the textbox manually (preserve selection/replacement).
-            Dim tb = TextBoxTeacherSearch
-            Dim s As String = tb.Text
-            Dim selStart As Integer = tb.SelectionStart
-            Dim selLen As Integer = tb.SelectionLength
 
-            ' Determine case: Shift toggles, CapsLock toggles
-            Dim shiftPressed As Boolean = (keyData And Keys.Shift) = Keys.Shift
-            Dim capsOn As Boolean = Control.IsKeyLocked(Keys.CapsLock)
-            Dim useUpper As Boolean = shiftPressed Xor capsOn
-            Dim ch As Char = If(useUpper, "F"c, "f"c)
+        Dim keyOnly As Keys = keyData And Keys.KeyCode
 
-            Dim before As String = If(selStart > 0, s.Substring(0, selStart), String.Empty)
-            Dim afterIndex As Integer = Math.Min(selStart + selLen, s.Length)
-            Dim after As String = If(afterIndex < s.Length, s.Substring(afterIndex), String.Empty)
+        ' Find the deepest focused control inside the form
+        Dim focused As Control = GetDeepestFocusedControl()
 
-            tb.Text = before & ch & after
-            tb.SelectionStart = selStart + 1
-            tb.SelectionLength = 0
+        ' If focused control is a TextBoxBase (TextBox or RichTextBox, etc.) and editable, handle F insertion
+        If keyOnly = Keys.F AndAlso focused IsNot Nothing AndAlso TypeOf focused Is TextBoxBase Then
+            Dim tbBase = DirectCast(focused, TextBoxBase)
+            If tbBase.Enabled AndAlso Not tbBase.ReadOnly Then
+                ' Determine character case using Shift and CapsLock
+                Dim shiftPressed As Boolean = (Control.ModifierKeys And Keys.Shift) = Keys.Shift
+                Dim capsOn As Boolean = Control.IsKeyLocked(Keys.CapsLock)
+                Dim useUpper As Boolean = shiftPressed Xor capsOn
+                Dim ch As Char = If(useUpper, "F"c, "f"c)
 
-            ' Consume the key so parent doesn't trigger full-screen
-            Return True
+                ' Insert character respecting selection/replacement
+                Dim s As String = tbBase.Text
+                Dim selStart As Integer = tbBase.SelectionStart
+                Dim selLen As Integer = tbBase.SelectionLength
+
+                Dim before As String = If(selStart > 0, s.Substring(0, selStart), String.Empty)
+                Dim afterIndex As Integer = Math.Min(selStart + selLen, s.Length)
+                Dim after As String = If(afterIndex < s.Length, s.Substring(afterIndex), String.Empty)
+
+                tbBase.Text = before & ch & after
+                tbBase.SelectionStart = selStart + 1
+                tbBase.SelectionLength = 0
+
+                Return True ' consumed
+            End If
         End If
-
         Return MyBase.ProcessCmdKey(msg, keyData)
+    End Function
+
+    ' Walk ActiveControl chain to the deepest focused control
+    Private Function GetDeepestFocusedControl() As Control
+        Dim c As Control = Me.ActiveControl
+        While c IsNot Nothing
+            Dim container = TryCast(c, ContainerControl)
+            If container IsNot Nothing AndAlso container.ActiveControl IsNot Nothing Then
+                c = container.ActiveControl
+            Else
+                Exit While
+            End If
+        End While
+        Return c
     End Function
 
     Private Sub SearchTeachersBySurname(ByVal surname As String)

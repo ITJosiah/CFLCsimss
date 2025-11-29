@@ -148,6 +148,8 @@
         child.Show()
     End Sub
 
+
+
     ' Utility: remove everything from pnlTeacherMainContent except the left sidebar
     Private Sub ClearMainContentExceptSidebar()
         For i As Integer = pnlSuperAdminMainContent.Controls.Count - 1 To 0 Step -1
