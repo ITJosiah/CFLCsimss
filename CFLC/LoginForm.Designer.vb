@@ -30,6 +30,9 @@ Partial Class LoginForm
         Me.txtPassword = New System.Windows.Forms.TextBox()
         Me.btnLogin = New System.Windows.Forms.Button()
         Me.btnBack = New System.Windows.Forms.Button()
+        Me.CheckBoxPass = New System.Windows.Forms.CheckBox()
+        Me.cmbBoxUserLvl = New System.Windows.Forms.ComboBox()
+        Me.lblUserLvl = New System.Windows.Forms.Label()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -104,7 +107,7 @@ Partial Class LoginForm
         Me.btnLogin.Anchor = System.Windows.Forms.AnchorStyles.Bottom
         Me.btnLogin.BackColor = System.Drawing.Color.FromArgb(CType(CType(31, Byte), Integer), CType(CType(168, Byte), Integer), CType(CType(67, Byte), Integer))
         Me.btnLogin.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnLogin.Location = New System.Drawing.Point(594, 567)
+        Me.btnLogin.Location = New System.Drawing.Point(595, 592)
         Me.btnLogin.Name = "btnLogin"
         Me.btnLogin.Size = New System.Drawing.Size(150, 40)
         Me.btnLogin.TabIndex = 8
@@ -120,12 +123,42 @@ Partial Class LoginForm
         Me.btnBack.Text = "Back"
         Me.btnBack.UseVisualStyleBackColor = True
         '
+        'CheckBoxPass
+        '
+        Me.CheckBoxPass.AutoSize = True
+        Me.CheckBoxPass.Location = New System.Drawing.Point(710, 550)
+        Me.CheckBoxPass.Name = "CheckBoxPass"
+        Me.CheckBoxPass.Size = New System.Drawing.Size(81, 17)
+        Me.CheckBoxPass.TabIndex = 10
+        Me.CheckBoxPass.Text = "CheckBox1"
+        Me.CheckBoxPass.UseVisualStyleBackColor = True
+        '
+        'cmbBoxUserLvl
+        '
+        Me.cmbBoxUserLvl.FormattingEnabled = True
+        Me.cmbBoxUserLvl.Location = New System.Drawing.Point(842, 544)
+        Me.cmbBoxUserLvl.Name = "cmbBoxUserLvl"
+        Me.cmbBoxUserLvl.Size = New System.Drawing.Size(162, 21)
+        Me.cmbBoxUserLvl.TabIndex = 11
+        '
+        'lblUserLvl
+        '
+        Me.lblUserLvl.AutoSize = True
+        Me.lblUserLvl.Location = New System.Drawing.Point(447, 566)
+        Me.lblUserLvl.Name = "lblUserLvl"
+        Me.lblUserLvl.Size = New System.Drawing.Size(61, 13)
+        Me.lblUserLvl.TabIndex = 12
+        Me.lblUserLvl.Text = "User Level:"
+        '
         'LoginForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(7, Byte), Integer), CType(CType(77, Byte), Integer), CType(CType(39, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(1354, 661)
+        Me.Controls.Add(Me.lblUserLvl)
+        Me.Controls.Add(Me.cmbBoxUserLvl)
+        Me.Controls.Add(Me.CheckBoxPass)
         Me.Controls.Add(Me.btnBack)
         Me.Controls.Add(Me.btnLogin)
         Me.Controls.Add(Me.txtPassword)
@@ -150,4 +183,7 @@ Partial Class LoginForm
     Friend WithEvents txtPassword As TextBox
     Friend WithEvents btnLogin As Button
     Friend WithEvents btnBack As Button
+    Friend WithEvents CheckBoxPass As CheckBox
+    Friend WithEvents cmbBoxUserLvl As ComboBox
+    Friend WithEvents lblUserLvl As Label
 End Class
