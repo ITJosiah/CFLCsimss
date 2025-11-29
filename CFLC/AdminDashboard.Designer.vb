@@ -23,6 +23,9 @@ Partial Class AdminDashboard
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(AdminDashboard))
+        Dim ChartArea1 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
+        Dim Legend1 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
+        Dim Series1 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
         Me.pnlSidebar = New System.Windows.Forms.Panel()
         Me.flowButtons = New System.Windows.Forms.FlowLayoutPanel()
         Me.btnManageStudents = New System.Windows.Forms.Button()
@@ -56,6 +59,7 @@ Partial Class AdminDashboard
         Me.lblStudentListDashboard = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
+        Me.PieChartStudentGenderList = New System.Windows.Forms.DataVisualization.Charting.Chart()
         Me.pnlSidebar.SuspendLayout()
         Me.flowButtons.SuspendLayout()
         Me.pnlMainContent.SuspendLayout()
@@ -69,6 +73,7 @@ Partial Class AdminDashboard
         CType(Me.PictureBoxStudentListIcon, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel6.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PieChartStudentGenderList, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'pnlSidebar
@@ -191,6 +196,7 @@ Partial Class AdminDashboard
         'pnlMainContent
         '
         Me.pnlMainContent.BackColor = System.Drawing.Color.FromArgb(CType(CType(7, Byte), Integer), CType(CType(77, Byte), Integer), CType(CType(39, Byte), Integer))
+        Me.pnlMainContent.Controls.Add(Me.PieChartStudentGenderList)
         Me.pnlMainContent.Controls.Add(Me.pnlTeacherListDashboard)
         Me.pnlMainContent.Controls.Add(Me.pnlSubjectListDashboard)
         Me.pnlMainContent.Controls.Add(Me.pnlStudentListDashboard)
@@ -209,7 +215,7 @@ Partial Class AdminDashboard
         Me.pnlTeacherListDashboard.Controls.Add(Me.Panel3)
         Me.pnlTeacherListDashboard.Controls.Add(Me.lblTeacherListDashboard)
         Me.pnlTeacherListDashboard.Controls.Add(Me.Label9)
-        Me.pnlTeacherListDashboard.Location = New System.Drawing.Point(558, 36)
+        Me.pnlTeacherListDashboard.Location = New System.Drawing.Point(569, 36)
         Me.pnlTeacherListDashboard.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.pnlTeacherListDashboard.Name = "pnlTeacherListDashboard"
         Me.pnlTeacherListDashboard.Size = New System.Drawing.Size(466, 212)
@@ -284,7 +290,7 @@ Partial Class AdminDashboard
         Me.pnlSubjectListDashboard.Controls.Add(Me.Panel2)
         Me.pnlSubjectListDashboard.Controls.Add(Me.lblSubjectListDashboard)
         Me.pnlSubjectListDashboard.Controls.Add(Me.Label7)
-        Me.pnlSubjectListDashboard.Location = New System.Drawing.Point(63, 280)
+        Me.pnlSubjectListDashboard.Location = New System.Drawing.Point(1070, 36)
         Me.pnlSubjectListDashboard.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.pnlSubjectListDashboard.Name = "pnlSubjectListDashboard"
         Me.pnlSubjectListDashboard.Size = New System.Drawing.Size(466, 212)
@@ -440,6 +446,25 @@ Partial Class AdminDashboard
         Me.PictureBox1.TabIndex = 3
         Me.PictureBox1.TabStop = False
         '
+        'PieChartStudentGenderList
+        '
+        Me.PieChartStudentGenderList.BackColor = System.Drawing.Color.DarkGreen
+        ChartArea1.Name = "ChartArea1"
+        Me.PieChartStudentGenderList.ChartAreas.Add(ChartArea1)
+        Legend1.Name = "Legend1"
+        Me.PieChartStudentGenderList.Legends.Add(Legend1)
+        Me.PieChartStudentGenderList.Location = New System.Drawing.Point(1009, 304)
+        Me.PieChartStudentGenderList.Name = "PieChartStudentGenderList"
+        Me.PieChartStudentGenderList.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.SeaGreen
+        Series1.ChartArea = "ChartArea1"
+        Series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie
+        Series1.Legend = "Legend1"
+        Series1.Name = "Series1"
+        Me.PieChartStudentGenderList.Series.Add(Series1)
+        Me.PieChartStudentGenderList.Size = New System.Drawing.Size(597, 440)
+        Me.PieChartStudentGenderList.TabIndex = 8
+        Me.PieChartStudentGenderList.Text = "Chart1"
+        '
         'AdminDashboard
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
@@ -470,6 +495,7 @@ Partial Class AdminDashboard
         Me.Panel6.ResumeLayout(False)
         Me.Panel6.PerformLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PieChartStudentGenderList, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -507,4 +533,5 @@ Partial Class AdminDashboard
     Friend WithEvents Label6 As Label
     Friend WithEvents lblTeacherListDashboard As Label
     Friend WithEvents Label9 As Label
+    Friend WithEvents PieChartStudentGenderList As DataVisualization.Charting.Chart
 End Class

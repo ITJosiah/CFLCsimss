@@ -1,4 +1,5 @@
 ﻿Imports MySql.Data.MySqlClient
+Imports System.Windows.Forms.DataVisualization.Charting
 
 Public Class AdminDashboard
     Private currentContent As Form
@@ -25,6 +26,7 @@ Public Class AdminDashboard
         UpdateStudentCountFromDatabase()
         UpdateSubjectCountFromDatabase()
         UpdateTeacherCountFromDatabase()
+        UpdateGenderChartFromDatabase()
     End Sub
 
     Private Sub CenterLogo()
@@ -155,9 +157,10 @@ Public Class AdminDashboard
                 Dim oldForm As AdminManageStudents = TryCast(currentContent, AdminManageStudents)
                 If oldForm IsNot Nothing Then
                     RemoveHandler oldForm.StudentCountChanged, AddressOf OnStudentCountChanged
+                    RemoveHandler oldForm.GenderDataChanged, AddressOf OnGenderDataChanged
                 End If
             End If
-            
+
             ' Unsubscribe from events if it's AdminManageSubjects
             If TypeOf currentContent Is AdminManageSubjects Then
                 Dim oldForm As AdminManageSubjects = TryCast(currentContent, AdminManageSubjects)
@@ -165,7 +168,7 @@ Public Class AdminDashboard
                     RemoveHandler oldForm.SubjectCountChanged, AddressOf OnSubjectCountChanged
                 End If
             End If
-            
+
             ' Unsubscribe from events if it's AdminManageTeacher
             If TypeOf currentContent Is AdminManageTeacher Then
                 Dim oldForm As AdminManageTeacher = TryCast(currentContent, AdminManageTeacher)
@@ -195,9 +198,10 @@ Public Class AdminDashboard
                 Dim oldForm As AdminManageStudents = TryCast(currentContent, AdminManageStudents)
                 If oldForm IsNot Nothing Then
                     RemoveHandler oldForm.StudentCountChanged, AddressOf OnStudentCountChanged
+                    RemoveHandler oldForm.GenderDataChanged, AddressOf OnGenderDataChanged
                 End If
             End If
-            
+
             ' Unsubscribe from events if it's AdminManageSubjects
             If TypeOf currentContent Is AdminManageSubjects Then
                 Dim oldForm As AdminManageSubjects = TryCast(currentContent, AdminManageSubjects)
@@ -205,7 +209,7 @@ Public Class AdminDashboard
                     RemoveHandler oldForm.SubjectCountChanged, AddressOf OnSubjectCountChanged
                 End If
             End If
-            
+
             ' Unsubscribe from events if it's AdminManageTeacher
             If TypeOf currentContent Is AdminManageTeacher Then
                 Dim oldForm As AdminManageTeacher = TryCast(currentContent, AdminManageTeacher)
@@ -230,6 +234,7 @@ Public Class AdminDashboard
         pnlMainContent.Controls.Add(pnlStudentListDashboard)
         pnlMainContent.Controls.Add(pnlSubjectListDashboard)
         pnlMainContent.Controls.Add(pnlTeacherListDashboard)
+        pnlMainContent.Controls.Add(PieChartStudentGenderList)
         pnlMainContent.Controls.Add(PictureBox1)
         CenterLogo()
 
@@ -237,6 +242,7 @@ Public Class AdminDashboard
         UpdateStudentCountFromDatabase()
         UpdateSubjectCountFromDatabase()
         UpdateTeacherCountFromDatabase()
+        UpdateGenderChartFromDatabase()
     End Sub
 
     ' Method to update student count from database (fallback when form is not loaded)
@@ -265,7 +271,7 @@ Public Class AdminDashboard
             End If
         End Try
     End Sub
-    
+
     ' Method to update subject count from database (fallback when form is not loaded)
     Private Sub UpdateSubjectCountFromDatabase()
         Try
@@ -288,7 +294,7 @@ Public Class AdminDashboard
             End If
         End Try
     End Sub
-    
+
     ' Method to update teacher count from database (fallback when form is not loaded)
     Private Sub UpdateTeacherCountFromDatabase()
         Try
@@ -312,6 +318,44 @@ Public Class AdminDashboard
         End Try
     End Sub
 
+    ' Method to update gender chart from database (fallback when form is not loaded)
+    Private Sub UpdateGenderChartFromDatabase()
+        Try
+            modDBx.openConn(modDBx.db_name)
+            Dim sql As String = "SELECT Gender, COUNT(*) as Count FROM student GROUP BY Gender"
+
+            Dim maleCount As Integer = 0
+            Dim femaleCount As Integer = 0
+
+            Using cmd As New MySql.Data.MySqlClient.MySqlCommand(sql, modDBx.conn)
+                Using reader As MySqlDataReader = cmd.ExecuteReader()
+                    While reader.Read()
+                        Dim gender As String = ""
+                        If Not IsDBNull(reader("Gender")) Then
+                            gender = reader("Gender").ToString().Trim()
+                        End If
+                        Dim count As Integer = Convert.ToInt32(reader("Count"))
+
+                        If gender.Equals("Male", StringComparison.OrdinalIgnoreCase) Then
+                            maleCount = count
+                        ElseIf gender.Equals("Female", StringComparison.OrdinalIgnoreCase) Then
+                            femaleCount = count
+                        End If
+                    End While
+                End Using
+            End Using
+
+            UpdateGenderChart(maleCount, femaleCount)
+        Catch ex As Exception
+            ' If there's an error, keep current chart or set to 0
+            System.Diagnostics.Debug.WriteLine("Error updating gender chart from database: " & ex.Message)
+        Finally
+            If modDBx.conn IsNot Nothing AndAlso modDBx.conn.State = ConnectionState.Open Then
+                modDBx.conn.Close()
+            End If
+        End Try
+    End Sub
+
     ' Button click handlers
     Private Sub btnManageStudents_Click(sender As Object, e As EventArgs) Handles btnManageStudents.Click
         ' Dispose previous instance if exists
@@ -326,11 +370,15 @@ Public Class AdminDashboard
 
         ' Subscribe to student count changed event
         AddHandler manageStudentsForm.StudentCountChanged, AddressOf OnStudentCountChanged
+        ' Subscribe to gender data changed event
+        AddHandler manageStudentsForm.GenderDataChanged, AddressOf OnGenderDataChanged
 
         LoadContentForm(manageStudentsForm)
 
         ' Update count immediately
         UpdateStudentCountFromForm()
+        ' Update gender chart immediately
+        UpdateGenderChartFromForm()
     End Sub
 
     ' Event handler for student count changes
@@ -344,6 +392,11 @@ Public Class AdminDashboard
         End If
     End Sub
 
+    ' Event handler for gender data changes
+    Private Sub OnGenderDataChanged(maleCount As Integer, femaleCount As Integer)
+        UpdateGenderChart(maleCount, femaleCount)
+    End Sub
+
     ' Method to update student count from the form
     Private Sub UpdateStudentCountFromForm()
         If manageStudentsForm IsNot Nothing Then
@@ -351,6 +404,130 @@ Public Class AdminDashboard
             OnStudentCountChanged(count)
         End If
     End Sub
+
+    ' Method to update gender chart from the form
+    Private Sub UpdateGenderChartFromForm()
+        If manageStudentsForm IsNot Nothing Then
+            Dim genderCounts = manageStudentsForm.GetGenderCounts()
+            UpdateGenderChart(genderCounts("Male"), genderCounts("Female"))
+        End If
+    End Sub
+
+    ' Method to update the gender pie chart
+    Private Sub UpdateGenderChart(maleCount As Integer, femaleCount As Integer)
+        Try
+            ' Check if the chart control exists - search in multiple locations
+            Dim chartControl As Chart = Nothing
+
+            ' First, try to find by exact name in pnlMainContent
+            For Each ctrl As Control In pnlMainContent.Controls
+                If TypeOf ctrl Is Chart AndAlso ctrl.Name = "PieChartStudentGenderList" Then
+                    chartControl = DirectCast(ctrl, Chart)
+                    Exit For
+                End If
+            Next
+
+            ' If not found, check in pnlStudentListDashboard
+            If chartControl Is Nothing AndAlso pnlStudentListDashboard IsNot Nothing Then
+                For Each ctrl As Control In pnlStudentListDashboard.Controls
+                    If TypeOf ctrl Is Chart Then
+                        If ctrl.Name = "PieChartStudentGenderList" OrElse
+                           ctrl.Name.Contains("Chart") OrElse ctrl.Name.Contains("Pie") OrElse
+                           ctrl.Name.Contains("Gender") Then
+                            chartControl = DirectCast(ctrl, Chart)
+                            Exit For
+                        End If
+                    End If
+                Next
+            End If
+
+            ' If still not found, search all controls recursively
+            If chartControl Is Nothing Then
+                chartControl = FindChartControl(Me)
+            End If
+
+            ' If chart exists, update it
+            If chartControl IsNot Nothing Then
+                chartControl.Series.Clear()
+                chartControl.ChartAreas.Clear()
+
+                ' Add chart area
+                Dim chartArea As New ChartArea("GenderChartArea")
+                chartControl.ChartAreas.Add(chartArea)
+
+                ' Add series for pie chart
+                Dim series As New Series("GenderSeries")
+                series.ChartType = SeriesChartType.Pie
+                series.IsValueShownAsLabel = True
+                series.LabelFormat = "#,##0"
+
+                ' Add data points with colors
+                If maleCount > 0 Then
+                    Dim malePoint As New DataPoint(0, maleCount)
+                    malePoint.Color = Color.Green
+                    malePoint.LegendText = "Male"
+                    malePoint.Label = "Male: #VALY"
+                    series.Points.Add(malePoint)
+                End If
+
+                If femaleCount > 0 Then
+                    Dim femalePoint As New DataPoint(1, femaleCount)
+                    femalePoint.Color = Color.LightGreen
+                    femalePoint.LegendText = "Female"
+                    femalePoint.Label = "Female: #VALY"
+                    series.Points.Add(femalePoint)
+                End If
+
+                ' If no data, add placeholder
+                If maleCount = 0 AndAlso femaleCount = 0 Then
+                    Dim emptyPoint As New DataPoint(0, 1)
+                    emptyPoint.Color = Color.Gray
+                    emptyPoint.LegendText = "No Data"
+                    emptyPoint.IsEmpty = True
+                    series.Points.Add(emptyPoint)
+                End If
+
+                chartControl.Series.Add(series)
+
+                ' Configure chart appearance
+                chartControl.BackColor = Color.Transparent
+                chartArea.BackColor = Color.Transparent
+
+                ' Add legend
+                If chartControl.Legends.Count = 0 Then
+                    Dim legend As New Legend("GenderLegend")
+                    legend.Docking = Docking.Bottom
+                    chartControl.Legends.Add(legend)
+                End If
+            Else
+                ' Chart control doesn't exist - log for debugging
+                System.Diagnostics.Debug.WriteLine("PieChartStudentGenderList not found. Please add a Chart control named 'PieChartStudentGenderList' to the form.")
+            End If
+        Catch ex As Exception
+            System.Diagnostics.Debug.WriteLine("Error updating gender chart: " & ex.Message)
+        End Try
+    End Sub
+
+    ' Helper method to find chart control recursively
+    Private Function FindChartControl(parent As Control) As Chart
+        For Each ctrl As Control In parent.Controls
+            If TypeOf ctrl Is Chart Then
+                Dim chart As Chart = DirectCast(ctrl, Chart)
+                If chart.Name = "PieChartStudentGenderList" OrElse
+                   chart.Name.Contains("Gender") OrElse
+                   chart.Name.Contains("Pie") Then
+                    Return chart
+                End If
+            End If
+
+            ' Recursively search child controls
+            Dim foundChart As Chart = FindChartControl(ctrl)
+            If foundChart IsNot Nothing Then
+                Return foundChart
+            End If
+        Next
+        Return Nothing
+    End Function
 
     Private Sub btnManageTeachers_Click(sender As Object, e As EventArgs) Handles btnManageTeachers.Click
         ' Dispose previous instance if exists
@@ -371,14 +548,14 @@ Public Class AdminDashboard
         ' Update count immediately
         UpdateTeacherCountFromForm()
     End Sub
-    
+
     ' Event handler for teacher count changes
     Private Sub OnTeacherCountChanged(count As Integer)
         If lblTeacherListDashboard IsNot Nothing Then
             lblTeacherListDashboard.Text = count.ToString()
         End If
     End Sub
-    
+
     ' Method to update teacher count from the form
     Private Sub UpdateTeacherCountFromForm()
         If manageTeachersForm IsNot Nothing Then
