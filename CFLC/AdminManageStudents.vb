@@ -6,6 +6,21 @@ Public Class AdminManageStudents
     Private currentStudentID As Integer = 0
 
     Public Property IsEmbedded As Boolean = False
+    
+    ' Event to notify when student count changes
+    Public Event StudentCountChanged(count As Integer)
+    
+    ' Public method to get current student count
+    Public Function GetStudentCount() As Integer
+        If dgvStudents IsNot Nothing AndAlso dgvStudents.DataSource IsNot Nothing Then
+            Dim dt As DataTable = TryCast(dgvStudents.DataSource, DataTable)
+            If dt IsNot Nothing Then
+                Return dt.Rows.Count
+            End If
+            Return dgvStudents.Rows.Count
+        End If
+        Return 0
+    End Function
 
     Private Sub AdminManageStudents_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
@@ -1165,6 +1180,9 @@ Public Class AdminManageStudents
         Catch
             ' ignore - some layout states prevent setting CurrentCell to Nothing
         End Try
+        
+        ' Notify that student count has changed
+        RaiseEvent StudentCountChanged(GetStudentCount())
     End Sub
 
     Private Sub AdminManageStudents_Shown(sender As Object, e As EventArgs) Handles Me.Shown

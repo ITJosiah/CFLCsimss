@@ -1,5 +1,9 @@
-﻿Public Class AdminDashboard
+﻿Imports MySql.Data.MySqlClient
+
+Public Class AdminDashboard
     Private currentContent As Form
+    Private manageStudentsForm As AdminManageStudents = Nothing
+    Private manageSubjectsForm As AdminManageSubjects = Nothing
     Private Sub AdminDashboard_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ' Set form properties
         Me.FormBorderStyle = FormBorderStyle.None
@@ -15,6 +19,10 @@
         ShowHomeContent()
 
         StyleSidebarButtons()
+
+        ' Load initial counts
+        UpdateStudentCountFromDatabase()
+        UpdateSubjectCountFromDatabase()
     End Sub
 
     Private Sub CenterLogo()
@@ -140,6 +148,22 @@
 
     Private Sub LoadContentForm(child As Form)
         If currentContent IsNot Nothing Then
+            ' Unsubscribe from events if it's AdminManageStudents
+            If TypeOf currentContent Is AdminManageStudents Then
+                Dim oldForm As AdminManageStudents = TryCast(currentContent, AdminManageStudents)
+                If oldForm IsNot Nothing Then
+                    RemoveHandler oldForm.StudentCountChanged, AddressOf OnStudentCountChanged
+                End If
+            End If
+            
+            ' Unsubscribe from events if it's AdminManageSubjects
+            If TypeOf currentContent Is AdminManageSubjects Then
+                Dim oldForm As AdminManageSubjects = TryCast(currentContent, AdminManageSubjects)
+                If oldForm IsNot Nothing Then
+                    RemoveHandler oldForm.SubjectCountChanged, AddressOf OnSubjectCountChanged
+                End If
+            End If
+
             currentContent.Close()
             currentContent.Dispose()
             currentContent = Nothing
@@ -156,22 +180,132 @@
 
     Private Sub ShowHomeContent()
         If currentContent IsNot Nothing Then
+            ' Unsubscribe from events if it's AdminManageStudents
+            If TypeOf currentContent Is AdminManageStudents Then
+                Dim oldForm As AdminManageStudents = TryCast(currentContent, AdminManageStudents)
+                If oldForm IsNot Nothing Then
+                    RemoveHandler oldForm.StudentCountChanged, AddressOf OnStudentCountChanged
+                End If
+            End If
+            
+            ' Unsubscribe from events if it's AdminManageSubjects
+            If TypeOf currentContent Is AdminManageSubjects Then
+                Dim oldForm As AdminManageSubjects = TryCast(currentContent, AdminManageSubjects)
+                If oldForm IsNot Nothing Then
+                    RemoveHandler oldForm.SubjectCountChanged, AddressOf OnSubjectCountChanged
+                End If
+            End If
+
             currentContent.Close()
             currentContent.Dispose()
             currentContent = Nothing
         End If
 
+        ' Clear the form references when showing home
+        manageStudentsForm = Nothing
+        manageSubjectsForm = Nothing
+
         pnlMainContent.Controls.Clear()
+        ' Add both the student list dashboard panel and the logo
+        ' Order matters for z-ordering (last added appears on top)
+        pnlMainContent.Controls.Add(pnlStudentListDashboard)
+        pnlMainContent.Controls.Add(pnlSubjectListDashboard)
         pnlMainContent.Controls.Add(PictureBox1)
         CenterLogo()
+
+        ' Update counts from database when showing home (in case form is closed)
+        UpdateStudentCountFromDatabase()
+        UpdateSubjectCountFromDatabase()
+    End Sub
+
+    ' Method to update student count from database (fallback when form is not loaded)
+    Private Sub UpdateStudentCountFromDatabase()
+        Try
+            modDBx.openConn(modDBx.db_name)
+            Dim sql As String = "SELECT COUNT(*) FROM student"
+
+            Using cmd As New MySql.Data.MySqlClient.MySqlCommand(sql, modDBx.conn)
+                Dim count As Integer = Convert.ToInt32(cmd.ExecuteScalar())
+
+                If lblStudentListDashboard IsNot Nothing Then
+                    lblStudentListDashboard.Text = count.ToString()
+                End If
+
+                If Label3 IsNot Nothing Then
+                    Label3.Text = count.ToString()
+                End If
+            End Using
+        Catch ex As Exception
+            ' If there's an error, keep current value or set to 0
+            System.Diagnostics.Debug.WriteLine("Error updating student count from database: " & ex.Message)
+        Finally
+            If modDBx.conn IsNot Nothing AndAlso modDBx.conn.State = ConnectionState.Open Then
+                modDBx.conn.Close()
+            End If
+        End Try
+    End Sub
+    
+    ' Method to update subject count from database (fallback when form is not loaded)
+    Private Sub UpdateSubjectCountFromDatabase()
+        Try
+            modDBx.openConn(modDBx.db_name)
+            Dim sql As String = "SELECT COUNT(*) FROM subject"
+
+            Using cmd As New MySql.Data.MySqlClient.MySqlCommand(sql, modDBx.conn)
+                Dim count As Integer = Convert.ToInt32(cmd.ExecuteScalar())
+
+                If lblSubjectListDashboard IsNot Nothing Then
+                    lblSubjectListDashboard.Text = count.ToString()
+                End If
+            End Using
+        Catch ex As Exception
+            ' If there's an error, keep current value or set to 0
+            System.Diagnostics.Debug.WriteLine("Error updating subject count from database: " & ex.Message)
+        Finally
+            If modDBx.conn IsNot Nothing AndAlso modDBx.conn.State = ConnectionState.Open Then
+                modDBx.conn.Close()
+            End If
+        End Try
     End Sub
 
     ' Button click handlers
     Private Sub btnManageStudents_Click(sender As Object, e As EventArgs) Handles btnManageStudents.Click
-        Dim manageStudentsForm As New AdminManageStudents() With {
+        ' Dispose previous instance if exists
+        If manageStudentsForm IsNot Nothing Then
+            RemoveHandler manageStudentsForm.StudentCountChanged, AddressOf OnStudentCountChanged
+            manageStudentsForm = Nothing
+        End If
+
+        manageStudentsForm = New AdminManageStudents() With {
             .IsEmbedded = True
         }
+
+        ' Subscribe to student count changed event
+        AddHandler manageStudentsForm.StudentCountChanged, AddressOf OnStudentCountChanged
+
         LoadContentForm(manageStudentsForm)
+
+        ' Update count immediately
+        UpdateStudentCountFromForm()
+    End Sub
+
+    ' Event handler for student count changes
+    Private Sub OnStudentCountChanged(count As Integer)
+        If lblStudentListDashboard IsNot Nothing Then
+            lblStudentListDashboard.Text = count.ToString()
+        End If
+        ' Also update Label3 if it exists
+        If Label3 IsNot Nothing Then
+            Label3.Text = count.ToString()
+        End If
+    End Sub
+
+    ' Method to update student count from the form
+    Private Sub UpdateStudentCountFromForm()
+        If manageStudentsForm IsNot Nothing Then
+            Dim count As Integer = manageStudentsForm.GetStudentCount()
+            OnStudentCountChanged(count)
+        End If
     End Sub
 
     Private Sub btnManageTeachers_Click(sender As Object, e As EventArgs) Handles btnManageTeachers.Click
@@ -197,10 +331,38 @@
     End Sub
 
     Private Sub btnManageSubjects_Click(sender As Object, e As EventArgs) Handles btnManageSubjects.Click
-        Dim manageSubjectsForm As New AdminManageSubjects() With {
+        ' Dispose previous instance if exists
+        If manageSubjectsForm IsNot Nothing Then
+            RemoveHandler manageSubjectsForm.SubjectCountChanged, AddressOf OnSubjectCountChanged
+            manageSubjectsForm = Nothing
+        End If
+
+        manageSubjectsForm = New AdminManageSubjects() With {
             .IsEmbedded = True
         }
+
+        ' Subscribe to subject count changed event
+        AddHandler manageSubjectsForm.SubjectCountChanged, AddressOf OnSubjectCountChanged
+
         LoadContentForm(manageSubjectsForm)
+
+        ' Update count immediately
+        UpdateSubjectCountFromForm()
+    End Sub
+    
+    ' Event handler for subject count changes
+    Private Sub OnSubjectCountChanged(count As Integer)
+        If lblSubjectListDashboard IsNot Nothing Then
+            lblSubjectListDashboard.Text = count.ToString()
+        End If
+    End Sub
+    
+    ' Method to update subject count from the form
+    Private Sub UpdateSubjectCountFromForm()
+        If manageSubjectsForm IsNot Nothing Then
+            Dim count As Integer = manageSubjectsForm.GetSubjectCount()
+            OnSubjectCountChanged(count)
+        End If
     End Sub
 
     Private Sub btnGenerateReports_Click(sender As Object, e As EventArgs) Handles btnGenerateReports.Click
@@ -227,6 +389,7 @@
     Private Sub pnlMainContent_Paint(sender As Object, e As PaintEventArgs) Handles pnlMainContent.Paint
 
     End Sub
+
 
 End Class
 

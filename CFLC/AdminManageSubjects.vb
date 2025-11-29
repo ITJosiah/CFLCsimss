@@ -10,6 +10,21 @@ Public Class AdminManageSubjects
     Private currentSchoolYearStart As Date = New Date(2025, 8, 1) ' August 2025
     Private currentSchoolYearEnd As Date = New Date(2026, 5, 31) ' May 2026
 
+    ' Event to notify when subject count changes
+    Public Event SubjectCountChanged(count As Integer)
+
+    ' Public method to get current subject count
+    Public Function GetSubjectCount() As Integer
+        If dgvSubjectList IsNot Nothing AndAlso dgvSubjectList.DataSource IsNot Nothing Then
+            Dim dt As DataTable = TryCast(dgvSubjectList.DataSource, DataTable)
+            If dt IsNot Nothing Then
+                Return dt.Rows.Count
+            End If
+            Return dgvSubjectList.Rows.Count
+        End If
+        Return 0
+    End Function
+
     Private Sub AdminManageSubjects_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If Not IsEmbedded Then
             Me.WindowState = FormWindowState.Maximized
@@ -786,6 +801,9 @@ Public Class AdminManageSubjects
         Catch
             ' ignore - layout timing may prevent clearing CurrentCell
         End Try
+
+        ' Notify that subject count has changed
+        RaiseEvent SubjectCountChanged(GetSubjectCount())
     End Sub
 
     ' Final fallback after form is shown
