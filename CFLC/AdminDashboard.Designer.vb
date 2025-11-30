@@ -226,8 +226,7 @@ Partial Class AdminDashboard
         '
         'PieChartMunicipalityList
         '
-        Me.PieChartMunicipalityList.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.PieChartMunicipalityList.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.PieChartMunicipalityList.BackColor = System.Drawing.Color.DarkGreen
         Me.PieChartMunicipalityList.BorderlineColor = System.Drawing.Color.Transparent
         Me.PieChartMunicipalityList.BorderlineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Solid
@@ -237,7 +236,7 @@ Partial Class AdminDashboard
         Legend1.BackColor = System.Drawing.Color.DarkSeaGreen
         Legend1.Name = "Legend1"
         Me.PieChartMunicipalityList.Legends.Add(Legend1)
-        Me.PieChartMunicipalityList.Location = New System.Drawing.Point(819, 635)
+        Me.PieChartMunicipalityList.Location = New System.Drawing.Point(1114, 345)
         Me.PieChartMunicipalityList.Name = "PieChartMunicipalityList"
         Me.PieChartMunicipalityList.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.SeaGreen
         Series1.ChartArea = "ChartArea1"
@@ -245,26 +244,27 @@ Partial Class AdminDashboard
         Series1.Legend = "Legend1"
         Series1.Name = "Series1"
         Me.PieChartMunicipalityList.Series.Add(Series1)
-        Me.PieChartMunicipalityList.Size = New System.Drawing.Size(642, 384)
+        Me.PieChartMunicipalityList.Size = New System.Drawing.Size(466, 350)
         Me.PieChartMunicipalityList.TabIndex = 12
         Me.PieChartMunicipalityList.Text = "Chart1"
         Me.PieChartMunicipalityList.UseWaitCursor = True
         '
         'PanelForTotalEnrollmentChartDashboard
         '
+        Me.PanelForTotalEnrollmentChartDashboard.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.PanelForTotalEnrollmentChartDashboard.BackColor = System.Drawing.Color.ForestGreen
         Me.PanelForTotalEnrollmentChartDashboard.Controls.Add(Me.Label8)
         Me.PanelForTotalEnrollmentChartDashboard.Controls.Add(Me.ChartTotalEnrollmentPerYear)
         Me.PanelForTotalEnrollmentChartDashboard.Location = New System.Drawing.Point(76, 345)
         Me.PanelForTotalEnrollmentChartDashboard.Name = "PanelForTotalEnrollmentChartDashboard"
-        Me.PanelForTotalEnrollmentChartDashboard.Size = New System.Drawing.Size(688, 376)
+        Me.PanelForTotalEnrollmentChartDashboard.Size = New System.Drawing.Size(466, 350)
         Me.PanelForTotalEnrollmentChartDashboard.TabIndex = 12
         '
         'Label8
         '
         Me.Label8.AutoSize = True
         Me.Label8.Font = New System.Drawing.Font("Microsoft Sans Serif", 20.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label8.Location = New System.Drawing.Point(244, 11)
+        Me.Label8.Location = New System.Drawing.Point(134, 11)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(197, 39)
         Me.Label8.TabIndex = 2
@@ -272,8 +272,7 @@ Partial Class AdminDashboard
         '
         'ChartTotalEnrollmentPerYear
         '
-        Me.ChartTotalEnrollmentPerYear.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.ChartTotalEnrollmentPerYear.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.ChartTotalEnrollmentPerYear.BackColor = System.Drawing.Color.DarkGreen
         Me.ChartTotalEnrollmentPerYear.BorderlineColor = System.Drawing.Color.Green
         Me.ChartTotalEnrollmentPerYear.BorderSkin.BackColor = System.Drawing.SystemColors.GradientInactiveCaption
@@ -297,7 +296,7 @@ Partial Class AdminDashboard
         Series2.MarkerColor = System.Drawing.Color.White
         Series2.Name = "Series1"
         Me.ChartTotalEnrollmentPerYear.Series.Add(Series2)
-        Me.ChartTotalEnrollmentPerYear.Size = New System.Drawing.Size(682, 315)
+        Me.ChartTotalEnrollmentPerYear.Size = New System.Drawing.Size(460, 289)
         Me.ChartTotalEnrollmentPerYear.TabIndex = 0
         Me.ChartTotalEnrollmentPerYear.Text = "Chart1"
         '
@@ -316,6 +315,7 @@ Partial Class AdminDashboard
         '
         'PieChartStudentGenderList
         '
+        Me.PieChartStudentGenderList.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.PieChartStudentGenderList.BackColor = System.Drawing.Color.DarkGreen
         Me.PieChartStudentGenderList.BorderlineColor = System.Drawing.Color.Transparent
         Me.PieChartStudentGenderList.BorderlineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Solid
@@ -325,7 +325,7 @@ Partial Class AdminDashboard
         Legend2.BackColor = System.Drawing.Color.DarkSeaGreen
         Legend2.Name = "Legend1"
         Me.PieChartStudentGenderList.Legends.Add(Legend2)
-        Me.PieChartStudentGenderList.Location = New System.Drawing.Point(1114, 388)
+        Me.PieChartStudentGenderList.Location = New System.Drawing.Point(596, 345)
         Me.PieChartStudentGenderList.Name = "PieChartStudentGenderList"
         Me.PieChartStudentGenderList.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.SeaGreen
         Series3.ChartArea = "ChartArea1"
@@ -333,7 +333,7 @@ Partial Class AdminDashboard
         Series3.Legend = "Legend1"
         Series3.Name = "Series1"
         Me.PieChartStudentGenderList.Series.Add(Series3)
-        Me.PieChartStudentGenderList.Size = New System.Drawing.Size(347, 227)
+        Me.PieChartStudentGenderList.Size = New System.Drawing.Size(466, 350)
         Me.PieChartStudentGenderList.TabIndex = 8
         Me.PieChartStudentGenderList.Text = "Chart1"
         '

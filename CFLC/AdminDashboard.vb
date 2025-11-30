@@ -55,6 +55,30 @@ Public Class AdminDashboard
         PictureBox1.Top = (areaHeight - PictureBox1.Height) \ 2
     End Sub
 
+    Private Sub CenterCharts()
+        If pnlMainContent Is Nothing Then Return
+
+        ' Align charts with top panels
+        ' Student panel: X = 76, Width = 466
+        ' Teacher panel: X = 596, Width = 466
+        ' Subject panel: X = 1114, Width = 466
+
+        ' Align bar chart with Student panel (X = 76)
+        If PanelForTotalEnrollmentChartDashboard IsNot Nothing Then
+            PanelForTotalEnrollmentChartDashboard.Left = 76
+        End If
+
+        ' Align gender pie chart with Teacher panel (X = 596)
+        If PieChartStudentGenderList IsNot Nothing Then
+            PieChartStudentGenderList.Left = 596
+        End If
+
+        ' Align municipality pie chart with Subject panel (X = 1114)
+        If PieChartMunicipalityList IsNot Nothing Then
+            PieChartMunicipalityList.Left = 1114
+        End If
+    End Sub
+
     Private Sub StyleSidebarButtons()
         ' Style all sidebar buttons
         Dim buttons() As Button = {btnManageStudents, btnManageTeachers, btnManageSections,
@@ -114,6 +138,7 @@ Public Class AdminDashboard
     End Sub
     Private Sub AdminDashboard_Resize(sender As Object, e As EventArgs) Handles MyBase.Resize
         CenterLogo()
+        CenterCharts()
         PositionSidebarButtons()
     End Sub
 
@@ -312,6 +337,7 @@ Public Class AdminDashboard
         ' PictureBox1 (logo) stays in background, only centered if no content overlaps
 
         CenterLogo()
+        CenterCharts()
 
         ' Update counts from database when showing home (in case form is closed)
         UpdateStudentCountFromDatabase()
