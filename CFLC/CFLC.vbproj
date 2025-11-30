@@ -258,6 +258,12 @@
     <Compile Include="TeacherDashboard.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="TeacherGenerateReport.Designer.vb">
+      <DependentUpon>TeacherGenerateReport.vb</DependentUpon>
+    </Compile>
+    <Compile Include="TeacherGenerateReport.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="TeacherViewAssignedSubjects.Designer.vb">
       <DependentUpon>TeacherViewAssignedSubjects.vb</DependentUpon>
     </Compile>
@@ -326,6 +332,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="TeacherDashboard.resx">
       <DependentUpon>TeacherDashboard.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TeacherGenerateReport.resx">
+      <DependentUpon>TeacherGenerateReport.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TeacherViewAssignedSubjects.resx">
       <DependentUpon>TeacherViewAssignedSubjects.vb</DependentUpon>

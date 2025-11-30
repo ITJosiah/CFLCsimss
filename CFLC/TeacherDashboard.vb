@@ -212,7 +212,12 @@ Public Class TeacherDashboard
     End Sub
 
     Private Sub btnTeacherGenerateReports_Click(sender As Object, e As EventArgs) Handles btnTeacherGenerateReports.Click
-
+        ' Open Generate Reports form for teacher
+        Dim reportsForm As New TeacherGenerateReport() With {
+            .IsEmbedded = True,
+            .TeacherID = Me.TeacherID
+        }
+        LoadContentForm(reportsForm)
     End Sub
 
     Private Sub btnLogout_Click(sender As Object, e As EventArgs) Handles btnLogout.Click
