@@ -5,6 +5,21 @@ Imports MySql.Data.MySqlClient
 Public Class AdminManageSections
     Public Property IsEmbedded As Boolean = False
     Private currentSectionID As Integer = 0
+    
+    ' Event to notify when section count changes
+    Public Event SectionCountChanged(count As Integer)
+    
+    ' Public method to get current section count
+    Public Function GetSectionCount() As Integer
+        If dgvSections IsNot Nothing AndAlso dgvSections.DataSource IsNot Nothing Then
+            Dim dt As DataTable = TryCast(dgvSections.DataSource, DataTable)
+            If dt IsNot Nothing Then
+                Return dt.Rows.Count
+            End If
+            Return dgvSections.Rows.Count
+        End If
+        Return 0
+    End Function
 
     ' Define the current school year (you might want to make this configurable)
     Private currentSchoolYearStart As Date = New Date(2025, 8, 1) ' August 2025
@@ -911,6 +926,10 @@ Public Class AdminManageSections
         Catch
             ' ignore - layout timing may prevent clearing CurrentCell
         End Try
+        
+        ' Raise event for dashboard update
+        Dim count As Integer = GetSectionCount()
+        RaiseEvent SectionCountChanged(count)
     End Sub
 
     ' Final fallback after form is shown

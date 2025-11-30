@@ -5,6 +5,21 @@ Public Class SuperAdminManageTeacherAccounts
     Public Property IsEmbedded As Boolean = False
     Private currentUserID As String = String.Empty
     Private originalData As New Dictionary(Of String, Object)()
+    
+    ' Event to notify when teacher account count changes
+    Public Event TeacherAccountCountChanged(count As Integer)
+    
+    ' Public method to get current teacher account count
+    Public Function GetTeacherAccountCount() As Integer
+        If dgvLoginTeacher IsNot Nothing AndAlso dgvLoginTeacher.DataSource IsNot Nothing Then
+            Dim dt As DataTable = TryCast(dgvLoginTeacher.DataSource, DataTable)
+            If dt IsNot Nothing Then
+                Return dt.Rows.Count
+            End If
+            Return dgvLoginTeacher.Rows.Count
+        End If
+        Return 0
+    End Function
 
     Private Sub SuperAdminManageTeacherAccounts_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If Not IsEmbedded Then
@@ -932,6 +947,10 @@ Public Class SuperAdminManageTeacherAccounts
         Catch
             ' ignore - layout timing may prevent clearing CurrentCell
         End Try
+        
+        ' Raise event for dashboard update
+        Dim count As Integer = GetTeacherAccountCount()
+        RaiseEvent TeacherAccountCountChanged(count)
     End Sub
 
     ' Final fallback after form is shown

@@ -5,6 +5,21 @@ Public Class SuperAdminManageAdminAccounts
     Public Property IsEmbedded As Boolean = False
     Private currentUserID As String = String.Empty
     Private originalData As New Dictionary(Of String, Object)()
+    
+    ' Event to notify when admin account count changes
+    Public Event AdminAccountCountChanged(count As Integer)
+    
+    ' Public method to get current admin account count
+    Public Function GetAdminAccountCount() As Integer
+        If dgvLoginAdmin IsNot Nothing AndAlso dgvLoginAdmin.DataSource IsNot Nothing Then
+            Dim dt As DataTable = TryCast(dgvLoginAdmin.DataSource, DataTable)
+            If dt IsNot Nothing Then
+                Return dt.Rows.Count
+            End If
+            Return dgvLoginAdmin.Rows.Count
+        End If
+        Return 0
+    End Function
 
     Private Sub SuperAdminManageAdminAccounts_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If Not IsEmbedded Then
@@ -710,6 +725,10 @@ Public Class SuperAdminManageAdminAccounts
     ' Ensure selection is cleared after any data binding operation
     Private Sub dgvLoginAdmin_DataBindingComplete(sender As Object, e As DataGridViewBindingCompleteEventArgs) Handles dgvLoginAdmin.DataBindingComplete
         EnsureSelectionCleared()
+        
+        ' Raise event for dashboard update
+        Dim count As Integer = GetAdminAccountCount()
+        RaiseEvent AdminAccountCountChanged(count)
     End Sub
 
     ' Final fallback after form is shown
