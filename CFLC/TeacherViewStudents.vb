@@ -1,11 +1,18 @@
 ﻿Imports System.Data.SqlClient
 Imports MySql.Data.MySqlClient
+Imports System.Collections.Generic
 
 Public Class TeacherViewStudents
     Public Property IsEmbedded As Boolean = False
     Public Property TeacherID As String = "" ' The logged-in teacher's ID
     Private isInitializing As Boolean = False
     Private lastSelectedIndex As Integer = -1
+    
+    ' Events for dashboard updates
+    Public Event StudentCountChanged(count As Integer)
+    Public Event FourPSDataChanged(with4PS As Integer, without4PS As Integer)
+    Public Event IndigenousDataChanged(indigenous As Integer, notIndigenous As Integer)
+    Public Event GenderDataChanged(maleCount As Integer, femaleCount As Integer)
 
     Private Sub TeacherViewStudents_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         isInitializing = True
@@ -52,6 +59,9 @@ Public Class TeacherViewStudents
                 Dim dt As New DataTable()
                 adapter.Fill(dt)
                 dgvStudents.DataSource = dt
+                
+                ' Raise events after data is loaded
+                RaiseDataChangedEvents()
             End Using
         Catch ex As Exception
             MessageBox.Show("Error loading students: " & ex.Message, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -284,6 +294,9 @@ Public Class TeacherViewStudents
                     Dim dt As New DataTable()
                     adapter.Fill(dt)
                     dgvStudents.DataSource = dt
+                    
+                    ' Raise events after data is loaded
+                    RaiseDataChangedEvents()
                 End Using
             End If
 
@@ -326,5 +339,102 @@ Public Class TeacherViewStudents
 
     Private Sub txtbxStudentPOB_TextChanged(sender As Object, e As EventArgs) Handles txtbxStudentPOB.TextChanged
         ' Add any specific logic here if needed
+    End Sub
+    
+    ' Public methods to get data for dashboard
+    Public Function GetStudentCount() As Integer
+        If dgvStudents.DataSource IsNot Nothing AndAlso TypeOf dgvStudents.DataSource Is DataTable Then
+            Return DirectCast(dgvStudents.DataSource, DataTable).Rows.Count
+        End If
+        Return 0
+    End Function
+    
+    Public Function GetFourPSCounts() As Dictionary(Of String, Integer)
+        Dim counts As New Dictionary(Of String, Integer)
+        counts("With 4PS") = 0
+        counts("No 4PS") = 0
+        
+        If dgvStudents.DataSource IsNot Nothing AndAlso TypeOf dgvStudents.DataSource Is DataTable Then
+            Dim dt As DataTable = DirectCast(dgvStudents.DataSource, DataTable)
+            For Each row As DataRow In dt.Rows
+                Dim fourPSValue As Object = row("4PsID")
+                If fourPSValue IsNot Nothing AndAlso Not IsDBNull(fourPSValue) AndAlso Not String.IsNullOrWhiteSpace(fourPSValue.ToString()) Then
+                    counts("With 4PS") += 1
+                Else
+                    counts("No 4PS") += 1
+                End If
+            Next
+        End If
+        
+        Return counts
+    End Function
+    
+    Public Function GetIndigenousCounts() As Dictionary(Of String, Integer)
+        Dim counts As New Dictionary(Of String, Integer)
+        counts("Indigenous") = 0
+        counts("Not Indigenous") = 0
+        
+        If dgvStudents.DataSource IsNot Nothing AndAlso TypeOf dgvStudents.DataSource Is DataTable Then
+            Dim dt As DataTable = DirectCast(dgvStudents.DataSource, DataTable)
+            For Each row As DataRow In dt.Rows
+                Dim indigenousValue As Object = row("IndigineousSpecific")
+                If indigenousValue IsNot Nothing AndAlso Not IsDBNull(indigenousValue) AndAlso Not String.IsNullOrWhiteSpace(indigenousValue.ToString()) Then
+                    counts("Indigenous") += 1
+                Else
+                    counts("Not Indigenous") += 1
+                End If
+            Next
+        End If
+        
+        Return counts
+    End Function
+    
+    Public Function GetGenderCounts() As Dictionary(Of String, Integer)
+        Dim counts As New Dictionary(Of String, Integer)
+        counts("Male") = 0
+        counts("Female") = 0
+        
+        If dgvStudents.DataSource IsNot Nothing AndAlso TypeOf dgvStudents.DataSource Is DataTable Then
+            Dim dt As DataTable = DirectCast(dgvStudents.DataSource, DataTable)
+            For Each row As DataRow In dt.Rows
+                Dim genderValue As Object = row("Gender")
+                If genderValue IsNot Nothing AndAlso Not IsDBNull(genderValue) Then
+                    Dim gender As String = genderValue.ToString().Trim()
+                    If String.Equals(gender, "Male", StringComparison.OrdinalIgnoreCase) Then
+                        counts("Male") += 1
+                    ElseIf String.Equals(gender, "Female", StringComparison.OrdinalIgnoreCase) Then
+                        counts("Female") += 1
+                    End If
+                End If
+            Next
+        End If
+        
+        Return counts
+    End Function
+    
+    ' Raise all data changed events
+    Private Sub RaiseDataChangedEvents()
+        Try
+            Dim studentCount As Integer = GetStudentCount()
+            RaiseEvent StudentCountChanged(studentCount)
+            
+            Dim fourPSCounts As Dictionary(Of String, Integer) = GetFourPSCounts()
+            RaiseEvent FourPSDataChanged(fourPSCounts("With 4PS"), fourPSCounts("No 4PS"))
+            
+            Dim indigenousCounts As Dictionary(Of String, Integer) = GetIndigenousCounts()
+            RaiseEvent IndigenousDataChanged(indigenousCounts("Indigenous"), indigenousCounts("Not Indigenous"))
+            
+            Dim genderCounts As Dictionary(Of String, Integer) = GetGenderCounts()
+            RaiseEvent GenderDataChanged(genderCounts("Male"), genderCounts("Female"))
+        Catch ex As Exception
+            System.Diagnostics.Debug.WriteLine("Error raising data changed events: " & ex.Message)
+        End Try
+    End Sub
+    
+    ' Handle DataBindingComplete to raise events when data changes
+    Private Sub dgvStudents_DataBindingComplete(sender As Object, e As DataGridViewBindingCompleteEventArgs) Handles dgvStudents.DataBindingComplete
+        If Not isInitializing Then
+            RaiseDataChangedEvents()
+        End If
     End Sub
 End Class

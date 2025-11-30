@@ -1,9 +1,12 @@
 ﻿Imports System.Data.SqlClient
 Imports System.Text
 Imports MySql.Data.MySqlClient
+Imports System.Windows.Forms.DataVisualization.Charting
+Imports System.Collections.Generic
 
 Public Class TeacherDashboard
     Private currentContent As Form
+    Private teacherViewStudentsForm As TeacherViewStudents = Nothing
     Public Property IsEmbedded As Boolean = False
     Public Property TeacherID As String = ""
 
@@ -25,6 +28,9 @@ Public Class TeacherDashboard
         StyleSidebarButtons()
         PositionSidebarButtons()
         ShowHomeContent()
+        
+        ' Initialize dashboard data
+        RefreshDashboardData()
     End Sub
 
     Private Sub CenterLogo()
@@ -109,6 +115,14 @@ Public Class TeacherDashboard
     End Sub
 
     Private Sub LoadContentForm(child As Form)
+        ' Unsubscribe from previous TeacherViewStudents events
+        If teacherViewStudentsForm IsNot Nothing Then
+            RemoveHandler teacherViewStudentsForm.StudentCountChanged, AddressOf OnStudentCountChanged
+            RemoveHandler teacherViewStudentsForm.FourPSDataChanged, AddressOf OnFourPSDataChanged
+            RemoveHandler teacherViewStudentsForm.IndigenousDataChanged, AddressOf OnIndigenousDataChanged
+            RemoveHandler teacherViewStudentsForm.GenderDataChanged, AddressOf OnGenderDataChanged
+        End If
+        
         If currentContent IsNot Nothing Then
             currentContent.Close()
             currentContent.Dispose()
@@ -124,6 +138,21 @@ Public Class TeacherDashboard
         child.Dock = DockStyle.Fill
         pnlTeacherMainContent.Controls.Add(child)
         child.Show()
+        
+        ' Subscribe to TeacherViewStudents events if it's that form
+        If TypeOf child Is TeacherViewStudents Then
+            teacherViewStudentsForm = DirectCast(child, TeacherViewStudents)
+            AddHandler teacherViewStudentsForm.StudentCountChanged, AddressOf OnStudentCountChanged
+            AddHandler teacherViewStudentsForm.FourPSDataChanged, AddressOf OnFourPSDataChanged
+            AddHandler teacherViewStudentsForm.IndigenousDataChanged, AddressOf OnIndigenousDataChanged
+            AddHandler teacherViewStudentsForm.GenderDataChanged, AddressOf OnGenderDataChanged
+            
+            ' Update dashboard immediately
+            UpdateStudentCountFromForm()
+            UpdateFourPSChartFromForm()
+            UpdateIndigenousChartFromForm()
+            UpdateGenderChartFromForm()
+        End If
     End Sub
 
     Private Sub ShowHomeContent()
@@ -133,14 +162,45 @@ Public Class TeacherDashboard
             currentContent = Nothing
         End If
 
+        ' Clear form reference
+        teacherViewStudentsForm = Nothing
+
         ' Remove only the main content controls — keep the sidebar intact
         ClearMainContentExceptSidebar()
 
-        ' Re-add the logo to the main content area
+        ' Re-add dashboard controls (charts and panel)
+        If Not pnlTeacherMainContent.Controls.Contains(pnlTeacherStudentListDashboard) Then
+            pnlTeacherMainContent.Controls.Add(pnlTeacherStudentListDashboard)
+        End If
+        If Not pnlTeacherMainContent.Controls.Contains(PieChartTeacherStudent4psList) Then
+            pnlTeacherMainContent.Controls.Add(PieChartTeacherStudent4psList)
+        End If
+        If Not pnlTeacherMainContent.Controls.Contains(PieChartTeacherStudentIndigenous) Then
+            pnlTeacherMainContent.Controls.Add(PieChartTeacherStudentIndigenous)
+        End If
+        If Not pnlTeacherMainContent.Controls.Contains(PieChartTeacherStudentGenderList) Then
+            pnlTeacherMainContent.Controls.Add(PieChartTeacherStudentGenderList)
+        End If
+        
+        ' Ensure charts and panel are visible and in front
+        pnlTeacherStudentListDashboard.Visible = True
+        pnlTeacherStudentListDashboard.BringToFront()
+        PieChartTeacherStudent4psList.Visible = True
+        PieChartTeacherStudent4psList.BringToFront()
+        PieChartTeacherStudentIndigenous.Visible = True
+        PieChartTeacherStudentIndigenous.BringToFront()
+        PieChartTeacherStudentGenderList.Visible = True
+        PieChartTeacherStudentGenderList.BringToFront()
+        
+        ' Put logo behind charts
         If Not pnlTeacherMainContent.Controls.Contains(PictureBox1) Then
             pnlTeacherMainContent.Controls.Add(PictureBox1)
         End If
+        PictureBox1.SendToBack()
         CenterLogo()
+        
+        ' Refresh dashboard data from database
+        RefreshDashboardData()
     End Sub
 
     ' Utility: remove everything from pnlTeacherMainContent except the left sidebar
@@ -234,5 +294,305 @@ Public Class TeacherDashboard
 
     Private Sub btnBackToDashboard_Click(sender As Object, e As EventArgs) Handles btnBackToDashboard.Click
         ShowHomeContent()
+    End Sub
+    
+    ' Event handlers for TeacherViewStudents events
+    Private Sub OnStudentCountChanged(count As Integer)
+        lblTeacherStudentListDashboard.Text = count.ToString()
+        Label3.Text = count.ToString()
+    End Sub
+    
+    Private Sub OnFourPSDataChanged(with4PS As Integer, without4PS As Integer)
+        UpdateFourPSChart(with4PS, without4PS)
+    End Sub
+    
+    Private Sub OnIndigenousDataChanged(indigenous As Integer, notIndigenous As Integer)
+        UpdateIndigenousChart(indigenous, notIndigenous)
+    End Sub
+    
+    Private Sub OnGenderDataChanged(maleCount As Integer, femaleCount As Integer)
+        UpdateGenderChart(maleCount, femaleCount)
+    End Sub
+    
+    ' Update methods from form
+    Private Sub UpdateStudentCountFromForm()
+        If teacherViewStudentsForm IsNot Nothing Then
+            Dim count As Integer = teacherViewStudentsForm.GetStudentCount()
+            OnStudentCountChanged(count)
+        End If
+    End Sub
+    
+    Private Sub UpdateFourPSChartFromForm()
+        If teacherViewStudentsForm IsNot Nothing Then
+            Dim counts As Dictionary(Of String, Integer) = teacherViewStudentsForm.GetFourPSCounts()
+            UpdateFourPSChart(counts("With 4PS"), counts("No 4PS"))
+        End If
+    End Sub
+    
+    Private Sub UpdateIndigenousChartFromForm()
+        If teacherViewStudentsForm IsNot Nothing Then
+            Dim counts As Dictionary(Of String, Integer) = teacherViewStudentsForm.GetIndigenousCounts()
+            UpdateIndigenousChart(counts("Indigenous"), counts("Not Indigenous"))
+        End If
+    End Sub
+    
+    Private Sub UpdateGenderChartFromForm()
+        If teacherViewStudentsForm IsNot Nothing Then
+            Dim counts As Dictionary(Of String, Integer) = teacherViewStudentsForm.GetGenderCounts()
+            UpdateGenderChart(counts("Male"), counts("Female"))
+        End If
+    End Sub
+    
+    ' Refresh dashboard data from database (fallback when form is not loaded)
+    Private Sub RefreshDashboardData()
+        UpdateStudentCountFromDatabase()
+        UpdateFourPSChartFromDatabase()
+        UpdateIndigenousChartFromDatabase()
+        UpdateGenderChartFromDatabase()
+    End Sub
+    
+    ' Database update methods (fallback)
+    Private Sub UpdateStudentCountFromDatabase()
+        Try
+            modDBx.openConn("cflc_db")
+            Dim query As String = "SELECT COUNT(DISTINCT st.StudentID) 
+                                  FROM student st 
+                                  INNER JOIN enrollment se ON st.StudentID = se.StudentID 
+                                  INNER JOIN section s ON se.SectionID = s.SectionID 
+                                  WHERE s.TeacherID = @teacher_id"
+            
+            Using cmd As New MySqlCommand(query, modDBx.conn)
+                cmd.Parameters.AddWithValue("@teacher_id", TeacherID)
+                Dim count As Integer = Convert.ToInt32(cmd.ExecuteScalar())
+                lblTeacherStudentListDashboard.Text = count.ToString()
+                Label3.Text = count.ToString()
+            End Using
+        Catch ex As Exception
+            System.Diagnostics.Debug.WriteLine("Error updating student count: " & ex.Message)
+        Finally
+            If modDBx.conn.State = ConnectionState.Open Then
+                modDBx.conn.Close()
+            End If
+        End Try
+    End Sub
+    
+    Private Sub UpdateFourPSChartFromDatabase()
+        Try
+            modDBx.openConn("cflc_db")
+            Dim query As String = "SELECT 
+                                    SUM(CASE WHEN st.`4PsID` IS NOT NULL AND st.`4PsID` != '' THEN 1 ELSE 0 END) AS With4PS,
+                                    SUM(CASE WHEN st.`4PsID` IS NULL OR st.`4PsID` = '' THEN 1 ELSE 0 END) AS No4PS
+                                  FROM student st 
+                                  INNER JOIN enrollment se ON st.StudentID = se.StudentID 
+                                  INNER JOIN section s ON se.SectionID = s.SectionID 
+                                  WHERE s.TeacherID = @teacher_id"
+            
+            Using cmd As New MySqlCommand(query, modDBx.conn)
+                cmd.Parameters.AddWithValue("@teacher_id", TeacherID)
+                Using reader As MySqlDataReader = cmd.ExecuteReader()
+                    If reader.Read() Then
+                        Dim with4PS As Integer = If(IsDBNull(reader("With4PS")), 0, Convert.ToInt32(reader("With4PS")))
+                        Dim no4PS As Integer = If(IsDBNull(reader("No4PS")), 0, Convert.ToInt32(reader("No4PS")))
+                        UpdateFourPSChart(with4PS, no4PS)
+                    End If
+                End Using
+            End Using
+        Catch ex As Exception
+            System.Diagnostics.Debug.WriteLine("Error updating 4PS chart: " & ex.Message)
+        Finally
+            If modDBx.conn.State = ConnectionState.Open Then
+                modDBx.conn.Close()
+            End If
+        End Try
+    End Sub
+    
+    Private Sub UpdateIndigenousChartFromDatabase()
+        Try
+            modDBx.openConn("cflc_db")
+            Dim query As String = "SELECT 
+                                    SUM(CASE WHEN st.IndigineousSpecific IS NOT NULL AND st.IndigineousSpecific != '' THEN 1 ELSE 0 END) AS Indigenous,
+                                    SUM(CASE WHEN st.IndigineousSpecific IS NULL OR st.IndigineousSpecific = '' THEN 1 ELSE 0 END) AS NotIndigenous
+                                  FROM student st 
+                                  INNER JOIN enrollment se ON st.StudentID = se.StudentID 
+                                  INNER JOIN section s ON se.SectionID = s.SectionID 
+                                  WHERE s.TeacherID = @teacher_id"
+            
+            Using cmd As New MySqlCommand(query, modDBx.conn)
+                cmd.Parameters.AddWithValue("@teacher_id", TeacherID)
+                Using reader As MySqlDataReader = cmd.ExecuteReader()
+                    If reader.Read() Then
+                        Dim indigenous As Integer = If(IsDBNull(reader("Indigenous")), 0, Convert.ToInt32(reader("Indigenous")))
+                        Dim notIndigenous As Integer = If(IsDBNull(reader("NotIndigenous")), 0, Convert.ToInt32(reader("NotIndigenous")))
+                        UpdateIndigenousChart(indigenous, notIndigenous)
+                    End If
+                End Using
+            End Using
+        Catch ex As Exception
+            System.Diagnostics.Debug.WriteLine("Error updating Indigenous chart: " & ex.Message)
+        Finally
+            If modDBx.conn.State = ConnectionState.Open Then
+                modDBx.conn.Close()
+            End If
+        End Try
+    End Sub
+    
+    Private Sub UpdateGenderChartFromDatabase()
+        Try
+            modDBx.openConn("cflc_db")
+            Dim query As String = "SELECT 
+                                    SUM(CASE WHEN st.Gender = 'Male' THEN 1 ELSE 0 END) AS Male,
+                                    SUM(CASE WHEN st.Gender = 'Female' THEN 1 ELSE 0 END) AS Female
+                                  FROM student st 
+                                  INNER JOIN enrollment se ON st.StudentID = se.StudentID 
+                                  INNER JOIN section s ON se.SectionID = s.SectionID 
+                                  WHERE s.TeacherID = @teacher_id"
+            
+            Using cmd As New MySqlCommand(query, modDBx.conn)
+                cmd.Parameters.AddWithValue("@teacher_id", TeacherID)
+                Using reader As MySqlDataReader = cmd.ExecuteReader()
+                    If reader.Read() Then
+                        Dim maleCount As Integer = If(IsDBNull(reader("Male")), 0, Convert.ToInt32(reader("Male")))
+                        Dim femaleCount As Integer = If(IsDBNull(reader("Female")), 0, Convert.ToInt32(reader("Female")))
+                        UpdateGenderChart(maleCount, femaleCount)
+                    End If
+                End Using
+            End Using
+        Catch ex As Exception
+            System.Diagnostics.Debug.WriteLine("Error updating Gender chart: " & ex.Message)
+        Finally
+            If modDBx.conn.State = ConnectionState.Open Then
+                modDBx.conn.Close()
+            End If
+        End Try
+    End Sub
+    
+    ' Chart update methods
+    Private Sub UpdateFourPSChart(with4PS As Integer, without4PS As Integer)
+        Try
+            Dim chartControl As Chart = PieChartTeacherStudent4psList
+            If chartControl IsNot Nothing Then
+                chartControl.Series.Clear()
+                chartControl.ChartAreas.Clear()
+                
+                Dim chartArea As New ChartArea("FourPSChartArea")
+                chartControl.ChartAreas.Add(chartArea)
+                
+                Dim series As New Series("FourPSSeries")
+                series.ChartType = SeriesChartType.Pie
+                series.IsValueShownAsLabel = True
+                series.LabelFormat = "#,##0"
+                
+                ' Add data points
+                If with4PS > 0 Then
+                    Dim point1 As New DataPoint(0, with4PS)
+                    point1.LegendText = "With 4PS"
+                    point1.Color = Color.Green
+                    point1.Label = "With 4PS: #VALY"
+                    series.Points.Add(point1)
+                End If
+                
+                If without4PS > 0 Then
+                    Dim point2 As New DataPoint(0, without4PS)
+                    point2.LegendText = "No 4PS"
+                    point2.Color = Color.LightGreen
+                    point2.Label = "No 4PS: #VALY"
+                    series.Points.Add(point2)
+                End If
+                
+                chartControl.Series.Add(series)
+                chartControl.BackColor = Color.Transparent
+                chartArea.BackColor = Color.Transparent
+                chartControl.Visible = True
+                chartControl.BringToFront()
+            End If
+        Catch ex As Exception
+            System.Diagnostics.Debug.WriteLine("Error updating 4PS chart: " & ex.Message)
+        End Try
+    End Sub
+    
+    Private Sub UpdateIndigenousChart(indigenous As Integer, notIndigenous As Integer)
+        Try
+            Dim chartControl As Chart = PieChartTeacherStudentIndigenous
+            If chartControl IsNot Nothing Then
+                chartControl.Series.Clear()
+                chartControl.ChartAreas.Clear()
+                
+                Dim chartArea As New ChartArea("IndigenousChartArea")
+                chartControl.ChartAreas.Add(chartArea)
+                
+                Dim series As New Series("IndigenousSeries")
+                series.ChartType = SeriesChartType.Pie
+                series.IsValueShownAsLabel = True
+                series.LabelFormat = "#,##0"
+                
+                ' Add data points
+                If indigenous > 0 Then
+                    Dim point1 As New DataPoint(0, indigenous)
+                    point1.LegendText = "Indigenous"
+                    point1.Color = Color.Green
+                    point1.Label = "Indigenous: #VALY"
+                    series.Points.Add(point1)
+                End If
+                
+                If notIndigenous > 0 Then
+                    Dim point2 As New DataPoint(0, notIndigenous)
+                    point2.LegendText = "Not Indigenous"
+                    point2.Color = Color.LightGreen
+                    point2.Label = "Not Indigenous: #VALY"
+                    series.Points.Add(point2)
+                End If
+                
+                chartControl.Series.Add(series)
+                chartControl.BackColor = Color.Transparent
+                chartArea.BackColor = Color.Transparent
+                chartControl.Visible = True
+                chartControl.BringToFront()
+            End If
+        Catch ex As Exception
+            System.Diagnostics.Debug.WriteLine("Error updating Indigenous chart: " & ex.Message)
+        End Try
+    End Sub
+    
+    Private Sub UpdateGenderChart(maleCount As Integer, femaleCount As Integer)
+        Try
+            Dim chartControl As Chart = PieChartTeacherStudentGenderList
+            If chartControl IsNot Nothing Then
+                chartControl.Series.Clear()
+                chartControl.ChartAreas.Clear()
+                
+                Dim chartArea As New ChartArea("GenderChartArea")
+                chartControl.ChartAreas.Add(chartArea)
+                
+                Dim series As New Series("GenderSeries")
+                series.ChartType = SeriesChartType.Pie
+                series.IsValueShownAsLabel = True
+                series.LabelFormat = "#,##0"
+                
+                ' Add data points with Green for Male and LightGreen for Female
+                If maleCount > 0 Then
+                    Dim point1 As New DataPoint(0, maleCount)
+                    point1.LegendText = "Male"
+                    point1.Color = Color.Green
+                    point1.Label = "Male: #VALY"
+                    series.Points.Add(point1)
+                End If
+                
+                If femaleCount > 0 Then
+                    Dim point2 As New DataPoint(0, femaleCount)
+                    point2.LegendText = "Female"
+                    point2.Color = Color.LightGreen
+                    point2.Label = "Female: #VALY"
+                    series.Points.Add(point2)
+                End If
+                
+                chartControl.Series.Add(series)
+                chartControl.BackColor = Color.Transparent
+                chartArea.BackColor = Color.Transparent
+                chartControl.Visible = True
+                chartControl.BringToFront()
+            End If
+        Catch ex As Exception
+            System.Diagnostics.Debug.WriteLine("Error updating Gender chart: " & ex.Message)
+        End Try
     End Sub
 End Class

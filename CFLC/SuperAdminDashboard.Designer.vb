@@ -29,10 +29,10 @@ Partial Class SuperAdminDashboard
         Me.btnSuperAdminManageAdmin = New System.Windows.Forms.Button()
         Me.btnSuperAdminManageTea = New System.Windows.Forms.Button()
         Me.btnSuperAdminManageSysCon = New System.Windows.Forms.Button()
+        Me.btnSuperAdminAccessLogs = New System.Windows.Forms.Button()
         Me.btnSuperAdminGenerateReports = New System.Windows.Forms.Button()
         Me.btnBackToDashboard = New System.Windows.Forms.Button()
         Me.btnLogout = New System.Windows.Forms.Button()
-        Me.btnSuperAdminAccessLogs = New System.Windows.Forms.Button()
         Me.pnlSuperAdminMainContent.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlTeacherSidebar.SuspendLayout()
@@ -45,17 +45,17 @@ Partial Class SuperAdminDashboard
         Me.pnlSuperAdminMainContent.Controls.Add(Me.PictureBox1)
         Me.pnlSuperAdminMainContent.Dock = System.Windows.Forms.DockStyle.Fill
         Me.pnlSuperAdminMainContent.Location = New System.Drawing.Point(0, 0)
-        Me.pnlSuperAdminMainContent.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.pnlSuperAdminMainContent.Margin = New System.Windows.Forms.Padding(4)
         Me.pnlSuperAdminMainContent.Name = "pnlSuperAdminMainContent"
-        Me.pnlSuperAdminMainContent.Size = New System.Drawing.Size(1733, 779)
+        Me.pnlSuperAdminMainContent.Size = New System.Drawing.Size(1924, 1175)
         Me.pnlSuperAdminMainContent.TabIndex = 14
         '
         'PictureBox1
         '
         Me.PictureBox1.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.PictureBox1.Image = Global.CFLC.My.Resources.Resources.logo
-        Me.PictureBox1.Location = New System.Drawing.Point(828, 176)
-        Me.PictureBox1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.PictureBox1.Location = New System.Drawing.Point(924, 374)
+        Me.PictureBox1.Margin = New System.Windows.Forms.Padding(4)
         Me.PictureBox1.Name = "PictureBox1"
         Me.PictureBox1.Size = New System.Drawing.Size(500, 406)
         Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
@@ -69,10 +69,10 @@ Partial Class SuperAdminDashboard
         Me.pnlTeacherSidebar.Controls.Add(Me.btnLogout)
         Me.pnlTeacherSidebar.Dock = System.Windows.Forms.DockStyle.Left
         Me.pnlTeacherSidebar.Location = New System.Drawing.Point(0, 0)
-        Me.pnlTeacherSidebar.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.pnlTeacherSidebar.Margin = New System.Windows.Forms.Padding(4)
         Me.pnlTeacherSidebar.Name = "pnlTeacherSidebar"
         Me.pnlTeacherSidebar.Padding = New System.Windows.Forms.Padding(40, 49, 40, 49)
-        Me.pnlTeacherSidebar.Size = New System.Drawing.Size(400, 779)
+        Me.pnlTeacherSidebar.Size = New System.Drawing.Size(400, 1175)
         Me.pnlTeacherSidebar.TabIndex = 12
         '
         'FlowLayoutPanel1
@@ -89,7 +89,7 @@ Partial Class SuperAdminDashboard
         Me.FlowLayoutPanel1.Location = New System.Drawing.Point(40, 49)
         Me.FlowLayoutPanel1.Margin = New System.Windows.Forms.Padding(0)
         Me.FlowLayoutPanel1.Name = "FlowLayoutPanel1"
-        Me.FlowLayoutPanel1.Size = New System.Drawing.Size(320, 619)
+        Me.FlowLayoutPanel1.Size = New System.Drawing.Size(320, 1015)
         Me.FlowLayoutPanel1.TabIndex = 0
         Me.FlowLayoutPanel1.WrapContents = False
         '
@@ -123,6 +123,16 @@ Partial Class SuperAdminDashboard
         Me.btnSuperAdminManageSysCon.Text = "Manage System Configuration"
         Me.btnSuperAdminManageSysCon.UseVisualStyleBackColor = True
         '
+        'btnSuperAdminAccessLogs
+        '
+        Me.btnSuperAdminAccessLogs.Location = New System.Drawing.Point(0, 231)
+        Me.btnSuperAdminAccessLogs.Margin = New System.Windows.Forms.Padding(0, 0, 0, 22)
+        Me.btnSuperAdminAccessLogs.Name = "btnSuperAdminAccessLogs"
+        Me.btnSuperAdminAccessLogs.Size = New System.Drawing.Size(320, 55)
+        Me.btnSuperAdminAccessLogs.TabIndex = 13
+        Me.btnSuperAdminAccessLogs.Text = "Access All Logs"
+        Me.btnSuperAdminAccessLogs.UseVisualStyleBackColor = True
+        '
         'btnSuperAdminGenerateReports
         '
         Me.btnSuperAdminGenerateReports.Location = New System.Drawing.Point(0, 308)
@@ -150,7 +160,7 @@ Partial Class SuperAdminDashboard
         Me.btnLogout.BackColor = System.Drawing.Color.Red
         Me.btnLogout.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.btnLogout.ForeColor = System.Drawing.Color.White
-        Me.btnLogout.Location = New System.Drawing.Point(40, 668)
+        Me.btnLogout.Location = New System.Drawing.Point(40, 1064)
         Me.btnLogout.Margin = New System.Windows.Forms.Padding(0)
         Me.btnLogout.Name = "btnLogout"
         Me.btnLogout.Size = New System.Drawing.Size(320, 62)
@@ -158,24 +168,14 @@ Partial Class SuperAdminDashboard
         Me.btnLogout.Text = "Logout"
         Me.btnLogout.UseVisualStyleBackColor = False
         '
-        'btnSuperAdminAccessLogs
-        '
-        Me.btnSuperAdminAccessLogs.Location = New System.Drawing.Point(0, 231)
-        Me.btnSuperAdminAccessLogs.Margin = New System.Windows.Forms.Padding(0, 0, 0, 22)
-        Me.btnSuperAdminAccessLogs.Name = "btnSuperAdminAccessLogs"
-        Me.btnSuperAdminAccessLogs.Size = New System.Drawing.Size(320, 55)
-        Me.btnSuperAdminAccessLogs.TabIndex = 13
-        Me.btnSuperAdminAccessLogs.Text = "Access All Logs"
-        Me.btnSuperAdminAccessLogs.UseVisualStyleBackColor = True
-        '
         'SuperAdminDashboard
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1733, 779)
+        Me.ClientSize = New System.Drawing.Size(1924, 1175)
         Me.Controls.Add(Me.pnlTeacherSidebar)
         Me.Controls.Add(Me.pnlSuperAdminMainContent)
-        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Margin = New System.Windows.Forms.Padding(4)
         Me.Name = "SuperAdminDashboard"
         Me.Text = "SuperAdminDashboard"
         Me.pnlSuperAdminMainContent.ResumeLayout(False)
