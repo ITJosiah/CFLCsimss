@@ -151,12 +151,114 @@ Public Class AdminGenerateReports
         InitializeSectionComboBox()
         InitializeEnrollmentYearComboBox()
         InitializeSubjectComboBox()
+        ' Initialize year combo boxes for all sections
+        InitializeStudentEnrollmentYearComboBox()
+        InitializeEnrollmentSummaryYearComboBox()
+        InitializeSubjectEnrollmentYearComboBox()
         ' Show all DGV by default
         dgvStudents.Visible = True
         dgvEnrollment.Visible = True
         dgvSections.Visible = True
         dgvSubjects.Visible = True
         isInitializing = False
+
+        ' Style controls for better appearance
+        StyleControls()
+
+        ' Center the GroupBoxes
+        CenterGroupBoxes()
+    End Sub
+
+    Private Sub CenterGroupBoxes()
+        If pnlMainContent Is Nothing Then Return
+
+        Dim panelWidth As Integer = pnlMainContent.ClientSize.Width
+        Dim panelHeight As Integer = pnlMainContent.ClientSize.Height
+
+        ' GroupBox dimensions
+        Dim groupBoxWidth As Integer = 1200
+        Dim groupBoxHeight As Integer = 200
+        Dim spacing As Integer = 20
+
+        ' Calculate horizontal center
+        Dim centerX As Integer = (panelWidth - groupBoxWidth) \ 2
+
+        ' Calculate total height of all GroupBoxes with spacing
+        Dim totalHeight As Integer = (groupBoxHeight * 4) + (spacing * 3)
+
+        ' Calculate vertical center
+        Dim startY As Integer = (panelHeight - totalHeight) \ 2
+
+        ' Position each GroupBox
+        If grpStudents IsNot Nothing Then
+            grpStudents.Location = New Point(centerX, startY)
+        End If
+
+        If grpEnrollment IsNot Nothing Then
+            grpEnrollment.Location = New Point(centerX, startY + groupBoxHeight + spacing)
+        End If
+
+        If grpSections IsNot Nothing Then
+            grpSections.Location = New Point(centerX, startY + (groupBoxHeight + spacing) * 2)
+        End If
+
+        If grpSubjects IsNot Nothing Then
+            grpSubjects.Location = New Point(centerX, startY + (groupBoxHeight + spacing) * 3)
+        End If
+    End Sub
+
+    Private Sub AdminGenerateReports_Resize(sender As Object, e As EventArgs) Handles MyBase.Resize
+        CenterGroupBoxes()
+    End Sub
+
+    Private Sub StyleControls()
+        ' Style all print buttons with hover effects
+        Dim buttons() As Button = {btnAdminGenerateStudents, btnAdminGenerateEnrollmentSummary,
+                                   btnAdminGenerateSections, btnAdminGenerateSubjects}
+
+        For Each btn As Button In buttons
+            If btn IsNot Nothing Then
+                btn.FlatAppearance.BorderSize = 0
+                btn.FlatAppearance.MouseOverBackColor = Color.FromArgb(90, 98, 104)
+                btn.FlatAppearance.MouseDownBackColor = Color.FromArgb(73, 80, 87)
+                btn.Cursor = Cursors.Hand
+            End If
+        Next
+
+        ' Style combo boxes
+        Dim comboBoxes() As ComboBox = {cmbGradeLevel, cmbStudentEnrollmentYear, cmbEnrollmentView,
+                                        cmbEnrollmentSummaryYear, cmbSectionView, cmbEnrollmentYear,
+                                        cmbSubjectView, cmbSubjectEnrollmentYear}
+
+        For Each cmb As ComboBox In comboBoxes
+            If cmb IsNot Nothing Then
+                cmb.FlatStyle = FlatStyle.Flat
+                cmb.BackColor = Color.White
+                cmb.ForeColor = Color.Black
+            End If
+        Next
+
+        ' Style DataGridViews - more subtle colors
+        Dim dataGrids() As DataGridView = {dgvStudents, dgvEnrollment, dgvSections, dgvSubjects}
+
+        For Each dgv As DataGridView In dataGrids
+            If dgv IsNot Nothing Then
+                dgv.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(249, 249, 249)
+                dgv.DefaultCellStyle.SelectionBackColor = Color.FromArgb(108, 117, 125)
+                dgv.DefaultCellStyle.SelectionForeColor = Color.White
+                dgv.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(108, 117, 125)
+                dgv.ColumnHeadersDefaultCellStyle.ForeColor = Color.White
+                dgv.ColumnHeadersDefaultCellStyle.Font = New System.Drawing.Font("Microsoft Sans Serif", 10, FontStyle.Regular)
+                dgv.EnableHeadersVisualStyles = False
+            End If
+        Next
+    End Sub
+
+    Private Sub HideLogoWhenDataShown()
+        ' Hide logo when any data is displayed
+        If PictureBox1 IsNot Nothing Then
+            PictureBox1.Visible = False
+        End If
     End Sub
 
     ' Initialize Grade Level ComboBox
@@ -189,11 +291,31 @@ Public Class AdminGenerateReports
         ' Don't select by default - let user choose
     End Sub
 
-    ' Initialize Enrollment Year ComboBox
+    ' Initialize Enrollment Year ComboBox (for Sections)
     Private Sub InitializeEnrollmentYearComboBox()
+        PopulateYearComboBox(cmbEnrollmentYear)
+    End Sub
+
+    ' Initialize Student Enrollment Year ComboBox
+    Private Sub InitializeStudentEnrollmentYearComboBox()
+        PopulateYearComboBox(cmbStudentEnrollmentYear)
+    End Sub
+
+    ' Initialize Enrollment Summary Year ComboBox
+    Private Sub InitializeEnrollmentSummaryYearComboBox()
+        PopulateYearComboBox(cmbEnrollmentSummaryYear)
+    End Sub
+
+    ' Initialize Subject Enrollment Year ComboBox
+    Private Sub InitializeSubjectEnrollmentYearComboBox()
+        PopulateYearComboBox(cmbSubjectEnrollmentYear)
+    End Sub
+
+    ' Helper method to populate year combo box
+    Private Sub PopulateYearComboBox(comboBox As ComboBox)
         Try
-            cmbEnrollmentYear.Items.Clear()
-            cmbEnrollmentYear.Items.Add("All Years")
+            comboBox.Items.Clear()
+            comboBox.Items.Add("All Years")
 
             ' Open connection
             If Not openConn() Then
@@ -210,7 +332,7 @@ Public Class AdminGenerateReports
                 Using reader As MySqlDataReader = cmd.ExecuteReader()
                     While reader.Read()
                         Dim year As Integer = reader.GetInt32("EnrollmentYear")
-                        cmbEnrollmentYear.Items.Add(year.ToString())
+                        comboBox.Items.Add(year.ToString())
                     End While
                 End Using
             End Using
@@ -264,13 +386,43 @@ Public Class AdminGenerateReports
         End If
     End Sub
 
-    ' Enrollment Year ComboBox selection change event
+    ' Enrollment Year ComboBox selection change event (for Sections)
     Private Sub cmbEnrollmentYear_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbEnrollmentYear.SelectedIndexChanged
         ' Only load sections if not initializing and an item is selected
         If Not isInitializing AndAlso cmbEnrollmentYear.SelectedItem IsNot Nothing Then
             LoadSectionsByGrade()
             ' Show section DGV
             dgvSections.Visible = True
+        End If
+    End Sub
+
+    ' Student Enrollment Year ComboBox selection change event
+    Private Sub cmbStudentEnrollmentYear_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbStudentEnrollmentYear.SelectedIndexChanged
+        ' Only load students if not initializing and an item is selected
+        If Not isInitializing AndAlso cmbStudentEnrollmentYear.SelectedItem IsNot Nothing Then
+            LoadStudentsByGrade()
+            ' Show student DGV
+            dgvStudents.Visible = True
+        End If
+    End Sub
+
+    ' Enrollment Summary Year ComboBox selection change event
+    Private Sub cmbEnrollmentSummaryYear_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbEnrollmentSummaryYear.SelectedIndexChanged
+        ' Only load enrollment summary if not initializing and an item is selected
+        If Not isInitializing AndAlso cmbEnrollmentSummaryYear.SelectedItem IsNot Nothing Then
+            LoadEnrollmentSummary()
+            ' Show enrollment DGV
+            dgvEnrollment.Visible = True
+        End If
+    End Sub
+
+    ' Subject Enrollment Year ComboBox selection change event
+    Private Sub cmbSubjectEnrollmentYear_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbSubjectEnrollmentYear.SelectedIndexChanged
+        ' Only load subjects if not initializing and an item is selected
+        If Not isInitializing AndAlso cmbSubjectEnrollmentYear.SelectedItem IsNot Nothing Then
+            LoadSubjectsByGrade()
+            ' Show subject DGV
+            dgvSubjects.Visible = True
         End If
     End Sub
 
@@ -295,6 +447,12 @@ Public Class AdminGenerateReports
             ' Get selected option
             Dim selectedOption As String = cmbEnrollmentView.SelectedItem.ToString()
 
+            ' Get selected enrollment year (if any)
+            Dim selectedYear As String = Nothing
+            If cmbEnrollmentSummaryYear.SelectedItem IsNot Nothing Then
+                selectedYear = cmbEnrollmentSummaryYear.SelectedItem.ToString()
+            End If
+
             ' Open connection
             If Not openConn() Then
                 MessageBox.Show("Cannot connect to database. Please check your config.txt file and database settings.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -303,16 +461,26 @@ Public Class AdminGenerateReports
 
             Dim dt As New DataTable()
 
+            ' Build WHERE clause for enrollment year filter
+            Dim yearFilter As String = ""
+            If selectedYear IsNot Nothing AndAlso selectedYear <> "All Years" Then
+                yearFilter = "AND YEAR(e.StartDate) = @EnrollmentYear "
+            End If
+
             ' Check if "All Enrollments" is selected
             If selectedOption = "All Enrollments" Then
-                ' Query enrollment summary for all grade levels
+                ' Query enrollment summary for all grade levels, filtered by enrollment year if selected
                 Dim sql As String = "SELECT CONCAT('GRADE ', e.GradeLevel) AS GradeLevel, COUNT(DISTINCT e.StudentID) AS StudentCount " &
                                     "FROM enrollment e " &
                                     "WHERE (e.EnrollmentStatus = 'Enrolled' OR e.EnrollmentStatus IS NULL) " &
+                                    If(selectedYear IsNot Nothing AndAlso selectedYear <> "All Years", yearFilter, "") &
                                     "GROUP BY e.GradeLevel " &
                                     "ORDER BY e.GradeLevel"
 
                 Using cmd As New MySqlCommand(sql, conn)
+                    If selectedYear IsNot Nothing AndAlso selectedYear <> "All Years" Then
+                        cmd.Parameters.AddWithValue("@EnrollmentYear", Integer.Parse(selectedYear))
+                    End If
                     Using da As New MySqlDataAdapter(cmd)
                         da.Fill(dt)
                     End Using
@@ -331,16 +499,20 @@ Public Class AdminGenerateReports
                 ' Get selected grade number
                 Dim gradeNumber As Integer = Integer.Parse(selectedOption.Replace("GRADE ", ""))
 
-                ' Query enrollment summary for selected grade level
+                ' Query enrollment summary for selected grade level, filtered by enrollment year if selected
                 Dim sql As String = "SELECT CONCAT('GRADE ', e.GradeLevel) AS GradeLevel, COUNT(DISTINCT e.StudentID) AS StudentCount " &
                                     "FROM enrollment e " &
                                     "WHERE (e.EnrollmentStatus = 'Enrolled' OR e.EnrollmentStatus IS NULL) " &
                                     "AND e.GradeLevel = @GradeLevel " &
+                                    If(selectedYear IsNot Nothing AndAlso selectedYear <> "All Years", yearFilter, "") &
                                     "GROUP BY e.GradeLevel " &
                                     "ORDER BY e.GradeLevel"
 
                 Using cmd As New MySqlCommand(sql, conn)
                     cmd.Parameters.AddWithValue("@GradeLevel", gradeNumber)
+                    If selectedYear IsNot Nothing AndAlso selectedYear <> "All Years" Then
+                        cmd.Parameters.AddWithValue("@EnrollmentYear", Integer.Parse(selectedYear))
+                    End If
                     Using da As New MySqlDataAdapter(cmd)
                         da.Fill(dt)
                     End Using
@@ -354,6 +526,7 @@ Public Class AdminGenerateReports
             ' Bind to Enrollment DataGridView
             dgvEnrollment.DataSource = dt
             dgvEnrollment.Refresh()
+            HideLogoWhenDataShown()
 
             ' Clear selection
             dgvEnrollment.ClearSelection()
@@ -378,6 +551,12 @@ Public Class AdminGenerateReports
             ' Get selected option
             Dim selectedOption As String = cmbGradeLevel.SelectedItem.ToString()
 
+            ' Get selected enrollment year (if any)
+            Dim selectedYear As String = Nothing
+            If cmbStudentEnrollmentYear.SelectedItem IsNot Nothing Then
+                selectedYear = cmbStudentEnrollmentYear.SelectedItem.ToString()
+            End If
+
             ' Open connection
             If Not openConn() Then
                 MessageBox.Show("Cannot connect to database. Please check your config.txt file and database settings.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -386,14 +565,26 @@ Public Class AdminGenerateReports
 
             Dim dt As New DataTable()
 
+            ' Build WHERE clause for enrollment year filter
+            Dim yearFilter As String = ""
+            If selectedYear IsNot Nothing AndAlso selectedYear <> "All Years" Then
+                yearFilter = "AND YEAR(e.StartDate) = @EnrollmentYear "
+            End If
+
             ' Check if "All Students" is selected
             If selectedOption = "All Students" Then
-                ' Query all students
-                Dim sql As String = "SELECT s.StudentID, s.FirstName, s.LastName, s.Gender " &
+                ' Query all students, filtered by enrollment year if selected
+                Dim sql As String = "SELECT DISTINCT s.StudentID, s.FirstName, s.LastName, s.Gender " &
                                     "FROM student s " &
+                                    "INNER JOIN enrollment e ON s.StudentID = e.StudentID " &
+                                    "WHERE (e.EnrollmentStatus = 'Enrolled' OR e.EnrollmentStatus IS NULL) " &
+                                    If(selectedYear IsNot Nothing AndAlso selectedYear <> "All Years", yearFilter, "") &
                                     "ORDER BY s.LastName, s.FirstName"
 
                 Using cmd As New MySqlCommand(sql, conn)
+                    If selectedYear IsNot Nothing AndAlso selectedYear <> "All Years" Then
+                        cmd.Parameters.AddWithValue("@EnrollmentYear", Integer.Parse(selectedYear))
+                    End If
                     Using da As New MySqlDataAdapter(cmd)
                         da.Fill(dt)
                     End Using
@@ -402,15 +593,20 @@ Public Class AdminGenerateReports
                 ' Get selected grade number
                 Dim gradeNumber As Integer = Integer.Parse(selectedOption.Replace("GRADE ", ""))
 
-                ' Query students filtered by grade level (join with enrollment table)
-                Dim sql As String = "SELECT s.StudentID, s.FirstName, s.LastName, s.Gender " &
+                ' Query students filtered by grade level (join with enrollment table), filtered by enrollment year if selected
+                Dim sql As String = "SELECT DISTINCT s.StudentID, s.FirstName, s.LastName, s.Gender " &
                                     "FROM student s " &
                                     "INNER JOIN enrollment e ON s.StudentID = e.StudentID " &
                                     "WHERE e.GradeLevel = @GradeLevel " &
+                                    "AND (e.EnrollmentStatus = 'Enrolled' OR e.EnrollmentStatus IS NULL) " &
+                                    If(selectedYear IsNot Nothing AndAlso selectedYear <> "All Years", yearFilter, "") &
                                     "ORDER BY s.LastName, s.FirstName"
 
                 Using cmd As New MySqlCommand(sql, conn)
                     cmd.Parameters.AddWithValue("@GradeLevel", gradeNumber)
+                    If selectedYear IsNot Nothing AndAlso selectedYear <> "All Years" Then
+                        cmd.Parameters.AddWithValue("@EnrollmentYear", Integer.Parse(selectedYear))
+                    End If
                     Using da As New MySqlDataAdapter(cmd)
                         da.Fill(dt)
                     End Using
@@ -420,6 +616,7 @@ Public Class AdminGenerateReports
             ' Bind to DataGridView
             dgvStudents.DataSource = dt
             dgvStudents.Refresh()
+            HideLogoWhenDataShown()
 
             ' Clear selection
             dgvStudents.ClearSelection()
@@ -519,6 +716,7 @@ Public Class AdminGenerateReports
             ' Bind to DataGridView
             dgvSections.DataSource = dt
             dgvSections.Refresh()
+            HideLogoWhenDataShown()
 
             ' Clear selection
             dgvSections.ClearSelection()
@@ -590,6 +788,7 @@ Public Class AdminGenerateReports
             ' Bind to DataGridView
             dgvSubjects.DataSource = dt
             dgvSubjects.Refresh()
+            HideLogoWhenDataShown()
 
             ' Clear selection
             dgvSubjects.ClearSelection()
@@ -613,10 +812,10 @@ Public Class AdminGenerateReports
 
         ' Load students data into DGV
         LoadStudentsByGrade()
-        
+
         ' Show student DGV
         dgvStudents.Visible = True
-        
+
         ' Generate the report
         GenerateStudentReport()
     End Sub
@@ -631,10 +830,10 @@ Public Class AdminGenerateReports
 
         ' Load enrollment summary data into DGV
         LoadEnrollmentSummary()
-        
+
         ' Show enrollment DGV
         dgvEnrollment.Visible = True
-        
+
         ' Generate the report
         GenerateEnrollmentSummaryReport()
     End Sub
@@ -649,10 +848,10 @@ Public Class AdminGenerateReports
 
         ' Load sections data into DGV
         LoadSectionsByGrade()
-        
+
         ' Show section DGV
         dgvSections.Visible = True
-        
+
         ' Generate the report
         GenerateSectionReport()
     End Sub
@@ -667,10 +866,10 @@ Public Class AdminGenerateReports
 
         ' Load subjects data into DGV
         LoadSubjectsByGrade()
-        
+
         ' Show subject DGV
         dgvSubjects.Visible = True
-        
+
         ' Generate the report
         GenerateSubjectReport()
     End Sub
@@ -688,6 +887,12 @@ Public Class AdminGenerateReports
             Dim selectedOption As String = cmbGradeLevel.SelectedItem.ToString()
             Dim selectedGrade As String = selectedOption
 
+            ' Get selected enrollment year (if any)
+            Dim selectedYear As String = Nothing
+            If cmbStudentEnrollmentYear.SelectedItem IsNot Nothing Then
+                selectedYear = cmbStudentEnrollmentYear.SelectedItem.ToString()
+            End If
+
             ' Get data from DataGridView
             Dim dt As DataTable = DirectCast(dgvStudents.DataSource, DataTable)
 
@@ -699,16 +904,28 @@ Public Class AdminGenerateReports
                     Return
                 End If
 
+                ' Build WHERE clause for enrollment year filter
+                Dim yearFilter As String = ""
+                If selectedYear IsNot Nothing AndAlso selectedYear <> "All Years" Then
+                    yearFilter = "AND YEAR(e.StartDate) = @EnrollmentYear "
+                End If
+
                 ' Check if "All Students" is selected
                 If selectedOption = "All Students" Then
-                    ' Query all students
-                    Dim sql As String = "SELECT s.StudentID, s.FirstName, s.LastName, s.Gender " &
+                    ' Query all students, filtered by enrollment year if selected
+                    Dim sql As String = "SELECT DISTINCT s.StudentID, s.FirstName, s.LastName, s.Gender " &
                                         "FROM student s " &
+                                        "INNER JOIN enrollment e ON s.StudentID = e.StudentID " &
+                                        "WHERE (e.EnrollmentStatus = 'Enrolled' OR e.EnrollmentStatus IS NULL) " &
+                                        If(selectedYear IsNot Nothing AndAlso selectedYear <> "All Years", yearFilter, "") &
                                         "ORDER BY s.LastName, s.FirstName"
 
                     dt = New DataTable()
 
                     Using cmd As New MySqlCommand(sql, conn)
+                        If selectedYear IsNot Nothing AndAlso selectedYear <> "All Years" Then
+                            cmd.Parameters.AddWithValue("@EnrollmentYear", Integer.Parse(selectedYear))
+                        End If
                         Using da As New MySqlDataAdapter(cmd)
                             da.Fill(dt)
                         End Using
@@ -717,17 +934,22 @@ Public Class AdminGenerateReports
                     ' Get selected grade number
                     Dim gradeNumber As Integer = Integer.Parse(selectedOption.Replace("GRADE ", ""))
 
-                    ' Query students filtered by grade level
-                    Dim sql As String = "SELECT s.StudentID, s.FirstName, s.LastName, s.Gender " &
+                    ' Query students filtered by grade level, filtered by enrollment year if selected
+                    Dim sql As String = "SELECT DISTINCT s.StudentID, s.FirstName, s.LastName, s.Gender " &
                                         "FROM student s " &
                                         "INNER JOIN enrollment e ON s.StudentID = e.StudentID " &
                                         "WHERE e.GradeLevel = @GradeLevel " &
+                                        "AND (e.EnrollmentStatus = 'Enrolled' OR e.EnrollmentStatus IS NULL) " &
+                                        If(selectedYear IsNot Nothing AndAlso selectedYear <> "All Years", yearFilter, "") &
                                         "ORDER BY s.LastName, s.FirstName"
 
                     dt = New DataTable()
 
                     Using cmd As New MySqlCommand(sql, conn)
                         cmd.Parameters.AddWithValue("@GradeLevel", gradeNumber)
+                        If selectedYear IsNot Nothing AndAlso selectedYear <> "All Years" Then
+                            cmd.Parameters.AddWithValue("@EnrollmentYear", Integer.Parse(selectedYear))
+                        End If
                         Using da As New MySqlDataAdapter(cmd)
                             da.Fill(dt)
                         End Using
@@ -751,6 +973,9 @@ Public Class AdminGenerateReports
             ' Title
             Dim titleFont As New iTextSharp.text.Font(iTextSharp.text.Font.FontFamily.HELVETICA, 18, iTextSharp.text.Font.BOLD)
             Dim titleText As String = If(selectedOption = "All Students", "Student Master List Report - All Students", "Student Master List Report - " & selectedGrade)
+            If selectedYear IsNot Nothing AndAlso selectedYear <> "All Years" Then
+                titleText &= " (" & selectedYear & ")"
+            End If
             Dim title As New Paragraph(titleText, titleFont) With {.Alignment = Element.ALIGN_CENTER}
             doc.Add(title)
             doc.Add(New Paragraph("Generated on: " & DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")))
@@ -806,6 +1031,12 @@ Public Class AdminGenerateReports
             ' Get selected option
             Dim selectedOption As String = cmbEnrollmentView.SelectedItem.ToString()
 
+            ' Get selected enrollment year (if any)
+            Dim selectedYear As String = Nothing
+            If cmbEnrollmentSummaryYear.SelectedItem IsNot Nothing Then
+                selectedYear = cmbEnrollmentSummaryYear.SelectedItem.ToString()
+            End If
+
             ' Get data from Enrollment DataGridView
             Dim dt As DataTable = DirectCast(dgvEnrollment.DataSource, DataTable)
 
@@ -817,18 +1048,28 @@ Public Class AdminGenerateReports
                     Return
                 End If
 
+                ' Build WHERE clause for enrollment year filter
+                Dim yearFilter As String = ""
+                If selectedYear IsNot Nothing AndAlso selectedYear <> "All Years" Then
+                    yearFilter = "AND YEAR(e.StartDate) = @EnrollmentYear "
+                End If
+
                 ' Check if "All Enrollments" is selected
                 If selectedOption = "All Enrollments" Then
-                    ' Query enrollment summary for all grade levels
+                    ' Query enrollment summary for all grade levels, filtered by enrollment year if selected
                     Dim sql As String = "SELECT e.GradeLevel, COUNT(DISTINCT e.StudentID) AS StudentCount " &
                                         "FROM enrollment e " &
                                         "WHERE (e.EnrollmentStatus = 'Enrolled' OR e.EnrollmentStatus IS NULL) " &
+                                        If(selectedYear IsNot Nothing AndAlso selectedYear <> "All Years", yearFilter, "") &
                                         "GROUP BY e.GradeLevel " &
                                         "ORDER BY e.GradeLevel"
 
                     dt = New DataTable()
 
                     Using cmd As New MySqlCommand(sql, conn)
+                        If selectedYear IsNot Nothing AndAlso selectedYear <> "All Years" Then
+                            cmd.Parameters.AddWithValue("@EnrollmentYear", Integer.Parse(selectedYear))
+                        End If
                         Using da As New MySqlDataAdapter(cmd)
                             da.Fill(dt)
                         End Using
@@ -837,11 +1078,12 @@ Public Class AdminGenerateReports
                     ' Get selected grade number
                     Dim gradeNumber As Integer = Integer.Parse(selectedOption.Replace("GRADE ", ""))
 
-                    ' Query enrollment summary for selected grade level
+                    ' Query enrollment summary for selected grade level, filtered by enrollment year if selected
                     Dim sql As String = "SELECT e.GradeLevel, COUNT(DISTINCT e.StudentID) AS StudentCount " &
                                         "FROM enrollment e " &
                                         "WHERE (e.EnrollmentStatus = 'Enrolled' OR e.EnrollmentStatus IS NULL) " &
                                         "AND e.GradeLevel = @GradeLevel " &
+                                        If(selectedYear IsNot Nothing AndAlso selectedYear <> "All Years", yearFilter, "") &
                                         "GROUP BY e.GradeLevel " &
                                         "ORDER BY e.GradeLevel"
 
@@ -849,6 +1091,9 @@ Public Class AdminGenerateReports
 
                     Using cmd As New MySqlCommand(sql, conn)
                         cmd.Parameters.AddWithValue("@GradeLevel", gradeNumber)
+                        If selectedYear IsNot Nothing AndAlso selectedYear <> "All Years" Then
+                            cmd.Parameters.AddWithValue("@EnrollmentYear", Integer.Parse(selectedYear))
+                        End If
                         Using da As New MySqlDataAdapter(cmd)
                             da.Fill(dt)
                         End Using
@@ -893,9 +1138,15 @@ Public Class AdminGenerateReports
             ' Title
             Dim titleFont As New iTextSharp.text.Font(iTextSharp.text.Font.FontFamily.HELVETICA, 18, iTextSharp.text.Font.BOLD)
             Dim titleText As String = If(selectedOption = "All Enrollments", "Enrollment Summary Report - All Enrollments", "Enrollment Summary Report - " & selectedOption)
+            If selectedYear IsNot Nothing AndAlso selectedYear <> "All Years" Then
+                titleText &= " (" & selectedYear & ")"
+            End If
             Dim title As New Paragraph(titleText, titleFont) With {.Alignment = Element.ALIGN_CENTER}
             doc.Add(title)
             Dim descriptionText As String = If(selectedOption = "All Enrollments", "Summarizes the number of students enrolled per grade level", "Summarizes the number of students enrolled for " & selectedOption)
+            If selectedYear IsNot Nothing AndAlso selectedYear <> "All Years" Then
+                descriptionText &= " for enrollment year " & selectedYear
+            End If
             doc.Add(New Paragraph(descriptionText))
             doc.Add(New Paragraph("Generated on: " & DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")))
             doc.Add(New Paragraph(" "))
@@ -1005,10 +1256,10 @@ Public Class AdminGenerateReports
                     yearFilter = "AND YEAR(e.StartDate) = @EnrollmentYear "
                 End If
 
-            ' Check if "All Sections" is selected
-            If selectedOption = "All Sections" Then
-                ' Query all sections with student count, filtered by enrollment year if selected
-                Dim sql As String = "SELECT s.SectionID, s.SectionName, s.GradeLevel, " &
+                ' Check if "All Sections" is selected
+                If selectedOption = "All Sections" Then
+                    ' Query all sections with student count, filtered by enrollment year if selected
+                    Dim sql As String = "SELECT s.SectionID, s.SectionName, s.GradeLevel, " &
                                     "COUNT(DISTINCT e.StudentID) AS StudentCount " &
                                     "FROM section s " &
                                     "LEFT JOIN enrollment e ON s.SectionID = e.SectionID " &
@@ -1017,22 +1268,22 @@ Public Class AdminGenerateReports
                                     "GROUP BY s.SectionID, s.SectionName, s.GradeLevel " &
                                     "ORDER BY s.GradeLevel, s.SectionName"
 
-                dt = New DataTable()
+                    dt = New DataTable()
 
-                Using cmd As New MySqlCommand(sql, conn)
-                    If selectedYear IsNot Nothing AndAlso selectedYear <> "All Years" Then
-                        cmd.Parameters.AddWithValue("@EnrollmentYear", Integer.Parse(selectedYear))
-                    End If
-                    Using da As New MySqlDataAdapter(cmd)
-                        da.Fill(dt)
+                    Using cmd As New MySqlCommand(sql, conn)
+                        If selectedYear IsNot Nothing AndAlso selectedYear <> "All Years" Then
+                            cmd.Parameters.AddWithValue("@EnrollmentYear", Integer.Parse(selectedYear))
+                        End If
+                        Using da As New MySqlDataAdapter(cmd)
+                            da.Fill(dt)
+                        End Using
                     End Using
-                End Using
-            Else
-                ' Get selected grade number
-                Dim gradeNumber As Integer = Integer.Parse(selectedOption.Replace("GRADE ", ""))
+                Else
+                    ' Get selected grade number
+                    Dim gradeNumber As Integer = Integer.Parse(selectedOption.Replace("GRADE ", ""))
 
-                ' Query sections filtered by grade level with student count, filtered by enrollment year if selected
-                Dim sql As String = "SELECT s.SectionID, s.SectionName, s.GradeLevel, " &
+                    ' Query sections filtered by grade level with student count, filtered by enrollment year if selected
+                    Dim sql As String = "SELECT s.SectionID, s.SectionName, s.GradeLevel, " &
                                     "COUNT(DISTINCT e.StudentID) AS StudentCount " &
                                     "FROM section s " &
                                     "LEFT JOIN enrollment e ON s.SectionID = e.SectionID " &
@@ -1042,18 +1293,18 @@ Public Class AdminGenerateReports
                                     "GROUP BY s.SectionID, s.SectionName, s.GradeLevel " &
                                     "ORDER BY s.SectionName"
 
-                dt = New DataTable()
+                    dt = New DataTable()
 
-                Using cmd As New MySqlCommand(sql, conn)
-                    cmd.Parameters.AddWithValue("@GradeLevel", gradeNumber)
-                    If selectedYear IsNot Nothing AndAlso selectedYear <> "All Years" Then
-                        cmd.Parameters.AddWithValue("@EnrollmentYear", Integer.Parse(selectedYear))
-                    End If
-                    Using da As New MySqlDataAdapter(cmd)
-                        da.Fill(dt)
+                    Using cmd As New MySqlCommand(sql, conn)
+                        cmd.Parameters.AddWithValue("@GradeLevel", gradeNumber)
+                        If selectedYear IsNot Nothing AndAlso selectedYear <> "All Years" Then
+                            cmd.Parameters.AddWithValue("@EnrollmentYear", Integer.Parse(selectedYear))
+                        End If
+                        Using da As New MySqlDataAdapter(cmd)
+                            da.Fill(dt)
+                        End Using
                     End Using
-                End Using
-            End If
+                End If
             End If
 
             If dt Is Nothing OrElse dt.Rows.Count = 0 Then
@@ -1093,7 +1344,7 @@ Public Class AdminGenerateReports
             ' Headers
             Dim headerFont As New iTextSharp.text.Font(iTextSharp.text.Font.FontFamily.HELVETICA, 12, iTextSharp.text.Font.BOLD)
             Dim headers() As String = {"Section ID", "Section Name", "Grade Level", "Number of Students"}
-            
+
             For Each header As String In headers
                 Dim headerCell As New PdfPCell(New Phrase(header, headerFont)) With {
                     .BackgroundColor = BaseColor.LIGHT_GRAY,
@@ -1245,7 +1496,7 @@ Public Class AdminGenerateReports
             ' Headers
             Dim headerFont As New iTextSharp.text.Font(iTextSharp.text.Font.FontFamily.HELVETICA, 12, iTextSharp.text.Font.BOLD)
             Dim headers() As String = {"Subject ID", "Subject Code", "Subject Name", "Category", "Grade Level", "Status"}
-            
+
             For Each header As String In headers
                 Dim headerCell As New PdfPCell(New Phrase(header, headerFont)) With {
                     .BackgroundColor = BaseColor.LIGHT_GRAY,

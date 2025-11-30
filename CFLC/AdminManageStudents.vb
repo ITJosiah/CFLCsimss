@@ -1224,4 +1224,38 @@ Public Class AdminManageStudents
             End If
         End If
     End Sub
+
+    Private Sub btnGenerateReports_Click(sender As Object, e As EventArgs) Handles btnGenerateReports.Click
+        ' Open Generate Reports form
+        Dim reportsForm As New AdminGenerateReports()
+        
+        If IsEmbedded Then
+            ' If embedded, find the parent dashboard and load the form there
+            Dim dashboard As AdminDashboard = FindParentDashboard()
+            If dashboard IsNot Nothing Then
+                reportsForm.IsEmbedded = True
+                dashboard.LoadContentForm(reportsForm)
+            Else
+                ' Fallback: show as new window
+                reportsForm.IsEmbedded = False
+                reportsForm.Show()
+            End If
+        Else
+            ' Not embedded, show as standalone window
+            reportsForm.IsEmbedded = False
+            reportsForm.Show()
+        End If
+    End Sub
+
+    ' Helper method to find the parent AdminDashboard form
+    Private Function FindParentDashboard() As AdminDashboard
+        Dim control As Control = Me
+        While control IsNot Nothing
+            If TypeOf control Is AdminDashboard Then
+                Return DirectCast(control, AdminDashboard)
+            End If
+            control = control.Parent
+        End While
+        Return Nothing
+    End Function
 End Class

@@ -31,6 +31,12 @@ Partial Class AdminGenerateReports
         Me.dgvSections = New System.Windows.Forms.DataGridView()
         Me.lblEnrollmentYear = New System.Windows.Forms.Label()
         Me.cmbEnrollmentYear = New System.Windows.Forms.ComboBox()
+        Me.lblStudentEnrollmentYear = New System.Windows.Forms.Label()
+        Me.cmbStudentEnrollmentYear = New System.Windows.Forms.ComboBox()
+        Me.lblEnrollmentSummaryYear = New System.Windows.Forms.Label()
+        Me.cmbEnrollmentSummaryYear = New System.Windows.Forms.ComboBox()
+        Me.lblSubjectEnrollmentYear = New System.Windows.Forms.Label()
+        Me.cmbSubjectEnrollmentYear = New System.Windows.Forms.ComboBox()
         Me.lblSectionView = New System.Windows.Forms.Label()
         Me.cmbSectionView = New System.Windows.Forms.ComboBox()
         Me.btnAdminGenerateSections = New System.Windows.Forms.Button()
@@ -43,6 +49,10 @@ Partial Class AdminGenerateReports
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.btnAdminGenerateStudents = New System.Windows.Forms.Button()
         Me.btnAdminGenerateEnrollmentSummary = New System.Windows.Forms.Button()
+        Me.grpStudents = New System.Windows.Forms.GroupBox()
+        Me.grpEnrollment = New System.Windows.Forms.GroupBox()
+        Me.grpSections = New System.Windows.Forms.GroupBox()
+        Me.grpSubjects = New System.Windows.Forms.GroupBox()
         Me.pnlSidebar.SuspendLayout()
         Me.pnlMainContent.SuspendLayout()
         CType(Me.dgvSubjects, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -64,24 +74,10 @@ Partial Class AdminGenerateReports
         'pnlMainContent
         '
         Me.pnlMainContent.BackColor = System.Drawing.Color.FromArgb(CType(CType(7, Byte), Integer), CType(CType(77, Byte), Integer), CType(CType(39, Byte), Integer))
-        Me.pnlMainContent.Controls.Add(Me.dgvSubjects)
-        Me.pnlMainContent.Controls.Add(Me.lblSubjectView)
-        Me.pnlMainContent.Controls.Add(Me.cmbSubjectView)
-        Me.pnlMainContent.Controls.Add(Me.btnAdminGenerateSubjects)
-        Me.pnlMainContent.Controls.Add(Me.dgvSections)
-        Me.pnlMainContent.Controls.Add(Me.lblEnrollmentYear)
-        Me.pnlMainContent.Controls.Add(Me.cmbEnrollmentYear)
-        Me.pnlMainContent.Controls.Add(Me.lblSectionView)
-        Me.pnlMainContent.Controls.Add(Me.cmbSectionView)
-        Me.pnlMainContent.Controls.Add(Me.btnAdminGenerateSections)
-        Me.pnlMainContent.Controls.Add(Me.dgvEnrollment)
-        Me.pnlMainContent.Controls.Add(Me.lblEnrollmentView)
-        Me.pnlMainContent.Controls.Add(Me.cmbEnrollmentView)
-        Me.pnlMainContent.Controls.Add(Me.btnAdminGenerateEnrollmentSummary)
-        Me.pnlMainContent.Controls.Add(Me.dgvStudents)
-        Me.pnlMainContent.Controls.Add(Me.lblGradeLevel)
-        Me.pnlMainContent.Controls.Add(Me.cmbGradeLevel)
-        Me.pnlMainContent.Controls.Add(Me.btnAdminGenerateStudents)
+        Me.pnlMainContent.Controls.Add(Me.grpSubjects)
+        Me.pnlMainContent.Controls.Add(Me.grpSections)
+        Me.pnlMainContent.Controls.Add(Me.grpEnrollment)
+        Me.pnlMainContent.Controls.Add(Me.grpStudents)
         Me.pnlMainContent.Controls.Add(Me.PictureBox1)
         Me.pnlMainContent.Dock = System.Windows.Forms.DockStyle.Fill
         Me.pnlMainContent.Location = New System.Drawing.Point(0, 0)
@@ -100,21 +96,44 @@ Partial Class AdminGenerateReports
         Me.PictureBox1.TabIndex = 3
         Me.PictureBox1.TabStop = False
         '
+        'grpStudents
+        '
+        Me.grpStudents.BackColor = System.Drawing.Color.White
+        Me.grpStudents.Controls.Add(Me.btnAdminGenerateStudents)
+        Me.grpStudents.Controls.Add(Me.lblGradeLevel)
+        Me.grpStudents.Controls.Add(Me.cmbGradeLevel)
+        Me.grpStudents.Controls.Add(Me.lblStudentEnrollmentYear)
+        Me.grpStudents.Controls.Add(Me.cmbStudentEnrollmentYear)
+        Me.grpStudents.Controls.Add(Me.dgvStudents)
+        Me.grpStudents.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.grpStudents.ForeColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.grpStudents.Location = New System.Drawing.Point(50, 20)
+        Me.grpStudents.Name = "grpStudents"
+        Me.grpStudents.Padding = New System.Windows.Forms.Padding(15, 10, 15, 15)
+        Me.grpStudents.Size = New System.Drawing.Size(1200, 200)
+        Me.grpStudents.TabIndex = 28
+        Me.grpStudents.TabStop = False
+        Me.grpStudents.Text = "Student Reports"
+        '
         'btnAdminGenerateStudents
         '
-        Me.btnAdminGenerateStudents.Location = New System.Drawing.Point(272, 30)
+        Me.btnAdminGenerateStudents.BackColor = System.Drawing.Color.FromArgb(CType(CType(108, Byte), Integer), CType(CType(117, Byte), Integer), CType(CType(125, Byte), Integer))
+        Me.btnAdminGenerateStudents.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnAdminGenerateStudents.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnAdminGenerateStudents.ForeColor = System.Drawing.Color.White
+        Me.btnAdminGenerateStudents.Location = New System.Drawing.Point(18, 30)
         Me.btnAdminGenerateStudents.Name = "btnAdminGenerateStudents"
-        Me.btnAdminGenerateStudents.Size = New System.Drawing.Size(169, 40)
+        Me.btnAdminGenerateStudents.Size = New System.Drawing.Size(150, 40)
         Me.btnAdminGenerateStudents.TabIndex = 4
         Me.btnAdminGenerateStudents.Text = "Print Students"
-        Me.btnAdminGenerateStudents.UseVisualStyleBackColor = True
+        Me.btnAdminGenerateStudents.UseVisualStyleBackColor = False
         '
         'cmbGradeLevel
         '
         Me.cmbGradeLevel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbGradeLevel.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmbGradeLevel.FormattingEnabled = True
-        Me.cmbGradeLevel.Location = New System.Drawing.Point(456, 37)
+        Me.cmbGradeLevel.Location = New System.Drawing.Point(190, 40)
         Me.cmbGradeLevel.Name = "cmbGradeLevel"
         Me.cmbGradeLevel.Size = New System.Drawing.Size(200, 28)
         Me.cmbGradeLevel.TabIndex = 5
@@ -123,12 +142,33 @@ Partial Class AdminGenerateReports
         '
         Me.lblGradeLevel.AutoSize = True
         Me.lblGradeLevel.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblGradeLevel.ForeColor = System.Drawing.Color.White
-        Me.lblGradeLevel.Location = New System.Drawing.Point(456, 14)
+        Me.lblGradeLevel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.lblGradeLevel.Location = New System.Drawing.Point(190, 17)
         Me.lblGradeLevel.Name = "lblGradeLevel"
         Me.lblGradeLevel.Size = New System.Drawing.Size(100, 20)
         Me.lblGradeLevel.TabIndex = 6
         Me.lblGradeLevel.Text = "Grade Level:"
+        '
+        'cmbStudentEnrollmentYear
+        '
+        Me.cmbStudentEnrollmentYear.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cmbStudentEnrollmentYear.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmbStudentEnrollmentYear.FormattingEnabled = True
+        Me.cmbStudentEnrollmentYear.Location = New System.Drawing.Point(410, 40)
+        Me.cmbStudentEnrollmentYear.Name = "cmbStudentEnrollmentYear"
+        Me.cmbStudentEnrollmentYear.Size = New System.Drawing.Size(200, 28)
+        Me.cmbStudentEnrollmentYear.TabIndex = 22
+        '
+        'lblStudentEnrollmentYear
+        '
+        Me.lblStudentEnrollmentYear.AutoSize = True
+        Me.lblStudentEnrollmentYear.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblStudentEnrollmentYear.ForeColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.lblStudentEnrollmentYear.Location = New System.Drawing.Point(410, 17)
+        Me.lblStudentEnrollmentYear.Name = "lblStudentEnrollmentYear"
+        Me.lblStudentEnrollmentYear.Size = New System.Drawing.Size(130, 20)
+        Me.lblStudentEnrollmentYear.TabIndex = 23
+        Me.lblStudentEnrollmentYear.Text = "Enrollment Year:"
         '
         'dgvStudents
         '
@@ -136,31 +176,55 @@ Partial Class AdminGenerateReports
         Me.dgvStudents.AllowUserToDeleteRows = False
         Me.dgvStudents.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.dgvStudents.BackgroundColor = System.Drawing.Color.White
+        Me.dgvStudents.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.dgvStudents.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvStudents.Location = New System.Drawing.Point(272, 80)
+        Me.dgvStudents.Location = New System.Drawing.Point(18, 95)
         Me.dgvStudents.Name = "dgvStudents"
         Me.dgvStudents.ReadOnly = True
         Me.dgvStudents.RowHeadersWidth = 51
         Me.dgvStudents.RowTemplate.Height = 24
         Me.dgvStudents.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.dgvStudents.Size = New System.Drawing.Size(900, 150)
+        Me.dgvStudents.Size = New System.Drawing.Size(1164, 90)
         Me.dgvStudents.TabIndex = 7
+        '
+        'grpEnrollment
+        '
+        Me.grpEnrollment.BackColor = System.Drawing.Color.White
+        Me.grpEnrollment.Controls.Add(Me.btnAdminGenerateEnrollmentSummary)
+        Me.grpEnrollment.Controls.Add(Me.lblEnrollmentView)
+        Me.grpEnrollment.Controls.Add(Me.cmbEnrollmentView)
+        Me.grpEnrollment.Controls.Add(Me.lblEnrollmentSummaryYear)
+        Me.grpEnrollment.Controls.Add(Me.cmbEnrollmentSummaryYear)
+        Me.grpEnrollment.Controls.Add(Me.dgvEnrollment)
+        Me.grpEnrollment.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.grpEnrollment.ForeColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.grpEnrollment.Location = New System.Drawing.Point(50, 240)
+        Me.grpEnrollment.Name = "grpEnrollment"
+        Me.grpEnrollment.Padding = New System.Windows.Forms.Padding(15, 10, 15, 15)
+        Me.grpEnrollment.Size = New System.Drawing.Size(1200, 200)
+        Me.grpEnrollment.TabIndex = 29
+        Me.grpEnrollment.TabStop = False
+        Me.grpEnrollment.Text = "Enrollment Summary Reports"
         '
         'btnAdminGenerateEnrollmentSummary
         '
-        Me.btnAdminGenerateEnrollmentSummary.Location = New System.Drawing.Point(272, 260)
+        Me.btnAdminGenerateEnrollmentSummary.BackColor = System.Drawing.Color.FromArgb(CType(CType(108, Byte), Integer), CType(CType(117, Byte), Integer), CType(CType(125, Byte), Integer))
+        Me.btnAdminGenerateEnrollmentSummary.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnAdminGenerateEnrollmentSummary.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnAdminGenerateEnrollmentSummary.ForeColor = System.Drawing.Color.White
+        Me.btnAdminGenerateEnrollmentSummary.Location = New System.Drawing.Point(18, 30)
         Me.btnAdminGenerateEnrollmentSummary.Name = "btnAdminGenerateEnrollmentSummary"
-        Me.btnAdminGenerateEnrollmentSummary.Size = New System.Drawing.Size(169, 40)
+        Me.btnAdminGenerateEnrollmentSummary.Size = New System.Drawing.Size(150, 40)
         Me.btnAdminGenerateEnrollmentSummary.TabIndex = 8
         Me.btnAdminGenerateEnrollmentSummary.Text = "Print Enrollments"
-        Me.btnAdminGenerateEnrollmentSummary.UseVisualStyleBackColor = True
+        Me.btnAdminGenerateEnrollmentSummary.UseVisualStyleBackColor = False
         '
         'cmbEnrollmentView
         '
         Me.cmbEnrollmentView.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbEnrollmentView.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmbEnrollmentView.FormattingEnabled = True
-        Me.cmbEnrollmentView.Location = New System.Drawing.Point(456, 267)
+        Me.cmbEnrollmentView.Location = New System.Drawing.Point(190, 40)
         Me.cmbEnrollmentView.Name = "cmbEnrollmentView"
         Me.cmbEnrollmentView.Size = New System.Drawing.Size(200, 28)
         Me.cmbEnrollmentView.TabIndex = 9
@@ -169,12 +233,33 @@ Partial Class AdminGenerateReports
         '
         Me.lblEnrollmentView.AutoSize = True
         Me.lblEnrollmentView.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblEnrollmentView.ForeColor = System.Drawing.Color.White
-        Me.lblEnrollmentView.Location = New System.Drawing.Point(456, 244)
+        Me.lblEnrollmentView.ForeColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.lblEnrollmentView.Location = New System.Drawing.Point(190, 17)
         Me.lblEnrollmentView.Name = "lblEnrollmentView"
         Me.lblEnrollmentView.Size = New System.Drawing.Size(133, 20)
         Me.lblEnrollmentView.TabIndex = 10
         Me.lblEnrollmentView.Text = "Enrollment View:"
+        '
+        'cmbEnrollmentSummaryYear
+        '
+        Me.cmbEnrollmentSummaryYear.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cmbEnrollmentSummaryYear.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmbEnrollmentSummaryYear.FormattingEnabled = True
+        Me.cmbEnrollmentSummaryYear.Location = New System.Drawing.Point(410, 40)
+        Me.cmbEnrollmentSummaryYear.Name = "cmbEnrollmentSummaryYear"
+        Me.cmbEnrollmentSummaryYear.Size = New System.Drawing.Size(200, 28)
+        Me.cmbEnrollmentSummaryYear.TabIndex = 24
+        '
+        'lblEnrollmentSummaryYear
+        '
+        Me.lblEnrollmentSummaryYear.AutoSize = True
+        Me.lblEnrollmentSummaryYear.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblEnrollmentSummaryYear.ForeColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.lblEnrollmentSummaryYear.Location = New System.Drawing.Point(410, 17)
+        Me.lblEnrollmentSummaryYear.Name = "lblEnrollmentSummaryYear"
+        Me.lblEnrollmentSummaryYear.Size = New System.Drawing.Size(130, 20)
+        Me.lblEnrollmentSummaryYear.TabIndex = 25
+        Me.lblEnrollmentSummaryYear.Text = "Enrollment Year:"
         '
         'dgvEnrollment
         '
@@ -182,31 +267,55 @@ Partial Class AdminGenerateReports
         Me.dgvEnrollment.AllowUserToDeleteRows = False
         Me.dgvEnrollment.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.dgvEnrollment.BackgroundColor = System.Drawing.Color.White
+        Me.dgvEnrollment.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.dgvEnrollment.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvEnrollment.Location = New System.Drawing.Point(272, 310)
+        Me.dgvEnrollment.Location = New System.Drawing.Point(18, 95)
         Me.dgvEnrollment.Name = "dgvEnrollment"
         Me.dgvEnrollment.ReadOnly = True
         Me.dgvEnrollment.RowHeadersWidth = 51
         Me.dgvEnrollment.RowTemplate.Height = 24
         Me.dgvEnrollment.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.dgvEnrollment.Size = New System.Drawing.Size(900, 150)
+        Me.dgvEnrollment.Size = New System.Drawing.Size(1164, 90)
         Me.dgvEnrollment.TabIndex = 11
+        '
+        'grpSections
+        '
+        Me.grpSections.BackColor = System.Drawing.Color.White
+        Me.grpSections.Controls.Add(Me.btnAdminGenerateSections)
+        Me.grpSections.Controls.Add(Me.lblSectionView)
+        Me.grpSections.Controls.Add(Me.cmbSectionView)
+        Me.grpSections.Controls.Add(Me.lblEnrollmentYear)
+        Me.grpSections.Controls.Add(Me.cmbEnrollmentYear)
+        Me.grpSections.Controls.Add(Me.dgvSections)
+        Me.grpSections.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.grpSections.ForeColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.grpSections.Location = New System.Drawing.Point(50, 460)
+        Me.grpSections.Name = "grpSections"
+        Me.grpSections.Padding = New System.Windows.Forms.Padding(15, 10, 15, 15)
+        Me.grpSections.Size = New System.Drawing.Size(1200, 200)
+        Me.grpSections.TabIndex = 30
+        Me.grpSections.TabStop = False
+        Me.grpSections.Text = "Section Reports"
         '
         'btnAdminGenerateSections
         '
-        Me.btnAdminGenerateSections.Location = New System.Drawing.Point(272, 490)
+        Me.btnAdminGenerateSections.BackColor = System.Drawing.Color.FromArgb(CType(CType(108, Byte), Integer), CType(CType(117, Byte), Integer), CType(CType(125, Byte), Integer))
+        Me.btnAdminGenerateSections.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnAdminGenerateSections.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnAdminGenerateSections.ForeColor = System.Drawing.Color.White
+        Me.btnAdminGenerateSections.Location = New System.Drawing.Point(18, 30)
         Me.btnAdminGenerateSections.Name = "btnAdminGenerateSections"
-        Me.btnAdminGenerateSections.Size = New System.Drawing.Size(169, 40)
+        Me.btnAdminGenerateSections.Size = New System.Drawing.Size(150, 40)
         Me.btnAdminGenerateSections.TabIndex = 12
         Me.btnAdminGenerateSections.Text = "Print Section"
-        Me.btnAdminGenerateSections.UseVisualStyleBackColor = True
+        Me.btnAdminGenerateSections.UseVisualStyleBackColor = False
         '
         'cmbSectionView
         '
         Me.cmbSectionView.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbSectionView.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmbSectionView.FormattingEnabled = True
-        Me.cmbSectionView.Location = New System.Drawing.Point(456, 497)
+        Me.cmbSectionView.Location = New System.Drawing.Point(190, 40)
         Me.cmbSectionView.Name = "cmbSectionView"
         Me.cmbSectionView.Size = New System.Drawing.Size(200, 28)
         Me.cmbSectionView.TabIndex = 13
@@ -215,8 +324,8 @@ Partial Class AdminGenerateReports
         '
         Me.lblSectionView.AutoSize = True
         Me.lblSectionView.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblSectionView.ForeColor = System.Drawing.Color.White
-        Me.lblSectionView.Location = New System.Drawing.Point(456, 474)
+        Me.lblSectionView.ForeColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.lblSectionView.Location = New System.Drawing.Point(190, 17)
         Me.lblSectionView.Name = "lblSectionView"
         Me.lblSectionView.Size = New System.Drawing.Size(100, 20)
         Me.lblSectionView.TabIndex = 14
@@ -228,14 +337,15 @@ Partial Class AdminGenerateReports
         Me.dgvSections.AllowUserToDeleteRows = False
         Me.dgvSections.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.dgvSections.BackgroundColor = System.Drawing.Color.White
+        Me.dgvSections.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.dgvSections.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvSections.Location = New System.Drawing.Point(272, 540)
+        Me.dgvSections.Location = New System.Drawing.Point(18, 95)
         Me.dgvSections.Name = "dgvSections"
         Me.dgvSections.ReadOnly = True
         Me.dgvSections.RowHeadersWidth = 51
         Me.dgvSections.RowTemplate.Height = 24
         Me.dgvSections.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.dgvSections.Size = New System.Drawing.Size(900, 150)
+        Me.dgvSections.Size = New System.Drawing.Size(1164, 90)
         Me.dgvSections.TabIndex = 15
         '
         'cmbEnrollmentYear
@@ -243,7 +353,7 @@ Partial Class AdminGenerateReports
         Me.cmbEnrollmentYear.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbEnrollmentYear.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmbEnrollmentYear.FormattingEnabled = True
-        Me.cmbEnrollmentYear.Location = New System.Drawing.Point(676, 497)
+        Me.cmbEnrollmentYear.Location = New System.Drawing.Point(410, 40)
         Me.cmbEnrollmentYear.Name = "cmbEnrollmentYear"
         Me.cmbEnrollmentYear.Size = New System.Drawing.Size(200, 28)
         Me.cmbEnrollmentYear.TabIndex = 16
@@ -252,28 +362,51 @@ Partial Class AdminGenerateReports
         '
         Me.lblEnrollmentYear.AutoSize = True
         Me.lblEnrollmentYear.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblEnrollmentYear.ForeColor = System.Drawing.Color.White
-        Me.lblEnrollmentYear.Location = New System.Drawing.Point(676, 474)
+        Me.lblEnrollmentYear.ForeColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.lblEnrollmentYear.Location = New System.Drawing.Point(410, 17)
         Me.lblEnrollmentYear.Name = "lblEnrollmentYear"
         Me.lblEnrollmentYear.Size = New System.Drawing.Size(130, 20)
         Me.lblEnrollmentYear.TabIndex = 17
         Me.lblEnrollmentYear.Text = "Enrollment Year:"
         '
+        'grpSubjects
+        '
+        Me.grpSubjects.BackColor = System.Drawing.Color.White
+        Me.grpSubjects.Controls.Add(Me.btnAdminGenerateSubjects)
+        Me.grpSubjects.Controls.Add(Me.lblSubjectView)
+        Me.grpSubjects.Controls.Add(Me.cmbSubjectView)
+        Me.grpSubjects.Controls.Add(Me.lblSubjectEnrollmentYear)
+        Me.grpSubjects.Controls.Add(Me.cmbSubjectEnrollmentYear)
+        Me.grpSubjects.Controls.Add(Me.dgvSubjects)
+        Me.grpSubjects.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.grpSubjects.ForeColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.grpSubjects.Location = New System.Drawing.Point(50, 680)
+        Me.grpSubjects.Name = "grpSubjects"
+        Me.grpSubjects.Padding = New System.Windows.Forms.Padding(15, 10, 15, 15)
+        Me.grpSubjects.Size = New System.Drawing.Size(1200, 200)
+        Me.grpSubjects.TabIndex = 31
+        Me.grpSubjects.TabStop = False
+        Me.grpSubjects.Text = "Subject Reports"
+        '
         'btnAdminGenerateSubjects
         '
-        Me.btnAdminGenerateSubjects.Location = New System.Drawing.Point(272, 720)
+        Me.btnAdminGenerateSubjects.BackColor = System.Drawing.Color.FromArgb(CType(CType(108, Byte), Integer), CType(CType(117, Byte), Integer), CType(CType(125, Byte), Integer))
+        Me.btnAdminGenerateSubjects.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnAdminGenerateSubjects.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnAdminGenerateSubjects.ForeColor = System.Drawing.Color.White
+        Me.btnAdminGenerateSubjects.Location = New System.Drawing.Point(18, 30)
         Me.btnAdminGenerateSubjects.Name = "btnAdminGenerateSubjects"
-        Me.btnAdminGenerateSubjects.Size = New System.Drawing.Size(169, 40)
+        Me.btnAdminGenerateSubjects.Size = New System.Drawing.Size(150, 40)
         Me.btnAdminGenerateSubjects.TabIndex = 18
         Me.btnAdminGenerateSubjects.Text = "Print Subjects"
-        Me.btnAdminGenerateSubjects.UseVisualStyleBackColor = True
+        Me.btnAdminGenerateSubjects.UseVisualStyleBackColor = False
         '
         'cmbSubjectView
         '
         Me.cmbSubjectView.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbSubjectView.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmbSubjectView.FormattingEnabled = True
-        Me.cmbSubjectView.Location = New System.Drawing.Point(456, 727)
+        Me.cmbSubjectView.Location = New System.Drawing.Point(190, 40)
         Me.cmbSubjectView.Name = "cmbSubjectView"
         Me.cmbSubjectView.Size = New System.Drawing.Size(200, 28)
         Me.cmbSubjectView.TabIndex = 19
@@ -282,12 +415,33 @@ Partial Class AdminGenerateReports
         '
         Me.lblSubjectView.AutoSize = True
         Me.lblSubjectView.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblSubjectView.ForeColor = System.Drawing.Color.White
-        Me.lblSubjectView.Location = New System.Drawing.Point(456, 704)
+        Me.lblSubjectView.ForeColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.lblSubjectView.Location = New System.Drawing.Point(190, 17)
         Me.lblSubjectView.Name = "lblSubjectView"
         Me.lblSubjectView.Size = New System.Drawing.Size(100, 20)
         Me.lblSubjectView.TabIndex = 20
         Me.lblSubjectView.Text = "Subject View:"
+        '
+        'cmbSubjectEnrollmentYear
+        '
+        Me.cmbSubjectEnrollmentYear.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cmbSubjectEnrollmentYear.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmbSubjectEnrollmentYear.FormattingEnabled = True
+        Me.cmbSubjectEnrollmentYear.Location = New System.Drawing.Point(410, 40)
+        Me.cmbSubjectEnrollmentYear.Name = "cmbSubjectEnrollmentYear"
+        Me.cmbSubjectEnrollmentYear.Size = New System.Drawing.Size(200, 28)
+        Me.cmbSubjectEnrollmentYear.TabIndex = 26
+        '
+        'lblSubjectEnrollmentYear
+        '
+        Me.lblSubjectEnrollmentYear.AutoSize = True
+        Me.lblSubjectEnrollmentYear.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblSubjectEnrollmentYear.ForeColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.lblSubjectEnrollmentYear.Location = New System.Drawing.Point(410, 17)
+        Me.lblSubjectEnrollmentYear.Name = "lblSubjectEnrollmentYear"
+        Me.lblSubjectEnrollmentYear.Size = New System.Drawing.Size(130, 20)
+        Me.lblSubjectEnrollmentYear.TabIndex = 27
+        Me.lblSubjectEnrollmentYear.Text = "Enrollment Year:"
         '
         'dgvSubjects
         '
@@ -295,14 +449,15 @@ Partial Class AdminGenerateReports
         Me.dgvSubjects.AllowUserToDeleteRows = False
         Me.dgvSubjects.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.dgvSubjects.BackgroundColor = System.Drawing.Color.White
+        Me.dgvSubjects.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.dgvSubjects.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvSubjects.Location = New System.Drawing.Point(272, 770)
+        Me.dgvSubjects.Location = New System.Drawing.Point(18, 95)
         Me.dgvSubjects.Name = "dgvSubjects"
         Me.dgvSubjects.ReadOnly = True
         Me.dgvSubjects.RowHeadersWidth = 51
         Me.dgvSubjects.RowTemplate.Height = 24
         Me.dgvSubjects.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.dgvSubjects.Size = New System.Drawing.Size(900, 150)
+        Me.dgvSubjects.Size = New System.Drawing.Size(1164, 90)
         Me.dgvSubjects.TabIndex = 21
         '
         'AdminGenerateReports
@@ -347,4 +502,14 @@ Partial Class AdminGenerateReports
     Friend WithEvents cmbSubjectView As ComboBox
     Friend WithEvents lblSubjectView As Label
     Friend WithEvents dgvSubjects As DataGridView
+    Friend WithEvents lblStudentEnrollmentYear As Label
+    Friend WithEvents cmbStudentEnrollmentYear As ComboBox
+    Friend WithEvents lblEnrollmentSummaryYear As Label
+    Friend WithEvents cmbEnrollmentSummaryYear As ComboBox
+    Friend WithEvents lblSubjectEnrollmentYear As Label
+    Friend WithEvents cmbSubjectEnrollmentYear As ComboBox
+    Friend WithEvents grpStudents As GroupBox
+    Friend WithEvents grpEnrollment As GroupBox
+    Friend WithEvents grpSections As GroupBox
+    Friend WithEvents grpSubjects As GroupBox
 End Class
