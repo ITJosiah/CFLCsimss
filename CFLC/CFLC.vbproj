@@ -326,6 +326,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="TeacherDashboard.resx">
       <DependentUpon>TeacherDashboard.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="TeacherViewAssignedSubjects.resx">
       <DependentUpon>TeacherViewAssignedSubjects.vb</DependentUpon>
