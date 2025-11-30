@@ -385,6 +385,14 @@ Public Class SuperAdminManageAdminAccounts
                 Dim rowsAffected As Integer = command.ExecuteNonQuery()
 
                 If rowsAffected > 0 Then
+                    ' Log the addition
+                    Try
+                        Dim accountInfo As String = "User ID: " & txtbxAdminUserID.Text.Trim() & ", User Type: " & ComboBoxAdminUserType.SelectedItem.ToString()
+                        modDBx.Logs("Added admin account - " & accountInfo, "btnManAdAdd_Click")
+                    Catch
+                        ' Silently fail if logging doesn't work
+                    End Try
+
                     MessageBox.Show("Admin account created successfully!", "Success",
                                   MessageBoxButtons.OK, MessageBoxIcon.Information)
                     ClearInputs()
@@ -549,6 +557,14 @@ Public Class SuperAdminManageAdminAccounts
             Dim rowsAffected As Integer = command.ExecuteNonQuery()
 
             If rowsAffected > 0 Then
+                ' Log the update
+                Try
+                    Dim accountInfo As String = "User ID: " & txtbxAdminUserID.Text.Trim() & " (Original: " & originalUserID & "), User Type: " & ComboBoxAdminUserType.SelectedItem.ToString()
+                    modDBx.Logs("Updated admin account - " & accountInfo, "btnManAdUpdate_Click")
+                Catch
+                    ' Silently fail if logging doesn't work
+                End Try
+
                 MessageBox.Show("Admin account updated successfully!", "Success",
                           MessageBoxButtons.OK, MessageBoxIcon.Information)
                 ClearInputs()
@@ -652,6 +668,14 @@ Public Class SuperAdminManageAdminAccounts
                 Dim rowsAffected As Integer = command.ExecuteNonQuery()
 
                 If rowsAffected > 0 Then
+                    ' Log the deletion
+                    Try
+                        Dim accountInfo As String = "User ID: " & currentUserID
+                        modDBx.Logs("Deleted admin account - " & accountInfo, "btnManAdDelete_Click")
+                    Catch
+                        ' Silently fail if logging doesn't work
+                    End Try
+
                     MessageBox.Show("Admin account deleted successfully!", "Success",
                               MessageBoxButtons.OK, MessageBoxIcon.Information)
                     ClearInputs()

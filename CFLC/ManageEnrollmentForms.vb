@@ -376,6 +376,14 @@ Public Class ManageEnrollmentForms
                 Dim rowsAffected As Integer = cmd.ExecuteNonQuery()
 
                 If rowsAffected > 0 Then
+                    ' Log the addition
+                    Try
+                        Dim enrollmentInfo As String = "Student ID: " & txtbxEnrollmentStudentID.Text.Trim() & ", Section ID: " & txtbxEnrollSectionID.Text.Trim() & ", Grade Level: " & nudEnrollmentGradeLevel.Value.ToString()
+                        modDBx.Logs("Added enrollment - " & enrollmentInfo, "btnEnrollAdd_Click")
+                    Catch
+                        ' Silently fail if logging doesn't work
+                    End Try
+
                     MessageBox.Show("Enrollment added successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
                     ClearEnrollmentFields()
                     LoadToDGV("SELECT * FROM enrollment", dgvEnrollment)
@@ -423,6 +431,14 @@ Public Class ManageEnrollmentForms
                 Dim rowsAffected As Integer = cmd.ExecuteNonQuery()
 
                 If rowsAffected > 0 Then
+                    ' Log the deletion
+                    Try
+                        Dim enrollmentInfo As String = "Enrollment ID: " & currentEnrollmentID.ToString()
+                        modDBx.Logs("Deleted enrollment - " & enrollmentInfo, "btnEnrollDelete_Click")
+                    Catch
+                        ' Silently fail if logging doesn't work
+                    End Try
+
                     MessageBox.Show("Enrollment deleted successfully.", "Delete Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
                     ' Refresh the DataGridView
                     LoadToDGV("SELECT * FROM enrollment", dgvEnrollment)
@@ -571,6 +587,14 @@ Public Class ManageEnrollmentForms
                 Dim rowsAffected As Integer = cmd.ExecuteNonQuery()
 
                 If rowsAffected > 0 Then
+                    ' Log the update
+                    Try
+                        Dim enrollmentInfo As String = "Enrollment ID: " & currentEnrollmentID.ToString() & ", Student ID: " & txtbxEnrollmentStudentID.Text.Trim() & ", Section ID: " & txtbxEnrollSectionID.Text.Trim()
+                        modDBx.Logs("Updated enrollment - " & enrollmentInfo, "btnEnrollUpdate_Click")
+                    Catch
+                        ' Silently fail if logging doesn't work
+                    End Try
+
                     MessageBox.Show("Enrollment updated successfully.", "Update Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
                     ' Clear inputs and re-enable Add after successful update
                     ClearEnrollmentFields()

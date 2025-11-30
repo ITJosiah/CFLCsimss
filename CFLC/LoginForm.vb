@@ -113,6 +113,11 @@ Public Class LoginForm
             Dim userLevel As String = loginResult.Item1
             Dim teacherID As String = loginResult.Item2
 
+            ' Set CurrentLoggedUser for logging purposes
+            modDBx.CurrentLoggedUser.id = txtUserID.Text.Trim()
+            modDBx.CurrentLoggedUser.username = txtUserID.Text.Trim()
+            modDBx.CurrentLoggedUser.position = userLevel
+
             MessageBox.Show("Login successful!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
 
             ' Hide login form first

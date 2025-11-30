@@ -511,6 +511,14 @@ Public Class SuperAdminManageTeacherAccounts
                 Dim rowsAffected As Integer = command.ExecuteNonQuery()
 
                 If rowsAffected > 0 Then
+                    ' Log the addition
+                    Try
+                        Dim accountInfo As String = "User ID: " & txtbxTeacherUserID.Text.Trim() & ", Teacher ID: " & txtbxTeaAccountTeacherID.Text.Trim()
+                        modDBx.Logs("Added teacher account - " & accountInfo, "btnManTeacherAdd_Click")
+                    Catch
+                        ' Silently fail if logging doesn't work
+                    End Try
+
                     MessageBox.Show("Teacher account created successfully!", "Success",
                                   MessageBoxButtons.OK, MessageBoxIcon.Information)
                     ClearInputs()
@@ -659,11 +667,11 @@ Public Class SuperAdminManageTeacherAccounts
         ' This method is no longer needed since we load all teachers, but keeping it for compatibility
         ' The selection in dgvLoginTeacher will highlight the corresponding row in dgvTeacher
         If dgvTeacher Is Nothing Then Return
-        
+
         ' Find and select the row with matching TeacherID
         If dgvTeacher.Rows.Count > 0 Then
             For Each row As DataGridViewRow In dgvTeacher.Rows
-                If row.Cells("TeacherID").Value IsNot Nothing AndAlso 
+                If row.Cells("TeacherID").Value IsNot Nothing AndAlso
                    row.Cells("TeacherID").Value.ToString() = teacherID Then
                     dgvTeacher.ClearSelection()
                     row.Selected = True
@@ -741,6 +749,14 @@ Public Class SuperAdminManageTeacherAccounts
             Dim rowsAffected As Integer = command.ExecuteNonQuery()
 
             If rowsAffected > 0 Then
+                ' Log the update
+                Try
+                    Dim accountInfo As String = "User ID: " & txtbxTeacherUserID.Text.Trim() & " (Original: " & originalUserID & "), Teacher ID: " & txtbxTeaAccountTeacherID.Text.Trim()
+                    modDBx.Logs("Updated teacher account - " & accountInfo, "btnManTeacherUpdate_Click")
+                Catch
+                    ' Silently fail if logging doesn't work
+                End Try
+
                 MessageBox.Show("Teacher account updated successfully!", "Success",
                           MessageBoxButtons.OK, MessageBoxIcon.Information)
                 ClearInputs()
@@ -854,6 +870,14 @@ Public Class SuperAdminManageTeacherAccounts
                 Dim rowsAffected As Integer = command.ExecuteNonQuery()
 
                 If rowsAffected > 0 Then
+                    ' Log the deletion
+                    Try
+                        Dim accountInfo As String = "User ID: " & currentUserID
+                        modDBx.Logs("Deleted teacher account - " & accountInfo, "btnManTeaDelete_Click")
+                    Catch
+                        ' Silently fail if logging doesn't work
+                    End Try
+
                     MessageBox.Show("Teacher account deleted successfully!", "Success",
                               MessageBoxButtons.OK, MessageBoxIcon.Information)
                     ClearInputs()

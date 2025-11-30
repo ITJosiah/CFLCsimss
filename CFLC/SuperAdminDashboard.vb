@@ -199,4 +199,20 @@
     Private Sub btnBackToDashboard_Click(sender As Object, e As EventArgs) Handles btnBackToDashboard.Click
         ShowHomeContent()
     End Sub
+
+    Private Sub btnSuperAdminAccessLogs_Click(sender As Object, e As EventArgs) Handles btnSuperAdminAccessLogs.Click
+        ' Open Access All Logs form
+        Dim accessLogsForm As New SuperAdminAccessAllLogs() With {
+            .IsEmbedded = True
+        }
+        LoadContentForm(accessLogsForm)
+    End Sub
+
+    Private Sub btnSuperAdminManageSysCon_Click(sender As Object, e As EventArgs) Handles btnSuperAdminManageSysCon.Click
+        ' Open System Configuration form
+        Dim configForm As New SuperAdminConfiguration() With {
+            .IsEmbedded = True
+        }
+        LoadContentForm(configForm)
+    End Sub
 End Class

@@ -229,6 +229,14 @@ Public Class AdminManageSubjects
                 Dim rowsAffected As Integer = cmd.ExecuteNonQuery()
 
                 If rowsAffected > 0 Then
+                    ' Log the addition
+                    Try
+                        Dim subjectInfo As String = "Subject Code: " & txtbxManSubSubjectCode.Text.Trim() & ", Subject Name: " & ConvertToProperCase(SafeString(txtbxManSubSubjectName.Text))
+                        modDBx.Logs("Added subject - " & subjectInfo, "btnSubjectAdd_Click")
+                    Catch
+                        ' Silently fail if logging doesn't work
+                    End Try
+
                     MessageBox.Show("Subject added successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
                     ClearInputFields()
                     LoadToDGV("SELECT * FROM subject", dgvSubjectList)
@@ -276,6 +284,14 @@ Public Class AdminManageSubjects
                 Dim rowsAffected As Integer = cmd.ExecuteNonQuery()
 
                 If rowsAffected > 0 Then
+                    ' Log the deletion
+                    Try
+                        Dim subjectInfo As String = "Subject ID: " & currentSubjectID.ToString()
+                        modDBx.Logs("Deleted subject - " & subjectInfo, "btnSubjectDelete_Click")
+                    Catch
+                        ' Silently fail if logging doesn't work
+                    End Try
+
                     MessageBox.Show("Subject deleted successfully.", "Delete Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
                     ' Refresh the DataGridView
                     LoadToDGV("SELECT * FROM subject", dgvSubjectList)
@@ -411,6 +427,14 @@ Public Class AdminManageSubjects
                 Dim rowsAffected As Integer = cmd.ExecuteNonQuery()
 
                 If rowsAffected > 0 Then
+                    ' Log the update
+                    Try
+                        Dim subjectInfo As String = "Subject ID: " & currentSubjectID.ToString() & ", Subject Code: " & txtbxManSubSubjectCode.Text.Trim()
+                        modDBx.Logs("Updated subject - " & subjectInfo, "btnSubjectUpdate_Click")
+                    Catch
+                        ' Silently fail if logging doesn't work
+                    End Try
+
                     MessageBox.Show("Subject updated successfully.", "Update Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
                     ' Clear inputs and re-enable Add after successful update
                     ClearInputFields()

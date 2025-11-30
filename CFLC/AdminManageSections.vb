@@ -325,6 +325,14 @@ Public Class AdminManageSections
                 Dim rowsAffected As Integer = cmd.ExecuteNonQuery()
 
                 If rowsAffected > 0 Then
+                    ' Log the addition
+                    Try
+                        Dim sectionInfo As String = "Section Name: " & ConvertToProperCase(SafeString(txtbxManSecSectionName.Text)) & ", Grade Level: " & nudManSecGradeLevel.Value.ToString()
+                        modDBx.Logs("Added section - " & sectionInfo, "btnSectionAdd_Click")
+                    Catch
+                        ' Silently fail if logging doesn't work
+                    End Try
+
                     MessageBox.Show("Section added successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
                     ClearInputFields()
                     LoadToDGV("SELECT * FROM section", dgvSections)
@@ -372,6 +380,14 @@ Public Class AdminManageSections
                 Dim rowsAffected As Integer = cmd.ExecuteNonQuery()
 
                 If rowsAffected > 0 Then
+                    ' Log the deletion
+                    Try
+                        Dim sectionInfo As String = "Section ID: " & currentSectionID.ToString()
+                        modDBx.Logs("Deleted section - " & sectionInfo, "btnSectionDelete_Click")
+                    Catch
+                        ' Silently fail if logging doesn't work
+                    End Try
+
                     MessageBox.Show("Section deleted successfully.", "Delete Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
                     ' Refresh the DataGridView
                     LoadToDGV("SELECT * FROM section", dgvSections)
@@ -529,6 +545,14 @@ Public Class AdminManageSections
                 Dim rowsAffected As Integer = cmd.ExecuteNonQuery()
 
                 If rowsAffected > 0 Then
+                    ' Log the update
+                    Try
+                        Dim sectionInfo As String = "Section ID: " & currentSectionID.ToString() & ", Section Name: " & ConvertToProperCase(SafeString(txtbxManSecSectionName.Text))
+                        modDBx.Logs("Updated section - " & sectionInfo, "btnSectionUpdate_Click")
+                    Catch
+                        ' Silently fail if logging doesn't work
+                    End Try
+
                     MessageBox.Show("Section updated successfully.", "Update Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
                     ' Clear inputs and re-enable Add after successful update
                     ClearInputFields()

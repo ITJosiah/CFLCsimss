@@ -258,6 +258,14 @@ Public Class AdminManageStudents
                 Dim rowsAffected As Integer = cmd.ExecuteNonQuery()
 
                 If rowsAffected > 0 Then
+                    ' Log the addition
+                    Try
+                        Dim studentInfo As String = "LRN: " & SafeString(txtbxStudentLRN.Text) & ", Name: " & ConvertToProperCase(txtbxStudentFirstName.Text.Trim()) & " " & ConvertToProperCase(txtbxStudentSurname.Text.Trim())
+                        modDBx.Logs("Added student - " & studentInfo, "btnStudentAdd_Click")
+                    Catch
+                        ' Silently fail if logging doesn't work
+                    End Try
+
                     MessageBox.Show("Student added successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
                     ClearInputFields()
                     LoadToDGV("SELECT * FROM student", dgvStudents)
@@ -770,6 +778,14 @@ Public Class AdminManageStudents
                 Dim rowsAffected As Integer = cmd.ExecuteNonQuery()
 
                 If rowsAffected > 0 Then
+                    ' Log the update
+                    Try
+                        Dim studentInfo As String = "Student ID: " & currentStudentID.ToString() & ", Name: " & ConvertToProperCase(txtbxStudentFirstName.Text.Trim()) & " " & ConvertToProperCase(txtbxStudentSurname.Text.Trim())
+                        modDBx.Logs("Updated student - " & studentInfo, "btnStudentUpdate_Click")
+                    Catch
+                        ' Silently fail if logging doesn't work
+                    End Try
+
                     MsgBox("Student updated successfully.", MsgBoxStyle.Information, "Update Success")
                     ' Clear inputs and re-enable Add after successful update
                     ClearInputFields()
@@ -980,6 +996,14 @@ Public Class AdminManageStudents
                 Dim rowsAffected As Integer = cmd.ExecuteNonQuery()
 
                 If rowsAffected > 0 Then
+                    ' Log the deletion
+                    Try
+                        Dim studentInfo As String = "Student ID: " & currentStudentID.ToString()
+                        modDBx.Logs("Deleted student - " & studentInfo, "btnStudentDelete_Click")
+                    Catch
+                        ' Silently fail if logging doesn't work
+                    End Try
+
                     MsgBox("Student deleted successfully.", MsgBoxStyle.Information, "Delete Success")
                     ' Refresh the DataGridView
                     LoadToDGV("SELECT * FROM student", dgvStudents)

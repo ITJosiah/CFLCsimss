@@ -15,7 +15,7 @@ Module modDBx
     Public strConnection As String = "server=" & db_server & ";uid=" & db_uid & ";password=" & db_pwd & ";database=" & db_name & ";" & "allowuservariables='True';"
 
     Public Structure LoggedUser
-        Dim id As Integer
+        Dim id As String
         Dim name As String
         Dim position As String
         Dim username As String
@@ -165,12 +165,33 @@ Module modDBx
     End Function
     Sub Logs(ByVal transaction As String, Optional ByVal events As String = "*_Click")
         Try
-            readQuery(String.Format("INSERT INTO `logs`(`dt`, `user_accounts_id`, `event`, `transactions`) VALUES ({0},{1},'{2}','{3}')", "now()",
-                                    CurrentLoggedUser.id,
-                                    events,
-                                    transaction))
+            ' Only log if there's a logged user (check if id is empty, which means no user is logged in)
+            If String.IsNullOrEmpty(CurrentLoggedUser.id) Then
+                Return
+            End If
+
+            ' Ensure connection is open
+            If conn.State <> ConnectionState.Open Then
+                openConn(db_name)
+            End If
+
+            ' Escape single quotes in strings to prevent SQL injection
+            Dim safeEvent As String = events.Replace("'", "''")
+            Dim safeTransaction As String = transaction.Replace("'", "''")
+
+            ' Use parameterized query for safety
+            Dim insertQuery As String = "INSERT INTO `logs`(`dt`, `user_accounts_id`, `event`, `transactions`) VALUES (NOW(), @user_id, @event, @transaction)"
+            
+            Using insertCmd As New MySqlCommand(insertQuery, conn)
+                insertCmd.Parameters.AddWithValue("@user_id", CurrentLoggedUser.id)
+                insertCmd.Parameters.AddWithValue("@event", safeEvent)
+                insertCmd.Parameters.AddWithValue("@transaction", safeTransaction)
+                insertCmd.ExecuteNonQuery()
+            End Using
         Catch ex As Exception
-            MsgBox(ex.Message)
+            ' Silently fail - don't interrupt user workflow if logging fails
+            ' Optionally log to a file or show in debug mode
+            System.Diagnostics.Debug.WriteLine("Error logging: " & ex.Message)
         End Try
     End Sub
 End Module
