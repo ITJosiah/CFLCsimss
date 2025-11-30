@@ -6,13 +6,10 @@ Public Class AdminManageStudents
     Private currentStudentID As Integer = 0
 
     Public Property IsEmbedded As Boolean = False
-    
+
     ' Event to notify when student count changes
     Public Event StudentCountChanged(count As Integer)
-    
-    ' Event to notify when gender data changes
-    Public Event GenderDataChanged(maleCount As Integer, femaleCount As Integer)
-    
+
     ' Public method to get current student count
     Public Function GetStudentCount() As Integer
         If dgvStudents IsNot Nothing AndAlso dgvStudents.DataSource IsNot Nothing Then
@@ -24,13 +21,13 @@ Public Class AdminManageStudents
         End If
         Return 0
     End Function
-    
+
     ' Public method to get gender counts
     Public Function GetGenderCounts() As Dictionary(Of String, Integer)
         Dim genderCounts As New Dictionary(Of String, Integer)()
         genderCounts("Male") = 0
         genderCounts("Female") = 0
-        
+
         If dgvStudents IsNot Nothing AndAlso dgvStudents.DataSource IsNot Nothing Then
             Dim dt As DataTable = TryCast(dgvStudents.DataSource, DataTable)
             If dt IsNot Nothing Then
@@ -39,7 +36,7 @@ Public Class AdminManageStudents
                     If Not IsDBNull(row("Gender")) Then
                         gender = row("Gender").ToString().Trim()
                     End If
-                    
+
                     If gender.Equals("Male", StringComparison.OrdinalIgnoreCase) Then
                         genderCounts("Male") += 1
                     ElseIf gender.Equals("Female", StringComparison.OrdinalIgnoreCase) Then
@@ -60,7 +57,7 @@ Public Class AdminManageStudents
                 Next
             End If
         End If
-        
+
         Return genderCounts
     End Function
 
@@ -1222,10 +1219,10 @@ Public Class AdminManageStudents
         Catch
             ' ignore - some layout states prevent setting CurrentCell to Nothing
         End Try
-        
+
         ' Notify that student count has changed
         RaiseEvent StudentCountChanged(GetStudentCount())
-        
+
         ' Notify that gender data has changed
         Dim genderCounts = GetGenderCounts()
         RaiseEvent GenderDataChanged(genderCounts("Male"), genderCounts("Female"))
