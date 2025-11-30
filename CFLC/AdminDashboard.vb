@@ -212,7 +212,7 @@ Public Class AdminDashboard
         child.Dock = DockStyle.Fill
         pnlMainContent.Controls.Add(child)
         child.Show()
-        
+
         ' Hide charts if ManageEnrollmentForms is loaded (to prevent overlap with data grid)
         If TypeOf child Is ManageEnrollmentForms Then
             If PieChartStudentGenderList IsNot Nothing Then
