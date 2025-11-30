@@ -227,5 +227,7 @@ Public Class TeacherDashboard
             Me.Close()
         End Sub
 
-
+    Private Sub btnBackToDashboard_Click(sender As Object, e As EventArgs) Handles btnBackToDashboard.Click
+        ShowHomeContent()
+    End Sub
 End Class

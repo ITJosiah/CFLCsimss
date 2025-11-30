@@ -6,13 +6,10 @@ Public Class AdminManageStudents
     Private currentStudentID As Integer = 0
 
     Public Property IsEmbedded As Boolean = False
-    
-    ' Event to notify when student count changes
+
+    ' Event to notify when student count changess
     Public Event StudentCountChanged(count As Integer)
-    
-    ' Event to notify when gender data changes
-    Public Event GenderDataChanged(maleCount As Integer, femaleCount As Integer)
-    
+
     ' Public method to get current student count
     Public Function GetStudentCount() As Integer
         If dgvStudents IsNot Nothing AndAlso dgvStudents.DataSource IsNot Nothing Then
@@ -23,45 +20,6 @@ Public Class AdminManageStudents
             Return dgvStudents.Rows.Count
         End If
         Return 0
-    End Function
-    
-    ' Public method to get gender counts
-    Public Function GetGenderCounts() As Dictionary(Of String, Integer)
-        Dim genderCounts As New Dictionary(Of String, Integer)()
-        genderCounts("Male") = 0
-        genderCounts("Female") = 0
-        
-        If dgvStudents IsNot Nothing AndAlso dgvStudents.DataSource IsNot Nothing Then
-            Dim dt As DataTable = TryCast(dgvStudents.DataSource, DataTable)
-            If dt IsNot Nothing Then
-                For Each row As DataRow In dt.Rows
-                    Dim gender As String = ""
-                    If Not IsDBNull(row("Gender")) Then
-                        gender = row("Gender").ToString().Trim()
-                    End If
-                    
-                    If gender.Equals("Male", StringComparison.OrdinalIgnoreCase) Then
-                        genderCounts("Male") += 1
-                    ElseIf gender.Equals("Female", StringComparison.OrdinalIgnoreCase) Then
-                        genderCounts("Female") += 1
-                    End If
-                Next
-            Else
-                ' Fallback: count from DataGridView rows
-                For Each row As DataGridViewRow In dgvStudents.Rows
-                    If row.Cells("Gender") IsNot Nothing AndAlso row.Cells("Gender").Value IsNot Nothing Then
-                        Dim gender As String = row.Cells("Gender").Value.ToString().Trim()
-                        If gender.Equals("Male", StringComparison.OrdinalIgnoreCase) Then
-                            genderCounts("Male") += 1
-                        ElseIf gender.Equals("Female", StringComparison.OrdinalIgnoreCase) Then
-                            genderCounts("Female") += 1
-                        End If
-                    End If
-                Next
-            End If
-        End If
-        
-        Return genderCounts
     End Function
 
     Private Sub AdminManageStudents_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -1222,13 +1180,9 @@ Public Class AdminManageStudents
         Catch
             ' ignore - some layout states prevent setting CurrentCell to Nothing
         End Try
-        
+
         ' Notify that student count has changed
         RaiseEvent StudentCountChanged(GetStudentCount())
-        
-        ' Notify that gender data has changed
-        Dim genderCounts = GetGenderCounts()
-        RaiseEvent GenderDataChanged(genderCounts("Male"), genderCounts("Female"))
     End Sub
 
     Private Sub AdminManageStudents_Shown(sender As Object, e As EventArgs) Handles Me.Shown
