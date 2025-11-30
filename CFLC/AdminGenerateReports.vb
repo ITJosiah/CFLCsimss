@@ -142,8 +142,8 @@ Public Class AdminGenerateReports
 
     ' Form Load event
     Private Sub AdminGenerateReports_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        ' Hide PictureBox when form loads
-        PictureBox1.Visible = False
+        ' Show PictureBox (logo) when form loads
+        PictureBox1.Visible = True
         ' Initialize without selecting (to prevent auto-loading students)
         isInitializing = True
         InitializeGradeComboBox()

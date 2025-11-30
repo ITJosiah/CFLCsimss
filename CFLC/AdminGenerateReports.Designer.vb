@@ -23,15 +23,6 @@ Partial Class AdminGenerateReports
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.pnlSidebar = New System.Windows.Forms.Panel()
-        Me.flowButtons = New System.Windows.Forms.FlowLayoutPanel()
-        Me.btnManageStudents = New System.Windows.Forms.Button()
-        Me.btnManageTeachers = New System.Windows.Forms.Button()
-        Me.btnManageSections = New System.Windows.Forms.Button()
-        Me.btnManageSubjects = New System.Windows.Forms.Button()
-        Me.btnManageEnrollments = New System.Windows.Forms.Button()
-        Me.btnGenerateReports = New System.Windows.Forms.Button()
-        Me.btnBackToDashboard = New System.Windows.Forms.Button()
-        Me.btnLogout = New System.Windows.Forms.Button()
         Me.pnlMainContent = New System.Windows.Forms.Panel()
         Me.dgvSubjects = New System.Windows.Forms.DataGridView()
         Me.lblSubjectView = New System.Windows.Forms.Label()
@@ -53,7 +44,6 @@ Partial Class AdminGenerateReports
         Me.btnAdminGenerateStudents = New System.Windows.Forms.Button()
         Me.btnAdminGenerateEnrollmentSummary = New System.Windows.Forms.Button()
         Me.pnlSidebar.SuspendLayout()
-        Me.flowButtons.SuspendLayout()
         Me.pnlMainContent.SuspendLayout()
         CType(Me.dgvSubjects, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.dgvSections, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -65,118 +55,11 @@ Partial Class AdminGenerateReports
         'pnlSidebar
         '
         Me.pnlSidebar.BackColor = System.Drawing.Color.FromArgb(CType(CType(40, Byte), Integer), CType(CType(130, Byte), Integer), CType(CType(61, Byte), Integer))
-        Me.pnlSidebar.Controls.Add(Me.flowButtons)
-        Me.pnlSidebar.Controls.Add(Me.btnLogout)
         Me.pnlSidebar.Dock = System.Windows.Forms.DockStyle.Left
         Me.pnlSidebar.Location = New System.Drawing.Point(0, 0)
         Me.pnlSidebar.Name = "pnlSidebar"
-        Me.pnlSidebar.Padding = New System.Windows.Forms.Padding(30, 40, 30, 40)
-        Me.pnlSidebar.Size = New System.Drawing.Size(300, 960)
+        Me.pnlSidebar.Size = New System.Drawing.Size(0, 960)
         Me.pnlSidebar.TabIndex = 12
-        '
-        'flowButtons
-        '
-        Me.flowButtons.BackColor = System.Drawing.Color.Transparent
-        Me.flowButtons.Controls.Add(Me.btnManageStudents)
-        Me.flowButtons.Controls.Add(Me.btnManageTeachers)
-        Me.flowButtons.Controls.Add(Me.btnManageSections)
-        Me.flowButtons.Controls.Add(Me.btnManageSubjects)
-        Me.flowButtons.Controls.Add(Me.btnManageEnrollments)
-        Me.flowButtons.Controls.Add(Me.btnGenerateReports)
-        Me.flowButtons.Controls.Add(Me.btnBackToDashboard)
-        Me.flowButtons.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.flowButtons.FlowDirection = System.Windows.Forms.FlowDirection.TopDown
-        Me.flowButtons.Location = New System.Drawing.Point(30, 40)
-        Me.flowButtons.Margin = New System.Windows.Forms.Padding(0)
-        Me.flowButtons.Name = "flowButtons"
-        Me.flowButtons.Size = New System.Drawing.Size(240, 730)
-        Me.flowButtons.TabIndex = 0
-        Me.flowButtons.WrapContents = False
-        '
-        'btnManageStudents
-        '
-        Me.btnManageStudents.Location = New System.Drawing.Point(0, 0)
-        Me.btnManageStudents.Margin = New System.Windows.Forms.Padding(0, 0, 0, 18)
-        Me.btnManageStudents.Name = "btnManageStudents"
-        Me.btnManageStudents.Size = New System.Drawing.Size(240, 45)
-        Me.btnManageStudents.TabIndex = 4
-        Me.btnManageStudents.Text = "Manage Students"
-        Me.btnManageStudents.UseVisualStyleBackColor = True
-        '
-        'btnManageTeachers
-        '
-        Me.btnManageTeachers.Location = New System.Drawing.Point(0, 63)
-        Me.btnManageTeachers.Margin = New System.Windows.Forms.Padding(0, 0, 0, 18)
-        Me.btnManageTeachers.Name = "btnManageTeachers"
-        Me.btnManageTeachers.Size = New System.Drawing.Size(240, 45)
-        Me.btnManageTeachers.TabIndex = 5
-        Me.btnManageTeachers.Text = "Manage Teachers"
-        Me.btnManageTeachers.UseVisualStyleBackColor = True
-        '
-        'btnManageSections
-        '
-        Me.btnManageSections.Location = New System.Drawing.Point(0, 126)
-        Me.btnManageSections.Margin = New System.Windows.Forms.Padding(0, 0, 0, 18)
-        Me.btnManageSections.Name = "btnManageSections"
-        Me.btnManageSections.Size = New System.Drawing.Size(240, 45)
-        Me.btnManageSections.TabIndex = 6
-        Me.btnManageSections.Text = "Manage Sections"
-        Me.btnManageSections.UseVisualStyleBackColor = True
-        '
-        'btnManageSubjects
-        '
-        Me.btnManageSubjects.Location = New System.Drawing.Point(0, 189)
-        Me.btnManageSubjects.Margin = New System.Windows.Forms.Padding(0, 0, 0, 18)
-        Me.btnManageSubjects.Name = "btnManageSubjects"
-        Me.btnManageSubjects.Size = New System.Drawing.Size(240, 45)
-        Me.btnManageSubjects.TabIndex = 8
-        Me.btnManageSubjects.Text = "Manage Subjects"
-        Me.btnManageSubjects.UseVisualStyleBackColor = True
-        '
-        'btnManageEnrollments
-        '
-        Me.btnManageEnrollments.Location = New System.Drawing.Point(0, 252)
-        Me.btnManageEnrollments.Margin = New System.Windows.Forms.Padding(0, 0, 0, 18)
-        Me.btnManageEnrollments.Name = "btnManageEnrollments"
-        Me.btnManageEnrollments.Size = New System.Drawing.Size(240, 45)
-        Me.btnManageEnrollments.TabIndex = 7
-        Me.btnManageEnrollments.Text = "Manage Enrollments"
-        Me.btnManageEnrollments.UseVisualStyleBackColor = True
-        '
-        'btnGenerateReports
-        '
-        Me.btnGenerateReports.Location = New System.Drawing.Point(0, 315)
-        Me.btnGenerateReports.Margin = New System.Windows.Forms.Padding(0, 0, 0, 18)
-        Me.btnGenerateReports.Name = "btnGenerateReports"
-        Me.btnGenerateReports.Size = New System.Drawing.Size(240, 45)
-        Me.btnGenerateReports.TabIndex = 9
-        Me.btnGenerateReports.Text = "Generate Reports"
-        Me.btnGenerateReports.UseVisualStyleBackColor = True
-        '
-        'btnBackToDashboard
-        '
-        Me.btnBackToDashboard.Anchor = System.Windows.Forms.AnchorStyles.Bottom
-        Me.btnBackToDashboard.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.btnBackToDashboard.Location = New System.Drawing.Point(56, 378)
-        Me.btnBackToDashboard.Margin = New System.Windows.Forms.Padding(0, 0, 0, 18)
-        Me.btnBackToDashboard.Name = "btnBackToDashboard"
-        Me.btnBackToDashboard.Size = New System.Drawing.Size(127, 45)
-        Me.btnBackToDashboard.TabIndex = 10
-        Me.btnBackToDashboard.Text = "Back to Dashboard"
-        Me.btnBackToDashboard.UseVisualStyleBackColor = True
-        '
-        'btnLogout
-        '
-        Me.btnLogout.BackColor = System.Drawing.Color.Red
-        Me.btnLogout.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.btnLogout.ForeColor = System.Drawing.Color.White
-        Me.btnLogout.Location = New System.Drawing.Point(30, 770)
-        Me.btnLogout.Margin = New System.Windows.Forms.Padding(0)
-        Me.btnLogout.Name = "btnLogout"
-        Me.btnLogout.Size = New System.Drawing.Size(240, 50)
-        Me.btnLogout.TabIndex = 10
-        Me.btnLogout.Text = "Logout"
-        Me.btnLogout.UseVisualStyleBackColor = False
         '
         'pnlMainContent
         '
@@ -201,16 +84,16 @@ Partial Class AdminGenerateReports
         Me.pnlMainContent.Controls.Add(Me.btnAdminGenerateStudents)
         Me.pnlMainContent.Controls.Add(Me.PictureBox1)
         Me.pnlMainContent.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.pnlMainContent.Location = New System.Drawing.Point(300, 0)
+        Me.pnlMainContent.Location = New System.Drawing.Point(0, 0)
         Me.pnlMainContent.Name = "pnlMainContent"
-        Me.pnlMainContent.Size = New System.Drawing.Size(1143, 960)
+        Me.pnlMainContent.Size = New System.Drawing.Size(1443, 960)
         Me.pnlMainContent.TabIndex = 13
         '
         'PictureBox1
         '
         Me.PictureBox1.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.PictureBox1.Image = Global.CFLC.My.Resources.Resources.logo
-        Me.PictureBox1.Location = New System.Drawing.Point(393, 247)
+        Me.PictureBox1.Location = New System.Drawing.Point(534, 247)
         Me.PictureBox1.Name = "PictureBox1"
         Me.PictureBox1.Size = New System.Drawing.Size(375, 330)
         Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
@@ -219,7 +102,7 @@ Partial Class AdminGenerateReports
         '
         'btnAdminGenerateStudents
         '
-        Me.btnAdminGenerateStudents.Location = New System.Drawing.Point(116, 30)
+        Me.btnAdminGenerateStudents.Location = New System.Drawing.Point(272, 30)
         Me.btnAdminGenerateStudents.Name = "btnAdminGenerateStudents"
         Me.btnAdminGenerateStudents.Size = New System.Drawing.Size(169, 40)
         Me.btnAdminGenerateStudents.TabIndex = 4
@@ -231,7 +114,7 @@ Partial Class AdminGenerateReports
         Me.cmbGradeLevel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbGradeLevel.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmbGradeLevel.FormattingEnabled = True
-        Me.cmbGradeLevel.Location = New System.Drawing.Point(300, 37)
+        Me.cmbGradeLevel.Location = New System.Drawing.Point(456, 37)
         Me.cmbGradeLevel.Name = "cmbGradeLevel"
         Me.cmbGradeLevel.Size = New System.Drawing.Size(200, 28)
         Me.cmbGradeLevel.TabIndex = 5
@@ -241,7 +124,7 @@ Partial Class AdminGenerateReports
         Me.lblGradeLevel.AutoSize = True
         Me.lblGradeLevel.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblGradeLevel.ForeColor = System.Drawing.Color.White
-        Me.lblGradeLevel.Location = New System.Drawing.Point(300, 14)
+        Me.lblGradeLevel.Location = New System.Drawing.Point(456, 14)
         Me.lblGradeLevel.Name = "lblGradeLevel"
         Me.lblGradeLevel.Size = New System.Drawing.Size(100, 20)
         Me.lblGradeLevel.TabIndex = 6
@@ -254,7 +137,7 @@ Partial Class AdminGenerateReports
         Me.dgvStudents.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.dgvStudents.BackgroundColor = System.Drawing.Color.White
         Me.dgvStudents.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvStudents.Location = New System.Drawing.Point(116, 80)
+        Me.dgvStudents.Location = New System.Drawing.Point(272, 80)
         Me.dgvStudents.Name = "dgvStudents"
         Me.dgvStudents.ReadOnly = True
         Me.dgvStudents.RowHeadersWidth = 51
@@ -265,7 +148,7 @@ Partial Class AdminGenerateReports
         '
         'btnAdminGenerateEnrollmentSummary
         '
-        Me.btnAdminGenerateEnrollmentSummary.Location = New System.Drawing.Point(116, 260)
+        Me.btnAdminGenerateEnrollmentSummary.Location = New System.Drawing.Point(272, 260)
         Me.btnAdminGenerateEnrollmentSummary.Name = "btnAdminGenerateEnrollmentSummary"
         Me.btnAdminGenerateEnrollmentSummary.Size = New System.Drawing.Size(169, 40)
         Me.btnAdminGenerateEnrollmentSummary.TabIndex = 8
@@ -277,7 +160,7 @@ Partial Class AdminGenerateReports
         Me.cmbEnrollmentView.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbEnrollmentView.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmbEnrollmentView.FormattingEnabled = True
-        Me.cmbEnrollmentView.Location = New System.Drawing.Point(300, 267)
+        Me.cmbEnrollmentView.Location = New System.Drawing.Point(456, 267)
         Me.cmbEnrollmentView.Name = "cmbEnrollmentView"
         Me.cmbEnrollmentView.Size = New System.Drawing.Size(200, 28)
         Me.cmbEnrollmentView.TabIndex = 9
@@ -287,7 +170,7 @@ Partial Class AdminGenerateReports
         Me.lblEnrollmentView.AutoSize = True
         Me.lblEnrollmentView.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblEnrollmentView.ForeColor = System.Drawing.Color.White
-        Me.lblEnrollmentView.Location = New System.Drawing.Point(300, 244)
+        Me.lblEnrollmentView.Location = New System.Drawing.Point(456, 244)
         Me.lblEnrollmentView.Name = "lblEnrollmentView"
         Me.lblEnrollmentView.Size = New System.Drawing.Size(133, 20)
         Me.lblEnrollmentView.TabIndex = 10
@@ -300,7 +183,7 @@ Partial Class AdminGenerateReports
         Me.dgvEnrollment.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.dgvEnrollment.BackgroundColor = System.Drawing.Color.White
         Me.dgvEnrollment.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvEnrollment.Location = New System.Drawing.Point(116, 310)
+        Me.dgvEnrollment.Location = New System.Drawing.Point(272, 310)
         Me.dgvEnrollment.Name = "dgvEnrollment"
         Me.dgvEnrollment.ReadOnly = True
         Me.dgvEnrollment.RowHeadersWidth = 51
@@ -311,7 +194,7 @@ Partial Class AdminGenerateReports
         '
         'btnAdminGenerateSections
         '
-        Me.btnAdminGenerateSections.Location = New System.Drawing.Point(116, 490)
+        Me.btnAdminGenerateSections.Location = New System.Drawing.Point(272, 490)
         Me.btnAdminGenerateSections.Name = "btnAdminGenerateSections"
         Me.btnAdminGenerateSections.Size = New System.Drawing.Size(169, 40)
         Me.btnAdminGenerateSections.TabIndex = 12
@@ -323,7 +206,7 @@ Partial Class AdminGenerateReports
         Me.cmbSectionView.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbSectionView.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmbSectionView.FormattingEnabled = True
-        Me.cmbSectionView.Location = New System.Drawing.Point(300, 497)
+        Me.cmbSectionView.Location = New System.Drawing.Point(456, 497)
         Me.cmbSectionView.Name = "cmbSectionView"
         Me.cmbSectionView.Size = New System.Drawing.Size(200, 28)
         Me.cmbSectionView.TabIndex = 13
@@ -333,7 +216,7 @@ Partial Class AdminGenerateReports
         Me.lblSectionView.AutoSize = True
         Me.lblSectionView.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblSectionView.ForeColor = System.Drawing.Color.White
-        Me.lblSectionView.Location = New System.Drawing.Point(300, 474)
+        Me.lblSectionView.Location = New System.Drawing.Point(456, 474)
         Me.lblSectionView.Name = "lblSectionView"
         Me.lblSectionView.Size = New System.Drawing.Size(100, 20)
         Me.lblSectionView.TabIndex = 14
@@ -346,7 +229,7 @@ Partial Class AdminGenerateReports
         Me.dgvSections.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.dgvSections.BackgroundColor = System.Drawing.Color.White
         Me.dgvSections.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvSections.Location = New System.Drawing.Point(116, 540)
+        Me.dgvSections.Location = New System.Drawing.Point(272, 540)
         Me.dgvSections.Name = "dgvSections"
         Me.dgvSections.ReadOnly = True
         Me.dgvSections.RowHeadersWidth = 51
@@ -360,7 +243,7 @@ Partial Class AdminGenerateReports
         Me.cmbEnrollmentYear.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbEnrollmentYear.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmbEnrollmentYear.FormattingEnabled = True
-        Me.cmbEnrollmentYear.Location = New System.Drawing.Point(520, 497)
+        Me.cmbEnrollmentYear.Location = New System.Drawing.Point(676, 497)
         Me.cmbEnrollmentYear.Name = "cmbEnrollmentYear"
         Me.cmbEnrollmentYear.Size = New System.Drawing.Size(200, 28)
         Me.cmbEnrollmentYear.TabIndex = 16
@@ -370,7 +253,7 @@ Partial Class AdminGenerateReports
         Me.lblEnrollmentYear.AutoSize = True
         Me.lblEnrollmentYear.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblEnrollmentYear.ForeColor = System.Drawing.Color.White
-        Me.lblEnrollmentYear.Location = New System.Drawing.Point(520, 474)
+        Me.lblEnrollmentYear.Location = New System.Drawing.Point(676, 474)
         Me.lblEnrollmentYear.Name = "lblEnrollmentYear"
         Me.lblEnrollmentYear.Size = New System.Drawing.Size(130, 20)
         Me.lblEnrollmentYear.TabIndex = 17
@@ -378,7 +261,7 @@ Partial Class AdminGenerateReports
         '
         'btnAdminGenerateSubjects
         '
-        Me.btnAdminGenerateSubjects.Location = New System.Drawing.Point(116, 720)
+        Me.btnAdminGenerateSubjects.Location = New System.Drawing.Point(272, 720)
         Me.btnAdminGenerateSubjects.Name = "btnAdminGenerateSubjects"
         Me.btnAdminGenerateSubjects.Size = New System.Drawing.Size(169, 40)
         Me.btnAdminGenerateSubjects.TabIndex = 18
@@ -390,7 +273,7 @@ Partial Class AdminGenerateReports
         Me.cmbSubjectView.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbSubjectView.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmbSubjectView.FormattingEnabled = True
-        Me.cmbSubjectView.Location = New System.Drawing.Point(300, 727)
+        Me.cmbSubjectView.Location = New System.Drawing.Point(456, 727)
         Me.cmbSubjectView.Name = "cmbSubjectView"
         Me.cmbSubjectView.Size = New System.Drawing.Size(200, 28)
         Me.cmbSubjectView.TabIndex = 19
@@ -400,7 +283,7 @@ Partial Class AdminGenerateReports
         Me.lblSubjectView.AutoSize = True
         Me.lblSubjectView.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblSubjectView.ForeColor = System.Drawing.Color.White
-        Me.lblSubjectView.Location = New System.Drawing.Point(300, 704)
+        Me.lblSubjectView.Location = New System.Drawing.Point(456, 704)
         Me.lblSubjectView.Name = "lblSubjectView"
         Me.lblSubjectView.Size = New System.Drawing.Size(100, 20)
         Me.lblSubjectView.TabIndex = 20
@@ -413,7 +296,7 @@ Partial Class AdminGenerateReports
         Me.dgvSubjects.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.dgvSubjects.BackgroundColor = System.Drawing.Color.White
         Me.dgvSubjects.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvSubjects.Location = New System.Drawing.Point(116, 770)
+        Me.dgvSubjects.Location = New System.Drawing.Point(272, 770)
         Me.dgvSubjects.Name = "dgvSubjects"
         Me.dgvSubjects.ReadOnly = True
         Me.dgvSubjects.RowHeadersWidth = 51
@@ -432,7 +315,6 @@ Partial Class AdminGenerateReports
         Me.Name = "AdminGenerateReports"
         Me.Text = "AdminGenerateReports"
         Me.pnlSidebar.ResumeLayout(False)
-        Me.flowButtons.ResumeLayout(False)
         Me.pnlMainContent.ResumeLayout(False)
         Me.pnlMainContent.PerformLayout()
         CType(Me.dgvSubjects, System.ComponentModel.ISupportInitialize).EndInit()
@@ -445,15 +327,6 @@ Partial Class AdminGenerateReports
     End Sub
 
     Friend WithEvents pnlSidebar As Panel
-    Friend WithEvents flowButtons As FlowLayoutPanel
-    Friend WithEvents btnManageStudents As Button
-    Friend WithEvents btnManageTeachers As Button
-    Friend WithEvents btnManageSections As Button
-    Friend WithEvents btnManageSubjects As Button
-    Friend WithEvents btnManageEnrollments As Button
-    Friend WithEvents btnGenerateReports As Button
-    Friend WithEvents btnBackToDashboard As Button
-    Friend WithEvents btnLogout As Button
     Friend WithEvents pnlMainContent As Panel
     Friend WithEvents PictureBox1 As PictureBox
     Friend WithEvents btnAdminGenerateStudents As Button
