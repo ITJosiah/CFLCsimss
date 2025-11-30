@@ -438,7 +438,10 @@ Public Class AdminDashboard
 
     Private Sub btnGenerateReports_Click(sender As Object, e As EventArgs) Handles btnGenerateReports.Click
         ' TODO: Open Generate Reports form
-        MessageBox.Show("Generate Reports - Coming Soon")
+        Dim AdminGenerateReportsForm As New AdminGenerateReports() With {
+            .IsEmbedded = True
+        }
+        LoadContentForm(AdminGenerateReportsForm)
     End Sub
 
     Private Sub btnLogout_Click(sender As Object, e As EventArgs) Handles btnLogout.Click
