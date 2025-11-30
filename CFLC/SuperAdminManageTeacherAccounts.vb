@@ -31,9 +31,11 @@ Public Class SuperAdminManageTeacherAccounts
         ' Initialize form components
         InitializeControls()
         SetupDataGridView()
+        SetupTeacherDataGridView()
         SetDefaultValues()
         StyleControls()
         LoadTeacherData()
+        LoadAllTeachers()
 
         ' Ensure Add button is enabled by default
         btnManTeacherAdd.Enabled = True
@@ -112,6 +114,46 @@ Public Class SuperAdminManageTeacherAccounts
         dgvLoginTeacher.Columns.Add(colTeacherID)
     End Sub
 
+    Private Sub SetupTeacherDataGridView()
+        If dgvTeacher Is Nothing Then Return
+
+        ' Clear existing columns first
+        dgvTeacher.Columns.Clear()
+
+        ' Configure DataGridView appearance
+        dgvTeacher.AutoGenerateColumns = False
+        dgvTeacher.SelectionMode = DataGridViewSelectionMode.FullRowSelect
+        dgvTeacher.ReadOnly = True
+        dgvTeacher.AllowUserToAddRows = False
+        dgvTeacher.RowHeadersVisible = False
+        dgvTeacher.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill
+
+        ' Create and add columns for TeacherID, FirstName, MiddleName, LastName
+        Dim colTeacherID As New DataGridViewTextBoxColumn()
+        colTeacherID.Name = "TeacherID"
+        colTeacherID.HeaderText = "Teacher ID"
+        colTeacherID.DataPropertyName = "TeacherID"
+        dgvTeacher.Columns.Add(colTeacherID)
+
+        Dim colFirstName As New DataGridViewTextBoxColumn()
+        colFirstName.Name = "FirstName"
+        colFirstName.HeaderText = "First Name"
+        colFirstName.DataPropertyName = "FirstName"
+        dgvTeacher.Columns.Add(colFirstName)
+
+        Dim colMiddleName As New DataGridViewTextBoxColumn()
+        colMiddleName.Name = "MiddleName"
+        colMiddleName.HeaderText = "Middle Name"
+        colMiddleName.DataPropertyName = "MiddleName"
+        dgvTeacher.Columns.Add(colMiddleName)
+
+        Dim colLastName As New DataGridViewTextBoxColumn()
+        colLastName.Name = "LastName"
+        colLastName.HeaderText = "Last Name"
+        colLastName.DataPropertyName = "LastName"
+        dgvTeacher.Columns.Add(colLastName)
+    End Sub
+
     Private Sub StyleControls()
         ' Style input controls
         Dim textBoxes() As TextBox = {txtbxTeacherUserID, txtbxTeacherPassword,
@@ -159,6 +201,14 @@ Public Class SuperAdminManageTeacherAccounts
             dgvLoginTeacher.BorderStyle = BorderStyle.None
             dgvLoginTeacher.Font = New Font("Arial", 9, FontStyle.Regular)
             dgvLoginTeacher.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(240, 240, 240)
+        End If
+
+        ' Style Teacher DataGridView
+        If dgvTeacher IsNot Nothing Then
+            dgvTeacher.BackgroundColor = Color.White
+            dgvTeacher.BorderStyle = BorderStyle.None
+            dgvTeacher.Font = New Font("Arial", 9, FontStyle.Regular)
+            dgvTeacher.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(240, 240, 240)
         End If
     End Sub
 
@@ -223,6 +273,10 @@ Public Class SuperAdminManageTeacherAccounts
         ' If the search box is empty, load all teachers (default view)
         If String.IsNullOrWhiteSpace(searchTerm) OrElse searchTerm = "Search by User ID or Teacher ID..." Then
             LoadTeacherData()
+            ' Clear selection in teacher details grid when search is cleared
+            If dgvTeacher IsNot Nothing Then
+                dgvTeacher.ClearSelection()
+            End If
             Return
         End If
 
@@ -248,9 +302,30 @@ Public Class SuperAdminManageTeacherAccounts
                 dgvLoginTeacher.DataSource = dt
                 dgvLoginTeacher.Refresh()
 
+                ' Highlight the corresponding teacher in dgvTeacher if search matches TeacherID
+                If dt.Rows.Count > 0 AndAlso dt.Rows(0)("TeacherID") IsNot Nothing AndAlso Not IsDBNull(dt.Rows(0)("TeacherID")) Then
+                    Dim firstTeacherID As String = dt.Rows(0)("TeacherID").ToString()
+                    ' Check if search term matches TeacherID pattern
+                    If searchTerm.Trim().Length > 0 AndAlso firstTeacherID.StartsWith(searchTerm.Trim()) Then
+                        LoadTeacherDetails(firstTeacherID)
+                    Else
+                        ' Clear selection if search doesn't match TeacherID
+                        If dgvTeacher IsNot Nothing Then
+                            dgvTeacher.ClearSelection()
+                        End If
+                    End If
+                Else
+                    ' Clear selection if no results
+                    If dgvTeacher IsNot Nothing Then
+                        dgvTeacher.ClearSelection()
+                    End If
+                End If
+
                 If dt.Rows.Count = 0 Then
-                    ' Optional: Show message when no results found
-                    ' MessageBox.Show("No teacher account found matching '" & searchTerm & "'.", "Search Result", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                    ' Clear selection when no results
+                    If dgvTeacher IsNot Nothing Then
+                        dgvTeacher.ClearSelection()
+                    End If
                 End If
             End Using
 
@@ -436,6 +511,14 @@ Public Class SuperAdminManageTeacherAccounts
                 Dim rowsAffected As Integer = command.ExecuteNonQuery()
 
                 If rowsAffected > 0 Then
+                    ' Log the addition
+                    Try
+                        Dim accountInfo As String = "User ID: " & txtbxTeacherUserID.Text.Trim() & ", Teacher ID: " & txtbxTeaAccountTeacherID.Text.Trim()
+                        modDBx.Logs("Added teacher account - " & accountInfo, "btnManTeacherAdd_Click")
+                    Catch
+                        ' Silently fail if logging doesn't work
+                    End Try
+
                     MessageBox.Show("Teacher account created successfully!", "Success",
                                   MessageBoxButtons.OK, MessageBoxIcon.Information)
                     ClearInputs()
@@ -477,6 +560,11 @@ Public Class SuperAdminManageTeacherAccounts
         currentUserID = String.Empty
         originalData.Clear()
 
+        ' Clear selection in teacher details grid
+        If dgvTeacher IsNot Nothing Then
+            dgvTeacher.ClearSelection()
+        End If
+
         ' Re-enable Add button so user can create a new record
         btnManTeacherAdd.Enabled = True
 
@@ -500,12 +588,22 @@ Public Class SuperAdminManageTeacherAccounts
             clickedUserID = row.Cells("user_id").Value.ToString()
         End If
 
+        ' Get TeacherID from the selected row
+        Dim teacherID As String = String.Empty
+        If row.Cells("TeacherID").Value IsNot Nothing AndAlso Not IsDBNull(row.Cells("TeacherID").Value) Then
+            teacherID = row.Cells("TeacherID").Value.ToString()
+        End If
+
         ' If the user clicked the already-selected row, clear selection and inputs
         If Not String.IsNullOrEmpty(clickedUserID) AndAlso clickedUserID = currentUserID Then
             dgvLoginTeacher.ClearSelection()
             currentUserID = String.Empty
             originalData.Clear()
             ClearInputs()
+            ' Clear selection in teacher data grid
+            If dgvTeacher IsNot Nothing Then
+                dgvTeacher.ClearSelection()
+            End If
             Return
         End If
 
@@ -526,8 +624,61 @@ Public Class SuperAdminManageTeacherAccounts
             txtbxTeacherUserType.Text = "teacher"
             txtbxTeaAccountTeacherID.Text = originalData("TeacherID")
 
+            ' Highlight the corresponding teacher in dgvTeacher if TeacherID exists
+            If Not String.IsNullOrEmpty(teacherID) Then
+                LoadTeacherDetails(teacherID)
+            End If
+
             ' Keep Add button enabled
             btnManTeacherAdd.Enabled = True
+        End If
+    End Sub
+
+    ' Load all teachers (TeacherID, FirstName, MiddleName, LastName) into dgvTeacher
+    Private Sub LoadAllTeachers()
+        If dgvTeacher Is Nothing Then Return
+
+        Try
+            modDBx.openConn(modDBx.db_name)
+
+            Dim query As String = "SELECT TeacherID, FirstName, MiddleName, LastName FROM teacher ORDER BY TeacherID"
+            Using command As New MySqlCommand(query, modDBx.conn)
+                Using adapter As New MySqlDataAdapter(command)
+                    Dim table As New DataTable()
+                    adapter.Fill(table)
+                    dgvTeacher.DataSource = table
+                End Using
+            End Using
+        Catch ex As Exception
+            MessageBox.Show("Error loading teacher data: " & ex.Message, "Database Error",
+                          MessageBoxButtons.OK, MessageBoxIcon.Error)
+            If dgvTeacher IsNot Nothing Then
+                dgvTeacher.DataSource = Nothing
+            End If
+        Finally
+            If modDBx.conn IsNot Nothing AndAlso modDBx.conn.State = ConnectionState.Open Then
+                modDBx.conn.Close()
+            End If
+        End Try
+    End Sub
+
+    ' Load teacher details (TeacherID, FirstName, MiddleName, LastName) into dgvTeacher - kept for backward compatibility
+    Private Sub LoadTeacherDetails(teacherID As String)
+        ' This method is no longer needed since we load all teachers, but keeping it for compatibility
+        ' The selection in dgvLoginTeacher will highlight the corresponding row in dgvTeacher
+        If dgvTeacher Is Nothing Then Return
+
+        ' Find and select the row with matching TeacherID
+        If dgvTeacher.Rows.Count > 0 Then
+            For Each row As DataGridViewRow In dgvTeacher.Rows
+                If row.Cells("TeacherID").Value IsNot Nothing AndAlso
+                   row.Cells("TeacherID").Value.ToString() = teacherID Then
+                    dgvTeacher.ClearSelection()
+                    row.Selected = True
+                    dgvTeacher.FirstDisplayedScrollingRowIndex = row.Index
+                    Exit For
+                End If
+            Next
         End If
     End Sub
 
@@ -598,6 +749,14 @@ Public Class SuperAdminManageTeacherAccounts
             Dim rowsAffected As Integer = command.ExecuteNonQuery()
 
             If rowsAffected > 0 Then
+                ' Log the update
+                Try
+                    Dim accountInfo As String = "User ID: " & txtbxTeacherUserID.Text.Trim() & " (Original: " & originalUserID & "), Teacher ID: " & txtbxTeaAccountTeacherID.Text.Trim()
+                    modDBx.Logs("Updated teacher account - " & accountInfo, "btnManTeacherUpdate_Click")
+                Catch
+                    ' Silently fail if logging doesn't work
+                End Try
+
                 MessageBox.Show("Teacher account updated successfully!", "Success",
                           MessageBoxButtons.OK, MessageBoxIcon.Information)
                 ClearInputs()
@@ -711,6 +870,14 @@ Public Class SuperAdminManageTeacherAccounts
                 Dim rowsAffected As Integer = command.ExecuteNonQuery()
 
                 If rowsAffected > 0 Then
+                    ' Log the deletion
+                    Try
+                        Dim accountInfo As String = "User ID: " & currentUserID
+                        modDBx.Logs("Deleted teacher account - " & accountInfo, "btnManTeaDelete_Click")
+                    Catch
+                        ' Silently fail if logging doesn't work
+                    End Try
+
                     MessageBox.Show("Teacher account deleted successfully!", "Success",
                               MessageBoxButtons.OK, MessageBoxIcon.Information)
                     ClearInputs()

@@ -33,7 +33,7 @@
 
     Private Sub StyleSidebarButtons()
         ' Style all sidebar buttons
-        Dim buttons() As Button = {btnSuperAdminManageAdmin, btnSuperAdminManageTea, btnSuperAdminManageSysCon,
+        Dim buttons() As Button = {btnSuperAdminManageAdmin, btnSuperAdminManageTea, btnSuperAdminManageSysCon, btnSuperAdminAccessLogs,
                                    btnSuperAdminGenerateReports}
 
         For Each btn As Button In buttons
@@ -117,7 +117,12 @@
         btnSuperAdminManageSysCon.Width = sidebarWidth - (sidebarPadding * 2)
         btnSuperAdminManageSysCon.Height = buttonHeight
 
-        btnSuperAdminGenerateReports.Top = btnSuperAdminManageSysCon.Bottom + buttonSpacing
+        btnSuperAdminAccessLogs.Top = btnSuperAdminManageSysCon.Bottom + buttonSpacing
+        btnSuperAdminAccessLogs.Left = sidebarPadding
+        btnSuperAdminAccessLogs.Width = sidebarWidth - (sidebarPadding * 2)
+        btnSuperAdminAccessLogs.Height = buttonHeight
+
+        btnSuperAdminGenerateReports.Top = btnSuperAdminAccessLogs.Bottom + buttonSpacing
         btnSuperAdminGenerateReports.Left = sidebarPadding
         btnSuperAdminGenerateReports.Width = sidebarWidth - (sidebarPadding * 2)
         btnSuperAdminGenerateReports.Height = buttonHeight
@@ -193,5 +198,21 @@
 
     Private Sub btnBackToDashboard_Click(sender As Object, e As EventArgs) Handles btnBackToDashboard.Click
         ShowHomeContent()
+    End Sub
+
+    Private Sub btnSuperAdminAccessLogs_Click(sender As Object, e As EventArgs) Handles btnSuperAdminAccessLogs.Click
+        ' Open Access All Logs form
+        Dim accessLogsForm As New SuperAdminAccessAllLogs() With {
+            .IsEmbedded = True
+        }
+        LoadContentForm(accessLogsForm)
+    End Sub
+
+    Private Sub btnSuperAdminManageSysCon_Click(sender As Object, e As EventArgs) Handles btnSuperAdminManageSysCon.Click
+        ' Open System Configuration form
+        Dim configForm As New SuperAdminConfiguration() With {
+            .IsEmbedded = True
+        }
+        LoadContentForm(configForm)
     End Sub
 End Class

@@ -149,6 +149,14 @@ Public Class AdminManageTeacher
                 Dim rowsAffected As Integer = cmd.ExecuteNonQuery()
 
                 If rowsAffected > 0 Then
+                    ' Log the addition
+                    Try
+                        Dim teacherInfo As String = "Name: " & ConvertToProperCase(SafeString(TextBoxTeacherFirstName.Text)) & " " & ConvertToProperCase(SafeString(TextBoxTeacherSurname.Text))
+                        modDBx.Logs("Added teacher - " & teacherInfo, "btnTeaAdd_Click")
+                    Catch
+                        ' Silently fail if logging doesn't work
+                    End Try
+
                     MessageBox.Show("Teacher added successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
                     ClearInputFields()
                     LoadToDGV("SELECT * FROM teacher", dgvTeacher)
@@ -312,6 +320,14 @@ Public Class AdminManageTeacher
                 Dim rowsAffected As Integer = cmd.ExecuteNonQuery()
 
                 If rowsAffected > 0 Then
+                    ' Log the update
+                    Try
+                        Dim teacherInfo As String = "Teacher ID: " & currentTeacherID.ToString() & ", Name: " & ConvertToProperCase(SafeString(TextBoxTeacherFirstName.Text)) & " " & ConvertToProperCase(SafeString(TextBoxTeacherSurname.Text))
+                        modDBx.Logs("Updated teacher - " & teacherInfo, "btnTeaUpdate_Click")
+                    Catch
+                        ' Silently fail if logging doesn't work
+                    End Try
+
                     MessageBox.Show("Teacher updated successfully.", "Update Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
                     ' Clear inputs and re-enable Add after successful update
                     ClearInputFields()

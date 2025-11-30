@@ -234,6 +234,18 @@
     <Compile Include="AdminManageTeacher.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="SuperAdminAccessAllLogs.Designer.vb">
+      <DependentUpon>SuperAdminAccessAllLogs.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SuperAdminAccessAllLogs.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SuperAdminConfiguration.Designer.vb">
+      <DependentUpon>SuperAdminConfiguration.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SuperAdminConfiguration.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="SuperAdminDashboard.Designer.vb">
       <DependentUpon>SuperAdminDashboard.vb</DependentUpon>
     </Compile>
@@ -256,6 +268,12 @@
       <DependentUpon>TeacherDashboard.vb</DependentUpon>
     </Compile>
     <Compile Include="TeacherDashboard.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TeacherGenerateReport.Designer.vb">
+      <DependentUpon>TeacherGenerateReport.vb</DependentUpon>
+    </Compile>
+    <Compile Include="TeacherGenerateReport.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="TeacherViewAssignedSubjects.Designer.vb">
@@ -315,6 +333,12 @@
       <DependentUpon>AdminManageTeacher.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="SuperAdminAccessAllLogs.resx">
+      <DependentUpon>SuperAdminAccessAllLogs.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SuperAdminConfiguration.resx">
+      <DependentUpon>SuperAdminConfiguration.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="SuperAdminDashboard.resx">
       <DependentUpon>SuperAdminDashboard.vb</DependentUpon>
     </EmbeddedResource>
@@ -327,6 +351,9 @@
     <EmbeddedResource Include="TeacherDashboard.resx">
       <DependentUpon>TeacherDashboard.vb</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TeacherGenerateReport.resx">
+      <DependentUpon>TeacherGenerateReport.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TeacherViewAssignedSubjects.resx">
       <DependentUpon>TeacherViewAssignedSubjects.vb</DependentUpon>

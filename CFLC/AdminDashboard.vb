@@ -164,7 +164,7 @@ Public Class AdminDashboard
         btnLogout.Height = buttonHeight
     End Sub
 
-    Private Sub LoadContentForm(child As Form)
+    Friend Sub LoadContentForm(child As Form)
         If currentContent IsNot Nothing Then
             ' Unsubscribe from events if it's AdminManageStudents
             ' Note: Student count subscription removed - now using enrollment count instead
@@ -212,6 +212,18 @@ Public Class AdminDashboard
         child.Dock = DockStyle.Fill
         pnlMainContent.Controls.Add(child)
         child.Show()
+
+        ' Hide charts if ManageEnrollmentForms is loaded (to prevent overlap with data grid)
+        If TypeOf child Is ManageEnrollmentForms Then
+            If PieChartStudentGenderList IsNot Nothing Then
+                PieChartStudentGenderList.Visible = False
+                PieChartStudentGenderList.SendToBack()
+            End If
+            If PieChartMunicipalityList IsNot Nothing Then
+                PieChartMunicipalityList.Visible = False
+                PieChartMunicipalityList.SendToBack()
+            End If
+        End If
     End Sub
 
     Private Sub ShowHomeContent()
@@ -531,11 +543,21 @@ Public Class AdminDashboard
                 Dim chartArea As New ChartArea("GenderChartArea")
                 chartControl.ChartAreas.Add(chartArea)
 
+                ' Add legend first (before series)
+                chartControl.Legends.Clear()
+                Dim legend As New Legend("GenderLegend")
+                legend.Docking = Docking.Bottom
+                legend.ForeColor = Color.White
+                legend.Font = New Font("Segoe UI", 10, FontStyle.Bold)
+                legend.BackColor = Color.Transparent
+                chartControl.Legends.Add(legend)
+
                 ' Add series for pie chart
                 Dim series As New Series("GenderSeries")
                 series.ChartType = SeriesChartType.Pie
                 series.IsValueShownAsLabel = True
                 series.LabelFormat = "#,##0"
+                series.Legend = "GenderLegend"  ' Link series to legend
 
                 ' Add data points with colors
                 If maleCount > 0 Then
@@ -569,21 +591,14 @@ Public Class AdminDashboard
                 chartControl.BackColor = Color.Transparent
                 chartArea.BackColor = Color.Transparent
 
-                ' Ensure chart is visible
-                chartControl.Visible = True
-                chartControl.BringToFront()
-
-                ' Add legend
-                If chartControl.Legends.Count = 0 Then
-                    Dim legend As New Legend("GenderLegend")
-                    legend.Docking = Docking.Bottom
-                    legend.ForeColor = Color.White
-                    legend.Font = New Font("Segoe UI", 10, FontStyle.Bold)
-                    chartControl.Legends.Add(legend)
+                ' Hide chart if enrollment form is active (to prevent overlap)
+                If currentContent IsNot Nothing AndAlso TypeOf currentContent Is ManageEnrollmentForms Then
+                    chartControl.Visible = False
+                    chartControl.SendToBack()
                 Else
-                    ' Update existing legend
-                    chartControl.Legends("GenderLegend").ForeColor = Color.White
-                    chartControl.Legends("GenderLegend").Font = New Font("Segoe UI", 10, FontStyle.Bold)
+                    ' Ensure chart is visible
+                    chartControl.Visible = True
+                    chartControl.BringToFront()
                 End If
 
                 ' Change label font + color here
@@ -729,8 +744,11 @@ Public Class AdminDashboard
     End Sub
 
     Private Sub btnGenerateReports_Click(sender As Object, e As EventArgs) Handles btnGenerateReports.Click
-        ' TODO: Open Generate Reports form
-        MessageBox.Show("Generate Reports - Coming Soon")
+        ' Open Generate Reports form
+        Dim reportsForm As New AdminGenerateReports() With {
+            .IsEmbedded = True
+        }
+        LoadContentForm(reportsForm)
     End Sub
 
     Private Sub btnLogout_Click(sender As Object, e As EventArgs) Handles btnLogout.Click
@@ -1062,8 +1080,14 @@ Public Class AdminDashboard
                     point.LabelBackColor = Color.Transparent
                 Next
 
-                chartControl.Visible = True
-                chartControl.BringToFront()
+                ' Hide chart if enrollment form is active (to prevent overlap)
+                If currentContent IsNot Nothing AndAlso TypeOf currentContent Is ManageEnrollmentForms Then
+                    chartControl.Visible = False
+                    chartControl.SendToBack()
+                Else
+                    chartControl.Visible = True
+                    chartControl.BringToFront()
+                End If
                 ' Adjust inner plot position to make pie chart bigger and fit better
                 chartArea.InnerPlotPosition.Auto = False
                 chartArea.InnerPlotPosition.X = 25
@@ -1137,8 +1161,14 @@ Public Class AdminDashboard
                 chartArea.AxisX.Interval = 1
                 chartArea.AxisX.LabelStyle.Angle = 100
 
-                chartControl.Visible = True
-                chartControl.BringToFront()
+                ' Hide chart if enrollment form is active (to prevent overlap)
+                If currentContent IsNot Nothing AndAlso TypeOf currentContent Is ManageEnrollmentForms Then
+                    chartControl.Visible = False
+                    chartControl.SendToBack()
+                Else
+                    chartControl.Visible = True
+                    chartControl.BringToFront()
+                End If
 
                 ' Ensure chart is inside the correct panel
                 If PanelForTotalEnrollmentChartDashboard IsNot Nothing Then
