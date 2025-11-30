@@ -6,10 +6,10 @@ Public Class AdminManageStudents
     Private currentStudentID As Integer = 0
 
     Public Property IsEmbedded As Boolean = False
-    
-    ' Event to notify when student count changes
+
+    ' Event to notify when student count changess
     Public Event StudentCountChanged(count As Integer)
-    
+
     ' Public method to get current student count
     Public Function GetStudentCount() As Integer
         If dgvStudents IsNot Nothing AndAlso dgvStudents.DataSource IsNot Nothing Then
@@ -1180,7 +1180,7 @@ Public Class AdminManageStudents
         Catch
             ' ignore - some layout states prevent setting CurrentCell to Nothing
         End Try
-        
+
         ' Notify that student count has changed
         RaiseEvent StudentCountChanged(GetStudentCount())
     End Sub
