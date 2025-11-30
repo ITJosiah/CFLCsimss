@@ -20,10 +20,12 @@ Public Class LoginForm
         CenterControls()
 
         ' Style the login button
-        btnLogin.BackColor = Me.BackColor
+        btnLogin.BackColor = Color.FromArgb(31, 168, 67)
         btnLogin.ForeColor = Color.White
         btnLogin.FlatStyle = FlatStyle.Flat
         btnLogin.FlatAppearance.BorderSize = 0
+        btnLogin.FlatAppearance.MouseOverBackColor = Color.FromArgb(25, 140, 55)
+        btnLogin.Cursor = Cursors.Hand
 
         ' Style the back button
         btnBack.BackColor = Me.BackColor
