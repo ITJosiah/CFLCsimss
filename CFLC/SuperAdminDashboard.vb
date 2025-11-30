@@ -33,7 +33,7 @@
 
     Private Sub StyleSidebarButtons()
         ' Style all sidebar buttons
-        Dim buttons() As Button = {btnSuperAdminManageAdmin, btnSuperAdminManageTea, btnSuperAdminManageSysCon,
+        Dim buttons() As Button = {btnSuperAdminManageAdmin, btnSuperAdminManageTea, btnSuperAdminManageSysCon, btnSuperAdminAccessLogs,
                                    btnSuperAdminGenerateReports}
 
         For Each btn As Button In buttons
@@ -117,7 +117,12 @@
         btnSuperAdminManageSysCon.Width = sidebarWidth - (sidebarPadding * 2)
         btnSuperAdminManageSysCon.Height = buttonHeight
 
-        btnSuperAdminGenerateReports.Top = btnSuperAdminManageSysCon.Bottom + buttonSpacing
+        btnSuperAdminAccessLogs.Top = btnSuperAdminManageSysCon.Bottom + buttonSpacing
+        btnSuperAdminAccessLogs.Left = sidebarPadding
+        btnSuperAdminAccessLogs.Width = sidebarWidth - (sidebarPadding * 2)
+        btnSuperAdminAccessLogs.Height = buttonHeight
+
+        btnSuperAdminGenerateReports.Top = btnSuperAdminAccessLogs.Bottom + buttonSpacing
         btnSuperAdminGenerateReports.Left = sidebarPadding
         btnSuperAdminGenerateReports.Width = sidebarWidth - (sidebarPadding * 2)
         btnSuperAdminGenerateReports.Height = buttonHeight
@@ -193,5 +198,17 @@
 
     Private Sub btnBackToDashboard_Click(sender As Object, e As EventArgs) Handles btnBackToDashboard.Click
         ShowHomeContent()
+    End Sub
+
+    Private Sub btnLogout_Click(sender As Object, e As EventArgs) Handles btnLogout.Click
+        ' Go back to Form1 (main menu)
+        For Each form As Form In Application.OpenForms
+            If form.Name = "LoginForm" Then
+                form.Show()
+                form.WindowState = FormWindowState.Maximized
+                Exit For
+            End If
+        Next
+        Me.Close()
     End Sub
 End Class
