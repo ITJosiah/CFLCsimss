@@ -2,6 +2,7 @@
 Imports System.Text
 Imports MySql.Data.MySqlClient
 Imports System.Collections.Generic
+Imports System.Windows.Forms.DataVisualization.Charting
 
 Public Class ManageEnrollmentForms
     Public Property IsEmbedded As Boolean = False
@@ -67,6 +68,27 @@ Public Class ManageEnrollmentForms
 
         ' Initialize mode of payment based on payment status
         UpdateModeOfPaymentAvailability()
+        
+        ' Ensure data grid is visible and on top - hide any overlapping charts
+        dgvEnrollment.Visible = True
+        dgvEnrollment.BringToFront()
+        
+        ' Recursively hide all charts in the form and its containers
+        HideAllCharts(Me)
+    End Sub
+    
+    ' Helper method to recursively hide all Chart controls
+    Private Sub HideAllCharts(parentControl As Control)
+        For Each ctrl As Control In parentControl.Controls
+            If TypeOf ctrl Is Chart Then
+                ctrl.Visible = False
+                ctrl.SendToBack()
+            End If
+            ' Recursively check child controls
+            If ctrl.HasChildren Then
+                HideAllCharts(ctrl)
+            End If
+        Next
     End Sub
 
     ' ===== COMBOBOX INITIALIZATION METHODS =====
@@ -1204,8 +1226,35 @@ Public Class ManageEnrollmentForms
         Catch
         End Try
 
+        ' Ensure data grid is on top and visible - bring to front to prevent chart overlap
+        dgvEnrollment.BringToFront()
+        dgvEnrollment.Visible = True
+        
+        ' Recursively hide all charts again (in case they were added after Load)
+        HideAllCharts(Me)
+        
+        ' Also check parent container if embedded
+        If IsEmbedded AndAlso Me.Parent IsNot Nothing Then
+            HideAllCharts(Me.Parent)
+        End If
+
         ' Move focus to first input so the grid doesn't appear focused
         txtbxEnrollmentStudentID.Focus()
+    End Sub
+    
+    ' Ensure charts stay hidden when form is resized or painted
+    Private Sub ManageEnrollmentForms_Resize(sender As Object, e As EventArgs) Handles Me.Resize
+        If dgvEnrollment IsNot Nothing Then
+            dgvEnrollment.BringToFront()
+            HideAllCharts(Me)
+        End If
+    End Sub
+    
+    Private Sub pnlContent_Paint(sender As Object, e As PaintEventArgs) Handles pnlContent.Paint
+        ' Ensure data grid stays on top
+        If dgvEnrollment IsNot Nothing Then
+            dgvEnrollment.BringToFront()
+        End If
     End Sub
 
     ' ===== SEARCH FUNCTIONALITY =====
