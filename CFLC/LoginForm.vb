@@ -107,10 +107,16 @@ Public Class LoginForm
         End If
 
         ' Attempt login
-        Dim userLevel As String = ValidateLogin(txtUserID.Text.Trim(), txtPassword.Text)
+        Dim loginResult As Tuple(Of String, String) = ValidateLogin(txtUserID.Text.Trim(), txtPassword.Text)
 
-        If userLevel IsNot Nothing Then
+        If loginResult IsNot Nothing Then
+            Dim userLevel As String = loginResult.Item1
+            Dim teacherID As String = loginResult.Item2
+
             MessageBox.Show("Login successful!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
+
+            ' Hide login form first
+            Me.Hide()
 
             ' Navigate to appropriate dashboard based on user level
             Select Case userLevel.ToLower()
@@ -122,10 +128,12 @@ Public Class LoginForm
                     superAdminDashboard.Show()
                 Case "teacher"
                     Dim teacherDashboard As New TeacherDashboard()
+                    teacherDashboard.TeacherID = teacherID
                     teacherDashboard.Show()
                 Case Else
                     MessageBox.Show($"Welcome {userLevel}!", "Login Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
-                    Return ' Don't close the login form for unknown user types
+                    Me.Show() ' Show login form again for unknown user types
+                    Return
             End Select
 
             Me.Close()
@@ -134,28 +142,32 @@ Public Class LoginForm
         End If
     End Sub
 
-    Private Function ValidateLogin(userID As String, password As String) As String
+    Private Function ValidateLogin(userID As String, password As String) As Tuple(Of String, String)
         Try
             modDBx.openConn(modDBx.db_name)
 
-            ' Query to get the encrypted password and user type from database
-            Dim query As String = "SELECT Password, user_type FROM login WHERE user_id = @user_id"
+            ' Query to get the encrypted password, user type, and TeacherID from database
+            Dim query As String = "SELECT Password, user_type, TeacherID FROM login WHERE user_id = @user_id"
 
             Using cmd As New MySqlCommand(query, modDBx.conn)
                 cmd.Parameters.AddWithValue("@user_id", userID)
 
                 Using reader As MySqlDataReader = cmd.ExecuteReader()
                     If reader.Read() Then
-                        ' Get the encrypted password and user type from database
+                        ' Get the encrypted password, user type, and TeacherID from database
                         Dim encryptedPasswordFromDB As String = reader("Password").ToString()
                         Dim userType As String = reader("user_type").ToString()
+                        Dim teacherID As String = ""
+                        If Not IsDBNull(reader("TeacherID")) Then
+                            teacherID = reader("TeacherID").ToString()
+                        End If
 
                         ' Decrypt the password from database and compare with user input
                         Dim decryptedPassword As String = modDBx.Decrypt(encryptedPasswordFromDB)
 
                         ' Compare the decrypted password with user input
                         If decryptedPassword = password Then
-                            Return userType ' Return user type if login successful
+                            Return New Tuple(Of String, String)(userType, teacherID) ' Return user type and TeacherID if login successful
                         Else
                             Return Nothing ' Password doesn't match
                         End If
