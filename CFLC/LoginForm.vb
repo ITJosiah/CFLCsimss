@@ -114,16 +114,18 @@ Public Class LoginForm
 
             ' Navigate to appropriate dashboard based on user level
             Select Case userLevel.ToLower()
-                Case "admin", "superadmin"
+                Case "admin"
                     Dim adminDashboard As New AdminDashboard()
                     adminDashboard.Show()
+                Case "superadmin"
+                    Dim superAdminDashboard As New SuperAdminDashboard()
+                    superAdminDashboard.Show()
                 Case "teacher"
-                    ' Create and show teacher dashboard
-                    ' Dim teacherDashboard As New TeacherDashboard()
-                    ' teacherDashboard.Show()
-                    MessageBox.Show("Teacher dashboard would open here", "Teacher Login", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                    Dim teacherDashboard As New TeacherDashboard()
+                    teacherDashboard.Show()
                 Case Else
                     MessageBox.Show($"Welcome {userLevel}!", "Login Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                    Return ' Don't close the login form for unknown user types
             End Select
 
             Me.Close()
