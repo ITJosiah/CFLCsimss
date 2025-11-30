@@ -22,6 +22,14 @@ Partial Class AdminDashboard
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Dim ChartArea1 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
+        Dim Legend1 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
+        Dim Series1 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim ChartArea2 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
+        Dim Series2 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim ChartArea3 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
+        Dim Legend2 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
+        Dim Series3 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(AdminDashboard))
         Me.pnlSidebar = New System.Windows.Forms.Panel()
         Me.flowButtons = New System.Windows.Forms.FlowLayoutPanel()
@@ -34,6 +42,12 @@ Partial Class AdminDashboard
         Me.btnBackToDashboard = New System.Windows.Forms.Button()
         Me.btnLogout = New System.Windows.Forms.Button()
         Me.pnlMainContent = New System.Windows.Forms.Panel()
+        Me.PieChartMunicipalityList = New System.Windows.Forms.DataVisualization.Charting.Chart()
+        Me.PanelForTotalEnrollmentChartDashboard = New System.Windows.Forms.Panel()
+        Me.Label8 = New System.Windows.Forms.Label()
+        Me.ChartTotalEnrollmentPerYear = New System.Windows.Forms.DataVisualization.Charting.Chart()
+        Me.ComboBoxEnrollmentPerYearDashboard = New System.Windows.Forms.ComboBox()
+        Me.PieChartStudentGenderList = New System.Windows.Forms.DataVisualization.Charting.Chart()
         Me.pnlTeacherListDashboard = New System.Windows.Forms.Panel()
         Me.PictureBox3 = New System.Windows.Forms.PictureBox()
         Me.Panel3 = New System.Windows.Forms.Panel()
@@ -59,6 +73,10 @@ Partial Class AdminDashboard
         Me.pnlSidebar.SuspendLayout()
         Me.flowButtons.SuspendLayout()
         Me.pnlMainContent.SuspendLayout()
+        CType(Me.PieChartMunicipalityList, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.PanelForTotalEnrollmentChartDashboard.SuspendLayout()
+        CType(Me.ChartTotalEnrollmentPerYear, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PieChartStudentGenderList, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlTeacherListDashboard.SuspendLayout()
         CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel3.SuspendLayout()
@@ -191,6 +209,10 @@ Partial Class AdminDashboard
         'pnlMainContent
         '
         Me.pnlMainContent.BackColor = System.Drawing.Color.FromArgb(CType(CType(7, Byte), Integer), CType(CType(77, Byte), Integer), CType(CType(39, Byte), Integer))
+        Me.pnlMainContent.Controls.Add(Me.PieChartMunicipalityList)
+        Me.pnlMainContent.Controls.Add(Me.PanelForTotalEnrollmentChartDashboard)
+        Me.pnlMainContent.Controls.Add(Me.ComboBoxEnrollmentPerYearDashboard)
+        Me.pnlMainContent.Controls.Add(Me.PieChartStudentGenderList)
         Me.pnlMainContent.Controls.Add(Me.pnlTeacherListDashboard)
         Me.pnlMainContent.Controls.Add(Me.pnlSubjectListDashboard)
         Me.pnlMainContent.Controls.Add(Me.pnlStudentListDashboard)
@@ -202,6 +224,119 @@ Partial Class AdminDashboard
         Me.pnlMainContent.Size = New System.Drawing.Size(1524, 1058)
         Me.pnlMainContent.TabIndex = 12
         '
+        'PieChartMunicipalityList
+        '
+        Me.PieChartMunicipalityList.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.PieChartMunicipalityList.BackColor = System.Drawing.Color.DarkGreen
+        Me.PieChartMunicipalityList.BorderlineColor = System.Drawing.Color.Transparent
+        Me.PieChartMunicipalityList.BorderlineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Solid
+        Me.PieChartMunicipalityList.BorderlineWidth = 3
+        ChartArea1.Name = "ChartArea1"
+        Me.PieChartMunicipalityList.ChartAreas.Add(ChartArea1)
+        Legend1.BackColor = System.Drawing.Color.DarkSeaGreen
+        Legend1.Name = "Legend1"
+        Me.PieChartMunicipalityList.Legends.Add(Legend1)
+        Me.PieChartMunicipalityList.Location = New System.Drawing.Point(819, 635)
+        Me.PieChartMunicipalityList.Name = "PieChartMunicipalityList"
+        Me.PieChartMunicipalityList.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.SeaGreen
+        Series1.ChartArea = "ChartArea1"
+        Series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie
+        Series1.Legend = "Legend1"
+        Series1.Name = "Series1"
+        Me.PieChartMunicipalityList.Series.Add(Series1)
+        Me.PieChartMunicipalityList.Size = New System.Drawing.Size(642, 384)
+        Me.PieChartMunicipalityList.TabIndex = 12
+        Me.PieChartMunicipalityList.Text = "Chart1"
+        Me.PieChartMunicipalityList.UseWaitCursor = True
+        '
+        'PanelForTotalEnrollmentChartDashboard
+        '
+        Me.PanelForTotalEnrollmentChartDashboard.BackColor = System.Drawing.Color.ForestGreen
+        Me.PanelForTotalEnrollmentChartDashboard.Controls.Add(Me.Label8)
+        Me.PanelForTotalEnrollmentChartDashboard.Controls.Add(Me.ChartTotalEnrollmentPerYear)
+        Me.PanelForTotalEnrollmentChartDashboard.Location = New System.Drawing.Point(76, 345)
+        Me.PanelForTotalEnrollmentChartDashboard.Name = "PanelForTotalEnrollmentChartDashboard"
+        Me.PanelForTotalEnrollmentChartDashboard.Size = New System.Drawing.Size(688, 376)
+        Me.PanelForTotalEnrollmentChartDashboard.TabIndex = 12
+        '
+        'Label8
+        '
+        Me.Label8.AutoSize = True
+        Me.Label8.Font = New System.Drawing.Font("Microsoft Sans Serif", 20.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label8.Location = New System.Drawing.Point(244, 11)
+        Me.Label8.Name = "Label8"
+        Me.Label8.Size = New System.Drawing.Size(197, 39)
+        Me.Label8.TabIndex = 2
+        Me.Label8.Text = "Enrollments"
+        '
+        'ChartTotalEnrollmentPerYear
+        '
+        Me.ChartTotalEnrollmentPerYear.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.ChartTotalEnrollmentPerYear.BackColor = System.Drawing.Color.DarkGreen
+        Me.ChartTotalEnrollmentPerYear.BorderlineColor = System.Drawing.Color.Green
+        Me.ChartTotalEnrollmentPerYear.BorderSkin.BackColor = System.Drawing.SystemColors.GradientInactiveCaption
+        Me.ChartTotalEnrollmentPerYear.BorderSkin.BorderColor = System.Drawing.Color.AliceBlue
+        Me.ChartTotalEnrollmentPerYear.BorderSkin.PageColor = System.Drawing.Color.Transparent
+        ChartArea2.Name = "ChartArea1"
+        Me.ChartTotalEnrollmentPerYear.ChartAreas.Add(ChartArea2)
+        Me.ChartTotalEnrollmentPerYear.Location = New System.Drawing.Point(3, 58)
+        Me.ChartTotalEnrollmentPerYear.Name = "ChartTotalEnrollmentPerYear"
+        Me.ChartTotalEnrollmentPerYear.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.None
+        Series2.BackGradientStyle = System.Windows.Forms.DataVisualization.Charting.GradientStyle.TopBottom
+        Series2.BackHatchStyle = System.Windows.Forms.DataVisualization.Charting.ChartHatchStyle.DarkDownwardDiagonal
+        Series2.BackImageTransparentColor = System.Drawing.Color.Transparent
+        Series2.BackSecondaryColor = System.Drawing.Color.Transparent
+        Series2.BorderColor = System.Drawing.Color.Green
+        Series2.ChartArea = "ChartArea1"
+        Series2.Color = System.Drawing.Color.Green
+        Series2.LabelBackColor = System.Drawing.Color.White
+        Series2.LabelBorderColor = System.Drawing.Color.White
+        Series2.MarkerBorderColor = System.Drawing.Color.White
+        Series2.MarkerColor = System.Drawing.Color.White
+        Series2.Name = "Series1"
+        Me.ChartTotalEnrollmentPerYear.Series.Add(Series2)
+        Me.ChartTotalEnrollmentPerYear.Size = New System.Drawing.Size(682, 315)
+        Me.ChartTotalEnrollmentPerYear.TabIndex = 0
+        Me.ChartTotalEnrollmentPerYear.Text = "Chart1"
+        '
+        'ComboBoxEnrollmentPerYearDashboard
+        '
+        Me.ComboBoxEnrollmentPerYearDashboard.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.ComboBoxEnrollmentPerYearDashboard.BackColor = System.Drawing.Color.DarkGreen
+        Me.ComboBoxEnrollmentPerYearDashboard.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.ComboBoxEnrollmentPerYearDashboard.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.ComboBoxEnrollmentPerYearDashboard.Font = New System.Drawing.Font("Microsoft Sans Serif", 13.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ComboBoxEnrollmentPerYearDashboard.FormattingEnabled = True
+        Me.ComboBoxEnrollmentPerYearDashboard.Location = New System.Drawing.Point(1363, 29)
+        Me.ComboBoxEnrollmentPerYearDashboard.Name = "ComboBoxEnrollmentPerYearDashboard"
+        Me.ComboBoxEnrollmentPerYearDashboard.Size = New System.Drawing.Size(149, 34)
+        Me.ComboBoxEnrollmentPerYearDashboard.TabIndex = 0
+        '
+        'PieChartStudentGenderList
+        '
+        Me.PieChartStudentGenderList.BackColor = System.Drawing.Color.DarkGreen
+        Me.PieChartStudentGenderList.BorderlineColor = System.Drawing.Color.Transparent
+        Me.PieChartStudentGenderList.BorderlineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Solid
+        Me.PieChartStudentGenderList.BorderlineWidth = 3
+        ChartArea3.Name = "ChartArea1"
+        Me.PieChartStudentGenderList.ChartAreas.Add(ChartArea3)
+        Legend2.BackColor = System.Drawing.Color.DarkSeaGreen
+        Legend2.Name = "Legend1"
+        Me.PieChartStudentGenderList.Legends.Add(Legend2)
+        Me.PieChartStudentGenderList.Location = New System.Drawing.Point(1114, 388)
+        Me.PieChartStudentGenderList.Name = "PieChartStudentGenderList"
+        Me.PieChartStudentGenderList.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.SeaGreen
+        Series3.ChartArea = "ChartArea1"
+        Series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie
+        Series3.Legend = "Legend1"
+        Series3.Name = "Series1"
+        Me.PieChartStudentGenderList.Series.Add(Series3)
+        Me.PieChartStudentGenderList.Size = New System.Drawing.Size(347, 227)
+        Me.PieChartStudentGenderList.TabIndex = 8
+        Me.PieChartStudentGenderList.Text = "Chart1"
+        '
         'pnlTeacherListDashboard
         '
         Me.pnlTeacherListDashboard.BackColor = System.Drawing.Color.ForestGreen
@@ -209,7 +344,7 @@ Partial Class AdminDashboard
         Me.pnlTeacherListDashboard.Controls.Add(Me.Panel3)
         Me.pnlTeacherListDashboard.Controls.Add(Me.lblTeacherListDashboard)
         Me.pnlTeacherListDashboard.Controls.Add(Me.Label9)
-        Me.pnlTeacherListDashboard.Location = New System.Drawing.Point(569, 36)
+        Me.pnlTeacherListDashboard.Location = New System.Drawing.Point(596, 87)
         Me.pnlTeacherListDashboard.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.pnlTeacherListDashboard.Name = "pnlTeacherListDashboard"
         Me.pnlTeacherListDashboard.Size = New System.Drawing.Size(466, 212)
@@ -284,7 +419,7 @@ Partial Class AdminDashboard
         Me.pnlSubjectListDashboard.Controls.Add(Me.Panel2)
         Me.pnlSubjectListDashboard.Controls.Add(Me.lblSubjectListDashboard)
         Me.pnlSubjectListDashboard.Controls.Add(Me.Label7)
-        Me.pnlSubjectListDashboard.Location = New System.Drawing.Point(1070, 36)
+        Me.pnlSubjectListDashboard.Location = New System.Drawing.Point(1114, 89)
         Me.pnlSubjectListDashboard.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.pnlSubjectListDashboard.Name = "pnlSubjectListDashboard"
         Me.pnlSubjectListDashboard.Size = New System.Drawing.Size(466, 212)
@@ -360,7 +495,7 @@ Partial Class AdminDashboard
         Me.pnlStudentListDashboard.Controls.Add(Me.Panel6)
         Me.pnlStudentListDashboard.Controls.Add(Me.lblStudentListDashboard)
         Me.pnlStudentListDashboard.Controls.Add(Me.Label1)
-        Me.pnlStudentListDashboard.Location = New System.Drawing.Point(63, 36)
+        Me.pnlStudentListDashboard.Location = New System.Drawing.Point(76, 86)
         Me.pnlStudentListDashboard.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.pnlStudentListDashboard.Name = "pnlStudentListDashboard"
         Me.pnlStudentListDashboard.Size = New System.Drawing.Size(466, 212)
@@ -454,6 +589,11 @@ Partial Class AdminDashboard
         Me.pnlSidebar.ResumeLayout(False)
         Me.flowButtons.ResumeLayout(False)
         Me.pnlMainContent.ResumeLayout(False)
+        CType(Me.PieChartMunicipalityList, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.PanelForTotalEnrollmentChartDashboard.ResumeLayout(False)
+        Me.PanelForTotalEnrollmentChartDashboard.PerformLayout()
+        CType(Me.ChartTotalEnrollmentPerYear, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PieChartStudentGenderList, System.ComponentModel.ISupportInitialize).EndInit()
         Me.pnlTeacherListDashboard.ResumeLayout(False)
         Me.pnlTeacherListDashboard.PerformLayout()
         CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).EndInit()
@@ -507,4 +647,10 @@ Partial Class AdminDashboard
     Friend WithEvents Label6 As Label
     Friend WithEvents lblTeacherListDashboard As Label
     Friend WithEvents Label9 As Label
+    Friend WithEvents PieChartStudentGenderList As DataVisualization.Charting.Chart
+    Friend WithEvents ChartTotalEnrollmentPerYear As DataVisualization.Charting.Chart
+    Friend WithEvents PanelForTotalEnrollmentChartDashboard As Panel
+    Friend WithEvents Label8 As Label
+    Friend WithEvents ComboBoxEnrollmentPerYearDashboard As ComboBox
+    Friend WithEvents PieChartMunicipalityList As DataVisualization.Charting.Chart
 End Class
