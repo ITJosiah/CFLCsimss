@@ -1023,12 +1023,14 @@ Public Class ManageEnrollmentForms
     End Function
 
     ' Public method to get municipality counts with optional year filter
+    ' Counts distinct students per municipality (connected to enrollment)
     Public Function GetMunicipalityCounts(Optional yearFilter As String = Nothing) As Dictionary(Of String, Integer)
         Dim municipalityCounts As New Dictionary(Of String, Integer)()
 
         Try
             modDBx.openConn(modDBx.db_name)
-            Dim sql As String = "SELECT s.Municipality, COUNT(DISTINCT e.EnrollmentID) as Count " &
+            ' Count distinct students per municipality, connected to enrollment
+            Dim sql As String = "SELECT s.Municipality, COUNT(DISTINCT s.StudentID) as Count " &
                                 "FROM enrollment e " &
                                 "INNER JOIN student s ON e.StudentID = s.StudentID "
             

@@ -55,30 +55,6 @@ Public Class AdminDashboard
         PictureBox1.Top = (areaHeight - PictureBox1.Height) \ 2
     End Sub
 
-    Private Sub CenterCharts()
-        If pnlMainContent Is Nothing Then Return
-
-        ' Align charts with top panels
-        ' Student panel: X = 76, Width = 466
-        ' Teacher panel: X = 596, Width = 466
-        ' Subject panel: X = 1114, Width = 466
-
-        ' Align bar chart with Student panel (X = 76)
-        If PanelForTotalEnrollmentChartDashboard IsNot Nothing Then
-            PanelForTotalEnrollmentChartDashboard.Left = 76
-        End If
-
-        ' Align gender pie chart with Teacher panel (X = 596)
-        If PieChartStudentGenderList IsNot Nothing Then
-            PieChartStudentGenderList.Left = 596
-        End If
-
-        ' Align municipality pie chart with Subject panel (X = 1114)
-        If PieChartMunicipalityList IsNot Nothing Then
-            PieChartMunicipalityList.Left = 1114
-        End If
-    End Sub
-
     Private Sub StyleSidebarButtons()
         ' Style all sidebar buttons
         Dim buttons() As Button = {btnManageStudents, btnManageTeachers, btnManageSections,
@@ -138,7 +114,6 @@ Public Class AdminDashboard
     End Sub
     Private Sub AdminDashboard_Resize(sender As Object, e As EventArgs) Handles MyBase.Resize
         CenterLogo()
-        CenterCharts()
         PositionSidebarButtons()
     End Sub
 
@@ -337,7 +312,6 @@ Public Class AdminDashboard
         ' PictureBox1 (logo) stays in background, only centered if no content overlaps
 
         CenterLogo()
-        CenterCharts()
 
         ' Update counts from database when showing home (in case form is closed)
         UpdateStudentCountFromDatabase()
@@ -603,13 +577,19 @@ Public Class AdminDashboard
                 If chartControl.Legends.Count = 0 Then
                     Dim legend As New Legend("GenderLegend")
                     legend.Docking = Docking.Bottom
+                    legend.ForeColor = Color.White
+                    legend.Font = New Font("Segoe UI", 10, FontStyle.Bold)
                     chartControl.Legends.Add(legend)
+                Else
+                    ' Update existing legend
+                    chartControl.Legends("GenderLegend").ForeColor = Color.White
+                    chartControl.Legends("GenderLegend").Font = New Font("Segoe UI", 10, FontStyle.Bold)
                 End If
 
                 ' Change label font + color here
                 series.IsValueShownAsLabel = True
-                series.Font = New Font("Segoe UI", 9, FontStyle.Italic)
-                series.LabelForeColor = Color.Black
+                series.Font = New Font("Segoe UI", 10, FontStyle.Bold)
+                series.LabelForeColor = Color.White
 
             Else
                 ' Chart control doesn't exist - log for debugging
@@ -898,12 +878,14 @@ Public Class AdminDashboard
     End Sub
 
     ' Helper methods for database fallback queries
+    ' Count distinct students per municipality (not enrollments)
     Private Function GetMunicipalityCountsFromDatabase(yearFilter As String) As Dictionary(Of String, Integer)
         Dim municipalityCounts As New Dictionary(Of String, Integer)()
 
         Try
             modDBx.openConn(modDBx.db_name)
-            Dim sql As String = "SELECT s.Municipality, COUNT(DISTINCT e.EnrollmentID) as Count " &
+            ' Count distinct students per municipality, connected to enrollment
+            Dim sql As String = "SELECT s.Municipality, COUNT(DISTINCT s.StudentID) as Count " &
                                 "FROM enrollment e " &
                                 "INNER JOIN student s ON e.StudentID = s.StudentID "
 
@@ -1032,6 +1014,10 @@ Public Class AdminDashboard
                 series("PieLineColor") = "Black"
                 ' Disable SmartLabelStyle to allow manual radial alignment
                 series.SmartLabelStyle.Enabled = False
+                ' Set label font and color - transparent background, black text
+                series.Font = New Font("Segoe UI", 10, FontStyle.Bold)
+                series.LabelForeColor = Color.Black
+                series.LabelBackColor = Color.Transparent
 
                 ' Add data points for each municipality
                 Dim colorIndex As Integer = 0
@@ -1044,6 +1030,8 @@ Public Class AdminDashboard
                         point.Color = colors(colorIndex Mod colors.Length)
                         point.LegendText = kvp.Key
                         point.Label = kvp.Key & ": #VALY"
+                        point.LabelForeColor = Color.Black
+                        point.LabelBackColor = Color.Transparent
                         ' Don't set LabelAngle - let it align automatically with the pie slice (radial)
                         series.Points.Add(point)
                         colorIndex += 1
@@ -1064,15 +1052,24 @@ Public Class AdminDashboard
 
                 chartControl.Series.Add(series)
 
-                chartControl.BackColor = Color.Transparent
+                ' Make chart background lighter for better label visibility
+                chartControl.BackColor = Color.FromArgb(40, 130, 61) ' Lighter green background
                 chartArea.BackColor = Color.Transparent
+
+                ' Force label colors to be applied after series is added - transparent background, black text
+                For Each point As DataPoint In series.Points
+                    point.LabelForeColor = Color.Black
+                    point.LabelBackColor = Color.Transparent
+                Next
+
                 chartControl.Visible = True
                 chartControl.BringToFront()
+                ' Adjust inner plot position to make pie chart bigger and fit better
                 chartArea.InnerPlotPosition.Auto = False
                 chartArea.InnerPlotPosition.X = 25
-                chartArea.InnerPlotPosition.Y = 25
+                chartArea.InnerPlotPosition.Y = 20
                 chartArea.InnerPlotPosition.Width = 50
-                chartArea.InnerPlotPosition.Height = 50
+                chartArea.InnerPlotPosition.Height = 65
 
             End If
         Catch ex As Exception
@@ -1160,9 +1157,8 @@ Public Class AdminDashboard
         End Try
     End Sub
 
+    Private Sub PieChartMunicipalityList_Click(sender As Object, e As EventArgs) Handles PieChartMunicipalityList.Click
 
-
-
-
+    End Sub
 End Class
 

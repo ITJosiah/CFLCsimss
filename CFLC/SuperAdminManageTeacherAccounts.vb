@@ -31,24 +31,18 @@ Public Class SuperAdminManageTeacherAccounts
         ' Initialize form components
         InitializeControls()
         SetupDataGridView()
-        SetupTeacherDataGridView()
         SetDefaultValues()
         StyleControls()
         LoadTeacherData()
-        LoadTeacherInfoData()
 
         ' Ensure Add button is enabled by default
         btnManTeacherAdd.Enabled = True
 
         ' Ensure the grid doesn't auto-select the first row on load
         dgvLoginTeacher.ClearSelection()
-        dgvTeacher.ClearSelection()
         Try
             If dgvLoginTeacher.Rows.Count > 0 AndAlso dgvLoginTeacher.Columns.Count > 0 Then
                 dgvLoginTeacher.CurrentCell = Nothing
-            End If
-            If dgvTeacher.Rows.Count > 0 AndAlso dgvTeacher.Columns.Count > 0 Then
-                dgvTeacher.CurrentCell = Nothing
             End If
         Catch
             ' ignore potential layout timing exceptions
@@ -65,7 +59,7 @@ Public Class SuperAdminManageTeacherAccounts
 
         ' Initialize search textbox with placeholder
         If txtbxManTeaSearch IsNot Nothing Then
-            txtbxManTeaSearch.Text = "Search by Teacher ID..."
+            txtbxManTeaSearch.Text = "Search by User ID or Teacher ID..."
             txtbxManTeaSearch.ForeColor = Color.Gray
         End If
     End Sub
@@ -116,46 +110,6 @@ Public Class SuperAdminManageTeacherAccounts
         colTeacherID.HeaderText = "Teacher ID"
         colTeacherID.DataPropertyName = "TeacherID"
         dgvLoginTeacher.Columns.Add(colTeacherID)
-    End Sub
-
-    Private Sub SetupTeacherDataGridView()
-        If dgvTeacher Is Nothing Then Return
-
-        ' Clear existing columns first
-        dgvTeacher.Columns.Clear()
-
-        ' Configure DataGridView appearance
-        dgvTeacher.AutoGenerateColumns = False
-        dgvTeacher.SelectionMode = DataGridViewSelectionMode.FullRowSelect
-        dgvTeacher.ReadOnly = True
-        dgvTeacher.AllowUserToAddRows = False
-        dgvTeacher.RowHeadersVisible = False
-        dgvTeacher.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill
-
-        ' Create and add columns with DataPropertyName for Teacher Information
-        Dim colTeacherID As New DataGridViewTextBoxColumn()
-        colTeacherID.Name = "TeacherID"
-        colTeacherID.HeaderText = "Teacher ID"
-        colTeacherID.DataPropertyName = "TeacherID"
-        dgvTeacher.Columns.Add(colTeacherID)
-
-        Dim colFirstName As New DataGridViewTextBoxColumn()
-        colFirstName.Name = "FirstName"
-        colFirstName.HeaderText = "First Name"
-        colFirstName.DataPropertyName = "FirstName"
-        dgvTeacher.Columns.Add(colFirstName)
-
-        Dim colMiddleName As New DataGridViewTextBoxColumn()
-        colMiddleName.Name = "MiddleName"
-        colMiddleName.HeaderText = "Middle Name"
-        colMiddleName.DataPropertyName = "MiddleName"
-        dgvTeacher.Columns.Add(colMiddleName)
-
-        Dim colLastName As New DataGridViewTextBoxColumn()
-        colLastName.Name = "LastName"
-        colLastName.HeaderText = "Last Name"
-        colLastName.DataPropertyName = "LastName"
-        dgvTeacher.Columns.Add(colLastName)
     End Sub
 
     Private Sub StyleControls()
@@ -264,37 +218,11 @@ Public Class SuperAdminManageTeacherAccounts
         End Try
     End Sub
 
-    Private Sub LoadTeacherInfoData()
-        If dgvTeacher Is Nothing Then Return
-
-        Try
-            modDBx.openConn(modDBx.db_name)
-
-            ' Query teacher information from teacher table
-            Dim query As String = "SELECT TeacherID, FirstName, MiddleName, LastName FROM teacher ORDER BY TeacherID"
-            Using command As New MySqlCommand(query, modDBx.conn)
-                Using adapter As New MySqlDataAdapter(command)
-                    Dim table As New DataTable()
-                    adapter.Fill(table)
-                    dgvTeacher.DataSource = table
-                End Using
-            End Using
-        Catch ex As Exception
-            MessageBox.Show("Error loading teacher information: " & ex.Message, "Database Error",
-                          MessageBoxButtons.OK, MessageBoxIcon.Error)
-        Finally
-            If modDBx.conn IsNot Nothing AndAlso modDBx.conn.State = ConnectionState.Open Then
-                modDBx.conn.Close()
-            End If
-        End Try
-    End Sub
-
     ' ==================== SEARCH FUNCTIONALITY ====================
     Private Sub SearchTeachers(ByVal searchTerm As String)
         ' If the search box is empty, load all teachers (default view)
-        If String.IsNullOrWhiteSpace(searchTerm) OrElse searchTerm = "Search by Teacher ID..." Then
+        If String.IsNullOrWhiteSpace(searchTerm) OrElse searchTerm = "Search by User ID or Teacher ID..." Then
             LoadTeacherData()
-            LoadTeacherInfoData()
             Return
         End If
 
@@ -302,47 +230,29 @@ Public Class SuperAdminManageTeacherAccounts
             ' Open Connection
             modDBx.openConn(modDBx.db_name)
 
-            ' Search login accounts by TeacherID
-            Dim sqlLogin As String = "SELECT user_id, password, user_type, TeacherID FROM login 
-                                     WHERE user_type = 'teacher' 
-                                     AND TeacherID LIKE @searchTerm
-                                     ORDER BY user_id"
+            ' Search by user_id or TeacherID
+            Dim sql As String = "SELECT user_id, password, user_type, TeacherID FROM login 
+                               WHERE user_type = 'teacher' 
+                               AND (user_id LIKE @searchTerm OR TeacherID LIKE @searchTerm)
+                               ORDER BY user_id"
 
-            Using cmdLogin As New MySqlCommand(sqlLogin, modDBx.conn)
+            Using cmd As New MySqlCommand(sql, modDBx.conn)
                 ' Use searchTerm + '%' to match from the beginning
-                cmdLogin.Parameters.AddWithValue("@searchTerm", searchTerm.Trim() & "%")
+                cmd.Parameters.AddWithValue("@searchTerm", searchTerm.Trim() & "%")
 
-                Dim dtLogin As New System.Data.DataTable
-                Using adapter As New MySql.Data.MySqlClient.MySqlDataAdapter(cmdLogin)
-                    adapter.Fill(dtLogin)
+                Dim dt As New System.Data.DataTable
+                Using adapter As New MySql.Data.MySqlClient.MySqlDataAdapter(cmd)
+                    adapter.Fill(dt)
                 End Using
 
-                dgvLoginTeacher.DataSource = dtLogin
+                dgvLoginTeacher.DataSource = dt
                 dgvLoginTeacher.Refresh()
+
+                If dt.Rows.Count = 0 Then
+                    ' Optional: Show message when no results found
+                    ' MessageBox.Show("No teacher account found matching '" & searchTerm & "'.", "Search Result", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                End If
             End Using
-
-            ' Search teacher information by TeacherID
-            Dim sqlTeacher As String = "SELECT TeacherID, FirstName, MiddleName, LastName FROM teacher 
-                                       WHERE TeacherID LIKE @searchTerm
-                                       ORDER BY TeacherID"
-
-            Using cmdTeacher As New MySqlCommand(sqlTeacher, modDBx.conn)
-                ' Use searchTerm + '%' to match from the beginning
-                cmdTeacher.Parameters.AddWithValue("@searchTerm", searchTerm.Trim() & "%")
-
-                Dim dtTeacher As New System.Data.DataTable
-                Using adapter As New MySql.Data.MySqlClient.MySqlDataAdapter(cmdTeacher)
-                    adapter.Fill(dtTeacher)
-                End Using
-
-                dgvTeacher.DataSource = dtTeacher
-                dgvTeacher.Refresh()
-            End Using
-
-            ' Optional: Show message when no results found
-            ' If dtLogin.Rows.Count = 0 AndAlso dtTeacher.Rows.Count = 0 Then
-            '     MessageBox.Show("No teacher found matching '" & searchTerm & "'.", "Search Result", MessageBoxButtons.OK, MessageBoxIcon.Information)
-            ' End If
 
         Catch ex As Exception
             MessageBox.Show("Error searching teacher accounts: " & ex.Message, "Search Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -368,7 +278,7 @@ Public Class SuperAdminManageTeacherAccounts
 
     ' Placeholder text for search box
     Private Sub txtbxManTeaSearch_Enter(sender As Object, e As EventArgs) Handles txtbxManTeaSearch.Enter
-        If txtbxManTeaSearch.Text = "Search by Teacher ID..." Then
+        If txtbxManTeaSearch.Text = "Search by User ID or Teacher ID..." Then
             txtbxManTeaSearch.Text = ""
             txtbxManTeaSearch.ForeColor = Color.Black
         End If
@@ -376,7 +286,7 @@ Public Class SuperAdminManageTeacherAccounts
 
     Private Sub txtbxManTeaSearch_Leave(sender As Object, e As EventArgs) Handles txtbxManTeaSearch.Leave
         If String.IsNullOrWhiteSpace(txtbxManTeaSearch.Text) Then
-            txtbxManTeaSearch.Text = "Search by Teacher ID..."
+            txtbxManTeaSearch.Text = "Search by User ID or Teacher ID..."
             txtbxManTeaSearch.ForeColor = Color.Gray
         End If
     End Sub
@@ -530,7 +440,6 @@ Public Class SuperAdminManageTeacherAccounts
                                   MessageBoxButtons.OK, MessageBoxIcon.Information)
                     ClearInputs()
                     LoadTeacherData()
-                    LoadTeacherInfoData()
                 Else
                     MessageBox.Show("Failed to create teacher account", "Error",
                                   MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -806,7 +715,6 @@ Public Class SuperAdminManageTeacherAccounts
                               MessageBoxButtons.OK, MessageBoxIcon.Information)
                     ClearInputs()
                     LoadTeacherData()
-                    LoadTeacherInfoData()
                 Else
                     MessageBox.Show("Failed to delete teacher account", "Error",
                               MessageBoxButtons.OK, MessageBoxIcon.Error)
