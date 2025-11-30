@@ -252,6 +252,12 @@
     <Compile Include="SuperAdminDashboard.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="SuperAdminGenerateReports.Designer.vb">
+      <DependentUpon>SuperAdminGenerateReports.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SuperAdminGenerateReports.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="SuperAdminManageAdminAccounts.Designer.vb">
       <DependentUpon>SuperAdminManageAdminAccounts.vb</DependentUpon>
     </Compile>
@@ -341,6 +347,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="SuperAdminDashboard.resx">
       <DependentUpon>SuperAdminDashboard.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SuperAdminGenerateReports.resx">
+      <DependentUpon>SuperAdminGenerateReports.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SuperAdminManageAdminAccounts.resx">
       <DependentUpon>SuperAdminManageAdminAccounts.vb</DependentUpon>

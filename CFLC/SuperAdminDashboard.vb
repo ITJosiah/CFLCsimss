@@ -215,4 +215,24 @@
         }
         LoadContentForm(configForm)
     End Sub
+
+    Private Sub btnSuperAdminGenerateReports_Click(sender As Object, e As EventArgs) Handles btnSuperAdminGenerateReports.Click
+        ' Open Generate Reports form
+        Dim reportsForm As New SuperAdminGenerateReports() With {
+            .IsEmbedded = True
+        }
+        LoadContentForm(reportsForm)
+    End Sub
+
+    Private Sub btnLogout_Click(sender As Object, e As EventArgs) Handles btnLogout.Click
+        ' Go back to Form1 (main menu)
+        For Each form As Form In Application.OpenForms
+            If form.Name = "Form1" Then
+                form.Show()
+                form.WindowState = FormWindowState.Maximized
+                Exit For
+            End If
+        Next
+        Me.Close()
+    End Sub
 End Class
