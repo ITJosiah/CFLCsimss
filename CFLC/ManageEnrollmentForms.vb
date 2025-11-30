@@ -1,6 +1,7 @@
 ﻿Imports System.Data.SqlClient
 Imports System.Text
 Imports MySql.Data.MySqlClient
+Imports System.Collections.Generic
 
 Public Class ManageEnrollmentForms
     Public Property IsEmbedded As Boolean = False
@@ -9,6 +10,17 @@ Public Class ManageEnrollmentForms
     ' Define the current school year
     Private currentSchoolYearStart As Date = New Date(2025, 8, 1) ' August 2025
     Private currentSchoolYearEnd As Date = New Date(2026, 5, 31) ' May 2026
+
+    ' Event to notify when gender data changes
+    Public Event GenderDataChanged(maleCount As Integer, femaleCount As Integer)
+    ' Event to notify when enrollment count changes
+    Public Event EnrollmentCountChanged(count As Integer)
+    ' Event to notify when municipality data changes
+    Public Event MunicipalityDataChanged(municipalityCounts As Dictionary(Of String, Integer))
+    ' Event to notify when enrollment per year data changes
+    Public Event EnrollmentPerYearDataChanged(enrollmentData As Dictionary(Of String, Integer))
+    ' Event to notify when available years change
+    Public Event AvailableYearsChanged(years As List(Of String))
 
     Private Sub ManageEnrollmentForms_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If Not IsEmbedded Then
@@ -888,6 +900,295 @@ Public Class ManageEnrollmentForms
             End If
         Catch
             ' ignore - layout timing may prevent clearing CurrentCell
+        End Try
+
+        ' Raise all data changed events after data is loaded
+        RaiseGenderDataChanged()
+        RaiseEnrollmentCountChanged()
+        RaiseMunicipalityDataChanged()
+        RaiseEnrollmentPerYearDataChanged()
+        RaiseAvailableYearsChanged()
+    End Sub
+
+    ' Public method to get enrollment count (overload without filter for backward compatibility)
+    Public Function GetEnrollmentCount() As Integer
+        Return GetEnrollmentCount(Nothing)
+    End Function
+
+    ' Private method to raise enrollment count changed event
+    Private Sub RaiseEnrollmentCountChanged()
+        Try
+            Dim count As Integer = GetEnrollmentCount()
+            RaiseEvent EnrollmentCountChanged(count)
+        Catch ex As Exception
+            System.Diagnostics.Debug.WriteLine("Error raising enrollment count changed event: " & ex.Message)
+        End Try
+    End Sub
+
+    ' Public method to get gender counts (overload without filter for backward compatibility)
+    Public Function GetGenderCounts() As Dictionary(Of String, Integer)
+        Return GetGenderCounts(Nothing)
+    End Function
+
+    ' Private method to raise gender data changed event
+    Private Sub RaiseGenderDataChanged()
+        Try
+            Dim genderCounts = GetGenderCounts()
+            RaiseEvent GenderDataChanged(genderCounts("Male"), genderCounts("Female"))
+        Catch ex As Exception
+            System.Diagnostics.Debug.WriteLine("Error raising gender data changed event: " & ex.Message)
+        End Try
+    End Sub
+
+    ' Public method to get gender counts with optional year filter
+    Public Function GetGenderCounts(Optional yearFilter As String = Nothing) As Dictionary(Of String, Integer)
+        Dim genderCounts As New Dictionary(Of String, Integer)()
+        genderCounts("Male") = 0
+        genderCounts("Female") = 0
+
+        Try
+            modDBx.openConn(modDBx.db_name)
+            ' Join enrollment with student to get gender information
+            Dim sql As String = "SELECT s.Gender, COUNT(DISTINCT e.EnrollmentID) as Count " &
+                                "FROM enrollment e " &
+                                "INNER JOIN student s ON e.StudentID = s.StudentID "
+            
+            ' Add year filter if provided (format: "2024-2025")
+            If Not String.IsNullOrEmpty(yearFilter) Then
+                Dim years() As String = yearFilter.Split("-"c)
+                If years.Length = 2 Then
+                    Dim startYear As Integer = Convert.ToInt32(years(0))
+                    Dim endYear As Integer = Convert.ToInt32(years(1))
+                    sql &= "WHERE YEAR(e.StartDate) = " & startYear & " AND YEAR(e.EndDate) = " & endYear & " "
+                End If
+            End If
+            
+            sql &= "GROUP BY s.Gender"
+
+            Using cmd As New MySqlCommand(sql, modDBx.conn)
+                Using reader As MySqlDataReader = cmd.ExecuteReader()
+                    While reader.Read()
+                        Dim gender As String = ""
+                        If Not IsDBNull(reader("Gender")) Then
+                            gender = reader("Gender").ToString().Trim()
+                        End If
+                        Dim count As Integer = Convert.ToInt32(reader("Count"))
+
+                        If gender.Equals("Male", StringComparison.OrdinalIgnoreCase) Then
+                            genderCounts("Male") = count
+                        ElseIf gender.Equals("Female", StringComparison.OrdinalIgnoreCase) Then
+                            genderCounts("Female") = count
+                        End If
+                    End While
+                End Using
+            End Using
+        Catch ex As Exception
+            System.Diagnostics.Debug.WriteLine("Error getting gender counts from enrollments: " & ex.Message)
+        Finally
+            If modDBx.conn IsNot Nothing AndAlso modDBx.conn.State = ConnectionState.Open Then
+                modDBx.conn.Close()
+            End If
+        End Try
+
+        Return genderCounts
+    End Function
+
+    ' Public method to get enrollment count with optional year filter
+    Public Function GetEnrollmentCount(Optional yearFilter As String = Nothing) As Integer
+        Try
+            modDBx.openConn(modDBx.db_name)
+            Dim sql As String = "SELECT COUNT(*) FROM enrollment e "
+            
+            ' Add year filter if provided
+            If Not String.IsNullOrEmpty(yearFilter) Then
+                Dim years() As String = yearFilter.Split("-"c)
+                If years.Length = 2 Then
+                    Dim startYear As Integer = Convert.ToInt32(years(0))
+                    Dim endYear As Integer = Convert.ToInt32(years(1))
+                    sql &= "WHERE YEAR(e.StartDate) = " & startYear & " AND YEAR(e.EndDate) = " & endYear
+                End If
+            End If
+
+            Using cmd As New MySqlCommand(sql, modDBx.conn)
+                Return Convert.ToInt32(cmd.ExecuteScalar())
+            End Using
+        Catch ex As Exception
+            System.Diagnostics.Debug.WriteLine("Error getting enrollment count: " & ex.Message)
+            Return 0
+        Finally
+            If modDBx.conn IsNot Nothing AndAlso modDBx.conn.State = ConnectionState.Open Then
+                modDBx.conn.Close()
+            End If
+        End Try
+    End Function
+
+    ' Public method to get municipality counts with optional year filter
+    Public Function GetMunicipalityCounts(Optional yearFilter As String = Nothing) As Dictionary(Of String, Integer)
+        Dim municipalityCounts As New Dictionary(Of String, Integer)()
+
+        Try
+            modDBx.openConn(modDBx.db_name)
+            Dim sql As String = "SELECT s.Municipality, COUNT(DISTINCT e.EnrollmentID) as Count " &
+                                "FROM enrollment e " &
+                                "INNER JOIN student s ON e.StudentID = s.StudentID "
+            
+            ' Add year filter if provided
+            If Not String.IsNullOrEmpty(yearFilter) Then
+                Dim years() As String = yearFilter.Split("-"c)
+                If years.Length = 2 Then
+                    Dim startYear As Integer = Convert.ToInt32(years(0))
+                    Dim endYear As Integer = Convert.ToInt32(years(1))
+                    sql &= "WHERE YEAR(e.StartDate) = " & startYear & " AND YEAR(e.EndDate) = " & endYear & " "
+                End If
+            End If
+            
+            sql &= "GROUP BY s.Municipality " &
+                   "ORDER BY Count DESC"
+
+            Using cmd As New MySqlCommand(sql, modDBx.conn)
+                Using reader As MySqlDataReader = cmd.ExecuteReader()
+                    While reader.Read()
+                        Dim municipality As String = ""
+                        If Not IsDBNull(reader("Municipality")) Then
+                            municipality = reader("Municipality").ToString().Trim()
+                        End If
+                        If Not String.IsNullOrEmpty(municipality) Then
+                            Dim count As Integer = Convert.ToInt32(reader("Count"))
+                            municipalityCounts(municipality) = count
+                        End If
+                    End While
+                End Using
+            End Using
+        Catch ex As Exception
+            System.Diagnostics.Debug.WriteLine("Error getting municipality counts: " & ex.Message)
+        Finally
+            If modDBx.conn IsNot Nothing AndAlso modDBx.conn.State = ConnectionState.Open Then
+                modDBx.conn.Close()
+            End If
+        End Try
+
+        Return municipalityCounts
+    End Function
+
+    ' Public method to get enrollment per year/month data
+    ' Returns monthly data if yearFilter is provided, yearly data if not
+    Public Function GetEnrollmentPerYearData(Optional yearFilter As String = Nothing) As Dictionary(Of String, Integer)
+        Dim enrollmentData As New Dictionary(Of String, Integer)()
+
+        Try
+            modDBx.openConn(modDBx.db_name)
+            Dim sql As String = ""
+            
+            If Not String.IsNullOrEmpty(yearFilter) Then
+                ' Return monthly data for the filtered year
+                Dim years() As String = yearFilter.Split("-"c)
+                If years.Length = 2 Then
+                    Dim startYear As Integer = Convert.ToInt32(years(0))
+                    sql = "SELECT MONTH(e.StartDate) as MonthNum, " &
+                          "CASE MONTH(e.StartDate) " &
+                          "WHEN 1 THEN 'January' WHEN 2 THEN 'February' WHEN 3 THEN 'March' " &
+                          "WHEN 4 THEN 'April' WHEN 5 THEN 'May' WHEN 6 THEN 'June' " &
+                          "WHEN 7 THEN 'July' WHEN 8 THEN 'August' WHEN 9 THEN 'September' " &
+                          "WHEN 10 THEN 'October' WHEN 11 THEN 'November' WHEN 12 THEN 'December' " &
+                          "END as MonthName, " &
+                          "COUNT(DISTINCT e.EnrollmentID) as Count " &
+                          "FROM enrollment e " &
+                          "WHERE YEAR(e.StartDate) = " & startYear & " " &
+                          "GROUP BY MONTH(e.StartDate) " &
+                          "ORDER BY MonthNum"
+                End If
+            Else
+                ' Return yearly data (all years)
+                sql = "SELECT CONCAT(YEAR(e.StartDate), '-', YEAR(e.EndDate)) as YearRange, " &
+                      "COUNT(DISTINCT e.EnrollmentID) as Count " &
+                      "FROM enrollment e " &
+                      "GROUP BY YEAR(e.StartDate), YEAR(e.EndDate) " &
+                      "ORDER BY YEAR(e.StartDate)"
+            End If
+
+            Using cmd As New MySqlCommand(sql, modDBx.conn)
+                Using reader As MySqlDataReader = cmd.ExecuteReader()
+                    While reader.Read()
+                        Dim key As String = ""
+                        If Not String.IsNullOrEmpty(yearFilter) Then
+                            ' Monthly data
+                            key = reader("MonthName").ToString()
+                        Else
+                            ' Yearly data
+                            key = reader("YearRange").ToString()
+                        End If
+                        Dim count As Integer = Convert.ToInt32(reader("Count"))
+                        enrollmentData(key) = count
+                    End While
+                End Using
+            End Using
+        Catch ex As Exception
+            System.Diagnostics.Debug.WriteLine("Error getting enrollment per year data: " & ex.Message)
+        Finally
+            If modDBx.conn IsNot Nothing AndAlso modDBx.conn.State = ConnectionState.Open Then
+                modDBx.conn.Close()
+            End If
+        End Try
+
+        Return enrollmentData
+    End Function
+
+    ' Public method to get available school years from enrollments
+    Public Function GetAvailableYears() As List(Of String)
+        Dim years As New List(Of String)()
+
+        Try
+            modDBx.openConn(modDBx.db_name)
+            Dim sql As String = "SELECT DISTINCT CONCAT(YEAR(e.StartDate), '-', YEAR(e.EndDate)) as YearRange " &
+                                "FROM enrollment e " &
+                                "ORDER BY YEAR(e.StartDate) DESC"
+
+            Using cmd As New MySqlCommand(sql, modDBx.conn)
+                Using reader As MySqlDataReader = cmd.ExecuteReader()
+                    While reader.Read()
+                        Dim yearRange As String = reader("YearRange").ToString()
+                        If Not String.IsNullOrEmpty(yearRange) Then
+                            years.Add(yearRange)
+                        End If
+                    End While
+                End Using
+            End Using
+        Catch ex As Exception
+            System.Diagnostics.Debug.WriteLine("Error getting available years: " & ex.Message)
+        Finally
+            If modDBx.conn IsNot Nothing AndAlso modDBx.conn.State = ConnectionState.Open Then
+                modDBx.conn.Close()
+            End If
+        End Try
+
+        Return years
+    End Function
+
+    ' Private methods to raise events
+    Private Sub RaiseMunicipalityDataChanged()
+        Try
+            Dim municipalityCounts = GetMunicipalityCounts()
+            RaiseEvent MunicipalityDataChanged(municipalityCounts)
+        Catch ex As Exception
+            System.Diagnostics.Debug.WriteLine("Error raising municipality data changed event: " & ex.Message)
+        End Try
+    End Sub
+
+    Private Sub RaiseEnrollmentPerYearDataChanged()
+        Try
+            Dim enrollmentData = GetEnrollmentPerYearData()
+            RaiseEvent EnrollmentPerYearDataChanged(enrollmentData)
+        Catch ex As Exception
+            System.Diagnostics.Debug.WriteLine("Error raising enrollment per year data changed event: " & ex.Message)
+        End Try
+    End Sub
+
+    Private Sub RaiseAvailableYearsChanged()
+        Try
+            Dim years = GetAvailableYears()
+            RaiseEvent AvailableYearsChanged(years)
+        Catch ex As Exception
+            System.Diagnostics.Debug.WriteLine("Error raising available years changed event: " & ex.Message)
         End Try
     End Sub
 

@@ -1,11 +1,14 @@
 ﻿Imports MySql.Data.MySqlClient
 Imports System.Windows.Forms.DataVisualization.Charting
+Imports System.Collections.Generic
 
 Public Class AdminDashboard
     Private currentContent As Form
     Private manageStudentsForm As AdminManageStudents = Nothing
     Private manageSubjectsForm As AdminManageSubjects = Nothing
     Private manageTeachersForm As AdminManageTeacher = Nothing
+    Private manageEnrollmentForms As ManageEnrollmentForms = Nothing
+    Private selectedYearFilter As String = Nothing ' Stores the selected year filter (e.g., "2024-2025")
     Private Sub AdminDashboard_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ' Set form properties
         Me.FormBorderStyle = FormBorderStyle.None
@@ -27,6 +30,17 @@ Public Class AdminDashboard
         UpdateSubjectCountFromDatabase()
         UpdateTeacherCountFromDatabase()
         UpdateGenderChartFromDatabase()
+        UpdateMunicipalityChartFromDatabase()
+        UpdateEnrollmentPerYearChartFromDatabase()
+
+        ' Configure ComboBox to be dropdown list only (no typing)
+        ComboBoxEnrollmentPerYearDashboard.DropDownStyle = ComboBoxStyle.DropDownList
+
+        ' Populate year filter ComboBox
+        PopulateYearComboBox()
+
+        ' Add event handler for ComboBox selection change
+        AddHandler ComboBoxEnrollmentPerYearDashboard.SelectedIndexChanged, AddressOf ComboBoxEnrollmentPerYearDashboard_SelectedIndexChanged
     End Sub
 
     Private Sub CenterLogo()
@@ -153,13 +167,13 @@ Public Class AdminDashboard
     Private Sub LoadContentForm(child As Form)
         If currentContent IsNot Nothing Then
             ' Unsubscribe from events if it's AdminManageStudents
-            If TypeOf currentContent Is AdminManageStudents Then
-                Dim oldForm As AdminManageStudents = TryCast(currentContent, AdminManageStudents)
-                If oldForm IsNot Nothing Then
-                    RemoveHandler oldForm.StudentCountChanged, AddressOf OnStudentCountChanged
-                    RemoveHandler oldForm.GenderDataChanged, AddressOf OnGenderDataChanged
-                End If
-            End If
+            ' Note: Student count subscription removed - now using enrollment count instead
+            ' If TypeOf currentContent Is AdminManageStudents Then
+            '     Dim oldForm As AdminManageStudents = TryCast(currentContent, AdminManageStudents)
+            '     If oldForm IsNot Nothing Then
+            '         RemoveHandler oldForm.StudentCountChanged, AddressOf OnStudentCountChanged
+            '     End If
+            ' End If
 
             ' Unsubscribe from events if it's AdminManageSubjects
             If TypeOf currentContent Is AdminManageSubjects Then
@@ -174,6 +188,15 @@ Public Class AdminDashboard
                 Dim oldForm As AdminManageTeacher = TryCast(currentContent, AdminManageTeacher)
                 If oldForm IsNot Nothing Then
                     RemoveHandler oldForm.TeacherCountChanged, AddressOf OnTeacherCountChanged
+                End If
+            End If
+
+            ' Unsubscribe from events if it's ManageEnrollmentForms
+            If TypeOf currentContent Is ManageEnrollmentForms Then
+                Dim oldForm As ManageEnrollmentForms = TryCast(currentContent, ManageEnrollmentForms)
+                If oldForm IsNot Nothing Then
+                    RemoveHandler oldForm.GenderDataChanged, AddressOf OnGenderDataChanged
+                    RemoveHandler oldForm.EnrollmentCountChanged, AddressOf OnStudentCountChanged
                 End If
             End If
 
@@ -194,13 +217,13 @@ Public Class AdminDashboard
     Private Sub ShowHomeContent()
         If currentContent IsNot Nothing Then
             ' Unsubscribe from events if it's AdminManageStudents
-            If TypeOf currentContent Is AdminManageStudents Then
-                Dim oldForm As AdminManageStudents = TryCast(currentContent, AdminManageStudents)
-                If oldForm IsNot Nothing Then
-                    RemoveHandler oldForm.StudentCountChanged, AddressOf OnStudentCountChanged
-                    RemoveHandler oldForm.GenderDataChanged, AddressOf OnGenderDataChanged
-                End If
-            End If
+            ' Note: Student count subscription removed - now using enrollment count instead
+            ' If TypeOf currentContent Is AdminManageStudents Then
+            '     Dim oldForm As AdminManageStudents = TryCast(currentContent, AdminManageStudents)
+            '     If oldForm IsNot Nothing Then
+            '         RemoveHandler oldForm.StudentCountChanged, AddressOf OnStudentCountChanged
+            '     End If
+            ' End If
 
             ' Unsubscribe from events if it's AdminManageSubjects
             If TypeOf currentContent Is AdminManageSubjects Then
@@ -218,6 +241,15 @@ Public Class AdminDashboard
                 End If
             End If
 
+            ' Unsubscribe from events if it's ManageEnrollmentForms
+            If TypeOf currentContent Is ManageEnrollmentForms Then
+                Dim oldForm As ManageEnrollmentForms = TryCast(currentContent, ManageEnrollmentForms)
+                If oldForm IsNot Nothing Then
+                    RemoveHandler oldForm.GenderDataChanged, AddressOf OnGenderDataChanged
+                    RemoveHandler oldForm.EnrollmentCountChanged, AddressOf OnStudentCountChanged
+                End If
+            End If
+
             currentContent.Close()
             currentContent.Dispose()
             currentContent = Nothing
@@ -227,15 +259,58 @@ Public Class AdminDashboard
         manageStudentsForm = Nothing
         manageSubjectsForm = Nothing
         manageTeachersForm = Nothing
+        manageEnrollmentForms = Nothing
 
         pnlMainContent.Controls.Clear()
-        ' Add both the student list dashboard panel and the logo
+        ' Add all dashboard panels and charts
         ' Order matters for z-ordering (last added appears on top)
         pnlMainContent.Controls.Add(pnlStudentListDashboard)
         pnlMainContent.Controls.Add(pnlSubjectListDashboard)
         pnlMainContent.Controls.Add(pnlTeacherListDashboard)
+        pnlMainContent.Controls.Add(PanelForTotalEnrollmentChartDashboard)
         pnlMainContent.Controls.Add(PieChartStudentGenderList)
+        pnlMainContent.Controls.Add(PieChartMunicipalityList)
+        pnlMainContent.Controls.Add(ComboBoxEnrollmentPerYearDashboard)
         pnlMainContent.Controls.Add(PictureBox1)
+
+        ' Ensure ChartTotalEnrollmentPerYear is inside PanelForTotalEnrollmentChartDashboard
+        If PanelForTotalEnrollmentChartDashboard IsNot Nothing AndAlso ChartTotalEnrollmentPerYear IsNot Nothing Then
+            If Not PanelForTotalEnrollmentChartDashboard.Controls.Contains(ChartTotalEnrollmentPerYear) Then
+                ' Remove from pnlMainContent if it's there
+                If pnlMainContent.Controls.Contains(ChartTotalEnrollmentPerYear) Then
+                    pnlMainContent.Controls.Remove(ChartTotalEnrollmentPerYear)
+                End If
+                ' Add to Panel
+                PanelForTotalEnrollmentChartDashboard.Controls.Add(ChartTotalEnrollmentPerYear)
+                ChartTotalEnrollmentPerYear.Dock = DockStyle.Fill
+            End If
+        End If
+
+        ' Ensure PieChartMunicipalityList is visible and properly positioned
+        ' (It will be added to a container in UpdateMunicipalityChart if needed)
+        If PieChartMunicipalityList IsNot Nothing Then
+            PieChartMunicipalityList.Visible = True
+        End If
+
+        ' Ensure charts are visible and properly ordered
+        ' Bring charts to front, but keep PictureBox1 behind charts (logo should not cover charts)
+        If ChartTotalEnrollmentPerYear IsNot Nothing Then
+            ChartTotalEnrollmentPerYear.Visible = True
+            ChartTotalEnrollmentPerYear.BringToFront()
+        End If
+        If PieChartStudentGenderList IsNot Nothing Then
+            PieChartStudentGenderList.Visible = True
+            PieChartStudentGenderList.BringToFront()
+        End If
+        If PieChartMunicipalityList IsNot Nothing Then
+            PieChartMunicipalityList.Visible = True
+            PieChartMunicipalityList.BringToFront()
+        End If
+        If PanelForTotalEnrollmentChartDashboard IsNot Nothing Then
+            PanelForTotalEnrollmentChartDashboard.BringToFront()
+        End If
+        ' PictureBox1 (logo) stays in background, only centered if no content overlaps
+
         CenterLogo()
 
         ' Update counts from database when showing home (in case form is closed)
@@ -243,13 +318,19 @@ Public Class AdminDashboard
         UpdateSubjectCountFromDatabase()
         UpdateTeacherCountFromDatabase()
         UpdateGenderChartFromDatabase()
+        UpdateMunicipalityChartFromDatabase()
+        UpdateEnrollmentPerYearChartFromDatabase()
+
+        ' Refresh year ComboBox
+        PopulateYearComboBox()
     End Sub
 
     ' Method to update student count from database (fallback when form is not loaded)
+    ' Note: This now shows enrollment count instead of student count
     Private Sub UpdateStudentCountFromDatabase()
         Try
             modDBx.openConn(modDBx.db_name)
-            Dim sql As String = "SELECT COUNT(*) FROM student"
+            Dim sql As String = "SELECT COUNT(*) FROM enrollment"
 
             Using cmd As New MySql.Data.MySqlClient.MySqlCommand(sql, modDBx.conn)
                 Dim count As Integer = Convert.ToInt32(cmd.ExecuteScalar())
@@ -318,32 +399,56 @@ Public Class AdminDashboard
         End Try
     End Sub
 
-    ' Method to update gender chart from database (fallback when form is not loaded)
+    ' Method to update gender chart from database with filter support
     Private Sub UpdateGenderChartFromDatabase()
         Try
-            modDBx.openConn(modDBx.db_name)
-            Dim sql As String = "SELECT Gender, COUNT(*) as Count FROM student GROUP BY Gender"
-
             Dim maleCount As Integer = 0
             Dim femaleCount As Integer = 0
 
-            Using cmd As New MySql.Data.MySqlClient.MySqlCommand(sql, modDBx.conn)
-                Using reader As MySqlDataReader = cmd.ExecuteReader()
-                    While reader.Read()
-                        Dim gender As String = ""
-                        If Not IsDBNull(reader("Gender")) Then
-                            gender = reader("Gender").ToString().Trim()
-                        End If
-                        Dim count As Integer = Convert.ToInt32(reader("Count"))
+            If manageEnrollmentForms IsNot Nothing Then
+                Dim genderCounts = manageEnrollmentForms.GetGenderCounts(selectedYearFilter)
+                maleCount = genderCounts("Male")
+                femaleCount = genderCounts("Female")
+            Else
+                ' Fallback: query database directly
+                modDBx.openConn(modDBx.db_name)
+                Dim sql As String = "SELECT s.Gender, COUNT(DISTINCT e.EnrollmentID) as Count " &
+                                    "FROM enrollment e " &
+                                    "INNER JOIN student s ON e.StudentID = s.StudentID "
 
-                        If gender.Equals("Male", StringComparison.OrdinalIgnoreCase) Then
-                            maleCount = count
-                        ElseIf gender.Equals("Female", StringComparison.OrdinalIgnoreCase) Then
-                            femaleCount = count
-                        End If
-                    End While
+                If Not String.IsNullOrEmpty(selectedYearFilter) Then
+                    Dim years() As String = selectedYearFilter.Split("-"c)
+                    If years.Length = 2 Then
+                        Dim startYear As Integer = Convert.ToInt32(years(0))
+                        Dim endYear As Integer = Convert.ToInt32(years(1))
+                        sql &= "WHERE YEAR(e.StartDate) = " & startYear & " AND YEAR(e.EndDate) = " & endYear & " "
+                    End If
+                End If
+
+                sql &= "GROUP BY s.Gender"
+
+                Using cmd As New MySqlCommand(sql, modDBx.conn)
+                    Using reader As MySqlDataReader = cmd.ExecuteReader()
+                        While reader.Read()
+                            Dim gender As String = ""
+                            If Not IsDBNull(reader("Gender")) Then
+                                gender = reader("Gender").ToString().Trim()
+                            End If
+                            Dim count As Integer = Convert.ToInt32(reader("Count"))
+
+                            If gender.Equals("Male", StringComparison.OrdinalIgnoreCase) Then
+                                maleCount = count
+                            ElseIf gender.Equals("Female", StringComparison.OrdinalIgnoreCase) Then
+                                femaleCount = count
+                            End If
+                        End While
+                    End Using
                 End Using
-            End Using
+
+                If modDBx.conn.State = ConnectionState.Open Then
+                    modDBx.conn.Close()
+                End If
+            End If
 
             UpdateGenderChart(maleCount, femaleCount)
         Catch ex As Exception
@@ -368,17 +473,10 @@ Public Class AdminDashboard
             .IsEmbedded = True
         }
 
-        ' Subscribe to student count changed event
-        AddHandler manageStudentsForm.StudentCountChanged, AddressOf OnStudentCountChanged
-        ' Subscribe to gender data changed event
-        AddHandler manageStudentsForm.GenderDataChanged, AddressOf OnGenderDataChanged
+        ' Note: Student count subscription removed - now using enrollment count instead
+        ' AddHandler manageStudentsForm.StudentCountChanged, AddressOf OnStudentCountChanged
 
         LoadContentForm(manageStudentsForm)
-
-        ' Update count immediately
-        UpdateStudentCountFromForm()
-        ' Update gender chart immediately
-        UpdateGenderChartFromForm()
     End Sub
 
     ' Event handler for student count changes
@@ -398,17 +496,18 @@ Public Class AdminDashboard
     End Sub
 
     ' Method to update student count from the form
+    ' Note: This now gets enrollment count from ManageEnrollmentForms instead
     Private Sub UpdateStudentCountFromForm()
-        If manageStudentsForm IsNot Nothing Then
-            Dim count As Integer = manageStudentsForm.GetStudentCount()
+        If manageEnrollmentForms IsNot Nothing Then
+            Dim count As Integer = manageEnrollmentForms.GetEnrollmentCount(selectedYearFilter)
             OnStudentCountChanged(count)
         End If
     End Sub
 
     ' Method to update gender chart from the form
     Private Sub UpdateGenderChartFromForm()
-        If manageStudentsForm IsNot Nothing Then
-            Dim genderCounts = manageStudentsForm.GetGenderCounts()
+        If manageEnrollmentForms IsNot Nothing Then
+            Dim genderCounts = manageEnrollmentForms.GetGenderCounts(selectedYearFilter)
             UpdateGenderChart(genderCounts("Male"), genderCounts("Female"))
         End If
     End Sub
@@ -416,38 +515,15 @@ Public Class AdminDashboard
     ' Method to update the gender pie chart
     Private Sub UpdateGenderChart(maleCount As Integer, femaleCount As Integer)
         Try
-            ' Check if the chart control exists - search in multiple locations
-            Dim chartControl As Chart = Nothing
+            ' Use the direct reference to the chart control (it's a form member variable)
+            Dim chartControl As Chart = PieChartStudentGenderList
 
-            ' First, try to find by exact name in pnlMainContent
-            For Each ctrl As Control In pnlMainContent.Controls
-                If TypeOf ctrl Is Chart AndAlso ctrl.Name = "PieChartStudentGenderList" Then
-                    chartControl = DirectCast(ctrl, Chart)
-                    Exit For
-                End If
-            Next
-
-            ' If not found, check in pnlStudentListDashboard
-            If chartControl Is Nothing AndAlso pnlStudentListDashboard IsNot Nothing Then
-                For Each ctrl As Control In pnlStudentListDashboard.Controls
-                    If TypeOf ctrl Is Chart Then
-                        If ctrl.Name = "PieChartStudentGenderList" OrElse
-                           ctrl.Name.Contains("Chart") OrElse ctrl.Name.Contains("Pie") OrElse
-                           ctrl.Name.Contains("Gender") Then
-                            chartControl = DirectCast(ctrl, Chart)
-                            Exit For
-                        End If
-                    End If
-                Next
-            End If
-
-            ' If still not found, search all controls recursively
-            If chartControl Is Nothing Then
-                chartControl = FindChartControl(Me)
-            End If
-
-            ' If chart exists, update it
+            ' If chart exists, update it (don't check if it's in controls - it might be added later)
             If chartControl IsNot Nothing Then
+                ' Ensure chart is added to pnlMainContent if not already there
+                If Not pnlMainContent.Controls.Contains(chartControl) Then
+                    pnlMainContent.Controls.Add(chartControl)
+                End If
                 chartControl.Series.Clear()
                 chartControl.ChartAreas.Clear()
 
@@ -493,12 +569,22 @@ Public Class AdminDashboard
                 chartControl.BackColor = Color.Transparent
                 chartArea.BackColor = Color.Transparent
 
+                ' Ensure chart is visible
+                chartControl.Visible = True
+                chartControl.BringToFront()
+
                 ' Add legend
                 If chartControl.Legends.Count = 0 Then
                     Dim legend As New Legend("GenderLegend")
                     legend.Docking = Docking.Bottom
                     chartControl.Legends.Add(legend)
                 End If
+
+                ' Change label font + color here
+                series.IsValueShownAsLabel = True
+                series.Font = New Font("Segoe UI", 9, FontStyle.Italic)
+                series.LabelForeColor = Color.Black
+
             Else
                 ' Chart control doesn't exist - log for debugging
                 System.Diagnostics.Debug.WriteLine("PieChartStudentGenderList not found. Please add a Chart control named 'PieChartStudentGenderList' to the form.")
@@ -572,10 +658,33 @@ Public Class AdminDashboard
     End Sub
 
     Private Sub btnManageEnrollments_Click(sender As Object, e As EventArgs) Handles btnManageEnrollments.Click
-        Dim manageEnrollmentForms As New ManageEnrollmentForms() With {
+        ' Dispose previous instance if exists
+        If manageEnrollmentForms IsNot Nothing Then
+            RemoveHandler manageEnrollmentForms.GenderDataChanged, AddressOf OnGenderDataChanged
+            RemoveHandler manageEnrollmentForms.EnrollmentCountChanged, AddressOf OnStudentCountChanged
+            RemoveHandler manageEnrollmentForms.MunicipalityDataChanged, AddressOf OnMunicipalityDataChanged
+            RemoveHandler manageEnrollmentForms.EnrollmentPerYearDataChanged, AddressOf OnEnrollmentPerYearDataChanged
+            RemoveHandler manageEnrollmentForms.AvailableYearsChanged, AddressOf OnAvailableYearsChanged
+            manageEnrollmentForms = Nothing
+        End If
+
+        manageEnrollmentForms = New ManageEnrollmentForms() With {
             .IsEmbedded = True
         }
+
+        ' Subscribe to all enrollment data changed events
+        AddHandler manageEnrollmentForms.GenderDataChanged, AddressOf OnGenderDataChanged
+        AddHandler manageEnrollmentForms.EnrollmentCountChanged, AddressOf OnStudentCountChanged
+        AddHandler manageEnrollmentForms.MunicipalityDataChanged, AddressOf OnMunicipalityDataChanged
+        AddHandler manageEnrollmentForms.EnrollmentPerYearDataChanged, AddressOf OnEnrollmentPerYearDataChanged
+        AddHandler manageEnrollmentForms.AvailableYearsChanged, AddressOf OnAvailableYearsChanged
+
         LoadContentForm(manageEnrollmentForms)
+
+        ' Update gender chart immediately
+        UpdateGenderChartFromForm()
+        ' Update enrollment count immediately
+        UpdateStudentCountFromForm()
     End Sub
 
     Private Sub btnManageSubjects_Click(sender As Object, e As EventArgs) Handles btnManageSubjects.Click
@@ -597,14 +706,14 @@ Public Class AdminDashboard
         ' Update count immediately
         UpdateSubjectCountFromForm()
     End Sub
-    
+
     ' Event handler for subject count changes
     Private Sub OnSubjectCountChanged(count As Integer)
         If lblSubjectListDashboard IsNot Nothing Then
             lblSubjectListDashboard.Text = count.ToString()
         End If
     End Sub
-    
+
     ' Method to update subject count from the form
     Private Sub UpdateSubjectCountFromForm()
         If manageSubjectsForm IsNot Nothing Then
@@ -641,6 +750,392 @@ Public Class AdminDashboard
     Private Sub btnBackToDashboard_Click(sender As Object, e As EventArgs) Handles btnBackToDashboard.Click
         ShowHomeContent()
     End Sub
+
+    ' ===== YEAR FILTERING METHODS =====
+
+    ' Populate the year filter ComboBox
+    Private Sub PopulateYearComboBox()
+        Try
+            ComboBoxEnrollmentPerYearDashboard.Items.Clear()
+            ComboBoxEnrollmentPerYearDashboard.Items.Add("All Years")
+
+            If manageEnrollmentForms IsNot Nothing Then
+                Dim years = manageEnrollmentForms.GetAvailableYears()
+                For Each year As String In years
+                    ComboBoxEnrollmentPerYearDashboard.Items.Add(year)
+                Next
+            Else
+                ' Fallback: query database directly
+                modDBx.openConn(modDBx.db_name)
+                Dim sql As String = "SELECT DISTINCT CONCAT(YEAR(e.StartDate), '-', YEAR(e.EndDate)) as YearRange " &
+                                    "FROM enrollment e " &
+                                    "ORDER BY YEAR(e.StartDate) DESC"
+
+                Using cmd As New MySqlCommand(sql, modDBx.conn)
+                    Using reader As MySqlDataReader = cmd.ExecuteReader()
+                        While reader.Read()
+                            Dim yearRange As String = reader("YearRange").ToString()
+                            If Not String.IsNullOrEmpty(yearRange) Then
+                                ComboBoxEnrollmentPerYearDashboard.Items.Add(yearRange)
+                            End If
+                        End While
+                    End Using
+                End Using
+
+                If modDBx.conn.State = ConnectionState.Open Then
+                    modDBx.conn.Close()
+                End If
+            End If
+
+            ' Select "All Years" by default
+            ComboBoxEnrollmentPerYearDashboard.SelectedIndex = 0
+            selectedYearFilter = Nothing
+        Catch ex As Exception
+            System.Diagnostics.Debug.WriteLine("Error populating year ComboBox: " & ex.Message)
+        End Try
+    End Sub
+
+    ' ComboBox selection changed handler
+    Private Sub ComboBoxEnrollmentPerYearDashboard_SelectedIndexChanged(sender As Object, e As EventArgs)
+        If ComboBoxEnrollmentPerYearDashboard.SelectedItem IsNot Nothing Then
+            Dim selectedItem As String = ComboBoxEnrollmentPerYearDashboard.SelectedItem.ToString()
+            If selectedItem = "All Years" Then
+                selectedYearFilter = Nothing
+            Else
+                selectedYearFilter = selectedItem
+            End If
+
+            ' Refresh all charts and labels with the new filter
+            RefreshAllChartsWithFilter()
+        End If
+    End Sub
+
+    ' Refresh all charts and labels with current filter
+    Private Sub RefreshAllChartsWithFilter()
+        UpdateStudentCountFromDatabase()
+        UpdateGenderChartFromDatabase()
+        UpdateMunicipalityChartFromDatabase()
+        UpdateEnrollmentPerYearChartFromDatabase()
+    End Sub
+
+    ' ===== EVENT HANDLERS FOR NEW EVENTS =====
+
+    Private Sub OnMunicipalityDataChanged(municipalityCounts As Dictionary(Of String, Integer))
+        UpdateMunicipalityChart(municipalityCounts)
+    End Sub
+
+    Private Sub OnEnrollmentPerYearDataChanged(enrollmentData As Dictionary(Of String, Integer))
+        UpdateEnrollmentPerYearChart(enrollmentData)
+    End Sub
+
+    Private Sub OnAvailableYearsChanged(years As List(Of String))
+        ' Update ComboBox when years change
+        PopulateYearComboBox()
+    End Sub
+
+    ' ===== CHART UPDATE METHODS WITH FILTERING =====
+
+    ' Update municipality chart from database
+    Private Sub UpdateMunicipalityChartFromDatabase()
+        Try
+            Dim municipalityCounts As Dictionary(Of String, Integer)
+
+            If manageEnrollmentForms IsNot Nothing Then
+                municipalityCounts = manageEnrollmentForms.GetMunicipalityCounts(selectedYearFilter)
+            Else
+                ' Fallback: query database directly
+                municipalityCounts = GetMunicipalityCountsFromDatabase(selectedYearFilter)
+            End If
+
+            UpdateMunicipalityChart(municipalityCounts)
+        Catch ex As Exception
+            System.Diagnostics.Debug.WriteLine("Error updating municipality chart from database: " & ex.Message)
+        End Try
+    End Sub
+
+    ' Update enrollment per year chart from database
+    Private Sub UpdateEnrollmentPerYearChartFromDatabase()
+        Try
+            Dim enrollmentData As Dictionary(Of String, Integer)
+
+            If manageEnrollmentForms IsNot Nothing Then
+                enrollmentData = manageEnrollmentForms.GetEnrollmentPerYearData(selectedYearFilter)
+            Else
+                ' Fallback: query database directly
+                enrollmentData = GetEnrollmentPerYearDataFromDatabase(selectedYearFilter)
+            End If
+
+            UpdateEnrollmentPerYearChart(enrollmentData)
+        Catch ex As Exception
+            System.Diagnostics.Debug.WriteLine("Error updating enrollment per year chart from database: " & ex.Message)
+        End Try
+    End Sub
+
+    ' Helper methods for database fallback queries
+    Private Function GetMunicipalityCountsFromDatabase(yearFilter As String) As Dictionary(Of String, Integer)
+        Dim municipalityCounts As New Dictionary(Of String, Integer)()
+
+        Try
+            modDBx.openConn(modDBx.db_name)
+            Dim sql As String = "SELECT s.Municipality, COUNT(DISTINCT e.EnrollmentID) as Count " &
+                                "FROM enrollment e " &
+                                "INNER JOIN student s ON e.StudentID = s.StudentID "
+
+            If Not String.IsNullOrEmpty(yearFilter) Then
+                Dim years() As String = yearFilter.Split("-"c)
+                If years.Length = 2 Then
+                    Dim startYear As Integer = Convert.ToInt32(years(0))
+                    Dim endYear As Integer = Convert.ToInt32(years(1))
+                    sql &= "WHERE YEAR(e.StartDate) = " & startYear & " AND YEAR(e.EndDate) = " & endYear & " "
+                End If
+            End If
+
+            sql &= "GROUP BY s.Municipality ORDER BY Count DESC"
+
+            Using cmd As New MySqlCommand(sql, modDBx.conn)
+                Using reader As MySqlDataReader = cmd.ExecuteReader()
+                    While reader.Read()
+                        Dim municipality As String = ""
+                        If Not IsDBNull(reader("Municipality")) Then
+                            municipality = reader("Municipality").ToString().Trim()
+                        End If
+                        If Not String.IsNullOrEmpty(municipality) Then
+                            Dim count As Integer = Convert.ToInt32(reader("Count"))
+                            municipalityCounts(municipality) = count
+                        End If
+                    End While
+                End Using
+            End Using
+        Catch ex As Exception
+            System.Diagnostics.Debug.WriteLine("Error getting municipality counts from database: " & ex.Message)
+        Finally
+            If modDBx.conn IsNot Nothing AndAlso modDBx.conn.State = ConnectionState.Open Then
+                modDBx.conn.Close()
+            End If
+        End Try
+
+        Return municipalityCounts
+    End Function
+
+    Private Function GetEnrollmentPerYearDataFromDatabase(yearFilter As String) As Dictionary(Of String, Integer)
+        Dim enrollmentData As New Dictionary(Of String, Integer)()
+
+        Try
+            modDBx.openConn(modDBx.db_name)
+            Dim sql As String = ""
+
+            If Not String.IsNullOrEmpty(yearFilter) Then
+                ' Return monthly data for the filtered year
+                Dim years() As String = yearFilter.Split("-"c)
+                If years.Length = 2 Then
+                    Dim startYear As Integer = Convert.ToInt32(years(0))
+                    sql = "SELECT MONTH(e.StartDate) as MonthNum, " &
+                          "CASE MONTH(e.StartDate) " &
+                          "WHEN 1 THEN 'January' WHEN 2 THEN 'February' WHEN 3 THEN 'March' " &
+                          "WHEN 4 THEN 'April' WHEN 5 THEN 'May' WHEN 6 THEN 'June' " &
+                          "WHEN 7 THEN 'July' WHEN 8 THEN 'August' WHEN 9 THEN 'September' " &
+                          "WHEN 10 THEN 'October' WHEN 11 THEN 'November' WHEN 12 THEN 'December' " &
+                          "END as MonthName, " &
+                          "COUNT(DISTINCT e.EnrollmentID) as Count " &
+                          "FROM enrollment e " &
+                          "WHERE YEAR(e.StartDate) = " & startYear & " " &
+                          "GROUP BY MONTH(e.StartDate) " &
+                          "ORDER BY MonthNum"
+                End If
+            Else
+                ' Return yearly data (all years)
+                sql = "SELECT CONCAT(YEAR(e.StartDate), '-', YEAR(e.EndDate)) as YearRange, " &
+                      "COUNT(DISTINCT e.EnrollmentID) as Count " &
+                      "FROM enrollment e " &
+                      "GROUP BY YEAR(e.StartDate), YEAR(e.EndDate) " &
+                      "ORDER BY YEAR(e.StartDate)"
+            End If
+
+            Using cmd As New MySqlCommand(sql, modDBx.conn)
+                Using reader As MySqlDataReader = cmd.ExecuteReader()
+                    While reader.Read()
+                        Dim key As String = ""
+                        If Not String.IsNullOrEmpty(yearFilter) Then
+                            key = reader("MonthName").ToString()
+                        Else
+                            key = reader("YearRange").ToString()
+                        End If
+                        Dim count As Integer = Convert.ToInt32(reader("Count"))
+                        enrollmentData(key) = count
+                    End While
+                End Using
+            End Using
+        Catch ex As Exception
+            System.Diagnostics.Debug.WriteLine("Error getting enrollment per year data from database: " & ex.Message)
+        Finally
+            If modDBx.conn IsNot Nothing AndAlso modDBx.conn.State = ConnectionState.Open Then
+                modDBx.conn.Close()
+            End If
+        End Try
+
+        Return enrollmentData
+    End Function
+
+    ' ===== CHART RENDERING METHODS =====
+
+    ' Update municipality pie chart
+    Private Sub UpdateMunicipalityChart(municipalityCounts As Dictionary(Of String, Integer))
+        Try
+            Dim chartControl As Chart = PieChartMunicipalityList
+
+            If chartControl IsNot Nothing Then
+                ' Ensure chart is in pnlMainContent
+                If Not pnlMainContent.Controls.Contains(chartControl) Then
+                    pnlMainContent.Controls.Add(chartControl)
+                End If
+
+                chartControl.Series.Clear()
+                chartControl.ChartAreas.Clear()
+
+                Dim chartArea As New ChartArea("MunicipalityChartArea")
+                chartControl.ChartAreas.Add(chartArea)
+
+                Dim series As New Series("MunicipalitySeries")
+                series.ChartType = SeriesChartType.Pie
+                series.IsValueShownAsLabel = True
+                series.LabelFormat = "#,##0"
+
+                ' Configure label style to line up based on corresponding pie slices (radial alignment)
+                ' "Outside" positions labels outside the pie, aligned with their slices
+                series("PieLabelStyle") = "Outside"
+                series("PieLineColor") = "Black"
+                ' Disable SmartLabelStyle to allow manual radial alignment
+                series.SmartLabelStyle.Enabled = False
+
+                ' Add data points for each municipality
+                Dim colorIndex As Integer = 0
+                Dim colors() As Color = {Color.Green, Color.LightGreen, Color.DarkGreen, Color.ForestGreen,
+                                        Color.SeaGreen, Color.MediumSeaGreen, Color.LimeGreen, Color.YellowGreen}
+
+                For Each kvp As KeyValuePair(Of String, Integer) In municipalityCounts
+                    If kvp.Value > 0 Then
+                        Dim point As New DataPoint(0, kvp.Value)
+                        point.Color = colors(colorIndex Mod colors.Length)
+                        point.LegendText = kvp.Key
+                        point.Label = kvp.Key & ": #VALY"
+                        ' Don't set LabelAngle - let it align automatically with the pie slice (radial)
+                        series.Points.Add(point)
+                        colorIndex += 1
+                    End If
+                Next
+
+                ' Configure chart area for better label positioning
+                chartArea.Area3DStyle.Enable3D = False
+
+                ' If no data, add placeholder
+                If municipalityCounts.Count = 0 Then
+                    Dim emptyPoint As New DataPoint(0, 1)
+                    emptyPoint.Color = Color.Gray
+                    emptyPoint.LegendText = "No Data"
+                    emptyPoint.IsEmpty = True
+                    series.Points.Add(emptyPoint)
+                End If
+
+                chartControl.Series.Add(series)
+
+                chartControl.BackColor = Color.Transparent
+                chartArea.BackColor = Color.Transparent
+                chartControl.Visible = True
+                chartControl.BringToFront()
+                chartArea.InnerPlotPosition.Auto = False
+                chartArea.InnerPlotPosition.X = 25
+                chartArea.InnerPlotPosition.Y = 25
+                chartArea.InnerPlotPosition.Width = 50
+                chartArea.InnerPlotPosition.Height = 50
+
+            End If
+        Catch ex As Exception
+            System.Diagnostics.Debug.WriteLine("Error updating municipality chart: " & ex.Message)
+        End Try
+    End Sub
+
+    ' Update enrollment per year chart (bar/line chart)
+    Private Sub UpdateEnrollmentPerYearChart(enrollmentData As Dictionary(Of String, Integer))
+        Try
+            Dim chartControl As Chart = ChartTotalEnrollmentPerYear
+
+            If chartControl IsNot Nothing Then
+                ' Clear previous series and chart areas
+                chartControl.Series.Clear()
+                chartControl.ChartAreas.Clear()
+
+                ' Create chart area
+                Dim chartArea As New ChartArea("EnrollmentChartArea")
+                chartControl.ChartAreas.Add(chartArea)
+
+                ' Make chart and chart area backgrounds transparent
+                chartControl.BackColor = Color.Transparent
+                chartArea.BackColor = Color.Transparent
+
+                ' Keep axis lines visible
+                chartArea.AxisX.LineColor = Color.Black
+                chartArea.AxisY.LineColor = Color.Black
+
+                ' Optionally, adjust grid lines (light gray or transparent)
+                chartArea.AxisX.MajorGrid.LineColor = Color.Black
+                chartArea.AxisY.MajorGrid.LineColor = Color.Black
+
+                ' Create series
+                Dim series As New Series("EnrollmentSeries")
+                series.ChartType = SeriesChartType.Column
+                series.IsValueShownAsLabel = True          ' Show label inside bar
+                series.LabelForeColor = Color.Black        ' Label color for visibility
+                series.Font = New Font("Segoe UI", 9, FontStyle.Bold)
+                series.LabelFormat = "#,##0"
+                series("LabelStyle") = "Bottom"            ' Center labels inside bars
+                series.SmartLabelStyle.Enabled = False     ' Disable smart labels
+
+                ' Define bar colors
+                Dim barColors() As Color = {Color.Green, Color.LightGreen, Color.DarkGreen, Color.ForestGreen,
+                                           Color.SeaGreen, Color.MediumSeaGreen, Color.LimeGreen, Color.YellowGreen,
+                                           Color.OliveDrab, Color.DarkSeaGreen, Color.MediumAquamarine, Color.SpringGreen}
+
+                ' Add data points
+                Dim colorIndex As Integer = 0
+                For Each kvp As KeyValuePair(Of String, Integer) In enrollmentData
+                    Dim point As New DataPoint()
+                    point.SetValueXY(kvp.Key, kvp.Value)
+                    point.Color = barColors(colorIndex Mod barColors.Length)
+                    series.Points.Add(point)
+                    colorIndex += 1
+                Next
+
+                ' Add series to chart
+                chartControl.Series.Add(series)
+
+                ' Configure axes
+                chartArea.AxisX.Title = If(selectedYearFilter IsNot Nothing, "Month", "School Year")
+                chartArea.AxisY.Title = "Number of Enrollments"
+                chartArea.AxisX.Interval = 1
+                chartArea.AxisX.LabelStyle.Angle = 100
+
+                chartControl.Visible = True
+                chartControl.BringToFront()
+
+                ' Ensure chart is inside the correct panel
+                If PanelForTotalEnrollmentChartDashboard IsNot Nothing Then
+                    If Not PanelForTotalEnrollmentChartDashboard.Controls.Contains(chartControl) Then
+                        If pnlMainContent.Controls.Contains(chartControl) Then
+                            pnlMainContent.Controls.Remove(chartControl)
+                        End If
+                        PanelForTotalEnrollmentChartDashboard.Controls.Add(chartControl)
+                        chartControl.Dock = DockStyle.Fill
+                    End If
+                    PanelForTotalEnrollmentChartDashboard.BringToFront()
+                End If
+            End If
+        Catch ex As Exception
+            System.Diagnostics.Debug.WriteLine("Error updating enrollment per year chart: " & ex.Message)
+        End Try
+    End Sub
+
+
+
 
 
 End Class
