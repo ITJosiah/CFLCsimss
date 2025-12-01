@@ -71,6 +71,16 @@ Public Class AdminDashboard
             btn.Padding = New Padding(15, 0, 0, 0) ' More left padding for text
         Next
 
+        ' Style home button (green)
+        btnBackToDashboard.BackColor = Color.FromArgb(40, 167, 69) ' Green
+        btnBackToDashboard.ForeColor = Color.White
+        btnBackToDashboard.FlatStyle = FlatStyle.Flat
+        btnBackToDashboard.FlatAppearance.BorderSize = 0
+        btnBackToDashboard.FlatAppearance.MouseOverBackColor = Color.FromArgb(33, 136, 56) ' Darker green on hover
+        btnBackToDashboard.Font = New Font(btnBackToDashboard.Font.FontFamily, 15, FontStyle.Bold)
+        btnBackToDashboard.TextAlign = ContentAlignment.MiddleLeft
+        btnBackToDashboard.Padding = New Padding(15, 0, 0, 0) ' More left padding for text
+
         ' Style logout button differently (red)
         btnLogout.BackColor = Color.Red
         btnLogout.ForeColor = Color.White
@@ -342,7 +352,18 @@ Public Class AdminDashboard
     Private Sub UpdateStudentCountFromDatabase()
         Try
             modDBx.openConn(modDBx.db_name)
-            Dim sql As String = "SELECT COUNT(*) FROM enrollment"
+            Dim sql As String = "SELECT COUNT(*) FROM enrollment e"
+            
+            ' Apply year filter if one is selected
+            If Not String.IsNullOrEmpty(selectedYearFilter) Then
+                Dim years() As String = selectedYearFilter.Split("-"c)
+                If years.Length = 2 Then
+                    Dim startYear As Integer = Convert.ToInt32(years(0))
+                    Dim endYear As Integer = Convert.ToInt32(years(1))
+                    ' Filter by enrollment dates within the school year
+                    sql &= " WHERE YEAR(e.StartDate) = " & startYear & " AND YEAR(e.EndDate) = " & endYear
+                End If
+            End If
 
             Using cmd As New MySql.Data.MySqlClient.MySqlCommand(sql, modDBx.conn)
                 Dim count As Integer = Convert.ToInt32(cmd.ExecuteScalar())

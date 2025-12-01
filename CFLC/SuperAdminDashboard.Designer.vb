@@ -156,12 +156,12 @@ Partial Class SuperAdminDashboard
         'FlowLayoutPanel1
         '
         Me.FlowLayoutPanel1.BackColor = System.Drawing.Color.Transparent
+        Me.FlowLayoutPanel1.Controls.Add(Me.btnBackToDashboard)
         Me.FlowLayoutPanel1.Controls.Add(Me.btnSuperAdminManageAdmin)
         Me.FlowLayoutPanel1.Controls.Add(Me.btnSuperAdminManageTea)
         Me.FlowLayoutPanel1.Controls.Add(Me.btnSuperAdminManageSysCon)
         Me.FlowLayoutPanel1.Controls.Add(Me.btnSuperAdminAccessLogs)
         Me.FlowLayoutPanel1.Controls.Add(Me.btnSuperAdminGenerateReports)
-        Me.FlowLayoutPanel1.Controls.Add(Me.btnBackToDashboard)
         Me.FlowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.FlowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.TopDown
         Me.FlowLayoutPanel1.Location = New System.Drawing.Point(40, 49)
@@ -173,7 +173,7 @@ Partial Class SuperAdminDashboard
         '
         'btnSuperAdminManageAdmin
         '
-        Me.btnSuperAdminManageAdmin.Location = New System.Drawing.Point(0, 0)
+        Me.btnSuperAdminManageAdmin.Location = New System.Drawing.Point(0, 77)
         Me.btnSuperAdminManageAdmin.Margin = New System.Windows.Forms.Padding(0, 0, 0, 22)
         Me.btnSuperAdminManageAdmin.Name = "btnSuperAdminManageAdmin"
         Me.btnSuperAdminManageAdmin.Size = New System.Drawing.Size(320, 55)
@@ -183,7 +183,7 @@ Partial Class SuperAdminDashboard
         '
         'btnSuperAdminManageTea
         '
-        Me.btnSuperAdminManageTea.Location = New System.Drawing.Point(0, 77)
+        Me.btnSuperAdminManageTea.Location = New System.Drawing.Point(0, 154)
         Me.btnSuperAdminManageTea.Margin = New System.Windows.Forms.Padding(0, 0, 0, 22)
         Me.btnSuperAdminManageTea.Name = "btnSuperAdminManageTea"
         Me.btnSuperAdminManageTea.Size = New System.Drawing.Size(320, 55)
@@ -193,7 +193,7 @@ Partial Class SuperAdminDashboard
         '
         'btnSuperAdminManageSysCon
         '
-        Me.btnSuperAdminManageSysCon.Location = New System.Drawing.Point(0, 154)
+        Me.btnSuperAdminManageSysCon.Location = New System.Drawing.Point(0, 231)
         Me.btnSuperAdminManageSysCon.Margin = New System.Windows.Forms.Padding(0, 0, 0, 22)
         Me.btnSuperAdminManageSysCon.Name = "btnSuperAdminManageSysCon"
         Me.btnSuperAdminManageSysCon.Size = New System.Drawing.Size(320, 55)
@@ -203,7 +203,7 @@ Partial Class SuperAdminDashboard
         '
         'btnSuperAdminAccessLogs
         '
-        Me.btnSuperAdminAccessLogs.Location = New System.Drawing.Point(0, 231)
+        Me.btnSuperAdminAccessLogs.Location = New System.Drawing.Point(0, 308)
         Me.btnSuperAdminAccessLogs.Margin = New System.Windows.Forms.Padding(0, 0, 0, 22)
         Me.btnSuperAdminAccessLogs.Name = "btnSuperAdminAccessLogs"
         Me.btnSuperAdminAccessLogs.Size = New System.Drawing.Size(320, 55)
@@ -213,7 +213,7 @@ Partial Class SuperAdminDashboard
         '
         'btnSuperAdminGenerateReports
         '
-        Me.btnSuperAdminGenerateReports.Location = New System.Drawing.Point(0, 308)
+        Me.btnSuperAdminGenerateReports.Location = New System.Drawing.Point(0, 385)
         Me.btnSuperAdminGenerateReports.Margin = New System.Windows.Forms.Padding(0, 0, 0, 22)
         Me.btnSuperAdminGenerateReports.Name = "btnSuperAdminGenerateReports"
         Me.btnSuperAdminGenerateReports.Size = New System.Drawing.Size(320, 55)
@@ -223,14 +223,13 @@ Partial Class SuperAdminDashboard
         '
         'btnBackToDashboard
         '
-        Me.btnBackToDashboard.Anchor = System.Windows.Forms.AnchorStyles.Bottom
         Me.btnBackToDashboard.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.btnBackToDashboard.Location = New System.Drawing.Point(75, 385)
+        Me.btnBackToDashboard.Location = New System.Drawing.Point(0, 0)
         Me.btnBackToDashboard.Margin = New System.Windows.Forms.Padding(0, 0, 0, 22)
         Me.btnBackToDashboard.Name = "btnBackToDashboard"
         Me.btnBackToDashboard.Size = New System.Drawing.Size(169, 55)
         Me.btnBackToDashboard.TabIndex = 12
-        Me.btnBackToDashboard.Text = "Back to Dashboard"
+        Me.btnBackToDashboard.Text = "Home"
         Me.btnBackToDashboard.UseVisualStyleBackColor = True
         '
         'btnLogout

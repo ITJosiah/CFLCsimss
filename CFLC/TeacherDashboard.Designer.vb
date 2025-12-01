@@ -254,11 +254,11 @@ Partial Class TeacherDashboard
         'PanelSideButton
         '
         Me.PanelSideButton.BackColor = System.Drawing.Color.Transparent
+        Me.PanelSideButton.Controls.Add(Me.btnBackToDashboard)
         Me.PanelSideButton.Controls.Add(Me.btnTeacherViewSection)
         Me.PanelSideButton.Controls.Add(Me.btnTeacherViewStudents)
         Me.PanelSideButton.Controls.Add(Me.btnViewAssignedSubjects)
         Me.PanelSideButton.Controls.Add(Me.btnTeacherGenerateReports)
-        Me.PanelSideButton.Controls.Add(Me.btnBackToDashboard)
         Me.PanelSideButton.Dock = System.Windows.Forms.DockStyle.Left
         Me.PanelSideButton.FlowDirection = System.Windows.Forms.FlowDirection.TopDown
         Me.PanelSideButton.Location = New System.Drawing.Point(40, 49)
@@ -270,7 +270,7 @@ Partial Class TeacherDashboard
         '
         'btnTeacherViewSection
         '
-        Me.btnTeacherViewSection.Location = New System.Drawing.Point(0, 0)
+        Me.btnTeacherViewSection.Location = New System.Drawing.Point(0, 77)
         Me.btnTeacherViewSection.Margin = New System.Windows.Forms.Padding(0, 0, 0, 22)
         Me.btnTeacherViewSection.Name = "btnTeacherViewSection"
         Me.btnTeacherViewSection.Size = New System.Drawing.Size(320, 55)
@@ -280,7 +280,7 @@ Partial Class TeacherDashboard
         '
         'btnTeacherViewStudents
         '
-        Me.btnTeacherViewStudents.Location = New System.Drawing.Point(0, 77)
+        Me.btnTeacherViewStudents.Location = New System.Drawing.Point(0, 154)
         Me.btnTeacherViewStudents.Margin = New System.Windows.Forms.Padding(0, 0, 0, 22)
         Me.btnTeacherViewStudents.Name = "btnTeacherViewStudents"
         Me.btnTeacherViewStudents.Size = New System.Drawing.Size(320, 55)
@@ -290,7 +290,7 @@ Partial Class TeacherDashboard
         '
         'btnViewAssignedSubjects
         '
-        Me.btnViewAssignedSubjects.Location = New System.Drawing.Point(0, 154)
+        Me.btnViewAssignedSubjects.Location = New System.Drawing.Point(0, 231)
         Me.btnViewAssignedSubjects.Margin = New System.Windows.Forms.Padding(0, 0, 0, 22)
         Me.btnViewAssignedSubjects.Name = "btnViewAssignedSubjects"
         Me.btnViewAssignedSubjects.Size = New System.Drawing.Size(320, 55)
@@ -300,7 +300,7 @@ Partial Class TeacherDashboard
         '
         'btnTeacherGenerateReports
         '
-        Me.btnTeacherGenerateReports.Location = New System.Drawing.Point(0, 231)
+        Me.btnTeacherGenerateReports.Location = New System.Drawing.Point(0, 308)
         Me.btnTeacherGenerateReports.Margin = New System.Windows.Forms.Padding(0, 0, 0, 22)
         Me.btnTeacherGenerateReports.Name = "btnTeacherGenerateReports"
         Me.btnTeacherGenerateReports.Size = New System.Drawing.Size(320, 55)
@@ -310,14 +310,13 @@ Partial Class TeacherDashboard
         '
         'btnBackToDashboard
         '
-        Me.btnBackToDashboard.Anchor = System.Windows.Forms.AnchorStyles.Bottom
         Me.btnBackToDashboard.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.btnBackToDashboard.Location = New System.Drawing.Point(75, 308)
+        Me.btnBackToDashboard.Location = New System.Drawing.Point(0, 0)
         Me.btnBackToDashboard.Margin = New System.Windows.Forms.Padding(0, 0, 0, 22)
         Me.btnBackToDashboard.Name = "btnBackToDashboard"
         Me.btnBackToDashboard.Size = New System.Drawing.Size(169, 55)
         Me.btnBackToDashboard.TabIndex = 12
-        Me.btnBackToDashboard.Text = "Back to Dashboard"
+        Me.btnBackToDashboard.Text = "Home"
         Me.btnBackToDashboard.UseVisualStyleBackColor = True
         '
         'btnLogout

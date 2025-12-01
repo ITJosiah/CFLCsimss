@@ -105,6 +105,16 @@ Public Class TeacherDashboard
             btn.Padding = New Padding(15, 0, 0, 0)
         Next
 
+        ' Style home button (green)
+        btnBackToDashboard.BackColor = Color.FromArgb(40, 167, 69) ' Green
+        btnBackToDashboard.ForeColor = Color.White
+        btnBackToDashboard.FlatStyle = FlatStyle.Flat
+        btnBackToDashboard.FlatAppearance.BorderSize = 0
+        btnBackToDashboard.FlatAppearance.MouseOverBackColor = Color.FromArgb(33, 136, 56) ' Darker green on hover
+        btnBackToDashboard.Font = New Font(btnBackToDashboard.Font.FontFamily, 15, FontStyle.Bold)
+        btnBackToDashboard.TextAlign = ContentAlignment.MiddleLeft
+        btnBackToDashboard.Padding = New Padding(15, 0, 0, 0)
+
         btnLogout.BackColor = Color.Red
         btnLogout.ForeColor = Color.White
         btnLogout.FlatStyle = FlatStyle.Flat
