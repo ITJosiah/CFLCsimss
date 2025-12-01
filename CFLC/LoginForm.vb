@@ -196,14 +196,8 @@ Public Class LoginForm
     End Function
 
     Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
-        ' Go back to Form1
-        For Each form As Form In Application.OpenForms
-            If form.Name = "Form1" Then
-                form.Show()
-                form.WindowState = FormWindowState.Maximized
-                Exit For
-            End If
-        Next
-        Me.Close()
+        ' Close the login form
+        ' Since LoginForm is now the main form, closing it will exit the application
+        Application.Exit()
     End Sub
 End Class

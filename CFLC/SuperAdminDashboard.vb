@@ -403,9 +403,9 @@ Public Class SuperAdminDashboard
     End Sub
 
     Private Sub btnLogout_Click(sender As Object, e As EventArgs) Handles btnLogout.Click
-        ' Go back to Form1 (main menu)
+        ' Go back to LoginForm
         For Each form As Form In Application.OpenForms
-            If form.Name = "Form1" Then
+            If form.Name = "LoginForm" Then
                 form.Show()
                 form.WindowState = FormWindowState.Maximized
                 Exit For
