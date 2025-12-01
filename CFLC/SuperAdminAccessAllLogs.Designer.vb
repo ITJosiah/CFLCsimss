@@ -49,12 +49,11 @@ Partial Class SuperAdminAccessAllLogs
         '
         Me.dgvLogs.AllowUserToAddRows = False
         Me.dgvLogs.AllowUserToDeleteRows = False
-        Me.dgvLogs.Anchor = System.Windows.Forms.AnchorStyles.Right
         Me.dgvLogs.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.dgvLogs.BackgroundColor = System.Drawing.Color.White
         Me.dgvLogs.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.dgvLogs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvLogs.Location = New System.Drawing.Point(139, 138)
+        Me.dgvLogs.Location = New System.Drawing.Point(225, 149)
         Me.dgvLogs.Margin = New System.Windows.Forms.Padding(2)
         Me.dgvLogs.Name = "dgvLogs"
         Me.dgvLogs.ReadOnly = True
@@ -70,7 +69,7 @@ Partial Class SuperAdminAccessAllLogs
         Me.txtbxSearchLogs.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.txtbxSearchLogs.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtbxSearchLogs.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtbxSearchLogs.Location = New System.Drawing.Point(225, 98)
+        Me.txtbxSearchLogs.Location = New System.Drawing.Point(492, 110)
         Me.txtbxSearchLogs.Margin = New System.Windows.Forms.Padding(2)
         Me.txtbxSearchLogs.Name = "txtbxSearchLogs"
         Me.txtbxSearchLogs.Size = New System.Drawing.Size(226, 23)
@@ -82,7 +81,7 @@ Partial Class SuperAdminAccessAllLogs
         Me.lblSearchLogs.AutoSize = True
         Me.lblSearchLogs.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblSearchLogs.ForeColor = System.Drawing.Color.White
-        Me.lblSearchLogs.Location = New System.Drawing.Point(279, 73)
+        Me.lblSearchLogs.Location = New System.Drawing.Point(505, 73)
         Me.lblSearchLogs.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.lblSearchLogs.Name = "lblSearchLogs"
         Me.lblSearchLogs.Size = New System.Drawing.Size(184, 17)
@@ -95,7 +94,7 @@ Partial Class SuperAdminAccessAllLogs
         Me.lblTitle.AutoSize = True
         Me.lblTitle.Font = New System.Drawing.Font("Microsoft Sans Serif", 20.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblTitle.ForeColor = System.Drawing.Color.White
-        Me.lblTitle.Location = New System.Drawing.Point(250, 24)
+        Me.lblTitle.Location = New System.Drawing.Point(486, 25)
         Me.lblTitle.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.lblTitle.Name = "lblTitle"
         Me.lblTitle.Size = New System.Drawing.Size(221, 31)
