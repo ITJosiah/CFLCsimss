@@ -176,6 +176,7 @@ Public Class SuperAdminGenerateReports
         ' Center the GroupBoxes after form is fully laid out
         AddHandler Me.Shown, AddressOf SuperAdminGenerateReports_Shown
         AddHandler Me.ResizeEnd, AddressOf SuperAdminGenerateReports_ResizeEnd
+        AddHandler Me.VisibleChanged, AddressOf SuperAdminGenerateReports_VisibleChanged
     End Sub
 
     Private Sub SuperAdminGenerateReports_Resize(sender As Object, e As EventArgs) Handles MyBase.Resize
@@ -185,7 +186,18 @@ Public Class SuperAdminGenerateReports
 
     Private Sub SuperAdminGenerateReports_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
         ' Use BeginInvoke to ensure form is fully laid out
+        ' Multiple invocations ensure it happens after layout is complete
         Me.BeginInvoke(New Action(AddressOf CenterGroupBoxes))
+        Me.BeginInvoke(New Action(AddressOf CenterGroupBoxes))
+    End Sub
+
+    Private Sub SuperAdminGenerateReports_VisibleChanged(sender As Object, e As EventArgs) Handles MyBase.VisibleChanged
+        If Me.Visible Then
+            ' Center when form becomes visible (important for embedded forms)
+            ' Use multiple BeginInvoke to ensure it happens after layout
+            Me.BeginInvoke(New Action(AddressOf CenterGroupBoxes))
+            Me.BeginInvoke(New Action(AddressOf CenterGroupBoxes))
+        End If
     End Sub
 
     Private Sub SuperAdminGenerateReports_ResizeEnd(sender As Object, e As EventArgs) Handles MyBase.ResizeEnd
@@ -195,11 +207,25 @@ Public Class SuperAdminGenerateReports
     Private Sub CenterGroupBoxes()
         If pnlMainContent Is Nothing Then Return
 
-        ' Always use the panel's client size - this accounts for sidebar when embedded
-        ' When embedded, the form is docked in pnlSuperAdminMainContent which excludes the sidebar
-        ' When not embedded, pnlMainContent fills the form, so it's the same
-        Dim panelWidth As Integer = pnlMainContent.ClientSize.Width
-        Dim panelHeight As Integer = pnlMainContent.ClientSize.Height
+        ' Get the correct width based on whether form is embedded
+        ' When embedded: form is docked in pnlSuperAdminMainContent (excludes 400px sidebar)
+        ' When not embedded: form fills screen, pnlMainContent fills form
+        Dim panelWidth As Integer
+        Dim panelHeight As Integer
+        
+        If IsEmbedded Then
+            ' When embedded, the form itself is the available area (already excludes sidebar)
+            panelWidth = Me.ClientSize.Width
+            panelHeight = Me.ClientSize.Height
+        Else
+            ' When not embedded, use panel size
+            panelWidth = pnlMainContent.ClientSize.Width
+            panelHeight = pnlMainContent.ClientSize.Height
+        End If
+        
+        ' Ensure we have valid dimensions
+        If panelWidth <= 0 Then panelWidth = Me.ClientSize.Width
+        If panelHeight <= 0 Then panelHeight = Me.ClientSize.Height
 
         ' GroupBox dimensions - responsive to panel width with max width
         Dim maxGroupBoxWidth As Integer = 1200

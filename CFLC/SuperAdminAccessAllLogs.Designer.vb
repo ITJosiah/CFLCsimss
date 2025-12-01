@@ -40,7 +40,7 @@ Partial Class SuperAdminAccessAllLogs
         Me.pnlMainContent.Controls.Add(Me.lblTitle)
         Me.pnlMainContent.Dock = System.Windows.Forms.DockStyle.Fill
         Me.pnlMainContent.Location = New System.Drawing.Point(0, 0)
-        Me.pnlMainContent.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.pnlMainContent.Margin = New System.Windows.Forms.Padding(2)
         Me.pnlMainContent.Name = "pnlMainContent"
         Me.pnlMainContent.Size = New System.Drawing.Size(1029, 488)
         Me.pnlMainContent.TabIndex = 0
@@ -49,13 +49,13 @@ Partial Class SuperAdminAccessAllLogs
         '
         Me.dgvLogs.AllowUserToAddRows = False
         Me.dgvLogs.AllowUserToDeleteRows = False
-        Me.dgvLogs.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.dgvLogs.Anchor = System.Windows.Forms.AnchorStyles.Right
         Me.dgvLogs.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.dgvLogs.BackgroundColor = System.Drawing.Color.White
         Me.dgvLogs.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.dgvLogs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvLogs.Location = New System.Drawing.Point(139, 138)
-        Me.dgvLogs.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.dgvLogs.Margin = New System.Windows.Forms.Padding(2)
         Me.dgvLogs.Name = "dgvLogs"
         Me.dgvLogs.ReadOnly = True
         Me.dgvLogs.RowHeadersVisible = False
@@ -71,7 +71,7 @@ Partial Class SuperAdminAccessAllLogs
         Me.txtbxSearchLogs.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtbxSearchLogs.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtbxSearchLogs.Location = New System.Drawing.Point(225, 98)
-        Me.txtbxSearchLogs.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.txtbxSearchLogs.Margin = New System.Windows.Forms.Padding(2)
         Me.txtbxSearchLogs.Name = "txtbxSearchLogs"
         Me.txtbxSearchLogs.Size = New System.Drawing.Size(226, 23)
         Me.txtbxSearchLogs.TabIndex = 2
@@ -108,7 +108,7 @@ Partial Class SuperAdminAccessAllLogs
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1029, 488)
         Me.Controls.Add(Me.pnlMainContent)
-        Me.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.Margin = New System.Windows.Forms.Padding(2)
         Me.MinimumSize = New System.Drawing.Size(800, 400)
         Me.Name = "SuperAdminAccessAllLogs"
         Me.Text = "Access All Logs"
