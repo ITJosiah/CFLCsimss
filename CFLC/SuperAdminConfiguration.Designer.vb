@@ -22,6 +22,7 @@ Partial Class SuperAdminConfiguration
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.pnlSidebar = New System.Windows.Forms.Panel()
         Me.pnlMainContent = New System.Windows.Forms.Panel()
         Me.btnSave = New System.Windows.Forms.Button()
         Me.txtbxDatabase = New System.Windows.Forms.TextBox()
@@ -33,8 +34,18 @@ Partial Class SuperAdminConfiguration
         Me.txtbxServer = New System.Windows.Forms.TextBox()
         Me.lblServer = New System.Windows.Forms.Label()
         Me.lblTitle = New System.Windows.Forms.Label()
+        Me.pnlSidebar.SuspendLayout()
         Me.pnlMainContent.SuspendLayout()
         Me.SuspendLayout()
+        '
+        'pnlSidebar
+        '
+        Me.pnlSidebar.BackColor = System.Drawing.Color.FromArgb(CType(CType(40, Byte), Integer), CType(CType(130, Byte), Integer), CType(CType(61, Byte), Integer))
+        Me.pnlSidebar.Dock = System.Windows.Forms.DockStyle.Left
+        Me.pnlSidebar.Location = New System.Drawing.Point(0, 0)
+        Me.pnlSidebar.Name = "pnlSidebar"
+        Me.pnlSidebar.Size = New System.Drawing.Size(300, 600)
+        Me.pnlSidebar.TabIndex = 0
         '
         'pnlMainContent
         '
@@ -50,10 +61,10 @@ Partial Class SuperAdminConfiguration
         Me.pnlMainContent.Controls.Add(Me.lblServer)
         Me.pnlMainContent.Controls.Add(Me.lblTitle)
         Me.pnlMainContent.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.pnlMainContent.Location = New System.Drawing.Point(0, 0)
+        Me.pnlMainContent.Location = New System.Drawing.Point(300, 0)
         Me.pnlMainContent.Name = "pnlMainContent"
-        Me.pnlMainContent.Size = New System.Drawing.Size(900, 600)
-        Me.pnlMainContent.TabIndex = 0
+        Me.pnlMainContent.Size = New System.Drawing.Size(600, 600)
+        Me.pnlMainContent.TabIndex = 1
         '
         'lblTitle
         '
@@ -177,15 +188,18 @@ Partial Class SuperAdminConfiguration
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(900, 600)
         Me.Controls.Add(Me.pnlMainContent)
+        Me.Controls.Add(Me.pnlSidebar)
         Me.MinimumSize = New System.Drawing.Size(800, 500)
         Me.Name = "SuperAdminConfiguration"
         Me.Text = "System Configuration"
+        Me.pnlSidebar.ResumeLayout(False)
         Me.pnlMainContent.ResumeLayout(False)
         Me.pnlMainContent.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
 
+    Friend WithEvents pnlSidebar As Panel
     Friend WithEvents pnlMainContent As Panel
     Friend WithEvents lblTitle As Label
     Friend WithEvents lblServer As Label

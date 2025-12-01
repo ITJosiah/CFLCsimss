@@ -91,7 +91,7 @@ Partial Class SuperAdminGenerateReports
         Me.pnlSidebar.Dock = System.Windows.Forms.DockStyle.Left
         Me.pnlSidebar.Location = New System.Drawing.Point(0, 0)
         Me.pnlSidebar.Name = "pnlSidebar"
-        Me.pnlSidebar.Size = New System.Drawing.Size(0, 960)
+        Me.pnlSidebar.Size = New System.Drawing.Size(300, 960)
         Me.pnlSidebar.TabIndex = 12
         '
         'pnlMainContent
@@ -105,9 +105,9 @@ Partial Class SuperAdminGenerateReports
         Me.pnlMainContent.Controls.Add(Me.grpStudents)
         Me.pnlMainContent.Controls.Add(Me.PictureBox1)
         Me.pnlMainContent.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.pnlMainContent.Location = New System.Drawing.Point(0, 0)
+        Me.pnlMainContent.Location = New System.Drawing.Point(300, 0)
         Me.pnlMainContent.Name = "pnlMainContent"
-        Me.pnlMainContent.Size = New System.Drawing.Size(1443, 960)
+        Me.pnlMainContent.Size = New System.Drawing.Size(1143, 960)
         Me.pnlMainContent.TabIndex = 13
         '
         'grpStudents

@@ -62,24 +62,17 @@ Public Class SuperAdminAccessAllLogs
         ' Wait for form to be fully loaded
         Application.DoEvents()
         
-        ' Get the correct width based on whether form is embedded
-        ' When embedded: form is docked in pnlSuperAdminMainContent (excludes 400px sidebar)
-        ' When not embedded: form fills screen, pnlMainContent fills form
-        Dim panelWidth As Integer
-        Dim panelHeight As Integer
-        
-        If IsEmbedded Then
-            ' When embedded, the form itself is the available area (already excludes sidebar)
-            panelWidth = Me.ClientSize.Width
-            panelHeight = Me.ClientSize.Height
-        Else
-            ' When not embedded, use panel size
-            panelWidth = pnlMainContent.ClientSize.Width
-            panelHeight = pnlMainContent.ClientSize.Height
-        End If
+        ' Always use pnlMainContent width - it automatically excludes the sidebar (400px)
+        ' pnlMainContent is docked to fill, so it's the available area after sidebar
+        Dim panelWidth As Integer = pnlMainContent.ClientSize.Width
+        Dim panelHeight As Integer = pnlMainContent.ClientSize.Height
         
         ' Ensure we have valid dimensions
-        If panelWidth <= 0 Then panelWidth = Me.ClientSize.Width
+        If panelWidth <= 0 Then
+            ' Fallback: if panel width is invalid, calculate from form width minus sidebar
+            Dim sidebarWidth As Integer = If(pnlSidebar IsNot Nothing, pnlSidebar.Width, 300)
+            panelWidth = Math.Max(100, Me.ClientSize.Width - sidebarWidth)
+        End If
         If panelHeight <= 0 Then panelHeight = Me.ClientSize.Height
 
         ' Center title

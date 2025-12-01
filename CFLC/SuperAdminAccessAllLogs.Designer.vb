@@ -22,14 +22,26 @@ Partial Class SuperAdminAccessAllLogs
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.pnlSidebar = New System.Windows.Forms.Panel()
         Me.pnlMainContent = New System.Windows.Forms.Panel()
         Me.dgvLogs = New System.Windows.Forms.DataGridView()
         Me.txtbxSearchLogs = New System.Windows.Forms.TextBox()
         Me.lblSearchLogs = New System.Windows.Forms.Label()
         Me.lblTitle = New System.Windows.Forms.Label()
+        Me.pnlSidebar.SuspendLayout()
         Me.pnlMainContent.SuspendLayout()
         CType(Me.dgvLogs, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
+        '
+        'pnlSidebar
+        '
+        Me.pnlSidebar.BackColor = System.Drawing.Color.FromArgb(CType(CType(40, Byte), Integer), CType(CType(130, Byte), Integer), CType(CType(61, Byte), Integer))
+        Me.pnlSidebar.Dock = System.Windows.Forms.DockStyle.Left
+        Me.pnlSidebar.Location = New System.Drawing.Point(0, 0)
+        Me.pnlSidebar.Margin = New System.Windows.Forms.Padding(2)
+        Me.pnlSidebar.Name = "pnlSidebar"
+        Me.pnlSidebar.Size = New System.Drawing.Size(300, 488)
+        Me.pnlSidebar.TabIndex = 0
         '
         'pnlMainContent
         '
@@ -39,16 +51,17 @@ Partial Class SuperAdminAccessAllLogs
         Me.pnlMainContent.Controls.Add(Me.lblSearchLogs)
         Me.pnlMainContent.Controls.Add(Me.lblTitle)
         Me.pnlMainContent.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.pnlMainContent.Location = New System.Drawing.Point(0, 0)
+        Me.pnlMainContent.Location = New System.Drawing.Point(300, 0)
         Me.pnlMainContent.Margin = New System.Windows.Forms.Padding(2)
         Me.pnlMainContent.Name = "pnlMainContent"
-        Me.pnlMainContent.Size = New System.Drawing.Size(1029, 488)
-        Me.pnlMainContent.TabIndex = 0
+        Me.pnlMainContent.Size = New System.Drawing.Size(729, 488)
+        Me.pnlMainContent.TabIndex = 1
         '
         'dgvLogs
         '
         Me.dgvLogs.AllowUserToAddRows = False
         Me.dgvLogs.AllowUserToDeleteRows = False
+        Me.dgvLogs.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.dgvLogs.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.dgvLogs.BackgroundColor = System.Drawing.Color.White
         Me.dgvLogs.BorderStyle = System.Windows.Forms.BorderStyle.None
@@ -107,10 +120,12 @@ Partial Class SuperAdminAccessAllLogs
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1029, 488)
         Me.Controls.Add(Me.pnlMainContent)
+        Me.Controls.Add(Me.pnlSidebar)
         Me.Margin = New System.Windows.Forms.Padding(2)
         Me.MinimumSize = New System.Drawing.Size(800, 400)
         Me.Name = "SuperAdminAccessAllLogs"
         Me.Text = "Access All Logs"
+        Me.pnlSidebar.ResumeLayout(False)
         Me.pnlMainContent.ResumeLayout(False)
         Me.pnlMainContent.PerformLayout()
         CType(Me.dgvLogs, System.ComponentModel.ISupportInitialize).EndInit()
@@ -118,6 +133,7 @@ Partial Class SuperAdminAccessAllLogs
 
     End Sub
 
+    Friend WithEvents pnlSidebar As Panel
     Friend WithEvents pnlMainContent As Panel
     Friend WithEvents lblTitle As Label
     Friend WithEvents lblSearchLogs As Label
