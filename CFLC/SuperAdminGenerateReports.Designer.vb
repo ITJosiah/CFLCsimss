@@ -112,9 +112,7 @@ Partial Class SuperAdminGenerateReports
         '
         'grpStudents
         '
-        Me.grpStudents.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.grpStudents.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.grpStudents.BackColor = System.Drawing.Color.White
         Me.grpStudents.Controls.Add(Me.btnSuperAdminGenerateStudents)
         Me.grpStudents.Controls.Add(Me.lblGradeLevel)
@@ -211,9 +209,7 @@ Partial Class SuperAdminGenerateReports
         '
         'grpEnrollment
         '
-        Me.grpEnrollment.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.grpEnrollment.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.grpEnrollment.BackColor = System.Drawing.Color.White
         Me.grpEnrollment.Controls.Add(Me.btnSuperAdminGenerateEnrollmentSummary)
         Me.grpEnrollment.Controls.Add(Me.lblEnrollmentView)
@@ -310,9 +306,7 @@ Partial Class SuperAdminGenerateReports
         '
         'grpSections
         '
-        Me.grpSections.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.grpSections.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.grpSections.BackColor = System.Drawing.Color.White
         Me.grpSections.Controls.Add(Me.btnSuperAdminGenerateSections)
         Me.grpSections.Controls.Add(Me.lblSectionView)
@@ -409,9 +403,7 @@ Partial Class SuperAdminGenerateReports
         '
         'grpSubjects
         '
-        Me.grpSubjects.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.grpSubjects.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.grpSubjects.BackColor = System.Drawing.Color.White
         Me.grpSubjects.Controls.Add(Me.btnSuperAdminGenerateSubjects)
         Me.grpSubjects.Controls.Add(Me.lblSubjectView)
@@ -508,9 +500,7 @@ Partial Class SuperAdminGenerateReports
         '
         'grpTeacherReports
         '
-        Me.grpTeacherReports.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.grpTeacherReports.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.grpTeacherReports.BackColor = System.Drawing.Color.White
         Me.grpTeacherReports.Controls.Add(Me.grpTeacherSubjectLoad)
         Me.grpTeacherReports.Controls.Add(Me.grpTeacherSectionStudents)
@@ -563,9 +553,7 @@ Partial Class SuperAdminGenerateReports
         '
         'grpTeacherSectionStudents
         '
-        Me.grpTeacherSectionStudents.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.grpTeacherSectionStudents.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.grpTeacherSectionStudents.BackColor = System.Drawing.Color.White
         Me.grpTeacherSectionStudents.Controls.Add(Me.btnSuperAdminGenerateTeacherStudents)
         Me.grpTeacherSectionStudents.Controls.Add(Me.lblTeacherGender)
@@ -639,9 +627,7 @@ Partial Class SuperAdminGenerateReports
         '
         'grpTeacherSubjectLoad
         '
-        Me.grpTeacherSubjectLoad.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.grpTeacherSubjectLoad.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.grpTeacherSubjectLoad.BackColor = System.Drawing.Color.White
         Me.grpTeacherSubjectLoad.Controls.Add(Me.btnSuperAdminGenerateTeacherSubjectLoad)
         Me.grpTeacherSubjectLoad.Controls.Add(Me.lblTeacherSubjectLoadYear)

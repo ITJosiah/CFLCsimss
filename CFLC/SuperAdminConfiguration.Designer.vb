@@ -57,6 +57,7 @@ Partial Class SuperAdminConfiguration
         '
         'lblTitle
         '
+        Me.lblTitle.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.lblTitle.AutoSize = True
         Me.lblTitle.Font = New System.Drawing.Font("Microsoft Sans Serif", 20.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblTitle.ForeColor = System.Drawing.Color.White
@@ -68,6 +69,7 @@ Partial Class SuperAdminConfiguration
         '
         'lblServer
         '
+        Me.lblServer.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.lblServer.AutoSize = True
         Me.lblServer.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblServer.ForeColor = System.Drawing.Color.White
@@ -79,6 +81,7 @@ Partial Class SuperAdminConfiguration
         '
         'txtbxServer
         '
+        Me.txtbxServer.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.txtbxServer.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtbxServer.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtbxServer.Location = New System.Drawing.Point(300, 148)
@@ -88,6 +91,7 @@ Partial Class SuperAdminConfiguration
         '
         'lblUID
         '
+        Me.lblUID.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.lblUID.AutoSize = True
         Me.lblUID.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblUID.ForeColor = System.Drawing.Color.White
@@ -99,6 +103,7 @@ Partial Class SuperAdminConfiguration
         '
         'txtbxUID
         '
+        Me.txtbxUID.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.txtbxUID.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtbxUID.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtbxUID.Location = New System.Drawing.Point(300, 198)
@@ -108,6 +113,7 @@ Partial Class SuperAdminConfiguration
         '
         'lblPassword
         '
+        Me.lblPassword.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.lblPassword.AutoSize = True
         Me.lblPassword.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblPassword.ForeColor = System.Drawing.Color.White
@@ -119,6 +125,7 @@ Partial Class SuperAdminConfiguration
         '
         'txtbxPassword
         '
+        Me.txtbxPassword.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.txtbxPassword.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtbxPassword.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtbxPassword.Location = New System.Drawing.Point(300, 248)
@@ -129,6 +136,7 @@ Partial Class SuperAdminConfiguration
         '
         'lblDatabase
         '
+        Me.lblDatabase.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.lblDatabase.AutoSize = True
         Me.lblDatabase.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblDatabase.ForeColor = System.Drawing.Color.White
@@ -140,6 +148,7 @@ Partial Class SuperAdminConfiguration
         '
         'txtbxDatabase
         '
+        Me.txtbxDatabase.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.txtbxDatabase.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtbxDatabase.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtbxDatabase.Location = New System.Drawing.Point(300, 298)
@@ -149,6 +158,7 @@ Partial Class SuperAdminConfiguration
         '
         'btnSave
         '
+        Me.btnSave.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.btnSave.BackColor = System.Drawing.Color.FromArgb(CType(CType(108, Byte), Integer), CType(CType(117, Byte), Integer), CType(CType(125, Byte), Integer))
         Me.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnSave.FlatAppearance.BorderSize = 0

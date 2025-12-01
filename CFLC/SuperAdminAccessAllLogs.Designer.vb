@@ -67,6 +67,7 @@ Partial Class SuperAdminAccessAllLogs
         '
         'txtbxSearchLogs
         '
+        Me.txtbxSearchLogs.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.txtbxSearchLogs.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtbxSearchLogs.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtbxSearchLogs.Location = New System.Drawing.Point(225, 98)
@@ -77,6 +78,7 @@ Partial Class SuperAdminAccessAllLogs
         '
         'lblSearchLogs
         '
+        Me.lblSearchLogs.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.lblSearchLogs.AutoSize = True
         Me.lblSearchLogs.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblSearchLogs.ForeColor = System.Drawing.Color.White
@@ -89,6 +91,7 @@ Partial Class SuperAdminAccessAllLogs
         '
         'lblTitle
         '
+        Me.lblTitle.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.lblTitle.AutoSize = True
         Me.lblTitle.Font = New System.Drawing.Font("Microsoft Sans Serif", 20.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblTitle.ForeColor = System.Drawing.Color.White
