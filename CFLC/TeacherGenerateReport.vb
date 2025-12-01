@@ -86,39 +86,74 @@ Public Class TeacherGenerateReport
     End Sub
 
     Private Sub TeacherGenerateReport_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
-        CenterGroupBoxes()
+        ' Use BeginInvoke to ensure form is fully laid out
+        ' Multiple invocations ensure it happens after layout is complete
+        Me.BeginInvoke(New Action(AddressOf CenterGroupBoxes))
+        Me.BeginInvoke(New Action(AddressOf CenterGroupBoxes))
+    End Sub
+
+    Private Sub TeacherGenerateReport_VisibleChanged(sender As Object, e As EventArgs) Handles MyBase.VisibleChanged
+        If Me.Visible Then
+            ' Center when form becomes visible (important for embedded forms)
+            ' Use multiple BeginInvoke to ensure it happens after layout
+            Me.BeginInvoke(New Action(AddressOf CenterGroupBoxes))
+            Me.BeginInvoke(New Action(AddressOf CenterGroupBoxes))
+        End If
     End Sub
 
     Private Sub CenterGroupBoxes()
         If pnlMainContent Is Nothing Then Return
 
+        ' Wait for form to be fully loaded
+        Application.DoEvents()
+        
+        ' Always use pnlMainContent width - it automatically excludes the sidebar (300px)
+        ' pnlMainContent is docked to fill, so it's the available area after sidebar
         Dim panelWidth As Integer = pnlMainContent.ClientSize.Width
         Dim panelHeight As Integer = pnlMainContent.ClientSize.Height
+        
+        ' Ensure we have valid dimensions
+        If panelWidth <= 0 Then
+            ' Fallback: if panel width is invalid, calculate from form width minus sidebar
+            Dim sidebarWidth As Integer = If(pnlSidebar IsNot Nothing, pnlSidebar.Width, 300)
+            panelWidth = Math.Max(100, Me.ClientSize.Width - sidebarWidth)
+        End If
+        If panelHeight <= 0 Then panelHeight = Me.ClientSize.Height
 
-        Dim groupBoxWidth As Integer = 1200
+        ' GroupBox dimensions - now responsive
+        Dim minGroupBoxWidth As Integer = 800
+        Dim maxGroupBoxWidth As Integer = 1200
+        Dim groupBoxWidth As Integer = Math.Min(maxGroupBoxWidth, Math.Max(minGroupBoxWidth, panelWidth - 100)) ' 100 for padding
         Dim groupBoxHeight As Integer = 200
         Dim spacing As Integer = 20
 
         ' Calculate horizontal center
-        Dim centerX As Integer = (panelWidth - groupBoxWidth) \ 2
+        Dim centerX As Integer = Math.Max(0, (panelWidth - groupBoxWidth) \ 2)
 
         ' Calculate total height of 2 GroupBoxes with spacing
         Dim totalHeight As Integer = (groupBoxHeight * 2) + spacing
 
         ' Calculate vertical center
-        Dim startY As Integer = (panelHeight - totalHeight) \ 2
+        Dim startY As Integer = Math.Max(0, (panelHeight - totalHeight) \ 2)
 
         ' Position each GroupBox
         If grpSectionStudents IsNot Nothing Then
+            grpSectionStudents.Size = New Size(groupBoxWidth, groupBoxHeight)
             grpSectionStudents.Location = New Point(centerX, startY)
         End If
 
         If grpSubjectLoad IsNot Nothing Then
+            grpSubjectLoad.Size = New Size(groupBoxWidth, groupBoxHeight)
             grpSubjectLoad.Location = New Point(centerX, startY + groupBoxHeight + spacing)
         End If
     End Sub
 
     Private Sub TeacherGenerateReport_Resize(sender As Object, e As EventArgs) Handles MyBase.Resize
+        ' Throttle resize events - only center after resize ends
+        ' This prevents excessive calculations during resizing
+    End Sub
+
+    Private Sub TeacherGenerateReport_ResizeEnd(sender As Object, e As EventArgs) Handles MyBase.ResizeEnd
         CenterGroupBoxes()
     End Sub
 

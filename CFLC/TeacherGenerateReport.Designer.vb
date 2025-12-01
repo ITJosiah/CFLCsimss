@@ -50,7 +50,7 @@ Partial Class TeacherGenerateReport
         Me.pnlSidebar.Dock = System.Windows.Forms.DockStyle.Left
         Me.pnlSidebar.Location = New System.Drawing.Point(0, 0)
         Me.pnlSidebar.Name = "pnlSidebar"
-        Me.pnlSidebar.Size = New System.Drawing.Size(0, 960)
+        Me.pnlSidebar.Size = New System.Drawing.Size(300, 960)
         Me.pnlSidebar.TabIndex = 12
         '
         'pnlMainContent
@@ -61,16 +61,14 @@ Partial Class TeacherGenerateReport
         Me.pnlMainContent.Controls.Add(Me.grpSectionStudents)
         Me.pnlMainContent.Controls.Add(Me.PictureBox1)
         Me.pnlMainContent.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.pnlMainContent.Location = New System.Drawing.Point(0, 0)
+        Me.pnlMainContent.Location = New System.Drawing.Point(300, 0)
         Me.pnlMainContent.Name = "pnlMainContent"
-        Me.pnlMainContent.Size = New System.Drawing.Size(1443, 960)
+        Me.pnlMainContent.Size = New System.Drawing.Size(1143, 960)
         Me.pnlMainContent.TabIndex = 13
         '
         'grpSectionStudents
         '
-        Me.grpSectionStudents.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.grpSectionStudents.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.grpSectionStudents.BackColor = System.Drawing.Color.White
         Me.grpSectionStudents.Controls.Add(Me.btnTeacherGenerateStudents)
         Me.grpSectionStudents.Controls.Add(Me.lblGender)
@@ -144,9 +142,7 @@ Partial Class TeacherGenerateReport
         '
         'grpSubjectLoad
         '
-        Me.grpSubjectLoad.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.grpSubjectLoad.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.grpSubjectLoad.BackColor = System.Drawing.Color.White
         Me.grpSubjectLoad.Controls.Add(Me.btnTeacherGenerateSubjectLoad)
         Me.grpSubjectLoad.Controls.Add(Me.lblSubjectLoadYear)
