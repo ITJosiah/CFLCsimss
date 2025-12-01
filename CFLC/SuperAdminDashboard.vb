@@ -31,6 +31,9 @@ Public Class SuperAdminDashboard
         
         ' Initialize dashboard data
         RefreshDashboardData()
+        
+        ' Style all dashboard panel labels to white
+        StyleDashboardLabels()
 
     End Sub
 
@@ -80,6 +83,51 @@ Public Class SuperAdminDashboard
         btnLogout.FlatAppearance.MouseOverBackColor = Color.DarkRed ' Darker red on hover
         btnLogout.Font = New Font(btnLogout.Font.FontFamily, 12, FontStyle.Bold)
         btnLogout.TextAlign = ContentAlignment.MiddleCenter ' Center text for logout
+    End Sub
+    
+    Private Sub StyleDashboardLabels()
+        ' Style all labels on count panels to white
+        ' Student List Dashboard
+        If Label1 IsNot Nothing Then Label1.ForeColor = Color.White
+        If Label3 IsNot Nothing Then Label3.ForeColor = Color.White
+        If Label4 IsNot Nothing Then Label4.ForeColor = Color.White
+        If lblSuperAdminStudentListDashboard IsNot Nothing Then lblSuperAdminStudentListDashboard.ForeColor = Color.White
+        
+        ' Teacher List Dashboard
+        If Label5 IsNot Nothing Then Label5.ForeColor = Color.White
+        If Label6 IsNot Nothing Then Label6.ForeColor = Color.White
+        If Label9 IsNot Nothing Then Label9.ForeColor = Color.White
+        If lblSuperAdminTeacherListDashboard IsNot Nothing Then lblSuperAdminTeacherListDashboard.ForeColor = Color.White
+        
+        ' Subject List Dashboard
+        If Label2 IsNot Nothing Then Label2.ForeColor = Color.White
+        If Label7 IsNot Nothing Then Label7.ForeColor = Color.White
+        If lblNameSubjectListDashboard IsNot Nothing Then lblNameSubjectListDashboard.ForeColor = Color.White
+        If lblSuperAdminSubjectListDashboard IsNot Nothing Then lblSuperAdminSubjectListDashboard.ForeColor = Color.White
+        
+        ' Section List Dashboard
+        If Label8 IsNot Nothing Then Label8.ForeColor = Color.White
+        If Label10 IsNot Nothing Then Label10.ForeColor = Color.White
+        If Label12 IsNot Nothing Then Label12.ForeColor = Color.White
+        If lblSuperAdminSectionList IsNot Nothing Then lblSuperAdminSectionList.ForeColor = Color.White
+        
+        ' Enrollment List Dashboard
+        If Label13 IsNot Nothing Then Label13.ForeColor = Color.White
+        If Label14 IsNot Nothing Then Label14.ForeColor = Color.White
+        If Label16 IsNot Nothing Then Label16.ForeColor = Color.White
+        If lblSuperAdminEnrollmentList IsNot Nothing Then lblSuperAdminEnrollmentList.ForeColor = Color.White
+        
+        ' Accounts List Dashboard
+        If Label11 IsNot Nothing Then Label11.ForeColor = Color.White
+        If Label15 IsNot Nothing Then Label15.ForeColor = Color.White
+        If Label18 IsNot Nothing Then Label18.ForeColor = Color.White
+        If lblSuperAdminAccountsList IsNot Nothing Then lblSuperAdminAccountsList.ForeColor = Color.White
+        
+        ' Teacher Accounts List Dashboard
+        If Label17 IsNot Nothing Then Label17.ForeColor = Color.White
+        If Label19 IsNot Nothing Then Label19.ForeColor = Color.White
+        If Label21 IsNot Nothing Then Label21.ForeColor = Color.White
+        If lblSuperAdminTeacherAccountsList IsNot Nothing Then lblSuperAdminTeacherAccountsList.ForeColor = Color.White
     End Sub
 
 
@@ -307,6 +355,9 @@ Public Class SuperAdminDashboard
         
         ' Refresh dashboard data
         RefreshDashboardData()
+        
+        ' Style all dashboard panel labels to white
+        StyleDashboardLabels()
     End Sub
 
     Private Sub btnSuperAdminManageAdmin_Click(sender As Object, e As EventArgs) Handles btnSuperAdminManageAdmin.Click

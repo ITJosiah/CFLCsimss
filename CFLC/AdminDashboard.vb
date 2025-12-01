@@ -41,6 +41,9 @@ Public Class AdminDashboard
 
         ' Add event handler for ComboBox selection change
         AddHandler ComboBoxEnrollmentPerYearDashboard.SelectedIndexChanged, AddressOf ComboBoxEnrollmentPerYearDashboard_SelectedIndexChanged
+        
+        ' Style all dashboard panel labels to white
+        StyleDashboardLabels()
     End Sub
 
     Private Sub CenterLogo()
@@ -89,6 +92,27 @@ Public Class AdminDashboard
         btnLogout.FlatAppearance.MouseOverBackColor = Color.DarkRed ' Darker red on hover
         btnLogout.Font = New Font(btnLogout.Font.FontFamily, 12, FontStyle.Bold)
         btnLogout.TextAlign = ContentAlignment.MiddleCenter ' Center text for logout
+    End Sub
+    
+    Private Sub StyleDashboardLabels()
+        ' Style all labels on count panels to white
+        ' Student List Dashboard
+        If Label1 IsNot Nothing Then Label1.ForeColor = Color.White
+        If Label3 IsNot Nothing Then Label3.ForeColor = Color.White
+        If Label4 IsNot Nothing Then Label4.ForeColor = Color.White
+        If lblStudentListDashboard IsNot Nothing Then lblStudentListDashboard.ForeColor = Color.White
+        
+        ' Teacher List Dashboard
+        If Label5 IsNot Nothing Then Label5.ForeColor = Color.White
+        If Label6 IsNot Nothing Then Label6.ForeColor = Color.White
+        If Label9 IsNot Nothing Then Label9.ForeColor = Color.White
+        If lblTeacherListDashboard IsNot Nothing Then lblTeacherListDashboard.ForeColor = Color.White
+        
+        ' Subject List Dashboard
+        If Label2 IsNot Nothing Then Label2.ForeColor = Color.White
+        If Label7 IsNot Nothing Then Label7.ForeColor = Color.White
+        If lblNameSubjectListDashboard IsNot Nothing Then lblNameSubjectListDashboard.ForeColor = Color.White
+        If lblSubjectListDashboard IsNot Nothing Then lblSubjectListDashboard.ForeColor = Color.White
     End Sub
 
 
@@ -342,6 +366,9 @@ Public Class AdminDashboard
         UpdateGenderChartFromDatabase()
         UpdateMunicipalityChartFromDatabase()
         UpdateEnrollmentPerYearChartFromDatabase()
+        
+        ' Style all dashboard panel labels to white
+        StyleDashboardLabels()
 
         ' Refresh year ComboBox
         PopulateYearComboBox()
@@ -586,6 +613,7 @@ Public Class AdminDashboard
                     malePoint.Color = Color.Green
                     malePoint.LegendText = "Male"
                     malePoint.Label = "Male: #VALY"
+                    malePoint.LabelForeColor = Color.White
                     series.Points.Add(malePoint)
                 End If
 
@@ -594,6 +622,7 @@ Public Class AdminDashboard
                     femalePoint.Color = Color.LightGreen
                     femalePoint.LegendText = "Female"
                     femalePoint.Label = "Female: #VALY"
+                    femalePoint.LabelForeColor = Color.White
                     series.Points.Add(femalePoint)
                 End If
 
@@ -1053,9 +1082,9 @@ Public Class AdminDashboard
                 series("PieLineColor") = "Black"
                 ' Disable SmartLabelStyle to allow manual radial alignment
                 series.SmartLabelStyle.Enabled = False
-                ' Set label font and color - transparent background, black text
+                ' Set label font and color - transparent background, white text
                 series.Font = New Font("Segoe UI", 10, FontStyle.Bold)
-                series.LabelForeColor = Color.Black
+                series.LabelForeColor = Color.White
                 series.LabelBackColor = Color.Transparent
 
                 ' Add data points for each municipality
@@ -1069,7 +1098,7 @@ Public Class AdminDashboard
                         point.Color = colors(colorIndex Mod colors.Length)
                         point.LegendText = kvp.Key
                         point.Label = kvp.Key & ": #VALY"
-                        point.LabelForeColor = Color.Black
+                        point.LabelForeColor = Color.White
                         point.LabelBackColor = Color.Transparent
                         ' Don't set LabelAngle - let it align automatically with the pie slice (radial)
                         series.Points.Add(point)
@@ -1095,9 +1124,9 @@ Public Class AdminDashboard
                 chartControl.BackColor = Color.FromArgb(40, 130, 61) ' Lighter green background
                 chartArea.BackColor = Color.Transparent
 
-                ' Force label colors to be applied after series is added - transparent background, black text
+                ' Force label colors to be applied after series is added - transparent background, white text
                 For Each point As DataPoint In series.Points
-                    point.LabelForeColor = Color.Black
+                    point.LabelForeColor = Color.White
                     point.LabelBackColor = Color.Transparent
                 Next
 
@@ -1152,7 +1181,7 @@ Public Class AdminDashboard
                 Dim series As New Series("EnrollmentSeries")
                 series.ChartType = SeriesChartType.Column
                 series.IsValueShownAsLabel = True          ' Show label inside bar
-                series.LabelForeColor = Color.Black        ' Label color for visibility
+                series.LabelForeColor = Color.White        ' Label color for visibility
                 series.Font = New Font("Segoe UI", 9, FontStyle.Bold)
                 series.LabelFormat = "#,##0"
                 series("LabelStyle") = "Bottom"            ' Center labels inside bars
@@ -1181,6 +1210,11 @@ Public Class AdminDashboard
                 chartArea.AxisY.Title = "Number of Enrollments"
                 chartArea.AxisX.Interval = 1
                 chartArea.AxisX.LabelStyle.Angle = 100
+                ' Set axis label colors to white
+                chartArea.AxisX.LabelStyle.ForeColor = Color.White
+                chartArea.AxisY.LabelStyle.ForeColor = Color.White
+                chartArea.AxisX.TitleForeColor = Color.White
+                chartArea.AxisY.TitleForeColor = Color.White
 
                 ' Hide chart if enrollment form is active (to prevent overlap)
                 If currentContent IsNot Nothing AndAlso TypeOf currentContent Is ManageEnrollmentForms Then

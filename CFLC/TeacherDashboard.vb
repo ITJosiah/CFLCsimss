@@ -31,6 +31,9 @@ Public Class TeacherDashboard
         
         ' Initialize dashboard data
         RefreshDashboardData()
+        
+        ' Style all dashboard panel labels to white
+        StyleDashboardLabels()
     End Sub
 
     Private Sub CenterLogo()
@@ -123,6 +126,15 @@ Public Class TeacherDashboard
         btnLogout.Font = New Font(btnLogout.Font.FontFamily, 12, FontStyle.Bold)
         btnLogout.TextAlign = ContentAlignment.MiddleCenter
     End Sub
+    
+    Private Sub StyleDashboardLabels()
+        ' Style all labels on count panels to white
+        ' Teacher Student List Dashboard
+        If Label1 IsNot Nothing Then Label1.ForeColor = Color.White
+        If Label3 IsNot Nothing Then Label3.ForeColor = Color.White
+        If Label4 IsNot Nothing Then Label4.ForeColor = Color.White
+        If lblTeacherStudentListDashboard IsNot Nothing Then lblTeacherStudentListDashboard.ForeColor = Color.White
+    End Sub
 
     Private Sub LoadContentForm(child As Form)
         ' Unsubscribe from previous TeacherViewStudents events
@@ -211,6 +223,9 @@ Public Class TeacherDashboard
         
         ' Refresh dashboard data from database
         RefreshDashboardData()
+        
+        ' Style all dashboard panel labels to white
+        StyleDashboardLabels()
     End Sub
 
     ' Utility: remove everything from pnlTeacherMainContent except the left sidebar
@@ -491,6 +506,18 @@ Public Class TeacherDashboard
                 series.ChartType = SeriesChartType.Pie
                 series.IsValueShownAsLabel = True
                 series.LabelFormat = "#,##0"
+                series.LabelForeColor = Color.White
+                series.Font = New Font("Segoe UI", 10, FontStyle.Bold)
+                
+                ' Add legend
+                chartControl.Legends.Clear()
+                Dim legend As New Legend("FourPSLegend")
+                legend.Docking = Docking.Bottom
+                legend.ForeColor = Color.White
+                legend.Font = New Font("Segoe UI", 10, FontStyle.Bold)
+                legend.BackColor = Color.Transparent
+                chartControl.Legends.Add(legend)
+                series.Legend = "FourPSLegend"
                 
                 ' Add data points
                 If with4PS > 0 Then
@@ -498,6 +525,7 @@ Public Class TeacherDashboard
                     point1.LegendText = "With 4PS"
                     point1.Color = Color.Green
                     point1.Label = "With 4PS: #VALY"
+                    point1.LabelForeColor = Color.White
                     series.Points.Add(point1)
                 End If
                 
@@ -506,6 +534,7 @@ Public Class TeacherDashboard
                     point2.LegendText = "No 4PS"
                     point2.Color = Color.LightGreen
                     point2.Label = "No 4PS: #VALY"
+                    point2.LabelForeColor = Color.White
                     series.Points.Add(point2)
                 End If
                 
@@ -534,6 +563,18 @@ Public Class TeacherDashboard
                 series.ChartType = SeriesChartType.Pie
                 series.IsValueShownAsLabel = True
                 series.LabelFormat = "#,##0"
+                series.LabelForeColor = Color.White
+                series.Font = New Font("Segoe UI", 10, FontStyle.Bold)
+                
+                ' Add legend
+                chartControl.Legends.Clear()
+                Dim legend As New Legend("IndigenousLegend")
+                legend.Docking = Docking.Bottom
+                legend.ForeColor = Color.White
+                legend.Font = New Font("Segoe UI", 10, FontStyle.Bold)
+                legend.BackColor = Color.Transparent
+                chartControl.Legends.Add(legend)
+                series.Legend = "IndigenousLegend"
                 
                 ' Add data points
                 If indigenous > 0 Then
@@ -541,6 +582,7 @@ Public Class TeacherDashboard
                     point1.LegendText = "Indigenous"
                     point1.Color = Color.Green
                     point1.Label = "Indigenous: #VALY"
+                    point1.LabelForeColor = Color.White
                     series.Points.Add(point1)
                 End If
                 
@@ -549,6 +591,7 @@ Public Class TeacherDashboard
                     point2.LegendText = "Not Indigenous"
                     point2.Color = Color.LightGreen
                     point2.Label = "Not Indigenous: #VALY"
+                    point2.LabelForeColor = Color.White
                     series.Points.Add(point2)
                 End If
                 
@@ -577,6 +620,18 @@ Public Class TeacherDashboard
                 series.ChartType = SeriesChartType.Pie
                 series.IsValueShownAsLabel = True
                 series.LabelFormat = "#,##0"
+                series.LabelForeColor = Color.White
+                series.Font = New Font("Segoe UI", 10, FontStyle.Bold)
+                
+                ' Add legend
+                chartControl.Legends.Clear()
+                Dim legend As New Legend("GenderLegend")
+                legend.Docking = Docking.Bottom
+                legend.ForeColor = Color.White
+                legend.Font = New Font("Segoe UI", 10, FontStyle.Bold)
+                legend.BackColor = Color.Transparent
+                chartControl.Legends.Add(legend)
+                series.Legend = "GenderLegend"
                 
                 ' Add data points with Green for Male and LightGreen for Female
                 If maleCount > 0 Then
@@ -584,6 +639,7 @@ Public Class TeacherDashboard
                     point1.LegendText = "Male"
                     point1.Color = Color.Green
                     point1.Label = "Male: #VALY"
+                    point1.LabelForeColor = Color.White
                     series.Points.Add(point1)
                 End If
                 
@@ -592,6 +648,7 @@ Public Class TeacherDashboard
                     point2.LegendText = "Female"
                     point2.Color = Color.LightGreen
                     point2.Label = "Female: #VALY"
+                    point2.LabelForeColor = Color.White
                     series.Points.Add(point2)
                 End If
                 
