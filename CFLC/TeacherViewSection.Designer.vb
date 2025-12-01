@@ -349,6 +349,7 @@ Partial Class TeacherViewSection
         Me.ClientSize = New System.Drawing.Size(1568, 824)
         Me.Controls.Add(Me.pnlManSecContent)
         Me.Controls.Add(Me.pnlTeacherSidebar)
+        Me.MinimumSize = New System.Drawing.Size(1024, 600)
         Me.Name = "TeacherViewSection"
         Me.Text = "TeacherViewSection"
         Me.pnlTeacherSidebar.ResumeLayout(False)

@@ -311,6 +311,7 @@ Partial Class SuperAdminManageAdminAccounts
         Me.ClientSize = New System.Drawing.Size(1733, 779)
         Me.Controls.Add(Me.pnlSuperAdminMainContent)
         Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.MinimumSize = New System.Drawing.Size(1024, 600)
         Me.Name = "SuperAdminManageAdminAccounts"
         Me.Text = "SuperAdminManageAdminAccounts"
         Me.pnlSuperAdminMainContent.ResumeLayout(False)

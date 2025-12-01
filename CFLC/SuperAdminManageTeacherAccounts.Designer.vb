@@ -355,6 +355,7 @@ Partial Class SuperAdminManageTeacherAccounts
         Me.Controls.Add(Me.pnlSuperAdminMainContent)
         Me.Controls.Add(Me.pnlTeacherSidebar)
         Me.Margin = New System.Windows.Forms.Padding(4)
+        Me.MinimumSize = New System.Drawing.Size(1024, 600)
         Me.Name = "SuperAdminManageTeacherAccounts"
         Me.Text = "SuperAdminManageTeacherAccounts"
         Me.pnlSuperAdminMainContent.ResumeLayout(False)

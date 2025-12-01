@@ -148,6 +148,7 @@ Partial Class LoginForm
         Me.Controls.Add(Me.lblUserID)
         Me.Controls.Add(Me.lblTitle1)
         Me.Controls.Add(Me.PictureBox1)
+        Me.MinimumSize = New System.Drawing.Size(800, 500)
         Me.Name = "LoginForm"
         Me.Text = "LoginForm"
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()

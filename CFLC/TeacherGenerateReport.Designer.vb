@@ -55,6 +55,7 @@ Partial Class TeacherGenerateReport
         '
         'pnlMainContent
         '
+        Me.pnlMainContent.AutoScroll = True
         Me.pnlMainContent.BackColor = System.Drawing.Color.FromArgb(CType(CType(7, Byte), Integer), CType(CType(77, Byte), Integer), CType(CType(39, Byte), Integer))
         Me.pnlMainContent.Controls.Add(Me.grpSubjectLoad)
         Me.pnlMainContent.Controls.Add(Me.grpSectionStudents)
@@ -67,6 +68,9 @@ Partial Class TeacherGenerateReport
         '
         'grpSectionStudents
         '
+        Me.grpSectionStudents.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.grpSectionStudents.BackColor = System.Drawing.Color.White
         Me.grpSectionStudents.Controls.Add(Me.btnTeacherGenerateStudents)
         Me.grpSectionStudents.Controls.Add(Me.lblGender)
@@ -75,6 +79,8 @@ Partial Class TeacherGenerateReport
         Me.grpSectionStudents.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.grpSectionStudents.ForeColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
         Me.grpSectionStudents.Location = New System.Drawing.Point(50, 20)
+        Me.grpSectionStudents.Margin = New System.Windows.Forms.Padding(50, 20, 50, 20)
+        Me.grpSectionStudents.MinimumSize = New System.Drawing.Size(800, 200)
         Me.grpSectionStudents.Name = "grpSectionStudents"
         Me.grpSectionStudents.Padding = New System.Windows.Forms.Padding(15, 10, 15, 15)
         Me.grpSectionStudents.Size = New System.Drawing.Size(1200, 200)
@@ -120,6 +126,9 @@ Partial Class TeacherGenerateReport
         '
         Me.dgvSectionStudents.AllowUserToAddRows = False
         Me.dgvSectionStudents.AllowUserToDeleteRows = False
+        Me.dgvSectionStudents.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.dgvSectionStudents.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.dgvSectionStudents.BackgroundColor = System.Drawing.Color.White
         Me.dgvSectionStudents.BorderStyle = System.Windows.Forms.BorderStyle.None
@@ -135,6 +144,9 @@ Partial Class TeacherGenerateReport
         '
         'grpSubjectLoad
         '
+        Me.grpSubjectLoad.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.grpSubjectLoad.BackColor = System.Drawing.Color.White
         Me.grpSubjectLoad.Controls.Add(Me.btnTeacherGenerateSubjectLoad)
         Me.grpSubjectLoad.Controls.Add(Me.lblSubjectLoadYear)
@@ -143,6 +155,8 @@ Partial Class TeacherGenerateReport
         Me.grpSubjectLoad.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.grpSubjectLoad.ForeColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
         Me.grpSubjectLoad.Location = New System.Drawing.Point(50, 240)
+        Me.grpSubjectLoad.Margin = New System.Windows.Forms.Padding(50, 20, 50, 20)
+        Me.grpSubjectLoad.MinimumSize = New System.Drawing.Size(800, 200)
         Me.grpSubjectLoad.Name = "grpSubjectLoad"
         Me.grpSubjectLoad.Padding = New System.Windows.Forms.Padding(15, 10, 15, 15)
         Me.grpSubjectLoad.Size = New System.Drawing.Size(1200, 200)
@@ -188,6 +202,9 @@ Partial Class TeacherGenerateReport
         '
         Me.dgvSubjectLoad.AllowUserToAddRows = False
         Me.dgvSubjectLoad.AllowUserToDeleteRows = False
+        Me.dgvSubjectLoad.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.dgvSubjectLoad.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.dgvSubjectLoad.BackgroundColor = System.Drawing.Color.White
         Me.dgvSubjectLoad.BorderStyle = System.Windows.Forms.BorderStyle.None
@@ -219,6 +236,7 @@ Partial Class TeacherGenerateReport
         Me.ClientSize = New System.Drawing.Size(1443, 960)
         Me.Controls.Add(Me.pnlMainContent)
         Me.Controls.Add(Me.pnlSidebar)
+        Me.MinimumSize = New System.Drawing.Size(1024, 600)
         Me.Name = "TeacherGenerateReport"
         Me.Text = "Teacher Generate Reports"
         Me.pnlSidebar.ResumeLayout(False)

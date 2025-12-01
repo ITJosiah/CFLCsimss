@@ -83,6 +83,7 @@ Partial Class AdminManageTeacher
         '
         'pnlContent
         '
+        Me.pnlContent.AutoScroll = True
         Me.pnlContent.BackColor = System.Drawing.Color.FromArgb(CType(CType(7, Byte), Integer), CType(CType(77, Byte), Integer), CType(CType(39, Byte), Integer))
         Me.pnlContent.Controls.Add(Me.TextBoxTeacherSearch)
         Me.pnlContent.Controls.Add(Me.lblTeacherList)
@@ -699,6 +700,7 @@ Partial Class AdminManageTeacher
         Me.ClientSize = New System.Drawing.Size(1733, 953)
         Me.Controls.Add(Me.pnlContent)
         Me.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.MinimumSize = New System.Drawing.Size(1024, 600)
         Me.Name = "AdminManageTeacher"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Teacher"

@@ -561,6 +561,7 @@ Partial Class AdminManageSections
         Me.ClientSize = New System.Drawing.Size(1299, 630)
         Me.Controls.Add(Me.pnlManSecContent)
         Me.Controls.Add(Me.pnlSidebar)
+        Me.MinimumSize = New System.Drawing.Size(1024, 600)
         Me.Name = "AdminManageSections"
         Me.Text = "AdminManageSections"
         Me.pnlSidebar.ResumeLayout(False)

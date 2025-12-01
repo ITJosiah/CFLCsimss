@@ -73,6 +73,7 @@ Partial Class AdminGenerateReports
         '
         'pnlMainContent
         '
+        Me.pnlMainContent.AutoScroll = True
         Me.pnlMainContent.BackColor = System.Drawing.Color.FromArgb(CType(CType(7, Byte), Integer), CType(CType(77, Byte), Integer), CType(CType(39, Byte), Integer))
         Me.pnlMainContent.Controls.Add(Me.grpSubjects)
         Me.pnlMainContent.Controls.Add(Me.grpSections)
@@ -467,6 +468,7 @@ Partial Class AdminGenerateReports
         Me.ClientSize = New System.Drawing.Size(1443, 960)
         Me.Controls.Add(Me.pnlMainContent)
         Me.Controls.Add(Me.pnlSidebar)
+        Me.MinimumSize = New System.Drawing.Size(1024, 600)
         Me.Name = "AdminGenerateReports"
         Me.Text = "AdminGenerateReports"
         Me.pnlSidebar.ResumeLayout(False)

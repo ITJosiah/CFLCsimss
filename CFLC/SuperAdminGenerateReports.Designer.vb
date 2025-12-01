@@ -96,6 +96,7 @@ Partial Class SuperAdminGenerateReports
         '
         'pnlMainContent
         '
+        Me.pnlMainContent.AutoScroll = True
         Me.pnlMainContent.BackColor = System.Drawing.Color.FromArgb(CType(CType(7, Byte), Integer), CType(CType(77, Byte), Integer), CType(CType(39, Byte), Integer))
         Me.pnlMainContent.Controls.Add(Me.grpTeacherReports)
         Me.pnlMainContent.Controls.Add(Me.grpSubjects)
@@ -111,6 +112,9 @@ Partial Class SuperAdminGenerateReports
         '
         'grpStudents
         '
+        Me.grpStudents.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.grpStudents.BackColor = System.Drawing.Color.White
         Me.grpStudents.Controls.Add(Me.btnSuperAdminGenerateStudents)
         Me.grpStudents.Controls.Add(Me.lblGradeLevel)
@@ -121,6 +125,8 @@ Partial Class SuperAdminGenerateReports
         Me.grpStudents.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.grpStudents.ForeColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
         Me.grpStudents.Location = New System.Drawing.Point(50, 20)
+        Me.grpStudents.Margin = New System.Windows.Forms.Padding(50, 20, 50, 20)
+        Me.grpStudents.MinimumSize = New System.Drawing.Size(800, 150)
         Me.grpStudents.Name = "grpStudents"
         Me.grpStudents.Padding = New System.Windows.Forms.Padding(15, 10, 15, 15)
         Me.grpStudents.Size = New System.Drawing.Size(1200, 150)
@@ -187,6 +193,9 @@ Partial Class SuperAdminGenerateReports
         '
         Me.dgvStudents.AllowUserToAddRows = False
         Me.dgvStudents.AllowUserToDeleteRows = False
+        Me.dgvStudents.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.dgvStudents.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.dgvStudents.BackgroundColor = System.Drawing.Color.White
         Me.dgvStudents.BorderStyle = System.Windows.Forms.BorderStyle.None
@@ -202,6 +211,9 @@ Partial Class SuperAdminGenerateReports
         '
         'grpEnrollment
         '
+        Me.grpEnrollment.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.grpEnrollment.BackColor = System.Drawing.Color.White
         Me.grpEnrollment.Controls.Add(Me.btnSuperAdminGenerateEnrollmentSummary)
         Me.grpEnrollment.Controls.Add(Me.lblEnrollmentView)
@@ -212,6 +224,8 @@ Partial Class SuperAdminGenerateReports
         Me.grpEnrollment.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.grpEnrollment.ForeColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
         Me.grpEnrollment.Location = New System.Drawing.Point(50, 240)
+        Me.grpEnrollment.Margin = New System.Windows.Forms.Padding(50, 20, 50, 20)
+        Me.grpEnrollment.MinimumSize = New System.Drawing.Size(800, 150)
         Me.grpEnrollment.Name = "grpEnrollment"
         Me.grpEnrollment.Padding = New System.Windows.Forms.Padding(15, 10, 15, 15)
         Me.grpEnrollment.Size = New System.Drawing.Size(1200, 150)
@@ -278,6 +292,9 @@ Partial Class SuperAdminGenerateReports
         '
         Me.dgvEnrollment.AllowUserToAddRows = False
         Me.dgvEnrollment.AllowUserToDeleteRows = False
+        Me.dgvEnrollment.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.dgvEnrollment.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.dgvEnrollment.BackgroundColor = System.Drawing.Color.White
         Me.dgvEnrollment.BorderStyle = System.Windows.Forms.BorderStyle.None
@@ -293,6 +310,9 @@ Partial Class SuperAdminGenerateReports
         '
         'grpSections
         '
+        Me.grpSections.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.grpSections.BackColor = System.Drawing.Color.White
         Me.grpSections.Controls.Add(Me.btnSuperAdminGenerateSections)
         Me.grpSections.Controls.Add(Me.lblSectionView)
@@ -303,6 +323,8 @@ Partial Class SuperAdminGenerateReports
         Me.grpSections.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.grpSections.ForeColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
         Me.grpSections.Location = New System.Drawing.Point(50, 460)
+        Me.grpSections.Margin = New System.Windows.Forms.Padding(50, 20, 50, 20)
+        Me.grpSections.MinimumSize = New System.Drawing.Size(800, 150)
         Me.grpSections.Name = "grpSections"
         Me.grpSections.Padding = New System.Windows.Forms.Padding(15, 10, 15, 15)
         Me.grpSections.Size = New System.Drawing.Size(1200, 150)
@@ -348,6 +370,9 @@ Partial Class SuperAdminGenerateReports
         '
         Me.dgvSections.AllowUserToAddRows = False
         Me.dgvSections.AllowUserToDeleteRows = False
+        Me.dgvSections.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.dgvSections.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.dgvSections.BackgroundColor = System.Drawing.Color.White
         Me.dgvSections.BorderStyle = System.Windows.Forms.BorderStyle.None
@@ -384,6 +409,9 @@ Partial Class SuperAdminGenerateReports
         '
         'grpSubjects
         '
+        Me.grpSubjects.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.grpSubjects.BackColor = System.Drawing.Color.White
         Me.grpSubjects.Controls.Add(Me.btnSuperAdminGenerateSubjects)
         Me.grpSubjects.Controls.Add(Me.lblSubjectView)
@@ -394,6 +422,8 @@ Partial Class SuperAdminGenerateReports
         Me.grpSubjects.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.grpSubjects.ForeColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
         Me.grpSubjects.Location = New System.Drawing.Point(50, 680)
+        Me.grpSubjects.Margin = New System.Windows.Forms.Padding(50, 20, 50, 20)
+        Me.grpSubjects.MinimumSize = New System.Drawing.Size(800, 150)
         Me.grpSubjects.Name = "grpSubjects"
         Me.grpSubjects.Padding = New System.Windows.Forms.Padding(15, 10, 15, 15)
         Me.grpSubjects.Size = New System.Drawing.Size(1200, 150)
@@ -460,6 +490,9 @@ Partial Class SuperAdminGenerateReports
         '
         Me.dgvSubjects.AllowUserToAddRows = False
         Me.dgvSubjects.AllowUserToDeleteRows = False
+        Me.dgvSubjects.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.dgvSubjects.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.dgvSubjects.BackgroundColor = System.Drawing.Color.White
         Me.dgvSubjects.BorderStyle = System.Windows.Forms.BorderStyle.None
@@ -475,6 +508,9 @@ Partial Class SuperAdminGenerateReports
         '
         'grpTeacherReports
         '
+        Me.grpTeacherReports.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.grpTeacherReports.BackColor = System.Drawing.Color.White
         Me.grpTeacherReports.Controls.Add(Me.grpTeacherSubjectLoad)
         Me.grpTeacherReports.Controls.Add(Me.grpTeacherSectionStudents)
@@ -484,6 +520,8 @@ Partial Class SuperAdminGenerateReports
         Me.grpTeacherReports.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.grpTeacherReports.ForeColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
         Me.grpTeacherReports.Location = New System.Drawing.Point(50, 900)
+        Me.grpTeacherReports.Margin = New System.Windows.Forms.Padding(50, 20, 50, 20)
+        Me.grpTeacherReports.MinimumSize = New System.Drawing.Size(800, 150)
         Me.grpTeacherReports.Name = "grpTeacherReports"
         Me.grpTeacherReports.Padding = New System.Windows.Forms.Padding(15, 10, 15, 15)
         Me.grpTeacherReports.Size = New System.Drawing.Size(1200, 150)
@@ -525,6 +563,9 @@ Partial Class SuperAdminGenerateReports
         '
         'grpTeacherSectionStudents
         '
+        Me.grpTeacherSectionStudents.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.grpTeacherSectionStudents.BackColor = System.Drawing.Color.White
         Me.grpTeacherSectionStudents.Controls.Add(Me.btnSuperAdminGenerateTeacherStudents)
         Me.grpTeacherSectionStudents.Controls.Add(Me.lblTeacherGender)
@@ -533,6 +574,7 @@ Partial Class SuperAdminGenerateReports
         Me.grpTeacherSectionStudents.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.grpTeacherSectionStudents.ForeColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
         Me.grpTeacherSectionStudents.Location = New System.Drawing.Point(18, 70)
+        Me.grpTeacherSectionStudents.MinimumSize = New System.Drawing.Size(700, 150)
         Me.grpTeacherSectionStudents.Name = "grpTeacherSectionStudents"
         Me.grpTeacherSectionStudents.Padding = New System.Windows.Forms.Padding(15, 10, 15, 15)
         Me.grpTeacherSectionStudents.Size = New System.Drawing.Size(1164, 150)
@@ -579,6 +621,9 @@ Partial Class SuperAdminGenerateReports
         '
         Me.dgvTeacherSectionStudents.AllowUserToAddRows = False
         Me.dgvTeacherSectionStudents.AllowUserToDeleteRows = False
+        Me.dgvTeacherSectionStudents.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.dgvTeacherSectionStudents.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.dgvTeacherSectionStudents.BackgroundColor = System.Drawing.Color.White
         Me.dgvTeacherSectionStudents.BorderStyle = System.Windows.Forms.BorderStyle.None
@@ -594,6 +639,9 @@ Partial Class SuperAdminGenerateReports
         '
         'grpTeacherSubjectLoad
         '
+        Me.grpTeacherSubjectLoad.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.grpTeacherSubjectLoad.BackColor = System.Drawing.Color.White
         Me.grpTeacherSubjectLoad.Controls.Add(Me.btnSuperAdminGenerateTeacherSubjectLoad)
         Me.grpTeacherSubjectLoad.Controls.Add(Me.lblTeacherSubjectLoadYear)
@@ -602,6 +650,7 @@ Partial Class SuperAdminGenerateReports
         Me.grpTeacherSubjectLoad.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.grpTeacherSubjectLoad.ForeColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
         Me.grpTeacherSubjectLoad.Location = New System.Drawing.Point(18, 230)
+        Me.grpTeacherSubjectLoad.MinimumSize = New System.Drawing.Size(700, 150)
         Me.grpTeacherSubjectLoad.Name = "grpTeacherSubjectLoad"
         Me.grpTeacherSubjectLoad.Padding = New System.Windows.Forms.Padding(15, 10, 15, 15)
         Me.grpTeacherSubjectLoad.Size = New System.Drawing.Size(1164, 150)
@@ -648,6 +697,9 @@ Partial Class SuperAdminGenerateReports
         '
         Me.dgvTeacherSubjectLoad.AllowUserToAddRows = False
         Me.dgvTeacherSubjectLoad.AllowUserToDeleteRows = False
+        Me.dgvTeacherSubjectLoad.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.dgvTeacherSubjectLoad.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.dgvTeacherSubjectLoad.BackgroundColor = System.Drawing.Color.White
         Me.dgvTeacherSubjectLoad.BorderStyle = System.Windows.Forms.BorderStyle.None
@@ -679,6 +731,7 @@ Partial Class SuperAdminGenerateReports
         Me.ClientSize = New System.Drawing.Size(1443, 960)
         Me.Controls.Add(Me.pnlMainContent)
         Me.Controls.Add(Me.pnlSidebar)
+        Me.MinimumSize = New System.Drawing.Size(1024, 600)
         Me.Name = "SuperAdminGenerateReports"
         Me.Text = "SuperAdminGenerateReports"
         Me.pnlSidebar.ResumeLayout(False)

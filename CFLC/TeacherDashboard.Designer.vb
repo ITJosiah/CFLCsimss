@@ -66,6 +66,7 @@ Partial Class TeacherDashboard
         '
         'pnlTeacherMainContent
         '
+        Me.pnlTeacherMainContent.AutoScroll = True
         Me.pnlTeacherMainContent.BackColor = System.Drawing.Color.FromArgb(CType(CType(7, Byte), Integer), CType(CType(77, Byte), Integer), CType(CType(39, Byte), Integer))
         Me.pnlTeacherMainContent.Controls.Add(Me.PieChartTeacherStudent4psList)
         Me.pnlTeacherMainContent.Controls.Add(Me.PieChartTeacherStudentIndigenous)
@@ -340,6 +341,7 @@ Partial Class TeacherDashboard
         Me.Controls.Add(Me.pnlTeacherSidebar)
         Me.Controls.Add(Me.pnlTeacherMainContent)
         Me.Margin = New System.Windows.Forms.Padding(4)
+        Me.MinimumSize = New System.Drawing.Size(1024, 600)
         Me.Name = "TeacherDashboard"
         Me.Text = "TeacherDashboard"
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized

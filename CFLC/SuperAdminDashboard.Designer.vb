@@ -112,6 +112,7 @@ Partial Class SuperAdminDashboard
         '
         'pnlSuperAdminMainContent
         '
+        Me.pnlSuperAdminMainContent.AutoScroll = True
         Me.pnlSuperAdminMainContent.BackColor = System.Drawing.Color.FromArgb(CType(CType(7, Byte), Integer), CType(CType(77, Byte), Integer), CType(CType(39, Byte), Integer))
         Me.pnlSuperAdminMainContent.Controls.Add(Me.pnlSuperAdminTeacherAccountsList)
         Me.pnlSuperAdminMainContent.Controls.Add(Me.pnlSuperAdminAccountsList)
@@ -779,6 +780,7 @@ Partial Class SuperAdminDashboard
         Me.Controls.Add(Me.pnlTeacherSidebar)
         Me.Controls.Add(Me.pnlSuperAdminMainContent)
         Me.Margin = New System.Windows.Forms.Padding(4)
+        Me.MinimumSize = New System.Drawing.Size(1024, 600)
         Me.Name = "SuperAdminDashboard"
         Me.Text = "SuperAdminDashboard"
         Me.pnlSuperAdminMainContent.ResumeLayout(False)

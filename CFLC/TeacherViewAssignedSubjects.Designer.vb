@@ -560,6 +560,7 @@ Partial Class TeacherViewAssignedSubjects
         Me.Controls.Add(Me.pnlManSubContent)
         Me.Controls.Add(Me.pnlTeacherSidebar)
         Me.Margin = New System.Windows.Forms.Padding(4)
+        Me.MinimumSize = New System.Drawing.Size(1024, 600)
         Me.Name = "TeacherViewAssignedSubjects"
         Me.Text = "TeacherViewAssignedSubjects"
         Me.pnlTeacherSidebar.ResumeLayout(False)

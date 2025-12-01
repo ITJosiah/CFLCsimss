@@ -582,6 +582,7 @@ Partial Class AdminManageSubjects
         Me.ClientSize = New System.Drawing.Size(1300, 633)
         Me.Controls.Add(Me.pnlManSubContent)
         Me.Controls.Add(Me.pnlSidebar)
+        Me.MinimumSize = New System.Drawing.Size(1024, 600)
         Me.Name = "AdminManageSubjects"
         Me.Text = "AdminManageSubjects"
         Me.pnlSidebar.ResumeLayout(False)

@@ -206,6 +206,7 @@ Partial Class AdminDashboard
         '
         'pnlMainContent
         '
+        Me.pnlMainContent.AutoScroll = True
         Me.pnlMainContent.BackColor = System.Drawing.Color.FromArgb(CType(CType(7, Byte), Integer), CType(CType(77, Byte), Integer), CType(CType(39, Byte), Integer))
         Me.pnlMainContent.Controls.Add(Me.PieChartMunicipalityList)
         Me.pnlMainContent.Controls.Add(Me.PanelForTotalEnrollmentChartDashboard)
@@ -594,6 +595,7 @@ Partial Class AdminDashboard
         Me.ClientSize = New System.Drawing.Size(1443, 1047)
         Me.Controls.Add(Me.pnlMainContent)
         Me.Controls.Add(Me.pnlSidebar)
+        Me.MinimumSize = New System.Drawing.Size(1024, 600)
         Me.Name = "AdminDashboard"
         Me.Text = "AdminDashboard"
         Me.pnlSidebar.ResumeLayout(False)

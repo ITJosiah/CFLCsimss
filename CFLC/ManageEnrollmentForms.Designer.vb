@@ -69,6 +69,7 @@ Partial Class ManageEnrollmentForms
         '
         'pnlContent
         '
+        Me.pnlContent.AutoScroll = True
         Me.pnlContent.BackColor = System.Drawing.Color.FromArgb(CType(CType(7, Byte), Integer), CType(CType(77, Byte), Integer), CType(CType(39, Byte), Integer))
         Me.pnlContent.Controls.Add(Me.TextBoxEnrollSearch)
         Me.pnlContent.Controls.Add(Me.dgvEnrollment)
@@ -513,6 +514,7 @@ Partial Class ManageEnrollmentForms
         Me.ClientSize = New System.Drawing.Size(1715, 732)
         Me.Controls.Add(Me.pnlContent)
         Me.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.MinimumSize = New System.Drawing.Size(1024, 600)
         Me.Name = "ManageEnrollmentForms"
         Me.Text = "ManageEnrollmentForms"
         Me.pnlContent.ResumeLayout(False)

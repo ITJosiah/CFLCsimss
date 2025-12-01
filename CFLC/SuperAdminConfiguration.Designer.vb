@@ -167,6 +167,7 @@ Partial Class SuperAdminConfiguration
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(900, 600)
         Me.Controls.Add(Me.pnlMainContent)
+        Me.MinimumSize = New System.Drawing.Size(800, 500)
         Me.Name = "SuperAdminConfiguration"
         Me.Text = "System Configuration"
         Me.pnlMainContent.ResumeLayout(False)

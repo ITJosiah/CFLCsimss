@@ -106,6 +106,7 @@ Partial Class SuperAdminAccessAllLogs
         Me.ClientSize = New System.Drawing.Size(1029, 488)
         Me.Controls.Add(Me.pnlMainContent)
         Me.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.MinimumSize = New System.Drawing.Size(800, 400)
         Me.Name = "SuperAdminAccessAllLogs"
         Me.Text = "Access All Logs"
         Me.pnlMainContent.ResumeLayout(False)
