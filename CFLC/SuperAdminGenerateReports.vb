@@ -173,31 +173,43 @@ Public Class SuperAdminGenerateReports
         ' Style controls for better appearance
         StyleControls()
 
-        ' Center the GroupBoxes
-        CenterGroupBoxes()
+        ' Center the GroupBoxes after form is fully laid out
+        AddHandler Me.Shown, AddressOf SuperAdminGenerateReports_Shown
+        AddHandler Me.ResizeEnd, AddressOf SuperAdminGenerateReports_ResizeEnd
     End Sub
 
     Private Sub SuperAdminGenerateReports_Resize(sender As Object, e As EventArgs) Handles MyBase.Resize
-        CenterGroupBoxes()
+        ' Throttle resize events - only center after resize ends
+        ' This prevents excessive calculations during resizing
     End Sub
 
     Private Sub SuperAdminGenerateReports_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
+        ' Use BeginInvoke to ensure form is fully laid out
+        Me.BeginInvoke(New Action(AddressOf CenterGroupBoxes))
+    End Sub
+
+    Private Sub SuperAdminGenerateReports_ResizeEnd(sender As Object, e As EventArgs) Handles MyBase.ResizeEnd
         CenterGroupBoxes()
     End Sub
 
     Private Sub CenterGroupBoxes()
         If pnlMainContent Is Nothing Then Return
 
+        ' Always use the panel's client size - this accounts for sidebar when embedded
+        ' When embedded, the form is docked in pnlSuperAdminMainContent which excludes the sidebar
+        ' When not embedded, pnlMainContent fills the form, so it's the same
         Dim panelWidth As Integer = pnlMainContent.ClientSize.Width
         Dim panelHeight As Integer = pnlMainContent.ClientSize.Height
 
-        ' GroupBox dimensions - reduced to fit all sections on screen
-        Dim groupBoxWidth As Integer = 1200
+        ' GroupBox dimensions - responsive to panel width with max width
+        Dim maxGroupBoxWidth As Integer = 1200
+        Dim minGroupBoxWidth As Integer = 800
+        Dim groupBoxWidth As Integer = Math.Max(minGroupBoxWidth, Math.Min(maxGroupBoxWidth, panelWidth - 100))
         Dim groupBoxHeight As Integer = 150 ' Reduced from 200 to 150
         Dim spacing As Integer = 10 ' Reduced from 20 to 10
 
         ' Calculate horizontal center
-        Dim centerX As Integer = (panelWidth - groupBoxWidth) \ 2
+        Dim centerX As Integer = Math.Max(50, (panelWidth - groupBoxWidth) \ 2)
 
         ' Calculate Teacher Reports height (expanded if teacher sections are visible)
         Dim teacherReportsHeight As Integer = groupBoxHeight

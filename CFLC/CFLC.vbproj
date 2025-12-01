@@ -255,7 +255,9 @@
     <Compile Include="SuperAdminGenerateReports.Designer.vb">
       <DependentUpon>SuperAdminGenerateReports.vb</DependentUpon>
     </Compile>
-    <Compile Include="SuperAdminGenerateReports.vb" />
+    <Compile Include="SuperAdminGenerateReports.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="SuperAdminManageAdminAccounts.Designer.vb">
       <DependentUpon>SuperAdminManageAdminAccounts.vb</DependentUpon>
     </Compile>

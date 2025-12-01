@@ -30,11 +30,17 @@ Public Class SuperAdminAccessAllLogs
         ' Load all logs
         LoadAllLogs()
 
-        ' Center controls after form is shown
+        ' Center controls after form is shown and fully laid out
         AddHandler Me.Shown, AddressOf SuperAdminAccessAllLogs_Shown
+        AddHandler Me.ResizeEnd, AddressOf SuperAdminAccessAllLogs_ResizeEnd
     End Sub
 
     Private Sub SuperAdminAccessAllLogs_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
+        ' Use BeginInvoke to ensure form is fully laid out
+        Me.BeginInvoke(New Action(AddressOf CenterControls))
+    End Sub
+
+    Private Sub SuperAdminAccessAllLogs_ResizeEnd(sender As Object, e As EventArgs) Handles MyBase.ResizeEnd
         CenterControls()
     End Sub
 
@@ -43,31 +49,36 @@ Public Class SuperAdminAccessAllLogs
 
         ' Wait for form to be fully loaded
         Application.DoEvents()
-
+        
+        ' Always use the panel's client size - this accounts for sidebar when embedded
+        ' When embedded, the form is docked in pnlSuperAdminMainContent which excludes the sidebar
+        ' When not embedded, pnlMainContent fills the form, so it's the same
         Dim panelWidth As Integer = pnlMainContent.ClientSize.Width
         Dim panelHeight As Integer = pnlMainContent.ClientSize.Height
 
         ' Center title
         If lblTitle IsNot Nothing Then
-            lblTitle.Location = New Point(Math.Max(0, (panelWidth - lblTitle.Width) \ 2), 30)
+            lblTitle.Location = New Point(Math.Max(10, (panelWidth - lblTitle.Width) \ 2), 30)
         End If
 
         ' Center search label
         If lblSearchLogs IsNot Nothing Then
-            lblSearchLogs.Location = New Point(Math.Max(0, (panelWidth - lblSearchLogs.Width) \ 2), 90)
+            lblSearchLogs.Location = New Point(Math.Max(10, (panelWidth - lblSearchLogs.Width) \ 2), 90)
         End If
 
         ' Center search textbox
         If txtbxSearchLogs IsNot Nothing Then
-            txtbxSearchLogs.Location = New Point(Math.Max(0, (panelWidth - txtbxSearchLogs.Width) \ 2), 120)
+            txtbxSearchLogs.Location = New Point(Math.Max(10, (panelWidth - txtbxSearchLogs.Width) \ 2), 120)
         End If
 
-        ' Center and size DataGridView
+        ' Center and size DataGridView - responsive to panel width
         If dgvLogs IsNot Nothing Then
-            Dim dgvWidth As Integer = 1000
-            Dim dgvHeight As Integer = 500
+            Dim maxDgvWidth As Integer = 1000
+            Dim minDgvWidth As Integer = 600
+            Dim dgvWidth As Integer = Math.Max(minDgvWidth, Math.Min(maxDgvWidth, panelWidth - 50))
+            Dim dgvHeight As Integer = Math.Min(500, panelHeight - 200)
             dgvLogs.Size = New Size(dgvWidth, dgvHeight)
-            dgvLogs.Location = New Point(Math.Max(0, (panelWidth - dgvWidth) \ 2), 170)
+            dgvLogs.Location = New Point(Math.Max(25, (panelWidth - dgvWidth) \ 2), 170)
         End If
     End Sub
 

@@ -22,11 +22,17 @@ Public Class SuperAdminConfiguration
         ' Style controls
         StyleControls()
 
-        ' Center controls after form is shown
+        ' Center controls after form is shown and fully laid out
         AddHandler Me.Shown, AddressOf SuperAdminConfiguration_Shown
+        AddHandler Me.ResizeEnd, AddressOf SuperAdminConfiguration_ResizeEnd
     End Sub
 
     Private Sub SuperAdminConfiguration_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
+        ' Use BeginInvoke to ensure form is fully laid out
+        Me.BeginInvoke(New Action(AddressOf CenterControls))
+    End Sub
+
+    Private Sub SuperAdminConfiguration_ResizeEnd(sender As Object, e As EventArgs) Handles MyBase.ResizeEnd
         CenterControls()
     End Sub
 
@@ -35,18 +41,23 @@ Public Class SuperAdminConfiguration
 
         ' Wait for form to be fully loaded
         Application.DoEvents()
-
+        
+        ' Always use the panel's client size - this accounts for sidebar when embedded
+        ' When embedded, the form is docked in pnlSuperAdminMainContent which excludes the sidebar
+        ' When not embedded, pnlMainContent fills the form, so it's the same
         Dim panelWidth As Integer = pnlMainContent.ClientSize.Width
         Dim panelHeight As Integer = pnlMainContent.ClientSize.Height
 
         ' Center title
         If lblTitle IsNot Nothing Then
-            lblTitle.Location = New Point(Math.Max(0, (panelWidth - lblTitle.Width) \ 2), 50)
+            lblTitle.Location = New Point(Math.Max(10, (panelWidth - lblTitle.Width) \ 2), 50)
         End If
 
-        ' Configuration fields group (centered as a unit)
-        Dim fieldGroupWidth As Integer = 500
-        Dim fieldGroupLeft As Integer = Math.Max(0, (panelWidth - fieldGroupWidth) \ 2)
+        ' Configuration fields group (centered as a unit) - responsive to panel width
+        Dim maxFieldGroupWidth As Integer = 500
+        Dim minFieldGroupWidth As Integer = 400
+        Dim fieldGroupWidth As Integer = Math.Max(minFieldGroupWidth, Math.Min(maxFieldGroupWidth, panelWidth - 100))
+        Dim fieldGroupLeft As Integer = Math.Max(50, (panelWidth - fieldGroupWidth) \ 2)
         Dim startTop As Integer = 150
         Dim fieldSpacing As Integer = 50
 
@@ -76,7 +87,7 @@ Public Class SuperAdminConfiguration
 
         ' Center save button
         If btnSave IsNot Nothing Then
-            btnSave.Location = New Point(Math.Max(0, (panelWidth - btnSave.Width) \ 2), startTop + fieldSpacing * 4 + 20)
+            btnSave.Location = New Point(Math.Max(10, (panelWidth - btnSave.Width) \ 2), startTop + fieldSpacing * 4 + 20)
         End If
     End Sub
 
