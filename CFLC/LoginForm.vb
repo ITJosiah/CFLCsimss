@@ -1,14 +1,20 @@
 ﻿Imports MySql.Data.MySqlClient
 
 Public Class LoginForm
+    Private connectionInitialized As Boolean = False
     Private Sub LoginForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        ' Set form properties
-        Me.FormBorderStyle = FormBorderStyle.None
-        Me.WindowState = FormWindowState.Maximized
-        Me.Bounds = Screen.PrimaryScreen.Bounds
-        Me.TopMost = True
-        Me.BringToFront()
-        Me.BackColor = Color.FromArgb(7, 77, 39)
+        Try
+            ' Set form properties
+            Me.FormBorderStyle = FormBorderStyle.None
+            Me.WindowState = FormWindowState.Maximized
+            Me.Bounds = Screen.PrimaryScreen.Bounds
+            Me.TopMost = True
+            Me.BringToFront()
+            Me.BackColor = Color.FromArgb(7, 77, 39)
+        Catch ex As Exception
+            ' If form setup fails, show error but try to continue
+            MessageBox.Show("Error initializing form: " & ex.Message, "Form Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+        End Try
 
         txtUserID.Size = New Size(200, 35)
         txtPassword.Size = New Size(200, 35)
@@ -32,6 +38,37 @@ Public Class LoginForm
         btnBack.ForeColor = Color.White
         btnBack.FlatStyle = FlatStyle.Flat
         btnBack.FlatAppearance.BorderSize = 0
+    End Sub
+
+    Private Sub LoginForm_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
+        ' Initialize database connection after form is shown
+        ' Use BeginInvoke to ensure form is fully displayed before connection attempt
+        Me.BeginInvoke(New Action(AddressOf InitializeDatabaseConnection))
+    End Sub
+
+    Private Sub InitializeDatabaseConnection()
+        ' Prevent multiple connection attempts
+        If connectionInitialized Then Return
+        connectionInitialized = True
+
+        Try
+            ' Update connection string from config.txt
+            modDBx.UpdateConnectionString()
+
+            ' Test database connection
+            If modDBx.isConnectedToLocalServer() Then
+                MsgBox("Connected!")
+            Else
+                MsgBox("Failed to connect!")
+            End If
+        Catch ex As Exception
+            ' Show error but don't close the form
+            MsgBox("Error initializing database connection: " & ex.Message & vbCrLf & "The application will continue, but database operations may fail.", MsgBoxStyle.Critical, "Connection Error")
+        Finally
+            ' Ensure form stays visible
+            Me.Visible = True
+            Me.Show()
+        End Try
     End Sub
 
     Private Sub InitializeShowPasswordCheckBox()
@@ -196,8 +233,23 @@ Public Class LoginForm
     End Function
 
     Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
-        ' Close the login form
-        ' Since LoginForm is now the main form, closing it will exit the application
-        Application.Exit()
+        ' Go back to Form1
+        For Each form As Form In Application.OpenForms
+            If form.Name = "Form1" Then
+                form.Show()
+                form.WindowState = FormWindowState.Maximized
+                Exit For
+            End If
+        Next
+        Me.Close()
+    End Sub
+
+    Private Sub LoginForm_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
+        ' Prevent accidental closing - only allow closing if explicitly intended
+        ' This ensures the form stays open even if there are errors
+        If e.CloseReason = CloseReason.UserClosing Then
+            ' User is trying to close - allow it (they can use the Back button or X)
+            ' But we'll keep the form open by default unless explicitly closed
+        End If
     End Sub
 End Class
